@@ -1,0 +1,20 @@
+lovelace:
+  mode: yaml
+  resources: !include ../lovelace/resources.yaml
+
+  dashboards:
+    dashboard-default:
+      mode: yaml
+      filename: dashboard_default.yaml
+      title: Overzicht
+      icon: mdi:view-dashboard
+    dashboard-systems:
+      mode: yaml
+      filename: dashboard_systems.yaml
+      title: Systems
+      icon: mdi:apps
+    dashboard-status:
+      mode: yaml
+      filename: dashboard_status.yaml
+      title: Status
+      icon: mdi:tools

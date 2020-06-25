@@ -1,0 +1,24 @@
+title: SabNZBD
+path: sabnzbd
+panel: false
+icon: 'mdi:download-multiple'
+badges: []
+cards: 
+  - type: entities
+    title: SABnzbd
+    entities:
+      - sensor.sab_status
+      - sensor.sab_speed
+      - sensor.sab_queue_count
+      - sensor.sab_queue
+      - sensor.sab_disk
+      - sensor.sab_disk_free
+      - sensor.sab_left
+      - sensor.sab_daily_total
+      - sensor.sab_weekly_total
+      - sensor.sab_monthly_total
+      - sensor.sab_total
+      
+  - type: sensor
+    entity: sensor.sab_speed
+    graph: line

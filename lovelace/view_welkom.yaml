@@ -1,0 +1,68 @@
+title: Welkom
+path: welkom
+panel: false
+icon: 'mdi:home-assistant'
+badges: []
+cards:
+
+  - type: markdown
+    content: |
+      {% if now().hour < 5 %}
+      # Goede nacht, {{user}}!
+      {% elif now().hour < 12 %}
+      # Goede morgen, {{user}}!
+      {% elif now().hour < 18 %}
+      # Goede middag, {{user}}!
+      {% else %}
+      # Fijne avond, {{user}}!
+      {% endif %}
+      
+      {% set months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"] %}
+      {% set month = months[now().strftime('%m') | int -1] %}
+      {% set days = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]  %}
+      {% set day = days[now().strftime('%w') | int -1] %}
+      Het is vandaag {{ day + ' ' + now().strftime('%-d') + ' ' + month + ' ' + now().strftime('%Y') }}
+
+  - type: glance
+    title: Personen
+    entities:
+      - person.sander
+      - person.yuliia
+      - input_boolean.away_mode
+      - entity: input_boolean.guest_mode
+        tap_action:
+          action: toggle
+      - entity: input_boolean.vacation_mode
+        tap_action:
+          action: toggle
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      title: Let op
+      type: entities
+    filter:
+      template: |
+       {%if as_timestamp(now()) <= as_timestamp(state_attr('sensor.p2000_dichtbij', 'time')) + 7200 %}sensor.p2000_dichtbij{%endif%}
+      include:
+        - domain: sensor
+          attributes:
+            Wastecollector: purmerend
+            Days-until: = 0
+
+  - type: conditional
+    conditions:
+      - entity: sensor.time_of_day
+        state: Evening
+    card:
+      type: 'custom:auto-entities'
+      card:
+        title: Morgen
+        type: entities
+      filter:
+        include:
+          - attributes:
+              Days-until: 1
+              Wastecollector: purmerend
+            domain: sensor
+      show_empty: false

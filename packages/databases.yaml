@@ -1,0 +1,7 @@
+recorder:
+  db_url: !secret mariadb_connection
+
+influxdb:
+  host: influxdb
+  port: 8086
+  database: !secret influxdb_database

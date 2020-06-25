@@ -1,0 +1,58 @@
+sensor:
+  - platform: p2000
+    name: P2000 Ambulance
+    regios: 11
+    disciplines: 2
+    scan_interval: 120
+    radius: 5000
+    
+  - platform: p2000
+    name: P2000 Brandweer
+    regios: 11
+    disciplines: 1
+    scan_interval: 120
+    radius: 5000
+
+  - platform: p2000
+    name: P2000 Dichtbij
+    regios: 11
+    disciplines: 1,2,3
+    scan_interval: 120
+    radius: 250
+
+  - platform: p2000
+    name: P2000 Politie
+    regios: 11
+    disciplines: 3
+    scan_interval: 120
+    radius: 5000
+
+homeassistant:
+  customize:
+    sensor.p2000_ambulance:
+      friendly_name: Ambulance
+      icon: "mdi:ambulance"
+    sensor.p2000_brandweer:
+      friendly_name: Brandweer
+      icon: "mdi:fire-truck"
+    sensor.p2000_dichtbij:
+      friendly_name: Buurt
+      icon: "mdi:alert"
+    sensor.p2000_politie:
+      friendly_name: Politie
+      icon: "mdi:taxi"
+
+automation:
+  - id: p20000_notification
+    alias: P2000 melding
+    initial_state: on
+    trigger:
+      platform: state
+      entity_id: sensor.p2000_dichtbij
+    action:
+      - service: notify.mobile_app_iphone_x_van_golles
+        data_template:
+          title: P2000 melding
+          message: "{{ states.sensor.p2000_dichtbij.state + states.sensor.p2000_dichtbij.attributes.capcodes }}"
+          data:
+            url: "https://www.google.com/maps/search/?api=1&query={{ states.sensor.p2000_dichtbij.attributes.latitude }},{{ states.sensor.p2000_dichtbij.attributes.longitude }}"

@@ -1,0 +1,16 @@
+- id: deurbel
+  alias: Deurbel
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.deurbel_action
+    to: 'vibration'
+  action:
+    - service: notify.mobile_app_iphone_x_van_golles
+      data_template:
+        title: "Ding dong!"
+        message: "Iemand staat bij de deur"
+
+    - service: notify.lg_c9
+      data_template:
+        message: "Ding dong! Iemand staat bij de deur"

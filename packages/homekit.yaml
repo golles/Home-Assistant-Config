@@ -1,0 +1,33 @@
+# This feature requires running an mDNS forwarder on your Docker host, e.g., avahi-daemon in reflector mode.
+#
+# In /etc/avahi/avahi-daemon.conf update the reflector section like bellow, make sure those 3 lines are not commented out.
+#
+# [reflector]
+# enable-reflector=yes
+# reflect-ipv=no
+
+# Restart the Avahi daemon to reload config:
+# sudo service avahi-daemon restart
+
+homekit:
+  safe_mode: false
+  auto_start: false
+  advertise_ip: !secret host_ip
+  filter:
+    include_domains:
+      - cover
+    include_entities:
+      - media_player.stb_arris_uhd
+  entity_config:
+    media_player.stb_arris_uhd:
+      feature_list:
+        - feature: on_off
+
+automation:
+  - alias: "Start HomeKit"
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - delay: 00:03
+      - service: homekit.start

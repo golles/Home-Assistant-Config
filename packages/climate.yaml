@@ -1,0 +1,36 @@
+tado:
+  username: !secret tado_username
+  password: !secret tado_password
+
+device_tracker:
+  - platform: tado
+    username: !secret tado_username
+    password: !secret tado_password
+    home_id: !secret tado_home_id
+  
+automation:
+  - alias: 'Tado auto home mode'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.away_mode
+        to: 'off'
+    action:
+      service: shell_command.tado_set_home
+      data_template:
+        username: !secret tado_username
+        password: !secret tado_password
+
+  - alias: 'Tado auto away mode'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.away_mode
+        to: 'on'
+    action:
+      service: shell_command.tado_set_away
+      data_template:
+        username: !secret tado_username
+        password: !secret tado_password
+
+shell_command:
+  tado_set_away: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" AWAY'
+  tado_set_home: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" HOME'

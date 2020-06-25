@@ -1,0 +1,95 @@
+title: Batterijen
+path: batterijen
+panel: false
+icon: 'mdi:battery-charging-wireless'
+badges: []
+cards: 
+  - type: custom:battery-state-card
+    name: iPhones
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: Battery Level
+    entities:
+      - entity: sensor.battery_level_2
+        charging_state:
+          entity_id: sensor.battery_state_2
+          state: Charging
+      - entity: sensor.yuliyas_iphone_battery_level
+        charging_state:
+          entity_id: sensor.yuliyas_iphone_battery_state
+          state: Charging
+          
+  - type: custom:battery-state-card
+    name: HUE dimmer switches
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: battery level
+    entities:
+      - sensor.keuken_dimmer_switch_battery_level
+      - sensor.achtertuin_schakelaar_battery_level
+      - sensor.overloop_schakelaar_battery_level
+      - sensor.slaapkamer_schakelaar_battery_level
+      - sensor.logeerkamer_schakelaar_battery_level
+      - sensor.kledingkamer_schakelaar_battery_level
+      - sensor.badkamer_schakelaar_battery_level
+      - sensor.zolder_schakelaar_battery_level
+      - sensor.zolder_schakelaar_2_battery_level
+
+  - type: custom:battery-state-card
+    name: HUE smart buttons
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: battery level
+    entities:
+      - sensor.master_switch_battery_level
+      - sensor.keuken_button_1_battery_level
+      - sensor.eettafel_button_1_battery_level
+      - sensor.eettafel_button_2_battery_level
+      - sensor.slaapkamer_knop_sander_battery_level
+      - sensor.slaapkamer_knop_yuliia_battery_level
+
+  - type: custom:battery-state-card
+    name: Xiaomi Aqara temperature, humidity and pressure
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+    entities:
+      - sensor.woonkamer_klimaat_battery
+      - sensor.meterkast_klimaat_battery
+      - sensor.slaapkamer_klimaat_battery
+      - sensor.logeerkamer_klimaat_battery
+      - sensor.kledingkamer_klimaat_battery
+      - sensor.badkamer_klimaat_battery
+      
+  - type: custom:battery-state-card
+    name: Xiaomi Aqara door & window contact sensor
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+    entities:
+      - sensor.voordeur_battery
+      - sensor.achterdeur_battery
+      - sensor.slaapkamerraam_battery
+      - sensor.kledingkamerraam_battery
+      - sensor.balkondeur_battery
+
+  - type: custom:battery-state-card
+    name: Xiaomi Aqara vibration sensor
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+    entities:
+      - sensor.deurbel_battery
+      - sensor.bed_sander_battery

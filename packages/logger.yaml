@@ -1,0 +1,3 @@
+logger:
+  logs:
+    homeassistant.components.media_player: info

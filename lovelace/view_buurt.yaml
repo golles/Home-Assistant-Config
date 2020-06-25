@@ -1,0 +1,40 @@
+title: In de buurt
+path: buurt
+panel: false
+icon: 'mdi:home-city'
+badges: []
+cards:
+  - type: weather-forecast
+    entity: weather.huis
+
+  - type: custom:auto-entities
+    show_empty: true
+    card:
+      type: glance
+      title: Afval
+    filter:
+      include:
+        - domain: sensor
+          attributes:
+            Wastecollector: purmerend
+    sort:
+      method: attribute
+      attribute: "Days-until"
+      numeric: true
+
+  - title: P2000 Purmerend
+    type: entities
+    show_header_toggle: false
+    entities:
+      - sensor.p2000_dichtbij
+      - sensor.p2000_ambulance
+      - sensor.p2000_brandweer
+      - sensor.p2000_politie
+
+  - title: Golf 7
+    type: entities
+    show_header_toggle: false
+    entities:
+      - sensor.golf_7_expdate
+      - binary_sensor.golf_7_insured
+      - sensor.golf_7_recall

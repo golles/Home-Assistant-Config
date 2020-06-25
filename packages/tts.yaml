@@ -1,0 +1,4 @@
+tts:
+  - platform: google_translate
+    base_url: !secret external_url
+    service_name: google_say

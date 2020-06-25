@@ -1,0 +1,21 @@
+- id: auto_day_night_theme
+  alias: "Automatisch theme voor dag en nacht"
+  initial_state: on
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sun.sun
+      to: above_horizon
+    - platform: state
+      entity_id: sun.sun
+      to: below_horizon
+  action:
+    - service_template: frontend.set_theme
+      data_template:
+        name: >
+          {% if states.sun.sun.state == "above_horizon" %}
+            Google Light Theme
+          {% else %}
+            Google Dark Theme
+          {% endif %}

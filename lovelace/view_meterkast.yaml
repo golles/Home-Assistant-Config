@@ -1,0 +1,56 @@
+title: Meterkast
+path: meterkast
+panel: false
+icon: 'mdi:gauge'
+badges: []
+cards: 
+  - type: entities
+    title: Elektriciteitsmeter
+    entities:
+      - sensor.energy_consumption_tarif_1
+      - sensor.energy_consumption_tarif_2
+      - type: custom:fold-entity-row
+        head: sensor.power_tariff
+        entities:
+          # - sensor.power_production
+          # - sensor.power_production_phase_l1
+          # - sensor.power_production_phase_l2
+          # - sensor.power_production_phase_l3
+          # - sensor.energy_production_tarif_1
+          # - sensor.energy_production_tarif_2
+          # - sensor.energy_consumption_total
+          - sensor.power_consumption
+          # - sensor.power_consumption_phase_l1
+          # - sensor.power_consumption_phase_l2
+          # - sensor.power_consumption_phase_l3
+          - sensor.short_power_failure_count
+          - sensor.long_power_failure_count
+          - sensor.voltage_sags_phase_l1
+          # - sensor.voltage_sags_phase_l2
+          # - sensor.voltage_sags_phase_l3
+          - sensor.voltage_swells_phase_l1
+          # - sensor.voltage_swells_phase_l2
+          # - sensor.voltage_swells_phase_l3
+          # - sensor.voltage_phase_l1
+          # - sensor.voltage_phase_l2
+          # - sensor.voltage_phase_l3
+          # - sensor.current_phase_l1
+          # - sensor.current_phase_l2
+          # - sensor.current_phase_l3
+          # - sensor.gas_consumption
+          # - sensor.hourly_gas_consumption
+
+  - type: entities
+    title: Warmtemeter
+    entities:
+      - sensor.stadsverwarming_energy
+      - type: custom:fold-entity-row
+        head: sensor.stadsverwarming_volume
+        entities:
+          - sensor.stadsverwarming_operating_hours
+          - sensor.stadsverwarming_temperature_in
+          - sensor.stadsverwarming_temperature_out
+          - sensor.stadsverwarming_temperature_difference
+          - sensor.stadsverwarming_power
+          - sensor.stadsverwarming_peak_power
+          - sensor.stadsverwarming_flow

@@ -1,0 +1,32 @@
+sensor:
+  - platform: dnsip
+
+homeassistant:
+  customize:
+    sensor.myip:
+      friendly_name: Extern IP
+      icon: "mdi:web"
+
+automation:
+  - alias: External ip changed
+    initial_state: on
+    trigger:
+      platform: state
+      entity_id: sensor.myip
+    action:
+      - service: notify.mobile_app_iphone_x_van_golles
+        data_template:
+          title: Externe IP gewijzigd
+          message: "Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is."
+
+      - service: shell_command.update_remote_ip
+        data_template:
+          username: !secret direct_admin_username
+          password: !secret direct_admin_password
+          server: !secret direct_admin_server
+          domain: !secret direct_admin_domain
+          subdomain: !secret direct_admin_subdomain
+          ip: "{{ states('sensor.myip') }}"
+
+shell_command:
+  update_remote_ip: '/config/custom_scripts/directadmin.sh "{{ username }}" "{{ password }}" "{{ server }}" "{{ domain }}" "{{ subdomain }}" "{{ ip }}"'

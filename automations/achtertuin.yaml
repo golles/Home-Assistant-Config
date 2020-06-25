@@ -1,0 +1,26 @@
+- id: licht_uit_achtertuin
+  alias: "Lampen uit achtertuin"
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '00:00:00'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - light.achtertuin
+
+- id: kerst_sfeer_achtertuin
+  alias: "Kerst sfeer achtertuin"
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '18:00:00'
+  condition:
+    condition: template
+    value_template: '{{ now().month == 12 and now().day >= 6 }}'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id:
+          - light.hue_smart_plug_1

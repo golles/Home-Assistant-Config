@@ -1,0 +1,23 @@
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+
+  - platform: template
+    sensors:
+      time_of_day:
+        entity_id: sensor.time
+        value_template: >-
+          {% set hour = now().hour %}
+          {% if hour in range(0,6) %} Midnight
+          {% elif hour in range(6,12) %} Morning
+          {% elif hour in range(12,18) %} Afternoon
+          {% else %} Evening
+          {% endif %}

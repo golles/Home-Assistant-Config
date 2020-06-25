@@ -1,0 +1,63 @@
+title: Ramen en deuren en covers
+path: ramendeurcover
+panel: false
+icon: 'mdi:door-open'
+badges: []
+cards: 
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Open deuren en ramen
+      type: glance
+    filter:
+      include:
+        - attributes:
+            device_class: door
+          domain: binary_sensor
+          options:
+            secondary_info: last-changed
+          state: 'on'
+        - domain: cover
+          state: open
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Alle deuren en ramen
+      type: entities
+    filter:
+      include:
+        - attributes:
+            device_class: door
+          domain: binary_sensor
+          options:
+            secondary_info: last-changed
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Covers
+      type: entities
+    filter:
+      include:
+        - domain: cover
+          options:
+            secondary_info: last-changed
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Beweging
+      type: entities
+    filter:
+      include:
+        - attributes:
+            device_class: motion
+          domain: binary_sensor
+          options:
+            secondary_info: last-changed

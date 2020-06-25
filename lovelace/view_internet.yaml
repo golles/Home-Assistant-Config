@@ -1,0 +1,31 @@
+title: Internet
+path: internet
+panel: false
+icon: 'mdi:web'
+badges: []
+cards:
+  - type: entities
+    title: Internet
+    entities:
+      - entity: sensor.myip
+      - type: divider
+      - entity: sensor.speedtest_download
+      - entity: sensor.speedtest_upload
+      - entity: sensor.speedtest_ping
+    
+  - type: horizontal-stack
+    cards:
+      - type: sensor
+        entity: sensor.speedtest_download
+        graph: line
+        name: Download
+
+      - type: sensor
+        entity: sensor.speedtest_upload
+        graph: line
+        name: Upload
+
+      - type: sensor
+        entity: sensor.speedtest_ping
+        graph: line
+        name: Ping

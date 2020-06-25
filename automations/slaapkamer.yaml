@@ -1,0 +1,23 @@
+- id: bed_led_uit
+  alias: "Bedledstrip uit"
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '09:00:00'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id:
+          - switch.ikea_switch_1_switch
+
+- id: bed_led_standby
+  alias: "Bedledstrip standby"
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id:
+          - switch.ikea_switch_1_switch

@@ -1,0 +1,15 @@
+sensor:
+  - platform: mc66c
+    name: Stadsverwarming
+    port: /dev/ttyUSB0
+    scan_interval: 30
+    resources:
+      - energy
+      - volume
+      - op_hrs
+      - temperature_in
+      - temperature_out
+      - temperature_diff
+      - power
+      - flow
+      - peak_power

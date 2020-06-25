@@ -1,0 +1,4 @@
+sensor:
+  - platform: version
+  - platform: version
+    source: docker
