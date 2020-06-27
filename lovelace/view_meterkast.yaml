@@ -4,6 +4,14 @@ panel: false
 icon: 'mdi:gauge'
 badges: []
 cards: 
+
+  - type: entities
+    entities:
+      - sensor.meterkast_klimaat_temperature
+      - sensor.meterkast_klimaat_humidity
+      - sensor.meterkast_klimaat_pressure
+      - sensor.meterkast_klimaat_linkquality
+
   - type: entities
     title: Elektriciteitsmeter
     entities:
