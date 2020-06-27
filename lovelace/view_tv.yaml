@@ -1,0 +1,12 @@
+title: TV
+path: tv
+panel: false
+icon: 'mdi:television-classic'
+badges: []
+cards:
+  - type: media-control
+    entity: media_player.lg_c9
+
+  - type: media-control
+    entity: media_player.stb_arris_uhd
+    name: Ziggo
