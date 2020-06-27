@@ -1,7 +1,7 @@
 sensor:
   - platform: mc66c
     name: Stadsverwarming
-    port: /dev/ttyUSB0
+    port: /dev/mc66c
     scan_interval: 30
     resources:
       - energy
