@@ -5,6 +5,12 @@ custom_header:
   active_tab_color: var(--state-icon-active-color)
   tab_indicator_color: var(--state-icon-active-color)
 
+swipe_nav:
+  wrap: true
+  animate: swipe
+  prevent_default: false
+  swipe_amount: 15
+
 views:
   - !include lovelace/view_batterijen.yaml
   - !include lovelace/view_raamdeurcover.yaml

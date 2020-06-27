@@ -5,6 +5,12 @@ custom_header:
   active_tab_color: var(--state-icon-active-color)
   tab_indicator_color: var(--state-icon-active-color)
 
+swipe_nav:
+  wrap: true
+  animate: swipe
+  prevent_default: false
+  swipe_amount: 15
+
 button_card_templates:
   radio_button:
     variables:
@@ -29,4 +35,6 @@ button_card_templates:
 views:
   - !include lovelace/view_welkom.yaml
   - !include lovelace/view_buurt.yaml
+  - !include lovelace/view_kamers.yaml
   - !include lovelace/view_radio.yaml
+  - !include lovelace/view_tv.yaml

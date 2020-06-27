@@ -4,6 +4,27 @@ panel: false
 icon: 'mdi:zigbee'
 badges: []
 cards:
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: OTA updates
+      type: entities
+    filter:
+      include:
+        - domain: binary_sensor
+          entity_id: '*update_available'
+          state: 'on'
+          options:
+            tap_action:
+              action: call-service
+              service: mqtt.publish
+              service_data:
+                topic: zigbee2mqtt/bridge/ota_update/update
+                payload_template: >
+                  {{ state_attr('this.entity_id', 'friendly_name').split('_update_available')[0] }}
+
   - title: Zigbee2mqtt
     type: entities
     show_header_toggle: false

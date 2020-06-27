@@ -1,12 +1,23 @@
   - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
     type: module
+
   - url: /local/custom-header.js?v=1.5.8
     type: module
+
+  - url: /local/swipe-navigation.js?v=1.0.0
+    type: js
+
   - url: /local/auto-entities.js
     type: module
+
   - url: /local/fold-entity-row.js
     type: module
+
   - url: /local/battery-state-card.js
     type: module
+
   - url: /local/button-card.js
+    type: module
+
+  - url: /local/banner-card.js?v=1
     type: module
