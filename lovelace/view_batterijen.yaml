@@ -12,9 +12,9 @@ cards:
     bulk_rename:
       - from: Battery Level
     entities:
-      - entity: sensor.battery_level_2
+      - entity: sensor.iphone_x_van_golles_battery_level
         charging_state:
-          entity_id: sensor.battery_state_2
+          entity_id: sensor.iphone_x_van_golles_battery_state
           state: Charging
       - entity: sensor.yuliyas_iphone_battery_level
         charging_state:
