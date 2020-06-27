@@ -10,9 +10,12 @@ cards:
     entities:
       - entity: sensor.uptime
       - type: divider
-      - entity: binary_sensor.updater
       - entity: sensor.current_version
-      - entity: sensor.latest_version
-      - type: weblink
-        name: Release notes
-        url: https://www.home-assistant.io/latest-release-notes/
+      - type: custom:fold-entity-row
+        head: binary_sensor.updater
+        open: true #"{{ is_state('binary_sensor.updater','on') }}"
+        entities:
+          - entity: sensor.latest_version
+          - type: weblink
+            name: Release notes
+            url: https://www.home-assistant.io/latest-release-notes/
