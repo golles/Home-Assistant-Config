@@ -1,0 +1,95 @@
+- id: eettafel_knop_2_on
+  alias: Eettafel knop2 - licht aan
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.0x001788010800072a_action
+      to: 'press'
+  condition:
+    - condition: state
+      entity_id: light.eettafel
+      state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: light.hue_filament_bulb_3 #5
+    - delay:
+        milliseconds: 0
+    - service: light.turn_on
+      entity_id: light.hue_filament_bulb_4 #4
+    - delay:
+        milliseconds: 0
+    - service: light.turn_on
+      entity_id: light.hue_filament_bulb_1 #3
+    - delay:
+        milliseconds: 0
+    - service: light.turn_on
+      entity_id: light.hue_filament_bulb_5 #2
+    - delay:
+        milliseconds: 0
+    - service: light.turn_on
+      entity_id: light.hue_filament_bulb_2 #1
+
+    # Alternative on:
+    # - service: light.turn_on
+    #   entity_id: 
+    #     - light.hue_filament_bulb_1 #3
+    # - delay:
+    #     milliseconds: 0
+    # - service: light.turn_on
+    #   entity_id: 
+    #     - light.hue_filament_bulb_5 #2
+    #     - light.hue_filament_bulb_4 #4
+    # - delay:
+    #     milliseconds: 0
+    # - service: light.turn_on
+    #   entity_id: 
+    #     - light.hue_filament_bulb_2 #1
+    #     - light.hue_filament_bulb_3 #5
+
+- id: eettafel_knop_2_off
+  alias: Eettafel knop2 - licht uit
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.0x001788010800072a_action
+      to: 'press'
+  condition:
+    - condition: state
+      entity_id: light.eettafel
+      state: 'on'
+  action:
+    - service: light.turn_off
+      entity_id: light.hue_filament_bulb_2 #1
+    - delay:
+        milliseconds: 0
+    - service: light.turn_off
+      entity_id: light.hue_filament_bulb_5 #2
+    - delay:
+        milliseconds: 0
+    - service: light.turn_off
+      entity_id: light.hue_filament_bulb_1 #3
+    - delay:
+        milliseconds: 0
+    - service: light.turn_off
+      entity_id: light.hue_filament_bulb_4 #4
+    - delay:
+        milliseconds: 0
+    - service: light.turn_off
+      entity_id: light.hue_filament_bulb_3 #5
+
+    # Alternative off:
+    # - service: light.turn_off
+    #   entity_id: 
+    #     - light.hue_filament_bulb_2 #1
+    #     - light.hue_filament_bulb_3 #5
+    # - delay:
+    #     milliseconds: 0
+    # - service: light.turn_off
+    #   entity_id: 
+    #     - light.hue_filament_bulb_5 #2
+    #     - light.hue_filament_bulb_4 #4
+    # - delay:
+    #     milliseconds: 0
+    # - service: light.turn_off
+    #   entity_id: 
+    #     - light.hue_filament_bulb_1 #3
