@@ -1,0 +1,12 @@
+- id: master_switch_all_lights_off
+  alias: Master switch - alles uit
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.0x0017880108000633_action
+      to: 'press'
+  action:
+    - service: light.turn_off
+      data_template: 
+        entity_id: >
+          {{ states.light | selectattr('state', 'eq', 'on') |  map(attribute='entity_id') | join(', ') }}
