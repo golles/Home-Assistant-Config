@@ -38,3 +38,11 @@ cards:
       - sensor.golf_7_expdate
       - binary_sensor.golf_7_insured
       - sensor.golf_7_recall
+
+  - title: Clio
+    type: entities
+    show_header_toggle: false
+    entities:
+      - sensor.clio_expdate
+      - binary_sensor.clio_insured
+      - sensor.clio_recall
