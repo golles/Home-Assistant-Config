@@ -24,18 +24,3 @@ sensor:
     state_topic: "shellies/shellyswitch25-E098068D1F4A/temperature"
     unit_of_measurement: '°C'
     device_class: temperature
-        
-automation:
-    - alias: 'Rolluik dicht avond'
-      trigger:
-          platform: time
-          at: "22:00:00"
-      condition:
-        - condition: template
-          value_template: "{{ not is_state('cover.slaapkamer_rolluik', 'closed') }}"
-        - condition: template
-          value_template: "{{ is_state('binary_sensor.slaapkamerraam_contact', 'off') }}"
-      action:
-          service: cover.close_cover
-          data:
-              entity_id: cover.slaapkamer_rolluik

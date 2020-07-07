@@ -1,0 +1,35 @@
+- id: rolluik_dicht
+  alias: 'Rolluik dicht avond'
+  initial_state: on
+  trigger:
+      platform: time
+      at: "22:00:00"
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('cover.slaapkamer_rolluik', 'closed') }}"
+    - condition: template
+      value_template: "{{ is_state('binary_sensor.slaapkamerraam_contact', 'off') }}"
+  action:
+      service: cover.close_cover
+      data:
+          entity_id: cover.slaapkamer_rolluik
+
+- id: rolluik_open_niet_thuis
+  alias: 'Rolluik open - niet thuis'
+  initial_state: on
+  trigger:
+      platform: time
+      at: "09:00:00"
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('cover.slaapkamer_rolluik', 'open') }}"
+    - condition: state
+      entity_id: group.residents
+      state: 'not_home'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
+  action:
+      service: cover.close_cover
+      data:
+          entity_id: cover.slaapkamer_rolluik
