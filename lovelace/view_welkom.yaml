@@ -28,7 +28,8 @@ cards:
     entities:
       - person.sander
       - person.yuliia
-      - input_boolean.away_mode
+      - entity: group.residents
+        name: Modus
       - entity: input_boolean.guest_mode
         tap_action:
           action: toggle
