@@ -1,9 +1,5 @@
   
 input_boolean:
-  away_mode:
-    name: Away Mode
-    initial: off
-    icon: mdi:human-greeting
   guest_mode:
     name: Guest Mode
     initial: off
@@ -13,34 +9,10 @@ input_boolean:
     initial: off
     icon: mdi:beach
 
-automation:
-  - alias: 'Turn on away mode when everybody leaves'
-    trigger:
-      - platform: state
-        entity_id: person.sander, person.yuliia
-        to: 'not_home'
-    condition:
-      - condition: state
-        entity_id: input_boolean.guest_mode
-        state: 'off'
-      - condition: state
-        entity_id: person.sander
-        state: 'not_home'
-      - condition: state
-        entity_id: person.yuliia
-        state: 'not_home'
-    action:
-      service: input_boolean.turn_on
-      entity_id: input_boolean.away_mode
-
-  # Turn off away mode when anybode arrives at home also turn off guest mode when arriving home
-  - alias: 'Turn off away mode when somebody arrives at home'
-    trigger:
-      - platform: state
-        entity_id: person.sander, person.yuliia
-        to: 'home'
-    action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.away_mode
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.guest_mode
+group:
+  residents:
+    name: Residents
+    icon: mdi:human-greeting
+    entities:
+      - person.sander
+      - person.yuliia

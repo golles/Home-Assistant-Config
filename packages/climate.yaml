@@ -6,8 +6,8 @@ automation:
   - alias: 'Tado auto home mode'
     trigger:
       - platform: state
-        entity_id: input_boolean.away_mode
-        to: 'off'
+        entity_id: group.residents
+        to: 'home'
     action:
       service: shell_command.tado_set_home
       data_template:
@@ -17,8 +17,8 @@ automation:
   - alias: 'Tado auto away mode'
     trigger:
       - platform: state
-        entity_id: input_boolean.away_mode
-        to: 'on'
+        entity_id: group.residents
+        to: 'not_home'
     action:
       service: shell_command.tado_set_away
       data_template:
