@@ -26,15 +26,12 @@
   alias: Slaapkamer knop Sander - press
   initial_state: on
   trigger:
-    - platform: mqtt
-      topic: 'zigbee2mqtt/Slaapkamer knop Sander/action'
-  condition:
-    condition: or
-    conditions:
-      - condition: template
-        value_template: '{{ trigger.payload == "on" }}'
-      - condition: template
-        value_template: '{{ trigger.payload == "off" }}'
+    - platform: state
+      entity_id: sensor.0x0017880108000810_action
+      to: 'on'
+    - platform: state
+      entity_id: sensor.0x0017880108000810_action
+      to: 'off'
   action:
     - service: light.toggle
       entity_id: light.hue_filament_bulb_1_4
@@ -43,16 +40,13 @@
   alias: Slaapkamer knop Sander - hold
   initial_state: on
   trigger:
-    - platform: mqtt
-      topic: 'zigbee2mqtt/Slaapkamer knop Sander/action'
+    - platform: state
+      entity_id: sensor.0x0017880108000810_action
+      to: 'hold'
   condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ trigger.payload == "hold" }}'
-      - condition: template
-        value_template: >
-          {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.slaapkamer_knop_sander_hold','last_triggered'))) > 5 }}
+    - condition: template
+      value_template: >
+        {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.slaapkamer_knop_sander_hold','last_triggered'))) > 5 }}
   action:
     - service: light.toggle
       entity_id: 
