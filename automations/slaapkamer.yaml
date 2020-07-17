@@ -21,3 +21,40 @@
       data:
         entity_id:
           - switch.ikea_switch_1_switch
+
+- id: slaapkamer_knop_sander_press
+  alias: Slaapkamer knop Sander - press
+  initial_state: on
+  trigger:
+    - platform: mqtt
+      topic: 'zigbee2mqtt/Slaapkamer knop Sander/action'
+  condition:
+    condition: or
+    conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == "on" }}'
+      - condition: template
+        value_template: '{{ trigger.payload == "off" }}'
+  action:
+    - service: light.toggle
+      entity_id: light.hue_filament_bulb_1_4
+
+- id: slaapkamer_knop_sander_hold
+  alias: Slaapkamer knop Sander - hold
+  initial_state: on
+  trigger:
+    - platform: mqtt
+      topic: 'zigbee2mqtt/Slaapkamer knop Sander/action'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == "hold" }}'
+      - condition: template
+        value_template: >
+          {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.slaapkamer_knop_sander_hold','last_triggered'))) > 5 }}
+  action:
+    - service: light.toggle
+      entity_id: 
+        - light.slaapkamer_lamp_1
+        - light.slaapkamer_lamp_2
