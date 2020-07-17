@@ -51,8 +51,8 @@ cards:
       - sensor.keuken_button_1_battery_level
       - sensor.eettafel_button_1_battery_level
       - sensor.0x001788010800072a_battery
-      - sensor.slaapkamer_knop_sander_battery_level
-      - sensor.slaapkamer_knop_yuliia_battery_level
+      - sensor.0x0017880108000810_battery
+      - sensor.0x0017880108003423_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara temperature, humidity and pressure
