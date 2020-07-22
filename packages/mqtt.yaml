@@ -5,9 +5,3 @@ mqtt:
   username: !secret mosquitto_username
   password: !secret mosquitto_password
   discovery: true
-  birth_message:
-    topic: 'hass/status'
-    payload: 'online'
-  will_message:
-    topic: 'hass/status'
-    payload: 'offline'
