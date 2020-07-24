@@ -1,20 +1,16 @@
 webostv:
-  host: 192.168.68.117
+  host: !secret webostv_ip
   name: LG C9
   turn_on_action:
     service: wake_on_lan.send_magic_packet
     data:
-      mac: '20-17-42-85-1F-5E'
-      broadcast_address: 192.168.68.117
-
-cast:
-  media_player:
-    - host: 192.168.68.119
-    - host: 192.168.68.123
+      mac: '20:17:42:85:1F:5E'
+      broadcast_address: !secret webostv_ip
+      broadcast_port: 9
 
 #media_player:
 #  - platform: lg_soundbar
-#    host: 192.168.68.119
+#    host: !secret lg_soundbar_ip
 #    port: 9741
 
 ziggonext:
