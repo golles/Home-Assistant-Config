@@ -56,6 +56,6 @@ automation:
       - service: notify.mobile_app_iphone_x_van_golles
         data_template:
           title: P2000 melding
-          message: "{{ states.sensor.p2000_dichtbij.state + states.sensor.p2000_dichtbij.attributes.capcodes }}"
+          message: "{{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}"
           data:
-            url: "https://www.google.com/maps/search/?api=1&query={{ states.sensor.p2000_dichtbij.attributes.latitude }},{{ states.sensor.p2000_dichtbij.attributes.longitude }}"
+            url: "https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}"

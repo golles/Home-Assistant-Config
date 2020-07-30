@@ -43,15 +43,13 @@
     - platform: state
       entity_id: sensor.0x0017880108000810_action
       to: 'hold'
-  condition:
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.slaapkamer_knop_sander_hold','last_triggered'))) > 5 }}
   action:
     - service: light.toggle
       entity_id: 
         - light.slaapkamer_lamp_1
         - light.slaapkamer_lamp_2
+    - delay:
+        seconds: 5
 
 - id: slaapkamer_knop_yullia_press
   alias: Slaapkamer knop Yullia - press
@@ -74,12 +72,10 @@
     - platform: state
       entity_id: sensor.0x0017880108003423_action
       to: 'hold'
-  condition:
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(state_attr('automation.slaapkamer_knop_yullia_hold','last_triggered'))) > 5 }}
   action:
     - service: light.toggle
       entity_id: 
         - light.slaapkamer_lamp_1
         - light.slaapkamer_lamp_2
+    - delay:
+        seconds: 5

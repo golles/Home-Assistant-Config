@@ -45,7 +45,7 @@ script:
             {% elif is_state("input_select.chromecast_radio_speakers", "Zolder") %} media_player.zolder
             {% elif is_state("input_select.chromecast_radio_speakers", "All") %} media_player.home_group
             {% endif %}
-          volume_level: '{{ states.input_number.volume_radio.state | float * 0.025 }}' 
+          volume_level: '{{ states("input_number.volume_radio") | float * 0.025 }}'
       - service: media_player.play_media
         data_template:
           entity_id: >

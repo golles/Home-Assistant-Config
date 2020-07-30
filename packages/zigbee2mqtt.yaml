@@ -29,8 +29,8 @@ script:
         topic: zigbee2mqtt/bridge/config/rename
         payload_template: >-
           {
-            "old": "{{ states.input_text.zigbee2mqtt_old_name.state | string }}",
-            "new": "{{ states.input_text.zigbee2mqtt_new_name.state | string }}"
+            "old": "{{ states('input_text.zigbee2mqtt_old_name') | string }}",
+            "new": "{{ states('input_text.zigbee2mqtt_new_name') | string }}"
           }
   zigbee2mqtt_remove:
     alias: Zigbee2mqtt Remove
@@ -38,7 +38,7 @@ script:
       service: mqtt.publish
       data_template:
         topic: zigbee2mqtt/bridge/config/remove
-        payload_template: "{{ states.input_text.zigbee2mqtt_remove.state | string }}"
+        payload_template: "{{ states('input_text.zigbee2mqtt_remove') | string }}"
 
 # Timer for joining time remaining (120 sec = 2 min)
 timer:
