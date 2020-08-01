@@ -67,3 +67,56 @@ cards:
               Wastecollector: purmerend
             domain: sensor
       show_empty: false
+
+  - type: conditional
+    conditions:
+      - entity: media_player.lg_c9
+        state: 'off'
+    card:
+      type: horizontal-stack
+      cards:
+        - type: 'custom:button-card'
+          template: radio_button
+          variables:
+            name: NPO Radio 2
+            image: /local/radio/npo2.png
+            stream: 'https://icecast.omroep.nl/radio2-bb-mp3'
+        - type: 'custom:button-card'
+          template: radio_button
+          variables:
+            name: Qmusic
+            image: /local/radio/qmusic.png
+            stream: 'https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3'
+        - type: 'custom:button-card'
+          template: radio_button
+          variables:
+            name: Sky Radio
+            image: /local/radio/skyradio.png
+            stream: 'https://19993.live.streamtheworld.com/SKYRADIO.mp3'
+
+  - type: conditional
+    conditions:
+      - entity: media_player.lg_c9
+        state: 'on'
+    card:
+      type: horizontal-stack
+      cards:
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Ziggo
+            image: /local/tv/ziggo.png
+            source: 'Ziggo'
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Netflix
+            image: /local/tv/netflix.png
+            source: 'Netflix'
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: YouTube
+            image: /local/tv/youtube.png
+            source: 'YouTube'
+        
