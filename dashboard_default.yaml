@@ -32,6 +32,25 @@ button_card_templates:
         - height: 100px
         - width: 100px
 
+  tv_button:
+    variables:
+      name: ''
+      image: /local/tv/empty.png
+      source: ''
+    show_entity_picture: true
+    name: '[[[ return variables.name ]]]'
+    entity_picture: '[[[ return variables.image ]]]'
+    tap_action:
+      action: call-service
+      service: media_player.select_source
+      service_data:
+        entity_id: 'media_player.lg_c9'
+        source: '[[[ return variables.source ]]]'
+    styles:
+      entity_picture:
+        - height: 100px
+        - width: 100px
+
 views:
   - !include lovelace/view_welkom.yaml
   - !include lovelace/view_buurt.yaml

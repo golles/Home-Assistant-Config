@@ -10,3 +10,57 @@ cards:
   - type: media-control
     entity: media_player.stb_arris_uhd
     name: Ziggo
+
+  - type: conditional
+    conditions:
+      - entity: media_player.stb_arris_uhd
+        state: playing
+    card:
+      type: 'custom:button-card'
+      entity: media_player.stb_arris_uhd
+      show_entity_picture: true
+      name: '[[[ return `${entity.attributes.channel} - ${entity.attributes.title}` ]]]'
+      entity_picture: '[[[ return `${entity.attributes.entity_picture}` ]]]'
+      tap_action:
+        action: none
+      styles:
+        entity_picture:
+          - width: 100%
+
+  - type: vertical-stack
+    cards:
+    - type: horizontal-stack
+      cards:
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Ziggo
+            image: /local/tv/ziggo.png
+            source: 'Ziggo'
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Netflix
+            image: /local/tv/netflix.png
+            source: 'Netflix'
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: YouTube
+            image: /local/tv/youtube.png
+            source: 'YouTube'
+
+    - type: horizontal-stack
+      cards:
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Nintendo Switch
+            image: /local/tv/switch.png
+            source: 'Nintendo Switch'
+        - type: 'custom:button-card'
+          template: tv_button
+          variables:
+            name: Plex
+            image: /local/tv/plex.png
+            source: 'Plex'
