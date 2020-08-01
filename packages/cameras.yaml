@@ -1,0 +1,7 @@
+camera:
+  - platform: mjpeg
+    name: dlink
+    mjpeg_url: http://192.168.68.118/video.cgi
+    still_image_url: http://192.168.68.118/image/jpeg.cgi
+    username: !secret dlink_camera_username
+    password: !secret dlink_camera_password
