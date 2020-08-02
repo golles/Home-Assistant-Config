@@ -24,7 +24,8 @@ homekit:
         - feature: on_off
 
 automation:
-  - alias: "Start HomeKit"
+  - id: homekit_delayed_start
+    alias: "Start HomeKit"
     trigger:
       - platform: homeassistant
         event: start

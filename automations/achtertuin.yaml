@@ -1,5 +1,5 @@
 - id: licht_uit_achtertuin
-  alias: "Lampen uit achtertuin"
+  alias: Lampen uit achtertuin
   initial_state: on
   trigger:
     - platform: time
@@ -11,7 +11,7 @@
           - light.achtertuin
 
 - id: kerst_sfeer_achtertuin
-  alias: "Kerst sfeer achtertuin"
+  alias: Kerst sfeer achtertuin
   initial_state: on
   trigger:
     - platform: time
