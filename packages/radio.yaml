@@ -38,6 +38,17 @@ script:
         example: 'audio/mp4'
     alias: Cast Selected Radio on Chromecast Speakers
     sequence:
+      - service: media_player.turn_on
+        data_template:
+          entity_id: >
+            {% if is_state("input_select.chromecast_radio_speakers", "Huiskamer") %} media_player.lg_soundbar
+            {% elif is_state("input_select.chromecast_radio_speakers", "Zolder") %} media_player.zolder
+            {% elif is_state("input_select.chromecast_radio_speakers", "All") %} media_player.home_group
+            {% endif %}
+
+      - delay:
+          seconds: 1
+
       - service: media_player.volume_set
         data_template:
           entity_id: >
@@ -46,6 +57,7 @@ script:
             {% elif is_state("input_select.chromecast_radio_speakers", "All") %} media_player.home_group
             {% endif %}
           volume_level: '{{ states("input_number.volume_radio") | float * 0.025 }}'
+
       - service: media_player.play_media
         data_template:
           entity_id: >
