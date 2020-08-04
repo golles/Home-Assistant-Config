@@ -3,27 +3,28 @@ tado:
   password: !secret tado_password
   
 automation:
-  - alias: 'Tado auto home mode'
-    trigger:
-      - platform: state
-        entity_id: group.residents
-        to: 'home'
-    action:
-      service: shell_command.tado_set_home
-      data_template:
-        username: !secret tado_username
-        password: !secret tado_password
-
-  - alias: 'Tado auto away mode'
-    trigger:
-      - platform: state
-        entity_id: group.residents
-        to: 'not_home'
-    action:
-      service: shell_command.tado_set_away
-      data_template:
-        username: !secret tado_username
-        password: !secret tado_password
+- id: tado_auto_home_and_away_mode
+  alias: Tado automatisch home en away mode activeren
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: group.residents
+  action:
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: group.residents
+            state: 'not_home'
+        sequence:
+          - service: shell_command.tado_set_away
+            data_template:
+              username: !secret tado_username
+              password: !secret tado_password
+      default:
+        - service: shell_command.tado_set_home
+          data_template:
+            username: !secret tado_username
+            password: !secret tado_password
 
 shell_command:
   tado_set_away: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" AWAY'
