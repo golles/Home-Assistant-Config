@@ -3,12 +3,12 @@
   initial_state: on
   trigger:
       platform: time
-      at: "22:00:00"
+      at: '22:00:00'
   condition:
     - condition: template
-      value_template: "{{ not is_state('cover.slaapkamer_rolluik', 'closed') }}"
+      value_template: '{{ not is_state("cover.slaapkamer_rolluik", "closed") }}'
     - condition: template
-      value_template: "{{ is_state('binary_sensor.slaapkamerraam_contact', 'off') }}"
+      value_template: '{{ is_state("binary_sensor.slaapkamerraam_contact", "off") }}'
   action:
       service: cover.close_cover
       data:
@@ -19,10 +19,10 @@
   initial_state: on
   trigger:
       platform: time
-      at: "09:00:00"
+      at: '09:00:00'
   condition:
     - condition: template
-      value_template: "{{ not is_state('cover.slaapkamer_rolluik', 'open') }}"
+      value_template: '{{ not is_state("cover.slaapkamer_rolluik", "open") }}'
     - condition: state
       entity_id: group.residents
       state: 'not_home'

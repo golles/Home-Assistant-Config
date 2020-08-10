@@ -93,6 +93,7 @@ automation:
         data:
           payload_template: "{{ states('input_select.zigbee2mqtt_log_level') }}"
           topic: zigbee2mqtt/bridge/config/log_level
+
   # Automation to start timer when enable join is turned on
   - id: zigbee_join_enabled
     alias: Zigbee Join Enabled
@@ -103,6 +104,7 @@ automation:
     action:
       service: timer.start
       entity_id: timer.zigbee_permit_join
+
   # Automation to stop timer when switch turned off and turn off switch when timer finished
   - id: zigbee_join_disabled
     alias: Zigbee Join Disabled
@@ -120,6 +122,7 @@ automation:
           entity_id: timer.zigbee_permit_join
       - service: switch.turn_off
         entity_id: switch.zigbee2mqtt_main_join
+
   - id: zigbee2mqtt_create_notification_on_successfull_interview
     alias: Zigbee new device notification
     trigger:

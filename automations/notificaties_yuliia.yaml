@@ -1,16 +1,16 @@
 - id: pool_to_home_notification
-  alias: "Sander left pool notification to Yuliia"
+  alias: 'Sander left pool notification to Yuliia'
   initial_state: on
   trigger:
     platform: state
     entity_id: person.sander
-    from: "Zwembad"
+    from: 'Zwembad'
   condition:
     condition: time
-    after: "21:00:00"
-    before: "23:00:00"
+    after: '21:00:00'
+    before: '23:00:00'
   action:
     service: notify.mobile_app_yuliyas_iphone
     data_template:
-      title: "Sander has left swimming pool!"
-      message: "He'll be home in ~30 minutes"
+      title: 'Sander has left swimming pool!'
+      message: 'He will be home in ~30 minutes'

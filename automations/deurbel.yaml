@@ -8,9 +8,9 @@
   action:
     - service: notify.mobile_app_iphone_x_van_golles
       data_template:
-        title: "Ding dong!"
-        message: "Iemand staat bij de deur"
+        title: 'Ding dong!'
+        message: 'Iemand staat bij de deur'
 
     - service: notify.lg_c9
       data_template:
-        message: "Ding dong! Iemand staat bij de deur"
+        message: 'Ding dong! Iemand staat bij de deur'
