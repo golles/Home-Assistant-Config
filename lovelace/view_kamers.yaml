@@ -77,8 +77,6 @@ cards:
         name: Temperatuur
       - entity: sensor.slaapkamer_humidity_2
         name: Luchtvochtigheid
-      - entity: cover.slaapkamer_rolluik
-        name: Rolluik
       - entity: binary_sensor.slaapkamerraam_contact
         name: Raam
         map_state:
