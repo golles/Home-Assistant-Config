@@ -5,7 +5,7 @@
     - platform: time
       at: '00:00:00'
   action:
-    - service: homeassistant.turn_off
+    - service: light.turn_off
       data:
         entity_id:
           - light.achtertuin
@@ -18,9 +18,9 @@
       at: '18:00:00'
   condition:
     condition: template
-    value_template: '{{ now().month == 12 and now().day >= 6 }}'
+    value_template: '{{ now().month == 12 and now().day >= 6 }}' # All days in December after Sinterklaas.
   action:
-    - service: homeassistant.turn_on
+    - service: light.turn_off
       data:
         entity_id:
           - light.hue_smart_plug_1
