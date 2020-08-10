@@ -48,7 +48,7 @@ cards:
     entity: sensor.zigbee2mqtt_networkmap
     # the following are optional:
     mqtt_base_topic: zigbee2mqtt
-    force: 1500 # decrease it to get smaller map if you have many devices
+    force: 800 # decrease it to get smaller map if you have many devices
     node_size: 16
     font_size: 12
     link_width: 2
