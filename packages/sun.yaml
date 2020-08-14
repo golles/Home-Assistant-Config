@@ -1,0 +1,13 @@
+sun:
+
+sensor:
+  - platform: template
+    sensors:
+      sun_position_house:
+        friendly_name: "Zon positie"
+        value_template: >-
+          {% if state_attr('sun.sun', 'azimuth') > 105 and state_attr('sun.sun', 'azimuth') < 285 -%}
+            Achter
+          {%- else -%}
+            Voor
+          {%- endif %}
