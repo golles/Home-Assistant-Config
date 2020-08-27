@@ -50,7 +50,7 @@ cards:
       - sensor.0x0017880108000633_battery
       - sensor.keuken_button_1_battery_level
       - sensor.eettafel_button_1_battery_level
-      - sensor.0x001788010800072a_battery
+      - sensor.0x0017880108000829_battery
       - sensor.0x0017880108000810_battery
       - sensor.0x0017880108003423_battery
 
@@ -93,3 +93,13 @@ cards:
     entities:
       - sensor.deurbel_battery
       - sensor.bed_sander_battery
+
+  - type: custom:battery-state-card
+    name: Xiaomi Aqara movement/illuminance sensor
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+    entities:
+      - sensor.toilet_motion_battery
