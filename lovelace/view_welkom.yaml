@@ -29,11 +29,13 @@ cards:
       - person.sander
       - person.yuliia
       - entity: group.residents
-        name: Modus
+        name: Thuismodus
       - entity: input_boolean.guest_mode
+        name: Gastmodus
         tap_action:
           action: toggle
       - entity: input_boolean.vacation_mode
+        name: Vakantiemodus
         tap_action:
           action: toggle
 
