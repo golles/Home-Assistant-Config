@@ -3,18 +3,33 @@ path: weer
 panel: false
 icon: 'mdi:weather-sunny'
 badges: []
-cards:  
+cards:
   - type: weather-forecast
     entity: weather.huis
 
-  - type: picture
-    image: >-
-      https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
- 
-  - type: picture
-    image: >-
-      https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+  - type: entities
+    title: Zon
+    entities:
+      - entity: sun.sun
+      - entity: sensor.sun_position_house
+        icon: 'mdi:weather-sunny'
 
   - type: picture
-    image: >-
-      http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+    image: 'http://cdn.knmi.nl/knmi/map/general/weather-map.gif'
+    tap_action:
+      action: url
+      url_path: 'http://cdn.knmi.nl/knmi/map/general/weather-map.gif'
+
+  - type: horizontal-stack
+    cards:
+      - type: picture
+        image: 'https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4'
+        tap_action:
+          action: url
+          url_path: 'https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4'
+
+      - type: picture
+        image: 'https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4'
+        tap_action:
+          action: url
+          url_path: 'https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4'
