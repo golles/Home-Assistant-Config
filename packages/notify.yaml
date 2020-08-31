@@ -1,0 +1,23 @@
+notify:
+  - name: sander
+    platform: group
+    services:
+      - service: mobile_app_iphone_x_van_golles
+
+  - name: yuliia
+    platform: group
+    services:
+      - service: mobile_app_yuliyas_iphone
+      
+  - name: all_iphones
+    platform: group
+    services:
+      - service: sander
+      - service: yuliia
+
+  - name: all_iphones_and_tv
+    platform: group
+    services:
+      - service: lg_c9
+      - service: sander
+      - service: yuliia

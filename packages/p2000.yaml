@@ -53,9 +53,9 @@ automation:
       - condition: template
         value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
     action:
-      - service: notify.mobile_app_iphone_x_van_golles
+      - service: notify.all_iphones_and_tv
         data_template:
-          title: P2000 melding
+          title: "🚨 P2000 melding"
           message: "{{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}"
           data:
             url: "https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}"

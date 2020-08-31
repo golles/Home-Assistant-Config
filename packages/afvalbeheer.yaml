@@ -39,7 +39,7 @@ automation:
         - condition: template
           value_template: '{{ is_state_attr("sensor.purmerend_restafval", "Days-until", 1) }}'
     action:
-      - service: notify.mobile_app_iphone_x_van_golles
+      - service: notify.sander
         data_template:
           title: Afval
           message: >

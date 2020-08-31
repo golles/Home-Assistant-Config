@@ -14,9 +14,9 @@ automation:
       platform: state
       entity_id: sensor.myip
     action:
-      - service: notify.mobile_app_iphone_x_van_golles
+      - service: notify.sander
         data_template:
-          title: Externe IP gewijzigd
+          title: "🌍 Externe IP gewijzigd"
           message: "Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is."
 
       - service: shell_command.update_remote_ip
