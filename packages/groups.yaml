@@ -1,0 +1,7 @@
+group:
+  woonkamer_motion:
+    name: Woonkamer motion
+    icon: mdi:walk
+    entities:
+      - binary_sensor.0x00158d00054a7372_occupancy
+      - binary_sensor.0x00158d00052befc2_occupancy
