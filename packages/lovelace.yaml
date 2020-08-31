@@ -6,13 +6,21 @@ lovelace:
     dashboard-default:
       mode: yaml
       filename: dashboard_default.yaml
-      title: Overzicht
-      icon: mdi:view-dashboard
+      title: 1. Overzicht
+      icon: mdi:home-assistant
+
+    dashboard-omgeving:
+      mode: yaml
+      filename: dashboard_omgeving.yaml
+      title: Omgeving
+      icon: mdi:home-city
+
     dashboard-systems:
       mode: yaml
       filename: dashboard_systems.yaml
       title: Systems
       icon: mdi:apps
+
     dashboard-status:
       mode: yaml
       filename: dashboard_status.yaml

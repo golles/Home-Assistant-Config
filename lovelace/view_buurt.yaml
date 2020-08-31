@@ -4,9 +4,6 @@ panel: false
 icon: 'mdi:home-city'
 badges: []
 cards:
-  - type: weather-forecast
-    entity: weather.huis
-
   - type: custom:auto-entities
     show_empty: true
     card:

@@ -53,7 +53,6 @@ button_card_templates:
 
 views:
   - !include lovelace/view_welkom.yaml
-  - !include lovelace/view_buurt.yaml
   - !include lovelace/view_kamers.yaml
   - !include lovelace/view_radio.yaml
   - !include lovelace/view_tv.yaml
