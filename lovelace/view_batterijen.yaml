@@ -61,8 +61,9 @@ cards:
       action: more-info
     bulk_rename:
       - from: _battery
+      - from: battery
     entities:
-      - sensor.woonkamer_klimaat_battery
+      - sensor.0x00158d000309fef1_battery
       - sensor.meterkast_klimaat_battery
       - sensor.slaapkamer_klimaat_battery
       - sensor.logeerkamer_klimaat_battery
@@ -76,6 +77,7 @@ cards:
       action: more-info
     bulk_rename:
       - from: _battery
+      - from: battery
     entities:
       - sensor.voordeur_battery
       - sensor.achterdeur_battery
@@ -90,6 +92,7 @@ cards:
       action: more-info
     bulk_rename:
       - from: _battery
+      - from: battery
     entities:
       - sensor.deurbel_battery
       - sensor.bed_sander_battery
@@ -101,5 +104,9 @@ cards:
       action: more-info
     bulk_rename:
       - from: _battery
+      - from: battery
     entities:
+      - sensor.0x00158d00054a7372_battery
+      - sensor.0x00158d00052befc2_battery
       - sensor.toilet_motion_battery
+      - sensor.0x00158d00054a73d4_battery
