@@ -14,5 +14,6 @@ swipe_nav:
 views:
   - !include lovelace/view_hass.yaml
   - !include lovelace/view_zigbee2mqtt.yaml
+  - !include lovelace/view_zigbee_map.yaml
   - !include lovelace/view_internet.yaml
   - !include lovelace/view_sabnzbd.yaml
