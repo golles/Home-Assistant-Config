@@ -19,6 +19,12 @@ cards:
           options:
             secondary_info: last-changed
           state: 'on'
+        - attributes:
+            device_class: window
+          domain: binary_sensor
+          options:
+            secondary_info: last-changed
+          state: 'on'
         - domain: cover
           state: open
 
@@ -32,6 +38,11 @@ cards:
       include:
         - attributes:
             device_class: door
+          domain: binary_sensor
+          options:
+            secondary_info: last-changed
+        - attributes:
+            device_class: window
           domain: binary_sensor
           options:
             secondary_info: last-changed
