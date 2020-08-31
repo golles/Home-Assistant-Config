@@ -65,11 +65,10 @@ cards:
         type: entities
       filter:
         include:
-          include:
-            - domain: sensor
-              attributes:
-                Wastecollector: purmerend
-                Days-until: = 1
+          - domain: sensor
+            attributes:
+              Wastecollector: purmerend
+              Days-until: = 1
 
   - type: conditional
     conditions:
