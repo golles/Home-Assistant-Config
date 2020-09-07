@@ -1,16 +1,29 @@
-# - id: someone_arrives_home
-#   alias: Someone arrives home
-#   initial_state: on
-#   trigger:
-#     platform: state
-#     entity_id:
-#       - person.sander
-#       - person.yuliia
-#     to: "home"
-#   condition:
-#     condition: sun
-#     after: sunset
-#     after_offset: -00:30:00
-#   action:
-#     service: homeassistant.turn_on
-#     entity_id: light.voortuin_lamp
+- id: someone_arrives_home
+  alias: Voortuinlamp aan als het donker is en iemand thuis komt
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: 
+        # List all individual residents and not the group
+        # as it won't work if someone comes home while someone else is already at home.
+        - person.sander
+        - person.yuliia
+      to: 'home'
+  condition:
+    condition: or
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '+01:00:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-01:00:00'
+  action:
+    - service: light.turn_on
+      entity_id: light.voortuin
+
+    - delay:
+        minutes: 10
+
+    - service: light.turn_off
+      entity_id: light.voortuin
