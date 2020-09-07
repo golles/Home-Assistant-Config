@@ -12,8 +12,3 @@ webostv:
 #  - platform: lg_soundbar
 #    host: !secret lg_soundbar_ip
 #    port: 9741
-
-ziggonext:
-  username: !secret ziggo_username
-  password: !secret ziggo_password
-  country_code: nl

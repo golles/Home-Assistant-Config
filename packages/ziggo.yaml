@@ -1,0 +1,15 @@
+ziggonext:
+  username: !secret ziggo_username
+  password: !secret ziggo_password
+  country_code: nl
+
+sensor:
+  - platform: rest
+    name: Ziggo incidents
+    scan_interval: 10800 # 60 * 60 * 3
+    json_attributes:
+      - callback
+      - outages
+      - announcements
+    resource: !secret ziggo_incidents_url
+    value_template: '{{ value_json.callback.timestamp }}'
