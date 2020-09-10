@@ -1,0 +1,50 @@
+- id: cube1_tab
+  alias: Cube 1 tab
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: device
+      domain: mqtt
+      device_id: 1469642bbb674302a11f52e2857eaadf
+      type: action
+      subtype: tap
+      discovery_id: 0x00158d00042df952 action_tap
+    - platform: state
+      entity_id: sensor.0x00158d00042df952_action
+      to: 'flip90'
+    - platform: state
+      entity_id: sensor.0x00158d00042df952_action
+      to: 'flip180'
+  action:
+    - service: light.toggle
+      entity_id: light.eettafel
+
+- id: cube1_rotate_left
+  alias: Cube 1 rotate left
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: sensor.0x00158d00042df952_action
+      to: 'rotate_left'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.eettafel
+        brightness: >
+          {{ state_attr('light.eettafel', 'brightness') | int - 25 }}
+          
+- id: cube1_rotate_right
+  alias: Cube 1 rotate right
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: sensor.0x00158d00042df952_action
+      to: 'rotate_right'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.eettafel
+        brightness: >
+          {{ state_attr('light.eettafel', 'brightness') | int + 25 }}
