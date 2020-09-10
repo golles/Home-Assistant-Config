@@ -1,0 +1,18 @@
+- id: overloop_on_from_zolder
+  alias: Overloop lamp automatisch aandoen als iemand van zolder komt
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.zolder_trap_occupancy
+      to: 'on'
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: light.overloop
+        state: 'on'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.overloop_spot_2
+        brightness: 255
