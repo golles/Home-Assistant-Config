@@ -1,23 +1,30 @@
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
-    type: module
-
-  - url: /local/custom-header.js?v=1.6.6
-    type: module
-
-  - url: /local/swipe-navigation.js?v=1.2.3
-    type: js
 
   - url: /local/auto-entities.js
     type: module
 
-  - url: /local/fold-entity-row.js
+  - url: /local/banner-card.js?v=1
     type: module
-
+  
   - url: /local/battery-state-card.js
     type: module
 
   - url: /local/button-card.js
     type: module
 
-  - url: /local/banner-card.js?v=1
+  - url: /local/custom-header.js?v=1.6.6
+    type: module
+
+  - url: /local/fold-entity-row.js
+    type: module
+
+  - url: /local/mini-graph-card-bundle.js?v=0.9.4
+    type: module
+
+  - url: /local/mini-media-player-bundle.js?v=1.11.0
+    type: module
+
+  - url: /local/swipe-navigation.js?v=1.2.3
+    type: js
+
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
     type: module

@@ -7,6 +7,8 @@ battery-state-card.js           https://github.com/maxwroc/battery-state-card/re
 button-card.js                  https://www.github.com/custom-cards/button-card/releases/latest/download/button-card.js
 custom-header.js                https://github.com/maykar/custom-header/releases/latest/download/custom-header.js
 fold-entity-row.js              https://raw.githubusercontent.com/thomasloven/lovelace-fold-entity-row/master/fold-entity-row.js
+mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
+mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js
 swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
 zigbee2mqtt-networkmap.js       https://github.com/azuwis/zigbee2mqtt-networkmap/releases/latest/download/zigbee2mqtt-networkmap.js
 EOF
