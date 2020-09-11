@@ -40,6 +40,14 @@ script:
         topic: zigbee2mqtt/bridge/config/remove
         payload_template: "{{ states('input_text.zigbee2mqtt_remove') | string }}"
 
+  zigbee2mqtt_force_remove:
+    alias: Zigbee2mqtt Force Remove
+    sequence:
+      service: mqtt.publish
+      data_template:
+        topic: zigbee2mqtt/bridge/config/force_remove
+        payload_template: "{{ states('input_text.zigbee2mqtt_remove') | string }}"
+
 # Timer for joining time remaining (120 sec = 2 min)
 timer:
   zigbee_permit_join:
@@ -84,7 +92,7 @@ automation:
   # Automation for sending MQTT message on input select change
   - id: zigbee_log_level
     alias: Zigbee2mqtt Log Level
-    initial_state: "on"
+    initial_state: on
     trigger:
       platform: state
       entity_id: input_select.zigbee2mqtt_log_level

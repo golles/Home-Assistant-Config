@@ -55,3 +55,4 @@ cards:
     entities:
       - entity: input_text.zigbee2mqtt_remove
       - entity: script.zigbee2mqtt_remove
+      - entity: script.zigbee2mqtt_force_remove
