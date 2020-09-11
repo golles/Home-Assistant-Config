@@ -19,3 +19,43 @@ cards:
           - type: weblink
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Entities onbekend
+      type: entities
+    filter:
+      exclude:
+        - entity_id: cover.zonnescherm
+        - entity_id: group.wasmachine
+        - entity_id: sensor.bosch_sbv88tx36e_elapsed
+        - entity_id: sensor.bosch_wawh2643nl_door
+        - entity_id: sensor.bosch_wawh2643nl_elapsed
+        - entity_id: sensor.bosch_wawh2643nl_program
+        - entity_id: sensor.bosch_wawh2643nl_remaining
+        - entity_id: sensor.current_phase_l1
+        - entity_id: sensor.current_phase_l2
+        - entity_id: sensor.current_phase_l3
+        - entity_id: sensor.energy_consumption_total
+        - entity_id: sensor.gas_consumption
+        - entity_id: sensor.hourly_gas_consumption
+        - entity_id: sensor.power_consumption_phase_l2
+        - entity_id: sensor.power_consumption_phase_l3
+        - entity_id: sensor.power_production_phase_l2
+        - entity_id: sensor.power_production_phase_l3
+        - entity_id: sensor.short_power_failure_count
+        - entity_id: sensor.voltage_phase_l1
+        - entity_id: sensor.voltage_phase_l2
+        - entity_id: sensor.voltage_phase_l3
+        - entity_id: sensor.voltage_sags_phase_l2
+        - entity_id: sensor.voltage_sags_phase_l3
+        - entity_id: sensor.voltage_swells_phase_l2
+        - entity_id: sensor.voltage_swells_phase_l3
+        - entity_id: sensor.p2000_politie
+        - entity_id: sensor.zigbee2mqtt_networkmap
+      include:
+        - state: unknown
+    
+    
