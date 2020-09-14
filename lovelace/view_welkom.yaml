@@ -121,4 +121,21 @@ cards:
             name: YouTube
             image: /local/tv/youtube.png
             source: 'YouTube'
-        
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Batterijen bijna leeg
+      type: custom:battery-state-card
+      secondary_info: last_updated
+      tap_action:
+        action: more-info
+      bulk_rename:
+        - from: _battery
+        - from: battery
+    filter:
+      include:
+        - attributes:
+            device_class: battery
+            battery: '< 20'
