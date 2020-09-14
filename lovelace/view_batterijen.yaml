@@ -96,6 +96,7 @@ cards:
     entities:
       - sensor.deurbel_battery
       - sensor.bed_sander_battery
+      - sensor.zonnescherm_vibration_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara movement/illuminance sensor
@@ -109,4 +110,4 @@ cards:
       - sensor.0x00158d00054a7372_battery
       - sensor.0x00158d00052befc2_battery
       - sensor.toilet_motion_battery
-      - sensor.0x00158d00054a73d4_battery
+      - sensor.zolder_trap_battery
