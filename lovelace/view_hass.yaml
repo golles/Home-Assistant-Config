@@ -8,12 +8,13 @@ cards:
     title: Home Assistant
     show_header_toggle: false
     entities:
-      - entity: sensor.uptime
+      # - entity: sensor.uptime
+      - entity: sensor.runtime
       - type: divider
       - entity: sensor.current_version
       - type: custom:fold-entity-row
         head: binary_sensor.updater
-        open: true #"{{ is_state('binary_sensor.updater','on') }}"
+        open: true # Sadly this doesn't work: "{{ is_state('binary_sensor.updater','on') }}" https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
         entities:
           - entity: sensor.latest_version
           - type: weblink
@@ -31,6 +32,7 @@ cards:
         - entity_id: cover.zonnescherm
         - entity_id: group.wasmachine
         - entity_id: sensor.bosch_sbv88tx36e_elapsed
+        - entity_id: sensor.bosch_sbv88tx36e_remaining
         - entity_id: sensor.bosch_wawh2643nl_door
         - entity_id: sensor.bosch_wawh2643nl_elapsed
         - entity_id: sensor.bosch_wawh2643nl_program
