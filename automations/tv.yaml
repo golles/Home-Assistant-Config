@@ -8,11 +8,11 @@
       for:
         minutes: 1
   condition:
-    condition: not
+    condition: not # Note that this is a NOT condition, as the Ziggo box has multiple states when on.
     conditions:
       - condition: state
         entity_id: media_player.stb_arris_uhd
-        state: 'on'
+        state: 'off'
   action:
     - service: media_player.turn_off
       entity_id: media_player.stb_arris_uhd
