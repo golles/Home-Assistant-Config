@@ -8,11 +8,15 @@ homeassistant:
       icon: "mdi:web"
 
 automation:
-  - alias: External ip changed
+  - id: ip_changed
+    alias: External ip changed
     initial_state: on
     trigger:
       platform: state
       entity_id: sensor.myip
+    condition:
+      - condition: template
+        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
     action:
       - service: notify.sander
         data_template:
