@@ -6,7 +6,7 @@ lovelace:
     dashboard-default:
       mode: yaml
       filename: dashboard_default.yaml
-      title: 1. Overzicht
+      title: Overzicht
       icon: mdi:home-assistant
 
     dashboard-omgeving:
