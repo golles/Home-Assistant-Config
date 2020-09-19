@@ -7,6 +7,6 @@
     to: 'vibration'
   action:
     - service: notify.all_iphones_and_tv
-      data_template:
+      data:
         title: '🔔 Ding dong!'
         message: 'Iemand staat bij de deur'

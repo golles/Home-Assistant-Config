@@ -11,6 +11,6 @@
     before: '23:00:00'
   action:
     service: notify.mobile_app_yuliyas_iphone
-    data_template:
+    data:
       title: 'Sander has left swimming pool!'
       message: 'He will be home in ~30 minutes'

@@ -29,7 +29,7 @@
       to: 'rotate_left'
   action:
     - service: light.turn_on
-      data_template:
+      data:
         entity_id: light.eettafel
         brightness: >
           {{ state_attr('light.eettafel', 'brightness') | int - 25 }}
@@ -44,7 +44,7 @@
       to: 'rotate_right'
   action:
     - service: light.turn_on
-      data_template:
+      data:
         entity_id: light.eettafel
         brightness: >
           {{ state_attr('light.eettafel', 'brightness') | int + 25 }}

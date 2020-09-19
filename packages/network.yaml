@@ -19,12 +19,12 @@ automation:
         value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
     action:
       - service: notify.sander
-        data_template:
+        data:
           title: "🌍 Externe IP gewijzigd"
           message: "Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is."
 
       - service: shell_command.update_remote_ip
-        data_template:
+        data:
           username: !secret direct_admin_username
           password: !secret direct_admin_password
           server: !secret direct_admin_server

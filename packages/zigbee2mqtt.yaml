@@ -25,7 +25,7 @@ script:
     alias: Zigbee2mqtt Rename
     sequence:
       service: mqtt.publish
-      data_template:
+      data:
         topic: zigbee2mqtt/bridge/config/rename
         payload_template: >-
           {
@@ -36,7 +36,7 @@ script:
     alias: Zigbee2mqtt Remove
     sequence:
       service: mqtt.publish
-      data_template:
+      data:
         topic: zigbee2mqtt/bridge/config/remove
         payload_template: "{{ states('input_text.zigbee2mqtt_remove') | string }}"
 
@@ -44,7 +44,7 @@ script:
     alias: Zigbee2mqtt Force Remove
     sequence:
       service: mqtt.publish
-      data_template:
+      data:
         topic: zigbee2mqtt/bridge/config/force_remove
         payload_template: "{{ states('input_text.zigbee2mqtt_remove') | string }}"
 
@@ -141,7 +141,7 @@ automation:
       value_template: '{{trigger.payload_json.type == "pairing" and trigger.payload_json.message == "interview_successful"}}'
     action:
       - service: persistent_notification.create
-        data_template:
+        data:
           title: Device joined the zigbee2mqtt network
           message: "Name: {{trigger.payload_json.meta.friendly_name}},
                     Vendor: {{trigger.payload_json.meta.vendor}},

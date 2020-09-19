@@ -17,12 +17,12 @@ automation:
               state: 'not_home'
           sequence:
             - service: shell_command.tado_set_away
-              data_template:
+              data:
                 username: !secret tado_username
                 password: !secret tado_password
         default:
           - service: shell_command.tado_set_home
-            data_template:
+            data:
               username: !secret tado_username
               password: !secret tado_password
 

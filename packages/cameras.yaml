@@ -25,13 +25,13 @@ automation:
             state: 'below_horizon'
         sequence:
           - service: shell_command.dlink_set_night_mode
-            data_template:
+            data:
               host: !secret dlink_camera_host
               username: !secret dlink_camera_username
               password: !secret dlink_camera_password
       default:
         - service: shell_command.dlink_set_day_mode
-          data_template:
+          data:
             host: !secret dlink_camera_host
             username: !secret dlink_camera_username
             password: !secret dlink_camera_password

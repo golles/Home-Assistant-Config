@@ -7,6 +7,6 @@
       to: 'press'
   action:
     - service: light.turn_off
-      data_template: 
+      data: 
         entity_id: >
           {{ states.light | selectattr('state', 'eq', 'on') |  map(attribute='entity_id') | join(', ') }}
