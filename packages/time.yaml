@@ -13,7 +13,6 @@ sensor:
   - platform: template
     sensors:
       time_of_day:
-        entity_id: sensor.time
         value_template: >-
           {% set hour = now().hour %}
           {% if hour in range(0,6) %} Midnight
