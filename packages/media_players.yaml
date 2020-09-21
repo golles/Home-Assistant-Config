@@ -8,7 +8,21 @@ webostv:
       broadcast_address: !secret webostv_ip
       broadcast_port: 9
 
-#media_player:
-#  - platform: lg_soundbar
-#    host: !secret lg_soundbar_ip
-#    port: 9741
+automation:
+- id: switch_soundbar_source_and_volume_when_tv_on
+  alias: Automatisch soundbar source en volume zetten als de tv aan gaat
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: media_player.lg_c9
+      from: 'off'
+      to: 'on'
+  action:
+    - service: shell_command.set_soundbar_source_and_volume
+      data:
+        ip: !secret lg_soundbar_ip
+        source: 15
+        volume: 12
+
+shell_command:
+  set_soundbar_source_and_volume: 'python /config/custom_scripts/lg_sl10.py "{{ ip }}" "{{ source }}" "{{ volume }}"'
