@@ -1,0 +1,25 @@
+- id: auto_light_woonkamer
+  alias: Automatisch licht aan in de woonkamer
+  initial_state: on
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.woonkamer_illuminance_illuminance_lux
+      below: 20
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: group.residents
+      from: 'not_home'
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: group.residents
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.woonkamer_illuminance_illuminance_lux
+      below: 20
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.woonkamer
+        brightness: 155
