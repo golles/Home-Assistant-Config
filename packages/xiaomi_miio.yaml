@@ -1,0 +1,115 @@
+fan:
+  - platform: xiaomi_miio
+    host: !secret airpurifier_ip
+    token: !secret airpurifier_token
+    model: zhimi.airpurifier.mb3
+    name: Air Purifier
+
+switch:
+  - platform: template
+    switches:
+      air_purifier_led:
+        friendly_name: "Scherm"
+        value_template: "{{ is_state_attr('fan.air_purifier', 'led', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_led_on
+          data:
+            entity_id: fan.air_purifier
+        turn_off:
+          service: xiaomi_miio.fan_set_led_off
+          data:
+            entity_id: fan.air_purifier
+        icon_template: mdi:lightbulb-outline
+
+      air_purifier_child_lock:
+        friendly_name: "Kinderslot"
+        value_template: "{{ is_state_attr('fan.air_purifier', 'child_lock', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_child_lock_on
+          data:
+            entity_id: fan.air_purifier
+        turn_off:
+          service: xiaomi_miio.fan_set_child_lock_off
+          data:
+            entity_id: fan.air_purifier
+        icon_template: "mdi:lock-outline"
+
+sensor:
+  - platform: template
+    sensors:
+      air_purifier_temp:
+        friendly_name: "Temperatuur"
+        value_template: "{{ state_attr('fan.air_purifier', 'temperature') }}"
+        unit_of_measurement: "°C"
+        device_class: "temperature"
+
+      air_purifier_humidity:
+        friendly_name: "Vochtigheid"
+        value_template: "{{ state_attr('fan.air_purifier', 'humidity') }}"
+        unit_of_measurement: "%"
+        device_class: "humidity"
+
+      air_purifier_air_quality_pm25:
+        friendly_name: "Luchtkwaliteit (AQI) PM2.5"
+        value_template: >
+           {% set value = state_attr('fan.air_purifier', 'aqi') %}
+           {% if state_attr('fan.air_purifier', 'aqi') == None %}
+            {{ 0 }}
+           {%- else -%}
+            {{ value }}
+           {% endif %}   
+        unit_of_measurement: "μg/m³"
+        icon_template: "mdi:weather-fog"
+
+      air_purifier_avg_air_quality_pm25:
+        friendly_name: "Gemiddelde luchtkwaliteit (AvgAQI) PM2.5"
+        value_template: "{{ state_attr('fan.air_purifier', 'average_aqi') }}"
+        unit_of_measurement: "μg/m³"
+        icon_template: "mdi:weather-hazy"
+
+      air_purifier_use_time:
+        friendly_name: "Tijd gebruikt"
+        value_template: >
+          {% macro phrase(value, name) %}
+          {%- set value = value | int %}
+          {%- set end = 's' if value > 1 else '' %}
+          {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
+          {%- endmacro %}
+          
+          {% set weeks = (state_attr('fan.air_purifier', 'use_time') | int / 604800) | int %}
+          {% set days = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800)) / 86400) | int %}
+          {% set hours = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400)) / 3600) | int %}
+          {% set minutes = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400) - (hours * 3600)) / 60) | int %}
+          {% set seconds = (state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400) - (hours * 3600) - (minutes*60)) | int %}
+          {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min'), phrase(seconds, 'sec') ] | select('!=','') | list | join(', ') }}
+        icon_template: "mdi:heart-pulse"
+
+      air_purifier_filter_used:
+        friendly_name: "Filter gebruikt"
+        value_template: "{{ state_attr('fan.air_purifier', 'filter_hours_used') }}"
+        unit_of_measurement: "hrs"
+        icon_template: "mdi:heart-off"
+
+      air_purifier_filter_remaining:
+        friendly_name: "Filter resterend"
+        value_template: "{{ state_attr('fan.air_purifier', 'filter_life_remaining') }}"
+        unit_of_measurement: "%"
+        icon_template: "mdi:heart-outline"
+
+      air_purifier_purify_volume:
+        friendly_name: "Gezuiverd volume"
+        value_template: "{{ state_attr('fan.air_purifier', 'purify_volume') }}"
+        unit_of_measurement: "m³"
+        icon_template: "mdi:warehouse"
+
+      air_purifier_speed:
+        friendly_name: "Motor snelheid"
+        value_template: "{{ state_attr('fan.air_purifier', 'motor_speed') }}"
+        unit_of_measurement: "rpm"
+        icon_template: "mdi:speedometer"
+
+      air_purifier_led_brightness:
+        friendly_name: "Led-helderheid"
+        value_template: "{{ state_attr('fan.air_purifier', 'led_brightness') }}"
+        unit_of_measurement: "lx"
+        icon_template: "mdi:brightness-5"
