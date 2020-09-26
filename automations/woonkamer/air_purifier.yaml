@@ -1,0 +1,16 @@
+- id: air_purifier_off_door_open
+  alias: Air purifier uit als de deur open staat
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.achterdeur_contact
+      to: 'on'
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: fan.air_purifier
+      state: 'on'
+  action:
+    - service: fan.turn_off
+      entity_id: fan.air_purifier
