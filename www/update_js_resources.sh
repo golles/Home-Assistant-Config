@@ -2,7 +2,6 @@
 
 RESOURCES=$(cat <<'EOF'
 auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
-banner-card.js                  https://github.com/nervetattoo/banner-card/releases/latest/download/banner-card.js
 battery-state-card.js           https://github.com/maxwroc/battery-state-card/releases/latest/download/battery-state-card.js
 button-card.js                  https://www.github.com/custom-cards/button-card/releases/latest/download/button-card.js
 custom-header.js                https://github.com/maykar/custom-header/releases/latest/download/custom-header.js

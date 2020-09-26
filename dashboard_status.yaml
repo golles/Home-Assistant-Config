@@ -14,4 +14,3 @@ swipe_nav:
 views:
   - !include lovelace/view_batterijen.yaml
   - !include lovelace/view_raamdeurcover.yaml
-  - !include lovelace/view_meterkast.yaml

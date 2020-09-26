@@ -49,7 +49,7 @@ cards:
     entities:
       - sensor.0x0017880108000633_battery
       - sensor.keuken_button_1_battery_level
-      - sensor.eettafel_button_1_battery_level
+      - sensor.hue_smart_button_1_battery_level
       - sensor.0x0017880108000829_battery
       - sensor.0x0017880108000810_battery
       - sensor.0x0017880108003423_battery

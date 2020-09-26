@@ -1,0 +1,214 @@
+title: Woonkamer
+path: woonkamer
+panel: false
+icon: 'mdi:sofa'
+badges: []
+cards: 
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - light.woonkamer
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.hue_filament_bulb_1_2
+            name: Groot 1
+          - entity: light.woonkamer_groot_2
+            name: Groot 2
+          - entity: light.woonkamer_klein
+            name: Klein
+
+      - light.tv
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.woonkamer_play_2
+            name: Links
+          - entity: light.woonkamer_play_1
+            name: Rechts
+
+      - light.eettafel
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.hue_filament_bulb_2
+            name: Hanglamp 1
+          - entity: light.hue_filament_bulb_5
+            name: Hanglamp 2
+          - entity: light.hue_filament_bulb_1
+            name: Hanglamp 3
+          - entity: light.hue_filament_bulb_4
+            name: Hanglamp 4
+          - entity: light.hue_filament_bulb_3
+            name: Hanglamp 5
+
+      - light.keuken
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.keuken_spot_1
+            name: Spot 1
+          - entity: light.keuken_spot_2
+            name: Spot 2
+          - entity: light.keuken_spot_3
+            name: Spot 3
+          - entity: light.keuken_spot_4
+            name: Spot 4
+          - entity: light.keuken_spot_5
+            name: Spot 5
+          - entity: light.keuken_spot_6
+            name: Spot 6
+
+      - entity: switch.ikea_switch_2_switch
+        name: Keukenkastje
+        icon: mdi:lightbulb
+      - type: divider
+      - cover.zonnescherm
+      - type: divider
+      - fan.air_purifier
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - switch.air_purifier_led
+          - switch.air_purifier_child_lock
+          - sensor.air_purifier_air_quality_pm25
+          - sensor.air_purifier_avg_air_quality_pm25
+          - type: divider
+          - sensor.air_purifier_temp
+          - sensor.air_purifier_humidity
+          - type: divider
+          - sensor.air_purifier_use_time
+          - sensor.air_purifier_filter_used
+          - sensor.air_purifier_filter_remaining
+          - sensor.air_purifier_purify_volume
+          - type: divider
+          - sensor.air_purifier_speed
+          - sensor.air_purifier_led_brightness
+
+  - type: thermostat
+    entity: climate.woonkamer
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        title: Radio
+        cards:
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: NPO Radio 1
+              image: /local/radio/npo1.png
+              stream: 'https://icecast.omroep.nl/radio1-bb-mp3'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: NPO Radio 2
+              image: /local/radio/npo2.png
+              stream: 'https://icecast.omroep.nl/radio2-bb-mp3'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: NPO 3FM
+              image: /local/radio/npo3fm.png
+              stream: 'https://icecast.omroep.nl/3fm-bb-mp3'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Qmusic
+              image: /local/radio/qmusic.png
+              stream: 'https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Sky Radio
+              image: /local/radio/skyradio.png
+              stream: 'https://19993.live.streamtheworld.com/SKYRADIO.mp3'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Radio 10
+              image: /local/radio/radio10.png
+              stream: 'http://19993.live.streamtheworld.com/RADIO10.mp3'
+
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Perec.FM
+              image: /local/radio/perec.png
+              stream: 'http://radio.stilnoe.fm:8080/radio-stilnoe'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Radio 538
+              image: /local/radio/538.jpg
+              stream: 'https://18973.live.streamtheworld.com/RADIO538.mp3'
+          - type: 'custom:button-card'
+            template: radio_button
+            variables:
+              name: Slam
+              image: /local/radio/slam.png
+              stream: 'https://19983.live.streamtheworld.com/SLAM_AAC.aac'
+
+  - type: vertical-stack
+    cards:
+      # - type: media-control
+      #   entity: media_player.lg_c9
+    
+      # - type: media-control
+      #   entity: media_player.stb_arris_uhd
+      #   name: Ziggo
+
+      - type: vertical-stack
+        title: TV
+        cards:
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              template: tv_button
+              variables:
+                name: Ziggo
+                image: /local/tv/ziggo.png
+                source: 'Ziggo'
+            - type: 'custom:button-card'
+              template: tv_button
+              variables:
+                name: Netflix
+                image: /local/tv/netflix.png
+                source: 'Netflix'
+            - type: 'custom:button-card'
+              template: tv_button
+              variables:
+                name: YouTube
+                image: /local/tv/youtube.png
+                source: 'YouTube'
+
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              template: tv_button
+              variables:
+                name: Nintendo Switch
+                image: /local/tv/switch.png
+                source: 'Nintendo Switch'
+            - type: 'custom:button-card'
+              template: tv_button
+              variables:
+                name: Plex
+                image: /local/tv/plex.png
+                source: 'Plex'

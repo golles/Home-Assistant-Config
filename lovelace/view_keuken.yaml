@@ -1,0 +1,49 @@
+title: Keuken
+path: keuken
+panel: false
+icon: 'mdi:chef-hat'
+badges: []
+cards: 
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - light.keuken
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.keuken_spot_1
+            name: Spot 1
+          - entity: light.keuken_spot_2
+            name: Spot 2
+          - entity: light.keuken_spot_3
+            name: Spot 3
+          - entity: light.keuken_spot_4
+            name: Spot 4
+          - entity: light.keuken_spot_5
+            name: Spot 5
+          - entity: light.keuken_spot_6
+            name: Spot 6
+
+  - type: entities
+    title: Vaatwasser
+    show_header_toggle: false
+    entities:
+      - sensor.bosch_sbv88tx36e_state
+      - sensor.bosch_sbv88tx36e_door
+      - sensor.bosch_sbv88tx36e_program
+      - sensor.bosch_sbv88tx36e_elapsed
+      - sensor.bosch_sbv88tx36e_remaining
+
+  - type: entities
+    title: Koelkast
+    show_header_toggle: false
+    entities:
+      - entity: sensor.0x00158d0002d7da66_temperature
+        name: Temperatuur
+      - entity: sensor.0x00158d0002d7da66_humidity
+        name: Vochtigheid
+      - entity: sensor.0x00158d0002d7da66_pressure
+        name: Druk

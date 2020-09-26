@@ -17,8 +17,11 @@ cards:
     entities:
       - sensor.energy_consumption_tarif_1
       - sensor.energy_consumption_tarif_2
+      - sensor.power_tariff
       - type: custom:fold-entity-row
-        head: sensor.power_tariff
+        head:
+          type: section
+          label: 
         entities:
           # - sensor.power_production
           # - sensor.power_production_phase_l1
@@ -52,8 +55,11 @@ cards:
     title: Warmtemeter
     entities:
       - sensor.stadsverwarming_energy
+      - sensor.stadsverwarming_volume
       - type: custom:fold-entity-row
-        head: sensor.stadsverwarming_volume
+        head:
+          type: section
+          label: 
         entities:
           - sensor.stadsverwarming_operating_hours
           - sensor.stadsverwarming_temperature_in
