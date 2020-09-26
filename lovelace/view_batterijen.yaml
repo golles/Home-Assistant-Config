@@ -12,7 +12,7 @@ cards:
     bulk_rename:
       - from: Battery Level
     entities:
-      - entity: sensor.iphone_x_van_golles_battery_level
+      - entity: sensor.iphone_x_van_golles_2_battery_level
         charging_state:
           entity_id: sensor.iphone_x_van_golles_battery_state
           state: Charging
@@ -111,3 +111,15 @@ cards:
       - sensor.0x00158d00052befc2_battery
       - sensor.toilet_motion_battery
       - sensor.zolder_trap_battery
+
+  - type: custom:battery-state-card
+    name: MiJia light intensity sensor
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+      - from: battery
+    entities:
+      - sensor.woonkamer_illuminance_battery
+      - sensor.achtertuin_illuminance_battery
