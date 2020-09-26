@@ -16,6 +16,7 @@ homekit:
   filter:
     include_entities:
       - media_player.stb_arris_uhd
+      - fan.air_purifier
   entity_config:
     media_player.stb_arris_uhd:
       feature_list:
