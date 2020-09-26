@@ -1,0 +1,26 @@
+- id: zolder_auto_off
+  alias: Zolder verlichting uit bij geen beweging
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hue_motion_sensor_1_motion
+      to: 'off'
+      for:
+        minutes: 10
+    - platform: state
+      entity_id: light.zolder
+      to: 'on'
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: binary_sensor.hue_motion_sensor_1_motion
+      state: 'off'
+      for:
+        minutes: 10
+    - condition: state
+      entity_id: light.zolder
+      state: 'on'
+  action:
+    - entity_id: light.zolder
+      service: light.turn_off

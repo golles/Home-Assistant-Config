@@ -1,0 +1,28 @@
+- id: slaapkamer_knop_yullia_press
+  alias: Slaapkamer knop Yullia - press
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.0x0017880108003423_action
+      to: 'on'
+    - platform: state
+      entity_id: sensor.0x0017880108003423_action
+      to: 'off'
+  action:
+    - service: light.toggle
+      entity_id: light.hue_filament_bulb_1_3
+
+- id: slaapkamer_knop_yullia_hold
+  alias: Slaapkamer knop Yullia - hold
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.0x0017880108003423_action
+      to: 'hold'
+  action:
+    - service: light.toggle
+      entity_id: 
+        - light.slaapkamer_lamp_1
+        - light.slaapkamer_lamp_2
+    - delay:
+        seconds: 5

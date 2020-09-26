@@ -4,9 +4,9 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.woonkamer_illuminance_illuminance_lux
-      below: 20
+      below: 15
       for:
-        minutes: 5
+        minutes: 10
     - platform: state
       entity_id: group.residents
       from: 'not_home'
@@ -17,9 +17,9 @@
       state: 'home'
     - condition: numeric_state
       entity_id: sensor.woonkamer_illuminance_illuminance_lux
-      below: 20
+      below: 15
   action:
     - service: light.turn_on
       data:
         entity_id: light.woonkamer
-        brightness: 155
+        brightness_pct: 60
