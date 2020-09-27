@@ -4,14 +4,42 @@ panel: false
 icon: 'mdi:web'
 badges: []
 cards:
+
+  - type: markdown
+    title: Ziggo storingen
+    entities:
+      - sensor.ziggo_incidents
+    content: >-
+      {% if not state_attr(config.entities[0], 'outages') -%}
+        Geen
+      {% else %}
+        {% for outage in state_attr(config.entities[0], 'outages') -%}
+        **[{{ outage.status }}]: {{ outage.title }}**
+        
+        {{ outage.announcement }}
+        
+        Verwachte opgelost: {{ outage.expected_solv_time }}
+        
+        {%- endfor %}
+      {%- endif %}
+
   - type: entities
     title: Internet
     entities:
-      - entity: sensor.myip
+      - sensor.myip
+      - type: divider
+      - sensor.cert_expiry_golles_nl
+      - sensor.cert_expiry_rg23_golles_nl
       - type: divider
       - entity: sensor.speedtest_download
+        name: Download
+        secondary_info: last-changed
       - entity: sensor.speedtest_upload
+        name: Upload
+        secondary_info: last-changed
       - entity: sensor.speedtest_ping
+        name: Ping
+        secondary_info: last-changed
     
   - type: horizontal-stack
     cards:
@@ -29,3 +57,4 @@ cards:
         entity: sensor.speedtest_ping
         graph: line
         name: Ping
+        
