@@ -14,8 +14,8 @@ sensor:
     sensors:
       time_of_day:
         value_template: >-
-          {% set hour = now().hour %}
-          {% if hour in range(0,6) %} Midnight
+          {% set hour = strptime(states('sensor.date_time'), '%Y-%m-%d, %H:%M').hour %}
+          {% if hour in range(0,6) %} Night
           {% elif hour in range(6,12) %} Morning
           {% elif hour in range(12,18) %} Afternoon
           {% else %} Evening
