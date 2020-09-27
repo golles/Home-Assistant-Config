@@ -60,6 +60,7 @@ cards:
         state: Evening
     card:
       type: 'custom:auto-entities'
+      show_empty: false
       card:
         title: Morgen
         type: entities
