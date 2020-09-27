@@ -31,16 +31,16 @@ homeassistant:
   customize:
     sensor.p2000_ambulance:
       friendly_name: Ambulance
-      icon: "mdi:ambulance"
+      icon: mdi:ambulance
     sensor.p2000_brandweer:
       friendly_name: Brandweer
-      icon: "mdi:fire-truck"
+      icon: mdi:fire-truck
     sensor.p2000_dichtbij:
       friendly_name: Buurt
-      icon: "mdi:alert"
+      icon: mdi:alert
     sensor.p2000_politie:
       friendly_name: Politie
-      icon: "mdi:taxi"
+      icon: mdi:car-emergency
 
 automation:
   - id: p20000_notification
