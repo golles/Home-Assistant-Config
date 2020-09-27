@@ -4,6 +4,24 @@ panel: false
 icon: 'mdi:home-city'
 badges: []
 cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - light.voortuin
+      - light.achtertuin
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.achtertuin_lamp_1
+            name: Lamp 1
+          - entity: light.achtertuin_lamp_2
+            name: Lamp 2
+          - entity: light.hue_smart_plug_1
+            name: Gekleurde licht
+
   - type: custom:auto-entities
     show_empty: true
     card:
