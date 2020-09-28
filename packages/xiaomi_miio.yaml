@@ -69,19 +69,43 @@ sensor:
 
       air_purifier_use_time:
         friendly_name: "Tijd gebruikt"
-        value_template: >
-          {% macro phrase(value, name) %}
-          {%- set value = value | int %}
-          {%- set end = 's' if value > 1 else '' %}
-          {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
-          {%- endmacro %}
-          
-          {% set weeks = (state_attr('fan.air_purifier', 'use_time') | int / 604800) | int %}
-          {% set days = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800)) / 86400) | int %}
-          {% set hours = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400)) / 3600) | int %}
-          {% set minutes = ((state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400) - (hours * 3600)) / 60) | int %}
-          {% set seconds = (state_attr('fan.air_purifier', 'use_time') | int - (weeks * 604800) - (days * 86400) - (hours * 3600) - (minutes*60)) | int %}
-          {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min'), phrase(seconds, 'sec') ] | select('!=','') | list | join(', ') }}
+        value_template: >-
+          {% set use_time = state_attr('fan.air_purifier', 'use_time') | int %}
+          {% set minutes = ((use_time % 3600) / 60) | int %}
+          {% set hours = ((use_time % 86400) / 3600) | int %}
+          {% set days = (use_time / 86400) | int %}
+      
+          {%- if use_time < 60 -%}
+            0 minuten
+          {%- else -%}
+            {%- if days > 0 -%}
+              {%- if days == 1 -%}
+                1 dag
+              {%- else -%}
+                {{ days }} dagen
+              {%- endif -%}
+            {%- endif -%}
+            {%- if hours > 0 -%}
+              {%- if days > 0 -%}
+                {{ ', ' }}
+              {%- endif -%}
+              {%- if hours == 1 -%}
+                1 uur
+              {%- else -%}
+                {{ hours }} uren
+              {%- endif -%}
+            {%- endif -%}
+            {%- if minutes > 0 -%}
+              {%- if days > 0 or hours > 0 -%}
+                {{ ', ' }}
+              {%- endif -%}
+              {%- if minutes == 1 -%}
+                1 minuut
+              {%- else -%}
+                {{ minutes }} minuten
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
         icon_template: "mdi:heart-pulse"
 
       air_purifier_filter_used:
