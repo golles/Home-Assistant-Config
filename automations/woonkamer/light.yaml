@@ -11,6 +11,10 @@
       entity_id: group.residents
       from: 'not_home'
       to: 'home'
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 20
   condition:
     - condition: state
       entity_id: group.residents
@@ -18,6 +22,10 @@
     - condition: numeric_state
       entity_id: sensor.woonkamer_illuminance_illuminance_lux
       below: 15
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: 20
   action:
     - service: light.turn_on
       data:
