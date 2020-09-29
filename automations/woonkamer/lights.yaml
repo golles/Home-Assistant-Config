@@ -17,6 +17,9 @@
       below: 20
   condition:
     - condition: state
+      entity_id: light.woonkamer
+      state: 'off'
+    - condition: state
       entity_id: group.residents
       state: 'home'
     - condition: numeric_state
@@ -30,4 +33,4 @@
     - service: light.turn_on
       data:
         entity_id: light.woonkamer
-        brightness_pct: 60
+        brightness_pct: 65
