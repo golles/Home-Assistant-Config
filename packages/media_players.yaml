@@ -4,7 +4,7 @@ webostv:
   turn_on_action:
     service: wake_on_lan.send_magic_packet
     data:
-      mac: '20:17:42:85:1F:5E'
+      mac: !secret webostv_mac
       broadcast_address: !secret webostv_ip
       broadcast_port: 9
 
