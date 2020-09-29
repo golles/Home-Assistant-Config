@@ -2,7 +2,7 @@ notify:
   - name: sander
     platform: group
     services:
-      - service: mobile_app_iphone_x_van_golles_2
+      - service: mobile_app_iphone_x_van_golles
 
   - name: yuliia
     platform: group
