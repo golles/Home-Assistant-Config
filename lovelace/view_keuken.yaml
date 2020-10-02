@@ -8,7 +8,19 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
+      - entity: sensor.woonkamer_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        icon: mdi:home-thermometer
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.woonkamer_humidity_2
+            name: Luchtvochtigheid
+      - type: divider
       - light.keuken
+      - entity: switch.ikea_switch_2_switch
+        name: Keukenkastje
+        icon: mdi:lightbulb
       - type: custom:fold-entity-row
         head:
           type: section
@@ -46,4 +58,4 @@ cards:
       - entity: sensor.0x00158d0002d7da66_humidity
         name: Vochtigheid
       - entity: sensor.0x00158d0002d7da66_pressure
-        name: Druk
+        name: Luchtdruk
