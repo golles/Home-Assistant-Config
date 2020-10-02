@@ -9,7 +9,7 @@ cards:
     show_header_toggle: false
     entities:
       - light.voortuin
-      - light.achtertuin
+      - group.achtertuin_lampen
       - type: custom:fold-entity-row
         head:
           type: section
