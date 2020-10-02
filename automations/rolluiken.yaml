@@ -1,0 +1,60 @@
+- id: rolluiken_dicht
+  alias: 'Rolluiken dicht avond'
+  initial_state: on
+  trigger:
+      platform: time
+      at: "22:00:00"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.slaapkamerraam_contact
+              state: "off"
+            - condition: state
+              entity_id: cover.slaapkamer
+              state: "open"
+          sequence:
+            - service: cover.close_cover
+              entity_id: cover.slaapkamer
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.kledingkamerraam_contact
+            state: "off"
+          - condition: state
+            entity_id: cover.kledingkamer
+            state: "open"
+        sequence:
+          - service: cover.close_cover
+            entity_id: cover.kledingkamer
+
+- id: rolluiken_open_niemand_thuis
+  alias: 'Rolluiken open - bij niemand thuis'
+  initial_state: on
+  trigger:
+      platform: time
+      at: "09:00:00"
+  condition:
+    - condition: state
+      entity_id: group.residents
+      state: 'not_home'
+    - condition: state
+      entity_id: input_boolean.guest_mode
+      state: 'off'
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: cover.slaapkamer
+              state: "closed"
+          sequence:
+            - service: cover.open_cover
+              entity_id: cover.slaapkamer
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: cover.kledingkamer
+              state: "closed"
+          sequence:
+            - service: cover.open_cover
+              entity_id: cover.kledingkamer
