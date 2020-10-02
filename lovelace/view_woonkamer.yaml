@@ -8,6 +8,15 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
+      - entity: sensor.woonkamer_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        icon: mdi:home-thermometer
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.woonkamer_humidity_2
+            name: Luchtvochtigheid
+      - type: divider
       - light.woonkamer
       - type: custom:fold-entity-row
         head:
@@ -74,7 +83,11 @@ cards:
       - type: divider
       - cover.zonnescherm
       - type: divider
-      - fan.air_purifier
+      - entity: fan.air_purifier
+        type: custom:multiple-entity-row
+        toggle: true
+        secondary_info:
+          entity: sensor.air_purifier_air_quality_pm25
       - type: custom:fold-entity-row
         head:
           type: section
