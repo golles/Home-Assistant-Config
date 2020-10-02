@@ -1,0 +1,13 @@
+title: Toilet
+path: toilet
+panel: false
+icon: 'mdi:toilet'
+badges: []
+cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - light.toilet
+      - binary_sensor.toilet_motion_occupancy
+      - automation.toilet_lamp_automatisch_aan

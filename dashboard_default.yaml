@@ -55,4 +55,5 @@ views:
   - !include lovelace/view_welkom.yaml
   - !include lovelace/view_woonkamer.yaml
   - !include lovelace/view_keuken.yaml
+  - !include lovelace/view_toilet.yaml
   - !include lovelace/view_meterkast.yaml
