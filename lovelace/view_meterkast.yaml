@@ -7,10 +7,13 @@ cards:
 
   - type: entities
     entities:
-      - sensor.meterkast_klimaat_temperature
-      - sensor.meterkast_klimaat_humidity
-      - sensor.meterkast_klimaat_pressure
-      - sensor.meterkast_klimaat_linkquality
+      - entity: sensor.meterkast_klimaat_temperature
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.meterkast_klimaat_humidity
+            name: Luchtvochtigheid
 
   - type: entities
     title: Elektriciteitsmeter

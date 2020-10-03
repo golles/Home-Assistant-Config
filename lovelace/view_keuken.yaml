@@ -11,16 +11,12 @@ cards:
       - entity: sensor.woonkamer_temperature_2
         type: custom:multiple-entity-row
         name: Klimaat
-        icon: mdi:home-thermometer
         state_header: Temperatuur
         entities:
           - entity: sensor.woonkamer_humidity_2
             name: Luchtvochtigheid
       - type: divider
       - light.keuken
-      - entity: switch.ikea_switch_2_switch
-        name: Keukenkastje
-        icon: mdi:lightbulb
       - type: custom:fold-entity-row
         head:
           type: section
@@ -38,16 +34,19 @@ cards:
             name: Spot 5
           - entity: light.keuken_spot_6
             name: Spot 6
+      - entity: switch.ikea_switch_2_switch
+        name: Keukenkastje
+        icon: mdi:lightbulb
 
   - type: entities
     title: Vaatwasser
     show_header_toggle: false
     entities:
-      - sensor.bosch_sbv88tx36e_state
-      - sensor.bosch_sbv88tx36e_door
-      - sensor.bosch_sbv88tx36e_program
-      - sensor.bosch_sbv88tx36e_elapsed
-      - sensor.bosch_sbv88tx36e_remaining
+      - switch.vaatwasser_power
+      - binary_sensor.vaatwasser_door
+      - sensor.vaatwasser_program_progress
+      - sensor.vaatwasser_remaining_program_time
+      - switch.vaatwasser_program_auto2
 
   - type: entities
     title: Koelkast

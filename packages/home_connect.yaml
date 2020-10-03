@@ -1,22 +1,30 @@
-sensor:
-  - platform: home_connect
-    refresh_token: !secret home_connect_refresh_token
+home_connect:
+  client_id: !secret home_connect_client_id
+  client_secret: !secret home_connect_client_secret
 
-group:
-  vaatwasser:
-    name: Vaatwasser
-    entities:
-      - sensor.bosch_sbv88tx36e_state
-      - sensor.bosch_sbv88tx36e_door
-      - sensor.bosch_sbv88tx36e_program
-      - sensor.bosch_sbv88tx36e_elapsed
-      - sensor.bosch_sbv88tx36e_remaining
+# Below is from a custom component I was using previously, keeping here in case I want to switch back.
+# Github: https://github.com/cotwild/home_connect
+#
+# sensor:
+#   - platform: home_connect
+#     refresh_token: !secret home_connect_refresh_token
 
-  wasmachine:
-    name: Wasmachine
-    entities:
-      - sensor.bosch_wawh2643nl_state
-      - sensor.bosch_wawh2643nl_door 
-      - sensor.bosch_wawh2643nl_program
-      - sensor.bosch_wawh2643nl_elapsed
-      - sensor.bosch_wawh2643nl_remaining
+# group:
+#   vaatwasser:
+#     name: Vaatwasser
+#     entities:
+#       - sensor.bosch_sbv88tx36e_state
+#       - sensor.bosch_sbv88tx36e_door
+#       - sensor.bosch_sbv88tx36e_program
+#       - sensor.bosch_sbv88tx36e_elapsed
+#       - sensor.bosch_sbv88tx36e_remaining
+
+#   wasmachine:
+#     name: Wasmachine
+#     entities:
+#       - sensor.bosch_wawh2643nl_state
+#       - sensor.bosch_wawh2643nl_door 
+#       - sensor.bosch_wawh2643nl_program
+#       - sensor.bosch_wawh2643nl_elapsed
+#       - sensor.bosch_wawh2643nl_remaining
+  
