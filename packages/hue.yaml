@@ -1,0 +1,43 @@
+homeassistant:
+  customize:
+    light.hue_smart_plug_1:
+      icon: mdi:led-strip-variant
+
+
+group:
+  achtertuin_lampen:
+    name: Achtertuin
+    icon: mdi:coach-lamp
+    entities:
+      - light.achtertuin_lamp_1
+      - light.achtertuin_lamp_2
+
+  slaapkamer_plafond_lamp:
+    name: Slaapkamer plafond
+    icon: mdi:ceiling-light
+    entities:
+      - light.slaapkamer_lamp_1
+      - light.slaapkamer_lamp_2
+
+  logeerkamer_plafond_lamp:
+    name: Logeerkamer plafond
+    icon: mdi:ceiling-light
+    entities:
+      - light.logeerkamer_lamp
+      - light.hue_color_lamp_1_3
+
+  kledingkamer_plafond_lamp:
+    name: Kledingkamer plafond
+    icon: mdi:ceiling-light
+    entities:
+      - light.hue_color_spot_2
+      - light.hue_color_spot_3
+      - light.hue_color_spot_1
+      - light.hue_color_spot_4
+
+  zolder_plafond_lamp:
+    name: Zolder plafond
+    icon: mdi:ceiling-light
+    entities:
+      - light.zolder_lamp
+      - light.hue_color_lamp_1_4
