@@ -6,7 +6,7 @@ badges: []
 cards: 
 
   - type: 'custom:auto-entities'
-    show_empty: false
+    show_empty: true
     card:
       show_header_toggle: false
       title: Open deuren en ramen
@@ -25,8 +25,6 @@ cards:
           options:
             secondary_info: last-changed
           state: 'on'
-        - domain: cover
-          state: open
 
   - type: 'custom:auto-entities'
     show_empty: false
