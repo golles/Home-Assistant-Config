@@ -15,7 +15,10 @@ cards:
         entities:
           - entity: sensor.woonkamer_humidity_2
             name: Luchtvochtigheid
-      - type: divider
+ 
+  - type: entities
+    show_header_toggle: false
+    entities:
       - light.keuken
       - type: custom:fold-entity-row
         head:
