@@ -1,0 +1,61 @@
+type: custom:mini-media-player
+entity: media_player.lg_soundbar
+name: Radio
+icon: mdi:radio
+artwork: cover
+source: icon
+hide:
+  icon: true
+  prev: true
+  next: true
+  play_pause: false
+  play_stop: false
+shortcuts:
+  columns: 3
+  column_height: 80
+  buttons:    
+    - cover: /local/radio/npo1.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://icecast.omroep.nl/radio1-bb-mp3
+    - cover: /local/radio/npo2.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://icecast.omroep.nl/radio2-bb-mp3
+    - cover: /local/radio/npo3fm.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://icecast.omroep.nl/3fm-bb-mp3
+    - cover: /local/radio/qmusic.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+    - cover: /local/radio/skyradio.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://19993.live.streamtheworld.com/SKYRADIO.mp3
+    - cover: /local/radio/radio10.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: http://19993.live.streamtheworld.com/RADIO10.mp3
+    - cover: /local/radio/perec.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: http://radio.stilnoe.fm:8080/radio-stilnoe
+    - cover: /local/radio/538.jpg
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://18973.live.streamtheworld.com/RADIO538.mp3
+    - cover: /local/radio/slam.png
+      type: script
+      id: script.play_livingroom_radio
+      data:
+        stream: https://19983.live.streamtheworld.com/SLAM_AAC.aac

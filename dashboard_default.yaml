@@ -11,46 +11,6 @@ swipe_nav:
   prevent_default: false
   swipe_amount: 15
 
-button_card_templates:
-  radio_button:
-    variables:
-      name: ''
-      image: /local/radio/empty.png
-      stream: ''
-      content_type: audio/mp4
-    show_entity_picture: true
-    name: '[[[ return variables.name ]]]'
-    entity_picture: '[[[ return variables.image ]]]'
-    tap_action:
-      action: call-service
-      service: script.play_chromecast_radio
-      service_data:
-        stream: '[[[ return variables.stream ]]]'
-        content_type: '[[[ return variables.content_type ]]]'
-    styles:
-      entity_picture:
-        - height: 100px
-        - width: 100px
-
-  tv_button:
-    variables:
-      name: ''
-      image: /local/tv/empty.png
-      source: ''
-    show_entity_picture: true
-    name: '[[[ return variables.name ]]]'
-    entity_picture: '[[[ return variables.image ]]]'
-    tap_action:
-      action: call-service
-      service: media_player.select_source
-      service_data:
-        entity_id: 'media_player.lg_c9'
-        source: '[[[ return variables.source ]]]'
-    styles:
-      entity_picture:
-        - height: 100px
-        - width: 100px
-
 views:
   - !include lovelace/view_welkom.yaml
   - !include lovelace/view_woonkamer.yaml

@@ -26,3 +26,68 @@ automation:
 
 shell_command:
   set_soundbar_source_and_volume: 'python /config/custom_scripts/lg_sl10.py "{{ ip }}" "{{ source }}" "{{ volume }}"'
+
+script:
+  play_livingroom_radio:
+    alias: Speel radio in de woonkamer
+    icon: mdi:radio
+    description: Speel radio in de woonkamer
+    mode: restart
+    variables:
+      speaker: media_player.lg_soundbar
+    fields:
+      stream:
+        description: The stream to play
+        example: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+    sequence:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_soundbar
+              state: 'off'
+          sequence:
+            - service: media_player.turn_on
+              data:
+                entity_id: '{{ speaker }}'
+            - delay:
+                seconds: 1
+      
+            - service: media_player.volume_set
+              data:
+                entity_id: '{{ speaker }}'
+                volume_level: 0.1 # 4 * 0.025
+
+      - service: media_player.play_media
+        data:
+          entity_id: '{{ speaker }}'
+          media_content_id: '{{ stream }}'
+          media_content_type: audio/mp4
+  
+  play_livingroom_tv_source:
+    alias: Speel tv met bron
+    icon: mdi:television
+    description: Speel tv met bron
+    mode: restart
+    variables:
+      tv: media_player.lg_c9
+    fields:
+      source:
+        description: The source to pick
+        example: Youtube
+    sequence:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_c9
+              state: 'off'
+          sequence:
+            - service: media_player.turn_on
+              data:
+                entity_id: '{{ tv }}'
+            - delay:
+                seconds: 2
+
+      - service: media_player.select_source
+        data:
+          entity_id: '{{ tv }}'
+          source: '{{ source }}'

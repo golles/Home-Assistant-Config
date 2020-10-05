@@ -1,0 +1,44 @@
+type: custom:mini-media-player
+entity: media_player.lg_c9
+name: TV
+icon: mdi:television
+artwork: cover
+source: full
+info: scroll
+volume_stateless: true
+hide:
+  icon: true
+  volume: false
+  prev: true
+  next: true
+  play_pause: true
+  play_stop: true
+shortcuts:
+  columns: 5
+  column_height: 60
+  buttons:    
+    - cover: /local/tv/ziggo.png
+      type: service
+      id: media_player.turn_on
+      data:
+        entity_id: media_player.stb_arris_uhd
+    - cover: /local/tv/netflix.png
+      type: script
+      id: script.play_livingroom_tv_source
+      data:
+        source: Netflix
+    - cover: /local/tv/youtube.png
+      type: script
+      id: script.play_livingroom_tv_source
+      data:
+        source: YouTube
+    - cover: /local/tv/switch.png
+      type: script
+      id: script.play_livingroom_tv_source
+      data:
+        source: Nintendo Switch
+    - cover: /local/tv/plex.png
+      type: script
+      id: script.play_livingroom_tv_source
+      data:
+        source: Plex
