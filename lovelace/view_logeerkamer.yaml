@@ -1,0 +1,36 @@
+title: Logeerkamer
+path: logeerkamer
+panel: false
+icon: mdi:bed-empty
+badges: []
+cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.logeerkamer_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.logeerkamer_humidity_2
+            name: Luchtvochtigheid
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: group.logeerkamer_plafond_lamp
+        name: Plafond
+        state_color: true
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.logeerkamer_lamp
+            name: Lamp 1
+          - entity: light.hue_color_lamp_1_3
+            name: Lamp 2
+
+  - type: thermostat
+    entity: climate.logeerkamer

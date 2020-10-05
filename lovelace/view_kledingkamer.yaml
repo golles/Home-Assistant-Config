@@ -1,0 +1,46 @@
+title: Kledingkamer
+path: kledingkamer
+panel: false
+icon: mdi:wardrobe
+badges: []
+cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.kledingkamer_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.kledingkamer_humidity_2
+            name: Luchtvochtigheid
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: group.kledingkamer_plafond_lamp
+        name: Plafond
+        state_color: true
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.hue_color_spot_2
+            name: Spot 1
+          - entity: light.hue_color_spot_3
+            name: Spot 2
+          - entity: light.hue_color_spot_1
+            name: Spot 3
+          - entity: light.hue_color_spot_4
+            name: Spot 4
+
+  - type: thermostat
+    entity: climate.kledingkamer
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: cover.kledingkamer
+        name: Rolluik

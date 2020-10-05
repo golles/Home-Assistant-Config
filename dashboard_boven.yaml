@@ -13,8 +13,8 @@ swipe_nav:
   swipe_amount: 15
 
 views:
-  - !include lovelace/view_hass.yaml
-  - !include lovelace/view_zigbee2mqtt.yaml
-  - !include lovelace/view_zigbee_map.yaml
-  - !include lovelace/view_internet.yaml
-  - !include lovelace/view_sabnzbd.yaml
+  - !include lovelace/view_slaapkamer.yaml
+  - !include lovelace/view_kledingkamer.yaml
+  - !include lovelace/view_logeerkamer.yaml
+  - !include lovelace/view_badkamer.yaml
+  - !include lovelace/view_zolder.yaml

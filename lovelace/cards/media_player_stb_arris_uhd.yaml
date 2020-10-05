@@ -1,5 +1,6 @@
 type: 'custom:mini-media-player'
 entity: media_player.stb_arris_uhd
+name: Ziggo
 artwork: cover
 source: full
 info: scroll
@@ -12,3 +13,4 @@ hide:
   play_pause: true
   play_stop: true
   runtime: false
+  

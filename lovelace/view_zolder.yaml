@@ -1,0 +1,46 @@
+title: zolder
+path: Zolder
+panel: false
+icon: mdi:home-roof
+badges: []
+cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.zolder_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.zolder_humidity_2
+            name: Luchtvochtigheid
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: group.zolder_plafond_lamp
+        name: Plafond
+        state_color: true
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: light.zolder_lamp
+            name: Lamp 1
+          - entity: light.hue_color_lamp_1_4
+            name: Lamp 2
+
+  - type: thermostat
+    entity: climate.zolder
+
+  - type: entities
+    title: Wasmachine
+    show_header_toggle: false
+    entities:
+      - switch.wasmachine_power
+      - binary_sensor.wasmachine_door
+      - sensor.wasmachine_program_progress
+      - sensor.wasmachine_remaining_program_time
+      

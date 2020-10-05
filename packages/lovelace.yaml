@@ -9,10 +9,16 @@ lovelace:
       title: Overzicht
       icon: mdi:home-assistant
 
-    dashboard-omgeving:
+    dashboard-boven:
       mode: yaml
-      filename: dashboard_omgeving.yaml
-      title: Omgeving
+      filename: dashboard_boven.yaml
+      title: Boven
+      icon: mdi:home-assistant
+
+    dashboard-buiten:
+      mode: yaml
+      filename: dashboard_buiten.yaml
+      title: Buiten
       icon: mdi:home-city
 
     dashboard-systems:

@@ -1,0 +1,26 @@
+title: Badkamer
+path: badkamer
+panel: false
+icon: mdi:shower
+badges: []
+cards:
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.badkamer_temperature_2
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.badkamer_humidity_2
+            name: Luchtvochtigheid
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - entity: light.badkamer
+        name: Plafond
+
+  - type: thermostat
+    entity: climate.badkamer
