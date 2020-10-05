@@ -2,7 +2,10 @@ homeassistant:
   customize:
     light.hue_smart_plug_1:
       icon: mdi:led-strip-variant
-
+    light.hue_filament_bulb_1_4:
+      icon: mdi:desk-lamp
+    light.hue_filament_bulb_1_3:
+      icon: mdi:desk-lamp
 
 group:
   achtertuin_lampen:
@@ -41,3 +44,60 @@ group:
     entities:
       - light.zolder_lamp
       - light.hue_color_lamp_1_4
+
+script:
+  eettafel_on:
+    alias: Eettafel lampen aan animatie
+    sequence:
+      - service: light.turn_on
+        entity_id: light.hue_filament_bulb_3 #5
+      - delay:
+          milliseconds: 100
+      - service: light.turn_on
+        entity_id: light.hue_filament_bulb_4 #4
+      - delay:
+          milliseconds: 100
+      - service: light.turn_on
+        entity_id: light.hue_filament_bulb_1 #3
+      - delay:
+          milliseconds: 100
+      - service: light.turn_on
+        entity_id: light.hue_filament_bulb_5 #2
+      - delay:
+          milliseconds: 100
+      - service: light.turn_on
+        entity_id: light.hue_filament_bulb_2 #1
+
+  eettafel_off:
+    alias: Eettafel lampen uit animatie
+    sequence:
+      - service: light.turn_off
+        entity_id: light.hue_filament_bulb_2 #1
+      - delay:
+          milliseconds: 100
+      - service: light.turn_off
+        entity_id: light.hue_filament_bulb_5 #2
+      - delay:
+          milliseconds: 100
+      - service: light.turn_off
+        entity_id: light.hue_filament_bulb_1 #3
+      - delay:
+          milliseconds: 100
+      - service: light.turn_off
+        entity_id: light.hue_filament_bulb_4 #4
+      - delay:
+          milliseconds: 100
+      - service: light.turn_off
+        entity_id: light.hue_filament_bulb_3 #5
+  
+switch:
+  - platform: template
+    switches:
+      eettafellamp:
+        friendly_name: Eettafel
+        icon_template: mdi:vanity-light
+        value_template: "{{ is_state('light.eettafel', 'on') }}"
+        turn_on:
+          service: script.eettafel_on
+        turn_off:
+          service: script.eettafel_off

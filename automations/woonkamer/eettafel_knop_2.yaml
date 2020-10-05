@@ -10,24 +10,7 @@
       entity_id: light.eettafel
       state: 'off'
   action:
-    - service: light.turn_on
-      entity_id: light.hue_filament_bulb_3 #5
-    - delay:
-        milliseconds: 100
-    - service: light.turn_on
-      entity_id: light.hue_filament_bulb_4 #4
-    - delay:
-        milliseconds: 100
-    - service: light.turn_on
-      entity_id: light.hue_filament_bulb_1 #3
-    - delay:
-        milliseconds: 100
-    - service: light.turn_on
-      entity_id: light.hue_filament_bulb_5 #2
-    - delay:
-        milliseconds: 100
-    - service: light.turn_on
-      entity_id: light.hue_filament_bulb_2 #1
+    - service: script.eettafel_on
 
 - id: eettafel_knop_2_off
   alias: Eettafel knop2 - licht uit
@@ -41,21 +24,4 @@
       entity_id: light.eettafel
       state: 'on'
   action:
-    - service: light.turn_off
-      entity_id: light.hue_filament_bulb_2 #1
-    - delay:
-        milliseconds: 100
-    - service: light.turn_off
-      entity_id: light.hue_filament_bulb_5 #2
-    - delay:
-        milliseconds: 100
-    - service: light.turn_off
-      entity_id: light.hue_filament_bulb_1 #3
-    - delay:
-        milliseconds: 100
-    - service: light.turn_off
-      entity_id: light.hue_filament_bulb_4 #4
-    - delay:
-        milliseconds: 100
-    - service: light.turn_off
-      entity_id: light.hue_filament_bulb_3 #5
+    - service: script.eettafel_off
