@@ -44,3 +44,5 @@ cards:
     entities:
       - entity: cover.kledingkamer
         name: Rolluik
+      - entity: binary_sensor.kledingkamerraam_contact
+        name: Raam

@@ -3,17 +3,11 @@ lovelace:
   resources: !include ../lovelace/resources.yaml
 
   dashboards:
-    dashboard-default:
-      mode: yaml
-      filename: dashboard_default.yaml
-      title: Overzicht
-      icon: mdi:home-assistant
-
     dashboard-boven:
       mode: yaml
       filename: dashboard_boven.yaml
       title: Boven
-      icon: mdi:home-assistant
+      icon: mdi:home-minus
 
     dashboard-buiten:
       mode: yaml
