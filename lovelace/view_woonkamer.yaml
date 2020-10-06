@@ -83,34 +83,13 @@ cards:
       - entity: switch.ikea_switch_2_switch
         name: Keukenkastje
         icon: mdi:lightbulb
-      - type: divider
+
+  - type: entities
+    show_header_toggle: false
+    entities:
       - cover.zonnescherm
-      - type: divider
-      - entity: fan.air_purifier
-        type: custom:multiple-entity-row
-        toggle: true
-        secondary_info:
-          entity: sensor.air_purifier_air_quality_pm25
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - switch.air_purifier_led
-          - switch.air_purifier_child_lock
-          - sensor.air_purifier_air_quality_pm25
-          - sensor.air_purifier_avg_air_quality_pm25
-          - type: divider
-          - sensor.air_purifier_temp
-          - sensor.air_purifier_humidity
-          - type: divider
-          - sensor.air_purifier_use_time
-          - sensor.air_purifier_filter_used
-          - sensor.air_purifier_filter_remaining
-          - sensor.air_purifier_purify_volume
-          - type: divider
-          - sensor.air_purifier_speed
-          - sensor.air_purifier_led_brightness
+
+  - !include cards/fan_air_purifier.yaml
 
   - type: thermostat
     entity: climate.woonkamer

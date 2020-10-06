@@ -1,0 +1,29 @@
+type: entities
+show_header_toggle: false
+entities:
+  - entity: fan.air_purifier
+    type: custom:multiple-entity-row
+    toggle: true
+    secondary_info:
+      entity: sensor.air_purifier_air_quality_pm25
+  - type: custom:fold-entity-row
+    head:
+      type: section
+      label: 
+    entities:
+      - sensor.air_purifier_air_quality_pm25
+      - sensor.air_purifier_avg_air_quality_pm25
+      - type: divider
+      - switch.air_purifier_led
+      - switch.air_purifier_child_lock
+      - type: divider
+      - sensor.air_purifier_temp
+      - sensor.air_purifier_humidity
+      - type: divider
+      - sensor.air_purifier_use_time
+      - sensor.air_purifier_filter_used
+      - sensor.air_purifier_filter_remaining
+      - sensor.air_purifier_purify_volume
+      - type: divider
+      - sensor.air_purifier_speed
+      - sensor.air_purifier_led_brightness
