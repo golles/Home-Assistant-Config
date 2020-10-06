@@ -25,6 +25,9 @@ cards:
           options:
             secondary_info: last-changed
           state: 'on'
+      exclude:
+        - entity_id: 'binary_sensor.wasmachine_door'
+        - entity_id: 'binary_sensor.vaatwasser_door'
 
   - type: 'custom:auto-entities'
     show_empty: false
@@ -44,6 +47,9 @@ cards:
           domain: binary_sensor
           options:
             secondary_info: last-changed
+      exclude:
+        - entity_id: 'binary_sensor.wasmachine_door'
+        - entity_id: 'binary_sensor.vaatwasser_door'
 
   - type: 'custom:auto-entities'
     show_empty: false
