@@ -8,7 +8,7 @@ cards:
     title: Home Assistant
     show_header_toggle: false
     entities:
-      # - entity: sensor.uptime
+      - entity: sensor.host_uptime
       - entity: sensor.runtime
       - type: divider
       - entity: sensor.current_version
