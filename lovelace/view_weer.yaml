@@ -10,9 +10,10 @@ cards:
   - type: entities
     title: Zon
     entities:
-      - entity: sun.sun
-      - entity: sensor.sun_position_house
-        icon: 'mdi:weather-sunny'
+      - sun.sun
+      - sensor.sun_position_house
+      - sensor.sun_sunrise
+      - sensor.sun_sunset
 
   - type: picture
     image: 'http://cdn.knmi.nl/knmi/map/general/weather-map.gif'
