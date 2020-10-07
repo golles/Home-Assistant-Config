@@ -2,16 +2,13 @@
   - url: /local/auto-entities.js
     type: module
 
-  - url: /local/banner-card.js?v=1
-    type: module
-  
   - url: /local/battery-state-card.js
     type: module
 
   - url: /local/button-card.js
     type: module
 
-  - url: /local/custom-header.js?v=1.6.6
+  - url: /local/custom-header.js?v=1.8.3
     type: module
 
   - url: /local/fold-entity-row.js
@@ -23,10 +20,10 @@
   - url: /local/mini-media-player-bundle.js?v=1.11.0
     type: module
 
-  - url: /local/multiple-entity-row.js?v=3.2.0
+  - url: /local/multiple-entity-row.js?v=3.2.1
     type: module
 
-  - url: /local/swipe-navigation.js?v=1.2.3
+  - url: /local/swipe-navigation.js?v=1.2.5
     type: js
 
   - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
