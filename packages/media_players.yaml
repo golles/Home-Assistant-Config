@@ -91,3 +91,24 @@ script:
         data:
           entity_id: '{{ tv }}'
           source: '{{ source }}'
+
+  play_livingroom_tv_source_ziggo:
+    alias: Speel tv met bron ziggo
+    icon: mdi:television
+    description: Speel tv met bron ziggo
+    mode: restart
+    sequence:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.stb_arris_uhd
+              state: 'off'
+          sequence:
+            - service: media_player.turn_on
+              data:
+                entity_id: 'media_player.stb_arris_uhd'
+
+      - service: script.play_livingroom_tv_source
+        data:
+          entity_id: media_player.lg_c9
+          source: Ziggo
