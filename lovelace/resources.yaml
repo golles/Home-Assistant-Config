@@ -8,9 +8,6 @@
   - url: /local/button-card.js
     type: module
 
-  - url: /local/custom-header.js?v=1.8.3
-    type: module
-
   - url: /local/fold-entity-row.js
     type: module
 
