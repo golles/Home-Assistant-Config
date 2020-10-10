@@ -9,7 +9,8 @@ cards:
     show_header_toggle: false
     entities:
       - light.voortuin
-      - group.achtertuin_lampen
+      - entity: group.achtertuin_lampen
+        state_color: true
       - type: custom:fold-entity-row
         head:
           type: section
