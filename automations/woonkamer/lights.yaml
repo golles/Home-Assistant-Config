@@ -29,6 +29,8 @@
       entity_id: sun.sun
       attribute: elevation
       below: 20
+    - condition: template
+      value_template: '{{ is_state_attr("sun.sun", "rising", False) }}'
   action:
     - service: light.turn_on
       data:
