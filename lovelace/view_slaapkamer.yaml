@@ -33,7 +33,7 @@ cards:
             name: Lamp 2
       - light.hue_filament_bulb_1_4
       - light.hue_filament_bulb_1_3
-      - entity: switch.ikea_switch_1_switch
+      - entity: switch.bed_ledstrip_switch
         name: Bedledstrip automatisch aan bij beweging
 
   - type: thermostat

@@ -80,7 +80,7 @@ cards:
           - entity: light.keuken_spot_6
             name: Spot 6
 
-      - entity: switch.ikea_switch_2_switch
+      - entity: switch.keukenkastje_lamp_switch
         name: Keukenkastje
         icon: mdi:lightbulb
 

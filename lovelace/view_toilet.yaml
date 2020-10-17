@@ -8,6 +8,8 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
-      - light.toilet
-      - binary_sensor.toilet_motion_occupancy
+      - entity: light.toilet
+        name: Licht
+      - entity: binary_sensor.toilet_beweging_occupancy
+        name: Beweging
       - automation.toilet_lamp_automatisch_aan
