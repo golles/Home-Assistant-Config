@@ -1,9 +1,14 @@
 - id: air_purifier_off_door_open
-  alias: Air purifier uit als de deur open staat
+  alias: Air purifier uit als de achterdeur of keukenraam open staat
   initial_state: on
   trigger:
     - platform: state
       entity_id: binary_sensor.achterdeur_contact
+      to: 'on'
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: binary_sensor.keukenraam_contact
       to: 'on'
       for:
         minutes: 5

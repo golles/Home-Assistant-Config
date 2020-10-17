@@ -3,17 +3,14 @@
   initial_state: on
   mode: single
   trigger:
-    - platform: device
-      domain: mqtt
-      device_id: 1469642bbb674302a11f52e2857eaadf
-      type: action
-      subtype: tap
-      discovery_id: 0x00158d00042df952 action_tap
     - platform: state
-      entity_id: sensor.0x00158d00042df952_action
+      entity_id: sensor.eettafel_cube_action
+      to: 'tap'
+    - platform: state
+      entity_id: sensor.eettafel_cube_action
       to: 'flip90'
     - platform: state
-      entity_id: sensor.0x00158d00042df952_action
+      entity_id: sensor.eettafel_cube_action
       to: 'flip180'
   action:
     - service: light.toggle
@@ -25,7 +22,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: sensor.0x00158d00042df952_action
+      entity_id: sensor.eettafel_cube_action
       to: 'rotate_left'
   action:
     - service: light.turn_on
@@ -40,7 +37,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: sensor.0x00158d00042df952_action
+      entity_id: sensor.eettafel_cube_action
       to: 'rotate_right'
   action:
     - service: light.turn_on

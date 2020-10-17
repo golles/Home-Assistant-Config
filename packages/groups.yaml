@@ -3,5 +3,5 @@ group:
     name: Woonkamer motion
     icon: mdi:walk
     entities:
-      - binary_sensor.0x00158d00054a7372_occupancy
-      - binary_sensor.0x00158d00052befc2_occupancy
+      - binary_sensor.woonkamer_beweging_1_occupancy
+      - binary_sensor.woonkamer_beweging_2_occupancy

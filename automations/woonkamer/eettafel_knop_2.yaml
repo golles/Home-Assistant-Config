@@ -3,7 +3,7 @@
   initial_state: on
   trigger:
     - platform: state
-      entity_id: sensor.0x0017880108000829_action
+      entity_id: sensor.eettafelknop_2_action
       to: 'press'
   condition:
     - condition: state
@@ -17,7 +17,7 @@
   initial_state: on
   trigger:
     - platform: state
-      entity_id: sensor.0x0017880108000829_action
+      entity_id: sensor.eettafelknop_2_action
       to: 'press'
   condition:
     - condition: state

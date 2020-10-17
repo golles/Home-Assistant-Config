@@ -3,7 +3,7 @@
   initial_state: on
   trigger:
     - platform: numeric_state
-      entity_id: sensor.woonkamer_illuminance_illuminance_lux
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 15
       for:
         minutes: 10
@@ -23,7 +23,7 @@
       entity_id: group.residents
       state: 'home'
     - condition: numeric_state
-      entity_id: sensor.woonkamer_illuminance_illuminance_lux
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 15
     - condition: numeric_state
       entity_id: sun.sun

@@ -3,7 +3,7 @@
   initial_state: on
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_motion_occupancy
+      entity_id: binary_sensor.toilet_beweging_occupancy
       to: 'on'
   action:
     - service: light.turn_on
@@ -14,7 +14,7 @@
   initial_state: on
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_motion_occupancy
+      entity_id: binary_sensor.toilet_beweging_occupancy
       to: 'off'
       for:
         seconds: 90

@@ -12,7 +12,7 @@ cards:
     bulk_rename:
       - from: Battery Level
     entities:
-      - entity: sensor.iphone_x_van_golles_2_battery_level
+      - entity: sensor.iphone_x_van_golles_battery_level
         charging_state:
           entity_id: sensor.iphone_x_van_golles_battery_state
           state: Charging
@@ -46,13 +46,15 @@ cards:
       action: more-info
     bulk_rename:
       - from: battery level
+      - from: _battery
+      - from: battery
     entities:
-      - sensor.0x0017880108000633_battery
+      - sensor.master_switch_battery
       - sensor.keuken_button_1_battery_level
       - sensor.hue_smart_button_1_battery_level
-      - sensor.0x0017880108000829_battery
-      - sensor.0x0017880108000810_battery
-      - sensor.0x0017880108003423_battery
+      - sensor.eettafelknop_2_battery
+      - sensor.bedlampje_knop_sander_battery
+      - sensor.bedlampje_knop_yuliia_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara temperature, humidity and pressure
@@ -63,7 +65,7 @@ cards:
       - from: _battery
       - from: battery
     entities:
-      - sensor.0x00158d000309fef1_battery
+      - sensor.woonkamer_klimaat_battery
       - sensor.meterkast_klimaat_battery
       - sensor.slaapkamer_klimaat_battery
       - sensor.logeerkamer_klimaat_battery
@@ -96,7 +98,7 @@ cards:
     entities:
       - sensor.deurbel_battery
       - sensor.bed_sander_battery
-      - sensor.zonnescherm_vibration_battery
+      - sensor.zonnescherm_beweging_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara movement/illuminance sensor
@@ -107,10 +109,10 @@ cards:
       - from: _battery
       - from: battery
     entities:
-      - sensor.0x00158d00054a7372_battery
-      - sensor.0x00158d00052befc2_battery
-      - sensor.toilet_motion_battery
-      - sensor.zolder_trap_battery
+      - sensor.woonkamer_beweging_1_battery
+      - sensor.woonkamer_beweging_1_battery
+      - sensor.toilet_beweging_battery
+      - sensor.zoldertrap_beweging_battery
 
   - type: custom:battery-state-card
     name: MiJia light intensity sensor
@@ -121,5 +123,5 @@ cards:
       - from: _battery
       - from: battery
     entities:
-      - sensor.woonkamer_illuminance_battery
-      - sensor.achtertuin_illuminance_battery
+      - sensor.woonkamer_lichtsterkte_battery
+      - sensor.achtertuin_lichtsterkte_battery

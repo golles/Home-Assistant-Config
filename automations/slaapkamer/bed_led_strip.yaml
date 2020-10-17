@@ -8,7 +8,7 @@
     - service: switch.turn_off
       data:
         entity_id:
-          - switch.ikea_switch_1_switch
+          - switch.bed_ledstrip_switch
 
 - id: bed_led_standby
   alias: 'Bedledstrip standby'
@@ -20,4 +20,4 @@
     - service: switch.turn_on
       data:
         entity_id:
-          - switch.ikea_switch_1_switch
+          - switch.bed_ledstrip_switch
