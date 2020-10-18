@@ -38,6 +38,19 @@ cards:
     entity: weather.huis
 
   - type: conditional
+    conditions:
+      - entity: sensor.time_of_day
+        state: Evening
+    card:
+      !include cards/lights_on.yaml
+  - type: conditional
+    conditions:
+      - entity: sensor.time_of_day
+        state: Night
+    card:
+      !include cards/lights_on.yaml
+
+  - type: conditional
     show_empty: false
     conditions:
       - entity: sensor.time_of_day

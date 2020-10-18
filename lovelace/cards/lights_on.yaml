@@ -1,0 +1,12 @@
+type: custom:auto-entities
+show_empty: false
+card:
+  type: entities
+  title: Lichten aan
+filter:
+  include:
+    - domain: light
+      state: 'on'
+      options:
+        tap_action:
+          action: more-info
