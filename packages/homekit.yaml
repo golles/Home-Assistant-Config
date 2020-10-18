@@ -15,18 +15,27 @@ homekit:
   advertise_ip: !secret host_ip
   filter:
     include_entities:
-      - media_player.stb_arris_uhd
       - fan.air_purifier
+      - switch.keukenkastje_lamp_switch
+      - switch.voorraadkastlamp_switch
+      - switch.ziggo_decoder
       - cover.slaapkamer
       - cover.kledingkamer
   entity_config:
-    media_player.stb_arris_uhd:
-      feature_list:
-        - feature: on_off
+    switch.keukenkastje_lamp_switch:
+      name: Keukenkastje
+    switch.voorraadkastlamp_switch:
+      name: Voorraadkast
+    switch.ziggo_decoder:
+      name: Ziggo decoder
+    cover.slaapkamer:
+      name: Slaapkamer Rolluik
+    cover.kledingkamer:
+      name: Kledingkamer Rolluik
 
 automation:
   - id: homekit_delayed_start
-    alias: "Start HomeKit"
+    alias: HomeKit uitgestelde start
     trigger:
       - platform: homeassistant
         event: start
