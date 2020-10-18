@@ -1,0 +1,18 @@
+- id: voorraadkast_light_bsaed_on_door
+  alias: Voorraadkast verlichting automatisch aan en uit
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.voorraadkastdeur_contact
+  action:
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.voorraadkastdeur_contact
+            state: 'on'
+        sequence:
+          - service: switch.turn_on
+            entity_id: switch.voorraadkastlamp_switch
+      default:
+        - service: switch.turn_off
+          entity_id: switch.voorraadkastlamp_switch
