@@ -8,6 +8,17 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
+      - entity: sensor.toilet_klimaat_temperature
+        type: custom:multiple-entity-row
+        name: Klimaat
+        state_header: Temperatuur
+        entities:
+          - entity: sensor.toilet_klimaat_humidity
+            name: Luchtvochtigheid 
+
+  - type: entities
+    show_header_toggle: false
+    entities:
       - entity: light.toilet
         name: Licht
       - entity: binary_sensor.toilet_beweging_occupancy
