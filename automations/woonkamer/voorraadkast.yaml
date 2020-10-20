@@ -1,6 +1,7 @@
 - id: voorraadkast_light_bsaed_on_door
   alias: Voorraadkast verlichting automatisch aan en uit
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: binary_sensor.voorraadkastdeur_contact
