@@ -8,6 +8,7 @@ cards:
   - type: 'custom:simple-thermostat'
     entity: climate.logeerkamer
     step_layout: row
+    step_size: 1
     name: false
     icon: false
     control:
