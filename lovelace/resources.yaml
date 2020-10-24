@@ -20,6 +20,9 @@
   - url: /local/multiple-entity-row.js?v=3.2.1
     type: module
 
+  - url: /local/simple-thermostat.js?v=0.38.0
+    type: module
+
   - url: /local/swipe-navigation.js?v=1.2.5
     type: js
 
