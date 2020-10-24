@@ -24,6 +24,3 @@ cards:
     entities:
       - entity: light.badkamer
         name: Plafond
-
-  - type: thermostat
-    entity: climate.badkamer

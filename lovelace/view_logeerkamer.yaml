@@ -34,6 +34,3 @@ cards:
             name: Lamp 1
           - entity: light.hue_color_lamp_1_3
             name: Lamp 2
-
-  - type: thermostat
-    entity: climate.logeerkamer

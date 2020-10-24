@@ -102,9 +102,6 @@ cards:
 
   - !include cards/fan_air_purifier.yaml
 
-  - type: thermostat
-    entity: climate.woonkamer
-
   - !include cards/media_player_lg_soundbar.yaml
   - !include cards/media_player_stb_arris_uhd.yaml
   - !include cards/media_player_lg_c9.yaml

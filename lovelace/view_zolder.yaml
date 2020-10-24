@@ -35,9 +35,6 @@ cards:
           - entity: light.hue_color_lamp_1_4
             name: Lamp 2
 
-  - type: thermostat
-    entity: climate.zolder
-
   - type: entities
     title: Wasmachine
     show_header_toggle: false

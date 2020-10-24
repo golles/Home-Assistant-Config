@@ -39,9 +39,6 @@ cards:
       - entity: switch.bed_ledstrip_switch
         name: Bedledstrip automatisch aan bij beweging
 
-  - type: thermostat
-    entity: climate.slaapkamer
-
   - type: entities
     show_header_toggle: false
     entities:
