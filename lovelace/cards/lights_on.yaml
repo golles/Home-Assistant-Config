@@ -10,3 +10,6 @@ filter:
       options:
         tap_action:
           action: more-info
+  exclude:
+    - attributes:
+        is_hue_group: true
