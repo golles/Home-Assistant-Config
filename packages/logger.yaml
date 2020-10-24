@@ -1,3 +1,6 @@
 logger:
+  default: warn
   logs:
-    homeassistant.components.media_player: info
+    homeconnect: debug
+    homeassistant.components.home_connect: debug
+    custom_components.tahoma: debug
