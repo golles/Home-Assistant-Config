@@ -48,8 +48,14 @@ cards:
           - entity: light.woonkamer_play_1
             name: Rechts
 
-      - entity: switch.eettafellamp
+      - entity: light.eettafel
+        type: custom:multiple-entity-row
         state_color: true
+        show_state: false
+        entities:
+          - entity: switch.eettafellamp
+            name: false
+            toggle: true
       - type: custom:fold-entity-row
         head:
           type: section
