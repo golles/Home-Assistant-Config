@@ -5,16 +5,19 @@ icon: mdi:bed-king
 badges: []
 cards:
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.slaapkamer_temperature_2
-        type: custom:multiple-entity-row
-        name: Klimaat
-        state_header: Temperatuur
-        entities:
-          - entity: sensor.slaapkamer_humidity_2
-            name: Luchtvochtigheid
+  - type: 'custom:simple-thermostat'
+    entity: climate.slaapkamer
+    step_layout: row
+    name: false
+    icon: false
+    control:
+      - hvac
+    label:
+      temperature: Temperatuur
+      state: Status
+    sensors:
+      - attribute: current_humidity
+        name: Luchtvochtigheid
 
   - type: entities
     show_header_toggle: false

@@ -5,16 +5,21 @@ icon: 'mdi:sofa'
 badges: []
 cards: 
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.woonkamer_temperature_2
-        type: custom:multiple-entity-row
-        name: Klimaat
-        state_header: Temperatuur
-        entities:
-          - entity: sensor.woonkamer_humidity_2
-            name: Luchtvochtigheid 
+  - type: 'custom:simple-thermostat'
+    entity: climate.woonkamer
+    step_layout: row
+    name: false
+    icon: false
+    control:
+      - hvac
+    label:
+      temperature: Temperatuur
+      state: Status
+    sensors:
+      - attribute: current_humidity
+        name: Luchtvochtigheid
+      - entity: sensor.woonkamer_lichtsterkte_illuminance_lux
+        name: Lichtsterkte
 
   - type: entities
     show_header_toggle: false
