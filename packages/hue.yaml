@@ -48,45 +48,49 @@ group:
 script:
   eettafel_on:
     alias: Eettafel lampen aan animatie
+    variables:
+      delay_ms: 100
     sequence:
       - service: light.turn_on
         entity_id: light.hue_filament_bulb_3 #5
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         entity_id: light.hue_filament_bulb_4 #4
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         entity_id: light.hue_filament_bulb_1 #3
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         entity_id: light.hue_filament_bulb_5 #2
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         entity_id: light.hue_filament_bulb_2 #1
 
   eettafel_off:
     alias: Eettafel lampen uit animatie
+    variables:
+      delay_ms: 100
     sequence:
       - service: light.turn_off
         entity_id: light.hue_filament_bulb_2 #1
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
         entity_id: light.hue_filament_bulb_5 #2
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
         entity_id: light.hue_filament_bulb_1 #3
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
         entity_id: light.hue_filament_bulb_4 #4
       - delay:
-          milliseconds: 100
+          milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
         entity_id: light.hue_filament_bulb_3 #5
   

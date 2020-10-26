@@ -9,8 +9,7 @@
     - service: light.turn_on
       data:
         entity_id: light.hue_color_candle_1
-        brightness: 255
-        rgb_color: [255,210,129]
+        profile: helder
 
 - id: auto_toilet_light_off
   alias: Toilet lamp automatisch uit
