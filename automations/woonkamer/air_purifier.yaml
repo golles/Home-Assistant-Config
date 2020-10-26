@@ -57,7 +57,7 @@
   condition:
     - condition: state
       entity_id: fan.air_purifier
-      state: 'off'
+      state: 'on'
   action:
     - service: fan.turn_off
       entity_id: fan.air_purifier

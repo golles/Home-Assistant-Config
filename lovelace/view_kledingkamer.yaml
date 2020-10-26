@@ -19,6 +19,7 @@ cards:
     sensors:
       - attribute: current_humidity
         name: Luchtvochtigheid
+        unit: '%'
 
   - type: entities
     show_header_toggle: false
