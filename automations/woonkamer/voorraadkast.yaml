@@ -5,6 +5,10 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.voorraadkastdeur_contact
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.voorraadkastdeur_contact
+      to: 'off'
   action:
     - choose:
       - conditions:
