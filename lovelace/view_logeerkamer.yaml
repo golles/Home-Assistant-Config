@@ -24,9 +24,8 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
-      - entity: group.logeerkamer_plafond_lamp
+      - entity: light.logeerkamer
         name: Plafond
-        state_color: true
       - type: custom:fold-entity-row
         head:
           type: section

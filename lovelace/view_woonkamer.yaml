@@ -52,7 +52,6 @@ cards:
 
       - entity: light.eettafel
         type: custom:multiple-entity-row
-        state_color: true
         show_state: false
         entities:
           - entity: switch.eettafellamp
