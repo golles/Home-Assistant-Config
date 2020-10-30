@@ -2,7 +2,7 @@
   - url: /local/auto-entities.js
     type: module
 
-  - url: /local/battery-state-card.js
+  - url: /local/battery-state-card.js?v=1.5.2
     type: module
 
   - url: /local/button-card.js
@@ -23,7 +23,7 @@
   - url: /local/simple-thermostat.js?v=0.38.0
     type: module
 
-  - url: /local/swipe-navigation.js?v=1.2.5
+  - url: /local/swipe-navigation.js?v=1.2.7
     type: js
 
   - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
