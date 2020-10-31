@@ -11,6 +11,10 @@ cards:
       action: more-info
     bulk_rename:
       - from: Battery Level
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - entity: sensor.iphone_x_van_golles_battery_level
         charging_state:
@@ -28,6 +32,10 @@ cards:
       action: more-info
     bulk_rename:
       - from: battery level
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.keuken_dimmer_switch_battery_level
       - sensor.achtertuin_schakelaar_battery_level
@@ -48,6 +56,10 @@ cards:
       - from: battery level
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.master_switch_battery
       - sensor.keuken_button_1_battery_level
@@ -64,6 +76,10 @@ cards:
     bulk_rename:
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.woonkamer_klimaat_battery
       - sensor.meterkast_klimaat_battery
@@ -80,6 +96,10 @@ cards:
     bulk_rename:
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.voordeur_battery
       - sensor.achterdeur_battery
@@ -95,6 +115,10 @@ cards:
     bulk_rename:
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.deurbel_battery
       - sensor.bed_sander_battery
@@ -108,6 +132,10 @@ cards:
     bulk_rename:
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.woonkamer_beweging_1_battery
       - sensor.woonkamer_beweging_1_battery
@@ -122,6 +150,10 @@ cards:
     bulk_rename:
       - from: _battery
       - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
     entities:
       - sensor.woonkamer_lichtsterkte_battery
       - sensor.achtertuin_lichtsterkte_battery
