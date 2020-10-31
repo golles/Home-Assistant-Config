@@ -2,6 +2,56 @@ home_connect:
   client_id: !secret home_connect_client_id
   client_secret: !secret home_connect_client_secret
 
+input_datetime:
+  dishwasher_daily_start:
+    name: Vaatwasser start
+    has_date: false
+    has_time: true
+
+automation:
+  - id: dishwasher_auto_daily_start
+    alias: Vaatwasser dagelijks starten
+    initial_state: on
+    trigger:
+      platform: time
+      at:
+        - input_datetime.dishwasher_daily_start
+    condition:
+      - condition: state
+        entity_id: switch.vaatwasser_power
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.vaatwasser_door
+        state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.vaatwasser_program_auto2
+
+  - id: dishwasher_set_daily_start_time
+    alias: Vaatwasser tijd dagelijks aanpassen
+    initial_state: on
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: time
+        at: 
+          - '12:00:00'
+    action:
+      - choose:
+        - conditions:
+            - condition: template
+              value_template: '{{ now().isoweekday() in range(1, 6) }}' # Monday - Friday
+          sequence:
+            - service: input_datetime.set_datetime
+              data:
+                entity_id: input_datetime.dishwasher_daily_start
+                time: '04:30'
+        default: # Saturday - Sunday
+          - service: input_datetime.set_datetime
+            data:
+              entity_id: input_datetime.dishwasher_daily_start
+              time: '07:30'
+
 # Below is from a custom component I was using previously, keeping here in case I want to switch back.
 # Github: https://github.com/cotwild/home_connect
 #

@@ -49,7 +49,11 @@ cards:
       - binary_sensor.vaatwasser_door
       - sensor.vaatwasser_program_progress
       - sensor.vaatwasser_remaining_program_time
-      - switch.vaatwasser_program_auto2
+      - type: section
+        label: Autostart
+      - entity: automation.vaatwasser_dagelijks_starten
+        icon: mdi:dishwasher
+      - input_datetime.dishwasher_daily_start
 
   - type: entities
     title: Koelkast
