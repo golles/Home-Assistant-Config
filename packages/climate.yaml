@@ -1,6 +1,29 @@
 tado:
   username: !secret tado_username
   password: !secret tado_password
+
+switch:
+  - platform: template
+    switches:
+      tado_home_mode:
+        friendly_name: Tado thuismodus
+        icon_template: >-
+          {% if is_state_attr('climate.woonkamer', 'preset_mode', 'home') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
+        value_template: "{{ is_state_attr('climate.woonkamer', 'preset_mode', 'home') }}"
+        turn_on:
+          service: shell_command.tado_set_home
+          data:
+            username: !secret tado_username
+            password: !secret tado_password
+        turn_off:
+          service: shell_command.tado_set_away
+          data:
+            username: !secret tado_username
+            password: !secret tado_password
   
 automation:
   - id: tado_auto_home_and_away_mode
@@ -16,15 +39,11 @@ automation:
               entity_id: group.residents
               state: 'not_home'
           sequence:
-            - service: shell_command.tado_set_away
-              data:
-                username: !secret tado_username
-                password: !secret tado_password
+            - service: switch.turn_off
+              entity_id: switch.tado_home_mode
         default:
-          - service: shell_command.tado_set_home
-            data:
-              username: !secret tado_username
-              password: !secret tado_password
+          - service: switch.turn_on
+            entity_id: switch.tado_home_mode
 
 shell_command:
   tado_set_away: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" AWAY'

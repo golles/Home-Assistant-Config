@@ -1,0 +1,235 @@
+title: Tado
+path: tado
+panel: false
+icon: mdi:radiator
+badges: []
+cards:
+
+  - type: entities
+    title: Tado
+    entities:
+      - entity: switch.tado_home_mode
+        name: Thuismodus
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Woonkamer
+        entities:
+          - entity: sensor.woonkamer_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.woonkamer_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.woonkamer_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.woonkamer_klimaat_humidity
+                name: Luchtvochtigheid
+          - entity: sensor.air_purifier_temp
+            type: custom:multiple-entity-row
+            name: Air purifier
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.air_purifier_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.woonkamer_power_2
+              - entity: sensor.woonkamer_heating_2
+              - entity: sensor.woonkamer_tado_mode_2
+              - entity: sensor.woonkamer_early_start_2
+              - entity: sensor.woonkamer_link_2
+              - entity: sensor.woonkamer_open_window_2
+              - entity: sensor.woonkamer_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.woonkamer
+        hours_to_show: 24
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Slaapkamer
+        entities:
+          - entity: sensor.slaapkamer_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.slaapkamer_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.slaapkamer_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.slaapkamer_klimaat_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.slaapkamer_power_2
+              - entity: sensor.slaapkamer_heating_2
+              - entity: sensor.slaapkamer_tado_mode_2
+              - entity: sensor.slaapkamer_early_start_2
+              - entity: sensor.slaapkamer_link_2
+              - entity: sensor.slaapkamer_open_window_2
+              - entity: sensor.slaapkamer_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.slaapkamer
+        hours_to_show: 24
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Kledingkamer
+        entities:
+          - entity: sensor.kledingkamer_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.kledingkamer_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.kledingkamer_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.kledingkamer_klimaat_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.kledingkamer_power_2
+              - entity: sensor.kledingkamer_heating_2
+              - entity: sensor.kledingkamer_tado_mode_2
+              - entity: sensor.kledingkamer_early_start_2
+              - entity: sensor.kledingkamer_link_2
+              - entity: sensor.kledingkamer_open_window_2
+              - entity: sensor.kledingkamer_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.kledingkamer
+        hours_to_show: 24
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Logeerkamer
+        entities:
+          - entity: sensor.logeerkamer_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.logeerkamer_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.logeerkamer_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.logeerkamer_klimaat_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.logeerkamer_power_2
+              - entity: sensor.logeerkamer_heating_2
+              - entity: sensor.logeerkamer_tado_mode_2
+              - entity: sensor.logeerkamer_early_start_2
+              - entity: sensor.logeerkamer_link_2
+              - entity: sensor.logeerkamer_open_window_2
+              - entity: sensor.logeerkamer_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.logeerkamer
+        hours_to_show: 24
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Badkamer
+        entities:
+          - entity: sensor.badkamer_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.badkamer_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.badkamer_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.badkamer_klimaat_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.badkamer_power_2
+              - entity: sensor.badkamer_heating_2
+              - entity: sensor.badkamer_tado_mode_2
+              - entity: sensor.badkamer_early_start_2
+              - entity: sensor.badkamer_link_2
+              - entity: sensor.badkamer_open_window_2
+              - entity: sensor.badkamer_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.badkamer
+        hours_to_show: 24
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: Zolder
+        entities:
+          - entity: sensor.zolder_temperature_2
+            type: custom:multiple-entity-row
+            name: Tado
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.zolder_humidity_2
+                name: Luchtvochtigheid 
+          - entity: sensor.zolder_klimaat_temperature
+            type: custom:multiple-entity-row
+            name: Xiaomi
+            state_header: Temperatuur
+            entities:
+              - entity: sensor.zolder_klimaat_humidity
+                name: Luchtvochtigheid
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: 
+            entities:
+              - entity: sensor.zolder_power_2
+              - entity: sensor.zolder_heating_2
+              - entity: sensor.zolder_tado_mode_2
+              - entity: sensor.zolder_early_start_2
+              - entity: sensor.zolder_link_2
+              - entity: sensor.zolder_open_window_2
+              - entity: sensor.zolder_overlay_2
+      - type: history-graph
+        entities:
+          - entity: climate.zolder
+        hours_to_show: 24

@@ -9,3 +9,4 @@ views:
   - !include lovelace/view_zigbee2mqtt.yaml
   - !include lovelace/view_internet.yaml
   - !include lovelace/view_sabnzbd.yaml
+  - !include lovelace/view_tado.yaml
