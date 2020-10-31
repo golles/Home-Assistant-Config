@@ -20,7 +20,9 @@
         before_offset: '-01:00:00'
   action:
     - service: light.turn_on
-      entity_id: light.voortuin
+      data:
+        entity_id: light.voortuin
+        profile: helder
 
     - delay:
         minutes: 10
