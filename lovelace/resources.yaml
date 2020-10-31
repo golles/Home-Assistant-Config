@@ -25,6 +25,3 @@
 
   - url: /local/swipe-navigation.js?v=1.2.7
     type: js
-
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
-    type: module

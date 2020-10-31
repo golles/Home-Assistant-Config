@@ -5,6 +5,18 @@ icon: 'mdi:zigbee'
 badges: []
 cards:
 
+  - title: Zigbee2mqtt
+    type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.zigbee2mqtt_bridge_state
+      - entity: sensor.zigbee2mqtt_version
+      - entity: sensor.coordinator_version
+      - type: weblink
+        name: Zigbee2MQTT configuratie
+        icon: mdi:zigbee
+        url: https://zigbee2mqtt.rg23.golles.nl
+
   - type: 'custom:auto-entities'
     show_empty: false
     card:
@@ -23,36 +35,15 @@ cards:
               service_data:
                 topic: zigbee2mqtt/bridge/ota_update/update
                 payload_template: >
-                  {{ state_attr('this.entity_id', 'friendly_name').split('_update_available')[0] }}
+                  {{ state_attr('this.entity_id', 'friendly_name').split(' update_available')[0] }}
 
-  - title: Zigbee2mqtt
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.zigbee2mqtt_bridge_state
-      - entity: sensor.zigbee2mqtt_version
-      - entity: sensor.coordinator_version
-      - entity: input_select.zigbee2mqtt_log_level
-
-  - title: Pairing
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: switch.zigbee2mqtt_main_join
-      - entity: timer.zigbee_permit_join
-
-  - title: Rename device
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: input_text.zigbee2mqtt_old_name
-      - entity: input_text.zigbee2mqtt_new_name
-      - entity: script.zigbee2mqtt_rename
-
-  - title: Remove device
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: input_text.zigbee2mqtt_remove
-      - entity: script.zigbee2mqtt_remove
-      - entity: script.zigbee2mqtt_force_remove
+  - type: markdown
+    title: Lang niet gezien
+    content: >-
+      {% for state in states.sensor -%}
+        {%- if 'linkquality' in state.name and state.attributes.linkquality %}
+          {%- if (as_timestamp(now()) - as_timestamp(state.last_updated) > (6 * 60 * 60) ) %}
+            **{{ state.name.split(' linkquality')[0] }}** niet gezien in de laatste {{ relative_time(state.last_updated).replace('hours', 'uur') }}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor %}
