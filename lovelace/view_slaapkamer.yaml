@@ -7,7 +7,7 @@ cards:
 
   - type: 'custom:simple-thermostat'
     entity: climate.slaapkamer
-    step_layout: row
+    step_layout: column
     step_size: 1
     name: false
     icon: false
