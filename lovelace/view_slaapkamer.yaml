@@ -20,6 +20,8 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
+      - entity: sensor.slaapkamer_lichtsterkte_illuminance_lux
+        name: Lichtsterkte
 
   - type: entities
     show_header_toggle: false
