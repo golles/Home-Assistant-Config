@@ -6,7 +6,7 @@ badges: []
 cards: 
 
   - type: 'custom:auto-entities'
-    show_empty: true
+    show_empty: false
     card:
       show_header_toggle: false
       title: Open deuren en ramen
@@ -33,7 +33,7 @@ cards:
     show_empty: false
     card:
       show_header_toggle: false
-      title: Alle deuren en ramen
+      title: Deuren
       type: entities
     filter:
       include:
@@ -42,14 +42,25 @@ cards:
           domain: binary_sensor
           options:
             secondary_info: last-changed
+      exclude:
+        - entity_id: 'binary_sensor.wasmachine_door'
+        - entity_id: 'binary_sensor.vaatwasser_door'
+
+  - type: 'custom:auto-entities'
+    show_empty: false
+    card:
+      show_header_toggle: false
+      title: Ramen
+      type: entities
+    filter:
+      include:
         - attributes:
             device_class: window
           domain: binary_sensor
           options:
             secondary_info: last-changed
-      exclude:
-        - entity_id: 'binary_sensor.wasmachine_door'
-        - entity_id: 'binary_sensor.vaatwasser_door'
+    sort:
+      method: name
 
   - type: 'custom:auto-entities'
     show_empty: false
@@ -62,6 +73,8 @@ cards:
         - domain: cover
           options:
             secondary_info: last-changed
+    sort:
+      method: name
 
   - type: 'custom:auto-entities'
     show_empty: false
@@ -76,3 +89,6 @@ cards:
           domain: binary_sensor
           options:
             secondary_info: last-changed
+    sort:
+      method: name
+

@@ -105,7 +105,10 @@ cards:
       - sensor.achterdeur_battery
       - sensor.slaapkamerraam_battery
       - sensor.kledingkamerraam_battery
+      - sensor.logeerkamerraam_battery
+      - sensor.badkamerraam_battery
       - sensor.balkondeur_battery
+      - sensor.zolderraam_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara vibration sensor
@@ -157,3 +160,5 @@ cards:
     entities:
       - sensor.woonkamer_lichtsterkte_battery
       - sensor.achtertuin_lichtsterkte_battery
+      - sensor.slaapkamer_lichtsterkte_battery
+

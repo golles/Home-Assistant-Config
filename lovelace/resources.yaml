@@ -23,5 +23,5 @@
   - url: /local/simple-thermostat.js?v=0.38.0
     type: module
 
-  - url: /local/swipe-navigation.js?v=1.2.7
+  - url: /local/swipe-navigation.js?v=1.2.8
     type: js

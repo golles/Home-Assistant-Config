@@ -8,3 +8,13 @@ homeassistant:
     
     binary_sensor.keukenraam_contact:
       device_class: window
+
+    binary_sensor.badkamerraam_contact:
+      device_class: window
+
+    binary_sensor.logeerkamerraam_contact:
+      device_class: window
+
+    binary_sensor.zolderraam_contact:
+      device_class: window
+
