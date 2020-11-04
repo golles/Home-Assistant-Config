@@ -33,8 +33,6 @@ script:
     icon: mdi:radio
     description: Speel radio in de woonkamer
     mode: restart
-    variables:
-      speaker: media_player.lg_soundbar
     fields:
       stream:
         description: The stream to play
@@ -48,18 +46,18 @@ script:
           sequence:
             - service: media_player.turn_on
               data:
-                entity_id: '{{ speaker }}'
-            - delay:
-                seconds: 1
-      
+                entity_id: media_player.lg_soundbar
+            - wait_template: "{{ is_state('media_player.lg_soundbar', 'on') }}"
+              timeout: '00:00:02'
+              continue_on_timeout: false
             - service: media_player.volume_set
               data:
-                entity_id: '{{ speaker }}'
+                entity_id: media_player.lg_soundbar
                 volume_level: 0.1 # 4 * 0.025
 
       - service: media_player.play_media
         data:
-          entity_id: '{{ speaker }}'
+          entity_id: media_player.lg_soundbar
           media_content_id: '{{ stream }}'
           media_content_type: audio/mp4
   
@@ -68,8 +66,6 @@ script:
     icon: mdi:television
     description: Speel tv met bron
     mode: restart
-    variables:
-      tv: media_player.lg_c9
     fields:
       source:
         description: The source to pick
@@ -83,13 +79,14 @@ script:
           sequence:
             - service: media_player.turn_on
               data:
-                entity_id: '{{ tv }}'
-            - delay:
-                seconds: 2
+                entity_id: media_player.lg_c9
+            - wait_template: "{{ is_state('media_player.lg_c9', 'on') }}"
+              timeout: '00:00:02'
+              continue_on_timeout: false
 
       - service: media_player.select_source
         data:
-          entity_id: '{{ tv }}'
+          entity_id: media_player.lg_c9
           source: '{{ source }}'
 
   play_livingroom_tv_source_ziggo:
@@ -110,5 +107,4 @@ script:
 
       - service: script.play_livingroom_tv_source
         data:
-          entity_id: media_player.lg_c9
           source: Ziggo
