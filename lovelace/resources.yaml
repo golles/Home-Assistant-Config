@@ -17,7 +17,7 @@
   - url: /local/mini-media-player-bundle.js?v=1.11.0
     type: module
 
-  - url: /local/multiple-entity-row.js?v=3.2.1
+  - url: /local/multiple-entity-row.js?v=4.0.0
     type: module
 
   - url: /local/simple-thermostat.js?v=0.38.0
