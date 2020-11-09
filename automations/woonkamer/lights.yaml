@@ -35,4 +35,11 @@
     - service: light.turn_on
       data:
         entity_id: light.woonkamer
-        brightness_pct: 65
+        profile: ontspannen
+        transition: 60 # 1 minute
+
+    - service: light.turn_on
+      data:
+        entity_id: light.woonkamer
+        profile: helder
+        transition: 1800 # Half an hour

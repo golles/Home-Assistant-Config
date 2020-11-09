@@ -14,8 +14,9 @@
   alias: Kerst sfeer achtertuin
   initial_state: on
   trigger:
-    - platform: time
-      at: '18:00:00'
+    - platform: sun
+      event: sunset
+      offset: '+00:45:00'
   condition:
     condition: template
     value_template: '{{ now().month == 12 and now().day >= 6 }}' # All days in December after Sinterklaas.
@@ -28,6 +29,7 @@
 - id: backdoor_opens_while_being_dark_outside
   alias: Achtertuin verlichting tijdelijk aan wanneer de deur open gaat
   initial_state: on
+  mode: restart
   trigger:
     - platform: state
       entity_id: binary_sensor.achterdeur_contact
@@ -38,7 +40,9 @@
       below: 10
   action:
     - service: light.turn_on
-      entity_id: light.achtertuin_groep
+      data:
+        entity_id: light.achtertuin_groep
+        profile: helder
 
     - delay:
         minutes: 10

@@ -16,4 +16,4 @@
     - service: light.turn_on
       data:
         entity_id: light.overloop_spot_2 # Only switch the light on that is pointing to the stairs.
-        brightness: 255
+        profile: helder

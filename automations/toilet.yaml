@@ -10,6 +10,7 @@
       data:
         entity_id: light.toilet
         profile: helder
+        transition: 1
 
 - id: auto_toilet_light_off
   alias: Toilet lamp automatisch uit
@@ -22,4 +23,6 @@
         seconds: 90
   action:
     - service: light.turn_off
-      entity_id: light.toilet
+      data:
+        entity_id: light.toilet
+        transition: 3
