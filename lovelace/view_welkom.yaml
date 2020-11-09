@@ -78,9 +78,28 @@ cards:
   - type: conditional
     conditions:
       - entity: media_player.lg_c9
-        state: 'on'
+        state_not: 'off'
     card:
       !include cards/media_player_lg_c9.yaml
+
+  - type: conditional
+    conditions:
+      - entity: sensor.time_of_day
+        state: Morning
+    card:
+      type: 'custom:auto-entities'
+      show_empty: false
+      card:
+        title: Goedemorgen!
+        type: entities
+      filter:
+        include:
+          - attributes:
+              device_class: shutter
+            domain: cover
+            options:
+              secondary_info: last-changed
+            state: 'closed'
       
   - type: 'custom:auto-entities'
     show_empty: false
