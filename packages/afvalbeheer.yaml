@@ -50,3 +50,14 @@ automation:
             {% elif is_state_attr("sensor.purmerend_restafval", "Days-until", 1) %}
             Morgen wordt de RESTAFVAL container (grijs) geleegd
             {% endif %}
+          data:
+            attachment:
+              content-type: jpeg
+              url: >
+                {% if is_state_attr("sensor.purmerend_papier", "Days-until", 1) %}
+                {{ state_attr("sensor.purmerend_papier", "entity_picture") }}
+                {% elif is_state_attr("sensor.purmerend_gft", "Days-until", 1)%}
+                {{ state_attr("sensor.purmerend_gft", "entity_picture") }}
+                {% elif is_state_attr("sensor.purmerend_restafval", "Days-until", 1) %}
+                {{ state_attr("sensor.purmerend_restafval", "entity_picture") }}
+                {% endif %}
