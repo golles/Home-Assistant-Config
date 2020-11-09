@@ -47,8 +47,8 @@ script:
             - service: media_player.turn_on
               data:
                 entity_id: media_player.lg_soundbar
-            - wait_template: "{{ not is_state('media_player.lg_soundbar', 'off') }}"
-              timeout: '00:00:02'
+            - wait_template: "{{ states('media_player.lg_soundbar') in ['idle', 'on'] }}"
+              timeout: '00:00:05'
               continue_on_timeout: false
             - service: media_player.volume_set
               data:
