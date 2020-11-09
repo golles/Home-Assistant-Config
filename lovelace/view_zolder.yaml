@@ -45,3 +45,15 @@ cards:
       - sensor.wasmachine_program_progress
       - sensor.wasmachine_remaining_program_time
       
+  - type: custom:mini-media-player
+    entity: media_player.zolder
+    name: TV
+    icon: mdi:television
+    artwork: cover
+    info: scroll
+    volume_stateless: true
+    hide:
+      icon: true
+      volume: false
+      prev: true
+      next: true
