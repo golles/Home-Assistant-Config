@@ -13,3 +13,5 @@ filter:
   exclude:
     - attributes:
         is_hue_group: true
+sort:
+  method: name
