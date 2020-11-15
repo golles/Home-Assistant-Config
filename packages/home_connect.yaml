@@ -20,23 +20,14 @@ sensor:
           {%- else -%}
             {% set seconds = as_timestamp(states('sensor.wasmachine_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
             {% set minutes = ((seconds % 3600) / 60) | int %}
-            {% set hours = ((seconds % 86400) / 3600) | int %}
-            {% set days = (seconds / 86400) | int %}
+            {% set hours = (seconds / 3600) | int %}
 
-            {%- if seconds < 60 -%}
+            {%- if seconds <= 0 -%}
+              Klaar
+            {%- elif seconds < 60 -%}
               {{ seconds }} seconden
             {%- else -%}
-              {%- if days > 0 -%}
-                {%- if days == 1 -%}
-                  1 dag
-                {%- else -%}
-                  {{ days }} dagen
-                {%- endif -%}
-              {%- endif -%}
               {%- if hours > 0 -%}
-                {%- if days > 0 -%}
-                  {{ ', ' }}
-                {%- endif -%}
                 {%- if hours == 1 -%}
                   1 uur
                 {%- else -%}
@@ -44,7 +35,7 @@ sensor:
                 {%- endif -%}
               {%- endif -%}
               {%- if minutes > 0 -%}
-                {%- if days > 0 or hours > 0 -%}
+                {%- if hours > 0 -%}
                   {{ ', ' }}
                 {%- endif -%}
                 {%- if minutes == 1 -%}
@@ -65,23 +56,14 @@ sensor:
           {%- else -%}
             {% set seconds = as_timestamp(states('sensor.vaatwasser_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
             {% set minutes = ((seconds % 3600) / 60) | int %}
-            {% set hours = ((seconds % 86400) / 3600) | int %}
-            {% set days = (seconds / 86400) | int %}
+            {% set hours = (seconds / 3600) | int %}
 
-            {%- if seconds < 60 -%}
+            {%- if seconds <= 0 -%}
+              Klaar
+            {%- elif seconds < 60 -%}
               {{ seconds }} seconden
             {%- else -%}
-              {%- if days > 0 -%}
-                {%- if days == 1 -%}
-                  1 dag
-                {%- else -%}
-                  {{ days }} dagen
-                {%- endif -%}
-              {%- endif -%}
               {%- if hours > 0 -%}
-                {%- if days > 0 -%}
-                  {{ ', ' }}
-                {%- endif -%}
                 {%- if hours == 1 -%}
                   1 uur
                 {%- else -%}
@@ -89,7 +71,7 @@ sensor:
                 {%- endif -%}
               {%- endif -%}
               {%- if minutes > 0 -%}
-                {%- if days > 0 or hours > 0 -%}
+                {%- if hours > 0 -%}
                   {{ ', ' }}
                 {%- endif -%}
                 {%- if minutes == 1 -%}
