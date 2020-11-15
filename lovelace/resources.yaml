@@ -2,7 +2,7 @@
   - url: /local/auto-entities.js
     type: module
 
-  - url: /local/battery-state-card.js?v=1.5.2
+  - url: /local/battery-state-card.js?v=1.6.0
     type: module
 
   - url: /local/button-card.js
@@ -17,11 +17,11 @@
   - url: /local/mini-media-player-bundle.js?v=1.11.0
     type: module
 
-  - url: /local/multiple-entity-row.js?v=4.0.0
+  - url: /local/multiple-entity-row.js?v=4.1.0
     type: module
 
-  - url: /local/simple-thermostat.js?v=0.38.0
+  - url: /local/simple-thermostat.js?v=0.39.0
     type: module
 
-  - url: /local/swipe-navigation.js?v=1.2.8
+  - url: /local/swipe-navigation.js?v=1.3.0
     type: js
