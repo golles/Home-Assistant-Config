@@ -48,7 +48,7 @@ cards:
       - switch.vaatwasser_power
       - binary_sensor.vaatwasser_door
       - sensor.vaatwasser_program_progress
-      - sensor.vaatwasser_remaining_program_time
+      - sensor.vaatwasser_remaining_relative_local
       - type: section
         label: Autostart
       - entity: automation.vaatwasser_dagelijks_starten

@@ -8,6 +8,99 @@ input_datetime:
     has_date: false
     has_time: true
 
+sensor:
+  - platform: template
+    sensors:
+      wasmachine_remaining_relative_local:
+        friendly_name: Resterende tijd
+        icon_template: mdi:clock
+        value_template: >-
+          {% if states('sensor.wasmachine_remaining_program_time') == 'unavailable' -%}
+            Onbekend
+          {%- else -%}
+            {% set seconds = as_timestamp(states('sensor.wasmachine_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
+            {% set minutes = ((seconds % 3600) / 60) | int %}
+            {% set hours = ((seconds % 86400) / 3600) | int %}
+            {% set days = (seconds / 86400) | int %}
+
+            {%- if seconds < 60 -%}
+              {{ seconds }} seconden
+            {%- else -%}
+              {%- if days > 0 -%}
+                {%- if days == 1 -%}
+                  1 dag
+                {%- else -%}
+                  {{ days }} dagen
+                {%- endif -%}
+              {%- endif -%}
+              {%- if hours > 0 -%}
+                {%- if days > 0 -%}
+                  {{ ', ' }}
+                {%- endif -%}
+                {%- if hours == 1 -%}
+                  1 uur
+                {%- else -%}
+                  {{ hours }} uur
+                {%- endif -%}
+              {%- endif -%}
+              {%- if minutes > 0 -%}
+                {%- if days > 0 or hours > 0 -%}
+                  {{ ', ' }}
+                {%- endif -%}
+                {%- if minutes == 1 -%}
+                  1 minuut
+                {%- else -%}
+                  {{ minutes }} minuten
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif %}
+
+      vaatwasser_remaining_relative_local:
+        friendly_name: Resterende tijd
+        icon_template: mdi:clock
+        value_template: >-
+          {% if states('sensor.vaatwasser_remaining_program_time') == 'unavailable' -%}
+            Onbekend
+          {%- else -%}
+            {% set seconds = as_timestamp(states('sensor.vaatwasser_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
+            {% set minutes = ((seconds % 3600) / 60) | int %}
+            {% set hours = ((seconds % 86400) / 3600) | int %}
+            {% set days = (seconds / 86400) | int %}
+
+            {%- if seconds < 60 -%}
+              {{ seconds }} seconden
+            {%- else -%}
+              {%- if days > 0 -%}
+                {%- if days == 1 -%}
+                  1 dag
+                {%- else -%}
+                  {{ days }} dagen
+                {%- endif -%}
+              {%- endif -%}
+              {%- if hours > 0 -%}
+                {%- if days > 0 -%}
+                  {{ ', ' }}
+                {%- endif -%}
+                {%- if hours == 1 -%}
+                  1 uur
+                {%- else -%}
+                  {{ hours }} uur
+                {%- endif -%}
+              {%- endif -%}
+              {%- if minutes > 0 -%}
+                {%- if days > 0 or hours > 0 -%}
+                  {{ ', ' }}
+                {%- endif -%}
+                {%- if minutes == 1 -%}
+                  1 minuut
+                {%- else -%}
+                  {{ minutes }} minuten
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif %}
+
 automation:
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten

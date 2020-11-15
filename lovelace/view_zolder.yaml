@@ -43,7 +43,7 @@ cards:
       - switch.wasmachine_power
       - binary_sensor.wasmachine_door
       - sensor.wasmachine_program_progress
-      - sensor.wasmachine_remaining_program_time
+      - sensor.wasmachine_remaining_relative_local
       
   - type: custom:mini-media-player
     entity: media_player.zolder

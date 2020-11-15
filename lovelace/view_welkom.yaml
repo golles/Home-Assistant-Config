@@ -44,6 +44,8 @@ cards:
     card:
       !include cards/lights_on.yaml
 
+  - !include cards/appliances_on.yaml
+
   - type: conditional
     conditions:
       - entity: sensor.time_of_day
