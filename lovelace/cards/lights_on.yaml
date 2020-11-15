@@ -7,11 +7,10 @@ filter:
   include:
     - domain: light
       state: 'on'
+      attributes:
+        is_hue_group: true
       options:
         tap_action:
           action: more-info
-  exclude:
-    - attributes:
-        is_hue_group: true
 sort:
   method: name
