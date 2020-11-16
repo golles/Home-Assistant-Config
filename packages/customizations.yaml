@@ -1,4 +1,8 @@
 homeassistant:
+  customize:
+    fan.air_purifier:
+      icon: mdi:air-purifier
+
   customize_glob:
     'binary_sensor.*raam_contact':
       device_class: window
