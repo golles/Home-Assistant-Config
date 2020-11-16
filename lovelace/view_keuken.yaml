@@ -44,6 +44,7 @@ cards:
   - type: entities
     title: Vaatwasser
     show_header_toggle: false
+    icon: mdi:dishwasher
     entities:
       - switch.vaatwasser_power
       - binary_sensor.vaatwasser_door
@@ -58,6 +59,7 @@ cards:
   - type: entities
     title: Koelkast
     show_header_toggle: false
+    icon: mdi:fridge
     entities:
       - entity: sensor.koelkast_klimaat_temperature
         name: Temperatuur

@@ -3,6 +3,7 @@ show_empty: false
 card:
   type: entities
   title: Lichten aan
+  icon: mdi:lightbulb-on
 filter:
   include:
     - domain: light

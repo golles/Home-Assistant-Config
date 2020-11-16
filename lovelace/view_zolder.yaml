@@ -39,6 +39,7 @@ cards:
   - type: entities
     title: Wasmachine
     show_header_toggle: false
+    icon: mdi:washing-machine
     entities:
       - switch.wasmachine_power
       - binary_sensor.wasmachine_door
