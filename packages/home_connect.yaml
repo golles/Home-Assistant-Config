@@ -11,6 +11,32 @@ input_datetime:
 sensor:
   - platform: template
     sensors:
+      wasmachine_active_program:
+        friendly_name: Wasmachine programma
+        icon_template: mdi:washing-machine
+        value_template: >-
+          {% set prefix = 'Wasmachine Program ' %}
+          {% set program = namespace(name = 'Uit') %}
+          {% for switch in states.switch -%}
+            {%- if switch.name.startswith(prefix) and switch.state == 'on' %}
+              {% set program.name = switch.name.split(prefix)[1] %}
+            {%- endif %}
+          {%- endfor %}
+          {{ program.name }}
+
+      vaatwasser_active_program:
+        friendly_name: Vaatwasser programma
+        icon_template: mdi:dishwasher
+        value_template: >-
+          {% set prefix = 'Vaatwasser Program ' %}
+          {% set program = namespace(name = 'Uit') %}
+          {% for switch in states.switch -%}
+            {%- if switch.name.startswith(prefix) and switch.state == 'on' %}
+              {% set program.name = switch.name.split(prefix)[1] %}
+            {%- endif %}
+          {%- endfor %}
+          {{ program.name }}
+
       wasmachine_remaining_relative_local:
         friendly_name: Resterende tijd
         icon_template: mdi:clock

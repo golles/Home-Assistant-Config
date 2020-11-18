@@ -46,15 +46,25 @@ cards:
     show_header_toggle: false
     icon: mdi:dishwasher
     entities:
-      - switch.vaatwasser_power
-      - binary_sensor.vaatwasser_door
-      - sensor.vaatwasser_program_progress
-      - sensor.vaatwasser_remaining_relative_local
+      - entity: switch.vaatwasser_power
+        name: Voedingsstatus
+      - entity: binary_sensor.vaatwasser_door
+        name: Deur
+      - entity: sensor.vaatwasser_active_program
+        name: Programma
+      - entity: sensor.vaatwasser_program_progress
+        name: Voortgang
+      - entity: sensor.vaatwasser_remaining_relative_local
+        name: Resterende tijd
       - type: section
         label: Autostart
       - entity: automation.vaatwasser_dagelijks_starten
-        icon: mdi:dishwasher
-      - input_datetime.dishwasher_daily_start
+        type: custom:multiple-entity-row
+        icon: mdi:clock
+        toggle: true
+        entities:
+          - entity: input_datetime.dishwasher_daily_start
+            name: Tijd
 
   - type: entities
     title: Koelkast

@@ -41,10 +41,14 @@ cards:
     show_header_toggle: false
     icon: mdi:washing-machine
     entities:
-      - switch.wasmachine_power
-      - binary_sensor.wasmachine_door
-      - sensor.wasmachine_program_progress
-      - sensor.wasmachine_remaining_relative_local
+      - entity: switch.wasmachine_power
+        name: Voedingsstatus
+      - entity: binary_sensor.wasmachine_door
+        name: Deur
+      - entity: sensor.wasmachine_program_progress
+        name: Voortgang
+      - entity: sensor.wasmachine_remaining_relative_local
+        name: Resterende tijd
       
   - type: custom:mini-media-player
     entity: media_player.zolder
