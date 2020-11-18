@@ -1,13 +1,16 @@
-- id: auto_toilet_light_on
-  alias: Toilet lamp automatisch aan
+- id: auto_kledingkamer_light_on
+  alias: Kledingkamer lamp automatisch aan
   initial_state: on
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_beweging_occupancy
+      entity_id: binary_sensor.kledingkamer_beweging_occupancy
       to: 'on'
   condition:
+    - condition: numeric_state
+      entity_id: sensor.kledingkamer_beweging_illuminance
+      below: 10
     - condition: state
-      entity_id: light.toilet
+      entity_id: light.kledingkamer
       state: 'off'
   action:
     - choose:
@@ -17,35 +20,35 @@
         sequence:
           - service: light.turn_on
             data:
-              entity_id: light.toilet
+              entity_id: light.kledingkamer
               profile: nachtlampje
           - service: light.turn_on
             data:
-              entity_id: light.toilet
+              entity_id: light.kledingkamer
               profile: ontspannen
               transition: 5
       default:
         - service: light.turn_on
           data:
-            entity_id: light.toilet
+            entity_id: light.kledingkamer
             profile: helder
             transition: 3
 
-- id: auto_toilet_light_off
-  alias: Toilet lamp automatisch uit
+- id: auto_kledingkamer_light_off
+  alias: Kledingkamer lamp automatisch uit
   initial_state: on
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_beweging_occupancy
+      entity_id: binary_sensor.kledingkamer_beweging_occupancy
       to: 'off'
       for:
-        seconds: 90
+        seconds: 60
   condition:
     - condition: state
-      entity_id: light.toilet
+      entity_id: light.kledingkamer
       state: 'on'
   action:
     - service: light.turn_off
       data:
-        entity_id: light.toilet
+        entity_id: light.kledingkamer
         transition: 3

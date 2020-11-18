@@ -26,3 +26,6 @@ cards:
     entities:
       - entity: light.badkamer
         name: Plafond
+      - entity: binary_sensor.badkamer_beweging_occupancy
+        name: Beweging
+      - automation.badkamer_lamp_automatisch_aan

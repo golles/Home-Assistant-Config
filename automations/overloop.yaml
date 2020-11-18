@@ -17,3 +17,4 @@
       data:
         entity_id: light.overloop_spot_2 # Only switch the light on that is pointing to the stairs.
         profile: helder
+        transition: 3

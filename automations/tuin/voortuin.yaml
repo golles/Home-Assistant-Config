@@ -23,6 +23,7 @@
       data:
         entity_id: light.voortuin
         profile: helder
+        transition: 3
 
     - wait_for_trigger:
       - platform: state
@@ -30,14 +31,10 @@
         from: 'on'
         to: 'off'
       timeout:
-        minutes: 10
+        minutes: 15
       continue_on_timeout: true
 
     - service: light.turn_off
-      entity_id: light.voortuin
-
-    - service: notify.sander
       data:
-        title: 'Voordeur dicht'
-        message: 'Voortuin lampje uit!'
-        
+        entity_id: light.voortuin
+        transition: 3

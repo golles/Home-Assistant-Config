@@ -1,13 +1,16 @@
-- id: auto_toilet_light_on
-  alias: Toilet lamp automatisch aan
+- id: auto_badkamer_light_on
+  alias: Badkamer lamp automatisch aan
   initial_state: on
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_beweging_occupancy
+      entity_id: binary_sensor.badkamer_beweging_occupancy
       to: 'on'
   condition:
+    - condition: numeric_state
+      entity_id: sensor.badkamer_beweging_illuminance
+      below: 10
     - condition: state
-      entity_id: light.toilet
+      entity_id: light.badkamer
       state: 'off'
   action:
     - choose:
@@ -17,35 +20,35 @@
         sequence:
           - service: light.turn_on
             data:
-              entity_id: light.toilet
+              entity_id: light.badkamer
               profile: nachtlampje
           - service: light.turn_on
             data:
-              entity_id: light.toilet
+              entity_id: light.badkamer
               profile: ontspannen
               transition: 5
       default:
         - service: light.turn_on
           data:
-            entity_id: light.toilet
+            entity_id: light.badkamer
             profile: helder
             transition: 3
 
-- id: auto_toilet_light_off
-  alias: Toilet lamp automatisch uit
-  initial_state: on
+- id: auto_badkamer_light_off
+  alias: Badkamer lamp automatisch uit
+  initial_state: off # TODO switch on, how to deal with showering?
   trigger:
     - platform: state
-      entity_id: binary_sensor.toilet_beweging_occupancy
+      entity_id: binary_sensor.badkamer_beweging_occupancy
       to: 'off'
       for:
         seconds: 90
   condition:
     - condition: state
-      entity_id: light.toilet
+      entity_id: light.badkamer
       state: 'on'
   action:
     - service: light.turn_off
       data:
-        entity_id: light.toilet
+        entity_id: light.badkamer
         transition: 3
