@@ -7,22 +7,28 @@ camera:
     password: !secret dlink_camera_password
 
 automation:
-- id: dlink_auto_day_night_mode # TODO: this should happen based on light in that place.
+- id: dlink_auto_day_night_mode
   alias: Automatisch Dlink camera in day of night mode zetten
   initial_state: on
   trigger:
     - platform: homeassistant
       event: start
-    - platform: sun
-      event: sunrise
-    - platform: sun
-      event: sunset
+    - platform: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      below: 15
+      for:
+        minutes: 10
+    - platform: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      above: 25
+      for:
+        minutes: 10
   action:
     - choose:
       - conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: 'below_horizon'
+          - condition: numeric_state
+            entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+            below: 15
         sequence:
           - service: shell_command.dlink_set_night_mode
             data:
