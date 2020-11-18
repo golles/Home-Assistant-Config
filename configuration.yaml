@@ -1,7 +1,12 @@
 homeassistant:
   internal_url: !secret internal_url
   external_url: !secret external_url
+
   packages: !include_dir_named packages
+  
+  allowlist_external_dirs:
+    - /tmp
+    - /config/www/tmp
   
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
