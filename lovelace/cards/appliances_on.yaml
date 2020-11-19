@@ -12,6 +12,6 @@ entities:
     icon: mdi:washing-machine
 filter:
   exclude:
-    - state: Onbekend
+    - state: Niet beschikbaar
 sort:
   method: name
