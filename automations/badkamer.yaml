@@ -32,7 +32,7 @@
           data:
             entity_id: light.badkamer
             profile: helder
-            transition: 3
+            transition: 2
 
 - id: auto_badkamer_light_off
   alias: Badkamer lamp automatisch uit
@@ -51,4 +51,4 @@
     - service: light.turn_off
       data:
         entity_id: light.badkamer
-        transition: 3
+        transition: 2

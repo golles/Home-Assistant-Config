@@ -23,7 +23,7 @@
       data:
         entity_id: light.voortuin
         profile: helder
-        transition: 3
+        transition: 2
 
     - wait_for_trigger:
       - platform: state
@@ -37,4 +37,4 @@
     - service: light.turn_off
       data:
         entity_id: light.voortuin
-        transition: 3
+        transition: 2

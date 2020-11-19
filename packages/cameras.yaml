@@ -11,8 +11,6 @@ automation:
   alias: Automatisch Dlink camera in day of night mode zetten
   initial_state: on
   trigger:
-    - platform: homeassistant
-      event: start
     - platform: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 15
