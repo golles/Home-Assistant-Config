@@ -1,5 +1,5 @@
 
-  - url: /local/auto-entities.js
+  - url: /local/auto-entities.js?v=1.7.0
     type: module
 
   - url: /local/battery-state-card.js?v=1.6.0
