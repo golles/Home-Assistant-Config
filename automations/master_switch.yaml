@@ -6,7 +6,14 @@
       entity_id: sensor.master_switch_action
       to: 'press'
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data: 
         entity_id: >
-          {{ states.light | selectattr('state', 'eq', 'on') |  map(attribute='entity_id') | join(', ') }}
+          {{ 
+            (
+              expand(states.light | selectattr('state', 'eq', 'on')) +
+              expand(states.media_player | rejectattr('state', 'in', ['off', 'unavailable']))
+            ) 
+              | map(attribute='entity_id')
+              | join(', ')
+            }}
