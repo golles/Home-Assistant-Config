@@ -21,10 +21,6 @@
           - service: light.turn_on
             data:
               entity_id: light.kledingkamer
-              profile: nachtlampje
-          - service: light.turn_on
-            data:
-              entity_id: light.kledingkamer
               profile: ontspannen
               transition: 5
       default:
