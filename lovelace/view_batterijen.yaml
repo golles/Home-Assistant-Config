@@ -102,6 +102,7 @@ cards:
       }
     entities:
       - sensor.voordeur_battery
+      - sensor.deurbel_battery
       - sensor.achterdeur_battery
       - sensor.achterraam_battery
       - sensor.slaapkamerraam_battery
@@ -124,9 +125,7 @@ cards:
         color: var(--secondary-text-color)
       }
     entities:
-      - sensor.deurbel_battery
       - sensor.bed_sander_battery
-      - sensor.zonnescherm_beweging_battery
 
   - type: custom:battery-state-card
     name: Xiaomi Aqara movement/illuminance sensor
