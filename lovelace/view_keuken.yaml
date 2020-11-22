@@ -59,12 +59,8 @@ cards:
       - type: section
         label: Autostart
       - entity: automation.vaatwasser_dagelijks_starten
-        type: custom:multiple-entity-row
-        icon: mdi:clock
-        toggle: true
-        entities:
-          - entity: input_datetime.dishwasher_daily_start
-            name: Tijd
+        icon: mdi:dishwasher
+      - input_datetime.dishwasher_daily_start
 
   - type: entities
     title: Koelkast

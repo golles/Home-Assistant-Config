@@ -45,6 +45,8 @@ cards:
         name: Voedingsstatus
       - entity: binary_sensor.wasmachine_door
         name: Deur
+      - entity: sensor.wasmachine_active_program
+        name: Programma
       - entity: sensor.wasmachine_program_progress
         name: Voortgang
       - entity: sensor.wasmachine_remaining_relative_local
