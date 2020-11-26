@@ -6,6 +6,15 @@ homeassistant:
       icon: mdi:desk-lamp
     light.hue_filament_bulb_1_3:
       icon: mdi:desk-lamp
+    light.bedlampen:
+      icon: mdi:desk-lamp
+
+light:
+  - platform: group
+    name: Bedlampen
+    entities:
+      - light.hue_filament_bulb_1_4
+      - light.hue_filament_bulb_1_3
 
 script:
   eettafel_on:

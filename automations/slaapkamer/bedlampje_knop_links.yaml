@@ -1,12 +1,12 @@
-- id: slaapkamer_knop_sander_press
-  alias: Slaapkamer knop Sander - press
+- id: slaapkamer_knop_links_press
+  alias: Slaapkamer knop links - press
   initial_state: on
   trigger:
     - platform: state
-      entity_id: sensor.bedlampje_knop_sander_action
+      entity_id: sensor.bedlampje_knop_links_action
       to: 'on'
     - platform: state
-      entity_id: sensor.bedlampje_knop_sander_action
+      entity_id: sensor.bedlampje_knop_links_action
       to: 'off'
   action:
     - choose:
@@ -33,17 +33,15 @@
         - service: light.turn_off
           entity_id: light.hue_filament_bulb_1_4
 
-- id: slaapkamer_knop_sander_hold
-  alias: Slaapkamer knop Sander - hold
+- id: slaapkamer_knop_links_hold
+  alias: Slaapkamer knop links - hold
   initial_state: on
   trigger:
     - platform: state
-      entity_id: sensor.bedlampje_knop_sander_action
+      entity_id: sensor.bedlampje_knop_links_action
       to: 'hold'
   action:
     - service: light.toggle
-      entity_id: 
-        - light.slaapkamer_lamp_1
-        - light.slaapkamer_lamp_2
+      entity_id: light.slaapkamer_plafond_groep
     - delay:
         seconds: 5
