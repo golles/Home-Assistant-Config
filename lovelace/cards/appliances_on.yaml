@@ -10,8 +10,10 @@ entities:
   - entity: sensor.wasmachine_remaining_relative_local
     name: Wasmachine resterende tijd
     icon: mdi:washing-machine
+  - entity: fan.air_purifier
 filter:
   exclude:
     - state: Niet beschikbaar
+    - state: 'off'
 sort:
   method: name
