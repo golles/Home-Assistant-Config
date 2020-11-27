@@ -1,4 +1,9 @@
 tts:
   - platform: google_translate
     base_url: !secret external_url
-    service_name: google_say
+
+  - platform: microsoft
+    api_key: !secret azure_tts_api_key
+    region: westeurope
+    language: nl-nl
+    type: ColetteNeural
