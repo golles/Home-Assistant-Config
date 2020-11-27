@@ -15,7 +15,7 @@ cards:
       - type: weblink
         name: Zigbee2MQTT configuratie
         icon: mdi:zigbee
-        url: https://zigbee2mqtt.rg23.golles.nl
+        url: !secret zigbee2mqtt_frontend
 
   - type: 'custom:auto-entities'
     show_empty: false

@@ -23,38 +23,48 @@ cards:
         {%- endfor %}
       {%- endif %}
 
-  - type: entities
-    title: Internet
-    entities:
-      - sensor.myip
-      - type: divider
-      - sensor.cert_expiry_golles_nl
-      - sensor.cert_expiry_rg23_golles_nl
-      - type: divider
-      - entity: sensor.speedtest_download
-        name: Download
-        secondary_info: last-changed
-      - entity: sensor.speedtest_upload
-        name: Upload
-        secondary_info: last-changed
-      - entity: sensor.speedtest_ping
-        name: Ping
-        secondary_info: last-changed
-    
-  - type: horizontal-stack
+  - type: vertical-stack
     cards:
-      - type: sensor
-        entity: sensor.speedtest_download
-        graph: line
-        name: Download
+      - type: entities
+        title: Internet
+        entities:
+          - sensor.myip
+          - entity: sensor.speedtest_download
+            name: Download
+            secondary_info: last-changed
+          - entity: sensor.speedtest_upload
+            name: Upload
+            secondary_info: last-changed
+          - entity: sensor.speedtest_ping
+            name: Ping
+            secondary_info: last-changed
 
-      - type: sensor
-        entity: sensor.speedtest_upload
-        graph: line
-        name: Upload
+      - type: horizontal-stack
+        cards:
+          - type: sensor
+            entity: sensor.speedtest_download
+            graph: line
+            name: Download
 
-      - type: sensor
-        entity: sensor.speedtest_ping
-        graph: line
-        name: Ping
-        
+          - type: sensor
+            entity: sensor.speedtest_upload
+            graph: line
+            name: Upload
+
+          - type: sensor
+            entity: sensor.speedtest_ping
+            graph: line
+            name: Ping
+
+  - type: custom:auto-entities
+    card:
+      type: entities
+      title: Certificaten
+      show_header_toggle: false
+    filter:
+      include:
+        - entity_id: 'sensor.cert_expiry_*'
+          not:
+            entity_id: 'sensor.cert_expiry_timestamp*'
+    sort:
+      method: name

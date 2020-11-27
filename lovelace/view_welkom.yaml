@@ -42,7 +42,7 @@ cards:
       - entity: sensor.day_or_night
         state: Night
     card:
-      !include cards/lights_on.yaml
+      !include cards/lichten_aan.yaml
 
   - type: conditional
     conditions:
@@ -63,7 +63,7 @@ cards:
               secondary_info: last-changed
             state: 'closed'
 
-  - !include cards/appliances_on.yaml
+  - !include cards/huishoudelijke_apparaten_aan.yaml
 
   - type: conditional
     conditions:
