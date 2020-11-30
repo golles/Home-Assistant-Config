@@ -29,3 +29,5 @@ cards:
       - entity: binary_sensor.badkamer_beweging_occupancy
         name: Beweging
       - automation.badkamer_lamp_automatisch_aan
+
+  - !include cards/fan_mechanische_ventilatie.yaml

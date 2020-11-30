@@ -64,3 +64,5 @@ cards:
       volume: false
       prev: true
       next: true
+
+  - !include cards/fan_mechanische_ventilatie.yaml
