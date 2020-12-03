@@ -57,7 +57,7 @@ entities:
             speed: high
             timer: 30
       - entity: sensor.mechanische_ventilatie_status
-        icon: mdi:clock-time-six-outline
+        icon: mdi:clock-time-twelve-outline
         name: 60m
         tap_action:
           action: call-service
