@@ -1,47 +1,79 @@
-- id: auto_toilet_light_on
-  alias: Toilet lamp automatisch aan
+- id: toilet_light_auto
+  alias: Toiletlamp automatisch aan/uit door aanwezigheid
   initial_state: on
+  mode: restart
+  variables:
+    light_entity: light.toilet
+    illuminance_entity: sensor.toilet_beweging_illuminance
+    illuminance_below: 10
   trigger:
     - platform: state
       entity_id: binary_sensor.toilet_beweging_occupancy
       to: 'on'
-  condition:
-    - condition: state
-      entity_id: light.toilet
-      state: 'off'
-  action:
-    - choose:
-      - conditions:
-          - condition: template
-            value_template: '{{ now().hour < 8 }}' # Between 00:00 - 07:59
-        sequence:
-          - service: light.turn_on
-            data:
-              entity_id: light.toilet
-              profile: ontspannen
-              transition: 5
-      default:
-        - service: light.turn_on
-          data:
-            entity_id: light.toilet
-            profile: helder
-            transition: 1
-
-- id: auto_toilet_light_off
-  alias: Toilet lamp automatisch uit
-  initial_state: on
-  trigger:
     - platform: state
       entity_id: binary_sensor.toilet_beweging_occupancy
       to: 'off'
       for:
-        seconds: 90
-  condition:
-    - condition: state
-      entity_id: light.toilet
-      state: 'on'
+        seconds: 30
   action:
-    - service: light.turn_off
-      data:
-        entity_id: light.toilet
-        transition: 2
+    - choose:
+      # Occupancy detected and not enough illuminance.
+      - conditions:
+        - condition: template
+          value_template: >
+            {{ 
+              'on' == trigger.to_state.state and 
+              states(illuminance_entity) | int < illuminance_below
+            }}
+        sequence:
+          - choose:
+            # Time between 00:00 - 07:59.
+            - conditions:
+                - condition: template
+                  value_template: '{{ now().hour < 8 }}' 
+              sequence:
+                - service: light.turn_on
+                  data:
+                    entity_id: '{{ light_entity }}'
+                    profile: ontspannen
+                    transition: 5
+            # All other times
+            default:
+              - service: light.turn_on
+                data:
+                  entity_id: '{{ light_entity }}'
+                  profile: helder
+                  transition: 1
+      # Occupancy no longer detected and the light is on.
+      - conditions:
+        - condition: template
+          value_template: >
+            {{
+              'off' == trigger.to_state.state and
+              'on' == states(light_entity)
+            }}
+        sequence:
+          - choose:
+            # Time between 00:00 - 07:59.
+            - conditions:
+                - condition: template
+                  value_template: '{{ now().hour < 8 }}' 
+              sequence:
+                - service: light.turn_on
+                  data:
+                    entity_id: '{{ light_entity }}'
+                    profile: gedimd
+                    transition: 1
+            # All other times
+            default:
+              - service: light.turn_on
+                data:
+                  entity_id: '{{ light_entity }}'
+                  profile: ontspannen
+                  transition: 1
+          - delay:
+              seconds: 10
+          - service: light.turn_off
+            data:
+              entity_id: '{{ light_entity }}'
+              transition: 1

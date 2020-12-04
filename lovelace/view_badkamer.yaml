@@ -28,6 +28,6 @@ cards:
         name: Plafond
       - entity: binary_sensor.badkamer_beweging_occupancy
         name: Beweging
-      - automation.badkamer_lamp_automatisch_aan
+      - group.badkamer_motion
 
   - !include cards/fan_mechanische_ventilatie.yaml

@@ -23,6 +23,6 @@ cards:
         name: Licht
       - entity: binary_sensor.toilet_beweging_occupancy
         name: Beweging
-      - automation.toilet_lamp_automatisch_aan
+      - automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
 
   - !include cards/fan_mechanische_ventilatie.yaml

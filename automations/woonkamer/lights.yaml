@@ -8,13 +8,15 @@
       for:
         minutes: 10
     - platform: state
-      entity_id: group.residents
-      from: 'not_home'
+      entity_id: group.residents # Deze werkt niet ivm de 15 minuten template hieronder
       to: 'home'
     - platform: numeric_state
       entity_id: sun.sun
       attribute: elevation
-      below: 20
+      below: 10
+    - platform: state
+      entity_id: group.woonkamer_motion
+      to: 'on'
   condition:
     - condition: state
       entity_id: light.woonkamer
@@ -28,16 +30,19 @@
     - condition: numeric_state
       entity_id: sun.sun
       attribute: elevation
-      below: 20
+      below: 10
     - condition: template
       value_template: '{{ is_state_attr("sun.sun", "rising", False) }}'
+    - condition: template # There must have been motion in the last x minutes
+      value_template: >-
+        {{ 
+        is_state('group.woonkamer_motion', 'on') or
+          (
+            is_state('group.woonkamer_motion', 'off') and 
+            as_timestamp(now()) <= as_timestamp(states.group.woonkamer_motion.last_changed) + (15 * 60)
+          )
+        }}
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.woonkamer
-        profile: ontspannen
-        transition: 60 # 1 minute
-
     - service: light.turn_on
       data:
         entity_id: light.woonkamer

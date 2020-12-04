@@ -6,3 +6,5 @@ homeassistant:
   customize_glob:
     'binary_sensor.*raam_contact':
       device_class: window
+    'group.*kamer_motion':
+      device_class: motion
