@@ -2,9 +2,6 @@ homeassistant:
   customize:
     fan.air_purifier:
       icon: mdi:air-purifier
-    binary_sensor.deurbel_contact:
-      icon: mdi:doorbell
-      device_class: switch
 
   customize_glob:
     'binary_sensor.*raam_contact':

@@ -102,7 +102,6 @@ cards:
       }
     entities:
       - sensor.voordeur_battery
-      - sensor.deurbel_battery
       - sensor.achterdeur_battery
       - sensor.achterraam_battery
       - sensor.slaapkamerraam_battery
