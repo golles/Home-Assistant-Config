@@ -1,10 +1,11 @@
-- id: master_switch_all_lights_off
+- id: master_switch
   alias: Master switch - alles uit
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: sensor.master_switch_action
-      to: 'press'
+      to: press
   action:
     - service: homeassistant.turn_off
       data: 

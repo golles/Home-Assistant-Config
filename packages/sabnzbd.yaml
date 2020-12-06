@@ -20,34 +20,34 @@ homeassistant:
   customize:
     sensor.sab_status:
       friendly_name: Status
-      icon: "mdi:eye"
+      icon: mdi:eye
     sensor.sab_speed:
       friendly_name: Speed
-      icon: "mdi:speedometer"
+      icon: mdi:speedometer
     sensor.sab_queue_count:
       friendly_name: Queue count
-      icon: "mdi:tray-full"
+      icon: mdi:tray-full
     sensor.sab_queue:
       friendly_name: Queue
-      icon: "mdi:tray-alert"
+      icon: mdi:tray-alert
     sensor.sab_disk:
       friendly_name: Disk size
-      icon: "mdi:harddisk"
+      icon: mdi:harddisk
     sensor.sab_disk_free:
       friendly_name: Disk free
-      icon: "mdi:harddisk"
+      icon: mdi:harddisk
     sensor.sab_left:
       friendly_name: Left
-      icon: "mdi:eye"
+      icon: mdi:eye
     sensor.sab_daily_total:
       friendly_name: Daily total
-      icon: "mdi:chart-bar"
+      icon: mdi:chart-bar
     sensor.sab_weekly_total:
       friendly_name: Weekly total
-      icon: "mdi:chart-bar"
+      icon: mdi:chart-bar
     sensor.sab_monthly_total:
       friendly_name: Monthly total
-      icon: "mdi:chart-bar"
+      icon: mdi:chart-bar
     sensor.sab_total:
       friendly_name: Total
-      icon: "mdi:chart-bar"
+      icon: mdi:chart-bar

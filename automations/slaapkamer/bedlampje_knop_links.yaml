@@ -1,6 +1,7 @@
 - id: slaapkamer_knop_links_press
   alias: Slaapkamer knop links - press
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: sensor.bedlampje_knop_links_action
@@ -18,7 +19,8 @@
           - choose:
             - conditions:
                 - condition: template
-                  value_template: '{{ now().hour < 9 }}' # Between 00:00 - 08:59
+                  value_template: > # Between 00:00 - 08:59
+                    {{ now().hour < 9 }}
               sequence:
                 - service: light.turn_on
                   data:
@@ -39,7 +41,7 @@
   trigger:
     - platform: state
       entity_id: sensor.bedlampje_knop_links_action
-      to: 'hold'
+      to: hold
   action:
     - service: light.toggle
       entity_id: light.slaapkamer_plafond_groep

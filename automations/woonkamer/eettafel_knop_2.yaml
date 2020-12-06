@@ -1,10 +1,11 @@
 - id: eettafel_knop_2_on
   alias: Eettafel knop2 - licht aan
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: sensor.eettafelknop_2_action
-      to: 'press'
+      to: press
   condition:
     - condition: state
       entity_id: light.eettafel
@@ -18,7 +19,7 @@
   trigger:
     - platform: state
       entity_id: sensor.eettafelknop_2_action
-      to: 'press'
+      to: press
   condition:
     - condition: state
       entity_id: light.eettafel

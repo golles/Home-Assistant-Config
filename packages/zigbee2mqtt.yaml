@@ -1,17 +1,19 @@
 sensor:
   - platform: mqtt
     name: Zigbee2mqtt Bridge state
-    state_topic: "zigbee2mqtt/bridge/state"
+    state_topic: zigbee2mqtt/bridge/state
     icon: mdi:router-wireless
   - platform: mqtt
     name: Zigbee2mqtt Version
-    state_topic: "zigbee2mqtt/bridge/config"
-    value_template: "{{ value_json.version }}"
+    state_topic: zigbee2mqtt/bridge/config
+    value_template: >
+      {{ value_json.version }}
     icon: mdi:zigbee
   - platform: mqtt
     name: Coordinator Version
-    state_topic: "zigbee2mqtt/bridge/config"
-    value_template: "{{ value_json.coordinator }}"
+    state_topic: zigbee2mqtt/bridge/config
+    value_template: >
+      {{ value_json.coordinator }}
     icon: mdi:chip
 
 automation:
@@ -22,11 +24,13 @@ automation:
       topic: 'zigbee2mqtt/bridge/log'
     condition:
       condition: template
-      value_template: '{{trigger.payload_json.type == "pairing" and trigger.payload_json.message == "interview_successful"}}'
+      value_template: >
+        {{trigger.payload_json.type == 'pairing' and trigger.payload_json.message == 'interview_successful'}}
     action:
       - service: persistent_notification.create
         data:
           title: Device joined the zigbee2mqtt network
-          message: "Name: {{trigger.payload_json.meta.friendly_name}},
-                    Vendor: {{trigger.payload_json.meta.vendor}},
-                    Description: {{trigger.payload_json.meta.description}}"
+          message: >
+            Name: {{ trigger.payload_json.meta.friendly_name }},
+            Vendor: {{ trigger.payload_json.meta.vendor }},
+            Description: {{ trigger.payload_json.meta.description }}

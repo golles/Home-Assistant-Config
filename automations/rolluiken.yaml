@@ -1,6 +1,7 @@
 - id: rolluiken_dicht
-  alias: 'Rolluiken dicht avond'
+  alias: Rolluiken dicht avond
   initial_state: on
+  mode: single
   trigger:
     - platform: sun
       event: sunset
@@ -13,7 +14,7 @@
               state: 'off'
             - condition: state
               entity_id: cover.slaapkamer
-              state: 'open'
+              state: open
           sequence:
             - service: cover.close_cover
               entity_id: cover.slaapkamer
@@ -24,21 +25,22 @@
             state: 'off'
           - condition: state
             entity_id: cover.kledingkamer
-            state: 'open'
+            state: open
         sequence:
           - service: cover.close_cover
             entity_id: cover.kledingkamer
 
 - id: rolluiken_open_niemand_thuis
-  alias: 'Rolluiken open - bij niemand thuis'
+  alias: Rolluiken open - bij niemand thuis
   initial_state: on
+  mode: single
   trigger:
       platform: time
       at: '09:00:00'
   condition:
     - condition: state
       entity_id: group.residents
-      state: 'not_home'
+      state: not_home
     - condition: state
       entity_id: input_boolean.guest_mode
       state: 'off'
@@ -47,7 +49,7 @@
         - conditions:
             - condition: state
               entity_id: cover.slaapkamer
-              state: 'closed'
+              state: closed
           sequence:
             - service: cover.open_cover
               entity_id: cover.slaapkamer
@@ -55,7 +57,7 @@
         - conditions:
             - condition: state
               entity_id: cover.kledingkamer
-              state: 'closed'
+              state: closed
           sequence:
             - service: cover.open_cover
               entity_id: cover.kledingkamer

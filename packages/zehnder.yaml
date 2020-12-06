@@ -3,8 +3,10 @@ fan:
     fans:
       mechanische_ventilatie:
         friendly_name: Mechanische ventilatie
-        value_template: "{{ states('sensor.mechanische_ventilatie_status') }}"
-        speed_template: "{{ state_attr('sensor.mechanische_ventilatie_status', 'speed') }}"
+        value_template: >
+          {{ states('sensor.mechanische_ventilatie_status') }}
+        speed_template: >
+          {{ state_attr('sensor.mechanische_ventilatie_status', 'speed') }}
         turn_on:
           service: script.ventilation_turn_on_off_dummy
         turn_off:
@@ -25,7 +27,12 @@ sensor:
     resource: !secret nrf905status_url
     username: !secret nrf905_username
     password: !secret nrf905_password
-    value_template: "{% if value_json['result'] == 'ok' %} on {% else %} off {% endif %}"
+    value_template: >
+      {% if value_json['result'] == 'ok' %} 
+        on 
+      {% else %} 
+        off 
+      {% endif %}
     json_attributes_path: $.devices.C0
     json_attributes:
       - voltage

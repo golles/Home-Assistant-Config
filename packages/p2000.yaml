@@ -46,6 +46,7 @@ automation:
   - id: p20000_notification
     alias: P2000 melding
     initial_state: on
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.p2000_dichtbij
@@ -55,7 +56,9 @@ automation:
     action:
       - service: notify.all_iphones_and_tv
         data:
-          title: "🚨 P2000 melding"
-          message: "{{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}"
+          title: 🚨 P2000 melding
+          message: >
+            {{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}
           data:
-            url: "https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}"
+            url: >
+              https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}

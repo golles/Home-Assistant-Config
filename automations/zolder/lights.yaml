@@ -1,6 +1,7 @@
 - id: zolder_auto_off
   alias: Zolder verlichting uit bij geen beweging
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: binary_sensor.hue_motion_sensor_1_motion

@@ -18,15 +18,15 @@ rdw:
 homeassistant:
   customize:
     sensor.golf_7_expdate:
-      friendly_name: "APK Vervaldatum"
+      friendly_name: APK Vervaldatum
     binary_sensor.golf_7_insured:
-      friendly_name: "Verzekeringsstatus"
+      friendly_name: Verzekeringsstatus
     sensor.golf_7_recall:
-      friendly_name: "Terugroepstatus"
+      friendly_name: Terugroepstatus
 
     sensor.clio_expdate:
-      friendly_name: "APK Vervaldatum"
+      friendly_name: APK Vervaldatum
     binary_sensor.clio_insured:
-      friendly_name: "Verzekeringsstatus"
+      friendly_name: Verzekeringsstatus
     sensor.clio_recall:
-      friendly_name: "Terugroepstatus"
+      friendly_name: Terugroepstatus

@@ -12,6 +12,7 @@ automation:
 - id: switch_soundbar_source_and_volume_when_tv_on
   alias: Automatisch soundbar source en volume zetten als de tv aan gaat
   initial_state: on
+  mode: single
   trigger:
     - platform: state
       entity_id: media_player.lg_c9
@@ -47,7 +48,8 @@ script:
             - service: media_player.turn_on
               data:
                 entity_id: media_player.lg_soundbar
-            - wait_template: "{{ states('media_player.lg_soundbar') in ['idle', 'on'] }}"
+            - wait_template: >
+                {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
               timeout: '00:00:05'
               continue_on_timeout: false
             - service: media_player.volume_set
@@ -80,7 +82,8 @@ script:
             - service: media_player.turn_on
               data:
                 entity_id: media_player.lg_c9
-            - wait_template: "{{ not is_state('media_player.lg_c9', 'off') }}"
+            - wait_template: >
+                {{ not is_state('media_player.lg_c9', 'off') }}
               timeout: '00:00:02'
               continue_on_timeout: false
 
@@ -103,7 +106,7 @@ script:
           sequence:
             - service: media_player.turn_on
               data:
-                entity_id: 'media_player.stb_arris_uhd'
+                entity_id: media_player.stb_arris_uhd
 
       - service: script.play_livingroom_tv_source
         data:

@@ -10,6 +10,7 @@ automation:
 - id: dlink_auto_day_night_mode
   alias: Automatisch Dlink camera in day of night mode zetten
   initial_state: on
+  mode: single
   trigger:
     - platform: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux

@@ -14,7 +14,7 @@ cards:
       - entity: sensor.current_version
       - type: custom:fold-entity-row
         head: binary_sensor.updater
-        open: true # Sadly this doesn't work: "{{ is_state('binary_sensor.updater','on') }}" https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
+        open: true # Sadly this doesn't work: {{ is_state('binary_sensor.updater','on') }} https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
         entities:
           - entity: sensor.latest_version
           - type: weblink

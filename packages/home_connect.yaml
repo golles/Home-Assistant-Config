@@ -14,7 +14,7 @@ sensor:
       wasmachine_active_program:
         friendly_name: Wasmachine programma
         icon_template: mdi:washing-machine
-        value_template: >-
+        value_template: >
           {% set prefix = 'Wasmachine Program ' %}
           {% set program = namespace(name = 'Niet beschikbaar') %}
           {% for switch in states.switch -%}
@@ -27,7 +27,7 @@ sensor:
       vaatwasser_active_program:
         friendly_name: Vaatwasser programma
         icon_template: mdi:dishwasher
-        value_template: >-
+        value_template: >
           {% set prefix = 'Vaatwasser Program ' %}
           {% set program = namespace(name = 'Niet beschikbaar') %}
           {% for switch in states.switch -%}
@@ -40,7 +40,7 @@ sensor:
       wasmachine_remaining_relative_local:
         friendly_name: Resterende tijd
         icon_template: mdi:clock
-        value_template: >-
+        value_template: >
           {% if is_state('sensor.wasmachine_remaining_program_time', 'unavailable') or is_state('switch.wasmachine_power', 'off') -%}
             Niet beschikbaar
           {%- else -%}
@@ -76,7 +76,7 @@ sensor:
       vaatwasser_remaining_relative_local:
         friendly_name: Resterende tijd
         icon_template: mdi:clock
-        value_template: >-
+        value_template: >
           {% if is_state('sensor.vaatwasser_remaining_program_time', 'unavailable') or is_state('switch.vaatwasser_power', 'off') -%}
             Niet beschikbaar
           {%- else -%}
@@ -113,6 +113,7 @@ automation:
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten
     initial_state: on
+    mode: single
     trigger:
       platform: time
       at:
@@ -131,6 +132,7 @@ automation:
   - id: dishwasher_set_daily_start_time
     alias: Vaatwasser tijd dagelijks aanpassen
     initial_state: on
+    mode: single
     trigger:
       - platform: homeassistant
         event: start
@@ -141,7 +143,8 @@ automation:
       - choose:
         - conditions:
             - condition: template
-              value_template: '{{ now().isoweekday() in [5, 6] }}' # Friday - Saturday
+              value_template: > # Friday - Saturday
+                {{ now().isoweekday() in [5, 6] }}
           sequence:
             - service: input_datetime.set_datetime
               data:
@@ -152,30 +155,3 @@ automation:
             data:
               entity_id: input_datetime.dishwasher_daily_start
               time: '04:30'
-
-# Below is from a custom component I was using previously, keeping here in case I want to switch back.
-# Github: https://github.com/cotwild/home_connect
-#
-# sensor:
-#   - platform: home_connect
-#     refresh_token: !secret home_connect_refresh_token
-
-# group:
-#   vaatwasser:
-#     name: Vaatwasser
-#     entities:
-#       - sensor.bosch_sbv88tx36e_state
-#       - sensor.bosch_sbv88tx36e_door
-#       - sensor.bosch_sbv88tx36e_program
-#       - sensor.bosch_sbv88tx36e_elapsed
-#       - sensor.bosch_sbv88tx36e_remaining
-
-#   wasmachine:
-#     name: Wasmachine
-#     entities:
-#       - sensor.bosch_wawh2643nl_state
-#       - sensor.bosch_wawh2643nl_door 
-#       - sensor.bosch_wawh2643nl_program
-#       - sensor.bosch_wawh2643nl_elapsed
-#       - sensor.bosch_wawh2643nl_remaining
-  

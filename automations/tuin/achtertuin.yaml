@@ -1,30 +1,31 @@
 - id: licht_uit_achtertuin
   alias: Lampen uit achtertuin
   initial_state: on
+  mode: single
   trigger:
     - platform: time
       at: '00:00:00'
   action:
     - service: light.turn_off
       data:
-        entity_id:
-          - light.achtertuin
+        entity_id: light.achtertuin
+        transition: 2
 
 - id: kerst_sfeer_achtertuin
   alias: Kerst sfeer achtertuin
   initial_state: on
+  mode: single
   trigger:
     - platform: sun
       event: sunset
       offset: '+00:45:00'
   condition:
     condition: template
-    value_template: '{{ now().month == 12 and now().day >= 6 }}' # All days in December after Sinterklaas.
+    value_template: > # All days in December after Sinterklaas.
+      {{ now().month == 12 and now().day >= 6 }}
   action:
-    - service: light.turn_off
-      data:
-        entity_id:
-          - light.hue_smart_plug_1
+    - service: light.turn_on
+      entity_id: light.hue_smart_plug_1
 
 - id: backdoor_opens_while_being_dark_outside
   alias: Achtertuin verlichting tijdelijk aan wanneer de deur open gaat

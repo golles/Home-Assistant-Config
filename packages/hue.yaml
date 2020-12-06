@@ -71,7 +71,8 @@ switch:
       eettafellamp:
         friendly_name: Eettafel
         icon_template: mdi:vanity-light
-        value_template: "{{ is_state('light.eettafel', 'on') }}"
+        value_template: >
+          {{ is_state('light.eettafel', 'on') }}
         turn_on:
           service: script.eettafel_on
         turn_off:

@@ -1,6 +1,7 @@
 - id: bed_light_off_or_standby
   alias: Automatisch bed ledstrip uit of standby zetten
   initial_state: on
+  mode: single
   trigger:
     - platform: numeric_state
       entity_id: sensor.slaapkamer_lichtsterkte_illuminance_lux

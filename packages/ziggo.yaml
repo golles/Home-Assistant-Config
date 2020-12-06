@@ -20,7 +20,8 @@ switch:
       ziggo_decoder:
         friendly_name: Ziggo decoder
         icon_template: mdi:television
-        value_template: "{{ not is_state('media_player.stb_arris_uhd', 'off') }}"
+        value_template: >
+          {{ not is_state('media_player.stb_arris_uhd', 'off') }}
         turn_on:
           service: media_player.turn_on
           data:

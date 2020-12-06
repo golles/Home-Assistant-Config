@@ -21,10 +21,11 @@ automation:
   - id: vacation_mode_on
     alias: Vakantie modus activeren bij langere afwezigheid
     initial_state: on
+    mode: single
     trigger:
       - platform: state
         entity_id: group.residents
-        to: 'not_home'
+        to: not_home
         for: '24:00:00'
     condition:
       - condition: state
@@ -37,10 +38,11 @@ automation:
   - id: vacation_mode_off
     alias: Automatisch vakantie modus deactiveren bij aanwezigheid
     initial_state: on
+    mode: single
     trigger:
       - platform: state
         entity_id: group.residents
-        to: 'home'
+        to: home
     action:
       - service: input_boolean.turn_off
         entity_id: input_boolean.vacation_mode

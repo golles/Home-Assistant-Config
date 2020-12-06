@@ -13,51 +13,45 @@ sensor:
 homeassistant:
   customize:
     sensor.purmerend_restafval:
-      friendly_name: "Restafval"
-      entity_picture: "/local/afval/purmerend_restafval.jpg"
+      friendly_name: Restafval
+      entity_picture: /local/afval/purmerend_restafval.jpg
     sensor.purmerend_papier:
-      friendly_name: "Papier"
-      entity_picture: "/local/afval/purmerend_papier.jpg"
+      friendly_name: Papier
+      entity_picture: /local/afval/purmerend_papier.jpg
     sensor.purmerend_gft:
-      friendly_name: "GFT"
-      entity_picture: "/local/afval/purmerend_gft.jpg"
+      friendly_name: GFT
+      entity_picture: /local/afval/purmerend_gft.jpg
     
 automation:
   - id: afval_notification
     alias: Melding voor afval
     initial_state: on
+    mode: single
+    variables:
+      entity: >
+        {{ 
+          states.sensor 
+            | selectattr('attributes.Wastecollector')
+            | selectattr('attributes.Days-until', 'eq', 1)
+            | map(attribute='entity_id')
+            | first
+            | default('none')
+        }}
     trigger:
       platform: time
-      at: "19:30:00"
+      at: '19:30:00'
     condition:
-      condition: or
-      conditions:
-        - condition: template
-          value_template: '{{ is_state_attr("sensor.purmerend_papier", "Days-until", 1) }}'
-        - condition: template
-          value_template: '{{ is_state_attr("sensor.purmerend_gft", "Days-until", 1) }}'
-        - condition: template
-          value_template: '{{ is_state_attr("sensor.purmerend_restafval", "Days-until", 1) }}'
+      - condition: template
+        value_template: >
+          {{ entity != 'none' }}
     action:
       - service: notify.sander
         data:
           title: Afval
           message: >
-            {% if is_state_attr("sensor.purmerend_papier", "Days-until", 1) %}
-            Morgen wordt de PAPIER container (groen) geleegd
-            {% elif is_state_attr("sensor.purmerend_gft", "Days-until", 1)%}
-            Morgen wordt de GFT container (bruin) geleegd
-            {% elif is_state_attr("sensor.purmerend_restafval", "Days-until", 1) %}
-            Morgen wordt de RESTAFVAL container (grijs) geleegd
-            {% endif %}
+            Morgen wordt de {{ state_attr(entity, 'friendly_name') | upper }} container geleegd.
           data:
             attachment:
               content-type: jpeg
               url: >
-                {% if is_state_attr("sensor.purmerend_papier", "Days-until", 1) %}
-                {{ state_attr("sensor.purmerend_papier", "entity_picture") }}
-                {% elif is_state_attr("sensor.purmerend_gft", "Days-until", 1)%}
-                {{ state_attr("sensor.purmerend_gft", "entity_picture") }}
-                {% elif is_state_attr("sensor.purmerend_restafval", "Days-until", 1) %}
-                {{ state_attr("sensor.purmerend_restafval", "entity_picture") }}
-                {% endif %}
+                {{ state_attr(entity, 'entity_picture') }}

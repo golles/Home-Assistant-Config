@@ -1,6 +1,5 @@
 sensor:
   - platform: uptime
-    unit_of_measurement: hours
 
   - platform: command_line
     name: Runtime

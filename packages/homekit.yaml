@@ -36,6 +36,8 @@ homekit:
 automation:
   - id: homekit_delayed_start
     alias: HomeKit uitgestelde start
+    initial_state: on
+    mode: single
     trigger:
       - platform: homeassistant
         event: start
