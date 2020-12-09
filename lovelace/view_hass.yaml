@@ -1,15 +1,19 @@
 title: Home Assistant
 path: hass
 panel: false
-icon: 'mdi:home-assistant'
+icon: mdi:home-assistant
 badges: []
 cards: 
   - type: entities
     title: Home Assistant
     show_header_toggle: false
     entities:
-      - entity: sensor.host_uptime
-      - entity: sensor.runtime
+      - type: custom:elapsed-time-entity-row
+        entity: sensor.host_uptime
+        hide: seconds
+      - type: custom:elapsed-time-entity-row
+        entity: sensor.runtime
+        hide: seconds
       - type: divider
       - entity: sensor.current_version
       - type: custom:fold-entity-row

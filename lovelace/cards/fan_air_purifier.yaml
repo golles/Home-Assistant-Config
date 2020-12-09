@@ -5,25 +5,77 @@ entities:
     type: custom:multiple-entity-row
     toggle: true
     secondary_info:
-      entity: sensor.air_purifier_air_quality_pm25
+      entity: sensor.air_purifier_air_quality
+      name: 'Luchtkwaliteit:'
   - type: custom:fold-entity-row
     head:
       type: section
       label: 
     entities:
-      - sensor.air_purifier_air_quality_pm25
-      - sensor.air_purifier_avg_air_quality_pm25
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: aqi
+        name: Luchtkwaliteit (AQI) PM2.5
+        suffix: μg/m³
+        icon: mdi:weather-fog
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: average_aqi
+        name: Gemiddelde luchtkwaliteit (AvgAQI) PM2.5
+        suffix: μg/m³
+        icon: mdi:weather-hazy
       - type: divider
-      - switch.air_purifier_led
-      - switch.air_purifier_child_lock
+      - entity: switch.air_purifier_led
+      - entity: switch.air_purifier_child_lock
       - type: divider
-      - sensor.air_purifier_temp
-      - sensor.air_purifier_humidity
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: temperature
+        name: Temperatuur
+        suffix: °C
+        icon: mdi:thermometer
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: humidity
+        name: Luchtvochtigheid
+        suffix: '%'
+        icon: mdi:water-percent
       - type: divider
-      - sensor.air_purifier_use_time
-      - sensor.air_purifier_filter_used
-      - sensor.air_purifier_filter_remaining
-      - sensor.air_purifier_purify_volume
+      - type: custom:elapsed-time-entity-row
+        entity: fan.air_purifier
+        attribute: use_time
+        name: Tijd gebruikt
+        icon: mdi:heart-pulse
+        hideSeconds: 'true'
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: filter_hours_used
+        name: Filter gebruikt
+        suffix: uur
+        icon: mdi:heart-off
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: filter_life_remaining
+        name: Filter resterend
+        suffix: '%'
+        icon: mdi:heart-outline
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: purify_volume
+        name: Gezuiverd volume
+        suffix: m³
+        icon: mdi:warehouse
+
       - type: divider
-      - sensor.air_purifier_speed
-      - sensor.air_purifier_led_brightness
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: motor_speed
+        name: Motor snelheid
+        suffix: rpm
+        icon: mdi:speedometer
+      - type: attribute
+        entity: fan.air_purifier
+        attribute: led_brightness
+        name: Led-helderheid
+        suffix: lx
+        icon: mdi:brightness-5

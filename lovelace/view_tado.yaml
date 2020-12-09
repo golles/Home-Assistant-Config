@@ -30,13 +30,16 @@ cards:
             entities:
               - entity: sensor.woonkamer_klimaat_humidity
                 name: Luchtvochtigheid
-          - entity: sensor.air_purifier_temp
+          - entity: fan.air_purifier
             type: custom:multiple-entity-row
             name: Air purifier
+            attribute: temperature
             state_header: Temperatuur
             entities:
-              - entity: sensor.air_purifier_humidity
+              - entity: fan.air_purifier
+                type: custom:multiple-entity-row
                 name: Luchtvochtigheid
+                attribute: temperature
           - type: custom:fold-entity-row
             head:
               type: section

@@ -2,88 +2,12 @@ sensor:
   - platform: uptime
 
   - platform: command_line
-    name: Runtime
+    name: runtime
     command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
-    scan_interval: 60
-    value_template: >-
-      {% set seconds = value | int  %}
-      {% set minutes = ((seconds % 3600) / 60) | int %}
-      {% set hours = ((seconds % 86400) / 3600) | int %}
-      {% set days = (seconds / 86400) | int %}
-
-      {%- if seconds < 60 -%}
-        {{ seconds }} seconden
-      {%- else -%}
-        {%- if days > 0 -%}
-          {%- if days == 1 -%}
-            1 dag
-          {%- else -%}
-            {{ days }} dagen
-          {%- endif -%}
-        {%- endif -%}
-        {%- if hours > 0 -%}
-          {%- if days > 0 -%}
-            {{ ', ' }}
-          {%- endif -%}
-          {%- if hours == 1 -%}
-            1 uur
-          {%- else -%}
-            {{ hours }} uur
-          {%- endif -%}
-        {%- endif -%}
-        {%- if minutes > 0 -%}
-          {%- if days > 0 or hours > 0 -%}
-            {{ ', ' }}
-          {%- endif -%}
-          {%- if minutes == 1 -%}
-            1 minuut
-          {%- else -%}
-            {{ minutes }} minuten
-          {%- endif -%}
-        {%- endif -%}
-      {%- endif -%}
 
   - platform: command_line
     name: host_uptime
     command: 'sed "s/\..*//" /proc/uptime'
-    scan_interval: 60
-    value_template: >-
-      {% set seconds = value | int  %}
-      {% set minutes = ((seconds % 3600) / 60) | int %}
-      {% set hours = ((seconds % 86400) / 3600) | int %}
-      {% set days = (seconds / 86400) | int %}
-
-      {%- if seconds < 60 -%}
-        {{ seconds }} seconden
-      {%- else -%}
-        {%- if days > 0 -%}
-          {%- if days == 1 -%}
-            1 dag
-          {%- else -%}
-            {{ days }} dagen
-          {%- endif -%}
-        {%- endif -%}
-        {%- if hours > 0 -%}
-          {%- if days > 0 -%}
-            {{ ', ' }}
-          {%- endif -%}
-          {%- if hours == 1 -%}
-            1 uur
-          {%- else -%}
-            {{ hours }} uur
-          {%- endif -%}
-        {%- endif -%}
-        {%- if minutes > 0 -%}
-          {%- if days > 0 or hours > 0 -%}
-            {{ ', ' }}
-          {%- endif -%}
-          {%- if minutes == 1 -%}
-            1 minuut
-          {%- else -%}
-            {{ minutes }} minuten
-          {%- endif -%}
-        {%- endif -%}
-      {%- endif -%}
   
 homeassistant:
   customize:

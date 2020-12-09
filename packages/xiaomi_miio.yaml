@@ -39,111 +39,22 @@ switch:
 sensor:
   - platform: template
     sensors:
-      air_purifier_temp:
-        friendly_name: Temperatuur
+      air_purifier_air_quality:
+        friendly_name: Luchtkwaliteit
         value_template: >
-          {{ state_attr('fan.air_purifier', 'temperature') }}
-        unit_of_measurement: °C
-        device_class: temperature
-
-      air_purifier_humidity:
-        friendly_name: Vochtigheid
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'humidity') }}
-        unit_of_measurement: '%'
-        device_class: humidity
-
-      air_purifier_air_quality_pm25:
-        friendly_name: Luchtkwaliteit (AQI) PM2.5
-        value_template: >
-           {% set value = state_attr('fan.air_purifier', 'aqi') %}
-           {% if state_attr('fan.air_purifier', 'aqi') == None %}
-            {{ 0 }}
-           {%- else -%}
-            {{ value }}
-           {% endif %}   
-        unit_of_measurement: μg/m³
-        icon_template: mdi:weather-fog
-
-      air_purifier_avg_air_quality_pm25:
-        friendly_name: Gemiddelde luchtkwaliteit (AvgAQI) PM2.5
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'average_aqi') }}
-        unit_of_measurement: μg/m³
-        icon_template: mdi:weather-hazy
-
-      air_purifier_use_time:
-        friendly_name: Tijd gebruikt
-        value_template: >
-          {% set use_time = state_attr('fan.air_purifier', 'use_time') | int %}
-          {% set minutes = ((use_time % 3600) / 60) | int %}
-          {% set hours = ((use_time % 86400) / 3600) | int %}
-          {% set days = (use_time / 86400) | int %}
-      
-          {%- if use_time < 60 -%}
-            0 minuten
+          {% set aqi = state_attr('fan.air_purifier', 'aqi') %}
+          {% if aqi < 12 %}
+            Goed
+          {%- elif aqi <= 35.4 -%}
+            Matig
+          {%- elif aqi <= 55.4 -%}
+            Ongezond voor gevoelige groepen
+          {%- elif aqi <= 150.4 -%}
+            Ongezond
+          {%- elif aqi <= 250.4 -%}
+            Heel ongezond
+          {%- elif aqi > 250.4 -%}
+            Gevaarlijk
           {%- else -%}
-            {%- if days > 0 -%}
-              {%- if days == 1 -%}
-                1 dag
-              {%- else -%}
-                {{ days }} dagen
-              {%- endif -%}
-            {%- endif -%}
-            {%- if hours > 0 -%}
-              {%- if days > 0 -%}
-                {{ ', ' }}
-              {%- endif -%}
-              {%- if hours == 1 -%}
-                1 uur
-              {%- else -%}
-                {{ hours }} uren
-              {%- endif -%}
-            {%- endif -%}
-            {%- if minutes > 0 -%}
-              {%- if days > 0 or hours > 0 -%}
-                {{ ', ' }}
-              {%- endif -%}
-              {%- if minutes == 1 -%}
-                1 minuut
-              {%- else -%}
-                {{ minutes }} minuten
-              {%- endif -%}
-            {%- endif -%}
-          {%- endif -%}
-        icon_template: mdi:heart-pulse
-
-      air_purifier_filter_used:
-        friendly_name: Filter gebruikt
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'filter_hours_used') }}
-        unit_of_measurement: hrs
-        icon_template: mdi:heart-off
-
-      air_purifier_filter_remaining:
-        friendly_name: Filter resterend
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'filter_life_remaining') }}
-        unit_of_measurement: '%'
-        icon_template: mdi:heart-outline
-
-      air_purifier_purify_volume:
-        friendly_name: Gezuiverd volume
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'purify_volume') }}
-        unit_of_measurement: m³
-        icon_template: mdi:warehouse
-
-      air_purifier_speed:
-        friendly_name: Motor snelheid
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'motor_speed') }}
-        unit_of_measurement: rpm
-        icon_template: mdi:speedometer
-
-      air_purifier_led_brightness:
-        friendly_name: Led-helderheid
-        value_template: >
-          {{ state_attr('fan.air_purifier', 'led_brightness') }}
-        unit_of_measurement: lx
-        icon_template: mdi:brightness-5
+            Onbekend
+          {% endif %}
