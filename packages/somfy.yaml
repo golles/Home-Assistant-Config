@@ -1,3 +1,15 @@
 tahoma:
   username: !secret somfy_username
   password: !secret somfy_password
+
+homeassistant:
+  customize:
+    cover.rolluiken:
+      device_class: shutter
+
+cover:
+  - platform: group
+    name: Alle rolluiken
+    entities:
+      - cover.slaapkamer
+      - cover.kledingkamer

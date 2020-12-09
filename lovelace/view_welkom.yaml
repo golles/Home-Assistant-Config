@@ -1,7 +1,7 @@
 title: Welkom
 path: welkom
 panel: false
-icon: 'mdi:home-assistant'
+icon: mdi:home-assistant
 badges: []
 cards:
 
@@ -20,7 +20,7 @@ cards:
         tap_action:
           action: toggle
 
-  - type: 'custom:auto-entities'
+  - type: custom:auto-entities
     show_empty: false
     card:
       title: Let op
@@ -49,19 +49,7 @@ cards:
       - entity: sensor.time_of_day
         state: Morning
     card:
-      type: 'custom:auto-entities'
-      show_empty: false
-      card:
-        title: Goedemorgen!
-        type: entities
-      filter:
-        include:
-          - attributes:
-              device_class: shutter
-            domain: cover
-            options:
-              secondary_info: last-changed
-            state: 'closed'
+      !include cards/ochtend.yaml
 
   - !include cards/huishoudelijke_apparaten_aan.yaml
 
@@ -70,7 +58,7 @@ cards:
       - entity: sensor.time_of_day
         state: Evening
     card:
-      type: 'custom:auto-entities'
+      type: custom:auto-entities
       show_empty: false
       card:
         title: Morgen
@@ -105,7 +93,7 @@ cards:
         card:
           !include cards/media_player_lg_c9.yaml
       
-  - type: 'custom:auto-entities'
+  - type: custom:auto-entities
     show_empty: false
     card:
       show_header_toggle: false
