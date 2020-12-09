@@ -1,4 +1,4 @@
-type: 'custom:auto-entities'
+type: custom:auto-entities
 show_empty: false
 card:
   type: entities

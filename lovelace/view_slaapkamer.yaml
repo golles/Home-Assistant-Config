@@ -5,7 +5,7 @@ icon: mdi:bed-king
 badges: []
 cards:
 
-  - type: 'custom:simple-thermostat'
+  - type: custom:simple-thermostat
     entity: climate.slaapkamer
     step_layout: column
     step_size: 1

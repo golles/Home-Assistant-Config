@@ -1,7 +1,7 @@
 title: Weer
 path: weer
 panel: false
-icon: 'mdi:weather-sunny'
+icon: mdi:weather-sunny
 badges: []
 cards:
   - type: weather-forecast
@@ -20,10 +20,10 @@ cards:
     aspect_ratio: 100%
       
   - type: picture
-    image: 'http://cdn.knmi.nl/knmi/map/general/weather-map.gif'
+    image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
     tap_action:
       action: url
-      url_path: 'http://cdn.knmi.nl/knmi/map/general/weather-map.gif'
+      url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
 
   - type: horizontal-stack
     cards:

@@ -1,11 +1,11 @@
 title: Woonkamer
 path: woonkamer
 panel: false
-icon: 'mdi:sofa'
+icon: mdi:sofa
 badges: []
 cards: 
 
-  - type: 'custom:simple-thermostat'
+  - type: custom:simple-thermostat
     entity: climate.woonkamer
     step_layout: column
     step_size: 0.5

@@ -1,4 +1,4 @@
-type: 'custom:mini-media-player'
+type: custom:mini-media-player
 entity: media_player.stb_arris_uhd
 name: Ziggo
 artwork: material

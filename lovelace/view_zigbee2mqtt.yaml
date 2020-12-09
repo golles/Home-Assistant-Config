@@ -1,7 +1,7 @@
 title: Zigbee2mqttt
 path: zigbee2mqttt
 panel: false
-icon: 'mdi:zigbee'
+icon: mdi:zigbee
 badges: []
 cards:
 
@@ -17,7 +17,7 @@ cards:
         icon: mdi:zigbee
         url: !secret zigbee2mqtt_frontend
 
-  - type: 'custom:auto-entities'
+  - type: custom:auto-entities
     show_empty: false
     card:
       show_header_toggle: false

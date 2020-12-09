@@ -1,7 +1,7 @@
 title: Meterkast
 path: meterkast
 panel: false
-icon: 'mdi:gauge'
+icon: mdi:gauge
 badges: []
 cards: 
 

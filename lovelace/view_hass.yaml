@@ -25,7 +25,7 @@ cards:
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/
 
-  - type: 'custom:auto-entities'
+  - type: custom:auto-entities
     show_empty: false
     card:
       show_header_toggle: false

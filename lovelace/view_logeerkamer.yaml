@@ -5,7 +5,7 @@ icon: mdi:bed-empty
 badges: []
 cards:
 
-  - type: 'custom:simple-thermostat'
+  - type: custom:simple-thermostat
     entity: climate.logeerkamer
     step_layout: column
     step_size: 1
