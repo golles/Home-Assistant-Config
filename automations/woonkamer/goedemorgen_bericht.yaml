@@ -1,0 +1,35 @@
+- id: goedemorgen_bericht
+  alias: Goedemorgen bericht bij 1e beweging in de woonkamer
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: group.woonkamer_motion
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: media_player.lg_c9
+      state: 'off' 
+    - condition: state
+      entity_id: media_player.lg_soundbar
+      state: 'off' 
+    - condition: state
+      entity_id: sensor.day_or_night
+      state: Day # Between 00-12.
+    - condition: state
+      entity_id: sensor.time_of_day
+      state: Morning # Between 06-18.
+    - condition: template
+      value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
+        {{ as_timestamp(now()) - as_timestamp(state_attr('automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer', 'last_triggered')) | int >= 6 * 60 * 60 }}
+  action:
+    - service: shell_command.set_soundbar_source_and_volume
+      data:
+        ip: !secret lg_soundbar_ip
+        source: 0 # Wifi.
+        volume: 10
+
+    - service: tts.microsoft_say
+      entity_id: media_player.lg_soundbar
+      data:
+        message: Goede morgen!

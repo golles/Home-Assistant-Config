@@ -22,7 +22,7 @@ automation:
     - service: shell_command.set_soundbar_source_and_volume
       data:
         ip: !secret lg_soundbar_ip
-        source: 15
+        source: 15 # HMDI ARC.
         volume: 12
 
 shell_command:
