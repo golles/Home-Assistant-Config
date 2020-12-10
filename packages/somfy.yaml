@@ -4,7 +4,7 @@ tahoma:
 
 homeassistant:
   customize:
-    cover.rolluiken:
+    cover.alle_rolluiken:
       device_class: shutter
 
 cover:
