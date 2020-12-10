@@ -29,10 +29,13 @@ cards:
       type: glance
       title: Afval
     filter:
-      include:
-        - domain: sensor
-          attributes:
-            Wastecollector: purmerend
+      template: >
+        {{ 
+          states.sensor 
+            | selectattr('attributes.Wastecollector')
+            | map(attribute='entity_id')
+            | list
+        }}
     sort:
       method: attribute
       attribute: Days-until

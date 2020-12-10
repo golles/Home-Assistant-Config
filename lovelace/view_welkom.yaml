@@ -64,11 +64,14 @@ cards:
         title: Morgen
         type: entities
       filter:
-        include:
-          - domain: sensor
-            attributes:
-              Wastecollector: purmerend
-              Days-until: = 1
+        template: >
+          {{ 
+            states.sensor 
+              | selectattr('attributes.Wastecollector')
+              | selectattr('attributes.Days-until', 'eq', 1)
+              | map(attribute='entity_id')
+              | first
+          }}
 
   - type: conditional
     conditions:
