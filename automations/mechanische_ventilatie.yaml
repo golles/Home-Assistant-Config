@@ -1,0 +1,49 @@
+- id: mechanische_ventilatie_douchen
+  alias: Mechanische ventilatie tijdens douchen
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.douche_beweging_occupancy
+      from: 'off'
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.douche_beweging_occupancy
+      from: 'on'
+      to: 'off'
+      for:
+        minutes: 5
+  action:
+    - choose:
+      # Occupancy detected.
+      - conditions:
+        - condition: state
+          entity_id: binary_sensor.douche_beweging_occupancy
+          state: 'on'
+        sequence:
+          - service: notify.sander
+            data:
+              title: Mechanische ventilatie
+              message: Beweging, naar hoog
+
+          - service: script.ventilation_set_speed
+            data:
+              speed: high
+      # Occupancy no longer detected.
+      default:
+        - service: notify.sander
+          data:
+            title: Mechanische ventilatie
+            message: Geen beweging, naar hoog voor 10 minuten
+            
+        - service: script.ventilation_set_speed
+          data:
+            speed: low
+
+        - delay:
+            seconds: 5
+            
+        - service: script.ventilation_set_speed_timer
+          data:
+            speed: high
+            timer: 10
