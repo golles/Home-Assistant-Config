@@ -1,4 +1,2 @@
 sensor:
-  - platform: dsmr
-    port: /dev/dsmr
-    dsmr_version: 4
+  - platform: dsmr_reader

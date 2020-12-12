@@ -18,41 +18,22 @@ cards:
   - type: entities
     title: Elektriciteitsmeter
     entities:
-      - sensor.energy_consumption_tarif_1
-      - sensor.energy_consumption_tarif_2
-      - sensor.power_tariff
+      - entity: sensor.dsmr_reading_electricity_delivered_1
+        name: Laagtarief
+      - entity: sensor.dsmr_reading_electricity_delivered_2
+        name: Normaaltarief
+      - entity: sensor.dsmr_meter_stats_electricity_tariff
+        name: Tarief
       - type: custom:fold-entity-row
         head:
           type: section
           label: 
         entities:
-          # - sensor.power_production
-          # - sensor.power_production_phase_l1
-          # - sensor.power_production_phase_l2
-          # - sensor.power_production_phase_l3
-          # - sensor.energy_production_tarif_1
-          # - sensor.energy_production_tarif_2
-          # - sensor.energy_consumption_total
-          - sensor.power_consumption
-          # - sensor.power_consumption_phase_l1
-          # - sensor.power_consumption_phase_l2
-          # - sensor.power_consumption_phase_l3
-          - sensor.short_power_failure_count
-          - sensor.long_power_failure_count
-          - sensor.voltage_sags_phase_l1
-          # - sensor.voltage_sags_phase_l2
-          # - sensor.voltage_sags_phase_l3
-          - sensor.voltage_swells_phase_l1
-          # - sensor.voltage_swells_phase_l2
-          # - sensor.voltage_swells_phase_l3
-          # - sensor.voltage_phase_l1
-          # - sensor.voltage_phase_l2
-          # - sensor.voltage_phase_l3
-          # - sensor.current_phase_l1
-          # - sensor.current_phase_l2
-          # - sensor.current_phase_l3
-          # - sensor.gas_consumption
-          # - sensor.hourly_gas_consumption
+          - sensor.dsmr_reading_electricity_currently_delivered
+          - sensor.dsmr_meter_stats_power_failure_count
+          - sensor.dsmr_meter_stats_long_power_failure_count
+          - sensor.dsmr_meter_stats_voltage_sag_count_l1
+          - sensor.dsmr_meter_stats_voltage_swell_count_l1
 
   - type: entities
     title: Warmtemeter
