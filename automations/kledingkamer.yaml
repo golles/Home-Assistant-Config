@@ -13,8 +13,6 @@
     - platform: state
       entity_id: binary_sensor.kledingkamer_beweging_occupancy
       to: 'off'
-      for:
-        seconds: 30
   action:
     - choose:
       # Occupancy detected and not enough illuminance.
