@@ -18,7 +18,7 @@
   trigger:
     - platform: sun
       event: sunset
-      offset: '+00:45:00'
+      offset: '-04:00:00'
   condition:
     condition: template
     value_template: > # All days in December after Sinterklaas.
