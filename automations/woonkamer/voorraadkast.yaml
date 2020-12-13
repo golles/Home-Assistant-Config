@@ -2,13 +2,13 @@
   alias: Voorraadkast verlichting automatisch aan en uit
   initial_state: on
   mode: single
+  max_exceeded: silent
   trigger:
     - platform: state
       entity_id: binary_sensor.voorraadkastdeur_contact
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.voorraadkastdeur_contact
-      to: 'off'
+      to: 
+        - 'on'
+        - 'off'
   action:
     - choose:
       - conditions:

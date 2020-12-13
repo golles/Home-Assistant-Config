@@ -7,10 +7,9 @@
       event: start
     - platform: state
       entity_id: sun.sun
-      to: below_horizon
-    - platform: state
-      entity_id: sun.sun
-      to: above_horizon
+      to: 
+        - below_horizon
+        - above_horizon
   action:
     - choose:
       - conditions:

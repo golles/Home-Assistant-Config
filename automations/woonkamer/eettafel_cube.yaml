@@ -5,13 +5,10 @@
   trigger:
     - platform: state
       entity_id: sensor.eettafel_cube_action
-      to: tap
-    - platform: state
-      entity_id: sensor.eettafel_cube_action
-      to: flip90
-    - platform: state
-      entity_id: sensor.eettafel_cube_action
-      to: flip180
+      to: 
+        - tap
+        - flip90
+        - flip180
   action:
     - service: light.toggle
       entity_id: light.eettafel

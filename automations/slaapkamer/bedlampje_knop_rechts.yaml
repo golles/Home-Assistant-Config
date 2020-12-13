@@ -5,10 +5,9 @@
   trigger:
     - platform: state
       entity_id: sensor.bedlampje_knop_rechts_action
-      to: 'on'
-    - platform: state
-      entity_id: sensor.bedlampje_knop_rechts_action
-      to: 'off'
+      to:
+        - 'on'
+        - 'off'
   action:
     - choose:
       - conditions:

@@ -2,6 +2,7 @@
   alias: Badkamerlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   mode: restart
+  max_exceeded: silent
   variables:
     light_entity: light.badkamer
     illuminance_entity: sensor.badkamer_beweging_illuminance
@@ -9,10 +10,9 @@
   trigger:
     - platform: state
       entity_id: group.badkamer_motion
-      to: 'on'
-    - platform: state
-      entity_id: group.badkamer_motion
-      to: 'off'
+      to: 
+        - 'on'
+        - 'off'
   action:
     - choose:
       # Occupancy detected and not enough illuminance.

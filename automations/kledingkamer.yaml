@@ -2,6 +2,7 @@
   alias: Kledingkamerlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   mode: restart
+  max_exceeded: silent
   variables:
     light_entity: light.kledingkamer
     illuminance_entity: sensor.kledingkamer_beweging_illuminance
@@ -9,10 +10,9 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.kledingkamer_beweging_occupancy
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.kledingkamer_beweging_occupancy
-      to: 'off'
+      to: 
+        - 'on'
+        - 'off'
   action:
     - choose:
       # Occupancy detected and not enough illuminance.

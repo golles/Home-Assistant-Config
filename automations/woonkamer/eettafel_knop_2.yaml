@@ -1,28 +1,61 @@
-- id: eettafel_knop_2_on
-  alias: Eettafel knop2 - licht aan
+- id: eettafel_knop_2
+  alias: Eettafel knop2
   initial_state: on
   mode: single
+  max_exceeded: silent
+  variables:
+    step: 20 # Needs to be an even number.
   trigger:
     - platform: state
       entity_id: sensor.eettafelknop_2_action
-      to: press
-  condition:
-    - condition: state
-      entity_id: light.eettafel
-      state: 'off'
+      to:
+        - 'on'
+        - 'off'
+        - 'hold'
   action:
-    - service: script.eettafel_on
+    - choose:
+      # Button is being pressed.
+      - conditions:
+        - condition: template
+          value_template: >
+            {{ trigger.to_state.state in ['on', 'off'] }}
+        sequence:
+          - choose:
+            # Light is off.
+            - conditions:
+                - condition: state
+                  entity_id: light.eettafel
+                  state: 'off'
+              sequence:
+                - service: script.eettafel_on
+            # Light is on.
+            default:
+              - service: script.eettafel_off
 
-- id: eettafel_knop_2_off
-  alias: Eettafel knop2 - licht uit
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: sensor.eettafelknop_2_action
-      to: press
-  condition:
-    - condition: state
-      entity_id: light.eettafel
-      state: 'on'
-  action:
-    - service: script.eettafel_off
+      # Button is being hold.
+      - conditions:
+        - condition: template
+          value_template: >
+            {{ 'hold' == trigger.to_state.state }}
+        sequence:
+          - choose:
+            # Light is off.
+            - conditions:
+                - condition: state
+                  entity_id: light.eettafel
+                  state: 'off'
+              sequence:
+                - service: script.eettafel_on
+            # Light is on.
+            default:
+              - service: light.turn_on
+                data:
+                  entity_id: light.eettafel
+                  brightness_step: >
+                    {%- if state_attr('light.eettafel', 'brightness') % 2 == 0 %}
+                      {{ step }}
+                    {%- else -%}
+                      -{{ step }}
+                    {%- endif %}
+              - delay:
+                  seconds: 1

@@ -21,25 +21,36 @@ script:
     alias: Eettafel lampen aan animatie
     variables:
       delay_ms: 100
+      brightness: 140
     sequence:
       - service: light.turn_on
-        entity_id: light.hue_filament_bulb_3 #5
+        data:
+          entity_id: light.hue_filament_bulb_3 #5
+          brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
-        entity_id: light.hue_filament_bulb_4 #4
+        data:
+          entity_id: light.hue_filament_bulb_4 #4
+          brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
-        entity_id: light.hue_filament_bulb_1 #3
+        data:
+          entity_id: light.hue_filament_bulb_1 #3
+          brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
-        entity_id: light.hue_filament_bulb_5 #2
+        data:
+          entity_id: light.hue_filament_bulb_5 #2
+          brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
-        entity_id: light.hue_filament_bulb_2 #1
+        data:
+          entity_id: light.hue_filament_bulb_2 #1
+          brightness: '{{ brightness }}'
 
   eettafel_off:
     alias: Eettafel lampen uit animatie
