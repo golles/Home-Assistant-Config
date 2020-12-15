@@ -16,15 +16,15 @@ switch:
         value_template: >
           {{ is_state_attr('climate.woonkamer', 'preset_mode', 'home') }}
         turn_on:
-          service: shell_command.tado_set_home
+          service: climate.set_preset_mode
           data:
-            username: !secret tado_username
-            password: !secret tado_password
+            entity_id: climate.woonkamer
+            preset_mode: home
         turn_off:
-          service: shell_command.tado_set_away
+          service: climate.set_preset_mode
           data:
-            username: !secret tado_username
-            password: !secret tado_password
+            entity_id: climate.woonkamer
+            preset_mode: away
   
 automation:
   - id: tado_auto_home_and_away_mode
@@ -45,7 +45,3 @@ automation:
         default:
           - service: switch.turn_on
             entity_id: switch.tado_home_mode
-
-shell_command:
-  tado_set_away: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" AWAY'
-  tado_set_home: '/config/custom_scripts/tado-presence.sh "{{ username }}" "{{ password }}" HOME'
