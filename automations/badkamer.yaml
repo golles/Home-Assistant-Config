@@ -1,77 +1,15 @@
 - id: badkamer_light_auto
   alias: Badkamerlamp automatisch aan/uit door aanwezigheid
   initial_state: on
-  mode: restart
-  max_exceeded: silent
-  variables:
-    light_entity: light.badkamer
-    illuminance_entity: sensor.badkamer_beweging_illuminance
-    illuminance_below: 10
-  trigger:
-    - platform: state
-      entity_id: group.badkamer_motion
-      to: 
-        - 'on'
-        - 'off'
-  action:
-    - choose:
-      # Occupancy detected and not enough illuminance.
-      - conditions:
-        - condition: template
-          value_template: >
-            {{ 
-              'on' == trigger.to_state.state and 
-              states(illuminance_entity) | int < illuminance_below
-            }}
-        sequence:
-          - choose:
-            # Time between 00:00 - 07:59.
-            - conditions:
-                - condition: template
-                  value_template: '{{ now().hour < 8 }}' 
-              sequence:
-                - service: light.turn_on
-                  data:
-                    entity_id: '{{ light_entity }}'
-                    profile: ontspannen
-                    transition: 5
-            # All other times
-            default:
-              - service: light.turn_on
-                data:
-                  entity_id: '{{ light_entity }}'
-                  profile: helder
-                  transition: 1
-      # Occupancy no longer detected and the light is on.
-      - conditions:
-        - condition: template
-          value_template: >
-            {{
-              'off' == trigger.to_state.state and
-              'on' == states(light_entity)
-            }}
-        sequence:
-          - choose:
-            # Time between 00:00 - 07:59.
-            - conditions:
-                - condition: template
-                  value_template: '{{ now().hour < 8 }}' 
-              sequence:
-                - service: light.turn_on
-                  data:
-                    entity_id: '{{ light_entity }}'
-                    profile: gedimd
-                    transition: 1
-            # All other times
-            default:
-              - service: light.turn_on
-                data:
-                  entity_id: '{{ light_entity }}'
-                  profile: ontspannen
-                  transition: 1
-          - delay:
-              seconds: 10
-          - service: light.turn_off
-            data:
-              entity_id: '{{ light_entity }}'
-              transition: 1
+  use_blueprint:
+    path: golles/motion_light_like_hue.yaml
+    input:
+      illuminance_below: '10'
+      motion_entity: group.badkamer_motion
+      light_entity: light.badkamer
+      brightness_drop: 60
+      illuminance_entity: sensor.badkamer_beweging_illuminance
+      day_start_time: 08:00:00
+      day_end_time: 00:00:00
+      day_profile: helder
+      night_profile: ontspannen

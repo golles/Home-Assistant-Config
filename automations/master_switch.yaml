@@ -1,28 +1,28 @@
 - id: master_switch
   alias: Master switch - alles uit
   initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: sensor.master_switch_action
-      to: press
-  action:
-    - service: homeassistant.turn_off
-      data: 
-        entity_id: >
-          {{ 
-            (
-              expand(
-                states.light 
-                | selectattr('state', 'eq', 'on')
-                | rejectattr('attributes.is_hue_group')
-                | rejectattr('entity_id', 'in', ['light.wled'])
-              ) +
-              expand(
-                states.media_player 
-                | rejectattr('state', 'in', ['off', 'unavailable'])
+  use_blueprint:
+    path: golles/mqtt_hue_smart_button.yaml
+    input:
+      hold_cooldown: '3'
+      smart_button: sensor.master_switch_action
+      press_action:
+      - service: homeassistant.turn_off
+        data:
+          entity_id: >
+            {{
+              (
+                expand(
+                  states.light
+                  | selectattr('state', 'eq', 'on')
+                  | rejectattr('attributes.is_hue_group')
+                  | rejectattr('entity_id', 'in', ['light.wled', 'light.hue_smart_plug_1'])
+                ) +
+                expand(
+                  states.media_player
+                  | rejectattr('state', 'in', ['off', 'unavailable'])
+                )
               )
-            ) 
-              | map(attribute='entity_id')
-              | join(', ')
-          }}
+                | map(attribute='entity_id')
+                | join(', ')
+            }}

@@ -1,48 +1,10 @@
 - id: slaapkamer_knop_links_press
   alias: Slaapkamer knop links - press
   initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: sensor.bedlampje_knop_links_action
-      to: 
-        - 'on'
-        - 'off'
-  action:
-    - choose:
-      - conditions:
-          - condition: state
-            entity_id: light.hue_filament_bulb_1_4
-            state: 'off'
-        sequence:
-          - choose:
-            - conditions:
-                - condition: template
-                  value_template: > # Between 00:00 - 08:59
-                    {{ now().hour < 9 }}
-              sequence:
-                - service: light.turn_on
-                  data:
-                    entity_id: light.hue_filament_bulb_1_4
-                    profile: nachtlampje
-            default:
-              - service: light.turn_on
-                data:
-                  entity_id: light.hue_filament_bulb_1_4
-                  profile: gedimd
-      default:
-        - service: light.turn_off
-          entity_id: light.hue_filament_bulb_1_4
-
-- id: slaapkamer_knop_links_hold
-  alias: Slaapkamer knop links - hold
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: sensor.bedlampje_knop_links_action
-      to: hold
-  action:
-    - service: light.toggle
-      entity_id: light.slaapkamer_plafond_groep
-    - delay:
-        seconds: 5
+  use_blueprint:
+    path: golles/mqtt_hue_smart_button_bedlampje.yaml
+    input:
+      hold_cooldown: '3'
+      smart_button: sensor.bedlampje_knop_links_action
+      light_entity_bed: light.hue_filament_bulb_1_4
+      light_entity_ceiling: light.slaapkamer_plafond_groep
