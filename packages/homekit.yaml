@@ -19,8 +19,6 @@ homekit:
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
       - switch.ziggo_decoder
-      - cover.slaapkamer
-      - cover.kledingkamer
   entity_config:
     switch.keukenkastje_lamp_switch:
       name: Keukenkastje
@@ -28,10 +26,6 @@ homekit:
       name: Voorraadkast
     switch.ziggo_decoder:
       name: Ziggo decoder
-    cover.slaapkamer:
-      name: Slaapkamer Rolluik
-    cover.kledingkamer:
-      name: Kledingkamer Rolluik
 
 automation:
   - id: homekit_delayed_start
