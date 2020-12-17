@@ -28,6 +28,8 @@ cards:
         name: Plafond
       - entity: binary_sensor.badkamer_beweging_occupancy
         name: Beweging
+      - entity: binary_sensor.douche_beweging_occupancy
+        name: Douche
       - group.badkamer_motion
       - automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
 
