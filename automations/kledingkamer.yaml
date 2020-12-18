@@ -2,14 +2,16 @@
   alias: Kledingkamerlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   use_blueprint:
-    path: golles/motion_light_like_hue.yaml
+    path: golles/motion-activated_light_profiles.yaml
     input:
       illuminance_below: '10'
       motion_entity: binary_sensor.kledingkamer_beweging_occupancy
+      no_motion_wait: 15
       light_entity: light.kledingkamer
-      brightness_drop: 60
       illuminance_entity: sensor.kledingkamer_beweging_illuminance
       day_start_time: 08:00:00
       day_end_time: 00:00:00
       day_profile: helder
       night_profile: ontspannen
+      night_profile_before_off: nachtlampje
+      day_profile_before_off: gedimd
