@@ -64,7 +64,5 @@ cards:
     filter:
       include:
         - entity_id: 'sensor.cert_expiry_*'
-          not:
-            entity_id: 'sensor.cert_expiry_timestamp*'
     sort:
       method: name
