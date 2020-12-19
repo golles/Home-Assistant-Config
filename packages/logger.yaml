@@ -1,6 +1,9 @@
 logger:
   default: warn
-  logs:
-    homeconnect: debug
-    homeassistant.components.home_connect: debug
-    custom_components.tahoma: debug
+  # logs:
+  #   homeconnect: debug
+  #   homeassistant.components.home_connect: debug
+  #   custom_components.tahoma: debug
+  #   homeassistant.components.homekit: debug
+  #   pyhap: debug
+  #   tts: debug
