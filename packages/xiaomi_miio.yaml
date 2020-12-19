@@ -43,7 +43,9 @@ sensor:
         friendly_name: Luchtkwaliteit
         value_template: >
           {% set aqi = state_attr('fan.air_purifier', 'aqi') %}
-          {% if aqi < 12 %}
+          {% if aqi == None %}
+            Onbekend
+          {% elif aqi < 12 %}
             Goed
           {%- elif aqi <= 35.4 -%}
             Matig
