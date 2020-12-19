@@ -51,6 +51,9 @@ cards:
         name: Voortgang
       - entity: sensor.wasmachine_remaining_relative_local
         name: Resterende tijd
+      - type: 'custom:elapsed-time-entity-row'
+        entity: sensor.wasmachine_remaining_seconds
+        hideSeconds: 'true'
       
   - type: custom:mini-media-player
     entity: media_player.zolder
