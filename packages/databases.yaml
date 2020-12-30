@@ -4,4 +4,4 @@ recorder:
 influxdb:
   host: influxdb
   port: 8086
-  database: !secret influxdb_database
+  database: homeassistant
