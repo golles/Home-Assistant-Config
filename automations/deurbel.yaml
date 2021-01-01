@@ -1,0 +1,30 @@
+- id: pause_tv_doorbell_press
+  alias: TV pauzeren als iemand op de deurbel drukt
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.deurbel_doorbell_pressed
+      to: 'off'
+  action:
+    - service: notify.lg_c9
+      data:
+        message: Ding dong! Iemand staat bij de deur
+        
+    - choose:
+      # Netflix, Plex, Youtube
+      - conditions:
+          - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
+        sequence:
+          - service: media_player.media_pause
+            entity_id: media_player.lg_c9
+  
+      # Ziggo, but not linear tv
+      - conditions:
+          - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') and not is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
+        sequence: 
+          - service: media_player.media_pause
+            entity_id: media_player.stb_arris_uhd
+
+    - delay:
+        seconds: 5
