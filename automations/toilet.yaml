@@ -5,14 +5,14 @@
     path: golles/motion-activated_light_profiles.yaml
     input:
       illuminance_below: '10'
-      motion_entity: binary_sensor.toilet_beweging_occupancy
-      no_motion_wait: 15
       light_entity: light.toilet
+      motion_entity: binary_sensor.toilet_beweging_occupancy
       illuminance_entity: sensor.toilet_beweging_illuminance
+      cool_down: 30
+      no_motion_wait: 15
       day_start_time: 08:00:00
       day_end_time: 00:00:00
       day_profile: helder
+      day_profile_before_off: gedimd
       night_profile: ontspannen
       night_profile_before_off: nachtlampje
-      day_profile_before_off: gedimd
-    
