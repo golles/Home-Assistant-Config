@@ -61,6 +61,12 @@ cards:
         - entity_id: sensor.voltage_swells_phase_l3
         - entity_id: sensor.p2000_politie
         - entity_id: sensor.zigbee2mqtt_networkmap
+        - entity_id: sensor.dsmr_reading_extra_device_delivered
+        - entity_id: sensor.dsmr_consumption_gas_currently_delivered
+        - entity_id: sensor.dsmr_consumption_gas_delivered
+        - entity_id: sensor.dsmr_consumption_gas_read_at
+        - entity_id: sensor.dsmr_day_consumption_gas
+        - entity_id: sensor.dsmr_day_consumption_gas_cost
       include:
         - state: unknown
     
