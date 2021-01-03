@@ -21,21 +21,11 @@
           entity_id: binary_sensor.douche_beweging_occupancy
           state: 'on'
         sequence:
-          - service: notify.sander
-            data:
-              title: Mechanische ventilatie
-              message: Beweging, naar hoog
-
           - service: script.ventilation_set_speed
             data:
               speed: high
       # Occupancy no longer detected.
-      default:
-        - service: notify.sander
-          data:
-            title: Mechanische ventilatie
-            message: Geen beweging, naar hoog voor 10 minuten
-            
+      default: 
         - service: script.ventilation_set_speed
           data:
             speed: low
