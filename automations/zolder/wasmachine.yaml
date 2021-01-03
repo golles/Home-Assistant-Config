@@ -1,0 +1,31 @@
+- id: washing_machine_door_open_when_done
+  alias: Wasmachine deur open als hij klaar is
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.wasmachine_door
+      to: 'on'
+  action:
+    - choose:
+      - conditions:
+        # Fan is currently set to low.
+        - "{{ is_state_attr('fan.mechanische_ventilatie', 'speed', 'low') }}"
+        sequence:
+          - service: script.ventilation_set_speed_timer
+            data:
+              speed: high
+              timer: 30
+
+    - choose:
+      - conditions:
+        # Washing machine rogress = 100, done.
+        - "{{ is_state('sensor.wasmachine_program_progress', '100') }}"
+        # Room climate is below 20.
+        - "{{ state_attr('climate.zolder', 'temperature') < 20 }}"
+        sequence:
+          - service: tado.set_climate_timer
+            data:
+              entity_id: climate.zolder
+              time_period: '02:00:00'
+              temperature: 23
