@@ -16,10 +16,13 @@ homekit:
   filter:
     include_entities:
       - fan.air_purifier
+      - light.wled_skull
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
       - switch.ziggo_decoder
   entity_config:
+    light.wled_skull:
+      name: Skull
     switch.keukenkastje_lamp_switch:
       name: Keukenkastje
     switch.voorraadkastlamp_switch:
