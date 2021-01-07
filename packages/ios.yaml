@@ -1,0 +1,37 @@
+ios:
+  actions:
+    - name: ALARM_OFF
+      background_color: "#000000"
+      label:
+        text: Wekker uit
+        color: "#ff0000"
+      icon:
+        icon: alarm-off
+        color: "#ff0000"
+
+    - name: ALARM_SNOOZE
+      background_color: "#000000"
+      label:
+        text: Wekker gesnoozed
+        color: "#ff0000"
+      icon:
+        icon: alarm-snooze
+        color: "#ff0000"
+
+    - name: RADIO_QMUSIC
+      background_color: "#ed3624"
+      label:
+        text: Qmusic
+        color: "#ffffff"
+      icon:
+        icon: radio
+        color: "#ffffff"
+
+    - name: TV_ZIGGO
+      background_color: "#ffffff"
+      label:
+        text: Ziggo
+        color: "#f48c00"
+      icon:
+        icon: television-classic
+        color: "#f48c00"
