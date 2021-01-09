@@ -30,13 +30,17 @@
   action:
     - variables:
         user_id: "{{ trigger.event.context.user_id }}"
+        person_entity: "{{ (states.person | selectattr('attributes.user_id', '==', user_id)) | first }}"
 
     - choose:
       - conditions:
-          - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+          - "{{ is_state_attr(person.entity_id, 'id', 'sander')}}"
+          - "{{ is_state(person.entity_id, 'home') }}"
         sequence:
-          service: tahoma.set_cover_my_position
-          entity_id: cover.alle_rolluiken
+          service: cover.set_cover_position
+          data:
+            entity_id: cover.slaapkamer
+            position: 12
 
 - id: ios_action_radio_qmusic
   alias: iOS action - Qmusic
