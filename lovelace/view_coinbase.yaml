@@ -1,0 +1,23 @@
+title: Coinbase
+path: coinbase
+panel: false
+icon: mdi:cash-multiple
+badges: []
+cards:
+  
+  - type: custom:auto-entities
+    card:
+      type: entities
+      title: Coinbase
+      show_header_toggle: false
+    filter:
+      template: >
+        {%- for sensor in states.sensor -%}
+          {%- if sensor.entity_id.startswith('sensor.coinbase_') and sensor.entity_id.endswith('_portemonnee') -%}
+            {%- if sensor.state | int > 0 -%}
+              {{ sensor.entity_id}},
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+    sort:
+      method: name
