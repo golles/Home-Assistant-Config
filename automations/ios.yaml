@@ -30,12 +30,11 @@
   action:
     - variables:
         user_id: "{{ trigger.event.context.user_id }}"
-        person_entity: "{{ (states.person | selectattr('attributes.user_id', '==', user_id)) | first }}"
 
     - choose:
       - conditions:
-          - "{{ is_state_attr(person.entity_id, 'id', 'sander')}}"
-          - "{{ is_state(person.entity_id, 'home') }}"
+          - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+          - "{{ is_state('person.sander', 'home') }}"
         sequence:
           service: cover.set_cover_position
           data:
