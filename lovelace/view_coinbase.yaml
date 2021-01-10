@@ -8,7 +8,7 @@ cards:
   - type: custom:auto-entities
     card:
       type: entities
-      title: Coinbase
+      title: Portemonnees
       show_header_toggle: false
     filter:
       template: >
@@ -21,3 +21,19 @@ cards:
         {%- endfor -%}
     sort:
       method: name
+
+  - type: custom:auto-entities
+    card:
+      type: entities
+      title: Koersen
+      show_header_toggle: false
+    filter:
+      template: >
+        {%- for sensor in states.sensor -%}
+          {%- if sensor.entity_id.endswith('_exchange_rate') -%}
+            {{ sensor.entity_id}},
+          {%- endif -%}
+        {%- endfor -%}
+    sort:
+      method: name
+  

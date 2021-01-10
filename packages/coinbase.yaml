@@ -1,3 +1,10 @@
 coinbase:
   api_key: !secret coinbase_api_key
   api_secret: !secret coinbase_api_secret
+  exchange_rate_currencies:
+    - BTC
+    - ETH
+    - LINK
+    - LTC
+    - UNI
+    - XRP
