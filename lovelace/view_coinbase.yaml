@@ -14,7 +14,7 @@ cards:
       template: >
         {%- for sensor in states.sensor -%}
           {%- if sensor.entity_id.startswith('sensor.coinbase_') and sensor.entity_id.endswith('_portemonnee') -%}
-            {%- if sensor.state | int > 0 -%}
+            {%- if sensor.state | float > 0 -%}
               {{ sensor.entity_id}},
             {%- endif -%}
           {%- endif -%}
@@ -37,3 +37,37 @@ cards:
     sort:
       method: name
   
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.btc_exchange_rate
+        line_color: '#ff9500'
+        font_size: 50
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.eth_exchange_rate
+        line_color: blue
+        font_size: 50
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.ltc_exchange_rate
+        line_color: grey
+        font_size: 50
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.link_exchange_rate
+        line_color: '#375bd2'
+        font_size: 50
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.uni_exchange_rate
+        line_color: '#ff0070'
+        font_size: 50
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.xrp_exchange_rate
+        line_color: black
+        font_size: 50
