@@ -1,0 +1,22 @@
+everything_off:
+  mode: single
+  sequence:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: >
+          {{
+            (
+              expand(
+                states.light
+                | selectattr('state', 'eq', 'on')
+                | rejectattr('attributes.is_hue_group')
+                | rejectattr('entity_id', 'in', ['light.wled', 'light.hue_smart_plug_1'])
+              ) +
+              expand(
+                states.media_player
+                | rejectattr('state', 'in', ['off', 'unavailable'])
+              )
+            )
+              | map(attribute='entity_id')
+              | join(', ')
+          }}

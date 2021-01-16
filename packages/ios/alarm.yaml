@@ -18,24 +18,6 @@ ios:
         icon: alarm-snooze
         color: "#ff0000"
 
-    - name: RADIO_QMUSIC
-      background_color: "#ed3624"
-      label:
-        text: Qmusic
-        color: "#ffffff"
-      icon:
-        icon: radio
-        color: "#ffffff"
-
-    - name: TV_ZIGGO
-      background_color: "#ffffff"
-      label:
-        text: Ziggo
-        color: "#f48c00"
-      icon:
-        icon: television-classic
-        color: "#f48c00"
-
 automation:
   - id: ios_action_alarm_off
     alias: iOS action - alarm uit
@@ -79,31 +61,3 @@ automation:
             data:
               entity_id: cover.slaapkamer
               position: 12
-
-  - id: ios_action_radio_qmusic
-    alias: iOS action - Qmusic
-    initial_state: on
-    mode: single
-    max_exceeded: silent
-    trigger:
-      - platform: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: RADIO_QMUSIC
-    action:
-      - service: script.play_livingroom_radio
-        data:
-          stream: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
-
-  - id: ios_action_tv_ziggo
-    alias: iOS action - Ziggo
-    initial_state: on
-    mode: single
-    max_exceeded: silent
-    trigger:
-      - platform: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: TV_ZIGGO
-    action:
-      - service: script.play_livingroom_tv_source_ziggo

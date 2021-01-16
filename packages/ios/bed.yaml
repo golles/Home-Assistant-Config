@@ -1,0 +1,49 @@
+ios:
+  actions:
+    - name: GOING_TO_BED
+      background_color: "#4c00ff"
+      label:
+        text: We ga naar bed
+        color: "#ffffff"
+      icon:
+        icon: bed
+        color: "#ffffff"
+
+    - name: GOING_TO_SLEEP
+      background_color: "#4c00ff"
+      label:
+        text: We gaan slapen
+        color: "#ffffff"
+      icon:
+        icon: sleep
+        color: "#ffffff"
+
+automation:
+  - id: ios_action_going_to_bed
+    alias: iOS action - We ga naar bed
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: GOING_TO_BED
+    action:
+      - service: script.everything_off
+
+      - service: light.turn_on
+        entity_id: light.bedlampen
+
+  - id: ios_action_going_to_sleep
+    alias: iOS action - We gaan slapen
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: GOING_TO_SLEEP
+    action:
+      - service: script.everything_off
