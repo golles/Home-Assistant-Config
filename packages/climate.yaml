@@ -30,6 +30,8 @@ automation:
   - id: tado_auto_home_and_away_mode
     alias: Tado automatisch home en away mode activeren
     initial_state: on
+    mode: single
+    max_exceeded: silent
     trigger:
       - platform: state
         entity_id: group.residents
