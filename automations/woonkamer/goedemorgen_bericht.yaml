@@ -23,13 +23,40 @@
       value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
         {{ as_timestamp(now()) - as_timestamp(state_attr('automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer', 'last_triggered')) | int >= 6 * 60 * 60 }}
   action:
-    - service: shell_command.set_soundbar_source_and_volume
+    - service: media_player.turn_on
       data:
-        ip: !secret lg_soundbar_ip
-        source: 0 # Wifi.
-        volume: 10
+        entity_id: media_player.lg_soundbar
+
+    - wait_template: >
+        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
+      timeout: '00:00:05'
+      continue_on_timeout: true
+
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.lg_soundbar
+        volume_level: 0.25 # 10 * 0.025
 
     - service: tts.microsoft_say
       entity_id: media_player.lg_soundbar
       data:
-        message: Goede morgen!
+        message: >
+          {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
+          {% set days = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"] %}
+          {% set months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"] %}
+          
+          {{ good[(now().hour / 6) | int] }}!
+          Vandaag is het {{ days[now().weekday()] }} {{ now().day }} {{ months[now().month - 1] }}.
+
+    - wait_template: >
+        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
+      timeout: '00:00:05'
+      continue_on_timeout: true
+
+    - service: tts.microsoft_say
+      entity_id: media_player.lg_soundbar
+      data:
+        message: >
+          Buiten is het {{ state_attr('sensor.knmi_weer', 'temp') | round }} graden, 
+          de temperatuur vandaag is tussen de {{ state_attr('sensor.knmi_weer', 'd0tmax') | round }} en {{ state_attr('sensor.knmi_weer', 'd0tmin') | round }} graden
+          het is {{ state_attr('sensor.knmi_weer', 'verw') }}

@@ -1,0 +1,61 @@
+sensor:
+  - platform: rest
+    name: KNMI weer
+    scan_interval: 36000 # 60 * 60 * 10
+    resource: http://weerlive.nl/api/json-data-10min.php
+    params:
+      key: !secret knmi_key
+      locatie: !secret knmi_location
+    value_template: >
+      {{ value_json.liveweer[0].samenv }}
+    json_attributes_path: liveweer[0]
+    json_attributes:
+      - plaats
+      - temp
+      - gtemp
+      - samenv
+      - lv
+      - windr
+      - windms
+      - winds
+      - windk
+      - windkmh
+      - luchtd
+      - ldmmhg
+      - dauwp
+      - zicht
+      - verw
+      - sup
+      - sunder
+      - image
+      - d0weer
+      - d0tmax
+      - d0tmin
+      - d0windk
+      - d0windknp
+      - d0windms
+      - d0windkmh
+      - d0windr
+      - d0neerslag
+      - d0zon
+      - d1weer
+      - d1tmax
+      - d1tmin
+      - d1windk
+      - d1windknp
+      - d1windms
+      - d1windkmh
+      - d1windr
+      - d1neerslag
+      - d1zon
+      - d2weer
+      - d2tmax
+      - d2tmin
+      - d2windk
+      - d2windknp
+      - d2windms
+      - d2windkmh
+      - d2windr
+      - d2neerslag
+      - d2zon
+      - alarm
