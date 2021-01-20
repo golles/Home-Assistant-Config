@@ -1,6 +1,7 @@
 tts:
   - platform: google_translate
     base_url: !secret external_url
+    language: nl
 
   - platform: microsoft
     api_key: !secret azure_tts_api_key
