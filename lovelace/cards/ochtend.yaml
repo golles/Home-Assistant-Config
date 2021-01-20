@@ -7,9 +7,9 @@ filter:
   include:
     - attributes:
         device_class: shutter
+        current_position: '< 100'
       domain: cover
       options:
         secondary_info: last-changed
-      state: closed
 sort:
   method: name
