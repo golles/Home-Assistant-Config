@@ -3,7 +3,7 @@ ios:
     - name: GOING_TO_BED
       background_color: "#4c00ff"
       label:
-        text: We ga naar bed
+        text: Naar bed
         color: "#ffffff"
       icon:
         icon: bed
@@ -12,7 +12,7 @@ ios:
     - name: GOING_TO_SLEEP
       background_color: "#4c00ff"
       label:
-        text: We gaan slapen
+        text: Gaan slapen
         color: "#ffffff"
       icon:
         icon: sleep
@@ -20,7 +20,7 @@ ios:
 
 automation:
   - id: ios_action_going_to_bed
-    alias: iOS action - We ga naar bed
+    alias: iOS action - Naar bed
     initial_state: on
     mode: single
     max_exceeded: silent
@@ -36,7 +36,7 @@ automation:
         entity_id: light.bedlampen
 
   - id: ios_action_going_to_sleep
-    alias: iOS action - We gaan slapen
+    alias: iOS action - Gaan slapen
     initial_state: on
     mode: single
     max_exceeded: silent

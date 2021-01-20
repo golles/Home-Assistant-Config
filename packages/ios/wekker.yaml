@@ -1,6 +1,6 @@
 ios:
   actions:
-    - name: ALARM_OFF
+    - name: ALARM_CLOCK_OFF
       background_color: "#000000"
       label:
         text: Wekker uit
@@ -9,7 +9,7 @@ ios:
         icon: alarm-off
         color: "#ff0000"
 
-    - name: ALARM_SNOOZE
+    - name: ALARM_CLOCK_SNOOZE
       background_color: "#000000"
       label:
         text: Wekker gesnoozed
@@ -19,8 +19,8 @@ ios:
         color: "#ff0000"
 
 automation:
-  - id: ios_action_alarm_off
-    alias: iOS action - alarm uit
+  - id: ios_action_alarm_clock_off
+    alias: iOS action - Wekker uit
     initial_state: on
     mode: single
     max_exceeded: silent
@@ -28,7 +28,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: ALARM_OFF
+          actionName: ALARM_CLOCK_OFF
     action:
       - variables:
           user_id: "{{ trigger.event.context.user_id }}"
@@ -38,8 +38,8 @@ automation:
             - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
           sequence: []
 
-  - id: ios_action_alarm_snooze
-    alias: iOS action - alarm gesnoozed
+  - id: ios_action_alarm_clock_snooze
+    alias: iOS action - Wekker gesnoozed
     initial_state: on
     mode: single
     max_exceeded: silent
@@ -47,7 +47,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: ALARM_SNOOZE
+          actionName: ALARM_CLOCK_SNOOZE
     action:
       - variables:
           user_id: "{{ trigger.event.context.user_id }}"
