@@ -32,7 +32,7 @@ cards:
           type: section
           label: 
         entities:
-          - entity: light.hue_filament_bulb_1_2
+          - entity: light.woonkamer_groot_1
             name: Groot 1
           - entity: light.woonkamer_groot_2
             name: Groot 2

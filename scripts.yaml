@@ -1,5 +1,9 @@
 everything_off:
+  description: Turn everything off in the house
   mode: single
+  fields:
+    exclude_entity_ids:
+      description: entity_ids to exclude
   sequence:
     - service: homeassistant.turn_off
       data:
@@ -10,13 +14,13 @@ everything_off:
                 states.light
                 | selectattr('state', 'eq', 'on')
                 | rejectattr('attributes.is_hue_group')
-                | rejectattr('entity_id', 'in', ['light.wled', 'light.hue_smart_plug_1'])
               ) +
               expand(
                 states.media_player
                 | rejectattr('state', 'in', ['off', 'unavailable'])
               )
             )
+              | rejectattr('entity_id', 'in', exclude_entity_ids)
               | map(attribute='entity_id')
               | join(', ')
           }}
