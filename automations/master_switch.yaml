@@ -8,3 +8,5 @@
       smart_button: sensor.master_switch_action
       press_action:
       - service: script.everything_off
+        data:
+          exclude_entity_ids: light.hue_smart_plug_1
