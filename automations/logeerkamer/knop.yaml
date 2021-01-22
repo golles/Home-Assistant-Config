@@ -2,7 +2,7 @@
   alias: Logeerkamer knop
   description: ''
   use_blueprint:
-    path: golles/zigbee2mqtt_xiaomi_aqara_switch_WXKG11LM.yaml
+    path: golles/zigbee2mqtt_xiaomi_switch.yaml
     input:
       switch: sensor.0x00158d00044e916d_action
       single:

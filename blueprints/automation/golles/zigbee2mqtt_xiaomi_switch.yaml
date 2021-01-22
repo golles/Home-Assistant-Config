@@ -1,19 +1,13 @@
 blueprint:
-  name: Zigbee2MQTT - Xiaomi Aqara switch (WXKG11LM)
+  name: Zigbee2MQTT - Xiaomi switch (WXKG01LM and WXKG11LM))
   description: |
-    This button blueprint allows you to setup automatic for a bed light button, clicking the button will turn on/off
-    the bed led, holding the button will turn on/off the ceiling light.
-    This automation does require to setup light profiles, a light profile contains the color (in xy), birghtness 
-    and a transition time. This makes the automation much simpler plus it allows you to maintain these states in a 
-    general place. For more information about light profiles, you could check the documentation 
-    https://www.home-assistant.io/integrations/light/
-    This automation should work with any lights, but only with Philips Hue smart button connected throught Zigbee2MQTT.
+    This blueprint allows you to make automations for the Xiaomi Aqara switch and Xiaomi MiJia wireless switch, connected to Zigbee2MQTT.
   domain: automation
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_xiaomi_aqara_switch_WXKG11LM.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_xiaomi_switch.yaml
   input:
     switch:
-      name: Aqara switch
-      description: Aqara switch to use (pick the sensor that end with _action).
+      name: Switch
+      description: Switch to use (pick the sensor that ends with _action).
       selector:
         entity:
           integration: mqtt
@@ -80,16 +74,4 @@ action:
       sequence: !input quadruple
 
     - conditions: "{{ to_state == 'hold' }}"
-      sequence:
-        repeat:
-          sequence: 
-            - choose:
-              - conditions:
-                  - "{{ true }}"
-                sequence: !input hold
-            - delay:
-                seconds: 1
-          until:
-            - condition: state
-              entity_id: !input switch
-              state: "release"
+      sequence: !input hold
