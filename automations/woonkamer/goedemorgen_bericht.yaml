@@ -27,15 +27,15 @@
       data:
         entity_id: media_player.lg_soundbar
 
-    - wait_template: >
-        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
-      timeout: '00:00:05'
-      continue_on_timeout: true
-
     - service: media_player.volume_set
       data:
         entity_id: media_player.lg_soundbar
         volume_level: 0.25 # 10 * 0.025
+
+    - wait_template: >
+        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
+      timeout: '00:00:05'
+      continue_on_timeout: true
 
     - service: tts.microsoft_say
       entity_id: media_player.lg_soundbar
@@ -47,16 +47,6 @@
           
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ days[now().weekday()] }} {{ now().day }} {{ months[now().month - 1] }}.
-
-    - wait_template: >
-        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
-      timeout: '00:00:05'
-      continue_on_timeout: true
-
-    - service: tts.microsoft_say
-      entity_id: media_player.lg_soundbar
-      data:
-        message: >
           Buiten is het {{ state_attr('sensor.knmi_weer', 'temp') | round }} graden, 
           de temperatuur vandaag is tussen de {{ state_attr('sensor.knmi_weer', 'd0tmax') | round }} en {{ state_attr('sensor.knmi_weer', 'd0tmin') | round }} graden
           het is {{ state_attr('sensor.knmi_weer', 'verw') }}
