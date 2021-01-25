@@ -14,6 +14,8 @@ cards:
       - type: custom:elapsed-time-entity-row
         entity: sensor.runtime
         hide: seconds
+      - entity: sensor.db_size
+        icon: mdi:database
       - type: divider
       - entity: sensor.current_version
       - type: custom:fold-entity-row
@@ -67,6 +69,7 @@ cards:
         - entity_id: sensor.dsmr_consumption_gas_read_at
         - entity_id: sensor.dsmr_day_consumption_gas
         - entity_id: sensor.dsmr_day_consumption_gas_cost
+        - entity_id: sensor.stb_arris_uhd_channel
       include:
         - state: unknown
     
