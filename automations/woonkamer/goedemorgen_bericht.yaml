@@ -42,11 +42,11 @@
       data:
         message: >
           {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
-          {% set days = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"] %}
-          {% set months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"] %}
+          {% set day = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][now().weekday()] %}
+          {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().weekday()] %}
           
           {{ good[(now().hour / 6) | int] }}!
-          Vandaag is het {{ days[now().weekday()] }} {{ now().day }} {{ months[now().month - 1] }}.
+          Vandaag is het {{ day }} {{ now().day }} {{ month }}.
           Buiten is het {{ state_attr('sensor.knmi_weer', 'temp') | round }} graden, 
           de temperatuur vandaag is tussen de {{ state_attr('sensor.knmi_weer', 'd0tmax') | round }} en {{ state_attr('sensor.knmi_weer', 'd0tmin') | round }} graden
           het is {{ state_attr('sensor.knmi_weer', 'verw') }}
