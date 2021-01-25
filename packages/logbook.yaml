@@ -1,0 +1,24 @@
+logbook:
+  exclude:
+    entities:
+      # Time
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - sensor.date_time_utc
+      - sensor.date_time_iso
+      - sensor.time_date
+      - sensor.time_utc
+      - sensor.internet_time
+      - sensor.time_of_day
+      - sensor.day_or_night
+
+      # Uptime
+      - sensor.uptime
+      - sensor.host_uptime
+      - sensor.runtime
+
+      #DSMR
+      - sensor.dsmr_reading_timestamp
+
+      # Adding items here you probably also want to add to recorder.yaml

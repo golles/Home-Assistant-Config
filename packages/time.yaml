@@ -31,4 +31,3 @@ sensor:
           {% else %} 
             Night
           {% endif %}
-    
