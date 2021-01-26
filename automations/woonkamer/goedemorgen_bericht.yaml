@@ -43,7 +43,7 @@
         message: >
           {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
           {% set day = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][now().weekday()] %}
-          {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().weekday()] %}
+          {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().month-1] %}
           
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
