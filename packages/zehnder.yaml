@@ -24,7 +24,7 @@ fan:
 sensor:
   - platform: rest
     name: Mechanische ventilatie status
-    resource: !secret nrf905status_url
+    resource: !secret nrf905_status_url
     username: !secret nrf905_username
     password: !secret nrf905_password
     value_template: >
@@ -33,7 +33,7 @@ sensor:
       {% else %} 
         off 
       {% endif %}
-    json_attributes_path: $.devices.C0
+    json_attributes_path: $.devices.C0 # This might be different for each fan.
     json_attributes:
       - voltage
       - percentage
@@ -58,6 +58,10 @@ script:
         data:
           host: !secret nrf905_host
           speed: '{{ speed }}'
+      - delay: 1
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.mechanische_ventilatie_status
   ventilation_set_speed_timer:
     mode: single
     fields:
@@ -73,6 +77,10 @@ script:
           host: !secret nrf905_host
           speed: '{{ speed }}'
           timer: '{{ timer }}'
+      - delay: 1
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.mechanische_ventilatie_status
   ventilation_set_voltage:
     mode: single
     fields:
@@ -85,6 +93,10 @@ script:
         data:
           host: !secret nrf905_host
           voltage: '{{ voltage }}'
+      - delay: 1
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.mechanische_ventilatie_status
           
 rest_command:
   ventilation_set_speed:
