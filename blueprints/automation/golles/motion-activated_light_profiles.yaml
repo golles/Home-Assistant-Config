@@ -131,8 +131,7 @@ action:
       entity_id: !input motion_entity
       from: "on"
       to: "off"
-
-  - delay: !input cool_down
+      for: !input cool_down
 
   - choose:
     # Day time.
