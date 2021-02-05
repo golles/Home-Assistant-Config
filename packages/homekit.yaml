@@ -10,7 +10,6 @@
 # sudo service avahi-daemon restart
 
 homekit:
-  safe_mode: false
   auto_start: false
   advertise_ip: !secret host_ip
   filter:
