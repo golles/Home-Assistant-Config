@@ -2,6 +2,7 @@
   alias: Automatisch licht aan in de woonkamer
   initial_state: on
   mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
@@ -9,7 +10,7 @@
       for:
         minutes: 10
     - platform: state
-      entity_id: group.residents # Deze werkt niet ivm de 15 minuten template hieronder
+      entity_id: group.residents
       to: home
     - platform: numeric_state
       entity_id: sun.sun
@@ -17,36 +18,43 @@
       below: 10
     - platform: state
       entity_id: group.woonkamer_motion
-      to: 'on'
+      to: 'on'    
   condition:
-    - condition: state
-      entity_id: light.woonkamer
-      state: 'off'
-    - condition: state
-      entity_id: group.residents
-      state: home
-    - condition: numeric_state
-      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-      below: 15
-    - condition: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      below: 10
-    - condition: template
-      value_template: >
-        {{ is_state_attr('sun.sun', 'rising', False) }}
-    - condition: template # There must have been motion in the last x minutes
-      value_template: >
-        {{ 
-        is_state('group.woonkamer_motion', 'on') or
-          (
-            is_state('group.woonkamer_motion', 'off') and 
-            as_timestamp(now()) <= as_timestamp(states.group.woonkamer_motion.last_changed) + (15 * 60)
-          )
-        }}
+    - "{{ is_state('light.woonkamer', 'off') }}"
+    - "{{ is_state('group.residents', 'home') }}"
+    - "{{ states('sensor.woonkamer_lichtsterkte_illuminance_lux') | int < 15 }}"
+    - "{{ state_attr('sun.sun', 'elevation') | int < 10 }}"
+    - "{{ is_state_attr('sun.sun', 'rising', False) }}"
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.woonkamer
-        profile: helder
-        transition: 900 # 15 minutes
+    - variables:
+        trigger_entity_id: "{{ trigger.entity_id }}"
+
+    - choose:
+      # When someone comes home or a motion sensor is triggered.
+      - conditions: >
+          {{ 
+            trigger_entity_id == 'group.residents' or
+            trigger_entity_id == 'group.woonkamer_motion'
+          }} 
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: light.woonkamer
+              profile: helder
+              transition: 2
+
+      # There must be motion or there must have been motion in the last x minutes else nobody might be in this room.
+      - conditions: >
+          {{ 
+            is_state('group.woonkamer_motion', 'on') or
+              (
+                is_state('group.woonkamer_motion', 'off') and 
+                as_timestamp(now()) <= as_timestamp(states.group.woonkamer_motion.last_changed) + (15 * 60)
+              )
+          }}
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: light.woonkamer
+              profile: helder
+              transition: 900 # 15 minutes.
