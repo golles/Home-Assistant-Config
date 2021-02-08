@@ -15,7 +15,6 @@ group:
     icon: mdi:human-greeting
     entities:
       - person.sander
-      - person.yuliia
   
 automation:
   - id: vacation_mode_on

@@ -7,7 +7,6 @@
       entity_id: 
         # List all individual residents and not the group as it won't work if someone comes home while someone else is already at home.
         - person.sander
-        - person.yuliia
       to: home
   condition:
     condition: or

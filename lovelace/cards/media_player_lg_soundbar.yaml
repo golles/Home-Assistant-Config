@@ -11,8 +11,8 @@ hide:
   play_pause: false
   play_stop: false
 shortcuts:
-  columns: 3
-  column_height: 80
+  columns: 4
+  column_height: 60
   buttons:    
     - cover: /local/radio/npo1.png
       type: script
@@ -44,11 +44,6 @@ shortcuts:
       id: script.play_livingroom_radio
       data:
         stream: http://19993.live.streamtheworld.com/RADIO10.mp3
-    - cover: /local/radio/perec.png
-      type: script
-      id: script.play_livingroom_radio
-      data:
-        stream: http://radio.stilnoe.fm:8080/radio-stilnoe
     - cover: /local/radio/538.jpg
       type: script
       id: script.play_livingroom_radio

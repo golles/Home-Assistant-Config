@@ -8,12 +8,12 @@ cards:
   - type: entities
     show_header_toggle: false
     entities:
-      - entity: sensor.woonkamer_temperature_2
+      - entity: sensor.woonkamer_temperature
         type: custom:multiple-entity-row
         name: Klimaat
         state_header: Temperatuur
         entities:
-          - entity: sensor.woonkamer_humidity_2
+          - entity: sensor.woonkamer_humidity
             name: Luchtvochtigheid
  
   - type: entities

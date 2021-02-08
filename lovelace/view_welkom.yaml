@@ -8,7 +8,6 @@ cards:
   - type: glance
     entities:
       - person.sander
-      - person.yuliia
       - entity: group.residents
         name: Thuismodus
       - entity: input_boolean.guest_mode

@@ -20,10 +20,6 @@ cards:
         charging_state:
           entity_id: sensor.iphone_x_van_golles_battery_state
           state: Charging
-      - entity: sensor.yuliyas_iphone_battery_level
-        charging_state:
-          entity_id: sensor.yuliyas_iphone_battery_state
-          state: Charging
           
   - type: custom:battery-state-card
     name: HUE dimmer switches
