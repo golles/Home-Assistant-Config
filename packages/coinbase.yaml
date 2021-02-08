@@ -7,4 +7,27 @@ coinbase:
     - LINK
     - LTC
     - UNI
-    - XRP
+    # - XRP # No longer on Coinbase.
+  base_currency: EUR
+  
+sensor:
+  - platform: template
+    sensors:
+      coinbase_total:
+        friendly_name: Portefeuille
+        unit_of_measurement: EUR
+        icon_template: mdi:currency-eur
+        value_template: >
+          {% set number_string = states.sensor 
+            | selectattr('attributes.Balance in native currency')
+            | map(attribute='attributes.Balance in native currency')
+            | join(', ')
+            | replace(' EUR', '')
+          %}
+
+          {% set total = namespace(value = 0) %}
+          {% for i in number_string.split(', ') %}
+            {% set total.value = total.value + (i | float) %}
+          {% endfor %}
+
+          {{ total.value }}

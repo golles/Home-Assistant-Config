@@ -10,15 +10,19 @@ cards:
       type: entities
       title: Portemonnees
       show_header_toggle: false
+    entities:
+      - sensor.coinbase_total
     filter:
-      template: >
-        {%- for sensor in states.sensor -%}
-          {%- if sensor.entity_id.startswith('sensor.coinbase_') and sensor.entity_id.endswith('_portemonnee') -%}
-            {%- if sensor.state | float > 0 -%}
-              {{ sensor.entity_id}},
-            {%- endif -%}
-          {%- endif -%}
-        {%- endfor -%}
+      include:
+        - domain: sensor
+          entity_id: 'sensor.coinbase_*_portemonnee'
+        - domain: sensor
+          entity_id: 'sensor.coinbase_*_portemonnee'
+          options:
+            type: attribute
+            attribute: Balance in native currency
+            name: ' '
+            icon: ' '
     sort:
       method: name
 
@@ -28,46 +32,8 @@ cards:
       title: Koersen
       show_header_toggle: false
     filter:
-      template: >
-        {%- for sensor in states.sensor -%}
-          {%- if sensor.entity_id.endswith('_exchange_rate') -%}
-            {{ sensor.entity_id}},
-          {%- endif -%}
-        {%- endfor -%}
+      include:
+        - domain: sensor
+          entity_id: 'sensor.*_exchange_rate'
     sort:
       method: name
-  
-  - type: grid
-    columns: 3
-    square: false
-    cards:
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.btc_exchange_rate
-        line_color: '#ff9500'
-        font_size: 50
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.eth_exchange_rate
-        line_color: blue
-        font_size: 50
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.ltc_exchange_rate
-        line_color: grey
-        font_size: 50
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.link_exchange_rate
-        line_color: '#375bd2'
-        font_size: 50
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.uni_exchange_rate
-        line_color: '#ff0070'
-        font_size: 50
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.xrp_exchange_rate
-        line_color: black
-        font_size: 50
