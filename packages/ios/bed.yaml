@@ -43,7 +43,9 @@ automation:
           transition: 30
 
       - service: light.turn_on
-        entity_id: light.bedlampen
+        data:
+          entity_id: light.bedlampen
+          profile: nachtlampje
 
   - id: ios_action_going_to_sleep
     alias: iOS action - Gaan slapen
