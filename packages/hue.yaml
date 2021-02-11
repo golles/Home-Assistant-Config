@@ -1,10 +1,10 @@
 homeassistant:
   customize:
-    light.hue_smart_plug_1:
+    light.gekleurde_licht:
       icon: mdi:led-strip-variant
-    light.hue_filament_bulb_1_4:
+    light.bedlampje_links:
       icon: mdi:desk-lamp
-    light.hue_filament_bulb_1_3:
+    light.bedlampje_rechts:
       icon: mdi:desk-lamp
     light.bedlampen:
       icon: mdi:desk-lamp
@@ -13,8 +13,8 @@ light:
   - platform: group
     name: Bedlampen
     entities:
-      - light.hue_filament_bulb_1_4
-      - light.hue_filament_bulb_1_3
+      - light.bedlampje_links
+      - light.bedlampje_rechts
 
 script:
   eettafel_on:
@@ -25,31 +25,31 @@ script:
     sequence:
       - service: light.turn_on
         data:
-          entity_id: light.hue_filament_bulb_3 #5
+          entity_id: light.eettafel_hanglamp_5
           brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         data:
-          entity_id: light.hue_filament_bulb_4 #4
+          entity_id: light.eettafel_hanglamp_4
           brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         data:
-          entity_id: light.hue_filament_bulb_1 #3
+          entity_id: light.eettafel_hanglamp_3
           brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         data:
-          entity_id: light.hue_filament_bulb_5 #2
+          entity_id: light.eettafel_hanglamp_2
           brightness: '{{ brightness }}'
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_on
         data:
-          entity_id: light.hue_filament_bulb_2 #1
+          entity_id: light.eettafel_hanglamp_1
           brightness: '{{ brightness }}'
 
   eettafel_off:
@@ -58,23 +58,23 @@ script:
       delay_ms: 100
     sequence:
       - service: light.turn_off
-        entity_id: light.hue_filament_bulb_2 #1
+        entity_id: light.eettafel_hanglamp_1
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
-        entity_id: light.hue_filament_bulb_5 #2
+        entity_id: light.eettafel_hanglamp_2
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
-        entity_id: light.hue_filament_bulb_1 #3
+        entity_id: light.eettafel_hanglamp_3
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
-        entity_id: light.hue_filament_bulb_4 #4
+        entity_id: light.eettafel_hanglamp_4
       - delay:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
-        entity_id: light.hue_filament_bulb_3 #5
+        entity_id: light.eettafel_hanglamp_5
   
 switch:
   - platform: template

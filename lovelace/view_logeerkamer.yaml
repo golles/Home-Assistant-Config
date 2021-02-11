@@ -31,7 +31,7 @@ cards:
           type: section
           label: 
         entities:
-          - entity: light.logeerkamer_lamp
+          - entity: light.logeerkamer_lamp_1
             name: Lamp 1
-          - entity: light.hue_color_lamp_1_3
+          - entity: light.logeerkamer_lamp_2
             name: Lamp 2

@@ -31,13 +31,13 @@ cards:
           type: section
           label: 
         entities:
-          - entity: light.hue_color_spot_2
+          - entity: light.kledingkamer_spot_1
             name: Spot 1
-          - entity: light.hue_color_spot_3
+          - entity: light.kledingkamer_spot_2
             name: Spot 2
-          - entity: light.hue_color_spot_1
+          - entity: light.kledingkamer_spot_3
             name: Spot 3
-          - entity: light.hue_color_spot_4
+          - entity: light.kledingkamer_spot_4
             name: Spot 4
       - entity: binary_sensor.kledingkamer_beweging_occupancy
         name: Beweging

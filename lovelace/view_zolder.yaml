@@ -31,9 +31,9 @@ cards:
           type: section
           label: 
         entities:
-          - entity: light.zolder_lamp
+          - entity: light.zolder_lamp_1
             name: Lamp 1
-          - entity: light.hue_color_lamp_1_4
+          - entity: light.zolder_lamp_2
             name: Lamp 2
 
   - type: entities

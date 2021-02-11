@@ -9,4 +9,4 @@
       press_action:
       - service: script.everything_off
         data:
-          exclude_entity_ids: light.hue_smart_plug_1
+          exclude_entity_ids: light.gekleurde_licht

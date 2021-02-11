@@ -42,10 +42,10 @@ cards:
         toggle: true
         state_header: Beide
         entities:
-          - entity: light.hue_filament_bulb_1_4
+          - entity: light.bedlampje_links
             name: Links
             toggle: true
-          - entity: light.hue_filament_bulb_1_3
+          - entity: light.bedlampje_rechts
             name: Rechts
             toggle: true
       - entity: switch.bed_ledstrip_switch

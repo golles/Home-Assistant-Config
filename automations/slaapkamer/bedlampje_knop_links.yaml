@@ -7,7 +7,7 @@
         day_end_time: 00:00:00
         day_start_time: 08:00:00
         smart_button: sensor.bedlampje_knop_links_action
-        light_entity_bed: light.hue_filament_bulb_1_4
+        light_entity_bed: light.bedlampje_links
         light_entity_ceiling: light.slaapkamer_plafond_groep
         night_profile: nachtlampje
         day_profile: gedimd

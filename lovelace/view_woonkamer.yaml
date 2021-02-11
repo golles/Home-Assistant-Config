@@ -62,15 +62,15 @@ cards:
           type: section
           label: 
         entities:
-          - entity: light.hue_filament_bulb_2
+          - entity: light.eettafel_hanglamp_1
             name: Hanglamp 1
-          - entity: light.hue_filament_bulb_5
+          - entity: light.eettafel_hanglamp_2
             name: Hanglamp 2
-          - entity: light.hue_filament_bulb_1
+          - entity: light.eettafel_hanglamp_3
             name: Hanglamp 3
-          - entity: light.hue_filament_bulb_4
+          - entity: light.eettafel_hanglamp_4
             name: Hanglamp 4
-          - entity: light.hue_filament_bulb_3
+          - entity: light.eettafel_hanglamp_5
             name: Hanglamp 5
 
       - light.keuken
