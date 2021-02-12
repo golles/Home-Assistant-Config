@@ -25,3 +25,6 @@
 
   - url: /local/swipe-navigation.js
     type: js
+
+  - url: /local/template-entity-row.js
+    type: module
