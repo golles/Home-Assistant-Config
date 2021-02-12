@@ -1,5 +1,11 @@
-- id: pause_tv_doorbell_press
-  alias: TV pauzeren als iemand op de deurbel drukt
+- id: doorbell_press_action
+  alias: Deurbel wordt ingedrukt
+  description: |
+    Wanneer er op de deurbel gedrukt wordt:
+      - Stuur een melding naar de werk laptop wanneer deze thuis en actief is.
+      - Stuur een melding naar de tv wanneer deze aan staat.
+      - Pauzeer de tv als Netflix, Plex of Youtube aan staat
+      - Pauzeer Ziggo wanneer je geen lineaire tv kijkt
   initial_state: on
   mode: single
   trigger:
@@ -7,24 +13,46 @@
       entity_id: binary_sensor.deurbel_doorbell_pressed
       to: 'on'
   action:
-    - service: notify.lg_c9
-      data:
-        message: Ding dong! Iemand staat bij de deur
+    - variables:
+        message_title: Ding dong!
+        message_text: Iemand staat bij de deur
+
+    - choose:
+      # Notify work laptop when working from home.
+      - conditions:
+          - "{{ is_state('device_tracker.tt_macbook', 'home') }}"
+          - "{{ is_state('binary_sensor.tt_macbook_active', 'on') }}"
+        sequence:
+          - service: notify.mobile_app_tt_macbook
+            data:
+              title: "{{ message_title }}"
+              message: "{{ message_text }}"
+
+    - choose:
+    # Nottify tv when on.
+      - conditions:
+        - "{{ is_state('media_player.lg_c9', 'on') }}"
+        sequence:
+        - service: notify.lg_c9
+          data:
+            message: "{{ message_title }} {{ message_text }}"
         
     - choose:
-      # Netflix, Plex, Youtube
+      # Pause tv when Netflix, Plex or Youtube is active.
       - conditions:
           - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
         sequence:
           - service: media_player.media_pause
             entity_id: media_player.lg_c9
   
-      # Ziggo, but not linear tv
+      # Pause Ziggo, but not when watching linear tv.
       - conditions:
-          - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') and not is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
+          - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
+          - "{{ is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
         sequence: 
           - service: media_player.media_pause
             entity_id: media_player.stb_arris_uhd
 
+    # Don't trigger again for a few seconds.
     - delay:
         seconds: 5
