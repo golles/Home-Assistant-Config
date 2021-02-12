@@ -3,7 +3,8 @@ path: hass
 panel: false
 icon: mdi:home-assistant
 badges: []
-cards: 
+cards:
+
   - type: entities
     title: Home Assistant
     show_header_toggle: false
@@ -26,6 +27,79 @@ cards:
           - type: weblink
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/
+
+  - type: entities
+    title: Info
+    show_header_toggle: false
+    entities:
+      - type: custom:template-entity-row
+        icon: mdi:robot
+        name: Automatiseringen
+        state: "{{ states.automation | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:checkbox-blank-circle-outline
+        name: Binaire sensoren
+        state: "{{ states.binary_sensor | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:camera
+        name: Cameras
+        state: "{{ states.camera | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:window-shutter-open
+        name: Covers
+        state: "{{ states.cover | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:walk
+        name: Groepen
+        state: "{{ states.group | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:thermostat
+        name: Klimaat
+        state: "{{ states.climate | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:lightbulb
+        name: Lampen
+        state: "{{ states.light | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:cast
+        name: Media spelers
+        state: "{{ states.media_player | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:account
+        name: Personen
+        state: "{{ states.person | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:flash
+        name: Schakelaars
+        state: "{{ states.switch | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:script
+        name: Scripts
+        state: "{{ states.script | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:eye
+        name: Sensoren
+        state: "{{ states.sensor | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:cellphone-link
+        name: Trackers
+        state: "{{ states.device_tracker | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:fan
+        name: Ventilatoren
+        state: "{{ states.fan | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:weather-cloudy
+        name: Weer
+        state: "{{ states.weather | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:white-balance-sunny
+        name: Zon
+        state: "{{ states.sun | count}}"
+      - type: custom:template-entity-row
+        icon: mdi:texture-box
+        name: Zones
+        state: "{{ states.zone | count}}"
 
   - type: custom:auto-entities
     show_empty: false
