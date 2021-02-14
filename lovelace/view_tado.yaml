@@ -34,12 +34,14 @@ cards:
             type: custom:multiple-entity-row
             name: Air purifier
             attribute: temperature
+            unit: °C
             state_header: Temperatuur
             entities:
               - entity: fan.air_purifier
                 type: custom:multiple-entity-row
                 name: Luchtvochtigheid
-                attribute: temperature
+                attribute: humidity
+                unit: "%"
           - type: custom:fold-entity-row
             head:
               type: section
