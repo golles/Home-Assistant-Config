@@ -170,18 +170,28 @@ automation:
         at: 
           - '12:00:00'
     action:
-      - choose:
-        - conditions:
-            - condition: template
-              value_template: > # Friday - Saturday
-                {{ now().isoweekday() in [5, 6] }}
-          sequence:
-            - service: input_datetime.set_datetime
-              data:
-                entity_id: input_datetime.dishwasher_daily_start
-                time: '07:30'
-        default:
-          - service: input_datetime.set_datetime
-            data:
-              entity_id: input_datetime.dishwasher_daily_start
-              time: '04:30'
+      - variables:
+          weekday_time: '04:30'
+          weekend_time: '07:30'
+          schedule_time: >
+            {% set weekday = now().isoweekday() %}
+            {% set hour = now().hour %}
+            
+            {% if hour < 4 %}
+              {% if weekday in [6, 7] %}
+                {{ weekend_time }}
+              {% else %}
+                {{ weekday_time }}
+              {% endif %}
+            {% else %}
+              {% if weekend_time in [5, 6] %}
+                {{ weekend }}
+              {% else %}
+                {{ weekday_time }}
+              {% endif %}
+            {% endif %}
+
+      - service: input_datetime.set_datetime
+        data:
+          entity_id: input_datetime.dishwasher_daily_start
+          time: "{{ schedule_time }}"
