@@ -34,8 +34,10 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
+        # It should come from Sander and he should be home.
         - conditions:
-            - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+          - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+          - "{{ is_state('person.sander', 'home') }}"
           sequence: []
 
   - id: ios_action_alarm_clock_snooze
@@ -53,11 +55,17 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
+        # Temperature should be higher than a certain amount.
         - conditions:
-            - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
-            - "{{ is_state('person.sander', 'home') }}"
+            - "{{ state_attr('weather.huis', 'temperature') > -2 }}"
           sequence:
-            service: cover.set_cover_position
-            data:
-              entity_id: cover.slaapkamer
-              position: 12
+            - choose:
+              # It should come from Sander and he should be home.
+              - conditions:
+                  - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+                  - "{{ is_state('person.sander', 'home') }}"
+                sequence:
+                  service: cover.set_cover_position
+                  data:
+                    entity_id: cover.slaapkamer
+                    position: 12
