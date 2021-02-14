@@ -1,9 +1,11 @@
 title: Batterijen
 path: batterijen
 panel: false
-icon: 'mdi:battery-charging-wireless'
+icon: "mdi:battery-charging-wireless"
 badges: []
-cards: 
+cards:
+  - !include cards/batterijen_laag.yaml
+            
   - type: custom:battery-state-card
     name: iPhones
     secondary_info: last_updated
@@ -157,3 +159,31 @@ cards:
       - sensor.achtertuin_lichtsterkte_battery
       - sensor.slaapkamer_lichtsterkte_battery
 
+
+  - type: custom:battery-state-card
+    name: Tado
+    secondary_info: last_updated
+    tap_action:
+      action: more-info
+    bulk_rename:
+      - from: _battery
+      - from: battery
+    style: |
+      .entity-row .secondary {
+        color: var(--secondary-text-color)
+      }
+    state_map:
+      - from: "off"
+        to: 100
+      - from: "on"
+        to: 10
+    entities:
+      - binary_sensor.ru1141249024_battery_state
+      - binary_sensor.va1805654016_battery_state
+      - binary_sensor.va1923094528_battery_state
+      - binary_sensor.va3030325248_battery_state
+      - binary_sensor.va2677479424_battery_state
+      - binary_sensor.va3382122496_battery_state
+      - binary_sensor.va4103542784_battery_state
+      - binary_sensor.va1788876800_battery_state
+      - binary_sensor.va2979272704_battery_state
