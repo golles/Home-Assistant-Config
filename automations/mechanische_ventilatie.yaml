@@ -3,6 +3,8 @@
   initial_state: on
   mode: restart
   trigger:
+    - platform: homeassistant
+      event: start # Listen to start event to make sure we're not staying forever in high mode.
     - platform: state
       entity_id: binary_sensor.douche_beweging_occupancy
       from: 'off'
@@ -24,7 +26,7 @@
           - service: script.ventilation_set_speed
             data:
               speed: high
-      # Occupancy no longer detected.
+      # Occupancy no longer detected. First go to low and then set a timer.
       default: 
         - service: script.ventilation_set_speed
           data:
