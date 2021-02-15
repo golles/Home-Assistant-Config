@@ -5,18 +5,18 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.achterdeur_contact
-      to: 'on'
+      to: "on"
       for:
         minutes: 5
     - platform: state
       entity_id: binary_sensor.keukenraam_contact
-      to: 'on'
+      to: "on"
       for:
         minutes: 5
   condition:
     - condition: state
       entity_id: fan.air_purifier
-      state: 'on'
+      state: "on"
   action:
     - service: fan.turn_off
       entity_id: fan.air_purifier
@@ -35,13 +35,13 @@
   condition:
     - condition: state
       entity_id: fan.air_purifier
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: binary_sensor.achterdeur_contact
-      state: 'off'
+      state: "off"
     - condition: state
       entity_id: binary_sensor.keukenraam_contact
-      state: 'off'
+      state: "off"
   action:
     - service: fan.turn_on
       entity_id: fan.air_purifier
@@ -60,7 +60,7 @@
   condition:
     - condition: state
       entity_id: fan.air_purifier
-      state: 'on'
+      state: "on"
   action:
     - service: fan.turn_off
       entity_id: fan.air_purifier

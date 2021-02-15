@@ -1,3 +1,8 @@
+homeassistant:
+  customize:
+    fan.air_purifier:
+      icon: mdi:air-purifier
+
 fan:
   - platform: xiaomi_miio
     host: !secret airpurifier_ip
@@ -11,7 +16,7 @@ switch:
       air_purifier_led:
         friendly_name: Scherm
         value_template: >
-          {{ is_state_attr('fan.air_purifier', 'led', true) }}
+          {{ is_state_attr("fan.air_purifier", "led", true) }}
         turn_on:
           service: xiaomi_miio.fan_set_led_on
           data:
@@ -25,7 +30,7 @@ switch:
       air_purifier_child_lock:
         friendly_name: Kinderslot
         value_template: >
-          {{ is_state_attr('fan.air_purifier', 'child_lock', true) }}
+          {{ is_state_attr("fan.air_purifier", "child_lock", true) }}
         turn_on:
           service: xiaomi_miio.fan_set_child_lock_on
           data:
@@ -42,7 +47,7 @@ sensor:
       air_purifier_air_quality:
         friendly_name: Luchtkwaliteit
         value_template: >
-          {% set aqi = state_attr('fan.air_purifier', 'aqi') %}
+          {% set aqi = state_attr("fan.air_purifier", "aqi") %}
           {% if aqi == None %}
             Onbekend
           {% elif aqi < 12 %}
