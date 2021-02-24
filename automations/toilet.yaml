@@ -5,7 +5,7 @@
     path: golles/motion-activated_light_profiles.yaml
     input:
       illuminance_below: '10'
-      light_entity: light.toilet
+      light_entity: light.toilet_lamp
       motion_entity: binary_sensor.toilet_beweging_occupancy
       illuminance_entity: sensor.toilet_beweging_illuminance
       cool_down: 60
