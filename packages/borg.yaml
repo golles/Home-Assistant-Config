@@ -1,0 +1,37 @@
+input_text:
+  borg:
+    name: Borg backup status
+    initial: Backup and Prune finished successfully
+    icon: mdi:cloud-upload
+
+automation:
+  - id: borg_webhook
+    alias: Borg backup webhook
+    initial_state: on
+    mode: restart
+    trigger:
+      - platform: webhook
+        webhook_id: borg
+    action:
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.borg
+          value: "{{ trigger.json.status }}"
+
+  - id: borg_warning
+    alias: Borg backup waarschuwing
+    initial_state: on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: input_text.borg
+        for:
+          minutes: 30
+    condition:
+      - "{{ states('input_text.borg') != 'Backup and Prune finished successfully' }}"
+    action:
+      - service: notify.sander
+        data:
+          title: Borg backup
+          message: >
+            Backup is niet goed gegaan, laatste status: {{ states('input_text.borg') }}.
