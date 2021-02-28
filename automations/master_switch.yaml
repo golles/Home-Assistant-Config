@@ -9,4 +9,6 @@
       press_action:
       - service: script.everything_off
         data:
-          exclude_entity_ids: light.gekleurde_licht
+          exclude_entity_ids: 
+            - light.gekleurde_licht
+            - light.hal_lamp
