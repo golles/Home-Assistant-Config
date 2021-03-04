@@ -10,4 +10,3 @@ views:
   - !include lovelace/view_internet.yaml
   - !include lovelace/view_sabnzbd.yaml
   - !include lovelace/view_tado.yaml
-  - !include lovelace/view_coinbase.yaml
