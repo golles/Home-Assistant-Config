@@ -48,7 +48,7 @@
       # Pause Ziggo, but not when watching linear tv.
       - conditions:
           - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
-          - "{{ is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
+          - "{{ not is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
         sequence: 
           - service: media_player.media_pause
             entity_id: media_player.stb_arris_uhd
