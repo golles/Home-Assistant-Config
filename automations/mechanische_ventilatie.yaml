@@ -19,23 +19,32 @@
     - choose:
       # Occupancy detected.
       - conditions:
-        - condition: state
-          entity_id: binary_sensor.douche_beweging_occupancy
-          state: 'on'
+        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
+        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'on') }}"
         sequence:
-          - service: script.ventilation_set_speed
+          - service: script.ventilation_set_preset_mode
+            data:
+              preset_mode: high
+
+      # Occupancy no longer detected. First go to low and then set a timer.
+      - conditions:
+        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
+        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'off') }}"
+        sequence:
+          - service: script.ventilation_set_preset_mode
+            data:
+              preset_mode: low
+
+          - delay:
+              seconds: 5
+
+          - service: script.ventilation_set_speed_timer
             data:
               speed: high
-      # Occupancy no longer detected. First go to low and then set a timer.
-      default: 
-        - service: script.ventilation_set_speed
-          data:
-            speed: low
+              timer: 10
 
-        - delay:
-            seconds: 5
-            
-        - service: script.ventilation_set_speed_timer
+      # HA start.
+      default:
+        - service: script.ventilation_set_preset_mode
           data:
-            speed: high
-            timer: 10
+            preset_mode: low

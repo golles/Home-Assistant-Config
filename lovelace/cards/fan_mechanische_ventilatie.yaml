@@ -13,25 +13,25 @@ entities:
         name: Laag
         tap_action:
           action: call-service
-          service: script.ventilation_set_speed
+          service: script.ventilation_set_preset_mode
           service_data:
-            speed: low
+            preset_mode: low
       - entity: sensor.mechanische_ventilatie_status
         icon: mdi:fan-speed-2
         name: Medium
         tap_action:
           action: call-service
-          service: script.ventilation_set_speed
+          service: script.ventilation_set_preset_mode
           service_data:
-            speed: medium
+            preset_mode: medium
       - entity: sensor.mechanische_ventilatie_status
         icon: mdi:fan-speed-3
         name: Hoog
         tap_action:
           action: call-service
-          service: script.ventilation_set_speed
+          service: script.ventilation_set_preset_mode
           service_data:
-            speed: high
+            preset_mode: high
   - type: custom:multiple-entity-row
     entity: sensor.mechanische_ventilatie_status
     attribute: timer

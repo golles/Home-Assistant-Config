@@ -5,17 +5,25 @@ fan:
         friendly_name: Mechanische ventilatie
         value_template: >
           {{ states('sensor.mechanische_ventilatie_status') }}
-        speed_template: >
+        availability_template: >
+          {{ states('sensor.mechanische_ventilatie_status') }}
+        percentage_template: >
+          {{ state_attr('sensor.mechanische_ventilatie_status', 'percentage') }}
+        preset_mode_template: >
           {{ state_attr('sensor.mechanische_ventilatie_status', 'speed') }}
         turn_on:
           service: script.ventilation_turn_on_off_dummy
         turn_off:
           service: script.ventilation_turn_on_off_dummy
-        set_speed:
-          service: script.ventilation_set_speed
+        set_percentage:
+          service: script.ventilation_set_voltage
           data:
-            speed: '{{ speed }}'
-        speeds:
+            voltage: '{{ percentage / 10 }}'
+        set_preset_mode:
+          service: script.ventilation_set_preset_mode
+          data:
+            preset_mode: '{{ preset_mode }}'
+        preset_modes:
           - low
           - medium
           - high
@@ -33,7 +41,7 @@ sensor:
       {% else %} 
         off 
       {% endif %}
-    json_attributes_path: $.devices.C0 # This might be different for each fan.
+    json_attributes_path: $.devices.C0 # This will be different for each fan.
     json_attributes:
       - voltage
       - percentage
@@ -44,20 +52,19 @@ script:
   ventilation_turn_on_off_dummy:
     mode: single
     sequence:
-      - delay:
-          miliseconds: 0
-  ventilation_set_speed:
+      - delay: 1
+  ventilation_set_preset_mode:
     mode: single
     fields:
       host:
         description: Hostname or ip
-      speed:
-        description: Set the fan speed (low/medium/high/max)
+      preset_mode:
+        description: Set the fan preset mode (low/medium/high/max)
     sequence:
-      - service: rest_command.ventilation_set_speed
+      - service: rest_command.ventilation_preset_mode
         data:
           host: !secret nrf905_host
-          speed: '{{ speed }}'
+          preset_mode: '{{ preset_mode }}'
       - delay: 1
       - service: homeassistant.update_entity
         data:
@@ -99,8 +106,8 @@ script:
           entity_id: sensor.mechanische_ventilatie_status
           
 rest_command:
-  ventilation_set_speed:
-    url: http://{{ host }}/api/v2/fan/setspeed.json?speed={{ speed }}
+  ventilation_preset_mode:
+    url: http://{{ host }}/api/v2/fan/setspeed.json?speed={{ preset_mode }}
     username: !secret nrf905_username
     password: !secret nrf905_password
   ventilation_set_speed_timer:
