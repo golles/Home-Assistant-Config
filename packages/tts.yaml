@@ -2,9 +2,15 @@ tts:
   - platform: google_translate
     base_url: !secret external_url
     language: nl
+    cache: true
+    cache_dir: /tmp/tts_google_translate
+    time_memory: 300
 
   - platform: microsoft
     api_key: !secret azure_tts_api_key
     region: westeurope
     language: nl-nl
     type: ColetteNeural
+    cache: true
+    cache_dir: /tmp/tts_microsoft
+    time_memory: 300
