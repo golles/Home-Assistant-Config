@@ -59,3 +59,41 @@ sensor:
       - d2neerslag
       - d2zon
       - alarm
+
+weather:
+  - platform: template
+    name: KNMI
+    condition_template: >
+      {% set condition = state_attr('sensor.knmi_weer', 'image')%}
+      {% if condition == 'zonnig' %}
+        sunny
+      {% elif condition == 'bliksem' %}
+        lightning
+      {% elif condition == 'regen' %}
+        rainy
+      {% elif condition == 'buien' %}
+        rainy
+      {% elif condition == 'hagel' %}
+        hail
+      {% elif condition == 'mist' %}
+        fog
+      {% elif condition == 'sneeuw' %}
+        snowy
+      {% elif condition == 'bewolkt' %}
+        cloudy
+      {% elif condition == 'halfbewolkt' %}
+        partlycloudy
+      {% elif condition == 'zwaarbewolkt' %}
+        cloudy
+      {% elif condition == 'nachtmist' %}
+        fog
+      {% elif condition == 'helderenacht' %}
+        clear-night
+      {% elif condition == 'wolkennacht' %}
+        cloudy
+      {% endif %}
+    temperature_template: "{{ state_attr('sensor.knmi_weer', 'temp') | float }}"
+    humidity_template: "{{ state_attr('sensor.knmi_weer', 'lv') | int }}"
+    pressure_template: "{{ state_attr('sensor.knmi_weer', 'luchtd') | float }}"
+    wind_speed_template: "{{ state_attr('sensor.knmi_weer', 'windkmh') | float }}"
+    # forecast_template: "{{ state_attr('sensor.knmi_weer', 'temp') | float }}"
