@@ -29,7 +29,7 @@ sensor:
   - platform: sql
     db_url: !secret mariadb_connection
     queries:
-      - name: DB size
+      - name: MariaDB size
         query: >
           SELECT 
             table_schema, 
