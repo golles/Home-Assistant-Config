@@ -17,21 +17,21 @@
         minutes: 5
   action:
     - choose:
-      # Occupancy detected.
       - conditions:
         - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
         - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'on') }}"
         sequence:
-          - service: script.ventilation_set_preset_mode
+          - alias: Occupancy detected
+            service: script.ventilation_set_preset_mode
             data:
               preset_mode: high
 
-      # Occupancy no longer detected. First go to low and then set a timer.
       - conditions:
         - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
         - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'off') }}"
         sequence:
-          - service: script.ventilation_set_preset_mode
+          - alias: Occupancy no longer detected. First go to low and then set a timer
+            service: script.ventilation_set_preset_mode
             data:
               preset_mode: low
 

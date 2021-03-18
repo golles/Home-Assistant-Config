@@ -30,20 +30,19 @@
         trigger_entity_id: "{{ trigger.entity_id }}"
 
     - choose:
-      # When someone comes home or a motion sensor is triggered.
       - conditions: >
           {{ 
             trigger_entity_id == 'group.residents' or
             trigger_entity_id == 'group.woonkamer_motion'
           }} 
         sequence:
-          - service: light.turn_on
+          - alias: When someone comes home or a motion sensor is triggered
+            service: light.turn_on
             data:
               entity_id: light.woonkamer
               profile: helder
               transition: 2
 
-      # There must be motion or there must have been motion in the last x minutes else nobody might be in this room.
       - conditions: >
           {{ 
             is_state('group.woonkamer_motion', 'on') or
@@ -53,7 +52,8 @@
               )
           }}
         sequence:
-          - service: light.turn_on
+          - alias: There must be motion or there must have been motion in the last x minutes else nobody might be in this room
+            service: light.turn_on
             data:
               entity_id: light.woonkamer
               profile: helder

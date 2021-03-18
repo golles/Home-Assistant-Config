@@ -18,39 +18,39 @@
         message_text: Iemand staat bij de deur
 
     - choose:
-      # Notify work laptop when working from home.
       - conditions:
           - "{{ is_state('device_tracker.tt_macbook', 'home') }}"
           - "{{ is_state('binary_sensor.tt_macbook_active', 'on') }}"
         sequence:
-          - service: notify.mobile_app_tt_macbook
+          - alias: Notify work laptop when working from home
+            service: notify.sander_work
             data:
               title: "{{ message_title }}"
               message: "{{ message_text }}"
 
     - choose:
-    # Nottify tv when on.
       - conditions:
         - "{{ is_state('media_player.lg_c9', 'on') }}"
         sequence:
-        - service: notify.lg_c9
+        - alias: Nottify tv when on
+          service: notify.lg_c9
           data:
             message: "{{ message_title }} {{ message_text }}"
         
     - choose:
-      # Pause tv when Netflix, Plex or Youtube is active.
       - conditions:
           - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
         sequence:
-          - service: media_player.media_pause
+          - alias: Pause tv when Netflix, Plex or Youtube is active
+            service: media_player.media_pause
             entity_id: media_player.lg_c9
   
-      # Pause Ziggo, but not when watching linear tv.
       - conditions:
           - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
           - "{{ not is_state_attr('media_player.stb_arris_uhd', 'play_mode', 'linear') }}"
         sequence: 
-          - service: media_player.media_pause
+          - alias: Pause Ziggo, but not when watching linear tv
+            service: media_player.media_pause
             entity_id: media_player.stb_arris_uhd
 
     # Don't trigger again for a few seconds.

@@ -4,6 +4,11 @@ notify:
     services:
       - service: mobile_app_iphone_x_van_golles
       - service: mobile_app_macbook_pro_van_sander
+  
+  - name: sander_work
+    platform: group
+    services:
+      - service: mobile_app_tt_macbook
       
   - name: all_iphones
     platform: group
