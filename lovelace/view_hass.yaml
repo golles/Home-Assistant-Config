@@ -15,7 +15,7 @@ cards:
       - type: custom:elapsed-time-entity-row
         entity: sensor.runtime
         hide: seconds
-      - entity: sensor.db_size
+      - entity: sensor.mariadb_size
         icon: mdi:database
       - type: divider
       - entity: sensor.current_version
