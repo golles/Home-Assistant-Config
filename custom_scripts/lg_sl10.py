@@ -12,7 +12,7 @@ class LGSoundbar:
     self._speaker.get_info()
     self._speaker.get_func()
 
-    time.sleep(1) # Sleep a little to get the data.
+    time.sleep(2) # Sleep a little to get the data.
 
   def setSource(self, source):
     '''Set the source of the soundbar.'''
