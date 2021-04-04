@@ -1,0 +1,83 @@
+automation:
+  - id: alarm_system
+    alias: Alarm systeem
+    description: |
+      Alarm systeem
+      Deze automation triggert bewust vele notificaties, namelijk voor alle deuren en ramen die open gaan
+      en ook voor alle bewegingssensoren die beweging detecteren.
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          # Deur/raam sensoren:
+          # Begaande grond.
+          - binary_sensor.achterdeur_contact
+          - binary_sensor.achterraam_contact
+          - binary_sensor.keukenraam_contact
+          - binary_sensor.voordeur_contact
+          - binary_sensor.voorraadkastdeur_contact
+          # Eerste verdieping.
+          - binary_sensor.slaapkamerraam_contact
+          - binary_sensor.kledingkamerraam_contact
+          - binary_sensor.badkamerraam_contact
+          - binary_sensor.logeerkamerraam_contact
+          # Tweede verdieping.
+          - binary_sensor.balkondeur_contact
+          - binary_sensor.zolderraam_contact
+
+          # Bewegingssensoren:
+          # Begaande grond.
+          - binary_sensor.woonkamer_beweging_1_occupancy
+          - binary_sensor.woonkamer_beweging_2_occupancy
+          - binary_sensor.hal_sensor_motion
+          - binary_sensor.toilet_beweging_occupancy
+          - binary_sensor.overloop_sensor_1_motion
+          # Eerste verdieping.
+          - binary_sensor.overloop_sensor_2_motion
+          - binary_sensor.kledingkamer_beweging_occupancy
+          - binary_sensor.badkamer_beweging_occupancy
+          # Tweede verdieping.
+          - binary_sensor.zoldertrap_beweging_occupancy
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: group.residents
+        state: not_home
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: 'off'
+    action:
+      - variables:
+          trigger_friendly_name: >
+            {{ 
+              state_attr(trigger.entity_id, 'friendly_name')
+              | replace(' occupancy', '')
+              | replace(' motion', '')
+              | replace(' contact', '')
+              | replace(' beweging', ' bewegingssensor')
+              | replace(' sensor', ' bewegingssensor')
+            }}
+          trigger_device_class: >
+            {{ state_attr(trigger.entity_id, 'device_class') }}
+          message: >
+            {% if trigger_device_class == 'door' %}
+              {{ trigger_friendly_name }} is geopend
+            {% elif trigger_device_class == 'window' %}
+              {{ trigger_friendly_name }} is geopend
+            {% elif trigger_device_class == 'motion' %}
+              {{ trigger_friendly_name }} heeft beweging gedetecteerd 
+            {% endif %}
+
+      - service: notify.sander
+        data:
+          title: 🚨🚨🚨 Alarm
+          message: >
+            {{ message }}
+          data:
+            push:
+              thread-id: alarm-notification-group
+              sound:
+                name: alrarm.caf
+                critical: 1
+                volume: 1.0
