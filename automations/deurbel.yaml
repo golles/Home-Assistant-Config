@@ -4,8 +4,8 @@
     Wanneer er op de deurbel gedrukt wordt:
       - Stuur een melding naar de werk laptop wanneer deze thuis en actief is.
       - Stuur een melding naar de tv wanneer deze aan staat.
-      - Pauzeer de tv als Netflix, Plex of Youtube aan staat
-      - Pauzeer Ziggo wanneer je geen lineaire tv kijkt
+      - Pauzeer de tv als Netflix, Plex of Youtube aan staat.
+      - Pauzeer Ziggo wanneer je geen lineaire tv kijkt.
   initial_state: on
   mode: single
   trigger:
@@ -56,3 +56,20 @@
     # Don't trigger again for a few seconds.
     - delay:
         seconds: 5
+
+- id: eufy-ha-mqtt-bridge_offline
+  alias: eufy-ha-mqtt-bridge offline
+  description: Ping a message when the container seems to be offline.
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: sensor.deurbel_battery_percentage
+      to: unknown
+      for:
+        minutes: 2
+  action:
+    - service: notify.sander
+      data:
+        title: eufy-ha-mqtt-bridge offline
+        message: Check de logs en container moet opnieuw worden gestart.
