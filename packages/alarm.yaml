@@ -39,6 +39,7 @@ automation:
           - binary_sensor.badkamer_beweging_occupancy
           # Tweede verdieping.
           - binary_sensor.zoldertrap_beweging_occupancy
+          - binary_sensor.zolder_beweging_occupancy
         to: 'on'
     condition:
       - condition: state
@@ -78,6 +79,6 @@ automation:
             push:
               thread-id: alarm-notification-group
               sound:
-                name: alrarm.caf
+                name: alarm.caf
                 critical: 1
                 volume: 1.0

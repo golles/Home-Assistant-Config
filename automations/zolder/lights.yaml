@@ -4,7 +4,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.hue_motion_sensor_1_motion
+      entity_id: binary_sensor.zolder_beweging_occupancy
       to: 'off'
       for:
         minutes: 10
@@ -15,7 +15,7 @@
         minutes: 5
   condition:
     - condition: state
-      entity_id: binary_sensor.hue_motion_sensor_1_motion
+      entity_id: binary_sensor.zolder_beweging_occupancy
       state: 'off'
       for:
         minutes: 10
