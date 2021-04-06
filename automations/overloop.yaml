@@ -5,14 +5,22 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.zoldertrap_beweging_occupancy
-      to: 'on'
+      to: "on"
   condition:
-    - condition: state
-      entity_id: light.overloop
-      state: 'off'
-    - condition: numeric_state
-      entity_id: sensor.overloop_sensor_2_light_level
-      below: 10
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.overloop_sensor_2_light_level
+        below: 10
+      - condition: or
+        conditions:
+          - condition: state # When the light is off.
+            entity_id: light.overloop
+            state: "off"
+          - condition: numeric_state # When the light is dimmerd, usually before turning off.
+            entity_id: light.overloop
+            attribute: brightness
+            below: 25
   action:
     - service: light.turn_on
       data:
