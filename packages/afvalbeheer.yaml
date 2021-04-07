@@ -31,7 +31,7 @@ automation:
       entity: >
         {{ 
           states.sensor 
-            | selectattr('attributes.Wastecollector')
+            | selectattr('attributes.Wastecollector', 'eq', 'purmerend')
             | selectattr('attributes.Days-until', 'eq', 1)
             | map(attribute='entity_id')
             | first
