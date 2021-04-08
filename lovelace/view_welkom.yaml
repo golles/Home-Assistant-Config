@@ -70,6 +70,7 @@ cards:
               | selectattr('attributes.Days-until', 'eq', 1)
               | map(attribute='entity_id')
               | first
+              | default('none')
           }}
 
   - type: conditional

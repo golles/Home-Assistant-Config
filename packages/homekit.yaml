@@ -1,6 +1,11 @@
 # This feature requires running an mDNS forwarder on your Docker host, e.g., avahi-daemon in reflector mode.
 #
-# In /etc/avahi/avahi-daemon.conf update the reflector section like bellow, make sure those 3 lines are not commented out.
+# In /etc/avahi/avahi-daemon.conf 
+# - server section, set cache-entries-max to 0, this prevents zeroconf.NonUniqueNameException.
+# - reflector section, make sure those 3 lines are not commented out.
+#
+# [server]
+# cache-entries-max=0
 #
 # [reflector]
 # enable-reflector=yes
@@ -10,7 +15,6 @@
 # sudo service avahi-daemon restart
 
 homekit:
-  auto_start: false
   advertise_ip: !secret host_ip
   filter:
     include_entities:
@@ -28,15 +32,3 @@ homekit:
       name: Voorraadkast
     switch.ziggo_decoder:
       name: Ziggo decoder
-
-automation:
-  - id: homekit_delayed_start
-    alias: HomeKit uitgestelde start
-    initial_state: on
-    mode: single
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      - delay: 00:03
-      - service: homekit.start

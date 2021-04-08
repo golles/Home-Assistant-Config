@@ -3,13 +3,6 @@ homeassistant:
     fan.air_purifier:
       icon: mdi:air-purifier
 
-fan:
-  - platform: xiaomi_miio
-    host: !secret airpurifier_ip
-    token: !secret airpurifier_token
-    model: zhimi.airpurifier.mb3
-    name: Air Purifier
-
 switch:
   - platform: template
     switches:
