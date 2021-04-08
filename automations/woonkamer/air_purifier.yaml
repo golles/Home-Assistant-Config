@@ -26,10 +26,9 @@
   initial_state: on
   mode: single
   trigger:
-    - platform: numeric_state
-      entity_id: fan.air_purifier
-      attribute: aqi
-      above: 10
+    - platform: template
+      value_template: >
+        {{ state_attr("fan.air_purifier", "aqi") | int > 10 }}
       for:
         minutes: 2
   condition:
@@ -51,10 +50,9 @@
   initial_state: on
   mode: single
   trigger:
-    - platform: numeric_state
-      entity_id: fan.air_purifier
-      attribute: aqi
-      below: 5
+    - platform: template
+      value_template: >
+        {{ state_attr("fan.air_purifier", "aqi") | int < 5 }}
       for:
         minutes: 2
   condition:

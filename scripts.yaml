@@ -13,15 +13,15 @@ everything_off:
               expand(
                 states.light
                 | selectattr('state', 'eq', 'on')
-                | rejectattr('attributes.is_hue_group')
-                | rejectattr('attributes.entity_id')
+                | rejectattr('attributes.is_hue_group', 'defined')
+                | rejectattr('attributes.entity_id', 'defined')
               ) +
               expand(
                 states.media_player
                 | rejectattr('state', 'in', ['off', 'unavailable'])
               )
             )
-              | rejectattr('entity_id', 'in', exclude_entity_ids)
-              | map(attribute='entity_id')
-              | join(', ')
+            | rejectattr('entity_id', 'in', exclude_entity_ids)
+            | map(attribute='entity_id')
+            | join(', ')
           }}

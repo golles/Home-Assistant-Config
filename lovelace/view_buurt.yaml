@@ -32,7 +32,7 @@ cards:
       template: >
         {{ 
           states.sensor 
-            | selectattr('attributes.Wastecollector', 'eq', 'purmerend')
+            | selectattr('attributes.Wastecollector', 'defined')
             | map(attribute='entity_id')
             | list
         }}
