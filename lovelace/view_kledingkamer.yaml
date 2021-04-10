@@ -42,10 +42,7 @@ cards:
       - entity: binary_sensor.kledingkamer_beweging_occupancy
         name: Beweging
       - automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
-
-  - type: entities
-    show_header_toggle: false
-    entities:
+      - type: divider
       - entity: cover.kledingkamer
         name: Rolluik
       - entity: binary_sensor.kledingkamerraam_contact

@@ -35,3 +35,6 @@ cards:
             name: Lamp 1
           - entity: light.logeerkamer_lamp_2
             name: Lamp 2
+      - type: divider
+      - entity: binary_sensor.logeerkamerraam_contact
+        name: Raam

@@ -50,10 +50,7 @@ cards:
             toggle: true
       - entity: switch.bed_ledstrip_switch
         name: Bedledstrip automatisch aan bij beweging
-
-  - type: entities
-    show_header_toggle: false
-    entities:
+      - type: divider
       - entity: cover.slaapkamer
         name: Rolluik
       - entity: binary_sensor.slaapkamerraam_contact

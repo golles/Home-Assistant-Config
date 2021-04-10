@@ -35,6 +35,11 @@ cards:
             name: Lamp 1
           - entity: light.zolder_lamp_2
             name: Lamp 2
+      - type: divider
+      - entity: binary_sensor.balkondeur_contact
+        name: Balkondeur
+      - entity: binary_sensor.zolderraam_contact
+        name: Raam
 
   - type: entities
     title: Wasmachine

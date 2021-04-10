@@ -32,5 +32,8 @@ cards:
         name: Douche
       - group.badkamer_motion
       - automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
+      - type: divider
+      - entity: binary_sensor.badkamerraam_contact
+        name: Raam
 
   - !include cards/fan_mechanische_ventilatie.yaml
