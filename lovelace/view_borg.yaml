@@ -1,0 +1,14 @@
+title: Borg backup
+path: borg
+panel: false
+icon: mdi:cloud-upload
+badges: []
+cards:
+
+  - type: entity
+    entity: input_text.borg
+
+  - type: logbook
+    entities:
+      - input_text.borg
+    hours_to_show: 72
