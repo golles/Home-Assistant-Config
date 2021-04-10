@@ -22,8 +22,10 @@ cards:
         name: Laagtarief
       - entity: sensor.dsmr_reading_electricity_delivered_2
         name: Normaaltarief
-      - entity: sensor.dsmr_meter_stats_electricity_tariff
+      - type: custom:template-entity-row
+        entity: sensor.dsmr_meter_stats_electricity_tariff
         name: Tarief
+        state: "{{ 'Hoog' if is_state('sensor.dsmr_meter_stats_electricity_tariff', 'high') else 'Laag' }}"
       - type: custom:fold-entity-row
         head:
           type: section
@@ -38,17 +40,26 @@ cards:
   - type: entities
     title: Warmtemeter
     entities:
-      - sensor.stadsverwarming_energy
-      - sensor.stadsverwarming_volume
+      - sensor.kamstrup_403_heat_energy_e1
+      - sensor.kamstrup_403_volume
       - type: custom:fold-entity-row
         head:
           type: section
           label: 
         entities:
-          - sensor.stadsverwarming_operating_hours
-          - sensor.stadsverwarming_temperature_in
-          - sensor.stadsverwarming_temperature_out
-          - sensor.stadsverwarming_temperature_difference
-          - sensor.stadsverwarming_power
-          - sensor.stadsverwarming_peak_power
-          - sensor.stadsverwarming_flow
+          - sensor.kamstrup_403_flow
+          - sensor.kamstrup_403_heat_energy_e1
+          - sensor.kamstrup_403_hourcounter
+          - sensor.kamstrup_403_infoevent
+          - sensor.kamstrup_403_power
+          - sensor.kamstrup_403_temp1
+          - sensor.kamstrup_403_temp1xm3
+          - sensor.kamstrup_403_temp2
+          - sensor.kamstrup_403_temp2xm3
+          - sensor.kamstrup_403_tempdiff
+
+  - type: entities
+    title: Watermeter
+    entities:
+      - entity: sensor.watermeter_totaal
+        name: Stand
