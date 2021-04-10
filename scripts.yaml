@@ -8,6 +8,10 @@ everything_off:
     - service: homeassistant.turn_off
       data:
         entity_id: >
+          {% if exclude_entity_ids is not defined %}
+            {% set exclude_entity_ids = '' %}
+          {% endif %}
+
           {{
             (
               expand(
