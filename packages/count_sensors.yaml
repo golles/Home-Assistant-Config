@@ -1,0 +1,54 @@
+sensor:
+  - platform: template
+    sensors:
+      count_lights_on:
+        friendly_name: Lichten aan
+        icon_template: mdi:counter
+        value_template: >
+          {{
+            states.light 
+            | selectattr("state", "eq", "on") 
+            | rejectattr("attributes.is_hue_group", "defined") 
+            | rejectattr("attributes.entity_id", "defined") 
+            | list 
+            | count
+          }}
+
+      count_doors_open:
+        friendly_name: Deuren open
+        icon_template: mdi:counter
+        value_template: >
+          {{
+            states.binary_sensor 
+            | selectattr("state", "eq", "on") 
+            | selectattr("attributes.device_class", "==", "door")
+            | rejectattr("entity_id", "in", [
+              "binary_sensor.vaatwasser_door",
+              "binary_sensor.wasmachine_door",
+            ])
+            | list 
+            | count
+          }}
+
+      count_windows_open:
+        friendly_name: Ramen open
+        icon_template: mdi:counter
+        value_template: >
+          {{
+            states.binary_sensor 
+            | selectattr("state", "eq", "on") 
+            | selectattr("attributes.device_class", "==", "window")
+            | list 
+            | count
+          }}
+
+      count_media_players_on:
+        friendly_name: Media spelers aan
+        icon_template: mdi:counter
+        value_template: >
+          {{
+            states.media_player 
+            | rejectattr("state", "in", ["off", "unavailable"])
+            | list 
+            | count
+          }}
