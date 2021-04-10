@@ -16,13 +16,21 @@ cards:
           - entity: sensor.toilet_klimaat_humidity
             name: Luchtvochtigheid 
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: light.toilet
-        name: Licht
-      - entity: binary_sensor.toilet_beweging_occupancy
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: light.toilet
+        name: Plafond
+        icon: mdi:ceiling-light
+      - type: button
+        entity: binary_sensor.toilet_beweging_occupancy
         name: Beweging
-      - automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
+        show_state: true
+      - type: button
+        entity: automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:toggle-switch
 
   - !include cards/fan_mechanische_ventilatie.yaml

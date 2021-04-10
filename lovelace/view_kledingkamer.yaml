@@ -7,6 +7,7 @@ cards:
 
   - type: custom:simple-thermostat
     entity: climate.kledingkamer
+    header: false
     step_layout: column
     step_size: 1
     name: false
@@ -21,29 +22,23 @@ cards:
         name: Luchtvochtigheid
         unit: '%'
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: light.kledingkamer
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: light.kledingkamer
         name: Plafond
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.kledingkamer_spot_1
-            name: Spot 1
-          - entity: light.kledingkamer_spot_2
-            name: Spot 2
-          - entity: light.kledingkamer_spot_3
-            name: Spot 3
-          - entity: light.kledingkamer_spot_4
-            name: Spot 4
-      - entity: binary_sensor.kledingkamer_beweging_occupancy
-        name: Beweging
-      - automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
-      - type: divider
-      - entity: cover.kledingkamer
+        icon: mdi:ceiling-light
+      - type: button
+        entity: cover.kledingkamer
         name: Rolluik
-      - entity: binary_sensor.kledingkamerraam_contact
+        show_state: true
+      - type: button
+        entity: binary_sensor.kledingkamerraam_contact
         name: Raam
+        show_state: true
+      - type: button
+        entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:toggle-switch

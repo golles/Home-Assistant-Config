@@ -7,6 +7,7 @@ cards:
 
   - type: custom:simple-thermostat
     entity: climate.logeerkamer
+    header: false
     step_layout: column
     step_size: 1
     name: false
@@ -21,20 +22,15 @@ cards:
         name: Luchtvochtigheid
         unit: '%'
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: light.logeerkamer
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: light.logeerkamer
         name: Plafond
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.logeerkamer_lamp_1
-            name: Lamp 1
-          - entity: light.logeerkamer_lamp_2
-            name: Lamp 2
-      - type: divider
-      - entity: binary_sensor.logeerkamerraam_contact
+        icon: mdi:ceiling-light
+      - type: button
+        entity: binary_sensor.logeerkamerraam_contact
         name: Raam
+        show_state: true

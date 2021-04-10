@@ -7,6 +7,7 @@ cards:
 
   - type: custom:simple-thermostat
     entity: climate.zolder
+    header: false
     step_layout: column
     step_size: 1
     name: false
@@ -21,25 +22,27 @@ cards:
         name: Luchtvochtigheid
         unit: '%'
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: light.zolder
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: light.zolder
         name: Plafond
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.zolder_lamp_1
-            name: Lamp 1
-          - entity: light.zolder_lamp_2
-            name: Lamp 2
-      - type: divider
-      - entity: binary_sensor.balkondeur_contact
+        icon: mdi:ceiling-light
+      - type: button
+        entity: binary_sensor.balkondeur_contact
         name: Balkondeur
-      - entity: binary_sensor.zolderraam_contact
+        show_state: true
+      - type: button
+        entity: binary_sensor.zolderraam_contact
         name: Raam
+        show_state: true
+      - type: button
+        entity: binary_sensor.zolder_beweging_occupancy
+        name: Beweging
+        show_state: true
 
   - type: entities
     title: Wasmachine
