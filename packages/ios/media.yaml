@@ -1,6 +1,6 @@
 ios:
   actions:
-    - name: RADIO_QMUSIC
+    - name: Qmusic
       background_color: "#ed3624"
       label:
         text: Qmusic
@@ -9,7 +9,7 @@ ios:
         icon: radio
         color: "#ffffff"
 
-    - name: TV_ZIGGO
+    - name: Ziggo
       background_color: "#ffffff"
       label:
         text: Ziggo
@@ -28,7 +28,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: RADIO_QMUSIC
+          actionName: Qmusic
     action:
       - service: script.play_livingroom_radio
         data:
@@ -43,7 +43,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: TV_ZIGGO
+          actionName: Ziggo
     action:
       - choose:
         # Turn on.

@@ -1,6 +1,6 @@
 ios:
   actions:
-    - name: GOING_TO_BED
+    - name: Naar bed
       background_color: "#4c00ff"
       label:
         text: Naar bed
@@ -9,7 +9,7 @@ ios:
         icon: bed
         color: "#ffffff"
 
-    - name: GOING_TO_SLEEP
+    - name: Gaan slapen
       background_color: "#4c00ff"
       label:
         text: Gaan slapen
@@ -28,7 +28,7 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: GOING_TO_BED
+          actionName: Naar bed
     action:
       - service: script.everything_off
         data:
@@ -56,6 +56,6 @@ automation:
       - platform: event
         event_type: ios.action_fired
         event_data:
-          actionName: GOING_TO_SLEEP
+          actionName: Gaan slapen
     action:
       - service: script.everything_off
