@@ -26,7 +26,7 @@ cards:
     columns: 3
     square: false
     cards:
-      - type: button
+      - type: light
         entity: light.badkamer
         name: Plafond
         icon: mdi:ceiling-light

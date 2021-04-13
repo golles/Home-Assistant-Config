@@ -28,14 +28,14 @@ cards:
     columns: 3
     square: false
     cards:
-      - type: button
+      - type: light
         entity: light.slaapkamer_plafond_groep
         name: Plafond
         icon: mdi:ceiling-light
-      - type: button
+      - type: light
         entity: light.bedlampje_links
         name: Bedlampje links
-      - type: button
+      - type: light
         entity: light.bedlampje_rechts
         name: Bedlampje rechts
       - type: button

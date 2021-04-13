@@ -27,7 +27,7 @@ cards:
     columns: 3
     square: false
     cards:
-      - type: button
+      - type: light
         entity: light.zolder
         name: Plafond
         icon: mdi:ceiling-light
@@ -43,6 +43,21 @@ cards:
         entity: binary_sensor.zolder_beweging_occupancy
         name: Beweging
         show_state: true
+      - type: media-control
+        entity: media_player.zolder
+      - type: button
+        entity: sensor.wasmachine_remaining_relative_local
+        name: Wasmachine
+        icon: mdi:washing-machine
+        tap_action:
+          action: more-info
+        show_icon: true
+        show_state: true
+        show_name: false
+      - type: entity
+        entity: fan.mechanische_ventilatie
+        attribute: percentage
+        unit: '%'
 
   - type: entities
     title: Wasmachine

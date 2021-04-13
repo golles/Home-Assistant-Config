@@ -5,23 +5,17 @@ icon: mdi:home-city
 badges: []
 cards:
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - light.voortuin
-      - entity: light.achtertuin_groep
-        name: Achtertuin
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.achtertuin_lamp_1
-            name: Lamp 1
-          - entity: light.achtertuin_lamp_2
-            name: Lamp 2
-          - entity: light.gekleurde_licht
-            name: Gekleurde licht
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: light
+        entity: light.voortuin
+        icon: mdi:ceiling-light
+      - type: light
+        entity: light.achtertuin_groep
+      - type: light
+        entity: light.gekleurde_licht
 
   - type: custom:auto-entities
     show_empty: true
