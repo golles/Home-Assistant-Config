@@ -47,6 +47,4 @@
           
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
-          Buiten is het {{ state_attr('sensor.knmi_weer', 'temp') | round | replace('-', 'min ') }} graden, 
-          de temperatuur vandaag is tussen de {{ state_attr('sensor.knmi_weer', 'd0tmax') | round | replace('-', 'min ') }} en {{ state_attr('sensor.knmi_weer', 'd0tmin') | round | replace('-', 'min ') }} graden
-          het is {{ state_attr('sensor.knmi_weer', 'verw') }}
+          {{ state_attr('sensor.lokaal_weer_en_verkeer', 'weatherDescription') }}
