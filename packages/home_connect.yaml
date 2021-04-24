@@ -150,11 +150,8 @@ automation:
         - input_datetime.dishwasher_daily_start
     condition:
       - condition: state
-        entity_id: switch.vaatwasser_power
+        entity_id: binary_sensor.vaatwasser_remote_start
         state: 'on'
-      - condition: state
-        entity_id: binary_sensor.vaatwasser_door
-        state: 'off'
     action:
       - service: switch.turn_on
         entity_id: switch.vaatwasser_program_auto2
