@@ -40,7 +40,7 @@
             service: light.turn_on
             data:
               entity_id: light.woonkamer
-              profile: helder
+              profile: ontspannen
               transition: 2
 
       - conditions: >
@@ -56,5 +56,5 @@
             service: light.turn_on
             data:
               entity_id: light.woonkamer
-              profile: helder
+              profile: ontspannen
               transition: 900 # 15 minutes.
