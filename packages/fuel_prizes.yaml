@@ -1,0 +1,7 @@
+sensor:
+  - platform: scrape
+    resource: https://www.tango.nl/stations/tango-purmerend
+    name: Tango - Benzine
+    select: "#euro95 > div.pump_price > span.price"
+    unit_of_measurement: €
+    scan_interval: 3600
