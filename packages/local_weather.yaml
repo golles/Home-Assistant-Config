@@ -1,0 +1,12 @@
+sensor:
+  - platform: rest
+    name: Lokaal weer en verkeer
+    scan_interval: 36000 # 60 * 60 * 10
+    resource: https://ditisdesupercooleappapi.nhnieuws.nl/api/init/web
+    value_template: OK
+    json_attributes:
+      - airQuality
+      - timestamp
+      - traffic
+      - weatherDescription
+      - weather
