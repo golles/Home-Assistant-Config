@@ -18,6 +18,13 @@
         sequence:
           - service: switch.turn_on
             entity_id: switch.voorraadkastlamp_switch
+
+          - delay:
+              minutes: 10
+
+          - service: switch.turn_off
+            entity_id: switch.voorraadkastlamp_switch
+
       default:
         - service: switch.turn_off
           entity_id: switch.voorraadkastlamp_switch
