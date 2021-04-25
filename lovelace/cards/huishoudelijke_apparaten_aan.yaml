@@ -5,15 +5,16 @@ card:
   title: Huishoudelijke apparaten
 entities:
   - entity: sensor.vaatwasser_remaining_relative_local
-    name: Vaatwasser resterende tijd
+    name: Vaatwasser
     icon: mdi:dishwasher
   - entity: sensor.wasmachine_remaining_relative_local
-    name: Wasmachine resterende tijd
+    name: Wasmachine
     icon: mdi:washing-machine
   - entity: fan.air_purifier
 filter:
   exclude:
     - state: Niet beschikbaar
     - state: 'off'
+    - state: Klaar
 sort:
   method: name
