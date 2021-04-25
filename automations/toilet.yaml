@@ -4,7 +4,7 @@
   use_blueprint:
     path: golles/motion-activated_light_profiles.yaml
     input:
-      illuminance_below: '10'
+      illuminance_below: '100'
       light_entity: light.toilet_lamp
       motion_entity: binary_sensor.toilet_beweging_occupancy
       illuminance_entity: sensor.toilet_beweging_illuminance
