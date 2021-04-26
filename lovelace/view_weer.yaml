@@ -24,7 +24,7 @@ cards:
 
   - type: grid
     columns: 3
-    square: false
+    square: true
     cards:
       - type: picture
         image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif

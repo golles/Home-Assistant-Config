@@ -35,6 +35,9 @@ cards:
 
   - type: weather-forecast
     entity: weather.huis
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-buiten/weer
 
   - type: conditional
     conditions:

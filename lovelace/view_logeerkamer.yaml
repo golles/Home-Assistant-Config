@@ -24,7 +24,7 @@ cards:
 
   - type: grid
     columns: 3
-    square: false
+    square: true
     cards:
       - type: light
         entity: light.logeerkamer

@@ -7,7 +7,8 @@ card:
   type: custom:battery-state-card
   secondary_info: last_updated
   tap_action:
-    action: more-info
+    action: navigate
+    navigation_path: /dashboard-status/batterijen
   bulk_rename:
     - from: _battery
     - from: battery
