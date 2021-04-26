@@ -1,7 +1,7 @@
 - id: voorraadkast_light_bsaed_on_door
   alias: Voorraadkast verlichting automatisch aan en uit
   initial_state: on
-  mode: single
+  mode: restart
   max_exceeded: silent
   trigger:
     - platform: state
