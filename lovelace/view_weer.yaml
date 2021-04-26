@@ -6,27 +6,32 @@ badges: []
 cards:
   - type: weather-forecast
     entity: weather.huis
+  - type: weather-forecast
+    entity: weather.knmi
+
+  - type: markdown
+    content: >-
+      {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
 
   - type: entities
     title: Zon
     entities:
-      - sun.sun
+      - entity: sun.sun
+        name: Zon
       - sensor.sun_position_house
       - sensor.sun_sunrise
       - sensor.sun_sunset
 
-  - type: iframe
-    url: https://embed.windy.com/embed2.html?lat=52.406&lon=4.971&detailLat=52.406&detailLon=4.971&width=650&height=450&zoom=10&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1
-    aspect_ratio: 100%
-      
-  - type: picture
-    image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-    tap_action:
-      action: url
-      url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-
-  - type: horizontal-stack
+  - type: grid
+    columns: 3
+    square: false
     cards:
+      - type: picture
+        image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+        tap_action:
+          action: url
+          url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+          
       - type: picture
         image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
         tap_action:
@@ -38,3 +43,7 @@ cards:
         tap_action:
           action: url
           url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+
+  - type: iframe
+    url: https://embed.windy.com/embed2.html?lat=52.406&lon=4.971&detailLat=52.406&detailLon=4.971&width=650&height=450&zoom=10&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1
+    aspect_ratio: 100%

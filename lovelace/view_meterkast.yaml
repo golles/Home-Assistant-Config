@@ -5,15 +5,16 @@ icon: mdi:gauge
 badges: []
 cards: 
 
-  - type: entities
-    entities:
-      - entity: sensor.meterkast_klimaat_temperature
-        type: custom:multiple-entity-row
-        name: Klimaat
-        state_header: Temperatuur
-        entities:
-          - entity: sensor.meterkast_klimaat_humidity
-            name: Luchtvochtigheid
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: entity
+        entity: sensor.meterkast_klimaat_temperature
+        name: Temperatuur
+      - type: entity
+        entity: sensor.meterkast_klimaat_humidity
+        name: Luchtvochtigheid
 
   - type: entities
     title: Elektriciteitsmeter

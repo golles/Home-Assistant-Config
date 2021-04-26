@@ -3,43 +3,39 @@ path: keuken
 panel: false
 icon: mdi:chef-hat
 badges: []
-cards: 
+cards:
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.woonkamer_temperature
-        type: custom:multiple-entity-row
-        name: Klimaat
-        state_header: Temperatuur
-        entities:
-          - entity: sensor.woonkamer_humidity
-            name: Luchtvochtigheid
- 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - light.keuken
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.keuken_spot_1
-            name: Spot 1
-          - entity: light.keuken_spot_2
-            name: Spot 2
-          - entity: light.keuken_spot_3
-            name: Spot 3
-          - entity: light.keuken_spot_4
-            name: Spot 4
-          - entity: light.keuken_spot_5
-            name: Spot 5
-          - entity: light.keuken_spot_6
-            name: Spot 6
-      - entity: switch.keukenkastje_lamp_switch
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: entity
+        entity: sensor.woonkamer_temperature
+        name: Temperatuur
+      - type: entity
+        entity: sensor.woonkamer_humidity
+        name: Luchtvochtigheid
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: light
+        entity: light.keuken
+        name: Plafond spots
+        icon: mdi:ceiling-light
+      - type: button
+        entity: switch.keukenkastje_lamp_switch
         name: Keukenkastje
         icon: mdi:lightbulb
+      - type: button
+        entity: sensor.koelkast_klimaat_temperature
+        name: Koelkast
+        icon: mdi:fridge
+        tap_action:
+          action: more-info
+        show_icon: true
+        show_state: true
 
   - type: entities
     title: Vaatwasser
@@ -61,15 +57,3 @@ cards:
       - entity: automation.vaatwasser_dagelijks_starten
         icon: mdi:dishwasher
       - input_datetime.dishwasher_daily_start
-
-  - type: entities
-    title: Koelkast
-    show_header_toggle: false
-    icon: mdi:fridge
-    entities:
-      - entity: sensor.koelkast_klimaat_temperature
-        name: Temperatuur
-      - entity: sensor.koelkast_klimaat_humidity
-        name: Vochtigheid
-      - entity: sensor.koelkast_klimaat_pressure
-        name: Luchtdruk

@@ -24,83 +24,59 @@ cards:
       - entity: sensor.woonkamer_lichtsterkte_illuminance_lux
         name: Lichtsterkte
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - light.woonkamer
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.woonkamer_groot_1
-            name: Groot 1
-          - entity: light.woonkamer_groot_2
-            name: Groot 2
-          - entity: light.woonkamer_klein
-            name: Klein
-
-      - light.tv
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.woonkamer_play_2
-            name: Links
-          - entity: light.woonkamer_play_1
-            name: Rechts
-
-      - entity: light.eettafel
-        type: custom:multiple-entity-row
-        show_state: false
-        entities:
-          - entity: switch.eettafellamp
-            name: false
-            toggle: true
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.eettafel_hanglamp_1
-            name: Hanglamp 1
-          - entity: light.eettafel_hanglamp_2
-            name: Hanglamp 2
-          - entity: light.eettafel_hanglamp_3
-            name: Hanglamp 3
-          - entity: light.eettafel_hanglamp_4
-            name: Hanglamp 4
-          - entity: light.eettafel_hanglamp_5
-            name: Hanglamp 5
-
-      - light.keuken
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - entity: light.keuken_spot_1
-            name: Spot 1
-          - entity: light.keuken_spot_2
-            name: Spot 2
-          - entity: light.keuken_spot_3
-            name: Spot 3
-          - entity: light.keuken_spot_4
-            name: Spot 4
-          - entity: light.keuken_spot_5
-            name: Spot 5
-          - entity: light.keuken_spot_6
-            name: Spot 6
-
-      - entity: switch.keukenkastje_lamp_switch
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: light
+        entity: light.woonkamer
+        icon: mdi:floor-lamp
+      - type: light
+        entity: light.tv
+        icon: mdi:car-parking-lights
+      - type: light
+        entity: light.wled_skull
+        name: Skull
+        icon: mdi:skull
+        hold_action:
+          action: call-service
+          service: wled.effect
+          service_data:
+            entity_id: light.wled_skull
+            effect: Breathe
+            intensity: 80
+            palette: Default
+      - type: light
+        entity: light.eettafel
+        icon: mdi:vanity-light
+        hold_action:
+          action: call-service
+          service: switch.toggle
+          service_data:
+            entity_id: switch.eettafellamp
+      - type: light
+        entity: light.keuken
+        name: Keuken spots
+        icon: mdi:ceiling-light
+      - type: button
+        entity: switch.keukenkastje_lamp_switch
         name: Keukenkastje
         icon: mdi:lightbulb
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - cover.zonnescherm
+      - type: button
+        entity: cover.zonnescherm_template
+        name: Zonnescherm
+        show_state: true
+      - type: button
+        entity: sensor.air_purifier_air_quality
+        name: Air purifier
+        icon: mdi:air-purifier
+        show_state: true
+        tap_action:
+          action: call-service
+          service: fan.toggle
+          service_data:
+            entity_id: fan.air_purifier
 
   - !include cards/fan_air_purifier.yaml
 

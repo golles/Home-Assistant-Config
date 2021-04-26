@@ -44,10 +44,27 @@ cards:
       - sensor.p2000_brandweer
       - sensor.p2000_politie
 
-  - title: Golf 7
-    type: entities
-    show_header_toggle: false
-    entities:
-      - sensor.golf_7_expdate
-      - binary_sensor.golf_7_insured
-      - sensor.golf_7_recall
+  - type: picture-elements
+    image: 'https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg'
+    elements:
+      - type: state-label
+        entity: sensor.golf_7_expdate
+        prefix: 'APK: '
+        style:
+          color: black
+          top: 95%
+          left: 20%
+      - type: state-label
+        entity: binary_sensor.golf_7_insured
+        prefix: 'Verzekerd: '
+        style:
+          color: black
+          top: 95%
+          left: 53%
+      - type: state-label
+        entity: sensor.golf_7_recall
+        prefix: 'Terugroep: '
+        style:
+          color: black
+          top: 95%
+          left: 85%

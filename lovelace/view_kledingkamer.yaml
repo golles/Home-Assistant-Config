@@ -29,7 +29,7 @@ cards:
       - type: light
         entity: light.kledingkamer
         name: Plafond
-        icon: mdi:ceiling-light
+        icon: mdi:track-light
       - type: button
         entity: cover.kledingkamer
         name: Rolluik
