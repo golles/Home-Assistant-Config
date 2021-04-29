@@ -9,6 +9,9 @@
   condition:
     condition: and
     conditions:
+      - condition: state
+        entity_id: binary_sensor.zolder_beweging_occupancy
+        state: 'on'
       - condition: numeric_state
         entity_id: sensor.overloop_sensor_2_light_level
         below: 10
