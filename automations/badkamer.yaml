@@ -4,7 +4,7 @@
   use_blueprint:
     path: golles/motion-activated_light_profiles.yaml
     input:
-      illuminance_below: '10'
+      illuminance_below: '15'
       light_entity: light.badkamer_lamp
       motion_entity: group.badkamer_motion
       illuminance_entity: sensor.badkamer_beweging_illuminance
