@@ -4,3 +4,6 @@ homeassistant:
       device_class: window
     "group.*kamer_motion":
       device_class: motion
+
+    "binary_sensor.*beweging*occupancy":
+      icon: mdi:motion-sensor
