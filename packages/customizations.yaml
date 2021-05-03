@@ -7,3 +7,8 @@ homeassistant:
 
     "binary_sensor.*beweging*occupancy":
       icon: mdi:motion-sensor
+
+  customize:
+    light.wled_skull:
+      friendly_name: Skull
+      icon: mdi:skull

@@ -26,6 +26,35 @@ cards:
 
   - type: grid
     columns: 3
+    square: false
+    cards:
+      - type: button
+        entity: scene.avond
+        tap_action:
+          action: call-service
+          service: light.wled_skull
+          service_data:
+            entity_id: scene.avond
+            transition: 2
+      - type: button
+        entity: scene.eten
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.eten
+            transition: 2
+      - type: button
+        entity: scene.film
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.film
+            transition: 2
+
+  - type: grid
+    columns: 3
     square: true
     cards:
       - type: light
@@ -36,8 +65,6 @@ cards:
         icon: mdi:car-parking-lights
       - type: light
         entity: light.wled_skull
-        name: Skull
-        icon: mdi:skull
         hold_action:
           action: call-service
           service: wled.effect

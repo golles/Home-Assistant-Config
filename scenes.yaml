@@ -1,0 +1,41 @@
+- name: Avond
+  icon: mdi:weather-night
+  entities:
+    light.woonkamer:
+      state: "on"
+      brightness: 76
+    light.eettafel:
+      state: "on"
+      brightness: 76
+    light.wled_skull:
+      state: "on"
+      brightness: 200
+      xy_color:
+        - 0.701
+        - 0.299
+      effect: Breathe
+
+- name: Eten
+  icon: mdi:food-turkey
+  entities:
+    light.woonkamer:
+      state: "on"
+      brightness: 76
+    light.eettafel:
+      state: "on"
+      brightness: 191
+
+- name: Film
+  icon: mdi:movie-open
+  entities:
+    light.woonkamer:
+      state: "on"
+      brightness: 64
+    light.eettafel:
+      state: "off"
+    light.tv:
+      state: "on"
+      brightness: 255
+      xy_color:
+        - 0.701
+        - 0.299
