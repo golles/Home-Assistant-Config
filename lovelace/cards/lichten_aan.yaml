@@ -14,5 +14,9 @@ filter:
       state: 'on'
       options:
         type: light
+    - entity_id: "light.bedlampje*"
+      state: 'on'
+      options:
+        type: light
 sort:
   method: name

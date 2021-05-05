@@ -62,7 +62,6 @@ cards:
         icon: mdi:floor-lamp
       - type: light
         entity: light.tv
-        icon: mdi:car-parking-lights
       - type: light
         entity: light.wled_skull
         hold_action:

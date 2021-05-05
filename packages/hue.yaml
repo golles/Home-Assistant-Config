@@ -8,6 +8,8 @@ homeassistant:
       icon: mdi:desk-lamp
     light.bedlampen:
       icon: mdi:desk-lamp
+    light.tv:
+      icon: mdi:car-parking-lights
 
 light:
   - platform: group
