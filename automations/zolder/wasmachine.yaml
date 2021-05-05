@@ -4,12 +4,17 @@
   mode: single
   trigger:
     - platform: state
+      entity_id: sensor.wasmachine_operation_state
+      from: Finished
+      to: Ready
+  condition:
+    - condition: state
       entity_id: binary_sensor.wasmachine_door
-      to: 'on'
+      state: 'on'
   action:
     - choose:
       - conditions:
-        # Fan is currently set to low.
+        # When the fan is set to low, set it to high for a certain amount of time.
         - "{{ is_state_attr('fan.mechanische_ventilatie', 'speed', 'low') }}"
         sequence:
           - service: script.ventilation_set_speed_timer
@@ -19,9 +24,7 @@
 
     - choose:
       - conditions:
-        # Washing machine rogress = 100, done.
-        - "{{ is_state('sensor.wasmachine_program_progress', '100') }}"
-        # Room climate is below 20.
+        # When the room temperature is below a certain value, switch the heating on.
         - "{{ state_attr('climate.zolder', 'temperature') < 20 }}"
         sequence:
           - service: tado.set_climate_timer
@@ -29,3 +32,20 @@
               entity_id: climate.zolder
               time_period: '02:00:00'
               temperature: 23
+
+- id: washing_machine_notifiction_tv
+  alias: Wasmachine klaar melding tv
+  description: Melding dat de wasmachine klaar is tonen op de tv
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: sensor.wasmachine_operation_state
+      from: Run
+      to: Finished
+  condition:
+    - "{{ is_state('media_player.lg_c9', 'on') }}"
+  action:
+    - service: notify.lg_c9
+      data:
+        message: Wasmachine is klaar
