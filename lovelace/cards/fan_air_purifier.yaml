@@ -6,7 +6,7 @@ entities:
     toggle: true
     secondary_info:
       entity: sensor.air_purifier_air_quality
-      name: 'Luchtkwaliteit:'
+      name: "Luchtkwaliteit:"
   - type: custom:fold-entity-row
     head:
       type: section
@@ -38,7 +38,7 @@ entities:
         entity: fan.air_purifier
         attribute: humidity
         name: Luchtvochtigheid
-        suffix: '%'
+        suffix: "%"
         icon: mdi:water-percent
       - type: divider
       - type: custom:elapsed-time-entity-row
@@ -46,7 +46,7 @@ entities:
         attribute: use_time
         name: Tijd gebruikt
         icon: mdi:heart-pulse
-        hideSeconds: 'true'
+        hideSeconds: "true"
       - type: attribute
         entity: fan.air_purifier
         attribute: filter_hours_used
@@ -57,7 +57,7 @@ entities:
         entity: fan.air_purifier
         attribute: filter_life_remaining
         name: Filter resterend
-        suffix: '%'
+        suffix: "%"
         icon: mdi:heart-outline
       - type: attribute
         entity: fan.air_purifier

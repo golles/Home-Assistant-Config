@@ -14,7 +14,7 @@ entities:
 filter:
   exclude:
     - state: unavailable
-    - state: 'off'
+    - state: "off"
     - state: Klaar
 sort:
   method: name

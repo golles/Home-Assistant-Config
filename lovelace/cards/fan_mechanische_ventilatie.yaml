@@ -70,7 +70,7 @@ entities:
     attribute: percentage
     name: Percentage
     icon: mdi:percent-outline
-    suffix: '%'
+    suffix: "%"
   - type: attribute
     entity: sensor.mechanische_ventilatie_status
     attribute: voltage
