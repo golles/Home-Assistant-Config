@@ -32,7 +32,7 @@ cards:
         entity: scene.avond
         tap_action:
           action: call-service
-          service: light.wled_skull
+          service: scene.turn_on
           service_data:
             entity_id: scene.avond
             transition: 2
