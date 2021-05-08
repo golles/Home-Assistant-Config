@@ -2,6 +2,7 @@ type: custom:auto-entities
 show_empty: false
 card:
   type: grid
+  title: Lampen aan
 card_param: cards
 filter:
   include:

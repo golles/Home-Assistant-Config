@@ -1,0 +1,56 @@
+type: custom:auto-entities
+show_empty: false
+card:
+  type: grid
+  title: Let op
+card_param: cards
+filter:
+  template: >
+    {% if as_timestamp(now()) <= as_timestamp(state_attr('sensor.p2000_dichtbij', 'time')) + 7200 %}
+      [{
+        "entity": "sensor.p2000_dichtbij",
+        "type": "button",
+        "show_state": "true",
+        "show_name": "false"
+      }]
+    {% endif %}
+  include:
+    - entity_id: cover.zonnescherm_template
+      state: open
+      options:
+        type: button
+        show_state: true
+
+    - domain: sensor
+      attributes:
+        Wastecollector: purmerend
+        Days-until: = 1
+      options:
+        type: button
+        show_state: true
+        icon: mdi:delete
+
+    - attributes:
+        device_class: battery
+        battery: "< 30"
+      options:
+        type: button
+        show_state: true
+    - domain: binary_sensor
+      state: "on"
+      attributes:
+        device_class: battery
+      options:
+        type: button
+        show_state: true
+        state_color: false
+
+    - domain: plant
+      state: problem
+      options:
+        type: button
+        show_state: true
+        state_color: false
+
+sort:
+  method: name

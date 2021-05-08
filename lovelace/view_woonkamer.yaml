@@ -104,6 +104,13 @@ cards:
           service_data:
             entity_id: fan.air_purifier
 
+      - type: button
+        entity: plant.calathea_medallion
+        show_state: true
+      - type: button
+        entity: plant.dracaena_marginata
+        show_state: true
+
   - !include cards/fan_air_purifier.yaml
 
   - !include cards/media_player_lg_soundbar.yaml

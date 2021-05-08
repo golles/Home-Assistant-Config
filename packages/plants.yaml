@@ -1,0 +1,22 @@
+plant:
+  Calathea Medallion:
+    sensors:
+      moisture: sensor.plant_87_moisture
+      temperature: sensor.plant_87_temperature
+      conductivity: sensor.plant_87_soil_conductivity
+      brightness: sensor.plant_87_illuminance
+    min_moisture: 20
+    max_moisture: 60
+    min_conductivity: 500
+    min_temperature: 15
+
+  Dracaena Marginata:
+    sensors:
+      moisture: sensor.plant_c6_moisture
+      temperature: sensor.plant_c6_temperature
+      conductivity: sensor.plant_c6_soil_conductivity
+      brightness: sensor.plant_c6_illuminance
+    min_moisture: 20
+    max_moisture: 60
+    min_conductivity: 500
+    min_temperature: 15

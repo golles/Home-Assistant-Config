@@ -19,20 +19,6 @@ cards:
         tap_action:
           action: toggle
 
-  - type: custom:auto-entities
-    show_empty: false
-    card:
-      title: Let op
-      type: entities
-    filter:
-      template: |
-       {%if as_timestamp(now()) <= as_timestamp(state_attr('sensor.p2000_dichtbij', 'time')) + 7200 %}sensor.p2000_dichtbij{%endif%}
-      include:
-        - domain: sensor
-          attributes:
-            Wastecollector: purmerend
-            Days-until: = 0
-
   - type: weather-forecast
     entity: weather.huis
     tap_action:
@@ -44,7 +30,9 @@ cards:
       - entity: sensor.day_or_night
         state: Night
     card:
-      !include cards/lichten_aan.yaml
+      !include cards/lampen_aan.yaml
+
+  - !include cards/let_op.yaml
 
   - !include cards/huishoudelijke_apparaten_aan.yaml
 
@@ -91,5 +79,3 @@ cards:
             state_not: 'off'
         card:
           !include cards/media_player_lg_c9.yaml
-      
-  - !include cards/batterijen_laag.yaml
