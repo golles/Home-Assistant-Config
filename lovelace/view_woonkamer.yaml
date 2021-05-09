@@ -82,7 +82,7 @@ cards:
             entity_id: switch.eettafellamp
       - type: light
         entity: light.keuken
-        name: Keuken spots
+        name: Keuken
         icon: mdi:ceiling-light
       - type: button
         entity: switch.keukenkastje_lamp_switch
@@ -90,9 +90,19 @@ cards:
         icon: mdi:lightbulb
 
       - type: button
+        entity: binary_sensor.woonkamer_beweging_2_occupancy
+        name: Woonkamer
+        show_state: true
+      - type: button
+        entity: binary_sensor.woonkamer_beweging_1_occupancy
+        name: Keuken
+        show_state: true
+
+      - type: button
         entity: cover.zonnescherm_template
         name: Zonnescherm
         show_state: true
+
       - type: button
         entity: sensor.air_purifier_air_quality
         name: Air purifier
