@@ -6,7 +6,7 @@ card:
 card_param: cards
 filter:
   template: >
-    {% if as_timestamp(now()) <= as_timestamp(state_attr('sensor.p2000_dichtbij', 'time')) + 7200 %}
+    {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
       [{
         "entity": "sensor.p2000_dichtbij",
         "type": "button",
@@ -24,11 +24,15 @@ filter:
     - domain: sensor
       attributes:
         Wastecollector: purmerend
-        Days-until: = 1
+        Days-until: <= 1
       options:
-        type: button
+        type: custom:button-card
         show_state: true
-        icon: mdi:delete
+        show_entity_picture: true
+        styles:
+          state:
+            - font-size: 0.9rem
+            - color: var(--secondary-text-color)
 
     - attributes:
         device_class: battery

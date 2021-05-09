@@ -6,7 +6,7 @@ sensor:
     params:
       key: !secret knmi_key
       locatie: !secret knmi_location
-    value_template: >
+    value_template: >-
       {{ value_json.liveweer[0].samenv }}
     json_attributes_path: liveweer[0]
     json_attributes:
@@ -63,37 +63,42 @@ sensor:
 weather:
   - platform: template
     name: KNMI
-    condition_template: >
-      {% set condition = state_attr('sensor.knmi_weer', 'image')%}
-      {% if condition == 'zonnig' %}
+    condition_template: >-
+      {% set condition = state_attr("sensor.knmi_weer", "image")%}
+      {% if condition == "zonnig" %}
         sunny
-      {% elif condition == 'bliksem' %}
+      {% elif condition == "bliksem" %}
         lightning
-      {% elif condition == 'regen' %}
+      {% elif condition == "regen" %}
         rainy
-      {% elif condition == 'buien' %}
+      {% elif condition == "buien" %}
         rainy
-      {% elif condition == 'hagel' %}
+      {% elif condition == "hagel" %}
         hail
-      {% elif condition == 'mist' %}
+      {% elif condition == "mist" %}
         fog
-      {% elif condition == 'sneeuw' %}
+      {% elif condition == "sneeuw" %}
         snowy
-      {% elif condition == 'bewolkt' %}
+      {% elif condition == "bewolkt" %}
         cloudy
-      {% elif condition == 'halfbewolkt' %}
+      {% elif condition == "halfbewolkt" %}
         partlycloudy
-      {% elif condition == 'zwaarbewolkt' %}
+      {% elif condition == "zwaarbewolkt" %}
         cloudy
-      {% elif condition == 'nachtmist' %}
+      {% elif condition == "nachtmist" %}
         fog
-      {% elif condition == 'helderenacht' %}
+      {% elif condition == "helderenacht" %}
         clear-night
-      {% elif condition == 'wolkennacht' %}
+      {% elif condition == "wolkennacht" %}
         cloudy
       {% endif %}
-    temperature_template: "{{ state_attr('sensor.knmi_weer', 'temp') | float }}"
-    humidity_template: "{{ state_attr('sensor.knmi_weer', 'lv') | int }}"
-    pressure_template: "{{ state_attr('sensor.knmi_weer', 'luchtd') | float }}"
-    wind_speed_template: "{{ state_attr('sensor.knmi_weer', 'windkmh') | float }}"
-    # forecast_template: "{{ state_attr('sensor.knmi_weer', 'temp') | float }}"
+    temperature_template: >-
+      {{ state_attr("sensor.knmi_weer", "temp") | float }}
+    humidity_template: >-
+      {{ state_attr("sensor.knmi_weer", "lv") | int }}
+    pressure_template: >-
+      {{ state_attr("sensor.knmi_weer", "luchtd") | float }}
+    wind_speed_template: >-
+      {{ state_attr("sensor.knmi_weer", "windkmh") | float }}
+    # forecast_template: >-
+    #   {{ state_attr("sensor.knmi_weer", "temp") | float }}

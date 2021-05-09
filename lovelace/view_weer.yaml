@@ -12,6 +12,8 @@ cards:
   - type: markdown
     content: >-
       {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
+      <br/><br/>
+      {{ state_attr("binary_sensor.meteoalarm", "description") }}
 
   - type: entities
     title: Zon

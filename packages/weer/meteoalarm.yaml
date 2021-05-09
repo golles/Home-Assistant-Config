@@ -1,0 +1,5 @@
+binary_sensor:
+  - platform: meteoalarm
+    country: NL
+    language: ne
+    province: "Noord-Holland"

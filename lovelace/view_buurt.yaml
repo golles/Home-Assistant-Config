@@ -20,16 +20,22 @@ cards:
   - type: custom:auto-entities
     show_empty: true
     card:
-      type: glance
+      type: grid
       title: Afval
+    card_param: cards
     filter:
-      template: >
-        {{ 
-          states.sensor 
-            | selectattr('attributes.Wastecollector', 'defined')
-            | map(attribute='entity_id')
-            | list
-        }}
+      include:
+        - domain: sensor
+          attributes:
+            Wastecollector: purmerend
+          options:
+            type: custom:button-card
+            show_state: true
+            show_entity_picture: true
+            styles:
+              state:
+                - font-size: 0.9rem
+                - color: var(--secondary-text-color)
     sort:
       method: attribute
       attribute: Days-until
@@ -45,25 +51,25 @@ cards:
       - sensor.p2000_politie
 
   - type: picture-elements
-    image: 'https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg'
+    image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
     elements:
       - type: state-label
         entity: sensor.golf_7_expdate
-        prefix: 'APK: '
+        prefix: "APK: "
         style:
           color: black
           top: 95%
           left: 20%
       - type: state-label
         entity: binary_sensor.golf_7_insured
-        prefix: 'Verzekerd: '
+        prefix: "Verzekerd: "
         style:
           color: black
           top: 95%
           left: 53%
       - type: state-label
         entity: sensor.golf_7_recall
-        prefix: 'Terugroep: '
+        prefix: "Terugroep: "
         style:
           color: black
           top: 95%
