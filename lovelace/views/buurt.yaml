@@ -30,9 +30,7 @@ cards:
             Wastecollector: purmerend
           options:
             type: custom:button-card
-            template: google_theme
-            show_state: true
-            show_entity_picture: true
+            template: afvalbeheer
     sort:
       method: attribute
       attribute: Days-until

@@ -32,9 +32,7 @@ filter:
         Days-until: <= 1
       options:
         type: custom:button-card
-        template: google_theme
-        show_state: true
-        show_entity_picture: true
+        template: afvalbeheer
 
     - attributes:
         device_class: battery

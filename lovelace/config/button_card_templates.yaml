@@ -8,15 +8,29 @@ google_theme:
     label:
       - font-size: 0.9rem
       - color: var(--secondary-text-color)
-      - margin-bottom: 24px
+      - margin-bottom: 20px
 
+afvalbeheer:
+  template: google_theme
+  show_entity_picture: true
+  show_label: true
+  label: >-
+    [[[
+      if (entity.state.includes(","))
+        return entity.state.split(",")[0];
+      else 
+        return entity.state;
+    ]]]
+  styles:
+    label:
+      - margin-bottom: 0px
+  
 air_purifier:
   template: google_theme
   hold_action:
     action: more-info
   show_state: true
   show_label: true
-  color: auto-no-temperature
   label: >-
     [[[
       return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state
