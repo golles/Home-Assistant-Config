@@ -6,33 +6,35 @@ card:
 card_param: cards
 filter:
   template: >
+    {%- set data = namespace(entities=[]) -%}
+
     {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
-      [{
-        "entity": "sensor.p2000_dichtbij",
+      {%- set data.entities = data.entities + [{
         "type": "button",
+        "entity": "sensor.p2000_dichtbij",
         "show_state": "true",
         "show_name": "false"
-      }]
+      }] -%}
     {% endif %}
+    
+    {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
+      {%- set data.entities = data.entities + [{
+        "type": "custom:button-card",
+        "template": "zonnescherm"
+      }] -%}
+    {% endif %}
+    
+    {{ data.entities }}
   include:
-    - entity_id: cover.zonnescherm_template
-      state: open
-      options:
-        type: button
-        show_state: true
-
     - domain: sensor
       attributes:
         Wastecollector: purmerend
         Days-until: <= 1
       options:
         type: custom:button-card
+        template: google_theme
         show_state: true
         show_entity_picture: true
-        styles:
-          state:
-            - font-size: 0.9rem
-            - color: var(--secondary-text-color)
 
     - attributes:
         device_class: battery

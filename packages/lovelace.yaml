@@ -5,24 +5,24 @@ lovelace:
   dashboards:
     dashboard-boven:
       mode: yaml
-      filename: dashboard_boven.yaml
+      filename: lovelace/dashboard_boven.yaml
       title: Boven
       icon: mdi:home-minus
 
     dashboard-buiten:
       mode: yaml
-      filename: dashboard_buiten.yaml
+      filename: lovelace/dashboard_buiten.yaml
       title: Buiten
       icon: mdi:home-city
 
     dashboard-systems:
       mode: yaml
-      filename: dashboard_systems.yaml
+      filename: lovelace/dashboard_systems.yaml
       title: Systems
       icon: mdi:apps
 
     dashboard-status:
       mode: yaml
-      filename: dashboard_status.yaml
+      filename: lovelace/dashboard_status.yaml
       title: Status
       icon: mdi:tools

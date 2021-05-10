@@ -1,0 +1,9 @@
+swipe_nav: !include config/swipe_nav.yaml
+button_card_templates: !include config/button_card_templates.yaml
+
+views:
+  - !include views/slaapkamer.yaml
+  - !include views/kledingkamer.yaml
+  - !include views/logeerkamer.yaml
+  - !include views/badkamer.yaml
+  - !include views/zolder.yaml

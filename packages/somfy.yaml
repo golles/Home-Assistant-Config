@@ -6,30 +6,6 @@ homeassistant:
   customize:
     binary_sensor.zonnescherm_contact_contact:
       device_class: shade # This shouldn't be a door.
-
-cover:
-  - platform: template
-    covers:
-      zonnescherm_template:
-        device_class: shade
-        friendly_name: Zonnescherm
-        # Never set to 100, as then it can't be opened further.
-        position_template: >-
-          {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
-            50
-          {% else %}
-            0
-          {% endif %}
-        icon_template: mdi:storefront-outline
-        open_cover:
-          service: cover.open_cover
-          target:
-            entity_id: cover.zonnescherm
-        close_cover:
-          service: cover.close_cover
-          target:
-            entity_id: cover.zonnescherm
-        stop_cover:
-          service: cover.stop_cover
-          target:
-            entity_id: cover.zonnescherm
+    cover.zonnescherm:
+      icon: mdi:storefront-outline
+      device_class: shade # This gives better widget in the UI.

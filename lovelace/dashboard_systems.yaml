@@ -1,0 +1,10 @@
+swipe_nav: !include config/swipe_nav.yaml
+button_card_templates: !include config/button_card_templates.yaml
+
+views:
+  - !include views/hass.yaml
+  - !include views/borg.yaml
+  - !include views/zigbee2mqtt.yaml
+  - !include views/internet.yaml
+  - !include views/sabnzbd.yaml
+  - !include views/tado.yaml

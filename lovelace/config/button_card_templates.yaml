@@ -1,0 +1,31 @@
+google_theme:
+  styles:
+    card:
+      - height: 100%
+    state:
+      - font-size: 0.9rem
+      - color: var(--secondary-text-color)
+      - margin-bottom: 24px
+    icon:
+      - color: var(--secondary-text-color)
+
+zonnescherm:
+  entity: cover.zonnescherm
+  show_state: false
+  show_label: true
+  label: >
+    [[[
+      if (states["binary_sensor.zonnescherm_contact_contact"].state == "on")
+        return "Open"
+      else 
+        return "Gesloten";
+    ]]]
+  styles:
+    card:
+      - height: 100%
+    label:
+      - font-size: 0.9rem
+      - color: var(--secondary-text-color)
+      - margin-bottom: 24px
+    icon:
+      - color: var(--secondary-text-color)

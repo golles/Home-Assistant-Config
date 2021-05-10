@@ -30,12 +30,9 @@ cards:
             Wastecollector: purmerend
           options:
             type: custom:button-card
+            template: google_theme
             show_state: true
             show_entity_picture: true
-            styles:
-              state:
-                - font-size: 0.9rem
-                - color: var(--secondary-text-color)
     sort:
       method: attribute
       attribute: Days-until

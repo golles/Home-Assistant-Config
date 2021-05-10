@@ -1,9 +1,0 @@
-swipe_nav:
-  wrap: true
-  animate: swipe
-  prevent_default: false
-  swipe_amount: 15
-
-views:
-  - !include lovelace/view_batterijen.yaml
-  - !include lovelace/view_raamdeurcover.yaml

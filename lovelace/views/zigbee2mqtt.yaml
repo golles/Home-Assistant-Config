@@ -37,13 +37,13 @@ cards:
                 payload_template: >
                   {{ state_attr('this.entity_id', 'friendly_name').split(' update_available')[0] }}
 
-  - type: markdown
-    title: Lang niet gezien
-    content: >-
-      {% for state in states.sensor -%}
-        {%- if 'linkquality' in state.name and state.attributes.linkquality %}
-          {%- if (as_timestamp(now()) - as_timestamp(state.last_updated) > (6 * 60 * 60) ) %}
-            **{{ state.name.split(' linkquality')[0] }}** niet gezien in de laatste {{ relative_time(state.last_updated).replace('hours', 'uur') }}
-          {%- endif -%}
-        {%- endif -%}
-      {%- endfor %}
+  # - type: markdown
+  #   title: Lang niet gezien
+  #   content: >-
+  #     {% for state in states.sensor -%}
+  #       {%- if 'linkquality' in state.name and state.attributes.linkquality %}
+  #         {%- if (as_timestamp(now()) - as_timestamp(state.last_updated) > (6 * 60 * 60) ) %}
+  #           **{{ state.name.split(' linkquality')[0] }}** niet gezien in de laatste {{ relative_time(state.last_updated).replace('hours', 'uur') }}
+  #         {%- endif -%}
+  #       {%- endif -%}
+  #     {%- endfor %}
