@@ -101,16 +101,9 @@ cards:
       - type: custom:button-card
         template: zonnescherm
 
-      - type: button
-        entity: sensor.air_purifier_air_quality
-        name: Air purifier
-        icon: mdi:air-purifier
-        show_state: true
-        tap_action:
-          action: call-service
-          service: fan.toggle
-          service_data:
-            entity_id: fan.air_purifier
+      - type: custom:button-card
+        entity: fan.air_purifier
+        template: air_purifier
 
       - type: button
         entity: plant.calathea_medallion
@@ -118,8 +111,6 @@ cards:
       - type: button
         entity: plant.dracaena_marginata
         show_state: true
-
-  - !include cards/fan_air_purifier.yaml
 
   - !include cards/media_player_lg_soundbar.yaml
   - type: vertical-stack

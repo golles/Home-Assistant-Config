@@ -5,15 +5,29 @@ google_theme:
     state:
       - font-size: 0.9rem
       - color: var(--secondary-text-color)
-      - margin-bottom: 24px
-    icon:
+    label:
+      - font-size: 0.9rem
       - color: var(--secondary-text-color)
+      - margin-bottom: 24px
+
+air_purifier:
+  template: google_theme
+  hold_action:
+    action: more-info
+  show_state: true
+  show_label: true
+  color: auto-no-temperature
+  label: >-
+    [[[
+      return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state
+    ]]]
 
 zonnescherm:
   entity: cover.zonnescherm
+  template: google_theme
   show_state: false
   show_label: true
-  label: >
+  label: >-
     [[[
       if (states["binary_sensor.zonnescherm_contact_contact"].state == "on")
         return "Open"
@@ -21,11 +35,11 @@ zonnescherm:
         return "Gesloten";
     ]]]
   styles:
-    card:
-      - height: 100%
-    label:
-      - font-size: 0.9rem
-      - color: var(--secondary-text-color)
-      - margin-bottom: 24px
     icon:
-      - color: var(--secondary-text-color)
+      - color: >-
+          [[[
+            if (states["binary_sensor.zonnescherm_contact_contact"].state == "on")
+              return "var(--paper-item-icon-active-color)"
+            else 
+              return "var(--paper-item-icon-color)";
+          ]]]

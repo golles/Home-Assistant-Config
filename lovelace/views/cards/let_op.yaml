@@ -58,5 +58,11 @@ filter:
         show_state: true
         state_color: false
 
+    - entity_id: fan.air_purifier
+      state: "on"
+      options:
+        type: custom:button-card
+        template: air_purifier
+
 sort:
   method: name
