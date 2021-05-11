@@ -57,8 +57,9 @@ automation:
       - service: notify.all_iphones_and_tv
         data:
           title: 🚨 P2000 melding
-          message: >
+          message: >-
             {{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}
           data:
-            url: >
+            group: p2000
+            url: >-
               https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}

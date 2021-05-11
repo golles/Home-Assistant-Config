@@ -27,6 +27,8 @@
             data:
               title: "{{ message_title }}"
               message: "{{ message_text }}"
+              data:
+                group: deurbel
 
     - choose:
       - conditions:

@@ -33,5 +33,7 @@ automation:
       - service: notify.sander
         data:
           title: Borg backup
-          message: >
+          message: >-
             Backup is niet goed gegaan, laatste status: {{ states('input_text.borg') }}.
+          data:
+            group: borg_backup

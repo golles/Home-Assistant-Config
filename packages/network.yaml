@@ -22,8 +22,10 @@ automation:
       - service: notify.sander
         data:
           title: 🌍 Externe IP gewijzigd
-          message: >
+          message: >-
             Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is.
+          data:
+            group: ddns
 
       - service: shell_command.update_remote_ip
         data:
@@ -32,7 +34,7 @@ automation:
           server: !secret direct_admin_server
           domain: !secret direct_admin_domain
           subdomain: !secret direct_admin_subdomain
-          ip: >
+          ip: >-
             {{ states('sensor.myip') }}
 
 shell_command:

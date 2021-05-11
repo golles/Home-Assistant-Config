@@ -28,7 +28,7 @@ automation:
     initial_state: on
     mode: single
     variables:
-      entity: >
+      entity: >-
         {{ 
           states.sensor 
             | selectattr('attributes.Wastecollector', 'defined')
@@ -42,16 +42,15 @@ automation:
       at: '19:30:00'
     condition:
       - condition: template
-        value_template: >
+        value_template: >-
           {{ entity != 'none' }}
     action:
       - service: notify.sander
         data:
           title: Afval
-          message: >
+          message: >-
             Morgen wordt de {{ state_attr(entity, 'friendly_name') | upper }} container geleegd.
           data:
-            attachment:
-              content-type: jpeg
-              url: >
-                {{ state_attr(entity, 'entity_picture') }}
+            group: afval
+            image: >-
+              {{ state_attr(entity, 'entity_picture') }}
