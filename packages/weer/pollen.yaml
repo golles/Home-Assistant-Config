@@ -1,0 +1,88 @@
+sensor:
+  - platform: rest
+    name: pollen_data
+    scan_interval: 300
+    resource_template: https://api.ambeedata.com/latest/pollen/by-lat-lng?lat={{ state_attr("zone.home", "latitude") }}&lng={{ state_attr("zone.home", "longitude") }}
+    value_template: >-
+      {{ value_json.message}}
+    headers:
+      content-type: application/json
+      x-api-key: !secret ambee-api
+    json_attributes_path: data[0]
+    json_attributes:
+      - Count
+      - Risk
+      - Species
+      - updatedAt
+
+  - platform: template
+    sensors:
+      pollen_bomen:
+        friendly_name: Bomen
+        icon_template: mdi:tree
+        value_template: >-
+          {% set state = state_attr("sensor.pollen_data", "Risk").tree_pollen %}
+          {% if state == "Low" %} Weinig
+          {% elif state == "Moderate"%} Matig
+          {% elif state == "High"%} Hoog
+          {% elif state == "Very High"%} Zeer hoog
+          {% else %}Onbekend{% endif %}
+        attribute_templates:
+          Totaal: >-
+            {{ state_attr("sensor.pollen_data", "Count").tree_pollen }} /m³
+          Els: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Alder }} /m³
+          Berk: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Birh }} /m³
+          Coniferen: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Cypress }} /m³
+          Iep: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Elm }} /m³
+          Hazelaar: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Hazel }} /m³
+          Eik: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Oak }} /m³
+          Den: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Pine }} /m³
+          Plataan: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Plane }} /m³
+          Populier: >-
+            {{ state_attr("sensor.pollen_data", "Species").Tree["Poplar / Cottonwood"] }} /m³
+
+      pollen_grassen:
+        friendly_name: Grassen
+        icon_template: mdi:grass
+        value_template: >-
+          {% set state = state_attr("sensor.pollen_data", "Risk").grass_pollen %}
+          {% if state == "Low" %} Weinig
+          {% elif state == "Moderate"%} Matig
+          {% elif state == "High"%} Hoog
+          {% elif state == "Very High"%} Zeer hoog
+          {% else %}Onbekend{% endif %}
+        attribute_templates:
+          Totaal: >-
+            {{ state_attr("sensor.pollen_data", "Count").grass_pollen }} /m³
+          Gramineae: >-
+            {{ state_attr("sensor.pollen_data", "Species").Grass["Grass / Poaceae"] }} /m³
+
+      pollen_onkruiden:
+        friendly_name: Onkruiden
+        icon_template: mdi:grass
+        value_template: >-
+          {% set state = state_attr("sensor.pollen_data", "Risk").weed_pollen %}
+          {% if state == "Low" %} Weinig
+          {% elif state == "Moderate"%} Matig
+          {% elif state == "High"%} Hoog
+          {% elif state == "Very High"%} Zeer hoog
+          {% else %}Onbekend{% endif %}
+        attribute_templates:
+          Totaal: >-
+            {{ state_attr("sensor.pollen_data", "Count").weed_pollen }} /m³
+          Amaranten/Ganzenvoet: >-
+            {{ state_attr("sensor.pollen_data", "Species").Weed.Chenopod }} /m³
+          Bijvoet: >-
+            {{ state_attr("sensor.pollen_data", "Species").Weed.Mugwort }} /m³
+          Brandnetel: >-
+            {{ state_attr("sensor.pollen_data", "Species").Weed.Nettle }} /m³
+          Ambrosia: >-
+            {{ state_attr("sensor.pollen_data", "Species").Weed.Ragweed }} /m³

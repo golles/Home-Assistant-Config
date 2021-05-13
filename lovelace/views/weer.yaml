@@ -24,6 +24,12 @@ cards:
       - sensor.sun_sunrise
       - sensor.sun_sunset
 
+  - type: entities
+    entities:
+      - sensor.pollen_bomen
+      - sensor.pollen_grassen
+      - sensor.pollen_onkruiden
+
   - type: grid
     columns: 3
     square: true
