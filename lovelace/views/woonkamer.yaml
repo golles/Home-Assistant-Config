@@ -108,9 +108,11 @@ cards:
       - type: button
         entity: plant.calathea_medallion
         show_state: true
+        state_color: false
       - type: button
         entity: plant.dracaena_marginata
         show_state: true
+        state_color: false
 
   - !include cards/media_player_lg_soundbar.yaml
   - type: vertical-stack
