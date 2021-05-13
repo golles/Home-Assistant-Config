@@ -52,9 +52,8 @@ filter:
     - domain: plant
       state: problem
       options:
-        type: button
-        show_state: true
-        state_color: false
+        type: custom:button-card
+        template: plant
 
     - entity_id: fan.air_purifier
       state: "on"

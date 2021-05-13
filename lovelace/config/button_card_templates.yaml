@@ -2,6 +2,8 @@ google_theme:
   styles:
     card:
       - height: 100%
+    icon:
+      - color: var(--paper-item-icon-color)
     state:
       - font-size: 0.9rem
       - color: var(--secondary-text-color)
@@ -35,6 +37,30 @@ air_purifier:
     [[[
       return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state
     ]]]
+  
+plant:
+  template: google_theme
+  hold_action:
+    action: more-info
+  show_state: false
+  show_label: true
+  name: >-
+    [[[ return entity.attributes.friendly_name.replace(" ", "<br>") ]]]
+  label: >-
+    [[[
+      if (entity.state == 'problem') {
+        return entity.attributes.problem + 
+          " (" + 
+          entity.attributes[entity.attributes.problem.split(" ")[0]] + 
+          entity.attributes.unit_of_measurement_dict[entity.attributes.problem.split(" ")[0]] + 
+          ")"
+      }
+      return entity.state
+    ]]]
+  styles:
+    label:
+      - text-transform: capitalize
+      - margin-bottom: 4px
 
 zonnescherm:
   entity: cover.zonnescherm

@@ -105,14 +105,12 @@ cards:
         entity: fan.air_purifier
         template: air_purifier
 
-      - type: button
+      - type: custom:button-card
         entity: plant.calathea_medallion
-        show_state: true
-        state_color: false
-      - type: button
+        template: plant
+      - type: custom:button-card
         entity: plant.dracaena_marginata
-        show_state: true
-        state_color: false
+        template: plant
 
   - !include cards/media_player_lg_soundbar.yaml
   - type: vertical-stack
