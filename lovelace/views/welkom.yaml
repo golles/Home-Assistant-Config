@@ -34,8 +34,6 @@ cards:
 
   - !include cards/let_op.yaml
 
-  - !include cards/huishoudelijke_apparaten_aan.yaml
-
   - type: conditional
     conditions:
       - entity: media_player.lg_c9

@@ -5,7 +5,7 @@ card:
   title: Let op
 card_param: cards
 filter:
-  template: >
+  template: >-
     {%- set data = namespace(entities=[]) -%}
 
     {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
@@ -21,6 +21,26 @@ filter:
       {%- set data.entities = data.entities + [{
         "type": "custom:button-card",
         "template": "zonnescherm"
+      }] -%}
+    {% endif %}
+
+    {% if not states("sensor.wasmachine_remaining_relative_local") in ["unavailable", "klaar"] %}
+      {%- set data.entities = data.entities + [{
+        "type": "button",
+        "entity": "sensor.wasmachine_remaining_relative_local",
+        "name": "Wasmachine",
+        "icon": "mdi:washing-machine",
+        "show_state": "true"
+      }] -%}
+    {% endif %}
+
+    {% if not states("sensor.vaatwasser_remaining_relative_local") in ["unavailable", "klaar"] %}
+      {%- set data.entities = data.entities + [{
+        "type": "button",
+        "entity": "sensor.vaatwasser_remaining_relative_local",
+        "name": "Vaatwasser",
+        "icon": "mdi:dishwasher",
+        "show_state": "true"
       }] -%}
     {% endif %}
     
