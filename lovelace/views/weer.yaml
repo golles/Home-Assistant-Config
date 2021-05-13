@@ -12,8 +12,11 @@ cards:
   - type: markdown
     content: >-
       {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
-      <br/><br/>
-      {{ state_attr("binary_sensor.meteoalarm", "description") }}
+
+      {% if is_state("binary_sensor.meteoalarm", "on") -%}
+        <br/><br/>
+        {{ state_attr("binary_sensor.meteoalarm", "description") }}
+      {%- endif %}
 
   - type: entities
     title: Zon
@@ -25,6 +28,7 @@ cards:
       - sensor.sun_sunset
 
   - type: entities
+    title: Pollen
     entities:
       - sensor.pollen_bomen
       - sensor.pollen_grassen
