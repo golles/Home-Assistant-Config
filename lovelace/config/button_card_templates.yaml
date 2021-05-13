@@ -18,10 +18,11 @@ afvalbeheer:
   show_label: true
   label: >-
     [[[
-      if (entity.state.includes(","))
+      if (entity.state.includes(",")) {
         return entity.state.split(",")[0];
-      else 
+      } else {
         return entity.state;
+      }
     ]]]
   styles:
     label:
@@ -35,7 +36,7 @@ air_purifier:
   show_label: true
   label: >-
     [[[
-      return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state
+      return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state;
     ]]]
   
 plant:
@@ -45,7 +46,7 @@ plant:
   show_state: false
   show_label: true
   name: >-
-    [[[ return entity.attributes.friendly_name.replace(" ", "<br>") ]]]
+    [[[ return entity.attributes.friendly_name.replace(" ", "<br>"); ]]]
   label: >-
     [[[
       if (entity.state == 'problem') {
@@ -53,9 +54,9 @@ plant:
           " (" + 
           entity.attributes[entity.attributes.problem.split(" ")[0]] + 
           entity.attributes.unit_of_measurement_dict[entity.attributes.problem.split(" ")[0]] + 
-          ")"
+          ")";
       }
-      return entity.state
+      return entity.state;
     ]]]
   styles:
     label:
@@ -69,17 +70,19 @@ zonnescherm:
   show_label: true
   label: >-
     [[[
-      if (states["binary_sensor.zonnescherm_contact_contact"].state == "on")
-        return "Open"
-      else 
-        return "Gesloten";
+      if (states["binary_sensor.zonnescherm_contact_contact"].state == "on") {
+        return "Open";
+      } else {
+        return "Gesloten";;
+      }
     ]]]
   styles:
     icon:
       - color: >-
           [[[
-            if (states["binary_sensor.zonnescherm_contact_contact"].state == "on")
-              return "var(--paper-item-icon-active-color)"
-            else 
+            if (states["binary_sensor.zonnescherm_contact_contact"].state == "on") {
+              return "var(--paper-item-icon-active-color)";
+            } else {
               return "var(--paper-item-icon-color)";
+            }
           ]]]
