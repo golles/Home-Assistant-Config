@@ -33,7 +33,7 @@ sensor:
           Els: >-
             {{ state_attr("sensor.pollen_data", "Species").Tree.Alder }} /m³
           Berk: >-
-            {{ state_attr("sensor.pollen_data", "Species").Tree.Birh }} /m³
+            {{ state_attr("sensor.pollen_data", "Species").Tree.Birch }} /m³
           Coniferen: >-
             {{ state_attr("sensor.pollen_data", "Species").Tree.Cypress }} /m³
           Iep: >-
