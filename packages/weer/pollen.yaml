@@ -1,7 +1,7 @@
 sensor:
   - platform: rest
     name: pollen_data
-    scan_interval: 300
+    scan_interval: 900
     resource_template: https://api.ambeedata.com/latest/pollen/by-lat-lng?lat={{ state_attr("zone.home", "latitude") }}&lng={{ state_attr("zone.home", "longitude") }}
     value_template: >-
       {{ value_json.message}}
