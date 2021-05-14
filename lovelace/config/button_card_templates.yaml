@@ -49,14 +49,22 @@ plant:
     [[[ return entity.attributes.friendly_name.replace(" ", "<br>"); ]]]
   label: >-
     [[[
+      var label = entity.state;
       if (entity.state == 'problem') {
-        return entity.attributes.problem + 
-          " (" + 
-          entity.attributes[entity.attributes.problem.split(" ")[0]] + 
-          entity.attributes.unit_of_measurement_dict[entity.attributes.problem.split(" ")[0]] + 
-          ")";
+        var problem = entity.attributes.problem
+          .replace("moisture high", "te vochtig")
+          .replace("moisture low", "te droog")
+          .replace("conductivity high", "veel mest")
+          .replace("conductivity low", "weinig mest")
+          .replace("temperature high", "te warm")
+          .replace("temperature low", "te koud")
+          .replace("brightness high", "te licht")
+          .replace("brightness low", "te donker");
+        var sensor_value = entity.attributes[entity.attributes.problem.split(" ")[0]];
+        var sensor_unit = entity.attributes.unit_of_measurement_dict[entity.attributes.problem.split(" ")[0]];
+        label = `${problem} (${sensor_value}${sensor_unit})`;
       }
-      return entity.state;
+      return label;
     ]]]
   styles:
     label:
