@@ -24,7 +24,7 @@ filter:
       }] -%}
     {% endif %}
 
-    {% if not states("sensor.wasmachine_remaining_relative_local") in ["unavailable", "klaar"] %}
+    {% if not states("sensor.wasmachine_remaining_relative_local") in ["unavailable", "Klaar"] %}
       {%- set data.entities = data.entities + [{
         "type": "button",
         "entity": "sensor.wasmachine_remaining_relative_local",
@@ -34,7 +34,7 @@ filter:
       }] -%}
     {% endif %}
 
-    {% if not states("sensor.vaatwasser_remaining_relative_local") in ["unavailable", "klaar"] %}
+    {% if not states("sensor.vaatwasser_remaining_relative_local") in ["unavailable", "Klaar"] %}
       {%- set data.entities = data.entities + [{
         "type": "button",
         "entity": "sensor.vaatwasser_remaining_relative_local",
