@@ -1,0 +1,78 @@
+title: Alarm
+path: alarm
+panel: false
+icon: mdi:alarm-light
+badges: []
+cards:
+
+  - type: entity-filter
+    card:
+      title: Sensoren actief
+    entities:
+      # Deur/raam sensoren:
+      # Begaande grond.
+      - binary_sensor.achterdeur_contact
+      - binary_sensor.achterraam_contact
+      - binary_sensor.keukenraam_contact
+      - binary_sensor.voordeur_contact
+      - binary_sensor.voorraadkastdeur_contact
+      # Eerste verdieping.
+      - binary_sensor.slaapkamerraam_contact
+      - binary_sensor.kledingkamerraam_contact
+      - binary_sensor.badkamerraam_contact
+      - binary_sensor.logeerkamerraam_contact
+      # Tweede verdieping.
+      - binary_sensor.balkondeur_contact
+      - binary_sensor.zolderraam_contact
+
+      # Bewegingssensoren:
+      # Begaande grond.
+      - binary_sensor.woonkamer_beweging_1_occupancy
+      - binary_sensor.woonkamer_beweging_2_occupancy
+      - binary_sensor.hal_sensor_motion
+      - binary_sensor.toilet_beweging_occupancy
+      - binary_sensor.overloop_sensor_1_motion
+      # Eerste verdieping.
+      - binary_sensor.overloop_sensor_2_motion
+      - binary_sensor.kledingkamer_beweging_occupancy
+      - binary_sensor.badkamer_beweging_occupancy
+      # Tweede verdieping.
+      - binary_sensor.zoldertrap_beweging_occupancy
+      - binary_sensor.zolder_beweging_occupancy
+    state_filter:
+      - "on"
+
+  - type: logbook
+    title: Geschiedenis
+    entities:
+      # Deur/raam sensoren:
+      # Begaande grond.
+      - binary_sensor.achterdeur_contact
+      - binary_sensor.achterraam_contact
+      - binary_sensor.keukenraam_contact
+      - binary_sensor.voordeur_contact
+      - binary_sensor.voorraadkastdeur_contact
+      # Eerste verdieping.
+      - binary_sensor.slaapkamerraam_contact
+      - binary_sensor.kledingkamerraam_contact
+      - binary_sensor.badkamerraam_contact
+      - binary_sensor.logeerkamerraam_contact
+      # Tweede verdieping.
+      - binary_sensor.balkondeur_contact
+      - binary_sensor.zolderraam_contact
+
+      # Bewegingssensoren:
+      # Begaande grond.
+      - binary_sensor.woonkamer_beweging_1_occupancy
+      - binary_sensor.woonkamer_beweging_2_occupancy
+      - binary_sensor.hal_sensor_motion
+      - binary_sensor.toilet_beweging_occupancy
+      - binary_sensor.overloop_sensor_1_motion
+      # Eerste verdieping.
+      - binary_sensor.overloop_sensor_2_motion
+      - binary_sensor.kledingkamer_beweging_occupancy
+      - binary_sensor.badkamer_beweging_occupancy
+      # Tweede verdieping.
+      - binary_sensor.zoldertrap_beweging_occupancy
+      - binary_sensor.zolder_beweging_occupancy
+    hours_to_show: 3
