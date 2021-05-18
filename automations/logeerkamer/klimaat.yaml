@@ -1,0 +1,8 @@
+- id: logeerkamer_klimaat
+  alias: Logeerkamer klimaat aan/uit door achtertdeur
+  use_blueprint:
+    path: golles/door-window-climate-control.yaml
+    input:
+      door_entity: binary_sensor.logeerkamerraam_contact
+      climate_entity: climate.logeerkamer
+      turn_off_delay: 300

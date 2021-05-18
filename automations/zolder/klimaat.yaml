@@ -1,0 +1,8 @@
+- id: zolder_klimaat
+  alias: Zolder klimaat aan/uit door achtertdeur
+  use_blueprint:
+    path: golles/door-window-climate-control.yaml
+    input:
+      door_entity: binary_sensor.balkondeur_contact
+      climate_entity: climate.zolder
+      turn_off_delay: 300

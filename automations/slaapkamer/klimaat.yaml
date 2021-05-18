@@ -1,0 +1,9 @@
+- id: slaapkamer_klimaat
+  alias: Slaapkamer klimaat aan/uit door achtertdeur
+  description: ''
+  use_blueprint:
+    path: golles/door-window-climate-control.yaml
+    input:
+      door_entity: binary_sensor.slaapkamerraam_contact
+      climate_entity: climate.slaapkamer
+      turn_off_delay: 300

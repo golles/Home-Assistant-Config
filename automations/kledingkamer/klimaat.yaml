@@ -1,0 +1,8 @@
+- id: kledingkamer_klimaat
+  alias: Kledingkamer klimaat aan/uit door achtertdeur
+  use_blueprint:
+    path: golles/door-window-climate-control.yaml
+    input:
+      door_entity: binary_sensor.kledingkamerraam_contact
+      climate_entity: climate.kledingkamer
+      turn_off_delay: 300
