@@ -1,5 +1,5 @@
 - id: slaapkamer_klimaat
-  alias: Slaapkamer klimaat aan/uit door achtertdeur
+  alias: Slaapkamer klimaat aan/uit door raam
   description: ''
   use_blueprint:
     path: golles/door-window-climate-control.yaml

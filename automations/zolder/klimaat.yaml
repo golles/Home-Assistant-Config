@@ -1,5 +1,5 @@
 - id: zolder_klimaat
-  alias: Zolder klimaat aan/uit door achtertdeur
+  alias: Zolder klimaat aan/uit door zolder balkondeur
   use_blueprint:
     path: golles/door-window-climate-control.yaml
     input:

@@ -1,5 +1,5 @@
 - id: badkamer_klimaat
-  alias: Badkamer klimaat aan/uit door achtertdeur
+  alias: Badkamer klimaat aan/uit door raam
   use_blueprint:
     path: golles/door-window-climate-control.yaml
     input:
