@@ -1,7 +1,7 @@
 logbook:
   exclude:
     entities:
-      # Time
+      # Time:
       - sensor.time
       - sensor.date
       - sensor.date_time
@@ -13,12 +13,12 @@ logbook:
       - sensor.time_of_day
       - sensor.day_or_night
 
-      # Uptime
+      # Uptime:
       - sensor.uptime
       - sensor.host_uptime
       - sensor.runtime
 
-      #DSMR
+      # DSMR:
       - sensor.dsmr_reading_timestamp
 
-      # Adding items here you probably also want to add to recorder.yaml
+      # Adding items here you probably also want to add to recorder.yaml.
