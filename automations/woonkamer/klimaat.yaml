@@ -3,6 +3,6 @@
   use_blueprint:
     path: golles/door-window-climate-control.yaml
     input:
-      door_entity: binary_sensor.voorraadkastdeur_contact
+      door_entity: binary_sensor.achterdeur_contact
       climate_entity: climate.woonkamer
       turn_off_delay: 300
