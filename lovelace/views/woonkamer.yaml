@@ -109,6 +109,12 @@ cards:
         entity: plant.calathea_medallion
         template: plant
       - type: custom:button-card
+        entity: plant.calathea_ornata
+        template: plant
+      - type: custom:button-card
+        entity: plant.scindapsus_epipremnum
+        template: plant
+      - type: custom:button-card
         entity: plant.dracaena_marginata
         template: plant
 

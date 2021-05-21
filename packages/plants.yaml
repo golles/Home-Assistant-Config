@@ -10,6 +10,17 @@ plant:
     min_conductivity: 500
     min_temperature: 15
 
+  Calathea Ornata:
+    sensors:
+      moisture: sensor.plant_5d_moisture
+      temperature: sensor.plant_5d_temperature
+      conductivity: sensor.plant_5d_soil_conductivity
+      brightness: sensor.plant_5d_illuminance
+    min_moisture: 20
+    max_moisture: 60
+    min_conductivity: 500
+    min_temperature: 15
+
   Dracaena Marginata:
     sensors:
       moisture: sensor.plant_c6_moisture
@@ -20,3 +31,36 @@ plant:
     max_moisture: 60
     min_conductivity: 500
     min_temperature: 15
+
+  Scindapsus Epipremnum:
+    sensors:
+      moisture: sensor.plant_71_moisture
+      temperature: sensor.plant_71_temperature
+      conductivity: sensor.plant_71_soil_conductivity
+      brightness: sensor.plant_71_illuminance
+    min_moisture: 20
+    max_moisture: 60
+    min_conductivity: 500
+    min_temperature: 15
+
+  # XX1:
+  #   sensors:
+  #     moisture: sensor.plant_10_moisture
+  #     temperature: sensor.plant_10_temperature
+  #     conductivity: sensor.plant_10_soil_conductivity
+  #     brightness: sensor.plant_10_illuminance
+  #   min_moisture: 20
+  #   max_moisture: 60
+  #   min_conductivity: 500
+  #   min_temperature: 15
+
+  # XX2:
+  #   sensors:
+  #     moisture: sensor.plant_ae_moisture
+  #     temperature: sensor.plant_ae_temperature
+  #     conductivity: sensor.plant_ae_soil_conductivity
+  #     brightness: sensor.plant_ae_illuminance
+  #   min_moisture: 20
+  #   max_moisture: 60
+  #   min_conductivity: 500
+  #   min_temperature: 15
