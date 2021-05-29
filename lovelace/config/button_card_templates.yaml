@@ -54,8 +54,8 @@ plant:
         var problem = entity.attributes.problem
           .replace("moisture high", "te vochtig")
           .replace("moisture low", "te droog")
-          .replace("conductivity high", "veel mest")
-          .replace("conductivity low", "weinig mest")
+          .replace("conductivity high", "hoge geleidbaarheid")
+          .replace("conductivity low", "lage geleidbaarheid")
           .replace("temperature high", "te warm")
           .replace("temperature low", "te koud")
           .replace("brightness high", "te licht")
