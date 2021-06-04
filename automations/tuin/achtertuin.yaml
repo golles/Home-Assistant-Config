@@ -4,7 +4,7 @@
   mode: single
   trigger:
     - platform: time
-      at: '00:00:00'
+      at: "00:00:00"
   action:
     - service: light.turn_off
       data:
@@ -18,7 +18,7 @@
   trigger:
     - platform: sun
       event: sunset
-      offset: '-04:00:00'
+      offset: "-04:00:00"
   condition:
     condition: template
     value_template: > # All days in December after Sinterklaas.
@@ -34,7 +34,8 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.achterdeur_contact
-      to: 'on'
+      from: "off"
+      to: "on"
   condition:
     - condition: numeric_state
       entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
