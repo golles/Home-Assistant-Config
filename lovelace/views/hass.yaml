@@ -11,95 +11,38 @@ cards:
     entities:
       - type: custom:elapsed-time-entity-row
         entity: sensor.host_uptime
-        hide: seconds
+        hideSeconds: "true"
       - type: custom:elapsed-time-entity-row
         entity: sensor.runtime
-        hide: seconds
+        hideSeconds: "true"
       - entity: sensor.mariadb_size
         icon: mdi:database
       - type: divider
       - entity: sensor.current_version
       - type: custom:fold-entity-row
         head: binary_sensor.updater
-        open: true # Sadly this doesn't work: {{ is_state('binary_sensor.updater','on') }} https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
+        open: true # Sadly this doesn't work: {{ is_state("binary_sensor.updater","on") }} https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
         entities:
           - entity: sensor.latest_version
           - type: weblink
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/
 
-  - type: entities
+  - type: markdown
     title: Info
-    show_header_toggle: false
-    entities:
-      - type: custom:template-entity-row
-        icon: mdi:robot
-        name: Automatiseringen
-        state: "{{ states.automation | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:checkbox-blank-circle-outline
-        name: Binaire sensoren
-        state: "{{ states.binary_sensor | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:camera
-        name: Cameras
-        state: "{{ states.camera | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:window-shutter-open
-        name: Covers
-        state: "{{ states.cover | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:walk
-        name: Groepen
-        state: "{{ states.group | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:thermostat
-        name: Klimaat
-        state: "{{ states.climate | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:lightbulb
-        name: Lampen
-        state: "{{ states.light | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:cast
-        name: Media spelers
-        state: "{{ states.media_player | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:account
-        name: Personen
-        state: "{{ states.person | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:flash
-        name: Schakelaars
-        state: "{{ states.switch | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:script
-        name: Scripts
-        state: "{{ states.script | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:eye
-        name: Sensoren
-        state: "{{ states.sensor | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:cellphone-link
-        name: Trackers
-        state: "{{ states.device_tracker | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:fan
-        name: Ventilatoren
-        state: "{{ states.fan | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:weather-cloudy
-        name: Weer
-        state: "{{ states.weather | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:white-balance-sunny
-        name: Zon
-        state: "{{ states.sun | count}}"
-      - type: custom:template-entity-row
-        icon: mdi:texture-box
-        name: Zones
-        state: "{{ states.zone | count}}"
+    content: |-
+      <table width="100%">
+        <tr>
+          <th align="left">Domein</th>
+          <th align="right">Aantal entities</th>
+        </tr>
+        {%- for d in states | groupby("domain") %}
+        <tr>
+          <td align="left">{{ d[0] }}</td>
+          <td align="right">{{ states[d[0]] | count}}</td>
+        </tr>
+        {%- endfor %}
+      </table>
 
   - type: custom:auto-entities
     show_empty: false

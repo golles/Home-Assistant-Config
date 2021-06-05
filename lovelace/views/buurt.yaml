@@ -36,7 +36,7 @@ cards:
       attribute: Days-until
       numeric: true
 
-  - title: P2000 Purmerend
+  - title: P2000
     type: entities
     show_header_toggle: false
     entities:
@@ -69,3 +69,9 @@ cards:
           color: black
           top: 95%
           left: 85%
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - sensor.tango_purmerend
+      - sensor.tango_winschoten
