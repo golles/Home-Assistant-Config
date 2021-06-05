@@ -1,7 +1,21 @@
+homeassistant:
+  customize:
+    sensor.tango_purmerend:
+      icon: mdi:gas-station
+    sensor.tango_winschoten:
+      icon: mdi:gas-station
+      
 sensor:
   - platform: scrape
     resource: https://www.tango.nl/stations/tango-purmerend
-    name: Tango - Benzine
+    name: Tango Purmerend
+    select: "#euro95 > div.pump_price > span.price"
+    unit_of_measurement: €
+    scan_interval: 3600
+
+  - platform: scrape
+    resource: https://www.tango.nl/stations/tango-winschoten
+    name: Tango Winschoten
     select: "#euro95 > div.pump_price > span.price"
     unit_of_measurement: €
     scan_interval: 3600
