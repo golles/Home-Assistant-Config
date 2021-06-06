@@ -8,4 +8,3 @@ homeassistant:
       device_class: shade # This shouldn't be a door.
     cover.zonnescherm:
       icon: mdi:storefront-outline
-      device_class: shade # This gives better widget in the UI.
