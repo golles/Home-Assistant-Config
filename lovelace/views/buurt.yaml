@@ -17,6 +17,12 @@ cards:
       - type: light
         entity: light.gekleurde_licht
 
+  - type: picture-glance
+    title: Deurbel laatste
+    image: camera.deurbel
+    entities: []
+    camera_image: camera.deurbel_last_event
+
   - type: custom:auto-entities
     show_empty: true
     card:
