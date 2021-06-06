@@ -7,12 +7,12 @@
       event: start # Listen to start event to make sure we're not staying forever in high mode.
     - platform: state
       entity_id: binary_sensor.douche_beweging_occupancy
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
     - platform: state
       entity_id: binary_sensor.douche_beweging_occupancy
-      from: 'on'
-      to: 'off'
+      from: "on"
+      to: "off"
       for:
         minutes: 5
   action:
@@ -48,3 +48,22 @@
         - service: script.ventilation_set_preset_mode
           data:
             preset_mode: low
+
+
+- id: nrf905_unavailable_reboot
+  alias: nrf905 opnieuw starten wanneer onbeschikbaar
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: media_player.your_monitor_chromecast
+      to: "unavailable"
+      for:
+        minutes: 15
+  action:
+    - service: switch.turn_off
+      entity_id: switch.zolder_switch
+    - delay:
+        minutes: 1
+    - service: switch.turn_off
+      entity_id: switch.zolder_switch
