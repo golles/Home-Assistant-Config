@@ -11,6 +11,12 @@
     - condition: state
       entity_id: binary_sensor.wasmachine_door
       state: 'on'
+    - condition: state # Door should be closed.
+      entity_id: binary_sensor.balkondeur_contact
+      state: 'off'
+    - condition: state # Window should be closed.
+      entity_id: binary_sensor.zolderraam_contact
+      state: 'off'
   action:
     - choose:
       - conditions:
