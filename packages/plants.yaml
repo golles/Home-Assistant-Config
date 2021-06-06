@@ -43,16 +43,16 @@ plant:
     min_conductivity: 500
     min_temperature: 15
 
-  # XX1:
-  #   sensors:
-  #     moisture: sensor.plant_10_moisture
-  #     temperature: sensor.plant_10_temperature
-  #     conductivity: sensor.plant_10_soil_conductivity
-  #     brightness: sensor.plant_10_illuminance
-  #   min_moisture: 20
-  #   max_moisture: 60
-  #   min_conductivity: 500
-  #   min_temperature: 15
+  Haworthiopsis Attenuata:
+    sensors:
+      moisture: sensor.plant_10_moisture
+      temperature: sensor.plant_10_temperature
+      conductivity: sensor.plant_10_soil_conductivity
+      brightness: sensor.plant_10_illuminance
+    min_moisture: 20
+    max_moisture: 60
+    min_conductivity: 500
+    min_temperature: 15
 
   # XX2:
   #   sensors:

@@ -103,6 +103,11 @@ cards:
         entity: fan.air_purifier
         template: air_purifier
 
+
+  - type: grid
+    columns: 3
+    square: true
+    cards:
       - type: custom:button-card
         entity: plant.calathea_medallion
         template: plant
@@ -114,6 +119,9 @@ cards:
         template: plant
       - type: custom:button-card
         entity: plant.dracaena_marginata
+        template: plant
+      - type: custom:button-card
+        entity: plant.haworthiopsis_attenuata
         template: plant
 
   - !include cards/media_player_lg_soundbar.yaml
