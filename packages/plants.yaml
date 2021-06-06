@@ -1,3 +1,5 @@
+# Plant details found on https://open.plantbook.io
+
 plant:
   Calathea Medallion:
     sensors:
@@ -5,10 +7,12 @@ plant:
       temperature: sensor.plant_87_temperature
       conductivity: sensor.plant_87_soil_conductivity
       brightness: sensor.plant_87_illuminance
-    min_moisture: 20
-    max_moisture: 60
-    min_conductivity: 500
-    min_temperature: 15
+    min_moisture: 15
+    max_moisture: 65
+    min_conductivity: 350
+    max_conductivity: 1000
+    min_temperature: 12
+    max_temperature: 32
 
   Calathea Ornata:
     sensors:
@@ -16,10 +20,12 @@ plant:
       temperature: sensor.plant_5d_temperature
       conductivity: sensor.plant_5d_soil_conductivity
       brightness: sensor.plant_5d_illuminance
-    min_moisture: 20
-    max_moisture: 60
-    min_conductivity: 500
-    min_temperature: 15
+    min_moisture: 15
+    max_moisture: 65
+    min_conductivity: 350
+    max_conductivity: 1000
+    min_temperature: 12
+    max_temperature: 32
 
   Dracaena Marginata:
     sensors:
@@ -27,10 +33,12 @@ plant:
       temperature: sensor.plant_c6_temperature
       conductivity: sensor.plant_c6_soil_conductivity
       brightness: sensor.plant_c6_illuminance
-    min_moisture: 20
+    min_moisture: 15
     max_moisture: 60
-    min_conductivity: 500
-    min_temperature: 15
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 10
+    max_temperature: 32
 
   Scindapsus Epipremnum:
     sensors:
@@ -38,10 +46,12 @@ plant:
       temperature: sensor.plant_71_temperature
       conductivity: sensor.plant_71_soil_conductivity
       brightness: sensor.plant_71_illuminance
-    min_moisture: 20
+    min_moisture: 15
     max_moisture: 60
-    min_conductivity: 500
-    min_temperature: 15
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 10
+    max_temperature: 32
 
   Haworthiopsis Attenuata:
     sensors:
@@ -49,10 +59,12 @@ plant:
       temperature: sensor.plant_10_temperature
       conductivity: sensor.plant_10_soil_conductivity
       brightness: sensor.plant_10_illuminance
-    min_moisture: 20
+    min_moisture: 15
     max_moisture: 60
-    min_conductivity: 500
-    min_temperature: 15
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_temperature: 10
+    max_temperature: 32
 
   # XX2:
   #   sensors:
@@ -60,7 +72,9 @@ plant:
   #     temperature: sensor.plant_ae_temperature
   #     conductivity: sensor.plant_ae_soil_conductivity
   #     brightness: sensor.plant_ae_illuminance
-  #   min_moisture: 20
+  #   min_moisture: 15
   #   max_moisture: 60
-  #   min_conductivity: 500
-  #   min_temperature: 15
+  #   min_conductivity: 350
+  #   max_conductivity: 2000
+  #   min_temperature: 10
+  #   max_temperature: 32
