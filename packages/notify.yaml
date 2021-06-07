@@ -11,13 +11,13 @@ notify:
     services:
       - service: mobile_app_tt_macbook
       
-  - name: all_iphones
+  - name: all_phones
     platform: group
     services:
       - service: sander
 
-  - name: all_iphones_and_tv
+  - name: all_phones_and_tv
     platform: group
     services:
-      - service: all_iphones
+      - service: all_phones
       - service: lg_c9

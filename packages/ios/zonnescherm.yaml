@@ -1,0 +1,46 @@
+automation:
+  - id: ios_action_awning_can_be_closed
+    alias: iOS action - Zonnescherm kan dicht
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: state
+        entity_id: sensor.sun_position_house
+        from: Achter
+        to: Voor
+        for:
+          minutes: 15
+    condition:
+      - condition: state
+        entity_id: binary_sensor.zonnescherm_contact_contact
+        state: "on"
+    action:
+      - alias: Set up variables for the actions
+        variables:
+          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
+          action_close: "{{ 'CLOSE_' ~ context.id }}"
+
+      - alias: Ask to close the awning
+        service: notify.all_phones
+        data:
+          message: De zon is niet langer achter, wil je het zonnescherm sluiten?
+          data:
+            actions:
+              - action: "{{ action_close }}"
+                title: Ja, sluit
+
+      - alias: Wait for a response
+        wait_for_trigger:
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ action_close }}"
+
+      - alias: Perform the action
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == action_close }}"
+            sequence:
+              - service: cover.close_cover
+                target:
+                  entity_id: cover.zonnescherm

@@ -52,14 +52,15 @@ automation:
         entity_id: sensor.p2000_dichtbij
     condition:
       - condition: template
-        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+        value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
     action:
-      - service: notify.all_iphones_and_tv
+      - alias: Sent a notification with url
+        service: notify.all_phones_and_tv
         data:
           title: 🚨 P2000 melding
           message: >-
-            {{ states('sensor.p2000_dichtbij') }} {{ state_attr('sensor.p2000_dichtbij', 'capcodes') }}
+            {{ states("sensor.p2000_dichtbij") }} {{ state_attr("sensor.p2000_dichtbij", "capcodes") }}
           data:
             group: p2000
             url: >-
-              https://www.google.com/maps/search/?api=1&query={{ state_attr('sensor.p2000_dichtbij', 'latitude') }},{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}
+              https://www.google.com/maps/search/?api=1&query={{ state_attr("sensor.p2000_dichtbij", "latitude") }},{{ state_attr("sensor.p2000_dichtbij", "longitude") }}
