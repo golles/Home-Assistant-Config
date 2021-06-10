@@ -20,8 +20,7 @@ cards:
     sensors:
       - attribute: current_humidity
         name: Luchtvochtigheid
-        unit: '%'
-
+        unit: "%"
 
   - type: grid
     columns: 3
@@ -57,7 +56,7 @@ cards:
       - type: entity
         entity: fan.mechanische_ventilatie
         attribute: percentage
-        unit: '%'
+        unit: "%"
 
   - type: entities
     title: Wasmachine

@@ -30,6 +30,8 @@ cards:
         entity: light.logeerkamer
         name: Plafond
         icon: mdi:ceiling-light
+      - type: media-control
+        entity: media_player.googlehome6234
       - type: button
         entity: binary_sensor.logeerkamerraam_contact
         name: Raam

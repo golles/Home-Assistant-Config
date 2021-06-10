@@ -1,0 +1,61 @@
+- id: home_office_laptop_inactive
+  alias: Thuiswerken, stop muziek laptop inactive
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.tt_macbook_active
+      from: "on"
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: device_tracker.tt_macbook
+      state: home
+    - condition: state
+      entity_id: sensor.tt_macbook_displays
+      state: "2"
+  action:
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.googlehome6234
+
+- id: home_office_meeting
+  alias: Thuiswerken, stop muziek bij vergadering
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.tt_macbook_microphone_in_use
+      from: "off"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: device_tracker.tt_macbook
+      state: home
+    - condition: state
+      entity_id: sensor.tt_macbook_displays
+      state: "2"
+    - condition: state
+      entity_id: sensor.tt_macbook_frontmost_app
+      state:
+        - Slack
+        - Microsoft Teams
+  action:
+    - service: media_player.volume_mute
+      data:
+        entity_id: media_player.googlehome6234
+        is_volume_muted: true
+
+    - wait_for_trigger:
+      - platform: state
+        entity_id: binary_sensor.tt_macbook_microphone_in_use
+        from: "on"
+        to: "off"
+      timeout:
+        minutes: 45
+      continue_on_timeout: false
+
+    - service: media_player.volume_mute
+      data:
+        entity_id: media_player.googlehome6234
+        is_volume_muted: false
