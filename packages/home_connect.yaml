@@ -151,8 +151,8 @@ automation:
                 {{ weekday_time }}
               {% endif %}
             {% else %}
-              {% if weekend_time in [5, 6] %}
-                {{ weekend }}
+              {% if weekday in [5, 6] %}
+                {{ weekend_time }}
               {% else %}
                 {{ weekday_time }}
               {% endif %}
