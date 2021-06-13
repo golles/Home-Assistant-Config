@@ -1,4 +1,84 @@
+ios:
+  actions:
+    - name: Zonnescherm dicht
+      background_color: "#ffff00"
+      label:
+        text: Zonnescherm dicht
+        color: "#000000"
+      icon:
+        icon: arrow-up-box
+        color: "#000000"
+
+    - name: Zonnescherm open
+      background_color: "#ffff00"
+      label:
+        text: Zonnescherm open
+        color: "#000000"
+      icon:
+        icon: arrow-down-box
+        color: "#000000"
+
+    - name: Zonnescherm helemaal open
+      background_color: "#ffff00"
+      label:
+        text: Zonnescherm helemaal open
+        color: "#000000"
+      icon:
+        icon: arrow-down-box
+        color: "#000000"
+
 automation:
+  - id: ios_action_awning_command
+    alias: iOS action - Zonnescherm dicht
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: Zonnescherm dicht
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: Zonnescherm open
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: Zonnescherm helemaal open
+    action:
+      - variables:
+          action_name: "{{ trigger.event.data.actionName }}"
+s
+      - choose:
+        - conditions:
+            - condition: template
+              value_template: >-
+                {{ action_name == "Zonnescherm dicht" }}
+          sequence:
+            - alias: Close awning
+              service: cover.close_cover
+              target:
+                entity_id: cover.zonnescherm
+        - conditions:
+            - condition: template
+              value_template: >-
+                {{ action_name == "Zonnescherm open" }}
+          sequence:
+            - alias: Open awning
+              service: tahoma.set_cover_my_position
+              target:
+                entity_id: cover.zonnescherm
+        - conditions:
+            - condition: template
+              value_template: >-
+                {{ action_name == "Zonnescherm  helemaal open" }}
+          sequence:
+            - alias: My position for awning
+              service: cover.zonnescherm
+              target:
+                entity_id: cover.zonnescherm
+
   - id: ios_action_awning_can_be_closed
     alias: iOS action - Zonnescherm kan dicht
     initial_state: on
