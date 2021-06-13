@@ -49,7 +49,7 @@ automation:
     action:
       - variables:
           action_name: "{{ trigger.event.data.actionName }}"
-s
+
       - choose:
         - conditions:
             - condition: template
