@@ -3,7 +3,8 @@ google_theme:
     card:
       - height: 100%
     icon:
-      - color: var(--paper-item-icon-color)
+      - color: >-
+          [[[ return entity.state == "on" ? "var(--paper-item-icon-active-color)" : "var(--paper-item-icon-color)"; ]]]
     state:
       - font-size: 0.9rem
       - color: var(--secondary-text-color)
@@ -35,9 +36,7 @@ air_purifier:
   show_state: true
   show_label: true
   label: >-
-    [[[
-      return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state;
-    ]]]
+    [[[ return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state; ]]]
   
 plant:
   template: google_theme
@@ -84,16 +83,6 @@ zonnescherm:
         return "Gesloten";;
       }
     ]]]
-  styles:
-    icon:
-      - color: >-
-          [[[
-            if (states["binary_sensor.zonnescherm_contact_contact"].state == "on") {
-              return "var(--paper-item-icon-active-color)";
-            } else {
-              return "var(--paper-item-icon-color)";
-            }
-          ]]]
 
 kamer_info:
   aspect_ratio: 1/1
