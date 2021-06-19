@@ -7,7 +7,7 @@ cards:
   - type: weather-forecast
     entity: weather.huis
   - type: weather-forecast
-    entity: weather.knmi
+    entity: weather.knmi_weidevenne
 
   - type: markdown
     content: >-
