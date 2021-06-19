@@ -1,0 +1,78 @@
+type: grid
+columns: 3
+square: true
+title: Kamers
+cards:
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:sofa
+    name: Woonkamer
+    variables:
+      climate_entity: climate.woonkamer
+      light_entity: light.woonkamer
+      view: /lovelace/woonkamer
+      
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:chef-hat
+    name: Keuken
+    variables:
+      light_entity: light.keuken
+      temperature_entity: sensor.woonkamer_klimaat_temperature
+      humidity_entity: sensor.woonkamer_klimaat_humidity
+      view: /lovelace/keuken
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:toilet
+    name: Toilet
+    variables:
+      light_entity: light.toilet
+      temperature_entity: sensor.toilet_klimaat_temperature
+      humidity_entity: sensor.toilet_klimaat_humidity
+      view: /lovelace/toilet
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:bed-king
+    name: Slaapkamer
+    variables:
+      climate_entity: climate.slaapkamer
+      light_entity: light.slaapkamer
+      view: /dashboard-boven/slaapkamer
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:wardrobe
+    name: Kledingkamer
+    variables:
+      climate_entity: climate.kledingkamer
+      light_entity: light.kledingkamer
+      view: /dashboard-boven/kledingkamer
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:bed-empty
+    name: Logeerkamer
+    variables:
+      climate_entity: climate.logeerkamer
+      light_entity: light.logeerkamer
+      view: /dashboard-boven/logeerkamer
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:shower
+    name: Badkamer
+    variables:
+      climate_entity: climate.badkamer
+      light_entity: light.badkamer
+      view: /dashboard-boven/badkamer
+
+  - type: custom:button-card
+    template: kamer_info
+    icon: mdi:home-roof
+    name: Zolder
+    variables:
+      climate_entity: climate.zolder
+      light_entity: light.zolder
+      view: /dashboard-boven/zolder

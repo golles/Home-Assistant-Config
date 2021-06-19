@@ -94,3 +94,96 @@ zonnescherm:
               return "var(--paper-item-icon-color)";
             }
           ]]]
+
+kamer_info:
+  aspect_ratio: 1/1
+  show_state: false
+  triggers_update: all
+  variables:
+    climate_entity: 
+    light_entity: 
+    temperature_entity:
+    humidity_entity:
+    view:
+  tap_action:
+    action: navigate
+    navigation_path: "[[[ return variables.view ]]]"
+  hold_action:
+    action: call-service
+    service: light.toggle
+    service_data:
+      entity_id: "[[[ return variables.light_entity ]]]"
+  styles:
+    grid:
+      - grid-template-areas: '"heating lights" "i i" "n n" "stats stats"'
+      - grid-template-columns: 1fr 1fr
+      - grid-template-rows: min-content 1fr min-content min-content
+    name:
+      - color: var(--text-color)
+      - justify-self: start
+      - padding-left: 10px
+      - font-size: 1.2rem
+    icon:
+      - color: var(--paper-item-icon-color)
+    custom_fields:
+      lights:
+        - align-self: start
+        - justify-self: end
+        - padding-right: 10px
+        - color: >-
+            [[[ return states[variables.light_entity].state == "on" ? "#f7cd89" : "var(--secondary-text-color)"; ]]]
+        - opacity: >-
+            [[[ return states[variables.light_entity].state == "on" ? 1 : 0.6; ]]]
+      heating:
+        - align-self: start
+        - justify-self: start
+        - padding-left: 10px
+        - color: >-
+            [[[ return states[variables.climate_entity].state == "heat" ? "#ff8100" : "var(--secondary-text-color)"; ]]]
+        - opacity: >-
+            [[[ return states[variables.climate_entity].state == "heat" ? 1 : 0.6; ]]]
+      stats:
+        - color: var(--secondary-text-color)
+        - font-size: 0.9rem
+        - padding-left: 8px
+        - align-self: start
+        - justify-self: start
+  custom_fields:
+    heating: |
+      [[[
+        if (states[variables.climate_entity] != undefined) {
+          return '<ha-icon icon="mdi:fire" style="width: 26px; height: 26px;"></ha-icon>'
+        }
+      ]]]
+    lights: |
+      [[[ 
+        if (states[variables.light_entity] != undefined) {
+          return '<ha-icon icon="mdi:lightbulb" style="width: 26px; height: 26px;"></ha-icon>'
+        }
+      ]]]
+    stats: |
+      [[[
+        let stats = [];
+        let temperature;
+        let humidity;
+
+        if (states[variables.climate_entity] != undefined) {
+          temperature = states[variables.climate_entity].attributes.current_temperature;
+          humidity = states[variables.climate_entity].attributes.current_humidity;
+        } else {
+          if (states[variables.temperature_entity] != undefined) {
+            temperature = Math.round(states[variables.temperature_entity].state);
+          }
+          if (states[variables.humidity_entity] != undefined) {
+            humidity = Math.round(states[variables.humidity_entity].state);
+          }
+        }
+        if (temperature) {
+          stats.push(`<ha-icon icon="mdi:thermometer" style="width: 12px; height: 12px;"></ha-icon><span>${temperature}°C</span>`);
+        }
+        if (humidity) {
+          stats.push(`<ha-icon icon="hass:water" style="width: 12px; height: 12px;"></ha-icon><span>${humidity}%</span>`);
+        }
+        
+        return stats.join(' ');
+      ]]]

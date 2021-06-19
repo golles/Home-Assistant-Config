@@ -25,6 +25,8 @@ cards:
       action: navigate
       navigation_path: /dashboard-buiten/weer
 
+  - !include cards/kamers.yaml
+
   - type: conditional
     conditions:
       - entity: sensor.day_or_night
