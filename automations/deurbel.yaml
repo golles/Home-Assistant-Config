@@ -11,6 +11,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.deurbel_doorbell_pressed
+      from: 'off'
       to: 'on'
   action:
     - variables:
@@ -67,7 +68,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.deurbel_doorbell_pressed
-      to: unknown
+      to: unavailable
       for:
         minutes: 2
   action:
