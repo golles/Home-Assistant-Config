@@ -57,7 +57,13 @@ automation:
       - alias: Sent a notification with url
         service: notify.all_phones_and_tv
         data:
-          title: 🚨 P2000 melding
+          title: >-
+            {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}
+            {% if "ambulance" in state %} 🚑
+            {% elif "brandweer" in state %} 🚒
+            {% elif "politie" in state %} 🚓
+            {% else %}🚨 {% endif %}
+            P2000 melding
           message: >-
             {{ states("sensor.p2000_dichtbij") }}
           data:
