@@ -1,46 +1,46 @@
 sensor:
   - platform: p2000
     name: P2000 Ambulance
+    icon: mdi:ambulance
     regios: 11
-    disciplines: 2
-    scan_interval: 120
+    disciplines: Ambulancediensten
+    scan_interval: 60
     radius: 5000
+    nolocation: True
     
   - platform: p2000
     name: P2000 Brandweer
+    icon: mdi:fire-truck
     regios: 11
-    disciplines: 1
-    scan_interval: 120
+    disciplines: Brandweerdiensten
+    scan_interval: 60
     radius: 5000
+    nolocation: True
 
   - platform: p2000
     name: P2000 Dichtbij
+    icon: mdi:alert
     regios: 11
-    disciplines: 1,2,3
-    scan_interval: 120
+    # disciplines: Ambulancediensten,Brandweerdiensten,Politiediensten
+    scan_interval: 60
     radius: 250
 
   - platform: p2000
     name: P2000 Politie
+    icon: mdi:car-emergency
     regios: 11
-    disciplines: 3
-    scan_interval: 120
+    disciplines: Politiediensten
+    scan_interval: 60
     radius: 5000
+    nolocation: True
 
-homeassistant:
-  customize:
-    sensor.p2000_ambulance:
-      friendly_name: Ambulance
-      icon: mdi:ambulance
-    sensor.p2000_brandweer:
-      friendly_name: Brandweer
-      icon: mdi:fire-truck
-    sensor.p2000_dichtbij:
-      friendly_name: Buurt
-      icon: mdi:alert
-    sensor.p2000_politie:
-      friendly_name: Politie
-      icon: mdi:car-emergency
+  - platform: p2000
+    name: P2000 Lifeliner 1
+    icon: mdi:helicopter
+    regios: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25
+    capcodes: 0120901
+    scan_interval: 60
+    nolocation: True
 
 automation:
   - id: p20000_notification

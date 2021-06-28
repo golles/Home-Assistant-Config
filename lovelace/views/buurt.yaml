@@ -46,10 +46,16 @@ cards:
     type: entities
     show_header_toggle: false
     entities:
-      - sensor.p2000_dichtbij
-      - sensor.p2000_ambulance
-      - sensor.p2000_brandweer
-      - sensor.p2000_politie
+      - entity: sensor.p2000_dichtbij
+        name: Dichtbij
+      - entity: sensor.p2000_ambulance
+        name: Ambulance
+      - entity: sensor.p2000_brandweer
+        name: Brandweer
+      - entity: sensor.p2000_politie
+        name: Politie
+      - entity: sensor.p2000_lifeliner_1
+        name: Lifeliner 1
 
   - type: picture-elements
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
