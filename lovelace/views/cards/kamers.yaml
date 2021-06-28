@@ -5,7 +5,7 @@ title: Kamers
 cards:
   - type: custom:button-card
     template: kamer_info
-    icon: mdi:sofa
+    icon: mdi:sofa-outline
     name: Woonkamer
     variables:
       climate_entity: climate.woonkamer
@@ -34,7 +34,7 @@ cards:
 
   - type: custom:button-card
     template: kamer_info
-    icon: mdi:bed-king
+    icon: mdi:bed-king-outline
     name: Slaapkamer
     variables:
       climate_entity: climate.slaapkamer
@@ -43,7 +43,7 @@ cards:
 
   - type: custom:button-card
     template: kamer_info
-    icon: mdi:wardrobe
+    icon: mdi:wardrobe-outline
     name: Kledingkamer
     variables:
       climate_entity: climate.kledingkamer
@@ -52,7 +52,7 @@ cards:
 
   - type: custom:button-card
     template: kamer_info
-    icon: mdi:bed-empty
+    icon: mdi:bed-outline
     name: Logeerkamer
     variables:
       climate_entity: climate.logeerkamer
