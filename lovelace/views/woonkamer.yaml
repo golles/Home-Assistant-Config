@@ -123,6 +123,9 @@ cards:
       - type: custom:button-card
         entity: plant.haworthiopsis_attenuata
         template: plant
+      - type: custom:button-card
+        entity: plant.crassula_ovata
+        template: plant
 
   - !include cards/media_player_lg_soundbar.yaml
   - type: vertical-stack
