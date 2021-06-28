@@ -59,7 +59,7 @@ automation:
         data:
           title: 🚨 P2000 melding
           message: >-
-            {{ states("sensor.p2000_dichtbij") }} {{ state_attr("sensor.p2000_dichtbij", "capcodes") }}
+            {{ states("sensor.p2000_dichtbij") }}
           data:
             group: p2000
             url: >-
