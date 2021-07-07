@@ -81,8 +81,8 @@ filter:
         type: custom:button-card
         template: air_purifier
 
-    - entity_id: "sensor.pollen_*"
-      state: "*oog" # Matches "Hoog" and "Zeer hoog".
+    - entity_id: "sensor.pollen_*_risk"
+      state: "*high*" # Matches "anything containing high.
       options:
         type: button
         show_state: true

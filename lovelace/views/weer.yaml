@@ -30,12 +30,9 @@ cards:
   - type: entities
     title: Pollen
     entities:
-      - entity: sensor.pollen_tree_risk
-        name: Bomen
-      - entity: sensor.pollen_grass_risk
-        name: Grassen
-      - entity: sensor.pollen_weed_risk
-        name: Onkruiden
+      - sensor.pollen_tree_risk
+      - sensor.pollen_grass_risk
+      - sensor.pollen_weed_risk
 
   - type: grid
     columns: 3
