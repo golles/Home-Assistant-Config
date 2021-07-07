@@ -1,5 +1,24 @@
 binary_sensor:
   - platform: meteoalarm
-    country: NL
+    country: netherlands
     language: ne
-    province: "Noord-Holland"
+    province: Noord-Holland
+
+automation:
+  - id: meteoalarm_notification
+    alias: MeteoAlarm notificatie
+    trigger:
+      platform: state
+      entity_id: binary_sensor.meteoalarm
+      from: "off"
+      to: "on"
+    action:
+      - service: notify.all_phones_and_tv
+        data:
+          title: >-
+            ⚠️ {{state_attr("binary_sensor.meteoalarm", "headline")}}
+          message: >-
+            {{state_attr("binary_sensor.meteoalarm", "description")}}
+            {{state_attr("binary_sensor.meteoalarm", "instruction")}}
+          data:
+            group: weather
