@@ -28,6 +28,7 @@ cards:
         entity: switch.keukenkastje_lamp_switch
         name: Keukenkastje
         icon: mdi:lightbulb
+        state_color: true
 
       - type: button
         entity: binary_sensor.woonkamer_beweging_1_occupancy
