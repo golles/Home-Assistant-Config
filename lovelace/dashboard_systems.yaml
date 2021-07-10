@@ -8,3 +8,4 @@ views:
   - !include views/internet.yaml
   - !include views/sabnzbd.yaml
   - !include views/tado.yaml
+  - !include views/coinbase.yaml

@@ -1,0 +1,30 @@
+title: Coinbase
+path: coinbase
+panel: false
+icon: mdi:cash-multiple
+badges: []
+cards:
+  
+  - type: custom:auto-entities
+    card:
+      type: entities
+      title: Coins
+      show_header_toggle: false
+    entities:
+      - sensor.coinbase_total
+    filter:
+      include:
+        - domain: sensor
+          entity_id: "sensor.coinbase_*_portemonnee"
+        - domain: sensor
+          entity_id: "sensor.coinbase_*_portemonnee"
+          options:
+            type: attribute
+            attribute: Balance in native currency
+            name: " "
+            icon: " "
+    sort:
+      method: attribute
+      attribute: Balance in native currency
+      numeric: true
+      reverse: true
