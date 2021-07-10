@@ -5,9 +5,9 @@ sensor:
         friendly_name: Portefeuille
         unit_of_measurement: EUR
         icon_template: mdi:currency-eur
-        value_template: >
+        value_template: >-
           {% set number_string = states.sensor 
-            | selectattr("attributes.Balance in native currency")
+            | selectattr("attributes.Balance in native currency", "defined")
             | map(attribute="attributes.Balance in native currency")
             | join(", ")
             | replace(" EUR", "")
