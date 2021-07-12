@@ -13,9 +13,7 @@ cards:
         entity: light.voortuin
         icon: mdi:ceiling-light
       - type: light
-        entity: light.achtertuin_groep
-      - type: light
-        entity: light.gekleurde_licht
+        entity: light.achtertuin
 
   - type: picture-glance
     title: Deurbel laatste
