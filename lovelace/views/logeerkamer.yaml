@@ -36,3 +36,15 @@ cards:
         entity: binary_sensor.logeerkamerraam_contact
         name: Raam
         show_state: true
+      - type: conditional
+        conditions:
+          - entity: sensor.tt_macbook_displays
+            state: "2"
+          - entity: device_tracker.tt_macbook
+            state: home
+        card:
+          type: button
+          entity: binary_sensor.tt_macbook_active
+          name: TT Macbook
+          icon: mdi:laptop-mac
+          show_state: true
