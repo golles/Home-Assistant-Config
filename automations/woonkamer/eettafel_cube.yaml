@@ -1,44 +1,51 @@
-- id: cube1_tab
-  alias: Cube 1 tab
-  initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: sensor.eettafel_cube_action
-      to: 
-        - tap
-        - flip90
-        - flip180
-  action:
-    - service: light.toggle
-      entity_id: light.eettafel
+- id: eettafel_cube
+  alias: Eettafel cube
+  use_blueprint:
+    path: golles/zigbee2mqtt_aqara_magic_cube.yaml
+    input:
+      remote: sensor.eettafel_cube_action
 
-- id: cube1_rotate_left
-  alias: Cube 1 rotate left
-  initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: sensor.eettafel_cube_action
-      to: rotate_left
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.eettafel
-        brightness: >
-          {{ state_attr('light.eettafel', 'brightness') | int - 25 }}
-          
-- id: cube1_rotate_right
-  alias: Cube 1 rotate right
-  initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: sensor.eettafel_cube_action
-      to: rotate_right
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.eettafel
-        brightness: >
-          {{ state_attr('light.eettafel', 'brightness') | int + 25 }}
+      flip_side_0:
+        - service: script.eettafel_on
+      flip_side_1:
+        - service: script.play_livingroom_radio
+          target:
+            entity_id: media_player.lg_soundbar
+          data:
+            stream: https://stream.qmusic.nl/qmusic/mp3
+      flip_side_3:
+        - service: script.eettafel_off
+      flip_side_4:
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.lg_soundbar
+            
+      rotate_left_side_0:
+        - service: light.turn_on
+          data:
+            brightness_step: -25
+          target:
+            entity_id: light.eettafel
+      rotate_right_side_0:
+        - service: light.turn_on
+          data:
+            brightness_step: 25
+          target:
+            entity_id: light.eettafel
+
+      rotate_left_side_1:
+        - service: media_player.volume_down
+          target:
+            entity_id: media_player.lg_soundbar
+      rotate_right_side_1:
+        - service: media_player.volume_up
+          target:
+            entity_id: media_player.lg_soundbar
+
+      shake:
+        - service: media_player.volume_mute
+          target:
+            entity_id: media_player.lg_soundbar
+          data:
+            is_volume_muted: >-
+              {{ not state_attr("media_player.lg_soundbar", "is_volume_muted") }}

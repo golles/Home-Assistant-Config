@@ -1,0 +1,56 @@
+- id: logeerkamer_cube
+  alias: Logeerkamer cube
+  use_blueprint:
+    path: golles/zigbee2mqtt_aqara_magic_cube.yaml
+    input:
+      remote: sensor.logeerkamer_cube_action
+
+      flip_side_0:
+        - service: light.turn_on
+          target:
+            entity_id: light.logeerkamer
+      flip_side_1:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.googlehome6234
+          data:
+            media_content_id: https://stream.qmusic.nl/qmusic/mp3
+            media_content_type: audio/mp3
+      flip_side_3:
+        - service: light.turn_off
+          target:
+            entity_id: light.logeerkamer
+      flip_side_4:
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.googlehome6234
+            
+      rotate_left_side_0:
+        - service: light.turn_on
+          data:
+            brightness_step: -25
+          target:
+            entity_id: light.logeerkamer
+      rotate_right_side_0:
+        - service: light.turn_on
+          data:
+            brightness_step: 25
+          target:
+            entity_id: light.logeerkamer
+
+      rotate_left_side_1:
+        - service: media_player.volume_down
+          target:
+            entity_id: media_player.googlehome6234
+      rotate_right_side_1:
+        - service: media_player.volume_up
+          target:
+            entity_id: media_player.googlehome6234
+
+      shake:
+        - service: media_player.volume_mute
+          target:
+            entity_id: media_player.googlehome6234
+          data:
+            is_volume_muted: >-
+              {{ not state_attr("media_player.googlehome6234", "is_volume_muted") }}
