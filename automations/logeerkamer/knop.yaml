@@ -4,7 +4,7 @@
   use_blueprint:
     path: golles/zigbee2mqtt_xiaomi_switch.yaml
     input:
-      switch: sensor.0x00158d00044e916d_action
+      switch: sensor.logeerkamer_knop_action
       single:
         - choose:
           - conditions:
