@@ -8,11 +8,21 @@
       flip_side_0:
         - service: script.eettafel_on
       flip_side_1:
-        - service: script.play_livingroom_radio
-          target:
-            entity_id: media_player.lg_soundbar
-          data:
+        - variables:
             stream: https://stream.qmusic.nl/qmusic/mp3
+            
+        - choose:
+            - conditions:
+                condition: or
+                conditions:
+                  - "{{ state_attr('media_player.googlehome6234', 'media_content_id') == None }}"
+                  - "{{ stream not in state_attr('media_player.googlehome6234', 'media_content_id') }}"
+              sequence:
+                - service: script.play_livingroom_radio
+                  target:
+                    entity_id: media_player.lg_soundbar
+                  data:
+                    stream: "{{ stream }}"
       flip_side_3:
         - service: script.eettafel_off
       flip_side_4:

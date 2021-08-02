@@ -10,12 +10,22 @@
           target:
             entity_id: light.logeerkamer
       flip_side_1:
-        - service: media_player.play_media
-          target:
-            entity_id: media_player.googlehome6234
-          data:
-            media_content_id: https://stream.qmusic.nl/qmusic/mp3
-            media_content_type: audio/mp3
+        - variables:
+            stream: https://stream.qmusic.nl/qmusic/mp3
+            
+        - choose:
+            - conditions:
+                condition: or
+                conditions:
+                  - "{{ state_attr('media_player.googlehome6234', 'media_content_id') == None }}"
+                  - "{{ stream not in state_attr('media_player.googlehome6234', 'media_content_id') }}"
+              sequence:
+                - service: media_player.play_media
+                  target:
+                    entity_id: media_player.googlehome6234
+                  data:
+                    media_content_id: "{{ stream }}"
+                    media_content_type: audio/mp3
       flip_side_3:
         - service: light.turn_off
           target:
