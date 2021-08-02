@@ -5,26 +5,26 @@ icon: mdi:web
 badges: []
 cards:
 
-  - type: markdown
-    title: Ziggo storingen
-    entities:
-      - sensor.ziggo_incidents
-    content: >-
-      {% if not state_attr(config.entities[0], 'outages') -%}
-        Geen
-      {% else %}
-        {% for outage in state_attr(config.entities[0], 'outages') -%}
-        **[{{ outage.status }}]: {{ outage.title }}**
-        
-        {{ outage.announcement }}
-        
-        Verwachte opgelost: {{ outage.expected_solv_time }}
-        
-        {%- endfor %}
-      {%- endif %}
-
   - type: vertical-stack
     cards:
+      - type: markdown
+        title: Ziggo storingen
+        entities:
+          - sensor.ziggo_incidents
+        content: >-
+          {% if not state_attr(config.entities[0], 'outages') -%}
+            Geen
+          {% else %}
+            {% for outage in state_attr(config.entities[0], 'outages') -%}
+            **[{{ outage.status }}]: {{ outage.title }}**
+            
+            {{ outage.announcement }}
+            
+            Verwachte opgelost: {{ outage.expected_solv_time }}
+            
+            {%- endfor %}
+          {%- endif %}
+
       - type: entities
         title: Internet
         entities:
@@ -66,3 +66,15 @@ cards:
         - entity_id: 'sensor.cert_expiry_*'
     sort:
       method: name
+
+  - type: entities
+    title: AdGuard Home
+    show_header_toggle: false
+    entities:
+      - sensor.adguard_dns_queries
+      - sensor.adguard_dns_queries_blocked
+      - sensor.adguard_dns_queries_blocked_ratio
+      - sensor.adguard_average_processing_speed
+      - switch.adguard_protection
+      - switch.adguard_filtering
+      - switch.adguard_parental_control
