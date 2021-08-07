@@ -12,6 +12,10 @@ automation:
       entity_id: binary_sensor.meteoalarm
       from: "off"
       to: "on"
+    condition:
+      - "{{ state_attr('binary_sensor.meteoalarm', 'headline') != None }}"
+      - "{{ state_attr('binary_sensor.meteoalarm', 'description') != None }}"
+      - "{{ state_attr('binary_sensor.meteoalarm', 'instruction') != None }}"
     action:
       - service: notify.all_phones_and_tv
         data:
