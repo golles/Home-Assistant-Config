@@ -12,6 +12,7 @@
       flip_side_1:
         - variables:
             stream: https://stream.qmusic.nl/qmusic/mp3
+            speaker: media_player.googlehome6234
             
         - choose:
             - conditions:
@@ -20,9 +21,15 @@
                   - "{{ state_attr('media_player.googlehome6234', 'media_content_id') == None }}"
                   - "{{ stream not in state_attr('media_player.googlehome6234', 'media_content_id') }}"
               sequence:
+                - service: media_player.volume_set
+                  data:
+                    volume_level: 0.1
+                  target:
+                    entity_id: "{{ speaker }}"
+
                 - service: media_player.play_media
                   target:
-                    entity_id: media_player.googlehome6234
+                    entity_id: "{{ speaker }}"
                   data:
                     media_content_id: "{{ stream }}"
                     media_content_type: audio/mp3
