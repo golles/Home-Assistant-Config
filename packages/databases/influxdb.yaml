@@ -1,0 +1,19 @@
+influxdb:
+  host: influxdb
+  port: 8086
+  database: homeassistant
+  exclude: 
+    !include ../../db_excludes.yaml
+
+sensor:
+  - platform: influxdb
+    host: influxdb
+    queries:
+      - name: InfluxDb size
+        unit_of_measurement: MB
+        value_template: '{{ (value | float / 1024 /1024) | round(1) }}'
+        group_function: sum
+        measurement: '"monitor"."shard"'
+        database: _internal
+        where: 'time > now() - 10s'
+        field: diskBytes
