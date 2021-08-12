@@ -3,6 +3,12 @@ homeassistant:
     fan.air_purifier:
       icon: mdi:air-purifier
 
+fan:
+  - platform: xiaomi_miio_fan
+    name: Ventilator
+    host: !secret fan_ip
+    token: !secret fan_token
+
 switch:
   - platform: template
     switches:
