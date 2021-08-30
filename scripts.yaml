@@ -1,31 +1,44 @@
 everything_off:
-  description: Turn everything off in the house
+  alias: Turn everything off in the house
   mode: single
   fields:
     exclude_entity_ids:
       description: entity_ids to exclude
-  sequence:
-    - service: homeassistant.turn_off
-      data:
-        entity_id: >
-          {% if exclude_entity_ids is not defined %}
-            {% set exclude_entity_ids = '' %}
-          {% endif %}
+  variables:
+    entities: >
+      {% if exclude_entity_ids is not defined %}
+        {% set exclude_entity_ids = [] %}
+      {% endif %}
 
-          {{
-            (
-              expand(
-                states.light
-                | selectattr('state', 'eq', 'on')
-                | rejectattr('attributes.is_hue_group', 'defined')
-                | rejectattr('attributes.entity_id', 'defined')
-              ) +
-              expand(
-                states.media_player
-                | rejectattr('state', 'in', ['off', 'unavailable'])
-              )
-            )
-            | rejectattr('entity_id', 'in', exclude_entity_ids)
-            | map(attribute='entity_id')
-            | join(', ')
-          }}
+      {% set exclude_entity_ids = exclude_entity_ids + ['fan.air_purifier', 'fan.mechanische_ventilatie'] %}
+
+      {{
+        (
+          expand(
+            states.light
+            | selectattr('state', 'eq', 'on')
+            | rejectattr('attributes.is_hue_group', 'defined')
+            | rejectattr('attributes.entity_id', 'defined')
+          ) +
+          expand(
+            states.media_player
+            | rejectattr('state', 'in', ['off', 'unavailable'])
+          ) +
+          expand(
+            states.fan
+            | rejectattr('state', 'in', ['off', 'unavailable'])
+          )
+        )
+        | rejectattr('entity_id', 'in', exclude_entity_ids)
+        | map(attribute='entity_id')
+        | join(', ')
+      }}
+  sequence:
+    - choose:
+        - alias: Turn everything off that is turned on
+          conditions:
+            - "{{ entities != '' }}"
+          sequence:
+            - service: homeassistant.turn_off
+              data:
+                entity_id: "{{ entities }}"
