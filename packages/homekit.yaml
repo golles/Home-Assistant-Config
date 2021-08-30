@@ -19,6 +19,7 @@ homekit:
   filter:
     include_entities:
       - fan.air_purifier
+      - fan.ventilator
       - light.wled_skull
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
