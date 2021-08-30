@@ -1,0 +1,33 @@
+sensor:
+  - platform: history_stats
+    name: Visisted parents
+    entity_id: person.sander
+    state: Ouders
+    type: count
+    start: '{{ now().replace(hour=0, minute=0, second=0) }}'
+    end: '{{ now() }}'
+
+automation:
+  - id: came_home_after_visited_parents
+    alias: Komt thuis van ouders
+    description: Automation wanneer Sander thuis komt nadat hij bij zijn ouders is geweest.
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: person.sander
+        to: home
+    condition:
+      - "{{ states('sensor.visisted_parents') | int > 0 }}"
+      # Can't be triggered when it was already triggered in the last 24 hours.
+      - "{{ as_timestamp(now()) - as_timestamp(state_attr('automation.komt_thuis_van_ouders', 'last_triggered')) | int >= 24 * 60 * 60 }}"
+    action:
+      - service: notify.sander
+        data:
+          title: Welkom thuis
+          message: Je bent vandaag bij ouders geweest
+          data:
+            group: zone_ouders
+            shortcut:
+              name: Home Assistant - Ouders bericht
+ 
