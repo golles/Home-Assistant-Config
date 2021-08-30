@@ -1,5 +1,5 @@
-- id: slaapkamer_knop_links_press
-  alias: Slaapkamer knop links - press
+- id: slaapkamer_knop_links
+  alias: Slaapkamer knop links
   initial_state: on
   use_blueprint:
       path: golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml
