@@ -7,7 +7,9 @@ cards:
   - type: weather-forecast
     entity: weather.huis
   - type: weather-forecast
-    entity: weather.knmi_weidevenne
+    entity: weather.knmi_purmerend
+  - type: weather-forecast
+    entity: weather.climacell_daily
 
   - type: markdown
     content: >-
@@ -28,11 +30,34 @@ cards:
       - sensor.sun_sunset
 
   - type: entities
+    title: Fijnstof meter
+    entities:
+      - entity: sensor.particulate_matter_2_5um_concentration
+        name: PM2,5
+      - entity: sensor.particulate_matter_10_0um_concentration
+        name: PM10
+      - entity: sensor.particulate_matter_temperature
+        name: Temperatuur
+      - entity: sensor.particulate_matter_humidity
+        name: Luchtvochtigheid
+      - entity: sensor.particulate_matter_pressure
+        name: Luchtdruk
+      - type: weblink
+        name: Opensensemap
+        url: https://opensensemap.org/explore/60d8388f8855dd001c008870
+      - type: weblink
+        name: Madavi
+        url: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
+
+  - type: entities
     title: Pollen
     entities:
-      - sensor.pollen_tree_risk
-      - sensor.pollen_grass_risk
-      - sensor.pollen_weed_risk
+      - entity: sensor.climacell_tree_pollen_index
+        name: Bomen
+      - entity: sensor.climacell_grass_pollen_index
+        name: Grassen
+      - entity: sensor.climacell_weed_pollen_index
+        name: Onkruiden
 
   - type: grid
     columns: 3
