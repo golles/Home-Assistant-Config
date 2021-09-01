@@ -135,5 +135,5 @@ cards:
   - !include cards/media_player_lg_soundbar.yaml
   - type: vertical-stack
     cards:
-      - !include cards/media_player_stb_arris_uhd.yaml
+      - !include cards/media_player_mediabox.yaml
       - !include cards/media_player_lg_c9.yaml

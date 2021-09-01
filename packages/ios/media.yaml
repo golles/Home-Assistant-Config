@@ -48,10 +48,10 @@ automation:
       - choose:
         # Turn on.
         - conditions:
-            - "{{ is_state('media_player.stb_arris_uhd', 'off') }}"
+            - "{{ is_state('media_player.mediabox', 'off') }}"
           sequence:
             - service: script.play_livingroom_tv_source_ziggo
         # Turn off.
         default:
           - service: media_player.turn_off
-            entity_id: media_player.stb_arris_uhd
+            entity_id: media_player.mediabox

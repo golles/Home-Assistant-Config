@@ -1,5 +1,5 @@
 type: custom:mini-media-player
-entity: media_player.stb_arris_uhd
+entity: media_player.mediabox
 name: Ziggo
 artwork: material
 source: full

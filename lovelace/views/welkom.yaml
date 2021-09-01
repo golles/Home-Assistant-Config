@@ -44,10 +44,10 @@ cards:
     cards:
       - type: conditional
         conditions:
-          - entity: media_player.stb_arris_uhd
+          - entity: media_player.mediabox
             state_not: "off"
         card:
-          !include cards/media_player_stb_arris_uhd.yaml
+          !include cards/media_player_mediabox.yaml
 
       - type: conditional
         conditions:

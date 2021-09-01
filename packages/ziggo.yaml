@@ -1,8 +1,3 @@
-ziggonext:
-  username: !secret ziggo_username
-  password: !secret ziggo_password
-  country_code: nl
-
 sensor:
   - platform: rest
     name: Ziggo incidents
@@ -21,12 +16,12 @@ switch:
         friendly_name: Ziggo decoder
         icon_template: mdi:television
         value_template: >
-          {{ not is_state('media_player.stb_arris_uhd', 'off') }}
+          {{ not is_state('media_player.mediabox', 'off') }}
         turn_on:
           service: media_player.turn_on
           data:
-            entity_id: media_player.stb_arris_uhd
+            entity_id: media_player.mediabox
         turn_off:
           service: media_player.turn_off
           data:
-            entity_id: media_player.stb_arris_uhd
+            entity_id: media_player.mediabox
