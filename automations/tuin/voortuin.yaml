@@ -33,6 +33,9 @@
         minutes: 15
       continue_on_timeout: true
 
+    - delay:
+        seconds: 5
+
     - service: light.turn_off
       data:
         entity_id: light.voortuin
