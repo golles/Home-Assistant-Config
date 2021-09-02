@@ -7,6 +7,8 @@
       entity_id: binary_sensor.tt_macbook_active
       from: "on"
       to: "off"
+      for:
+        minutes: 15
   condition:
     - condition: state
       entity_id: device_tracker.tt_macbook
@@ -59,9 +61,19 @@
         to: "off"
       timeout:
         minutes: 45
-      continue_on_timeout: false
+      continue_on_timeout: true
 
-    - service: media_player.volume_mute
-      data:
-        entity_id: media_player.googlehome6234
-        is_volume_muted: false
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.tt_macbook_microphone_in_use
+            state: "off"
+        sequence:
+          - service: media_player.volume_mute
+            data:
+              entity_id: media_player.googlehome6234
+              is_volume_muted: false
+      default:
+        - service: media_player.media_stop
+          data:
+            entity_id: media_player.googlehome6234
