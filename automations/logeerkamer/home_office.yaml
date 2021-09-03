@@ -9,6 +9,9 @@
       to: "off"
       for:
         minutes: 15
+    - platform: state
+      entity_id: sensor.tt_macbook_frontmost_app
+      to: loginwindow
   condition:
     - condition: state
       entity_id: device_tracker.tt_macbook
@@ -20,7 +23,7 @@
       entity_id: media_player.googlehome6234
       state: playing
   action:
-    - service: media_player.media_stop
+    - service: media_player.turn_off
       data:
         entity_id: media_player.googlehome6234
 
@@ -74,6 +77,6 @@
               entity_id: media_player.googlehome6234
               is_volume_muted: false
       default:
-        - service: media_player.media_stop
+        - service: media_player.turn_off
           data:
             entity_id: media_player.googlehome6234
