@@ -31,26 +31,29 @@ automation:
       entity: >-
         {{ 
           states.sensor 
-            | selectattr('attributes.Wastecollector', 'defined')
-            | selectattr('attributes.Days-until', 'eq', 1)
-            | map(attribute='entity_id')
+            | selectattr("attributes.Wastecollector", "defined")
+            | selectattr("attributes.Days-until", "eq", 1)
+            | map(attribute="entity_id")
             | first
-            | default('none')
+            | default("none")
         }}
     trigger:
       platform: time
-      at: '19:30:00'
+      at: "19:30:00"
     condition:
       - condition: template
         value_template: >-
-          {{ entity != 'none' }}
+          {{ entity != "none" }}
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "off"
     action:
       - service: notify.sander
         data:
           title: Afval
           message: >-
-            Morgen wordt de {{ state_attr(entity, 'friendly_name') | upper }} container geleegd.
+            Morgen wordt de {{ state_attr(entity, "friendly_name") | upper }} container geleegd.
           data:
             group: afval
             image: >-
-              {{ state_attr(entity, 'entity_picture') }}
+              {{ state_attr(entity, "entity_picture") }}
