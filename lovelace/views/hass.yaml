@@ -27,22 +27,27 @@ cards:
           - type: weblink
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/
-
-  - type: markdown
-    title: Info
-    content: |-
-      <table width="100%">
-        <tr>
-          <th align="left">Domein</th>
-          <th align="right">Aantal entities</th>
-        </tr>
+    
+  - type: custom:auto-entities
+    show_empty: true
+    card:
+      type: entities
+      title: Info
+    filter:
+      template: >-
+        {%- set data = namespace(entities=[]) -%}
         {%- for d in states | groupby("domain") %}
-        <tr>
-          <td align="left">{{ d[0] }}</td>
-          <td align="right">{{ states[d[0]] | count}}</td>
-        </tr>
+        {%- set data.entities = data.entities + [{
+          "type": "custom:template-entity-row",
+          "name": d[0],
+          "icon": "mdi:eye",
+          "state": states[d[0]] | count
+        }] -%}
         {%- endfor %}
-      </table>
+        
+        {{ data.entities }}
+    sort:
+      method: name
 
   - type: custom:auto-entities
     show_empty: false
@@ -89,5 +94,4 @@ cards:
         - entity_id: sensor.stb_arris_uhd_channel
       include:
         - state: unknown
-    
-    
+  
