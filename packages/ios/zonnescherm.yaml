@@ -124,3 +124,57 @@ automation:
               - service: cover.close_cover
                 target:
                   entity_id: cover.zonnescherm
+
+  - id: ios_action_awning_can_be_opened
+    alias: iOS action - Zonnescherm kan open
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+        above: 40000
+      - platform: state
+        entity_id: sensor.sun_position_house
+        from: Voor
+        to: Achter
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+        above: 40000
+      - condition: state
+        entity_id: sensor.sun_position_house
+        state: Achter
+      - condition: numeric_state
+        entity_id: weather.huis
+        attribute: temperature
+        above: 18
+    action:
+      - alias: Set up variables for the actions
+        variables:
+          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
+          action_open: "{{ 'OPEN_' ~ context.id }}"
+
+      - alias: Ask to close the awning
+        service: notify.all_phones
+        data:
+          message: De zon is achter, wil je het zonnescherm openen?
+          data:
+            actions:
+              - action: "{{ action_open }}"
+                title: Ja, open
+
+      - alias: Wait for a response
+        wait_for_trigger:
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ action_open }}"
+
+      - alias: Perform the action
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == action_open }}"
+            sequence:
+              - service: tahoma.set_cover_my_position
+                target:
+                  entity_id: cover.zonnescherm
