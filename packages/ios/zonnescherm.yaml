@@ -91,6 +91,10 @@ automation:
         to: Voor
         for:
           minutes: 15
+      - platform: state
+        entity_id: sun.sun
+        to: 
+          - below_horizon
     condition:
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
