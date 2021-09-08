@@ -5,7 +5,7 @@
     path: golles/motion-activated_light_profiles.yaml
     input:
       illuminance_below: '10'
-      motion_entity: binary_sensor.zolder_beweging_occupancy
+      motion_entity: group.zolder_motion
       no_motion_wait: 15
       light_entity: light.zolder
       illuminance_entity: sensor.zolder_beweging_illuminance
@@ -22,7 +22,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.zolder_beweging_occupancy
+      entity_id: group.zolder_motion
       to: 'off'
       for:
         minutes: 10
@@ -33,7 +33,7 @@
         minutes: 5
   condition:
     - condition: state
-      entity_id: binary_sensor.zolder_beweging_occupancy
+      entity_id: group.zolder_motion
       state: 'off'
       for:
         minutes: 10

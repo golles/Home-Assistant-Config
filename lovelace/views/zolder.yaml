@@ -39,7 +39,7 @@ cards:
         name: Raam
         show_state: true
       - type: button
-        entity: binary_sensor.zolder_beweging_occupancy
+        entity: group.zolder_motion
         name: Beweging
         show_state: true
       - type: media-control

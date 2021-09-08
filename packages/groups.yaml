@@ -1,13 +1,20 @@
 group:
   woonkamer_motion:
-    name: Woonkamer motion
+    name: Woonkamer beweging
     icon: mdi:walk
     entities:
       - binary_sensor.woonkamer_beweging_1_occupancy
       - binary_sensor.woonkamer_beweging_2_occupancy
   badkamer_motion:
-    name: Badkamer motion
+    name: Badkamer beweging
     icon: mdi:walk
     entities:
       - binary_sensor.badkamer_beweging_occupancy
       - binary_sensor.douche_beweging_occupancy
+
+  zolder_motion:
+    name: Zolder beweging
+    icon: mdi:walk
+    entities:
+      - binary_sensor.zolder_beweging_1_occupancy
+      - binary_sensor.zolder_beweging_2_occupancy
