@@ -145,10 +145,9 @@ automation:
       - condition: state
         entity_id: sensor.sun_position_house
         state: Achter
-      - condition: numeric_state
-        entity_id: weather.huis
-        attribute: temperature
-        above: 18
+      - condition: template
+        value_template: >-
+          {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int > 20 }}
     action:
       - alias: Set up variables for the actions
         variables:
