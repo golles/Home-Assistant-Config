@@ -1,17 +1,17 @@
 - id: rolluiken_dicht
-  alias: Rolluiken dicht avond
+  alias: Rolluiken - dicht in de avond
   initial_state: on
   mode: single
   trigger:
     - platform: sun
       event: sunset
-      offset: '+00:45:00'
+      offset: "+00:45:00"
   action:
     - choose:
         - conditions:
             - condition: state
               entity_id: binary_sensor.slaapkamerraam_contact
-              state: 'off'
+              state: "off"
             - condition: state
               entity_id: cover.slaapkamer
               state: open
@@ -22,7 +22,7 @@
       - conditions:
           - condition: state
             entity_id: binary_sensor.kledingkamerraam_contact
-            state: 'off'
+            state: "off"
           - condition: state
             entity_id: cover.kledingkamer
             state: open
@@ -31,19 +31,19 @@
             entity_id: cover.kledingkamer
 
 - id: rolluiken_open_niemand_thuis
-  alias: Rolluiken open - bij niemand thuis
+  alias: Rolluiken - open bij niemand thuis
   initial_state: on
   mode: single
   trigger:
       platform: time
-      at: '09:00:00'
+      at: "09:00:00"
   condition:
     - condition: state
       entity_id: group.residents
       state: not_home
     - condition: state
       entity_id: input_boolean.guest_mode
-      state: 'off'
+      state: "off"
   action:
     - choose:
         - conditions:
@@ -61,3 +61,22 @@
           sequence:
             - service: cover.open_cover
               entity_id: cover.kledingkamer
+
+- id: rolluik_dicht_slaapkamer
+  alias: Rolluiken - Slaapkamer dicht na sluiten raam
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.slaapkamerraam_contact
+      from: "on"
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: cover.kledingkamer
+      state: closed
+  action:
+    - delay:
+        seconds: 5
+    - service: cover.close_cover
+      entity_id: cover.slaapkamer
