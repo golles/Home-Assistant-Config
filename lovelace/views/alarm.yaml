@@ -38,7 +38,8 @@ cards:
       - binary_sensor.badkamer_beweging_occupancy
       # Tweede verdieping.
       - binary_sensor.zoldertrap_beweging_occupancy
-      - binary_sensor.zolder_beweging_occupancy
+      - binary_sensor.zolder_beweging_1_occupancy
+      - binary_sensor.zolder_beweging_2_occupancy
     state_filter:
       - "on"
 
@@ -74,5 +75,6 @@ cards:
       - binary_sensor.badkamer_beweging_occupancy
       # Tweede verdieping.
       - binary_sensor.zoldertrap_beweging_occupancy
-      - binary_sensor.zolder_beweging_occupancy
+      - binary_sensor.zolder_beweging_1_occupancy
+      - binary_sensor.zolder_beweging_2_occupancy
     hours_to_show: 3

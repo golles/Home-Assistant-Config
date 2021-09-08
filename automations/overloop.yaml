@@ -10,7 +10,7 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: binary_sensor.zolder_beweging_occupancy
+        entity_id: group.zolder_motion
         state: 'on'
       - condition: numeric_state
         entity_id: sensor.overloop_sensor_2_light_level

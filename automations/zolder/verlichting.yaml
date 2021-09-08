@@ -4,17 +4,18 @@
   use_blueprint:
     path: golles/motion-activated_light_profiles.yaml
     input:
-      illuminance_below: '10'
-      motion_entity: group.zolder_motion
-      no_motion_wait: 15
+      illuminance_below: '15'
       light_entity: light.zolder
-      illuminance_entity: sensor.zolder_beweging_illuminance
+      motion_entity: group.zolder_motion
+      illuminance_entity: sensor.zolder_beweging_2_illuminance_lux
+      cool_down: 60
+      no_motion_wait: 15
       day_start_time: 08:00:00
       day_end_time: 00:00:00
       day_profile: helder
+      day_profile_before_off: gedimd
       night_profile: ontspannen
       night_profile_before_off: nachtlampje
-      day_profile_before_off: gedimd
 
 - id: zolder_auto_off
   alias: Zolder verlichting uit bij geen beweging
