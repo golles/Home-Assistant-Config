@@ -29,7 +29,7 @@ ios:
 
 automation:
   - id: ios_action_awning_command
-    alias: iOS action - Zonnescherm dicht
+    alias: iOS action - Zonnescherm
     initial_state: on
     mode: single
     max_exceeded: silent
@@ -75,7 +75,7 @@ automation:
                 {{ action_name == "Zonnescherm  helemaal open" }}
           sequence:
             - alias: My position for awning
-              service: cover.zonnescherm
+              service: cover.open_cover
               target:
                 entity_id: cover.zonnescherm
 
