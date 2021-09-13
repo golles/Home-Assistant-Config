@@ -51,7 +51,9 @@ automation:
         state: 'off'
     action:
       - variables:
-          trigger_friendly_name: >
+          area_name : >-
+            {{ area_name(trigger.entity_id) }}
+          trigger_friendly_name: >-
             {{ 
               state_attr(trigger.entity_id, 'friendly_name')
               | replace(' occupancy', '')
@@ -60,9 +62,10 @@ automation:
               | replace(' beweging', ' bewegingssensor')
               | replace(' sensor', ' bewegingssensor')
             }}
-          trigger_device_class: >
+          trigger_device_class: >-
             {{ state_attr(trigger.entity_id, 'device_class') }}
-          message: >
+          message: >-
+            Beweging in de {{ area_name }}, 
             {% if trigger_device_class == 'door' %}
               {{ trigger_friendly_name }} is geopend
             {% elif trigger_device_class == 'window' %}
