@@ -1,0 +1,53 @@
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    allowed_chat_ids:
+      - !secret telegram_house_group
+      - !secret telegram_sander
+
+automation:
+  - id: telegram_commands
+    alias: Telegram commandos
+    description: Telegram commandos
+    initial_state: on
+    mode: parallel
+    trigger:
+      - platform: event
+        event_type: telegram_command
+    action:
+      - variables:
+          chat_id: >-
+            {{ trigger.event.data["chat_id"] }}
+          command: >-
+            {{ trigger.event.data["command"] }}
+
+      - choose:
+          - alias: Ping
+            conditions:
+              - "{{ command == '/ping' }}"
+            sequence:
+              - service: telegram_bot.send_message
+                data:
+                  target: "{{ chat_id }}"
+                  message: Pong
+
+          - alias: Meterstanden
+            conditions:
+              - "{{ command == '/meterstanden' }}"
+            sequence:
+              - service: telegram_bot.send_message
+                data:
+                  target: "{{ chat_id }}"
+                  parse_mode: markdown
+                  title: De meterstanden zijn
+                  message: |-
+                    *Stroom:*
+                    Laagtarief: {{ states("sensor.dsmr_reading_electricity_delivered_1") }} kWh
+                    Normaaltarief: {{ states("sensor.dsmr_reading_electricity_delivered_2") }} kWh
+
+                    *Stadsverwarming:*
+                    Energie: {{ states("sensor.kamstrup_403_heat_energy_e1") }} GJ
+                    Volume: {{ states("sensor.kamstrup_403_volume") }} m³
+
+                    *Water:*
+                    Verbruik: {{ states("sensor.watermeter_totaal") }} m³

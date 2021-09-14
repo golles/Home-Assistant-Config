@@ -21,3 +21,11 @@ notify:
     services:
       - service: all_phones
       - service: lg_c9
+
+  - platform: telegram
+    name: telegram_huisgroep
+    chat_id: !secret telegram_house_group
+
+  - platform: telegram
+    name: telegram_sander
+    chat_id: !secret telegram_sander

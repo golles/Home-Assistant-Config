@@ -21,13 +21,15 @@ cards:
       {%- endif %}
 
   - type: entities
-    title: Zon
+    title: Zon/Maan
     entities:
       - entity: sun.sun
         name: Zon
       - sensor.sun_position_house
       - sensor.sun_sunrise
       - sensor.sun_sunset
+      - entity: sensor.moon
+        name: Maan
 
   - type: entities
     title: Fijnstof meter

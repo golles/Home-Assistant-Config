@@ -1,0 +1,26 @@
+sensor:
+  - platform: moon
+
+automation:
+  - id: full_moon
+    alias: Volle maan bericht
+    description: Berichtje bij volle maan
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.iss
+        from: "off"
+        to: "on"
+    action:
+      - service: notify.telegram_huisgroep
+        data:
+          title: 🌕 Maan
+          message: >-
+            {{
+              [
+                "Het is volle maan vanavond!",
+                "Wil je een volle maan zien? Dat kan vanavond",
+                "Een volle maan!",
+              ] | random
+            }}  

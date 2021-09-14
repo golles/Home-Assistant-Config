@@ -1,0 +1,28 @@
+binary_sensor:
+  - platform: iss
+    show_on_map: false
+
+automation:
+  - id: iss_above_house
+    alias: ISS boven de woning
+    description: Berichtje wanneer het IIS over komt
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.iss
+        from: "off"
+        to: "on"
+    action:
+      - service: notify.telegram_huisgroep
+        data:
+          title: 🛰️ ISS
+          message: >-
+            {{
+              [
+                "Het ISS vliegt nu over de woning",
+                "Het International Space Station vliegt nu over de woning",
+                "Kijk omhoog, het ISS",
+                "Kijk omhoog, het International Space Station is daar nu",
+              ] | random
+            }}  
