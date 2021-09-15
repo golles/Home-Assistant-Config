@@ -1,7 +1,7 @@
 sensor:
   - platform: rest
     name: Lokaal weer en verkeer
-    scan_interval: 36000 # 60 * 60 * 10
+    scan_interval: 3600 # 60 * 60
     resource: https://ditisdesupercooleappapi.nhnieuws.nl/api/init/web
     value_template: OK
     json_attributes:

@@ -5,14 +5,14 @@
   trigger:
     - platform: state
       entity_id: group.woonkamer_motion
-      to: 'on'
+      to: "on"
   condition:
     - condition: state
       entity_id: media_player.lg_c9
-      state: 'off' 
+      state: "off" 
     - condition: state
       entity_id: media_player.lg_soundbar
-      state: 'off' 
+      state: "off" 
     - condition: state
       entity_id: sensor.day_or_night
       state: Day # Between 00-12.
@@ -21,8 +21,12 @@
       state: Morning # Between 06-18.
     - condition: template
       value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
-        {{ as_timestamp(now()) - as_timestamp(state_attr('automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer', 'last_triggered')) | int >= 6 * 60 * 60 }}
+        {{ as_timestamp(now()) - as_timestamp(state_attr("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", "last_triggered")) | int >= 6 * 60 * 60 }}
   action:
+    - service: homeassistant.update_entity
+      target:
+        entity_id: sensor.lokaal_weer_en_verkeer
+
     - service: media_player.turn_on
       data:
         entity_id: media_player.lg_soundbar
@@ -33,8 +37,8 @@
         volume_level: 0.25 # 10 * 0.025
 
     - wait_template: >
-        {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
-      timeout: '00:00:05'
+        {{ states("media_player.lg_soundbar") in ["idle", "on"] }}
+      timeout: "00:00:05"
       continue_on_timeout: true
 
     - service: tts.microsoft_say
@@ -42,9 +46,9 @@
       data:
         message: >
           {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
-          {% set day = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'][now().weekday()] %}
+          {% set day = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"][now().weekday()] %}
           {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().month-1] %}
           
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
-          {{ state_attr('sensor.lokaal_weer_en_verkeer', 'weatherDescription') }}
+          {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
