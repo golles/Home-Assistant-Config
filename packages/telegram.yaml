@@ -39,7 +39,6 @@ automation:
                 data:
                   target: "{{ chat_id }}"
                   parse_mode: markdown
-                  title: De meterstanden zijn
                   message: |-
                     *Stroom:*
                     Laagtarief: {{ states("sensor.dsmr_reading_electricity_delivered_1") }} kWh
@@ -51,3 +50,21 @@ automation:
 
                     *Water:*
                     Verbruik: {{ states("sensor.watermeter_totaal") }} m³
+
+          - alias: Wie is er thuis
+            conditions:
+              - "{{ command == '/wie_thuis' }}"
+            sequence:
+              - service: telegram_bot.send_message
+                data:
+                  target: "{{ chat_id }}"
+                  parse_mode: markdown
+                  message: |-
+                    Op dit moment thuis: 
+                    {{ 
+                      states.person 
+                        | selectattr("state", "eq", "home")
+                        | map(attribute="attributes.friendly_name")
+                        | join(", ")
+                        | default("Niemand")
+                    }}

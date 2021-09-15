@@ -14,12 +14,11 @@ automation:
     action:
       - service: notify.telegram_huisgroep
         data:
-          title: 🌕 Maan
           message: >-
             {{
               [
-                "Het is volle maan vanavond!",
-                "Wil je een volle maan zien? Dat kan vanavond",
-                "Een volle maan!",
+                "Het is volle maan 🌕 vanavond!",
+                "Wil je een volle maan 🌕 zien? Dat kan vanavond",
+                "Een volle maan 🌕",
               ] | random
             }}  

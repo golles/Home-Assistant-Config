@@ -16,13 +16,12 @@ automation:
     action:
       - service: notify.telegram_huisgroep
         data:
-          title: 🛰️ ISS
           message: >-
             {{
               [
-                "Het ISS vliegt nu over de woning",
-                "Het International Space Station vliegt nu over de woning",
-                "Kijk omhoog, het ISS",
-                "Kijk omhoog, het International Space Station is daar nu",
+                "Het ISS 🛰️ vliegt nu over de woning",
+                "Het International Space Station 🛰️ vliegt nu over de woning",
+                "Kijk omhoog, het ISS 🛰️",
+                "🛰️ Kijk omhoog, het International Space Station is daar nu",
               ] | random
             }}  
