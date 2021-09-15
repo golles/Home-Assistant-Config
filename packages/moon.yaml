@@ -9,9 +9,8 @@ automation:
     mode: single
     trigger:
       - platform: state
-        entity_id: binary_sensor.iss
-        from: "off"
-        to: "on"
+        entity_id: sensor.moon
+        to: Full Moon
     action:
       - service: notify.telegram_huisgroep
         data:
