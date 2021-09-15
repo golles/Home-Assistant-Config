@@ -11,21 +11,21 @@
         entity_id: light.achtertuin
         transition: 2
 
-# - id: kerst_sfeer_achtertuin
-#   alias: Kerst sfeer achtertuin
-#   initial_state: on
-#   mode: single
-#   trigger:
-#     - platform: sun
-#       event: sunset
-#       offset: "-04:00:00"
-#   condition:
-#     condition: template
-#     value_template: > # All days in December after Sinterklaas.
-#       {{ now().month == 12 and now().day >= 6 }}
-#   action:
-#     - service: light.turn_on
-#       entity_id: light.gekleurde_licht
+- id: kerst_sfeer_achtertuin
+  alias: Kerst sfeer achtertuin
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-04:00:00"
+  condition:
+    condition: template
+    value_template: > # All days in December after Sinterklaas.
+      {{ now().month == 12 and now().day >= 6 }}
+  action:
+    - service: light.turn_on
+      entity_id: light.gekleurde_licht
 
 - id: backdoor_opens_while_being_dark_outside
   alias: Achtertuin verlichting tijdelijk aan wanneer de deur open gaat
@@ -43,7 +43,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.achtertuin
+        entity_id: light.achtertuin_groep
         profile: helder
         transition: 2
 
@@ -52,5 +52,5 @@
 
     - service: light.turn_off
       data:
-        entity_id: light.achtertuin
+        entity_id: light.achtertuin_groep
         transition: 2

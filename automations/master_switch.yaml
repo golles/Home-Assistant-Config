@@ -11,3 +11,4 @@
         data:
           exclude_entity_ids:
             - light.hal_lamp
+            - light.gekleurde_licht

@@ -1,5 +1,7 @@
 homeassistant:
   customize:
+    light.gekleurde_licht:
+      icon: mdi:led-strip-variant
     light.bedlampje_links:
       icon: mdi:desk-lamp
     light.bedlampje_rechts:
