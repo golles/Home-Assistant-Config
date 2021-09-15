@@ -4,13 +4,13 @@ fan:
       mechanische_ventilatie:
         friendly_name: Mechanische ventilatie
         value_template: >
-          {{ states('sensor.mechanische_ventilatie_status') }}
+          {{ states("sensor.mechanische_ventilatie_status") }}
         availability_template: >
-          {{ states('sensor.mechanische_ventilatie_status') }}
+          {{ states("sensor.mechanische_ventilatie_status") }}
         percentage_template: >
-          {{ state_attr('sensor.mechanische_ventilatie_status', 'percentage') }}
+          {{ state_attr("sensor.mechanische_ventilatie_status", "percentage") }}
         preset_mode_template: >
-          {{ state_attr('sensor.mechanische_ventilatie_status', 'speed') }}
+          {{ state_attr("sensor.mechanische_ventilatie_status", "speed") }}
         turn_on:
           service: script.ventilation_turn_on_off_dummy
         turn_off:
@@ -18,11 +18,11 @@ fan:
         set_percentage:
           service: script.ventilation_set_voltage
           data:
-            voltage: '{{ percentage / 10 }}'
+            voltage: "{{ percentage / 10 }}"
         set_preset_mode:
           service: script.ventilation_set_preset_mode
           data:
-            preset_mode: '{{ preset_mode }}'
+            preset_mode: "{{ preset_mode }}"
         preset_modes:
           - low
           - medium
@@ -32,11 +32,13 @@ fan:
 sensor:
   - platform: rest
     name: Mechanische ventilatie status
+    scan_interval: 30
+    timeout: 30
     resource: !secret nrf905_status_url
     username: !secret nrf905_username
     password: !secret nrf905_password
     value_template: >
-      {% if value_json['result'] == 'ok' %} 
+      {% if value_json["result"] == "ok" %} 
         on 
       {% else %} 
         off 
@@ -64,7 +66,7 @@ script:
       - service: rest_command.ventilation_preset_mode
         data:
           host: !secret nrf905_host
-          preset_mode: '{{ preset_mode }}'
+          preset_mode: "{{ preset_mode }}"
       - delay: 1
       - service: homeassistant.update_entity
         data:
@@ -82,8 +84,8 @@ script:
       - service: rest_command.ventilation_set_speed_timer
         data:
           host: !secret nrf905_host
-          speed: '{{ speed }}'
-          timer: '{{ timer }}'
+          speed: "{{ speed }}"
+          timer: "{{ timer }}"
       - delay: 1
       - service: homeassistant.update_entity
         data:
@@ -99,7 +101,7 @@ script:
       - service: rest_command.ventilation_set_voltage
         data:
           host: !secret nrf905_host
-          voltage: '{{ voltage }}'
+          voltage: "{{ voltage }}"
       - delay: 1
       - service: homeassistant.update_entity
         data:
