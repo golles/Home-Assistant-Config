@@ -74,11 +74,6 @@ automation:
         entity_id: input_boolean.guest_mode
         state: "off"
     action:
-      - service: notify.telegram_huisgroep
-        data:
-          title: 🏖️ Vakantiemodus
-          message: >-
-            Actie: {{ trigger.id }} is uitgevoerd.
       - choose:
           - conditions:
               - condition: trigger
