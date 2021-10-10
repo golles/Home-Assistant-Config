@@ -30,6 +30,8 @@ cards:
         entity: light.zolder
         name: Plafond
         icon: mdi:ceiling-light
+      - type: custom:button-card
+        template: mechanische_ventilatie
       - type: button
         entity: binary_sensor.balkondeur_contact
         name: Balkondeur
@@ -42,8 +44,6 @@ cards:
         entity: group.zolder_motion
         name: Beweging
         show_state: true
-      - type: media-control
-        entity: media_player.zolder
       - type: button
         entity: sensor.wasmachine_remaining_relative_local
         name: Wasmachine
@@ -53,10 +53,6 @@ cards:
         show_icon: true
         show_state: true
         show_name: false
-      - type: entity
-        entity: fan.mechanische_ventilatie
-        attribute: percentage
-        unit: "%"
 
   - type: entities
     title: Wasmachine
@@ -87,4 +83,3 @@ cards:
       prev: true
       next: true
 
-  - !include cards/fan_mechanische_ventilatie.yaml

@@ -24,6 +24,8 @@ cards:
         entity: light.toilet
         name: Plafond
         icon: mdi:ceiling-light
+      - type: custom:button-card
+        template: mechanische_ventilatie
       - type: button
         entity: binary_sensor.toilet_beweging_occupancy
         name: Beweging
@@ -32,5 +34,3 @@ cards:
         entity: automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
         name: Automatisch licht
         icon: mdi:toggle-switch
-
-  - !include cards/fan_mechanische_ventilatie.yaml

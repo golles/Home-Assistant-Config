@@ -30,6 +30,8 @@ cards:
         entity: light.badkamer
         name: Plafond
         icon: mdi:ceiling-light
+      - type: custom:button-card
+        template: mechanische_ventilatie
       - type: button
         entity: binary_sensor.badkamerraam_contact
         name: Raam
@@ -46,5 +48,3 @@ cards:
         entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
         name: Automatisch licht
         icon: mdi:toggle-switch
-
-  - !include cards/fan_mechanische_ventilatie.yaml
