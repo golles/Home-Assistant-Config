@@ -16,8 +16,8 @@ automation:
   trigger:
     - platform: state
       entity_id: media_player.lg_c9
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
   action:
     - service: shell_command.set_soundbar_source_and_volume
       data:
@@ -32,7 +32,6 @@ script:
   play_livingroom_radio:
     alias: Speel radio in de woonkamer
     icon: mdi:radio
-    description: Speel radio in de woonkamer
     mode: restart
     fields:
       stream:
@@ -43,14 +42,14 @@ script:
         - conditions:
             - condition: state
               entity_id: media_player.lg_soundbar
-              state: 'off'
+              state: "off"
           sequence:
             - service: media_player.turn_on
               data:
                 entity_id: media_player.lg_soundbar
             - wait_template: >
-                {{ states('media_player.lg_soundbar') in ['idle', 'on'] }}
-              timeout: '00:00:05'
+                {{ states("media_player.lg_soundbar") in ["idle", "on"] }}
+              timeout: "00:00:05"
               continue_on_timeout: false
             - service: media_player.volume_set
               data:
@@ -60,54 +59,52 @@ script:
       - service: media_player.play_media
         data:
           entity_id: media_player.lg_soundbar
-          media_content_id: '{{ stream }}'
+          media_content_id: "{{ stream }}"
           media_content_type: audio/mp4
   
-  play_livingroom_tv_source:
+  play_tv_with_source:
     alias: Speel tv met bron
     icon: mdi:television
-    description: Speel tv met bron
     mode: restart
     fields:
+      media_player:
+        description: The media player to play the stream on
+        example: media_player.tv
       source:
         description: The source to pick
         example: Youtube
     sequence:
       - choose:
         - conditions:
-            - condition: state
-              entity_id: media_player.lg_c9
-              state: 'off'
+            - "{{ is_state(media_player, 'off') }}"
           sequence:
             - service: media_player.turn_on
               data:
-                entity_id: media_player.lg_c9
+                entity_id: "{{ media_player }}"
             - wait_template: >
-                {{ not is_state('media_player.lg_c9', 'off') }}
-              timeout: '00:00:02'
+                {{ not is_state(media_player, "off") }}
+              timeout: "00:00:02"
               continue_on_timeout: false
 
       - service: media_player.select_source
         data:
-          entity_id: media_player.lg_c9
-          source: '{{ source }}'
+          entity_id: "{{ media_player }}"
+          source: "{{ source }}"
 
   play_livingroom_tv_source_ziggo:
     alias: Speel tv met bron ziggo
     icon: mdi:television
-    description: Speel tv met bron ziggo
     mode: restart
     sequence:
       - choose:
         - conditions:
-            - condition: state
-              entity_id: media_player.mediabox
-              state: 'off'
+            - "{{ is_state('media_player.lg_c9', 'off') }}"
           sequence:
             - service: media_player.turn_on
               data:
                 entity_id: media_player.mediabox
 
-      - service: script.play_livingroom_tv_source
+      - service: script.play_tv_with_source
         data:
+          media_player: media_player.lg_c9
           source: Ziggo

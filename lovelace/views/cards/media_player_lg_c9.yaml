@@ -12,7 +12,7 @@ hide:
   prev: true
   next: true
 shortcuts:
-  columns: 5
+  columns: 3
   column_height: 60
   buttons:    
     - cover: /local/tv/ziggo.png
@@ -20,21 +20,31 @@ shortcuts:
       id: script.play_livingroom_tv_source_ziggo
     - cover: /local/tv/netflix.png
       type: script
-      id: script.play_livingroom_tv_source
+      id: script.play_tv_with_source
       data:
+        media_player: media_player.lg_c9
         source: Netflix
     - cover: /local/tv/youtube.png
       type: script
-      id: script.play_livingroom_tv_source
+      id: script.play_tv_with_source
       data:
+        media_player: media_player.lg_c9
         source: YouTube
     - cover: /local/tv/switch.png
       type: script
-      id: script.play_livingroom_tv_source
+      id: script.play_tv_with_source
       data:
+        media_player: media_player.lg_c9
         source: Nintendo Switch
     - cover: /local/tv/plex.png
       type: script
-      id: script.play_livingroom_tv_source
+      id: script.play_tv_with_source
       data:
+        media_player: media_player.lg_c9
         source: Plex
+    - cover: /local/tv/smart_tv_club.png
+      type: script
+      id: script.play_tv_with_source
+      data:
+        media_player: media_player.lg_c9
+        source: Smart TV Club
