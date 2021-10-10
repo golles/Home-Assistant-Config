@@ -11,6 +11,7 @@ sensor:
             | map(attribute="attributes.Balance in native currency")
             | join(", ")
             | replace(" EUR", "")
+            | default("0, 0")
           %}
 
           {% set total = namespace(value = 0) %}
