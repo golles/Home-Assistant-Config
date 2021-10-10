@@ -9,7 +9,7 @@ homeassistant:
     light.bedlampen:
       icon: mdi:desk-lamp
     light.tv:
-      icon: mdi:car-parking-lights
+      icon: mdi:television-ambient-light
 
 light:
   - platform: group
