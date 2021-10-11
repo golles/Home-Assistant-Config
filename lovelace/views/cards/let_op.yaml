@@ -8,13 +8,15 @@ filter:
   template: >-
     {%- set data = namespace(entities=[]) -%}
 
-    {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
-      {%- set data.entities = data.entities + [{
-        "type": "button",
-        "entity": "sensor.p2000_dichtbij",
-        "show_state": "true",
-        "show_name": "false"
-      }] -%}
+    {% if state_attr("sensor.p2000_dichtbij", "time") %}
+      {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
+        {%- set data.entities = data.entities + [{
+          "type": "button",
+          "entity": "sensor.p2000_dichtbij",
+          "show_state": "true",
+          "show_name": "false"
+        }] -%}
+      {% endif %}
     {% endif %}
     
     {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
@@ -44,7 +46,9 @@ filter:
       }] -%}
     {% endif %}
     
-    {{ data.entities }}
+    {% if data.entities | length > 0 %}
+      {{ data.entities }}
+    {% endif %}
   include:
     - domain: sensor
       attributes:
