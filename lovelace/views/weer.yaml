@@ -8,8 +8,6 @@ cards:
     entity: weather.huis
   - type: weather-forecast
     entity: weather.knmi_purmerend
-  - type: weather-forecast
-    entity: weather.climacell_daily
 
   - type: markdown
     content: >-
