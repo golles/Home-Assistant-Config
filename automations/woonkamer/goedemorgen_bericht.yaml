@@ -20,25 +20,30 @@
       value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
         {{ as_timestamp(now()) - as_timestamp(state_attr("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", "last_triggered")) | int >= 6 * 60 * 60 }}
   action:
-    - service: homeassistant.update_entity
+    - alias: Force update weather description
+      service: homeassistant.update_entity
       target:
         entity_id: sensor.lokaal_weer_en_verkeer
 
-    - service: media_player.turn_on
+    - alias: Turn on media player
+      service: media_player.turn_on
       data:
         entity_id: media_player.lg_soundbar
 
-    - service: media_player.volume_set
+    - alias: Set soundbar volume
+      service: media_player.volume_set
       data:
         entity_id: media_player.lg_soundbar
         volume_level: 0.25 # 10 * 0.025
 
-    - wait_template: >
+    - alias: Wait for the soundbar to be ready
+      wait_template: >
         {{ states("media_player.lg_soundbar") in ["idle", "on"] }}
       timeout: "00:00:05"
       continue_on_timeout: true
 
-    - service: tts.microsoft_say
+    - alias: Speak message
+      service: tts.microsoft_say
       entity_id: media_player.lg_soundbar
       data:
         message: >

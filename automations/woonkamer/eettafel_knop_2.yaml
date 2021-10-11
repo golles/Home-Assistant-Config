@@ -6,7 +6,7 @@
   use_blueprint:
     path: golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
     input:
-      hold_cooldown: '1'
+      hold_cooldown: "1"
       smart_button: sensor.eettafelknop_2_action
       press_action:
       - service: switch.toggle
@@ -17,7 +17,7 @@
         - conditions:
             - condition: state
               entity_id: light.eettafel
-              state: 'off'
+              state: "off"
           sequence:
             - service: script.eettafel_on
         # Light is on.
@@ -26,7 +26,7 @@
             data:
               entity_id: light.eettafel
               brightness_step: >
-                {%- if state_attr('light.eettafel', 'brightness') % 2 == 0 %}
+                {%- if state_attr("light.eettafel", "brightness") % 2 == 0 %}
                   {{ step }}
                 {%- else -%}
                   -{{ step }}

@@ -1,0 +1,14 @@
+- id: rain_detected
+  alias: Regen gedetecteerd
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.regen_contact
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.sander
+      data:
+        title: 🌧️ Regen
+        message: Test bericht, het regent

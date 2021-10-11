@@ -13,10 +13,10 @@
     conditions:
       - condition: sun
         after: sunset
-        after_offset: '+00:30:00'
+        after_offset: "+00:30:00"
       - condition: sun
         before: sunrise
-        before_offset: '-01:00:00'
+        before_offset: "-01:00:00"
   action:
     - service: light.turn_on
       data:
@@ -27,8 +27,8 @@
     - wait_for_trigger:
       - platform: state
         entity_id: binary_sensor.voordeur_contact
-        from: 'on'
-        to: 'off'
+        from: "on"
+        to: "off"
       timeout:
         minutes: 15
       continue_on_timeout: true

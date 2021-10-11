@@ -11,7 +11,7 @@
     conditions:
       - condition: state
         entity_id: group.zolder_motion
-        state: 'on'
+        state: "on"
       - condition: numeric_state
         entity_id: sensor.overloop_sensor_2_light_level
         below: 10
@@ -20,7 +20,7 @@
           - condition: state # When the light is off.
             entity_id: light.overloop
             state: "off"
-          - condition: numeric_state # When the light is dimmerd, usually before turning off.
+          - condition: numeric_state # When the light is dimmed, usually before turning off.
             entity_id: light.overloop
             attribute: brightness
             below: 25

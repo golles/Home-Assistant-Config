@@ -10,13 +10,13 @@
   condition:
     - condition: state
       entity_id: binary_sensor.wasmachine_door
-      state: 'on'
+      state: "on"
     - condition: state # Door should be closed.
       entity_id: binary_sensor.balkondeur_contact
-      state: 'off'
+      state: "off"
     - condition: state # Window should be closed.
       entity_id: binary_sensor.zolderraam_contact
-      state: 'off'
+      state: "off"
   action:
     - choose:
       - conditions:
@@ -36,7 +36,7 @@
           - service: tado.set_climate_timer
             data:
               entity_id: climate.zolder
-              time_period: '02:00:00'
+              time_period: "02:00:00"
               temperature: 23
 
 - id: washing_machine_notifiction_tv

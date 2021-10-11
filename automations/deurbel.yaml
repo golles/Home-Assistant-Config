@@ -11,8 +11,8 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.deurbel_doorbell_pressed
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
   action:
     - variables:
         message_title: Ding dong!

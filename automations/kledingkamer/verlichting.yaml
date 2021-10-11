@@ -4,7 +4,7 @@
   use_blueprint:
     path: golles/motion-activated_light_profiles.yaml
     input:
-      illuminance_below: '10'
+      illuminance_below: "10"
       motion_entity: binary_sensor.kledingkamer_beweging_occupancy
       no_motion_wait: 15
       light_entity: light.kledingkamer

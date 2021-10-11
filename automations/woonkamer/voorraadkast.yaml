@@ -7,14 +7,14 @@
     - platform: state
       entity_id: binary_sensor.voorraadkastdeur_contact
       to: 
-        - 'on'
-        - 'off'
+        - "on"
+        - "off"
   action:
     - choose:
       - conditions:
           - condition: state
             entity_id: binary_sensor.voorraadkastdeur_contact
-            state: 'on'
+            state: "on"
         sequence:
           - service: switch.turn_on
             entity_id: switch.voorraadkastlamp_switch

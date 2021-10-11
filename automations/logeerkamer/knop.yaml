@@ -1,6 +1,5 @@
 - id: logeerkamer_knop
   alias: Logeerkamer knop
-  description: ''
   use_blueprint:
     path: golles/zigbee2mqtt_xiaomi_switch.yaml
     input:
@@ -36,7 +35,7 @@
           data:
             entity_id: light.logeerkamer
             brightness_step: >
-              {%- if state_attr('light.logeerkamer', 'brightness') % 2 == 0 %}
+              {%- if state_attr("light.logeerkamer", "brightness") % 2 == 0 %}
                 20
               {%- else -%}
                 -20

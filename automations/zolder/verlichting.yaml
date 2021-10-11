@@ -4,7 +4,7 @@
   use_blueprint:
     path: golles/motion-activated_light_profiles.yaml
     input:
-      illuminance_below: '15'
+      illuminance_below: "15"
       light_entity: light.zolder
       motion_entity: group.zolder_motion
       illuminance_entity: sensor.zolder_beweging_2_illuminance_lux
@@ -24,23 +24,23 @@
   trigger:
     - platform: state
       entity_id: group.zolder_motion
-      to: 'off'
+      to: "off"
       for:
         minutes: 10
     - platform: state
       entity_id: light.zolder
-      to: 'on'
+      to: "on"
       for:
         minutes: 5
   condition:
     - condition: state
       entity_id: group.zolder_motion
-      state: 'off'
+      state: "off"
       for:
         minutes: 10
     - condition: state
       entity_id: light.zolder
-      state: 'on'
+      state: "on"
   action:
     - service: light.turn_off
       entity_id: light.zolder
