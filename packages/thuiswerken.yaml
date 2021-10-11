@@ -1,0 +1,86 @@
+template:
+  - binary_sensor:
+      - name: TT MacBook in thuis kantoor
+        state: >-
+          {{ is_state("device_tracker.tt_macbook", "home") and is_state("sensor.tt_macbook_displays", "2") }}
+      - name: TT MacBook in thuis kantoor en aan
+        state: >-
+          {{ is_state("binary_sensor.tt_macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.tt_macbook_active", "on") }}
+
+automation:
+  - id: home_office_laptop_inactive
+    alias: Thuiswerken, stop muziek laptop inactive
+    initial_state: on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.tt_macbook_active
+        from: "on"
+        to: "off"
+        for:
+          minutes: 15
+      - platform: state
+        entity_id: sensor.tt_macbook_frontmost_app
+        to: loginwindow
+    condition:
+      - condition: state
+        entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
+        state: "on"
+      - condition: state
+        entity_id: media_player.googlehome6234
+        state: playing
+    action:
+      - service: media_player.turn_off
+        data:
+          entity_id: media_player.googlehome6234
+
+  - id: home_office_meeting
+    alias: Thuiswerken, stop muziek bij vergadering
+    initial_state: on
+    mode: restart
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.tt_macbook_microphone_in_use
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
+        state: "on"
+      - condition: state
+        entity_id: media_player.googlehome6234
+        state: playing
+      - condition: state
+        entity_id: sensor.tt_macbook_frontmost_app
+        state:
+          - Slack
+          - Microsoft Teams
+    action:
+      - service: media_player.volume_mute
+        data:
+          entity_id: media_player.googlehome6234
+          is_volume_muted: true
+
+      - wait_for_trigger:
+        - platform: state
+          entity_id: binary_sensor.tt_macbook_microphone_in_use
+          from: "on"
+          to: "off"
+        timeout:
+          minutes: 45
+        continue_on_timeout: true
+
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.tt_macbook_microphone_in_use
+              state: "off"
+          sequence:
+            - service: media_player.volume_mute
+              data:
+                entity_id: media_player.googlehome6234
+                is_volume_muted: false
+        default:
+          - service: media_player.turn_off
+            data:
+              entity_id: media_player.googlehome6234

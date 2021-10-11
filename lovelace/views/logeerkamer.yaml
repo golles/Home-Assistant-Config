@@ -42,10 +42,8 @@ cards:
         show_state: true
       - type: conditional
         conditions:
-          - entity: sensor.tt_macbook_displays
-            state: "2"
-          - entity: device_tracker.tt_macbook
-            state: home
+          - entity: binary_sensor.tt_macbook_in_thuis_kantoor
+            state: "on"
         card:
           type: button
           entity: binary_sensor.tt_macbook_active

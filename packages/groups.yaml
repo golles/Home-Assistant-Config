@@ -1,21 +1,44 @@
 group:
   woonkamer_motion:
     name: Woonkamer beweging
-    icon: mdi:walk
+    icon: mdi:motion-sensor
     entities:
       - binary_sensor.woonkamer_beweging_1_occupancy
       - binary_sensor.woonkamer_beweging_2_occupancy
 
   badkamer_motion:
     name: Badkamer beweging
-    icon: mdi:walk
+    icon: mdi:motion-sensor
     entities:
       - binary_sensor.badkamer_beweging_occupancy
       - binary_sensor.douche_beweging_occupancy
 
   zolder_motion:
     name: Zolder beweging
-    icon: mdi:walk
+    icon: mdi:motion-sensor
     entities:
       - binary_sensor.zolder_beweging_1_occupancy
       - binary_sensor.zolder_beweging_2_occupancy
+
+  woonkamer_occupancy:
+    name: Woonkamer bezetting
+    icon: mdi:motion-sensor
+    entities: 
+      - group.woonkamer_motion
+      - media_player.lg_c9
+      - media_player.lg_soundbar
+
+  logeerkamer_occupancy:
+    name: Logeerkamer bezetting
+    icon: mdi:motion-sensor
+    entities: 
+      - binary_sensor.logeerkamer_beweging_occupancy
+      - media_player.googlehome6234
+      - binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
+
+  zolder_occupancy:
+    name: Zolder bezetting
+    icon: mdi:motion-sensor
+    entities: 
+      - group.zolder_motion
+      - media_player.zolder
