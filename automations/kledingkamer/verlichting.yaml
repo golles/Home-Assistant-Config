@@ -8,7 +8,7 @@
       motion_entity: binary_sensor.kledingkamer_beweging_occupancy
       no_motion_wait: 15
       light_entity: light.kledingkamer
-      illuminance_entity: sensor.kledingkamer_beweging_illuminance
+      illuminance_entity: sensor.kledingkamer_beweging_illuminance_lux
       day_start_time: 08:00:00
       day_end_time: 00:00:00
       day_profile: helder

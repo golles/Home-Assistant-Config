@@ -46,3 +46,7 @@ cards:
         entity: binary_sensor.slaapkamerraam_contact
         name: Raam
         show_state: true
+      - type: button
+        entity: binary_sensor.slaapkamer_beweging_occupancy
+        name: Beweging
+        show_state: true

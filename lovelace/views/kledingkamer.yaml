@@ -21,6 +21,8 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
+      - entity: sensor.kledingkamer_beweging_illuminance_lux
+        name: Lichtsterkte
 
   - type: grid
     columns: 3

@@ -36,6 +36,10 @@ cards:
         entity: binary_sensor.logeerkamerraam_contact
         name: Raam
         show_state: true
+      - type: button
+        entity: binary_sensor.logeerkamer_beweging_occupancy
+        name: Beweging
+        show_state: true
       - type: conditional
         conditions:
           - entity: sensor.tt_macbook_displays
@@ -46,5 +50,5 @@ cards:
           type: button
           entity: binary_sensor.tt_macbook_active
           name: TT Macbook
-          icon: mdi:laptop-mac
+          icon: mdi:laptop
           show_state: true

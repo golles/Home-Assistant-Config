@@ -5,6 +5,7 @@ group:
     entities:
       - binary_sensor.woonkamer_beweging_1_occupancy
       - binary_sensor.woonkamer_beweging_2_occupancy
+
   badkamer_motion:
     name: Badkamer beweging
     icon: mdi:walk
