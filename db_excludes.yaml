@@ -8,8 +8,6 @@ entities:
   - sensor.time_date
   - sensor.time_utc
   - sensor.internet_time
-  - sensor.time_of_day
-  - sensor.day_or_night
 
   # Uptime:
   - sensor.uptime

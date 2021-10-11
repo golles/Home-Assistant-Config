@@ -14,11 +14,8 @@
       entity_id: media_player.lg_soundbar
       state: "off" 
     - condition: state
-      entity_id: sensor.day_or_night
-      state: Day # Between 00-12.
-    - condition: state
-      entity_id: sensor.time_of_day
-      state: Morning # Between 06-18.
+      entity_id: binary_sensor.morning
+      state: "on"
     - condition: template
       value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
         {{ as_timestamp(now()) - as_timestamp(state_attr("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", "last_triggered")) | int >= 6 * 60 * 60 }}

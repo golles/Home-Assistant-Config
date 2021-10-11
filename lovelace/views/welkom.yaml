@@ -26,8 +26,8 @@ cards:
 
   - type: conditional
     conditions:
-      - entity: sensor.day_or_night
-        state: Night
+      - entity: sensor.count_lights_on
+        state_not: "0"
     card:
       !include cards/lampen_aan.yaml
 

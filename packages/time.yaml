@@ -10,24 +10,31 @@ sensor:
       - time_utc
       - beat
 
-  - platform: template
-    sensors:
-      time_of_day:
-        value_template: >-
-          {% set hour = strptime(states('sensor.time'), '%H:%M').hour %}
-          {% if hour in range(0, 12) %} 
-            Morning
-          {% elif hour in range(12, 18) %} 
-            Afternoon
-          {% else %} 
-            Evening
-          {% endif %}
+  - platform: season
+    type: astronomical
 
-      day_or_night:
-        value_template: >-
-          {% set hour = strptime(states('sensor.time'), '%H:%M').hour %}
-          {% if hour in range(6, 18) %} 
-            Day
-          {% else %} 
-            Night
-          {% endif %}
+binary_sensor:
+  - platform: tod
+    name: Night
+    after: "00:00"
+    before: "06:00"
+
+  - platform: tod
+    name: Morning
+    after: "06:00"
+    before: "12:00"
+
+  - platform: tod
+    name: Afternoon
+    after: "12:00"
+    before: "18:00"
+
+  - platform: tod
+    name: Evening
+    after: "18:00"
+    before: "00:00"
+
+  - platform: tod
+    name: Zon op
+    after: sunrise
+    before: sunset
