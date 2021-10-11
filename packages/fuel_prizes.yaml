@@ -2,8 +2,10 @@ homeassistant:
   customize:
     sensor.tango_purmerend:
       icon: mdi:gas-station
+      state_class: measurement
     sensor.tango_winschoten:
       icon: mdi:gas-station
+      state_class: measurement
       
 sensor:
   - platform: scrape
