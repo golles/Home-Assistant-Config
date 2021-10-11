@@ -58,3 +58,28 @@
               entity_id: scene.avond
             data:
               transition: 900 # 15 minutes.
+
+- id: tv_lights_based_on_source
+  alias: TV verlichting aanpassen op basis van de bron
+  initial_state: on
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      below: 5
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: media_player.lg_c9
+      attribute: source
+      to: 
+        - Netflix
+        - Plex
+  condition:
+    - "{{ states('sensor.woonkamer_lichtsterkte_illuminance_lux') | int < 5 }}"
+  action:
+    service: scene.turn_on
+    data:
+      entity_id: scene.film
+      transition: 2
