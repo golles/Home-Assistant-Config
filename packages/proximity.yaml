@@ -1,0 +1,12 @@
+proximity:
+  residents_home:
+    zone: home
+    devices:
+      # List all individual residents and not the group as it won't work.
+      - person.sander
+    tolerance: 50
+  sander_home:
+    zone: home
+    devices:
+      - person.sander
+    tolerance: 50
