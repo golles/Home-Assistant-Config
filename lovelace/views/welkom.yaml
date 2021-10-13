@@ -16,12 +16,6 @@ cards:
         tap_action:
           action: toggle
 
-  - type: weather-forecast
-    entity: weather.huis
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-buiten/weer
-
   - !include cards/kamers.yaml
 
   - type: conditional

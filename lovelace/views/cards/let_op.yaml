@@ -90,5 +90,14 @@ filter:
       options:
         type: button
         show_state: true
+
+    - entity_id: weather.knmi_purmerend
+      options:
+        type: button
+        name: Weer
+        show_state: true
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-buiten/weer
 sort:
   method: name
