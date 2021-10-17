@@ -3,7 +3,7 @@
   entities:
     light.woonkamer:
       state: "on"
-      brightness: 76
+      brightness: 120
     light.eettafel:
       state: "on"
       brightness: 76
@@ -15,6 +15,16 @@
         - 0.299
       effect: Breathe
 
+- name: Ochtend
+  icon: mdi:weather-sunset-up
+  entities:
+    light.woonkamer:
+      state: "on"
+      brightness: 76
+    light.keuken:
+      state: "on"
+      brightness: 76
+
 - name: Eten
   icon: mdi:food-turkey
   entities:
@@ -23,7 +33,7 @@
       brightness: 76
     light.eettafel:
       state: "on"
-      brightness: 191
+      brightness: 150
 
 - name: Film
   icon: mdi:movie-open

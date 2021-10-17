@@ -8,56 +8,82 @@
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 15
       for:
-        minutes: 10
+        minutes: 5
+    - platform: state
+      entity_id: group.woonkamer_occupancy
+      to: "on"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      below: 15
+    - condition: state
+      entity_id: group.woonkamer_occupancy
+      state: "on"
+  action:
+    - choose:
+      - conditions:
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.morning
+              state: "on"
+            - condition: state
+              entity_id: binary_sensor.night
+              state: "on"
+        sequence:
+          - alias: Turn on the morning scene
+            service: scene.turn_on
+            target:
+              entity_id: scene.ochtend
+            data:
+              transition: 2
+
+          - alias: Wait untill there is no more motion
+            wait_for_trigger:
+              platform: state
+              entity_id: group.woonkamer_occupancy
+              from: "on"
+              to: "off"
+              for: 30
+
+          - alias: Turn off all lights in the living room
+            service: light.turn_off
+            target:
+              entity_id:
+                - light.woonkamer
+                - light.eettafel
+                - light.keuken
+            data:
+              transition: 10
+      default:
+        - alias: Turn on the evening scene
+          service: scene.turn_on
+          target:
+            entity_id: scene.avond
+          data:
+            transition: 900 # 15 minutes.
+
+- id: auto_light_woonkamer_when_someone_arrives_home
+  alias: Automatisch licht aan in de woonkamer wanneer iemand thuis komt
+  initial_state: on
+  mode: single
+  max_exceeded: silent
+  trigger:
     - platform: state
       entity_id: group.residents
+      from: not_home
       to: home
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      below: 10
-    - platform: state
-      entity_id: group.woonkamer_motion
-      to: 'on'    
   condition:
-    - "{{ is_state('light.woonkamer', 'off') }}"
-    - "{{ is_state('group.residents', 'home') }}"
-    - "{{ states('sensor.woonkamer_lichtsterkte_illuminance_lux') | int < 15 }}"
-    - "{{ state_attr('sun.sun', 'elevation') | int < 10 }}"
-    - "{{ is_state_attr('sun.sun', 'rising', False) }}"
+    - condition: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      below: 15
   action:
-    - variables:
-        trigger_entity_id: "{{ trigger.entity_id }}"
-
-    - choose:
-      - conditions: >
-          {{ 
-            trigger_entity_id == 'group.residents' or
-            trigger_entity_id == 'group.woonkamer_motion'
-          }} 
-        sequence:
-          - alias: When someone comes home or a motion sensor is triggered
-            service: scene.turn_on
-            target:
-              entity_id: scene.avond
-            data:
-              transition: 5
-
-      - conditions: >
-          {{ 
-            is_state('group.woonkamer_motion', 'on') or
-              (
-                is_state('group.woonkamer_motion', 'off') and 
-                as_timestamp(now()) <= as_timestamp(states.group.woonkamer_motion.last_changed) + (15 * 60)
-              )
-          }}
-        sequence:
-          - alias: There must be motion or there must have been motion in the last x minutes else nobody might be in this room
-            service: scene.turn_on
-            target:
-              entity_id: scene.avond
-            data:
-              transition: 900 # 15 minutes.
+    - alias: Turn on the evening scene
+      service: scene.turn_on
+      target:
+        entity_id: scene.avond
+      data:
+        transition: 900 # 15 minutes.
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron
@@ -73,11 +99,22 @@
     - platform: state
       entity_id: media_player.lg_c9
       attribute: source
-      to: 
+      to:
         - Netflix
         - Plex
   condition:
-    - "{{ states('sensor.woonkamer_lichtsterkte_illuminance_lux') | int < 5 }}"
+    - condition: numeric_state
+      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+      below: 10
+    - condition: state
+      entity_id: media_player.lg_c9
+      state: "on" 
+    - condition: state
+      entity_id: media_player.lg_c9
+      attribute: source
+      state:
+        - Netflix
+        - Plex
   action:
     service: scene.turn_on
     data:

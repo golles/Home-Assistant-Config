@@ -6,7 +6,7 @@
     input:
       illuminance_below: "15"
       light_entity: light.zolder
-      motion_entity: group.zolder_motion
+      motion_entity: group.zolder_occupancy
       illuminance_entity: sensor.zolder_beweging_2_illuminance_lux
       cool_down: 60
       no_motion_wait: 15
@@ -23,7 +23,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: group.zolder_motion
+      entity_id: group.zolder_occupancy
       to: "off"
       for:
         minutes: 10
@@ -34,7 +34,7 @@
         minutes: 5
   condition:
     - condition: state
-      entity_id: group.zolder_motion
+      entity_id: group.zolder_occupancy
       state: "off"
       for:
         minutes: 10
