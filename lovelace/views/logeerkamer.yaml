@@ -50,3 +50,7 @@ cards:
           name: TT Macbook
           icon: mdi:laptop
           show_state: true
+      - type: button
+        entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:toggle-switch

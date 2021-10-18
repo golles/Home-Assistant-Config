@@ -1,0 +1,17 @@
+- id: logeerkamer_light_auto
+  alias: Logeerkamerlamp automatisch aan/uit door aanwezigheid
+  initial_state: on
+  use_blueprint:
+    path: golles/motion-activated_light_profiles.yaml
+    input:
+      illuminance_below: "10"
+      motion_entity: group.logeerkamer_occupancy
+      no_motion_wait: 15
+      light_entity: light.logeerkamer
+      illuminance_entity: sensor.logeerkamer_beweging_illuminance_lux
+      day_start_time: 08:00:00
+      day_end_time: 00:00:00
+      day_profile: helder
+      night_profile: ontspannen
+      night_profile_before_off: nachtlampje
+      day_profile_before_off: gedimd
