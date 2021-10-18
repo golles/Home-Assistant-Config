@@ -77,6 +77,46 @@ script:
           milliseconds: '{{ delay_ms }}'
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_5
+
+  wake_up_light:
+    alias: Wake up light
+    mode: single
+    fields:
+      light:
+        name: Light
+        description: The light to apply the wake up effect on
+        required: true
+        selector:
+          target:
+            entity:
+              domain: light
+      transition:
+        name: Transition
+        description: The number to seconds for the transition to take.
+        required: true
+        default: 600
+        selector:
+          number:
+            min: 0
+            max: 3600
+    sequence:
+      - alias: Turn on the light
+        service: light.turn_on
+        data:
+          profile: nachtlampje
+          transition: 0
+        target: "{{ light }}"
+
+      - alias: Wait a second
+        delay: 
+          seconds: 1
+
+      - alias: Transition the light to a brighter state
+        service: light.turn_on
+        data:
+          profile: energie
+          transition: "{{ transition }}"
+        target: "{{ light }}"
   
 switch:
   - platform: template
