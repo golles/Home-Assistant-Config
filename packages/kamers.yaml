@@ -1,0 +1,33 @@
+template:
+  - sensor:
+      - name: Kamer bezetting
+        state: >-
+          {{ state_attr("sensor.kamer_bezetting", "kamers") | default(["None"], true) | first }}
+        attributes:
+          kamers: >-
+            {%- set motion_sensors = states.binary_sensor 
+              | selectattr("attributes.device_class", "eq", "motion")
+              | rejectattr("entity_id", "in", [
+                  "binary_sensor.deurbel_doorbell_pressed",
+                  "binary_sensor.deurbel_motion_detected",
+                  "binary_sensor.deurbel_person_detected",
+                ])
+              | sort(attribute="last_changed", reverse = True) -%}
+        
+            {%- set room = namespace(r=[]) -%}
+            {% for sensor in motion_sensors | selectattr("state", "eq", "on") %}
+              {% if (area_name(sensor.entity_id) != None) %}
+                {%- set room.r = room.r + [area_name(sensor.entity_id)] -%}
+              {% endif %}
+            {% endfor %}
+            
+            {% if (room.r | count > 0) %}
+              {{ room.r | unique | list }}
+            {% else %}
+              {% for sensor in motion_sensors | selectattr("state", "eq", "off") %}
+                {% if area_name(sensor.entity_id) != None %}
+                  {%- set room.r = room.r + [area_name(sensor.entity_id)] -%}
+                {% endif %}
+              {% endfor %}
+              {{ [ room.r | first ] }}
+            {% endif %}
