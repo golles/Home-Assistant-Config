@@ -1,12 +1,105 @@
+alarm_control_panel:
+  - platform: manual
+    name: Huis alarm
+    arming_time: 30
+    delay_time: 30
+    trigger_time: 300
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+
 automation:
+  - id: alarm_auto_on_off
+    alias: Alarm - Automatisch aan/uit bij aanwezigheid
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: group.residents
+        to: 
+          - home
+          - not_home
+    action:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: group.residents
+              state: not_home
+          sequence:
+            - alias: Turn on the evening scene
+              service: alarm_control_panel.alarm_arm_away
+              entity_id: alarm_control_panel.huis_alarm
+        default:
+          - alias: Turn on the evening scene
+            service: alarm_control_panel.alarm_disarm
+            entity_id: alarm_control_panel.huis_alarm
+
+  - id: alarm_trigger_lights
+    alias: Alarm - Melding in huis
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.huis_alarm
+        from: pending
+        to: triggered
+    action:
+      - alias: Set up variables for the actions
+        variables:
+          # lights_flash: "light.keuken, light.tv"
+          lights_flash: >-
+            {{
+              states.light 
+              | selectattr("attributes.is_hue_group", "equalto", true)
+              | selectattr("attributes.supported_color_modes", "equalto", ["color_temp", "hs"]) 
+              | map(attribute='entity_id')
+              | join(', ')
+            }}
+
+      - alias: Store the current light state
+        service: scene.create
+        data:
+          scene_id: before_alarm_trigger
+          snapshot_entities: "{{ lights_flash }}"
+
+      - alias: Turn on lights
+        service: light.turn_on
+        target:
+          entity_id: "{{ lights_flash }}"
+
+      - alias: Wait 1 second before we start flashing
+        delay: 1
+
+      - alias: Flash lights
+        service: light.turn_on
+        data:
+          brightness: 255
+          rgb_color: [255, 0, 0]
+          flash: long
+        target:
+          entity_id: "{{ lights_flash }}"
+      
+      - alias: Wait untill the alarm is no longer triggered
+        wait_for_trigger:
+          platform: state
+          entity_id: alarm_control_panel.huis_alarm
+          from: triggered
+
+      - alias: Restore lights to previous state
+        service: scene.turn_on
+        data:
+          entity_id: scene.before_alarm_trigger
+
   - id: alarm_system
-    alias: Alarm systeem
+    alias: Alarm - Melding bij beweging
     description: |
       Alarm systeem
       Deze automation triggert bewust vele notificaties, namelijk voor alle deuren en ramen die open gaan
       en ook voor alle bewegingssensoren die beweging detecteren.
     initial_state: on
-    mode: single
+    mode: restart
     trigger:
       - platform: state
         entity_id:
@@ -43,45 +136,60 @@ automation:
           - binary_sensor.zoldertrap_beweging_occupancy
           - binary_sensor.zolder_beweging_1_occupancy
           - binary_sensor.zolder_beweging_2_occupancy
-        to: 'on'
+        to: "on"
     condition:
       - condition: state
-        entity_id: group.residents
-        state: not_home
+        entity_id: alarm_control_panel.huis_alarm
+        state: 
+          - armed_away
+          - pending
+          - triggered
       - condition: state
         entity_id: input_boolean.guest_mode
-        state: 'off'
+        state: "off"
     action:
-      - variables:
+      - alias: Set up variables for the actions
+        variables:
+          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
+          action_disarm_alarm: >-
+            {{ "DISARM_ALARM_" ~ context.id }}
           area_name : >-
             {{ area_name(trigger.entity_id) }}
           trigger_friendly_name: >-
             {{ 
-              state_attr(trigger.entity_id, 'friendly_name')
-              | replace(' occupancy', '')
-              | replace(' motion', '')
-              | replace(' contact', '')
-              | replace(' beweging', ' bewegingssensor')
-              | replace(' sensor', ' bewegingssensor')
+              state_attr(trigger.entity_id, "friendly_name")
+              | replace(" occupancy", "")
+              | replace(" motion", "")
+              | replace(" contact", "")
+              | replace(" beweging", " bewegingssensor")
+              | replace(" sensor", " bewegingssensor")
             }}
           trigger_device_class: >-
-            {{ state_attr(trigger.entity_id, 'device_class') }}
+            {{ state_attr(trigger.entity_id, "device_class") }}
           message: >-
             Beweging in de {{ area_name }},
-            {% if trigger_device_class == 'door' %}
+            {% if trigger_device_class == "door" %}
               {{ trigger_friendly_name }} is geopend
-            {% elif trigger_device_class == 'window' %}
+            {% elif trigger_device_class == "window" %}
               {{ trigger_friendly_name }} is geopend
-            {% elif trigger_device_class == 'motion' %}
+            {% elif trigger_device_class == "motion" %}
               {{ trigger_friendly_name }} heeft beweging gedetecteerd 
             {% endif %}
 
-      - service: notify.sander
+      - alias: Trigger the alarm
+        service: alarm_control_panel.alarm_trigger
+        entity_id: alarm_control_panel.huis_alarm
+
+      - alias: Notify user and ask to disarm
+        service: notify.sander
         data:
           title: 🚨🚨🚨 Alarm
-          message: >
+          message: >-
             {{ message }}
           data:
+            actions:
+              - action: "{{ action_disarm_alarm }}"
+                title: Zet alarm uit
             url: /dashboard-status/alarm
             push:
               thread-id: alarm-notification-group
@@ -89,3 +197,17 @@ automation:
                 name: alarm.caf
                 critical: 1
                 volume: 1.0
+
+      - alias: Wait for a response
+        wait_for_trigger:
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ action_disarm_alarm }}"
+
+      - alias: Perform the action
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == action_disarm_alarm }}"
+            sequence:
+              - service: alarm_control_panel.alarm_disarm
+                entity_id: alarm_control_panel.huis_alarm

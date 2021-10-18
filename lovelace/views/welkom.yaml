@@ -15,6 +15,7 @@ cards:
       - entity: input_boolean.vacation_mode
         tap_action:
           action: toggle
+      - alarm_control_panel.huis_alarm
 
   - !include cards/kamers.yaml
 
