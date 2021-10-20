@@ -25,6 +25,13 @@
       state: "on"
       brightness: 76
 
+- name: Nacht
+  icon: mdi:weather-night
+  entities:
+    light.woonkamer:
+      state: "on"
+      brightness: 50
+
 - name: Eten
   icon: mdi:food-turkey
   entities:

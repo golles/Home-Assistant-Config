@@ -31,14 +31,19 @@
               entity_id: binary_sensor.night
               state: "on"
         sequence:
-          - alias: Turn on the morning scene
+          - alias: Turn on the morning or night scene
             service: scene.turn_on
             target:
-              entity_id: scene.ochtend
+              entity_id: >-
+                {%- if is_state("binary_sensor.night", "on") %}
+                  scene.nacht
+                {%- else -%}
+                  scene.ochtend
+                {%- endif %}
             data:
               transition: 2
 
-          - alias: Wait untill there is no more motion
+          - alias: Wait untill there is no more occupancy
             wait_for_trigger:
               platform: state
               entity_id: group.woonkamer_occupancy
@@ -55,6 +60,7 @@
                 - light.keuken
             data:
               transition: 10
+
       default:
         - alias: Turn on the evening scene
           service: scene.turn_on
@@ -93,7 +99,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-      below: 5
+      below: 10
       for:
         minutes: 5
     - platform: state
