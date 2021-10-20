@@ -35,7 +35,6 @@ automation:
           exclude_entity_ids:
             - light.woonkamer_groot_1
             - light.woonkamer_groot_2
-            - light.woonkamer_klein
             - light.overloop_spot_1
             - light.overloop_spot_2
             - light.overloop_spot_3
