@@ -37,3 +37,4 @@ automation:
             Backup is niet goed gegaan, laatste status: {{ states('input_text.borg') }}.
           data:
             group: borg_backup
+            url: dashboard-systems/borg

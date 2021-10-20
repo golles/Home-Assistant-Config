@@ -12,3 +12,6 @@
       data:
         title: 🌧️ Regen
         message: Test bericht, het regent
+        data:
+          group: weather
+          url: dashboard-buiten/weer

@@ -26,6 +26,7 @@ automation:
             Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is.
           data:
             group: ddns
+            url: dashboard-systems/internet
 
       - service: shell_command.update_remote_ip
         data:

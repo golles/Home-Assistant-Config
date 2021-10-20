@@ -57,3 +57,4 @@ automation:
             group: afval
             image: >-
               {{ state_attr(entity, "entity_picture") }}
+            url: dashboard-buiten/buurt
