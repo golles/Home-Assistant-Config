@@ -66,6 +66,7 @@ filter:
       options:
         type: button
         show_state: true
+        icon: mdi:battery-10
     - domain: binary_sensor
       state: "on"
       attributes:
