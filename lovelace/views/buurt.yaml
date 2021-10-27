@@ -59,6 +59,27 @@ cards:
       - entity: sensor.p2000_lifeliner_1
         name: Lifeliner 1
 
+  - title: OV
+    type: entities
+    show_header_toggle: false
+    entities:
+      - entity: sensor.bushalte_orinocostraat
+        icon: mdi:bus
+      - type: custom:template-entity-row
+        entity: sensor.bushalte_orinocostraat
+        icon: mdi:bus-clock
+        state: >-
+          {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].ts | default(0) | int %}
+          {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].punctuality | default(0) | int %}
+          {{ ((timestamp + punctuality) | timestamp_local).split(" ")[1] | default("") }}
+      - type: custom:template-entity-row
+        entity: sensor.bushalte_orinocostraat
+        icon: mdi:bus-clock
+        state: >-
+          {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].ts | default(0) | int %}
+          {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].punctuality | default(0) | int %}
+          {{ ((timestamp + punctuality) | timestamp_local).split(" ")[1] | default("") }}
+
   - type: picture-elements
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
     elements:
