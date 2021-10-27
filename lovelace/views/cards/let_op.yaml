@@ -57,6 +57,8 @@ filter:
       options:
         type: custom:button-card
         template: afvalbeheer
+      not:
+        state: unknown
 
     - attributes:
         device_class: battery
