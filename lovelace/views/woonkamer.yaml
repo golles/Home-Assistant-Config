@@ -103,10 +103,15 @@ cards:
         entity: fan.air_purifier
         template: air_purifier
 
-      - type: button
-        entity: fan.ventilator
-        name: Ventilator
-        show_state: true
+      - type: conditional
+        conditions:
+          - entity: fan.ventilator
+            state_not: unavailable
+        card:
+          type: button
+          entity: fan.ventilator
+          name: Ventilator
+          show_state: true
 
 
   - type: grid
