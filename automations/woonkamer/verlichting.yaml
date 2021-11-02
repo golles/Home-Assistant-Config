@@ -97,11 +97,6 @@
   mode: single
   max_exceeded: silent
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-      below: 10
-      for:
-        minutes: 5
     - platform: state
       entity_id: media_player.lg_c9
       attribute: source
