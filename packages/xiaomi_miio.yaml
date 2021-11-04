@@ -15,20 +15,20 @@ sensor:
       air_purifier_air_quality:
         friendly_name: Luchtkwaliteit
         value_template: >
-          {% set aqi = states("sensor.mi_air_purifier_3_3h_pm2_5") | int %}
-          {% if aqi == None %}
+          {% set aqi = states("sensor.mi_air_purifier_3_3h_pm2_5") %}
+          {% if aqi == None or aqi == 'unavailable' %}
             Onbekend
-          {% elif aqi < 12 %}
+          {% elif aqi | int < 12 %}
             Goed
-          {%- elif aqi <= 35.4 -%}
+          {%- elif aqi | int <= 35.4 -%}
             Matig
-          {%- elif aqi <= 55.4 -%}
+          {%- elif aqi | int <= 55.4 -%}
             Ongezond voor gevoelige groepen
-          {%- elif aqi <= 150.4 -%}
+          {%- elif aqi | int <= 150.4 -%}
             Ongezond
-          {%- elif aqi <= 250.4 -%}
+          {%- elif aqi | int <= 250.4 -%}
             Heel ongezond
-          {%- elif aqi > 250.4 -%}
+          {%- elif aqi | int > 250.4 -%}
             Gevaarlijk
           {%- else -%}
             Onbekend
