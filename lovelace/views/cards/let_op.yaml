@@ -94,6 +94,15 @@ filter:
         type: button
         show_state: true
 
+    - entity_id: binary_sensor.updater
+      state: "on"
+      options:
+        type: button
+        show_state: true
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-systems/hass
+
     - entity_id: weather.knmi_purmerend
       options:
         type: button
