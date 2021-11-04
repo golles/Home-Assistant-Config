@@ -21,7 +21,7 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
-      - entity: sensor.badkamer_beweging_illuminance_lux
+      - entity: sensor.badkamer_beweging_light_level
         name: Lichtsterkte
 
   - type: grid
@@ -39,7 +39,7 @@ cards:
         name: Raam
         show_state: true
       - type: button
-        entity: binary_sensor.badkamer_beweging_occupancy
+        entity: binary_sensor.badkamer_beweging_motion
         name: Beweging
         show_state: true
       - type: button

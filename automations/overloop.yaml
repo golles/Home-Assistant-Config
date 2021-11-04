@@ -4,7 +4,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.zoldertrap_beweging_occupancy
+      entity_id: binary_sensor.zoldertrap_beweging_motion
       to: "on"
   condition:
     condition: and

@@ -5,10 +5,10 @@
     path: golles/motion-activated_light_profiles.yaml
     input:
       illuminance_below: "10"
-      motion_entity: binary_sensor.kledingkamer_beweging_occupancy
+      motion_entity: binary_sensor.kledingkamer_beweging_motion
       no_motion_wait: 15
       light_entity: light.kledingkamer
-      illuminance_entity: sensor.kledingkamer_beweging_illuminance_lux
+      illuminance_entity: sensor.kledingkamer_beweging_light_level
       day_start_time: 08:00:00
       day_end_time: 00:00:00
       day_profile: helder

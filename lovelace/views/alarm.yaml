@@ -5,6 +5,9 @@ icon: mdi:alarm-light
 badges: []
 cards:
 
+  - type: alarm-panel
+    entity: alarm_control_panel.huis_alarm
+
   - type: entity-filter
     card:
       title: Sensoren actief
@@ -34,12 +37,12 @@ cards:
       - binary_sensor.overloop_sensor_1_motion
       # Eerste verdieping.
       - binary_sensor.overloop_sensor_2_motion
-      - binary_sensor.kledingkamer_beweging_occupancy
-      - binary_sensor.badkamer_beweging_occupancy
+      - binary_sensor.kledingkamer_beweging_motion
+      - binary_sensor.badkamer_beweging_motion
       - binary_sensor.logeerkamer_beweging_occupancy
       - binary_sensor.slaapkamer_beweging_occupancy
       # Tweede verdieping.
-      - binary_sensor.zoldertrap_beweging_occupancy
+      - binary_sensor.zoldertrap_beweging_motion
       - binary_sensor.zolder_beweging_1_occupancy
       - binary_sensor.zolder_beweging_2_occupancy
     state_filter:
@@ -73,12 +76,12 @@ cards:
       - binary_sensor.overloop_sensor_1_motion
       # Eerste verdieping.
       - binary_sensor.overloop_sensor_2_motion
-      - binary_sensor.kledingkamer_beweging_occupancy
-      - binary_sensor.badkamer_beweging_occupancy
+      - binary_sensor.kledingkamer_beweging_motion
+      - binary_sensor.badkamer_beweging_motion
       - binary_sensor.logeerkamer_beweging_occupancy
       - binary_sensor.slaapkamer_beweging_occupancy
       # Tweede verdieping.
-      - binary_sensor.zoldertrap_beweging_occupancy
+      - binary_sensor.zoldertrap_beweging_motion
       - binary_sensor.zolder_beweging_1_occupancy
       - binary_sensor.zolder_beweging_2_occupancy
     hours_to_show: 3

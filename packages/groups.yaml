@@ -10,7 +10,7 @@ group:
     name: Badkamer beweging
     icon: mdi:motion-sensor
     entities:
-      - binary_sensor.badkamer_beweging_occupancy
+      - binary_sensor.badkamer_beweging_motion
       - binary_sensor.douche_beweging_occupancy
 
   zolder_motion:
