@@ -62,7 +62,7 @@ filter:
 
     - attributes:
         device_class: battery
-        battery: "< 30"
+        battery: "< 20"
       options:
         type: button
         show_state: true
