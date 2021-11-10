@@ -10,14 +10,9 @@
       from: not_home
       to: home
   condition:
-    condition: or
-    conditions:
-      - condition: sun
-        after: sunset
-        after_offset: "+00:30:00"
-      - condition: sun
-        before: sunrise
-        before_offset: "-01:00:00"
+    - condition: numeric_state
+      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      below: 10
   action:
     - service: light.turn_on
       data:
