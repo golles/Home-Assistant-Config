@@ -5,185 +5,28 @@ icon: "mdi:battery-charging-wireless"
 badges: []
 cards:
   - !include cards/batterijen_laag.yaml
-            
-  - type: custom:battery-state-card
-    name: iPhones
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: Battery Level
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - entity: sensor.iphone_x_van_golles_battery_level
-        charging_state:
-          entity_id: sensor.iphone_x_van_golles_battery_state
-          state: Charging
-          
-  - type: custom:battery-state-card
-    name: HUE dimmer switches
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: battery level
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.keuken_dimmer_switch_battery_level
-      - sensor.achtertuin_schakelaar_battery_level
-      - sensor.overloop_schakelaar_battery_level
-      - sensor.slaapkamer_schakelaar_battery_level
-      - sensor.logeerkamer_schakelaar_battery_level
-      - sensor.kledingkamer_schakelaar_battery_level
-      - sensor.badkamer_schakelaar_battery_level
-      - sensor.zolder_schakelaar_battery_level
-      - sensor.zolder_schakelaar_2_battery_level
 
-  - type: custom:battery-state-card
-    name: HUE smart buttons
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: battery level
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.master_switch_battery
-      - sensor.keuken_button_1_battery_level
-      - sensor.hue_smart_button_1_battery_level
-      - sensor.eettafelknop_2_battery
-      - sensor.bedlampje_knop_links_battery
-      - sensor.bedlampje_knop_rechts_battery
-
-  - type: custom:battery-state-card
-    name: Xiaomi Aqara temperature, humidity and pressure
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.woonkamer_klimaat_battery
-      - sensor.meterkast_klimaat_battery
-      - sensor.slaapkamer_klimaat_battery
-      - sensor.logeerkamer_klimaat_battery
-      - sensor.kledingkamer_klimaat_battery
-      - sensor.badkamer_klimaat_battery
-      
-  - type: custom:battery-state-card
-    name: Xiaomi Aqara door & window contact sensor
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.voordeur_battery
-      - sensor.achterdeur_battery
-      - sensor.achterraam_battery
-      - sensor.slaapkamerraam_battery
-      - sensor.kledingkamerraam_battery
-      - sensor.logeerkamerraam_battery
-      - sensor.badkamerraam_battery
-      - sensor.balkondeur_battery
-      - sensor.zolderraam_battery
-
-  - type: custom:battery-state-card
-    name: Xiaomi Aqara vibration sensor
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.bed_sander_battery
-
-  - type: custom:battery-state-card
-    name: Xiaomi Aqara movement/illuminance sensor
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.woonkamer_beweging_1_battery
-      - sensor.woonkamer_beweging_1_battery
-      - sensor.toilet_beweging_battery
-      - sensor.zoldertrap_beweging_battery
-
-  - type: custom:battery-state-card
-    name: MiJia light intensity sensor
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    entities:
-      - sensor.woonkamer_lichtsterkte_battery
-      - sensor.achtertuin_lichtsterkte_battery
-      - sensor.slaapkamer_lichtsterkte_battery
-
-
-  - type: custom:battery-state-card
-    name: Tado
-    secondary_info: last_updated
-    tap_action:
-      action: more-info
-    bulk_rename:
-      - from: _battery
-      - from: battery
-    style: |
-      .entity-row .secondary {
-        color: var(--secondary-text-color)
-      }
-    state_map:
-      - from: "off"
-        to: 100
-      - from: "on"
-        to: 10
-    entities:
-      - binary_sensor.ru1141249024_battery_state
-      - binary_sensor.va1805654016_battery_state
-      - binary_sensor.va1923094528_battery_state
-      - binary_sensor.va3030325248_battery_state
-      - binary_sensor.va2677479424_battery_state
-      - binary_sensor.va3382122496_battery_state
-      - binary_sensor.va4103542784_battery_state
-      - binary_sensor.va1788876800_battery_state
-      - binary_sensor.va2979272704_battery_state
+  - type: custom:auto-entities
+    card:
+      type: custom:battery-state-card
+      title: Batterijen
+    filter:
+      include:
+        - domain: sensor
+          attributes:
+            device_class: battery
+          options:
+            secondary_info: last_updated
+            tap_action:
+              action: more-info
+            bulk_rename:
+              - from: Battery Level
+              - from: battery level
+              - from: _battery
+              - from: battery
+            style: |
+              .entity-row .secondary {
+                color: var(--secondary-text-color)
+              }
+    sort:
+      method: name

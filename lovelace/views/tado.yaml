@@ -23,13 +23,6 @@ cards:
             entities:
               - entity: sensor.woonkamer_humidity
                 name: Luchtvochtigheid 
-          - entity: sensor.woonkamer_klimaat_temperature
-            type: custom:multiple-entity-row
-            name: Xiaomi
-            state_header: Temperatuur
-            entities:
-              - entity: sensor.woonkamer_klimaat_humidity
-                name: Luchtvochtigheid
           - entity: sensor.mi_air_purifier_3_3h_temperature
             type: custom:multiple-entity-row
             name: Air purifier
@@ -71,13 +64,6 @@ cards:
             entities:
               - entity: sensor.slaapkamer_humidity
                 name: Luchtvochtigheid 
-          - entity: sensor.slaapkamer_klimaat_temperature
-            type: custom:multiple-entity-row
-            name: Xiaomi
-            state_header: Temperatuur
-            entities:
-              - entity: sensor.slaapkamer_klimaat_humidity
-                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
@@ -108,13 +94,6 @@ cards:
             entities:
               - entity: sensor.kledingkamer_humidity
                 name: Luchtvochtigheid 
-          - entity: sensor.kledingkamer_klimaat_temperature
-            type: custom:multiple-entity-row
-            name: Xiaomi
-            state_header: Temperatuur
-            entities:
-              - entity: sensor.kledingkamer_klimaat_humidity
-                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
@@ -145,13 +124,6 @@ cards:
             entities:
               - entity: sensor.logeerkamer_humidity
                 name: Luchtvochtigheid 
-          - entity: sensor.logeerkamer_klimaat_temperature
-            type: custom:multiple-entity-row
-            name: Xiaomi
-            state_header: Temperatuur
-            entities:
-              - entity: sensor.logeerkamer_klimaat_humidity
-                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
@@ -219,13 +191,6 @@ cards:
             entities:
               - entity: sensor.zolder_humidity
                 name: Luchtvochtigheid 
-          - entity: sensor.zolder_klimaat_temperature
-            type: custom:multiple-entity-row
-            name: Xiaomi
-            state_header: Temperatuur
-            entities:
-              - entity: sensor.zolder_klimaat_humidity
-                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
