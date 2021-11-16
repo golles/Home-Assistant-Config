@@ -8,3 +8,32 @@ homeassistant:
       device_class: shade # This shouldn't be a door.
     cover.zonnescherm:
       icon: mdi:storefront-outline
+
+input_datetime:
+  covers_down:
+    name: Rolluiken dicht
+    has_date: false
+    has_time: true
+
+automation:
+  - id: covers_down_set_daily_time
+    alias: Rolluiken -  tijd voor sluiten aanpassen
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: time
+        at: "12:00:00"
+    action:
+      - service: input_datetime.set_datetime
+        data:
+          entity_id: input_datetime.covers_down
+          time: >
+            {% set currentDay = now().strftime("%j") | int %}
+            {% set middleDay = 183 %}
+            {% set longestDayOffsetMinutes = 45 %}
+            {% set magicFactor = 2.5 %}
+            {% set ofsetMinutes = (-((currentDay-middleDay) | abs) / magicFactor--longestDayOffsetMinutes) | round(0) %}
+
+            {{ as_local((state_attr("sun.sun", "next_setting")) | as_datetime + timedelta(minutes = ofsetMinutes)).strftime("%H:%M:%S") }}

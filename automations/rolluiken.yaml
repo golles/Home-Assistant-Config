@@ -3,9 +3,8 @@
   initial_state: on
   mode: single
   trigger:
-    - platform: sun
-      event: sunset
-      offset: "+00:45:00"
+    - platform: time
+      at: input_datetime.covers_down
   action:
     - choose:
         - conditions:
@@ -63,7 +62,7 @@
               entity_id: cover.kledingkamer
 
 - id: rolluik_dicht_slaapkamer
-  alias: Rolluiken - Slaapkamer dicht na sluiten raam
+  alias: Rolluiken - slaapkamer dicht na sluiten raam
   initial_state: on
   mode: single
   trigger:
