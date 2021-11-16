@@ -15,10 +15,10 @@ sensor:
         friendly_name: Wasmachine programma
         icon_template: mdi:washing-machine
         value_template: >
-          {% set prefix = 'Wasmachine Program ' %}
-          {% set program = namespace(name = 'unavailable') %}
+          {% set prefix = "Wasmachine Program " %}
+          {% set program = namespace(name = "unavailable") %}
           {% for switch in states.switch -%}
-            {%- if switch.name.startswith(prefix) and switch.state == 'on' %}
+            {%- if switch.name.startswith(prefix) and switch.state == "on" %}
               {% set program.name = switch.name.split(prefix)[1] %}
             {%- endif %}
           {%- endfor %}
@@ -28,10 +28,10 @@ sensor:
         friendly_name: Vaatwasser programma
         icon_template: mdi:dishwasher
         value_template: >
-          {% set prefix = 'Vaatwasser Program ' %}
-          {% set program = namespace(name = 'unavailable') %}
+          {% set prefix = "Vaatwasser Program " %}
+          {% set program = namespace(name = "unavailable") %}
           {% for switch in states.switch -%}
-            {%- if switch.name.startswith(prefix) and switch.state == 'on' %}
+            {%- if switch.name.startswith(prefix) and switch.state == "on" %}
               {% set program.name = switch.name.split(prefix)[1] %}
             {%- endif %}
           {%- endfor %}
@@ -41,10 +41,10 @@ sensor:
         friendly_name: Resterende tijd
         icon_template: mdi:clock
         value_template: >
-          {% if is_state('sensor.wasmachine_remaining_program_time', 'unavailable') or is_state('switch.wasmachine_power', 'off') -%}
+          {% if is_state("sensor.wasmachine_remaining_program_time", "unavailable") or is_state("switch.wasmachine_power", "off") -%}
             unavailable
           {%- else -%}
-            {% set seconds = as_timestamp(states('sensor.wasmachine_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
+            {% set seconds = as_timestamp(states("sensor.wasmachine_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
             {% set minutes = ((seconds % 3600) / 60) | int %}
             {% set hours = (seconds / 3600) | int %}
 
@@ -62,7 +62,7 @@ sensor:
               {%- endif -%}
               {%- if minutes > 0 -%}
                 {%- if hours > 0 -%}
-                  {{ ', ' }}
+                  {{ ", " }}
                 {%- endif -%}
                 {%- if minutes == 1 -%}
                   1 minuut
@@ -77,10 +77,10 @@ sensor:
         friendly_name: Resterende tijd
         icon_template: mdi:clock
         value_template: >
-          {% if is_state('sensor.vaatwasser_remaining_program_time', 'unavailable') or is_state('switch.vaatwasser_power', 'off') -%}
+          {% if is_state("sensor.vaatwasser_remaining_program_time", "unavailable") or is_state("switch.vaatwasser_power", "off") -%}
             unavailable
           {%- else -%}
-            {% set seconds = as_timestamp(states('sensor.vaatwasser_remaining_program_time')) - as_timestamp(utcnow()) | int  %}
+            {% set seconds = as_timestamp(states("sensor.vaatwasser_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
             {% set minutes = ((seconds % 3600) / 60) | int %}
             {% set hours = (seconds / 3600) | int %}
 
@@ -98,7 +98,7 @@ sensor:
               {%- endif -%}
               {%- if minutes > 0 -%}
                 {%- if hours > 0 -%}
-                  {{ ', ' }}
+                  {{ ", " }}
                 {%- endif -%}
                 {%- if minutes == 1 -%}
                   1 minuut
@@ -116,12 +116,11 @@ automation:
     mode: single
     trigger:
       platform: time
-      at:
-        - input_datetime.dishwasher_daily_start
+      at: input_datetime.dishwasher_daily_start
     condition:
       - condition: state
         entity_id: binary_sensor.vaatwasser_remote_start
-        state: 'on'
+        state: "on"
     action:
       - service: switch.turn_on
         entity_id: switch.vaatwasser_program_auto2
@@ -134,12 +133,11 @@ automation:
       - platform: homeassistant
         event: start
       - platform: time
-        at: 
-          - '12:00:00'
+        at: "12:00:00"
     action:
       - variables:
-          weekday_time: '04:30'
-          weekend_time: '07:30'
+          weekday_time: "04:30"
+          weekend_time: "07:30"
           schedule_time: >
             {% set weekday = now().isoweekday() %}
             {% set hour = now().hour %}
