@@ -23,7 +23,7 @@ cards:
     title: Deurbel laatste
     image: camera.deurbel
     entities: []
-    camera_image: camera.deurbel_last_event
+    camera_image: camera.deurbel
 
   - type: custom:auto-entities
     show_empty: true
