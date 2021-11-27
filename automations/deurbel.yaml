@@ -2,7 +2,7 @@
   alias: Deurbel wordt ingedrukt
   description: |
     Wanneer er op de deurbel gedrukt wordt:
-      - Stuur een melding naar de werk laptop wanneer deze thuis en actief is.
+      - Stuur een melding naar Sander wanneer de werk laptop deze thuis en actief is.
       - Stuur een melding naar de tv wanneer deze aan staat.
       - Pauzeer de tv als Netflix, Plex of Youtube aan staat.
       - Pauzeer Ziggo wanneer je geen lineaire tv kijkt.
@@ -24,12 +24,14 @@
           - "{{ is_state('binary_sensor.tt_macbook_active', 'on') }}"
         sequence:
           - alias: Notify work laptop when working from home
-            service: notify.sander_work
+            service: notify.sander
             data:
               title: "{{ message_title }}"
               message: "{{ message_text }}"
               data:
                 group: deurbel
+                entity_id: camera.deurbel
+                url: /dashboard-buiten/buurt
 
     - choose:
       - conditions:
