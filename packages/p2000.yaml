@@ -24,6 +24,7 @@ sensor:
     # disciplines: Ambulancediensten,Brandweerdiensten,Politiediensten
     scan_interval: 60
     radius: 250
+    nolocation: False
 
   - platform: p2000
     name: P2000 Politie
