@@ -13,6 +13,18 @@ sensor:
   - platform: season
     type: astronomical
 
+template:
+  - binary_sensor:
+      - name: Zomertijd
+        icon: >-
+          {% if is_state("binary_sensor.zomertijd", "on") %}
+            mdi:clock-time-three-outline
+          {% else %}
+            mdi:clock-time-three
+          {% endif %}
+        state: >-
+          {{ now().timetuple().tm_isdst == 1 }}
+        
 binary_sensor:
   - platform: tod
     name: Night
