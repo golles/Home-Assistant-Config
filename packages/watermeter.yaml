@@ -1,0 +1,16 @@
+utility_meter:
+  waterverbruik_per_dag:
+    source: sensor.watermeter_totaal
+    cycle: daily
+  waterverbruik_per_week:
+    source: sensor.watermeter_totaal
+    cycle: weekly
+  waterverbruik_per_maand:
+    source: sensor.watermeter_totaal
+    cycle: monthly
+  waterverbruik_per_kwartaal:
+    source: sensor.watermeter_totaal
+    cycle: quarterly
+  waterverbruik_per_jaar:
+    source: sensor.watermeter_totaal
+    cycle: yearly

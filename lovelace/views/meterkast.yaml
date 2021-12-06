@@ -27,6 +27,10 @@ cards:
         entity: sensor.dsmr_meter_stats_electricity_tariff
         name: Tarief
         state: "{{ 'Hoog' if is_state('sensor.dsmr_meter_stats_electricity_tariff', 'high') else 'Laag' }}"
+      - type: weblink
+        name: DSMR Reader
+        icon: mdi:link
+        url: !secret dsmr_frontend
       - type: custom:fold-entity-row
         head:
           type: section
@@ -64,3 +68,18 @@ cards:
     entities:
       - entity: sensor.watermeter_totaal
         name: Stand
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: 
+        entities:
+          - entity: sensor.waterverbruik_per_dag
+            name: Verbruik vandaag
+          - entity: sensor.waterverbruik_per_week
+            name: Verbruik deze week
+          - entity: sensor.waterverbruik_per_maand
+            name: Verbruik deze maand
+          - entity: sensor.waterverbruik_per_kwartaal
+            name: Verbruik dit kwartaal
+          - entity: sensor.waterverbruik_per_jaar
+            name: Verbruik dit jaar
