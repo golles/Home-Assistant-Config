@@ -11,7 +11,7 @@ cards:
       title: Coins
       show_header_toggle: false
     entities:
-      - sensor.coinbase_total
+      - sensor.portefeuille
     filter:
       include:
         - domain: sensor

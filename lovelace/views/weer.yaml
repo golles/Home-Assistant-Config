@@ -23,9 +23,9 @@ cards:
     entities:
       - entity: sun.sun
         name: Zon
-      - sensor.sun_position_house
-      - sensor.sun_sunrise
-      - sensor.sun_sunset
+      - sensor.zon_positie
+      - sensor.zonsopkomst
+      - sensor.zonsondergang
       - entity: sensor.moon
         name: Maan
 

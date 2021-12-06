@@ -9,12 +9,10 @@ fan:
     host: !secret fan_ip
     token: !secret fan_token
 
-sensor:
-  - platform: template
-    sensors:
-      air_purifier_air_quality:
-        friendly_name: Luchtkwaliteit
-        value_template: >
+template:
+  - sensor:
+      - name: Luchtkwaliteit
+        state: >-
           {% set aqi = states("sensor.mi_air_purifier_3_3h_pm2_5") %}
           {% if aqi == None or aqi == 'unavailable' %}
             Onbekend

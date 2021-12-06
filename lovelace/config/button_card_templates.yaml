@@ -36,7 +36,7 @@ air_purifier:
   show_state: true
   show_label: true
   label: >-
-    [[[ return "Kwaliteit: " + states["sensor.air_purifier_air_quality"].state; ]]]
+    [[[ return "Kwaliteit: " + states["sensor.luchtkwaliteit"].state; ]]]
 
 mechanische_ventilatie:
   template: google_theme

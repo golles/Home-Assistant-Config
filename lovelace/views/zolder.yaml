@@ -45,7 +45,7 @@ cards:
         name: Beweging
         show_state: true
       - type: button
-        entity: sensor.wasmachine_remaining_relative_local
+        entity: sensor.wasmachine_resterende_tijd
         name: Wasmachine
         icon: mdi:washing-machine
         tap_action:
@@ -63,11 +63,11 @@ cards:
         name: Voedingsstatus
       - entity: binary_sensor.wasmachine_door
         name: Deur
-      - entity: sensor.wasmachine_active_program
+      - entity: sensor.wasmachine_programma
         name: Programma
       - entity: sensor.wasmachine_program_progress
         name: Voortgang
-      - entity: sensor.wasmachine_remaining_relative_local
+      - entity: sensor.wasmachine_resterende_tijd
         name: Resterende tijd
       
   - type: custom:mini-media-player

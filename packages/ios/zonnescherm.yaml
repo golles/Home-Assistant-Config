@@ -86,7 +86,7 @@ automation:
     max_exceeded: silent
     trigger:
       - platform: state
-        entity_id: sensor.sun_position_house
+        entity_id: sensor.zon_positie
         from: Achter
         to: Voor
         for:
@@ -139,7 +139,7 @@ automation:
         entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
         above: 40000
       - platform: state
-        entity_id: sensor.sun_position_house
+        entity_id: sensor.zon_positie
         from: Voor
         to: Achter
     condition:
@@ -147,7 +147,7 @@ automation:
         entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
         above: 40000
       - condition: state
-        entity_id: sensor.sun_position_house
+        entity_id: sensor.zon_positie
         state: Achter
       - condition: template
         value_template: >-

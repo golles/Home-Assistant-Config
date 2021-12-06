@@ -1,11 +1,9 @@
-sensor:
-  - platform: template
-    sensors:
-      coinbase_total:
-        friendly_name: Portefeuille
+template:
+  - sensor:
+      - name: Portefeuille
         unit_of_measurement: EUR
-        icon_template: mdi:currency-eur
-        value_template: >-
+        icon: mdi:currency-eur
+        state: >-
           {% set number_string = states.sensor 
             | selectattr("attributes.Balance in native currency", "defined")
             | map(attribute="attributes.Balance in native currency")

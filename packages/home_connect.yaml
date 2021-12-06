@@ -8,13 +8,11 @@ input_datetime:
     has_date: false
     has_time: true
 
-sensor:
-  - platform: template
-    sensors:
-      wasmachine_active_program:
-        friendly_name: Wasmachine programma
-        icon_template: mdi:washing-machine
-        value_template: >
+template:
+  - sensor:
+      - name: Wasmachine programma
+        icon: mdi:washing-machine
+        state: >-
           {% set prefix = "Wasmachine Program " %}
           {% set program = namespace(name = "unavailable") %}
           {% for switch in states.switch -%}
@@ -24,10 +22,9 @@ sensor:
           {%- endfor %}
           {{ program.name }}
 
-      vaatwasser_active_program:
-        friendly_name: Vaatwasser programma
-        icon_template: mdi:dishwasher
-        value_template: >
+      - name: Vaatwasser programma
+        icon: mdi:dishwasher
+        state: >-
           {% set prefix = "Vaatwasser Program " %}
           {% set program = namespace(name = "unavailable") %}
           {% for switch in states.switch -%}
@@ -37,10 +34,9 @@ sensor:
           {%- endfor %}
           {{ program.name }}
 
-      wasmachine_remaining_relative_local:
-        friendly_name: Resterende tijd
-        icon_template: mdi:clock
-        value_template: >
+      - name: Wasmachine resterende tijd
+        icon: mdi:clock
+        state: >-
           {% if is_state("sensor.wasmachine_remaining_program_time", "unavailable") or is_state("switch.wasmachine_power", "off") -%}
             unavailable
           {%- else -%}
@@ -73,10 +69,9 @@ sensor:
             {%- endif -%}
           {%- endif %}
 
-      vaatwasser_remaining_relative_local:
-        friendly_name: Resterende tijd
-        icon_template: mdi:clock
-        value_template: >
+      - name: Vaatwasser resterende tijd
+        icon: mdi:clock
+        state: >-
           {% if is_state("sensor.vaatwasser_remaining_program_time", "unavailable") or is_state("switch.vaatwasser_power", "off") -%}
             unavailable
           {%- else -%}

@@ -26,20 +26,20 @@ filter:
       }] -%}
     {% endif %}
 
-    {% if not states("sensor.wasmachine_remaining_relative_local") in ["unavailable", "Klaar"] %}
+    {% if not states("sensor.wasmachine_resterende_tijd") in ["unavailable", "Klaar"] %}
       {%- set data.entities = data.entities + [{
         "type": "button",
-        "entity": "sensor.wasmachine_remaining_relative_local",
+        "entity": "sensor.wasmachine_resterende_tijd",
         "name": "Wasmachine",
         "icon": "mdi:washing-machine",
         "show_state": "true"
       }] -%}
     {% endif %}
 
-    {% if not states("sensor.vaatwasser_remaining_relative_local") in ["unavailable", "Klaar"] %}
+    {% if not states("sensor.vaatwasser_resterende_tijd") in ["unavailable", "Klaar"] %}
       {%- set data.entities = data.entities + [{
         "type": "button",
-        "entity": "sensor.vaatwasser_remaining_relative_local",
+        "entity": "sensor.vaatwasser_resterende_tijd",
         "name": "Vaatwasser",
         "icon": "mdi:dishwasher",
         "show_state": "true"
