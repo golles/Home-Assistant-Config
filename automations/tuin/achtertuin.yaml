@@ -16,9 +16,11 @@
   initial_state: on
   mode: single
   trigger:
-    - platform: sun
-      event: sunset
-      offset: "-04:00:00"
+    - platform: numeric_state
+      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      below: 60
+      for:
+        minutes: 5
   condition:
     condition: template
     value_template: > # All days in December after Sinterklaas.
