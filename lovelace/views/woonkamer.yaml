@@ -87,6 +87,14 @@ cards:
         name: Keukenkastje
         icon: mdi:lightbulb
 
+      - type: conditional
+        conditions:
+          - entity: light.wled_kerstboom
+            state_not: unavailable
+        card:
+          type: light
+          entity: light.wled_kerstboom
+
       - type: button
         entity: binary_sensor.woonkamer_beweging_2_occupancy
         name: Woonkamer
