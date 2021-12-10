@@ -38,6 +38,7 @@ automation:
             - light.overloop_spot_1
             - light.overloop_spot_2
             - light.overloop_spot_3
+            - light.gekleurde_licht
 
       - service: light.turn_off
         data:
