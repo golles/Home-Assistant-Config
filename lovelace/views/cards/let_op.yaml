@@ -111,5 +111,26 @@ filter:
         tap_action:
           action: navigate
           navigation_path: /dashboard-buiten/weer
+
+    - entity_id: binary_sensor.stookalert_noord_holland
+      state: "on"
+      options:
+        type: button
+        name: Stookalert
+        show_state: true
+
+    - entity_id: binary_sensor.knmi_purmerend_waarschuwing
+      state: "on"
+      options:
+        type: button
+        show_state: true
+
+    - entity_id: binary_sensor.meteoalarm
+      state: "on"
+      options:
+        type: button
+        name: MeteoAlarm
+        show_state: true
+
 sort:
   method: name
