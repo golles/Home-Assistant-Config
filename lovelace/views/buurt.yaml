@@ -72,7 +72,7 @@ cards:
           {% if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > 1 %}
             {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].ts | default(0) | int %}
             {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].punctuality | default(0) | int %}
-            {{ ((timestamp + punctuality) | timestamp_local).split(" ")[1] | default("") }}
+            {{ ((timestamp + punctuality) | timestamp_local).split("T")[1] | default("") }}
           {% else %}
             unavailable
           {% endif %}
@@ -83,7 +83,7 @@ cards:
           {% if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > 2 %}
             {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].ts | default(0) | int %}
             {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].punctuality | default(0) | int %}
-            {{ ((timestamp + punctuality) | timestamp_local).split(" ")[1] | default("") }}
+            {{ ((timestamp + punctuality) | timestamp_local).split("T")[1] | default("") }}
           {% else %}
             unavailable
           {% endif %}
@@ -92,21 +92,21 @@ cards:
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
     elements:
       - type: state-label
-        entity: sensor.golf_7_expdate
+        entity: sensor.apk_expiration
         prefix: "APK: "
         style:
           color: black
           top: 95%
           left: 20%
       - type: state-label
-        entity: binary_sensor.golf_7_insured
+        entity: binary_sensor.liability_insured
         prefix: "Verzekerd: "
         style:
           color: black
           top: 95%
           left: 53%
       - type: state-label
-        entity: sensor.golf_7_recall
+        entity: binary_sensor.pending_recall
         prefix: "Terugroep: "
         style:
           color: black

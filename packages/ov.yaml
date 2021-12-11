@@ -8,7 +8,7 @@ sensor:
       {% if value_json.arrivals | length > 0 %}
         {% set timestamp = value_json.arrivals[0].ts | default(0) | int %}
         {% set punctuality = value_json.arrivals[0].punctuality | default(0) | int %}
-        {{ (timestamp + punctuality) | timestamp_local | replace(" ", "T") }}
+        {{ (timestamp + punctuality) | timestamp_local }}
       {% else %}
         unavailable
       {% endif %}
