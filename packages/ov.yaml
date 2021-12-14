@@ -2,7 +2,7 @@ sensor:
   - platform: rest
     name: Bushalte Orinocostraat
     scan_interval: 300 # 60 * 5
-    resource: https://ovzoeker.nl/api/arrivals/2424233
+    resource: https://ovzoeker.nl/api/arrivals/2433780
     device_class: timestamp
     value_template: >-
       {% if value_json.arrivals | length > 0 %}
