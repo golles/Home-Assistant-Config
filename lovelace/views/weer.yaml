@@ -9,6 +9,20 @@ cards:
   - type: weather-forecast
     entity: weather.knmi_purmerend
 
+  - type: entities
+    title: Details
+    entities:
+      - entity: sensor.knmi_purmerend_gevoelstemperatuur
+        name: Gevoelstemperatuur
+      - entity: sensor.knmi_purmerend_dauwpunt
+        name: Dauwpunt
+      - entity: sensor.knmi_purmerend_korte_dagverwachting
+        name: Korte dagverwachting
+      - entity: binary_sensor.knmi_purmerend_waarschuwing
+        name: Waarschuwing
+      - entity: binary_sensor.stookalert_noord_holland
+        name: Stookalert
+
   - type: markdown
     content: >-
       {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
