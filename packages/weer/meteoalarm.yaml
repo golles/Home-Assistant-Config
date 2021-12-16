@@ -5,8 +5,8 @@ binary_sensor:
     province: Noord-Holland
 
 automation:
-  - id: meteoalarm_notification
-    alias: MeteoAlarm notificatie
+  - id: notification_meteoalarm
+    alias: "Notificatie: MeteoAlarm waarschuwing"
     trigger:
       platform: state
       entity_id: binary_sensor.meteoalarm

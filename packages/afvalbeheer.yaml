@@ -23,8 +23,8 @@ homeassistant:
       entity_picture: /local/afval/purmerend_gft.jpg
     
 automation:
-  - id: afval_notification
-    alias: Melding voor afval
+  - id: notification_afval
+    alias: "Notificatie: Afval wordt morgen opgehaald"
     initial_state: on
     mode: single
     variables:

@@ -20,7 +20,7 @@ sensor:
 
 automation:
   - id: zigbee2mqtt_create_notification_on_successfull_interview
-    alias: Zigbee new device notification
+    alias: Zigbee new device persistent notification
     trigger:
       platform: mqtt
       topic: zigbee2mqtt/bridge/log

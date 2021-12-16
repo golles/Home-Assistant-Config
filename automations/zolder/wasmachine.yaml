@@ -39,9 +39,8 @@
               time_period: "02:00:00"
               temperature: 23
 
-- id: washing_machine_notifiction_tv
-  alias: Wasmachine klaar melding tv
-  description: Melding dat de wasmachine klaar is tonen op de tv
+- id: notification_washing_machine
+  alias: "Notificatie: Wasmachine klaar (tv)"
   initial_state: on
   mode: single
   trigger:

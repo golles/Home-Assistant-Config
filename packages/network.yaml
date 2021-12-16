@@ -8,8 +8,8 @@ homeassistant:
       icon: mdi:web
 
 automation:
-  - id: ip_changed
-    alias: External ip changed
+  - id: notification_ip_changed
+    alias: "Notificatie: Externe IP veranderd"
     initial_state: on
     mode: single
     trigger:

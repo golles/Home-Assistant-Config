@@ -44,8 +44,8 @@ sensor:
     nolocation: True
 
 automation:
-  - id: p20000_notification
-    alias: P2000 melding
+  - id: notification_p2000
+    alias: "Notificatie: P200 bericht in de buurt"
     initial_state: on
     mode: single
     trigger:

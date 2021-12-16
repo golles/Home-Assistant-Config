@@ -18,8 +18,8 @@ automation:
           entity_id: input_text.borg
           value: "{{ trigger.json.status }}"
 
-  - id: borg_warning
-    alias: Borg backup waarschuwing
+  - id: notification_borg_warning
+    alias: "Notificatie: Borg backup waarschuwing"
     initial_state: on
     mode: restart
     trigger:
