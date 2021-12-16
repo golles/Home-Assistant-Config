@@ -69,24 +69,38 @@ cards:
         entity: sensor.bushalte_orinocostraat
         icon: mdi:bus-clock
         state: >-
-          {% if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > 1 %}
-            {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].ts | default(0) | int %}
-            {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[1].punctuality | default(0) | int %}
-            {{ ((timestamp + punctuality) | timestamp_local).split("T")[1].split("+")[0] }}
-          {% else %}
-            unavailable
-          {% endif %}
+          {% set key = 1 %}
+          {% set time = "unavailable" %}
+          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
+            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
+            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
+            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
+          {%- endif -%}
+          {{ time }}
       - type: custom:template-entity-row
         entity: sensor.bushalte_orinocostraat
         icon: mdi:bus-clock
         state: >-
-          {% if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > 2 %}
-            {% set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].ts | default(0) | int %}
-            {% set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[2].punctuality | default(0) | int %}
-            {{ ((timestamp + punctuality) | timestamp_local).split("T")[1].split("+")[0] }}
-          {% else %}
-            unavailable
-          {% endif %}
+          {% set key = 2 %}
+          {% set time = "unavailable" %}
+          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
+            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
+            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
+            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
+          {%- endif -%}
+          {{ time }}
+      - type: custom:template-entity-row
+        entity: sensor.bushalte_orinocostraat
+        icon: mdi:bus-clock
+        state: >-
+          {% set key = 3 %}
+          {% set time = "unavailable" %}
+          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
+            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
+            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
+            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
+          {%- endif -%}
+          {{ time }}
 
   - type: picture-elements
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"

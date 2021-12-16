@@ -5,13 +5,14 @@ sensor:
     resource: https://ovzoeker.nl/api/arrivals/2433780
     device_class: timestamp
     value_template: >-
-      {% if value_json.arrivals | length > 0 %}
-        {% set timestamp = value_json.arrivals[0].ts | default(0) | int %}
-        {% set punctuality = value_json.arrivals[0].punctuality | default(0) | int %}
-        {{ (timestamp + punctuality) | timestamp_local }}
-      {% else %}
-        unavailable
-      {% endif %}
+      {% set key = 0 %}
+      {% set time = "unavailable" %}
+      {%- if value_json.arrivals | length > key -%}
+        {%- set timestamp = value_json.arrivals[key].ts | default(0) | int -%}
+        {%- set punctuality = value_json.arrivals[key].punctuality | default(0) | int -%}
+        {%- set time = (timestamp + punctuality)| timestamp_local -%}
+      {%- endif -%}
+      {{ time }}
     json_attributes:
       - arrivals
       - stop
