@@ -6,6 +6,7 @@
     input:
       illuminance_below: "10"
       motion_entity: binary_sensor.kledingkamer_beweging_motion
+      cool_down: 30
       no_motion_wait: 15
       light_entity: light.kledingkamer
       illuminance_entity: sensor.kledingkamer_beweging_light_level
