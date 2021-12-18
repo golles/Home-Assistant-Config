@@ -17,7 +17,7 @@ input_datetime:
 
 automation:
   - id: covers_down_set_daily_time
-    alias: Rolluiken -  tijd voor sluiten aanpassen
+    alias: Rolluiken - Tijd voor sluiten dagelijks aanpassen
     initial_state: on
     mode: single
     trigger:
@@ -37,3 +37,32 @@ automation:
             {% set ofsetMinutes = (-((currentDay-middleDay) | abs) / magicFactor--longestDayOffsetMinutes) | round(0) %}
 
             {{ as_local((state_attr("sun.sun", "next_setting")) | as_datetime + timedelta(minutes = ofsetMinutes)).strftime("%H:%M:%S") }}
+
+  # The next automation is make sure we reload the ingration once it's unavailble.
+  # Copied from: https://github.com/iMicknl/ha-tahoma/issues/599#issuecomment-994596289
+  - id: covers_somfy_reload_integration
+    alias: Rolluiken - Somfy integratie herladen bij probleem
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: cover.slaapkamer
+        to: unavailable
+        for:
+          minutes: 5
+    action:
+      - alias: Notify about this
+        service: notify.sander
+        data:
+          title: Somfy
+          message: Integratie wordt herladen
+
+      - alias: Reload Somfy integration
+        service: homeassistant.reload_config_entry
+        target:
+          entity_id: cover.slaapkamer
+          
+      - alias: Clear the notification
+        service: persistent_notification.dismiss
+        data:
+          notification_id: config_entry_reconfigure
