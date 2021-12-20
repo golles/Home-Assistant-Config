@@ -43,11 +43,11 @@
       entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
       below: 10
   action:
-    - service: light.turn_on
+    - service: scene.turn_on
       data:
-        entity_id: light.achtertuin_groep
-        profile: helder
         transition: 2
+      target:
+        entity_id: scene.achtertuin_helder
 
     - delay:
         minutes: 10
