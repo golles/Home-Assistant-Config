@@ -94,6 +94,13 @@ cards:
         card:
           type: light
           entity: light.wled_kerstboom
+          hold_action:
+            action: call-service
+            service: light.turn_on
+            service_data:
+              entity_id: light.wled_kerstboom
+              effect: Colortwinkles
+              brightness: 80
 
       - type: button
         entity: binary_sensor.woonkamer_beweging_2_occupancy
