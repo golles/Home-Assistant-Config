@@ -71,6 +71,9 @@ cards:
             entity_id: light.wled_skull
             effect: breathe
             brightness: 200
+            xy_color:
+              - 0.701
+              - 0.299
       - type: light
         entity: light.eettafel
         icon: mdi:vanity-light
