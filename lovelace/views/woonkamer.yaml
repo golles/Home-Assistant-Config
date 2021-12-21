@@ -66,10 +66,11 @@ cards:
         entity: light.wled_skull
         hold_action:
           action: call-service
-          service: wled.preset
+          service: light.turn_on
           service_data:
             entity_id: light.wled_skull
-            preset: 666
+            effect: breathe
+            brightness: 200
       - type: light
         entity: light.eettafel
         icon: mdi:vanity-light
