@@ -1,5 +1,5 @@
 - id: christmas_tree_on
-  alias: Automatisch kerst verlichting aan woonkamer
+  alias: Kerst - Kerstboom automatisch aan
   initial_state: on
   mode: single
   max_exceeded: silent
@@ -7,6 +7,15 @@
     - platform: state
       entity_id: group.woonkamer_occupancy
       to: "on"
+  condition:
+    - condition: time
+      after: "07:00:00"
+      before: "00:00:00"
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: light.wled_kerstboom
+          state: unavailable
   action:
     - alias: Turn on the christmas tree
       service: light.turn_on
@@ -17,7 +26,7 @@
         entity_id: light.wled_kerstboom
 
 - id: christmas_keep_woonkamer_groot_2_off
-  alias: Keep woonkamer groot 2 off during christmas
+  alias: Kerst - Houdt de woonkamer groot 2 uit
   initial_state: on
   mode: single
   max_exceeded: silent
@@ -30,6 +39,12 @@
       entity_id: light.wled_kerstboom
       from: "off"
       to: "on"
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: light.wled_kerstboom
+          state: unavailable
   action:
     - alias: Turn off the light
       service: light.turn_off

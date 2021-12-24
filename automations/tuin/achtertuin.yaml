@@ -12,7 +12,7 @@
         transition: 2
 
 - id: kerst_sfeer_achtertuin
-  alias: Kerst sfeer achtertuin
+  alias: Kerst - Sfeer achtertuin
   initial_state: on
   mode: single
   trigger:
