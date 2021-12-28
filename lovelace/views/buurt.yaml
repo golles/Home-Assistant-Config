@@ -59,49 +59,6 @@ cards:
       - entity: sensor.p2000_lifeliner_1
         name: Lifeliner 1
 
-  - title: OV
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.bushalte_orinocostraat
-        icon: mdi:bus
-      - type: custom:template-entity-row
-        entity: sensor.bushalte_orinocostraat
-        icon: mdi:bus-clock
-        state: >-
-          {% set key = 1 %}
-          {% set time = "unavailable" %}
-          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
-            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
-            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
-            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
-          {%- endif -%}
-          {{ time }}
-      - type: custom:template-entity-row
-        entity: sensor.bushalte_orinocostraat
-        icon: mdi:bus-clock
-        state: >-
-          {% set key = 2 %}
-          {% set time = "unavailable" %}
-          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
-            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
-            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
-            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
-          {%- endif -%}
-          {{ time }}
-      - type: custom:template-entity-row
-        entity: sensor.bushalte_orinocostraat
-        icon: mdi:bus-clock
-        state: >-
-          {% set key = 3 %}
-          {% set time = "unavailable" %}
-          {%- if state_attr("sensor.bushalte_orinocostraat", "arrivals") | length > key -%}
-            {%- set timestamp = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].ts | default(0) | int -%}
-            {%- set punctuality = state_attr("sensor.bushalte_orinocostraat", "arrivals")[key].punctuality | default(0) | int -%}
-            {%- set time = (timestamp + punctuality)| timestamp_custom("%H:%M:%S") -%}
-          {%- endif -%}
-          {{ time }}
-
   - type: picture-elements
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
     elements:
