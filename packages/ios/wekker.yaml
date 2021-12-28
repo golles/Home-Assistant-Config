@@ -57,7 +57,7 @@ automation:
       - choose:
         # Temperature should be higher than a certain amount.
         - conditions:
-            - "{{ state_attr('weather.huis', 'temperature') > -2 }}"
+            - "{{ state_attr('weather.knmi_purmerend', 'temperature') > -2 }}"
           sequence:
             - choose:
               # It should come from Sander and he should be home.
