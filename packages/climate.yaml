@@ -43,13 +43,13 @@ switch:
       tado_home_mode:
         friendly_name: Tado thuismodus
         icon_template: >
-          {% if is_state_attr('climate.woonkamer', 'preset_mode', 'home') %}
+          {% if is_state_attr("climate.woonkamer", "preset_mode", "home") %}
             mdi:radiator
           {% else %}
             mdi:radiator-off
           {% endif %}
         value_template: >
-          {{ is_state_attr('climate.woonkamer', 'preset_mode', 'home') }}
+          {{ is_state_attr("climate.woonkamer", "preset_mode", "home") }}
         turn_on:
           service: climate.set_preset_mode
           data:
@@ -63,7 +63,7 @@ switch:
   
 automation:
   - id: tado_auto_home_and_away_mode
-    alias: Tado automatisch home en away mode activeren
+    alias: Tado - Automatisch home en away mode activeren
     initial_state: on
     mode: single
     max_exceeded: silent
@@ -77,8 +77,49 @@ automation:
               entity_id: group.residents
               state: not_home
           sequence:
-            - service: switch.turn_off
-              entity_id: switch.tado_home_mode
+            - alias: Set climate preset mode to home
+              service: climate.set_preset_mode
+              data:
+                entity_id: climate.woonkamer
+                preset_mode: away
         default:
-          - service: switch.turn_on
-            entity_id: switch.tado_home_mode
+          - alias: Set climate preset mode to home
+            service: climate.set_preset_mode
+            data:
+              entity_id: climate.woonkamer
+              preset_mode: home
+
+  - id: tado_preheat_going_home_cold_day
+    alias: Tado - Huis opwarmen op een koude dag naar huis gaan
+    initial_state: on
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: numeric_state
+        entity_id: proximity.residents_home
+        below: 20
+    condition:
+      - condition: state
+        entity_id: group.residents
+        state: not_home
+      - condition: state
+        entity_id: proximity.residents_home
+        attribute: dir_of_travel
+        state: towards
+      - condition: numeric_state
+        entity_id: climate.woonkamer
+        attribute: current_temperature
+        below: 18
+    action:
+      - service: notify.telegram_sander
+        data:
+          title: Tado
+          message: |
+            Ik zie dat je bijna thuis bent. 
+            Het is hier nu nog koud, dus we gaan nu opwarmen.
+
+      - alias: Set climate preset mode to home
+        service: climate.set_preset_mode
+        data:
+          entity_id: climate.woonkamer
+          preset_mode: home
