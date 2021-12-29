@@ -97,7 +97,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: proximity.residents_home
-        below: 20
+        below: 15
     condition:
       - condition: state
         entity_id: group.residents
