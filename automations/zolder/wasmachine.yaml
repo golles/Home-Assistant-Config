@@ -31,7 +31,7 @@
     - choose:
       - conditions:
         # When the room temperature is below a certain value, switch the heating on.
-        - "{{ state_attr('climate.zolder', 'temperature') < 20 }}"
+        - "{{ state_attr('climate.zolder', 'temperature') | float(20) < 20 }}"
         sequence:
           - service: tado.set_climate_timer
             data:
