@@ -47,7 +47,7 @@
       data:
         transition: 2
       target:
-        entity_id: scene.achtertuin_helder
+        entity_id: scene.achtertuin_helder_2
 
     - delay:
         minutes: 10
