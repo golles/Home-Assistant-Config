@@ -1,6 +1,6 @@
 - id: christmas_tree_on
   alias: Kerst - Kerstboom automatisch aan
-  initial_state: on
+  initial_state: off
   mode: single
   max_exceeded: silent
   trigger:
