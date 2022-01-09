@@ -10,6 +10,7 @@ cards:
     header: false
     step_layout: column
     step_size: 1
+    decimals: 0
     name: false
     icon: false
     control:
