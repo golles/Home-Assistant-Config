@@ -53,7 +53,7 @@ filter:
     - domain: sensor
       attributes:
         Wastecollector: purmerend
-        Days-until: <= 1
+        Days_until: <= 1
       options:
         type: custom:button-card
         template: afvalbeheer

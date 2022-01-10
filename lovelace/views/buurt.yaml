@@ -41,7 +41,7 @@ cards:
             template: afvalbeheer
     sort:
       method: attribute
-      attribute: Days-until
+      attribute: Days_until
       numeric: true
 
   - title: P2000
