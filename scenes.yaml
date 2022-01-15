@@ -9,7 +9,7 @@
       brightness: 76
     light.wled_skull:
       state: "on"
-      brightness: 200
+      brightness: 128
       xy_color:
         - 0.701
         - 0.299
