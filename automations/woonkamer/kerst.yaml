@@ -27,7 +27,7 @@
 
 - id: christmas_keep_woonkamer_groot_2_off
   alias: Kerst - Houdt de woonkamer groot 2 uit
-  initial_state: on
+  initial_state: off
   mode: single
   max_exceeded: silent
   trigger:
