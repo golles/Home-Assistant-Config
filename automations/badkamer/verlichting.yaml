@@ -8,7 +8,7 @@
       light_entity: light.badkamer_lamp
       motion_entity: group.badkamer_motion
       illuminance_entity: sensor.badkamer_beweging_light_level
-      cool_down: 60
+      cool_down: 90
       no_motion_wait: 15
       day_start_time: 08:00:00
       day_end_time: 00:00:00
