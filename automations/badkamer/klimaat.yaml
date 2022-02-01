@@ -6,3 +6,54 @@
       door_entity: binary_sensor.badkamerraam_contact
       climate_entity: climate.badkamer
       turn_off_delay: 300
+
+- id: mechanische_ventilatie_douchen
+  alias: Mechanische ventilatie tijdens douchen
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: homeassistant
+      event: start # Listen to start event to make sure we're not staying forever in high mode.
+    - platform: state
+      entity_id: binary_sensor.douche_beweging_occupancy
+      from: "off"
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.douche_beweging_occupancy
+      from: "on"
+      to: "off"
+      for:
+        minutes: 5
+  action:
+    - choose:
+      - conditions:
+        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
+        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'on') }}"
+        sequence:
+          - alias: Occupancy detected
+            service: fan.set_percentage
+            target:
+              entity_id: fan.mechanische_ventilatie
+            data:
+              percentage: 90
+
+      - conditions:
+        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
+        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'off') }}"
+        sequence:
+          - delay:
+              minutes: 10
+
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.mechanische_ventilatie
+            data:
+              percentage: 25
+
+      # HA start.
+      default:
+        - service: fan.set_percentage
+          target:
+            entity_id: fan.mechanische_ventilatie
+          data:
+            percentage: 25

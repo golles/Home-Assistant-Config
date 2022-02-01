@@ -48,12 +48,12 @@ mechanische_ventilatie:
     icon:
       - color: >-
           [[[ return entity.attributes.speed != "low" ? "var(--paper-item-icon-active-color)" : "var(--paper-item-icon-color)"; ]]]
-  tap_action:
-    action: call-service
-    service: script.ventilation_set_speed_timer
-    service_data:
-      speed: high
-      timer: 10
+  # tap_action:
+  #   action: call-service
+  #   service: script.ventilation_set_speed_timer
+  #   service_data:
+  #     speed: high
+  #     timer: 10
   hold_action:
     action: more-info
   show_state: false

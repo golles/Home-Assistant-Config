@@ -23,10 +23,18 @@
         # When the fan is set to low, set it to high for a certain amount of time.
         - "{{ is_state_attr('fan.mechanische_ventilatie', 'speed', 'low') }}"
         sequence:
-          - service: script.ventilation_set_speed_timer
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.mechanische_ventilatie
             data:
-              speed: high
-              timer: 30
+              percentage: 90
+          - delay:
+              minutes: 30
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.mechanische_ventilatie
+            data:
+              percentage: 25
 
     - choose:
       - conditions:
