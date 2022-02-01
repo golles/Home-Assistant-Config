@@ -1,5 +1,5 @@
 - id: licht_uit_achtertuin
-  alias: Lampen uit achtertuin
+  alias: Achtertuin - Lampen uit achtertuin om middernacht
   initial_state: on
   mode: single
   trigger:
@@ -12,7 +12,7 @@
         transition: 2
 
 - id: kerst_sfeer_achtertuin
-  alias: Kerst - Sfeer achtertuin
+  alias: Achtertuin - Kerst sfeer
   initial_state: on
   mode: single
   trigger:
@@ -29,8 +29,8 @@
     - service: light.turn_on
       entity_id: light.gekleurde_licht
 
-- id: backdoor_opens_while_being_dark_outside
-  alias: Achtertuin verlichting tijdelijk aan wanneer de deur open gaat
+- id: automatic_backgarden_lights
+  alias: Achtertuin - verlichting aan bij deur open of beweging
   initial_state: on
   mode: restart
   trigger:
@@ -38,21 +38,44 @@
       entity_id: binary_sensor.achterdeur_contact
       from: "off"
       to: "on"
+    - platform: state
+      entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
+      from: "off"
+      to: "on"
   condition:
     - condition: numeric_state
-      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
       below: 10
   action:
-    - service: scene.turn_on
+    - alias: Lights on
+      service: scene.turn_on
       data:
         transition: 2
       target:
         entity_id: scene.achtertuin_helder_2
 
-    - delay:
+    - alias: Wait a little
+      delay:
         minutes: 10
 
-    - service: light.turn_off
+    - alias: Lights off
+      service: light.turn_off
       data:
         entity_id: light.achtertuin_groep
         transition: 2
+
+
+- id: temp_notify_backgarden
+  alias: Stuur een berichtje bij beweging in de achtertuin
+  initial_state: on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
+      from: "off"
+      to: "on"
+  action:
+    - service: notify.sander
+      data:
+        title: Beweging in de achtertuin
+        message: Snel, ga kijken!
