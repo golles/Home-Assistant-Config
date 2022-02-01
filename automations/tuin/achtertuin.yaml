@@ -63,19 +63,3 @@
       data:
         entity_id: light.achtertuin_groep
         transition: 2
-
-
-- id: temp_notify_backgarden
-  alias: Stuur een berichtje bij beweging in de achtertuin
-  initial_state: on
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
-      from: "off"
-      to: "on"
-  action:
-    - service: notify.sander
-      data:
-        title: Beweging in de achtertuin
-        message: Snel, ga kijken!
