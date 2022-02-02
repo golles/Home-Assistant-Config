@@ -1,29 +1,33 @@
-webostv:
-  host: !secret webostv_ip
-  name: LG C9
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret webostv_mac
-      broadcast_address: !secret webostv_ip
-      broadcast_port: 9
-
 automation:
-- id: switch_soundbar_source_and_volume_when_tv_on
-  alias: Automatisch soundbar source en volume zetten als de tv aan gaat
-  initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: media_player.lg_c9
-      from: "off"
-      to: "on"
-  action:
-    - service: shell_command.set_soundbar_source_and_volume
-      data:
-        ip: !secret lg_soundbar_ip
-        source: 15 # HMDI ARC.
-        volume: 12
+  - id: lgc9_turn_on_wol
+    alias: LG C9 - Turn on via Wake-On-LAN
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: webostv.turn_on
+        entity_id: media_player.lg_c9
+    action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: !secret webostv_mac
+          broadcast_address: !secret webostv_ip
+          broadcast_port: 9
+
+  - id: switch_soundbar_source_and_volume_when_tv_on
+    alias: Automatisch soundbar source en volume zetten als de tv aan gaat
+    initial_state: on
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: media_player.lg_c9
+        from: "off"
+        to: "on"
+    action:
+      - service: shell_command.set_soundbar_source_and_volume
+        data:
+          ip: !secret lg_soundbar_ip
+          source: 15 # HMDI ARC.
+          volume: 12
 
 shell_command:
   set_soundbar_source_and_volume: 'python /config/custom_scripts/lg_sl10.py "{{ ip }}" "{{ source }}" "{{ volume }}"'

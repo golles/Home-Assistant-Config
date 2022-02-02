@@ -23,7 +23,7 @@ cards:
         head: binary_sensor.updater
         open: true # Sadly this doesn't work: {{ is_state("binary_sensor.updater","on") }} https://github.com/thomasloven/lovelace-fold-entity-row/issues/117
         entities:
-          - entity: sensor.latest_version
+          - entity: sensor.docker_hub
           - type: weblink
             name: Release notes
             url: https://www.home-assistant.io/latest-release-notes/

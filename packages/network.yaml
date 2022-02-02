@@ -1,12 +1,3 @@
-sensor:
-  - platform: dnsip
-
-homeassistant:
-  customize:
-    sensor.myip:
-      friendly_name: Extern IP
-      icon: mdi:web
-
 automation:
   - id: notification_ip_changed
     alias: "Notificatie: Externe IP veranderd"
