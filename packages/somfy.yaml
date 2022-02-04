@@ -1,7 +1,3 @@
-tahoma:
-  username: !secret somfy_username
-  password: !secret somfy_password
-
 homeassistant:
   customize:
     binary_sensor.zonnescherm_contact_contact:
