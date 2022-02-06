@@ -16,4 +16,20 @@
       night_scene: scene.badkamer_ontspannen
       night_scene_before_off: scene.badkamer_nachtlampje
       no_motion_wait: 15
-  
+
+- id: badkamer_enable_automatic_lights
+  alias: Badkamerlamp weer op automatisch zetten
+  initial_state: on
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: light.badkamer
+      from: "on"
+      to: "off"
+  condition:
+    condition: state
+    entity_id: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
+    state: "off"
+  action:
+    - service: automation.turn_on
+      entity_id: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
