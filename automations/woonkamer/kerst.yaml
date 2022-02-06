@@ -5,7 +5,7 @@
   max_exceeded: silent
   trigger:
     - platform: state
-      entity_id: group.woonkamer_occupancy
+      entity_id: binary_sensor.woonkamer_bezetting
       to: "on"
   condition:
     - condition: time

@@ -5,7 +5,7 @@
     path: golles/motion-activated_scenes.yaml
     input:
       day_end_time: 00:00:00
-      motion_entity: group.badkamer_motion
+      motion_entity: binary_sensor.badkamer_beweging
       cool_down: 90
       light_entity: light.badkamer
       illuminance_entity: sensor.badkamer_beweging_light_level

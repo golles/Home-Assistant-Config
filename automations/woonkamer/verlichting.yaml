@@ -10,14 +10,14 @@
       for:
         minutes: 5
     - platform: state
-      entity_id: group.woonkamer_occupancy
+      entity_id: binary_sensor.woonkamer_bezetting
       to: "on"
   condition:
     - condition: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 15
     - condition: state
-      entity_id: group.woonkamer_occupancy
+      entity_id: binary_sensor.woonkamer_bezetting
       state: "on"
   action:
     - choose:
@@ -46,7 +46,7 @@
           - alias: Wait untill there is no more occupancy
             wait_for_trigger:
               platform: state
-              entity_id: group.woonkamer_occupancy
+              entity_id: binary_sensor.woonkamer_bezetting
               from: "on"
               to: "off"
               for: 30

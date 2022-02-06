@@ -4,7 +4,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: group.woonkamer_motion
+      entity_id: binary_sensor.woonkamer_beweging
       to: "on"
   condition:
     - condition: state

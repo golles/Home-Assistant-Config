@@ -42,7 +42,7 @@ cards:
         name: Raam
         show_state: true
       - type: button
-        entity: group.zolder_motion
+        entity: binary_sensor.zolder_beweging
         name: Beweging
         show_state: true
       - type: button
