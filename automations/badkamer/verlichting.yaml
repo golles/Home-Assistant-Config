@@ -2,18 +2,18 @@
   alias: Badkamerlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   use_blueprint:
-    path: golles/motion-activated_light_profiles.yaml
+    path: golles/motion-activated_scenes.yaml
     input:
-      illuminance_below: "15"
-      light_entity: light.badkamer_lamp
-      motion_entity: group.badkamer_motion
-      illuminance_entity: sensor.badkamer_beweging_light_level
-      cool_down: 90
-      no_motion_wait: 15
-      day_start_time: 08:00:00
       day_end_time: 00:00:00
-      day_profile: helder
-      day_profile_before_off: gedimd
-      night_profile: ontspannen
-      night_profile_before_off: nachtlampje
+      motion_entity: group.badkamer_motion
+      cool_down: 90
+      light_entity: light.badkamer
+      illuminance_entity: sensor.badkamer_beweging_light_level
+      illuminance_below: 15
+      day_start_time: 08:00:00
+      day_scene: scene.badkamer_helder
+      day_scene_before_off: scene.badkamer_gedimd
+      night_scene: scene.badkamer_ontspannen
+      night_scene_before_off: scene.badkamer_nachtlampje
+      no_motion_wait: 15
   

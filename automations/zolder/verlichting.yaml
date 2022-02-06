@@ -2,20 +2,20 @@
   alias: Zolderlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   use_blueprint:
-    path: golles/motion-activated_light_profiles.yaml
+    path: golles/motion-activated_scenes.yaml
     input:
-      illuminance_below: "15"
-      light_entity: light.zolder
-      motion_entity: group.zolder_occupancy
-      illuminance_entity: sensor.zolder_beweging_2_illuminance_lux
-      cool_down: 60
-      no_motion_wait: 15
-      day_start_time: 08:00:00
       day_end_time: 00:00:00
-      day_profile: helder
-      day_profile_before_off: gedimd
-      night_profile: ontspannen
-      night_profile_before_off: nachtlampje
+      motion_entity: group.zolder_occupancy
+      cool_down: 60
+      light_entity: light.zolder
+      illuminance_entity: sensor.zolder_beweging_2_illuminance_lux
+      illuminance_below: 15
+      day_start_time: 08:00:00
+      day_scene: scene.zolder_helder
+      day_scene_before_off: scene.zolder_gedimd
+      night_scene: scene.zolder_ontspannen
+      night_scene_before_off: scene.zolder_nachtlampje
+      no_motion_wait: 15
 
 - id: zolder_auto_off
   alias: Zolder verlichting uit bij geen beweging

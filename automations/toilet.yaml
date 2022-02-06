@@ -2,17 +2,17 @@
   alias: Toiletlamp automatisch aan/uit door aanwezigheid
   initial_state: on
   use_blueprint:
-    path: golles/motion-activated_light_profiles.yaml
+    path: golles/motion-activated_scenes.yaml
     input:
-      illuminance_below: "100"
-      light_entity: light.toilet_lamp
-      motion_entity: binary_sensor.toilet_beweging_occupancy
-      illuminance_entity: sensor.toilet_beweging_illuminance
-      cool_down: 60
-      no_motion_wait: 15
-      day_start_time: 08:00:00
       day_end_time: 00:00:00
-      day_profile: helder
-      day_profile_before_off: gedimd
-      night_profile: ontspannen
-      night_profile_before_off: nachtlampje
+      motion_entity: binary_sensor.toilet_beweging_occupancy
+      cool_down: 60
+      light_entity: light.toilet
+      illuminance_entity: sensor.toilet_beweging_illuminance
+      illuminance_below: 100
+      day_start_time: 08:00:00
+      day_scene: scene.toilet_helder
+      day_scene_before_off: scene.toilet_gedimd
+      night_scene: scene.toilet_ontspannen
+      night_scene_before_off: scene.toilet_nachtlampje
+      no_motion_wait: 15
