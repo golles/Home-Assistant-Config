@@ -1,7 +1,7 @@
 title: Logeerkamer
 path: logeerkamer
 panel: false
-icon: mdi:bed-empty
+icon: mdi:bed-outline
 badges: []
 cards:
 
@@ -51,7 +51,16 @@ cards:
           name: TT Macbook
           icon: mdi:laptop
           show_state: true
-      - type: button
-        entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
-        name: Automatisch licht
-        icon: mdi:toggle-switch
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline

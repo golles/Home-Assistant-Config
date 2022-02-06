@@ -23,14 +23,30 @@ cards:
       - entity: binary_sensor.stookalert_noord_holland
         name: Stookalert
 
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.knmi_purmerend_waarschuwing
+        state: "on"
+    card:
+      type: markdown
+      title: Waarschuwing (KNMI)
+      content: >-
+        {{ state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing") }}
+
+  - type: conditional
+    conditions:
+      - entity: binary_sensor.meteoalarm
+        state: "on"
+    card:
+      type: markdown
+      title: Waarschuwing (Meteo Alarm)
+      content: >-
+        {{ state_attr("binary_sensor.meteoalarm", "description") }}
+
   - type: markdown
+    title: Verwachting
     content: >-
       {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
-
-      {% if is_state("binary_sensor.meteoalarm", "on") -%}
-        <br/><br/>
-        {{ state_attr("binary_sensor.meteoalarm", "description") }}
-      {%- endif %}
 
   - type: entities
     title: Zon/Maan

@@ -1,48 +1,9 @@
 title: In de buurt
 path: buurt
 panel: false
-icon: mdi:home-city
+icon: mdi:home-city-outline
 badges: []
 cards:
-
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.voortuin
-        icon: mdi:coach-lamp
-      - type: light
-        entity: light.achtertuin_groep
-        icon: mdi:coach-lamp
-        name: Achtertuin
-      - type: light
-        entity: light.gekleurde_licht
-
-  - type: picture-glance
-    title: Deurbel laatste
-    image: camera.deurbel
-    entities: []
-    camera_image: camera.deurbel
-
-  - type: custom:auto-entities
-    show_empty: true
-    card:
-      type: grid
-      title: Afval
-    card_param: cards
-    filter:
-      include:
-        - domain: sensor
-          attributes:
-            Wastecollector: purmerend
-          options:
-            type: custom:button-card
-            template: afvalbeheer
-    sort:
-      method: attribute
-      attribute: Days_until
-      numeric: true
 
   - title: P2000
     type: entities

@@ -31,6 +31,8 @@ cards:
         entity: light.zolder
         name: Plafond
         icon: mdi:ceiling-light
+      - type: media-control
+        entity: media_player.zolder
       - type: custom:button-card
         template: mechanische_ventilatie
       - type: button
@@ -70,17 +72,16 @@ cards:
         name: Voortgang
       - entity: sensor.wasmachine_resterende_tijd
         name: Resterende tijd
-      
-  - type: custom:mini-media-player
-    entity: media_player.zolder
-    name: TV
-    icon: mdi:television
-    artwork: cover
-    info: scroll
-    volume_stateless: true
-    hide:
-      icon: true
-      volume: false
-      prev: true
-      next: true
 
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.zolderlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline

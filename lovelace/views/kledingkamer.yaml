@@ -1,7 +1,7 @@
 title: Kledingkamer
 path: kledingkamer
 panel: false
-icon: mdi:wardrobe
+icon: mdi:wardrobe-outline
 badges: []
 cards:
 
@@ -44,8 +44,18 @@ cards:
       - type: button
         entity: binary_sensor.kledingkamer_beweging_motion
         name: Beweging
+        icon: mdi:motion-sensor
         show_state: true
-      - type: button
-        entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
-        name: Automatisch licht
-        icon: mdi:toggle-switch
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline

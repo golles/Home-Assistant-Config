@@ -14,7 +14,7 @@ cards:
       
   - type: custom:button-card
     template: kamer_info
-    icon: mdi:chef-hat
+    icon: mdi:countertop-outline
     name: Keuken
     variables:
       light_entity: light.keuken

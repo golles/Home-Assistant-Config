@@ -1,0 +1,63 @@
+title: Tuin
+path: tuin
+panel: false
+icon: mdi:watering-can-outline
+badges: []
+cards:
+
+  - type: grid
+    columns: 3
+    square: true
+    cards:
+      - type: light
+        entity: light.voortuin
+        icon: mdi:coach-lamp
+      - type: light
+        entity: light.achtertuin_groep
+        icon: mdi:coach-lamp
+        name: Achtertuin
+      - type: light
+        entity: light.gekleurde_licht
+      - type: button
+        entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
+        name: Beweging
+        icon: mdi:motion-sensor
+        show_state: true
+
+  - type: custom:auto-entities
+    show_empty: true
+    card:
+      type: grid
+      title: Afval
+    card_param: cards
+    filter:
+      include:
+        - domain: sensor
+          attributes:
+            Wastecollector: purmerend
+          options:
+            type: custom:button-card
+            template: afvalbeheer
+    sort:
+      method: attribute
+      attribute: Days_until
+      numeric: true
+
+  - type: picture-glance
+    title: Deurbel laatste
+    image: camera.deurbel
+    entities: []
+    camera_image: camera.deurbel
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.achtertuin_verlichting_aan_bij_deur_open_of_beweging
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline

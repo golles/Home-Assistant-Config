@@ -1,7 +1,7 @@
 title: Keuken
 path: keuken
 panel: false
-icon: mdi:chef-hat
+icon: mdi:countertop-outline
 badges: []
 cards:
 
@@ -46,22 +46,15 @@ cards:
         show_state: true
 
   - type: entities
-    title: Vaatwasser
     show_header_toggle: false
-    icon: mdi:dishwasher
     entities:
-      - entity: switch.vaatwasser_power
-        name: Voedingsstatus
-      - entity: binary_sensor.vaatwasser_door
-        name: Deur
-      - entity: sensor.vaatwasser_programma
-        name: Programma
-      - entity: sensor.vaatwasser_program_progress
-        name: Voortgang
-      - entity: sensor.vaatwasser_resterende_tijd
-        name: Resterende tijd
-      - type: section
-        label: Autostart
-      - entity: automation.vaatwasser_dagelijks_starten
-        icon: mdi:dishwasher
-      - input_datetime.dishwasher_daily_start
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.vaatwasser_dagelijks_starten
+            icon: mdi:dishwasher
+          - entity: input_datetime.dishwasher_daily_start
+            name: Vaatwasser starttijd

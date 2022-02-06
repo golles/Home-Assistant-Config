@@ -42,12 +42,22 @@ cards:
       - type: button
         entity: binary_sensor.badkamer_beweging_motion
         name: Beweging
+        icon: mdi:motion-sensor
         show_state: true
       - type: button
         entity: binary_sensor.douche_beweging_occupancy
         name: Douche
         show_state: true
-      - type: button
-        entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
-        name: Automatisch licht
-        icon: mdi:toggle-switch
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline
