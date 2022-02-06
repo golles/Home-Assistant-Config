@@ -4,6 +4,8 @@ template:
         state: >-
           {{ is_state("device_tracker.tt_macbook", "home") and is_state("sensor.tt_macbook_displays", "2") }}
       - name: TT MacBook in thuis kantoor en aan
+        delay_off:
+          seconds: 10
         state: >-
           {{ is_state("binary_sensor.tt_macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.tt_macbook_active", "on") }}
 
