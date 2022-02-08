@@ -12,7 +12,7 @@
       state: "off" 
     - condition: state
       entity_id: media_player.lg_soundbar
-      state: "off" 
+      state: "idle" 
     - condition: state
       entity_id: binary_sensor.morning
       state: "on"
@@ -25,22 +25,15 @@
       target:
         entity_id: sensor.lokaal_weer_en_verkeer
 
-    - alias: Turn on media player
-      service: media_player.turn_on
-      data:
-        entity_id: media_player.lg_soundbar
-
     - alias: Set soundbar volume
       service: media_player.volume_set
       data:
         entity_id: media_player.lg_soundbar
         volume_level: 0.25 # 10 * 0.025
 
-    - alias: Wait for the soundbar to be ready
-      wait_template: >
-        {{ states("media_player.lg_soundbar") in ["idle", "on"] }}
-      timeout: "00:00:05"
-      continue_on_timeout: true
+    - alias: Wait a little
+      delay:
+        seconds: 5
 
     - alias: Speak message
       service: tts.microsoft_say
