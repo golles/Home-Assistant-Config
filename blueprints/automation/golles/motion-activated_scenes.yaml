@@ -96,11 +96,21 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-  platform: state
-  entity_id: !input motion_entity
-  from: "off"
-  to: "on"
+  - platform: state
+    entity_id: !input motion_entity
+    from: "off"
+    to: "on"
+  - platform: numeric_state
+    entity_id: !input illuminance_entity
+    below: !input illuminance_below
+    for:
+      minutes: 5
 
+condition:
+  - condition: state
+    entity_id: !input motion_entity
+    state: "on"
+    
 action:
   - choose:
     - conditions:
@@ -125,7 +135,7 @@ action:
               - alias: Turn on light with day scene
                 service: scene.turn_on
                 data:
-                  transition: 2
+                  transition: 1
                 target:
                   entity_id: !input day_scene
           # Other times
@@ -133,7 +143,7 @@ action:
             - alias: Turn on light with night scene
               service: scene.turn_on
               data:
-                transition: 2
+                transition: 1
               target:
                 entity_id: !input night_scene
 
@@ -162,7 +172,7 @@ action:
                     - alias: Turn on light with day before off scene
                       service: scene.turn_on
                       data:
-                        transition: 2
+                        transition: 1
                       target:
                         entity_id: !input day_scene_before_off
                 # Other times
@@ -170,7 +180,7 @@ action:
                   - alias: Turn on light with night before off scene
                     service: scene.turn_on
                     data:
-                      transition: 2
+                      transition: 1
                     target:
                       entity_id: !input night_scene_before_off
 
@@ -180,4 +190,6 @@ action:
               - alias: Turn off the light
                 service: light.turn_off
                 data:
+                  transition: 1
+                target:
                   entity_id: !input light_entity
