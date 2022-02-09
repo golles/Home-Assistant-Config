@@ -41,7 +41,7 @@
                   scene.ochtend
                 {%- endif %}
             data:
-              transition: 2
+              transition: 1
 
           - alias: Wait untill there is no more occupancy
             wait_for_trigger:
@@ -67,7 +67,7 @@
           target:
             entity_id: scene.avond
           data:
-            transition: 900 # 15 minutes.
+            transition: 1
 
 - id: auto_light_woonkamer_when_someone_arrives_home
   alias: Automatisch licht aan in de woonkamer wanneer iemand thuis komt
@@ -89,7 +89,7 @@
       target:
         entity_id: scene.avond
       data:
-        transition: 900 # 15 minutes.
+        transition: 1
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron
@@ -120,4 +120,4 @@
     service: scene.turn_on
     data:
       entity_id: scene.film
-      transition: 2
+      transition: 1
