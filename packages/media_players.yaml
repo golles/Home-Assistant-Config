@@ -40,7 +40,7 @@ script:
     fields:
       stream:
         description: The stream to play
-        example: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+        example: https://stream.qmusic.nl/qmusic/mp3
     sequence:
       - choose:
         - conditions:

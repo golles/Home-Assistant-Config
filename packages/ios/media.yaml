@@ -32,7 +32,7 @@ automation:
     action:
       - service: script.play_livingroom_radio
         data:
-          stream: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+          stream: https://stream.qmusic.nl/qmusic/mp3
 
   - id: ios_action_tv_ziggo
     alias: iOS action - Ziggo

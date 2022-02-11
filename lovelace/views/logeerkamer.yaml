@@ -31,8 +31,6 @@ cards:
         entity: light.logeerkamer
         name: Plafond
         icon: mdi:ceiling-light
-      - type: media-control
-        entity: media_player.googlehome6234
       - type: button
         entity: binary_sensor.logeerkamerraam_contact
         name: Raam
@@ -51,6 +49,9 @@ cards:
           name: TT Macbook
           icon: mdi:laptop
           show_state: true
+
+  - !include cards/media_player_googlehome6234.yaml
+
 
   - type: entities
     show_header_toggle: false

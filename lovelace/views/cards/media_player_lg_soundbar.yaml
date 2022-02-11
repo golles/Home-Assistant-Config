@@ -33,7 +33,7 @@ shortcuts:
       type: script
       id: script.play_livingroom_radio
       data:
-        stream: https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3
+        stream: https://stream.qmusic.nl/qmusic/mp3
     - cover: /local/radio/skyradio.png
       type: script
       id: script.play_livingroom_radio
@@ -54,3 +54,7 @@ shortcuts:
       id: script.play_livingroom_radio
       data:
         stream: https://19983.live.streamtheworld.com/SLAM_AAC.aac
+tts:
+  platform: service
+  data:
+    service: tts.microsoft_say
