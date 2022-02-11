@@ -46,7 +46,9 @@ script:
         - conditions:
             - condition: state
               entity_id: media_player.lg_soundbar
-              state: "idle"
+              state: 
+               - "off"
+               - idle
             - condition: numeric_state
               entity_id: media_player.lg_soundbar
               attribute: volume_level

@@ -12,7 +12,9 @@
       state: "off" 
     - condition: state
       entity_id: media_player.lg_soundbar
-      state: "idle" 
+      state: 
+        - "off"
+        - idle
     - condition: state
       entity_id: binary_sensor.morning
       state: "on"
