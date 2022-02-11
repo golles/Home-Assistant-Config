@@ -76,11 +76,11 @@ filter:
         show_state: true
         state_color: false
 
-    - domain: plant
-      state: problem
-      options:
-        type: custom:button-card
-        template: plant
+    # - domain: plant
+    #   state: problem
+    #   options:
+    #     type: custom:button-card
+    #     template: plant
 
     - entity_id: fan.air_purifier
       state: "on"
