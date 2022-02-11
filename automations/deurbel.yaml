@@ -2,28 +2,33 @@
   alias: Deurbel wordt ingedrukt
   description: |
     Wanneer er op de deurbel gedrukt wordt:
-      - Stuur een melding naar Sander wanneer de werk laptop deze thuis en actief is.
-      - Stuur een melding naar de tv wanneer deze aan staat.
+      - Stuur een melding naar Sander wanneer hij aan het thuiswerken is.
+      - Stuur een melding naar de tv en start de stream wanneer de tv aan staat.
       - Pauzeer de tv als Netflix, Plex of Youtube aan staat.
-      - Pauzeer Ziggo wanneer je geen lineaire tv kijkt.
+      - Pauzeer Ziggo wanneer die geen lineaire tv afspeelt.
   initial_state: on
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.deurbel_doorbell_pressed
+      entity_id: binary_sensor.deurbel_ringing_sensor
       from: "off"
       to: "on"
   action:
     - variables:
         message_title: Ding dong!
         message_text: Iemand staat bij de deur
+        tv_sources_to_pause:
+          - Netflix
+          - Plex
+          - YouTube
+        tv_current_source: "{{ state_attr('media_player.lg_c9', 'source') }}" # Will be None when the tv is off.
+        internal_url: !secret internal_url
 
     - choose:
       - conditions:
-          - "{{ is_state('device_tracker.tt_macbook', 'home') }}"
-          - "{{ is_state('binary_sensor.tt_macbook_active', 'on') }}"
+          - "{{ is_state('binary_sensor.tt_macbook_in_thuis_kantoor_en_aan', 'on') }}"
         sequence:
-          - alias: Notify work laptop when working from home
+          - alias: Notify Sander when he's working from home, he might not hear the doorbell as he's really busy
             service: notify.sander
             data:
               title: "{{ message_title }}"
@@ -31,50 +36,58 @@
               data:
                 group: deurbel
                 entity_id: camera.deurbel
-                url: /dashboard-buiten/buurt
+                url: /dashboard-buiten/tuin
 
     - choose:
       - conditions:
         - "{{ is_state('media_player.lg_c9', 'on') }}"
         sequence:
-        - alias: Nottify tv when on
+        - alias: Notify tv when on
           service: notify.lg_c9
           data:
             message: "{{ message_title }} {{ message_text }}"
         
-    - choose:
-      - conditions:
-          - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
-        sequence:
-          - alias: Pause tv when Netflix, Plex or Youtube is active
-            service: media_player.media_pause
+        - choose:
+          - conditions:
+              # - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
+              - "{{ state_attr('media_player.lg_c9', 'source') in tv_sources_to_pause }}"
+            sequence:
+              - alias: Pause tv when Netflix, Plex or Youtube is active
+                service: media_player.media_pause
+                entity_id: media_player.lg_c9
+      
+          - conditions:
+              - "{{ is_state('media_player.mediabox', 'on') }}"
+              - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
+              - "{{ not is_state_attr('media_player.mediabox', 'play_mode', 'linear') }}"
+            sequence: 
+              - alias: Pause Ziggo, but not when watching linear tv
+                service: media_player.media_pause
+                entity_id: media_player.mediabox
+
+        - alias: Show camera stream in the web browser on the tv
+          service: webostv.command
+          data:
             entity_id: media_player.lg_c9
-  
-      - conditions:
-          - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
-          - "{{ not is_state_attr('media_player.mediabox', 'play_mode', 'linear') }}"
-        sequence: 
-          - alias: Pause Ziggo, but not when watching linear tv
-            service: media_player.media_pause
-            entity_id: media_player.mediabox
+            command: system.launcher/open
+            payload:
+              target: "{{ internal_url }}/api/camera_proxy_stream/camera.deurbel?token={{ state_attr('camera.deurbel', 'access_token') }}"
+
+        - alias: Wait a little
+          delay:
+            seconds: 15
+
+        - choose:
+          - conditions:
+              - "{{ is_state_attr('media_player.lg_c9', 'source', 'Webbrowser') }}"
+              - "{{ tv_current_source != None }}"
+            sequence:
+              - alias: Return to the previous source on the tv
+                service: media_player.select_source
+                data:
+                  entity_id: media_player.lg_c9
+                  source: "{{ tv_current_source }}"
 
     # Don't trigger again for a few seconds.
     - delay:
         seconds: 5
-
-- id: eufy-ha-mqtt-bridge_offline
-  alias: eufy-ha-mqtt-bridge offline
-  description: Ping a message when the container seems to be offline.
-  initial_state: on
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.deurbel_doorbell_pressed
-      to: unavailable
-      for:
-        minutes: 2
-  action:
-    - service: notify.sander
-      data:
-        title: eufy-ha-mqtt-bridge offline
-        message: Check de logs en container moet opnieuw worden gestart.
