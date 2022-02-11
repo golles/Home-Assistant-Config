@@ -22,7 +22,7 @@ cards:
     cards:
       - type: light
         entity: light.keuken
-        name: Plafond spots
+        name: Plafond
         icon: mdi:ceiling-light
 
       - type: button
@@ -36,14 +36,13 @@ cards:
         name: Keuken
         show_state: true
 
-      - type: button
+      - type: custom:button-card
         entity: sensor.vaatwasser_resterende_tijd
+        template: home_connect_appliance
         name: Vaatwasser
         icon: mdi:dishwasher
-        tap_action:
-          action: more-info
-        show_icon: true
-        show_state: true
+        variables:
+          progress_entity: sensor.vaatwasser_program_progress
 
   - type: entities
     show_header_toggle: false

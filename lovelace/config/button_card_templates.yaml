@@ -120,6 +120,44 @@ zonnescherm:
       }
     ]]]
 
+progress:
+  template: google_theme
+  show_label: true
+  label: " "
+  variables:
+    progress: 
+    progress_entity:
+  styles:
+    card:
+      - padding-bottom: 30px
+    name:
+      - margin-top: -30px
+    label:
+      - margin-bottom: 0px
+      - position: absolute
+      - background: var(--primary-color)
+      - height: 15px
+      - bottom: 0
+      - left: 0
+      - width: >-
+          [[[
+            if (variables.progress_entity) {
+              return states[variables.progress_entity].state + '%';
+            } else if (variables.progress) {
+              return variables.progress + '%' 
+            } else if (entity.entity_id.startsWith('light.')) {
+              return (entity.attributes.brightness / 255) * 100 + '%' 
+            } else if (entity.attributes.percentage) {
+              return entity.attributes.percentage + '%' 
+            } else {
+              return '0%';
+            }
+          ]]]
+
+home_connect_appliance:
+  template: progress
+  show_state: true
+
 kamer_info:
   aspect_ratio: 1/1
   show_state: false
