@@ -8,7 +8,8 @@ automation:
       entity_id: sensor.myip
     condition:
       - condition: template
-        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+        value_template: >-
+          {{ trigger.to_state.state not in [trigger.from_state.state, "unknown", "unavailable"] }}
     action:
       - service: notify.sander
         data:
@@ -27,7 +28,7 @@ automation:
           domain: !secret direct_admin_domain
           subdomain: !secret direct_admin_subdomain
           ip: >-
-            {{ states('sensor.myip') }}
+            {{ states("sensor.myip") }}
 
 shell_command:
   update_remote_ip: '/config/custom_scripts/directadmin.sh "{{ username }}" "{{ password }}" "{{ server }}" "{{ domain }}" "{{ subdomain }}" "{{ ip }}"'
