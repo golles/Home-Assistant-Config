@@ -156,7 +156,7 @@ action:
             for: !input cool_down
 
         - choose:
-          # Only continue when the light is still on, user might have turned it off manually.
+          # Only continue when the light are still on, user might have turned it off manually.
           - conditions:
               - condition: state
                 entity_id: !input light_entity
