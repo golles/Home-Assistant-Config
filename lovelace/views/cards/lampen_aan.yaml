@@ -5,6 +5,9 @@ card:
   title: Lampen aan
 card_param: cards
 filter:
+  exclude:
+    - entity_id: light.wooneet
+    - entity_id: light.achtertuin_groep
   include:
     - domain: light
       state: "on"
