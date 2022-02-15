@@ -1,73 +1,21 @@
 - id: auto_light_woonkamer
-  alias: Automatisch licht aan in de woonkamer
+  alias: Woonkamer automatisch aan/uit door aanwezigheid
   initial_state: on
-  mode: single
-  max_exceeded: silent
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-      below: 15
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: binary_sensor.woonkamer_bezetting
-      to: "on"
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-      below: 15
-    - condition: state
-      entity_id: binary_sensor.woonkamer_bezetting
-      state: "on"
-  action:
-    - choose:
-      - conditions:
-        - condition: or
-          conditions:
-            - condition: state
-              entity_id: binary_sensor.morning
-              state: "on"
-            - condition: state
-              entity_id: binary_sensor.night
-              state: "on"
-        sequence:
-          - alias: Turn on the morning or night scene
-            service: scene.turn_on
-            target:
-              entity_id: >-
-                {%- if is_state("binary_sensor.night", "on") %}
-                  scene.nacht
-                {%- else -%}
-                  scene.ochtend
-                {%- endif %}
-            data:
-              transition: 1
-
-          - alias: Wait untill there is no more occupancy
-            wait_for_trigger:
-              platform: state
-              entity_id: binary_sensor.woonkamer_bezetting
-              from: "on"
-              to: "off"
-              for: 30
-
-          - alias: Turn off all lights in the living room
-            service: light.turn_off
-            target:
-              entity_id:
-                - light.woonkamer
-                - light.eettafel
-                - light.keuken
-            data:
-              transition: 10
-
-      default:
-        - alias: Turn on the evening scene
-          service: scene.turn_on
-          target:
-            entity_id: scene.avond
-          data:
-            transition: 1
+  use_blueprint:
+    path: golles/motion-activated_scenes.yaml
+    input:
+      day_end_time: 00:00:00
+      motion_entity: binary_sensor.woonkamer_bezetting
+      cool_down: 60
+      light_entity: light.wooneet
+      illuminance_entity: sensor.woonkamer_lichtsterkte_illuminance_lux
+      illuminance_below: 10
+      day_start_time: 08:00:00
+      day_scene: scene.wooneet_avond
+      day_scene_before_off: scene.wooneet_avond
+      night_scene: scene.wooneet_nachtlampje
+      night_scene_before_off: scene.woonkamer_nachtlampje
+      no_motion_wait: 15
 
 - id: auto_light_woonkamer_when_someone_arrives_home
   alias: Automatisch licht aan in de woonkamer wanneer iemand thuis komt
@@ -87,7 +35,7 @@
     - alias: Turn on the evening scene
       service: scene.turn_on
       target:
-        entity_id: scene.avond
+        entity_id: scene.wooneet_avond
       data:
         transition: 1
 

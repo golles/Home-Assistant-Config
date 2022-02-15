@@ -29,28 +29,28 @@ cards:
     square: false
     cards:
       - type: button
-        entity: scene.avond
+        entity: scene.wooneet_avond
         tap_action:
           action: call-service
           service: scene.turn_on
           service_data:
-            entity_id: scene.avond
+            entity_id: scene.wooneet_avond
             transition: 2
       - type: button
-        entity: scene.eten
+        entity: scene.wooneet_eten
         tap_action:
           action: call-service
           service: scene.turn_on
           service_data:
-            entity_id: scene.eten
+            entity_id: scene.wooneet_eten
             transition: 2
       - type: button
-        entity: scene.film
+        entity: scene.wooneet_film
         tap_action:
           action: call-service
           service: scene.turn_on
           service_data:
-            entity_id: scene.film
+            entity_id: scene.wooneet_film
             transition: 2
 
   - type: grid
