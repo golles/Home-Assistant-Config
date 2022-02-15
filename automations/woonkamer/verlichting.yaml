@@ -12,9 +12,9 @@
       illuminance_below: 10
       day_start_time: 08:00:00
       day_scene: scene.wooneet_avond
-      day_scene_before_off: scene.wooneet_avond
-      night_scene: scene.wooneet_nachtlampje
-      night_scene_before_off: scene.woonkamer_nachtlampje
+      day_scene_before_off: scene.wooneet_nacht
+      night_scene: scene.wooneet_nacht
+      night_scene_before_off: scene.wooneet_nacht
       no_motion_wait: 15
 
 - id: auto_light_woonkamer_when_someone_arrives_home

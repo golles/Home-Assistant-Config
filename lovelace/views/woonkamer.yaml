@@ -25,11 +25,12 @@ cards:
         name: Lichtsterkte
 
   - type: grid
-    columns: 3
+    columns: 4
     square: false
     cards:
       - type: button
         entity: scene.wooneet_avond
+        state_color: false
         tap_action:
           action: call-service
           service: scene.turn_on
@@ -38,6 +39,7 @@ cards:
             transition: 2
       - type: button
         entity: scene.wooneet_eten
+        state_color: false
         tap_action:
           action: call-service
           service: scene.turn_on
@@ -46,11 +48,21 @@ cards:
             transition: 2
       - type: button
         entity: scene.wooneet_film
+        state_color: false
         tap_action:
           action: call-service
           service: scene.turn_on
           service_data:
             entity_id: scene.wooneet_film
+            transition: 2
+      - type: button
+        entity: scene.wooneet_nacht
+        state_color: false
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.wooneet_nacht
             transition: 2
 
   - type: grid
