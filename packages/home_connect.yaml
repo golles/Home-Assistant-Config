@@ -107,7 +107,6 @@ template:
 automation:
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten
-    initial_state: on
     mode: single
     trigger:
       platform: time
@@ -122,7 +121,6 @@ automation:
 
   - id: dishwasher_set_daily_start_time
     alias: Vaatwasser tijd dagelijks aanpassen
-    initial_state: on
     mode: single
     trigger:
       - platform: homeassistant

@@ -11,7 +11,6 @@ automation:
   - id: notification_arrived_home_after_visited_parents
     alias: "Notificatie: Komt thuis na bezoeken ouders"
     description: Automation wanneer Sander thuis komt nadat hij bij zijn ouders is geweest.
-    initial_state: on
     mode: single
     trigger:
       - platform: state

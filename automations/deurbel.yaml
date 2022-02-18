@@ -6,7 +6,6 @@
       - Stuur een melding naar de tv en start de stream wanneer de tv aan staat.
       - Pauzeer de tv als Netflix, Plex of Youtube aan staat.
       - Pauzeer Ziggo wanneer die geen lineaire tv afspeelt.
-  initial_state: on
   mode: single
   trigger:
     - platform: state

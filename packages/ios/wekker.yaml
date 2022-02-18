@@ -21,7 +21,6 @@ ios:
 automation:
   - id: ios_action_alarm_clock_off
     alias: iOS action - Wekker uit
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:
@@ -42,7 +41,6 @@ automation:
 
   - id: ios_action_alarm_clock_snooze
     alias: iOS action - Wekker gesnoozed
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:

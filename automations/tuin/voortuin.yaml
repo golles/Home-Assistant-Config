@@ -1,6 +1,5 @@
 - id: someone_arrives_home
   alias: Voortuinlamp aan als het donker is en iemand thuis komt
-  initial_state: on
   mode: single
   trigger:
     - platform: state

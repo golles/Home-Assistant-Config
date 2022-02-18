@@ -13,7 +13,6 @@ alarm_control_panel:
 automation:
   - id: alarm_auto_on_off
     alias: Alarm - Automatisch aan/uit bij aanwezigheid
-    initial_state: on
     mode: single
     trigger:
       - platform: state
@@ -38,7 +37,6 @@ automation:
 
   - id: alarm_trigger_lights
     alias: Alarm - Melding in huis
-    initial_state: on
     mode: single
     trigger:
       - platform: state
@@ -98,7 +96,6 @@ automation:
       Alarm systeem
       Deze automation triggert bewust vele notificaties, namelijk voor alle deuren en ramen die open gaan
       en ook voor alle bewegingssensoren die beweging detecteren.
-    initial_state: on
     mode: restart
     trigger:
       - platform: state

@@ -1,6 +1,5 @@
 - id: ziggo_auto_off_when_tv_off
   alias: Automatisch Ziggo uitzetten als de tv uit is
-  initial_state: on
   mode: single
   trigger:
     - platform: state

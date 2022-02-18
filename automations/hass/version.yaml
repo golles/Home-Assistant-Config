@@ -1,6 +1,5 @@
 - id: notification_new_version
   alias: "Notificatie: Nieuwe versie beschikbaar"
-  initial_state: on
   mode: single
   trigger:
     - platform: state

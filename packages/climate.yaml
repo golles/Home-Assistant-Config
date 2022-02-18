@@ -64,7 +64,6 @@ switch:
 automation:
   - id: tado_auto_home_and_away_mode
     alias: Tado - Automatisch home en away mode activeren
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:
@@ -91,7 +90,6 @@ automation:
 
   - id: tado_preheat_going_home_cold_day
     alias: Tado - Huis opwarmen op een koude dag naar huis gaan
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:

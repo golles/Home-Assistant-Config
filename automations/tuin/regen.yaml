@@ -1,6 +1,5 @@
 - id: rain_detected
   alias: Regen gedetecteerd
-  initial_state: on
   mode: single
   trigger:
     - platform: state

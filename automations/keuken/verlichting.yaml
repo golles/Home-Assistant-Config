@@ -1,6 +1,5 @@
 - id: keuken_light_auto
   alias: Keukenlamp automatisch aan/uit door aanwezigheid
-  initial_state: on
   use_blueprint:
     path: golles/motion-activated_scenes.yaml
     input:

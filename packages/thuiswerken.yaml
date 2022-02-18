@@ -12,7 +12,6 @@ template:
 automation:
   - id: home_office_laptop_inactive
     alias: Thuiswerken, stop muziek laptop inactive
-    initial_state: on
     mode: restart
     trigger:
       - platform: state
@@ -38,7 +37,6 @@ automation:
 
   - id: home_office_meeting
     alias: Thuiswerken, stop muziek bij vergadering
-    initial_state: on
     mode: restart
     trigger:
       - platform: state

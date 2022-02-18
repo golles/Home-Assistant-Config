@@ -7,7 +7,6 @@ input_text:
 automation:
   - id: borg_webhook
     alias: Borg backup webhook
-    initial_state: on
     mode: restart
     trigger:
       - platform: webhook
@@ -20,7 +19,6 @@ automation:
 
   - id: notification_borg_warning
     alias: "Notificatie: Borg backup waarschuwing"
-    initial_state: on
     mode: restart
     trigger:
       - platform: state

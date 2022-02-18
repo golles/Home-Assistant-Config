@@ -1,6 +1,5 @@
 - id: logeerkamer_light_auto
   alias: Logeerkamerlamp automatisch aan/uit door aanwezigheid
-  initial_state: on
   use_blueprint:
     path: golles/motion-activated_scenes.yaml
     input:

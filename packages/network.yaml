@@ -1,7 +1,6 @@
 automation:
   - id: notification_ip_changed
     alias: "Notificatie: Externe IP veranderd"
-    initial_state: on
     mode: single
     trigger:
       platform: state

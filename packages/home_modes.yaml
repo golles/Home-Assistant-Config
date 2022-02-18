@@ -19,7 +19,6 @@ group:
 automation:
   - id: vacation_mode_on
     alias: Vakantie modus - automatisch activeren bij afwezigheid
-    initial_state: on
     mode: single
     trigger:
       - platform: state
@@ -36,7 +35,6 @@ automation:
 
   - id: vacation_mode_off
     alias: Vakantie modus - automatisch deactiveren bij aanwezigheid
-    initial_state: on
     mode: single
     trigger:
       - platform: state
@@ -48,7 +46,6 @@ automation:
 
   - id: vacation_mode_presence
     alias: Vakantie modus - aanwezigheid nabootsen
-    initial_state: on
     mode: parallel
     trigger:
       - platform: numeric_state

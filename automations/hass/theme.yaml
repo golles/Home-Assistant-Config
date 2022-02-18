@@ -1,6 +1,5 @@
 - id: auto_day_night_theme
   alias: Automatisch theme voor dag en nacht
-  initial_state: on
   mode: single
   trigger:
     - platform: homeassistant

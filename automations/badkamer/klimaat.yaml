@@ -9,7 +9,6 @@
 
 - id: mechanische_ventilatie_douchen
   alias: Mechanische ventilatie tijdens douchen
-  initial_state: on
   mode: restart
   trigger:
     - platform: homeassistant

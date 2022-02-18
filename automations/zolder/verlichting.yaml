@@ -1,6 +1,5 @@
 - id: zolder_light_auto
   alias: Zolderlamp automatisch aan/uit door aanwezigheid
-  initial_state: on
   use_blueprint:
     path: golles/motion-activated_scenes.yaml
     input:
@@ -19,7 +18,6 @@
 
 - id: zolder_auto_off
   alias: Zolder verlichting uit bij geen beweging
-  initial_state: on
   mode: single
   trigger:
     - platform: state

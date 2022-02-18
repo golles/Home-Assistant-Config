@@ -46,7 +46,6 @@ sensor:
 automation:
   - id: notification_p2000
     alias: "Notificatie: P200 bericht in de buurt"
-    initial_state: on
     mode: single
     trigger:
       - platform: state

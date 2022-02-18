@@ -1,6 +1,5 @@
 - id: goedemorgen_bericht
   alias: Goedemorgen bericht bij 1e beweging in de woonkamer
-  initial_state: on
   mode: single
   trigger:
     - platform: state

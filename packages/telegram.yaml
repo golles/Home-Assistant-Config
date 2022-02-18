@@ -9,7 +9,6 @@ automation:
   - id: telegram_commands
     alias: Telegram commandos
     description: Telegram commandos
-    initial_state: on
     mode: parallel
     trigger:
       - platform: event

@@ -1,6 +1,5 @@
 - id: eettafel_knop_2
   alias: Eettafel knop2
-  initial_state: on
   variables:
     step: 20 # Needs to be an even number.
   use_blueprint:

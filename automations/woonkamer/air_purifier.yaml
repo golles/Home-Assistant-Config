@@ -1,6 +1,5 @@
 - id: air_purifier_off_door_open
   alias: Air purifier uit als de achterdeur of keukenraam open staat
-  initial_state: on
   mode: single
   trigger:
     - platform: state
@@ -23,7 +22,6 @@
 
 - id: air_purifier_on_based_on_aqi
   alias: Air purifier aan gebasseerd op aqi
-  initial_state: on
   mode: single
   trigger:
     - platform: numeric_state
@@ -47,7 +45,6 @@
 
 - id: air_purifier_off_based_on_aqi
   alias: Air purifier uit gebasseerd op aqi
-  initial_state: on
   mode: single
   trigger:
     - platform: numeric_state

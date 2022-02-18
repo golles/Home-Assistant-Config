@@ -14,7 +14,6 @@ input_datetime:
 automation:
   - id: covers_down_set_daily_time
     alias: Rolluiken - Tijd voor sluiten dagelijks aanpassen
-    initial_state: on
     mode: single
     trigger:
       - platform: homeassistant
@@ -38,7 +37,6 @@ automation:
   # Copied from: https://github.com/iMicknl/ha-tahoma/issues/599#issuecomment-994596289
   - id: covers_somfy_reload_integration
     alias: Rolluiken - Somfy integratie herladen bij probleem
-    initial_state: on
     mode: single
     trigger:
       - platform: state

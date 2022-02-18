@@ -30,7 +30,6 @@ ios:
 automation:
   - id: ios_action_awning_command
     alias: iOS action - Zonnescherm
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:
@@ -81,7 +80,6 @@ automation:
 
   - id: ios_action_awning_can_be_closed
     alias: iOS action - Zonnescherm kan dicht
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:
@@ -131,7 +129,6 @@ automation:
 
   - id: ios_action_awning_can_be_opened
     alias: iOS action - Zonnescherm kan open
-    initial_state: on
     mode: single
     max_exceeded: silent
     trigger:

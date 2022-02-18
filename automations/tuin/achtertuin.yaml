@@ -1,6 +1,5 @@
 - id: licht_uit_achtertuin
   alias: Achtertuin - Lampen uit achtertuin om middernacht
-  initial_state: on
   mode: single
   trigger:
     - platform: time
@@ -13,7 +12,6 @@
 
 - id: kerst_sfeer_achtertuin
   alias: Achtertuin - Kerst sfeer
-  initial_state: on
   mode: single
   trigger:
     - platform: numeric_state
@@ -31,7 +29,6 @@
 
 - id: automatic_backgarden_lights
   alias: Achtertuin - verlichting aan bij deur open of beweging
-  initial_state: on
   mode: restart
   trigger:
     - platform: state

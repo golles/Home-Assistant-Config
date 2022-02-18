@@ -1,6 +1,5 @@
 - id: overloop_on_from_zolder
   alias: Overloop lamp automatisch aandoen als iemand van zolder komt
-  initial_state: on
   mode: single
   trigger:
     - platform: state

@@ -1,6 +1,5 @@
 - id: washing_machine_door_open_when_done
   alias: Wasmachine deur open als hij klaar is
-  initial_state: on
   mode: single
   trigger:
     - platform: state
@@ -49,7 +48,6 @@
 
 - id: notification_washing_machine
   alias: "Notificatie: Wasmachine klaar (tv)"
-  initial_state: on
   mode: single
   trigger:
     - platform: state

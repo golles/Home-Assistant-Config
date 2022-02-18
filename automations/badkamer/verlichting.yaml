@@ -1,6 +1,5 @@
 - id: badkamer_light_auto
   alias: Badkamerlamp automatisch aan/uit door aanwezigheid
-  initial_state: on
   use_blueprint:
     path: golles/motion-activated_scenes.yaml
     input:
@@ -19,7 +18,6 @@
 
 - id: badkamer_enable_automatic_lights
   alias: Badkamerlamp weer op automatisch zetten
-  initial_state: on
   mode: single
   trigger:
     - platform: state

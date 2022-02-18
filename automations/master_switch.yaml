@@ -1,6 +1,5 @@
 - id: master_switch
   alias: Master switch - alles uit
-  initial_state: on
   use_blueprint:
     path: golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
     input:

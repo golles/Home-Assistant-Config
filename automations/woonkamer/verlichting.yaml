@@ -1,6 +1,5 @@
 - id: auto_light_woonkamer
   alias: Woonkamer automatisch aan/uit door aanwezigheid
-  initial_state: on
   use_blueprint:
     path: golles/motion-activated_scenes.yaml
     input:
@@ -19,7 +18,6 @@
 
 - id: auto_light_woonkamer_when_someone_arrives_home
   alias: Automatisch licht aan in de woonkamer wanneer iemand thuis komt
-  initial_state: on
   mode: single
   max_exceeded: silent
   trigger:
@@ -41,7 +39,6 @@
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron
-  initial_state: on
   mode: single
   max_exceeded: silent
   trigger:

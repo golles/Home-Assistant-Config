@@ -4,7 +4,6 @@ sensor:
 automation:
   - id: notification_full_moon
     alias: "Notificatie: Volle maan"
-    initial_state: on
     mode: single
     trigger:
       - platform: state
