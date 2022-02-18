@@ -8,7 +8,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.moon
-        to: Full Moon
+        to: full_moon
     action:
       - service: notify.telegram_huisgroep
         data:
