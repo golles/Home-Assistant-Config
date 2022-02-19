@@ -47,4 +47,4 @@
           
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
-          {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
+          {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
