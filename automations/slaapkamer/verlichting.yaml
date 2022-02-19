@@ -1,0 +1,43 @@
+- id: slaapkamer_light_auto
+  alias: Slaapkamerlamp automatisch aan/uit door aanwezigheid
+  use_blueprint:
+    path: golles/motion-activated_scenes.yaml
+    input:
+      day_end_time: 00:00:00
+      motion_entity: binary_sensor.slaapkamer_beweging_occupancy
+      cool_down: 60
+      light_entity: light.slaapkamer_plafond_groep
+      illuminance_entity: sensor.slaapkamer_beweging_illuminance_lux
+      illuminance_below: 10
+      day_start_time: 08:00:00
+      day_scene: scene.slaapkamer_plafond_groep_helder
+      day_scene_before_off: scene.slaapkamer_plafond_groep_gedimd
+      night_scene: scene.slaapkamer_plafond_groep_ontspannen
+      night_scene_before_off: scene.slaapkamer_plafond_groep_nachtlampje
+      no_motion_wait: 15
+
+- id: disable_slaapkamer_light_auto
+  alias: Slaapkamerlamp niet automatisch tijdens slaap
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: Naar bed
+    - platform: state
+      entity_id: cover.slaapkamer
+      attribute: current_position
+      to: 100
+      id: aan
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: aan
+          sequence:
+            - service: automation.turn_on
+              entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
+      default:
+        - service: automation.turn_off
+          entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
