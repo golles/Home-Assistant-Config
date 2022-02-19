@@ -44,7 +44,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: light.slaapkamer_plafond_groep
-    icon: mdi:ceiling-light
     name: Plafond
     use_light_color: true
     show_color_control: true

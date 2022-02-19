@@ -1,16 +1,3 @@
-homeassistant:
-  customize:
-    light.gekleurde_licht:
-      icon: mdi:led-strip-variant
-    light.bedlampje_links:
-      icon: mdi:desk-lamp
-    light.bedlampje_rechts:
-      icon: mdi:desk-lamp
-    light.bedlampen:
-      icon: mdi:desk-lamp
-    light.tv:
-      icon: mdi:television-ambient-light
-
 light:
   - platform: group
     name: Bedlampen
@@ -28,31 +15,31 @@ script:
       - service: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_5
-          brightness: '{{ brightness }}'
+          brightness: "{{ brightness }}"
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_4
-          brightness: '{{ brightness }}'
+          brightness: "{{ brightness }}"
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_3
-          brightness: '{{ brightness }}'
+          brightness: "{{ brightness }}"
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_2
-          brightness: '{{ brightness }}'
+          brightness: "{{ brightness }}"
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_1
-          brightness: '{{ brightness }}'
+          brightness: "{{ brightness }}"
 
   eettafel_off:
     alias: Eettafel lampen uit animatie
@@ -62,19 +49,19 @@ script:
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_1
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_2
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_3
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_4
       - delay:
-          milliseconds: '{{ delay_ms }}'
+          milliseconds: "{{ delay_ms }}"
       - service: light.turn_off
         entity_id: light.eettafel_hanglamp_5
 
@@ -125,7 +112,7 @@ switch:
         friendly_name: Eettafel
         icon_template: mdi:vanity-light
         value_template: >
-          {{ is_state('light.eettafel', 'on') }}
+          {{ is_state("light.eettafel", "on") }}
         turn_on:
           service: script.eettafel_on
         turn_off:

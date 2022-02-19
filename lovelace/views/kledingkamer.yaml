@@ -45,7 +45,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: light.kledingkamer
-    icon: mdi:track-light
     name: Plafond
     use_light_color: true
     show_color_control: true

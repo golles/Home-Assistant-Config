@@ -18,7 +18,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: light.voortuin
-    icon: mdi:coach-lamp
     name: Voortuin
     use_light_color: true
     show_color_control: true
@@ -27,7 +26,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: light.achtertuin_groep
-    icon: mdi:coach-lamp
     name: Achtertuin
     use_light_color: true
     show_color_control: true

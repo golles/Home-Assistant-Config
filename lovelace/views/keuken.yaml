@@ -31,7 +31,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: light.keuken
-    icon: mdi:ceiling-light
     name: Plafond
     use_light_color: true
     show_color_control: true
@@ -40,7 +39,6 @@ cards:
 
   - type: custom:mushroom-light-card
     entity: switch.keukenkastje_lamp_switch
-    icon: mdi:lightbulb
     name: Keukenkastje
 
   - type: custom:mushroom-template-card

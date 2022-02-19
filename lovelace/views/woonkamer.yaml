@@ -88,17 +88,14 @@ cards:
     cards:
       - type  : custom:mushroom-light-card
         entity: light.woonkamer
-        icon: mdi:floor-lamp
         show_brightness_control: true
 
       - type: custom:mushroom-light-card
         entity: light.eettafel
-        icon: mdi:vanity-light
         show_brightness_control: true
 
       - type: custom:mushroom-light-card
         entity: light.tv
-        name: TV lamp
         use_light_color: true
         show_color_control: true
         show_brightness_control: true
@@ -121,7 +118,6 @@ cards:
 
       - type: custom:mushroom-light-card
         entity: light.keuken
-        icon: mdi:ceiling-light
         name: Keuken
         use_light_color: true
         show_color_control: true
@@ -129,7 +125,6 @@ cards:
 
       - type: custom:mushroom-light-card
         entity: switch.keukenkastje_lamp_switch
-        icon: mdi:lightbulb
         name: Keukenkastje
 
   - type: grid
