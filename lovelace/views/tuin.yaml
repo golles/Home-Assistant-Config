@@ -5,24 +5,37 @@ icon: mdi:watering-can-outline
 badges: []
 cards:
 
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.voortuin
-        icon: mdi:coach-lamp
-      - type: light
-        entity: light.achtertuin_groep
-        icon: mdi:coach-lamp
-        name: Achtertuin
-      - type: light
-        entity: light.gekleurde_licht
-      - type: button
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.hue_outdoor_motion_sensor_1_illuminance
+      - type: entity
         entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
-        name: Beweging
         icon: mdi:motion-sensor
-        show_state: true
+
+  - type: custom:mushroom-title-card
+    title: Tuin
+
+  - type: custom:mushroom-light-card
+    entity: light.voortuin
+    icon: mdi:coach-lamp
+    name: Voortuin
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
+
+  - type: custom:mushroom-light-card
+    entity: light.achtertuin_groep
+    icon: mdi:coach-lamp
+    name: Achtertuin
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
+
+  - type: custom:mushroom-light-card
+    entity: light.gekleurde_licht
 
   - type: custom:auto-entities
     show_empty: true

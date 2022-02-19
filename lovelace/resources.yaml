@@ -22,6 +22,9 @@
 
   - url: /local/multiple-entity-row.js
     type: module
+  
+  - url: /local/mushroom.js
+    type: module
 
   - url: /local/simple-thermostat.js
     type: module

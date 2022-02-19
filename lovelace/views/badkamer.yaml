@@ -5,12 +5,30 @@ icon: mdi:shower
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.badkamer_beweging_light_level
+      - type: entity
+        entity: binary_sensor.badkamerraam_contact
+        icon: mdi:window-closed
+      - type: entity
+        entity: binary_sensor.badkamer_beweging_motion
+        icon: mdi:motion-sensor
+      - type: entity
+        entity: binary_sensor.douche_beweging_occupancy
+        name: Douche
+        icon: mdi:shower-head
+
+  - type: custom:mushroom-title-card
+    title: Badkamer
+
   - type: custom:simple-thermostat
     entity: climate.badkamer
     header: false
     step_layout: column
-    step_size: 1
-    decimals: 0
+    step_size: '1'
+    decimals: '0'
     name: false
     icon: false
     control:
@@ -22,32 +40,26 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
-      - entity: sensor.badkamer_beweging_light_level
-        name: Lichtsterkte
+    layout:
+      mode:
+        names: true
+        icons: true
+        headings: false
+      step: column
 
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.badkamer
-        name: Plafond
-        icon: mdi:ceiling-light
-      - type: custom:button-card
-        template: mechanische_ventilatie
-      - type: button
-        entity: binary_sensor.badkamerraam_contact
-        name: Raam
-        show_state: true
-      - type: button
-        entity: binary_sensor.badkamer_beweging_motion
-        name: Beweging
-        icon: mdi:motion-sensor
-        show_state: true
-      - type: button
-        entity: binary_sensor.douche_beweging_occupancy
-        name: Douche
-        show_state: true
+  - type: custom:mushroom-light-card
+    entity: light.badkamer
+    icon: mdi:track-light
+    name: Plafond
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
+
+  - type: custom:mushroom-fan-card
+    entity: fan.mechanische_ventilatie
+    icon_animation: true
+    show_percentage_control: true
 
   - type: entities
     show_header_toggle: false

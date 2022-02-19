@@ -3,6 +3,8 @@ show_empty: false
 card:
   type: grid
   title: Lampen aan
+  columns: 2
+  square: false
 card_param: cards
 filter:
   exclude:
@@ -14,14 +16,17 @@ filter:
       attributes:
         is_hue_group: true
       options:
-        type: light
+        type: custom:mushroom-light-card
+        show_brightness_control: true
     - entity_id: "light.wled*"
       state: "on"
       options:
-        type: light
+        type: custom:mushroom-light-card
+        show_brightness_control: true
     - entity_id: "light.bedlampje*"
       state: "on"
       options:
-        type: light
+        type: custom:mushroom-light-card
+        show_brightness_control: true
 sort:
   method: name

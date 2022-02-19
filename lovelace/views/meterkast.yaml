@@ -5,14 +5,17 @@ icon: mdi:gauge
 badges: []
 cards: 
 
+  - type: custom:mushroom-title-card
+    title: Meterkast
+
   - type: grid
     columns: 2
     square: false
     cards:
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.meterkast_klimaat_temperature
         name: Temperatuur
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.meterkast_klimaat_humidity
         name: Luchtvochtigheid
 

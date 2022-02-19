@@ -4,6 +4,10 @@ panel: false
 icon: mdi:weather-sunny
 badges: []
 cards:
+
+  - type: custom:mushroom-title-card
+    title: Weer
+
   - type: weather-forecast
     entity: weather.huis
   - type: weather-forecast

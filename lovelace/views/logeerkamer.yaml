@@ -5,12 +5,34 @@ icon: mdi:bed-outline
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.logeerkamer_beweging_illuminance_lux
+      - type: entity
+        entity: binary_sensor.logeerkamerraam_contact
+        icon: mdi:window-closed
+      - type: entity
+        entity: binary_sensor.logeerkamer_beweging_occupancy
+        icon: mdi:motion-sensor
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.tt_macbook_in_thuis_kantoor
+            state: 'on'
+        chip:
+          type: entity
+          entity: binary_sensor.tt_macbook_active
+          icon: mdi:laptop
+
+  - type: custom:mushroom-title-card
+    title: Logeerkamer
+
   - type: custom:simple-thermostat
     entity: climate.logeerkamer
     header: false
     step_layout: column
-    step_size: 1
-    decimals: 0
+    step_size: '1'
+    decimals: '0'
     name: false
     icon: false
     control:
@@ -22,36 +44,23 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
+    layout:
+      mode:
+        names: true
+        icons: true
+        headings: false
+      step: column
 
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.logeerkamer
-        name: Plafond
-        icon: mdi:ceiling-light
-      - type: button
-        entity: binary_sensor.logeerkamerraam_contact
-        name: Raam
-        show_state: true
-      - type: button
-        entity: binary_sensor.logeerkamer_beweging_occupancy
-        name: Beweging
-        show_state: true
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.tt_macbook_in_thuis_kantoor
-            state: "on"
-        card:
-          type: button
-          entity: binary_sensor.tt_macbook_active
-          name: TT Macbook
-          icon: mdi:laptop
-          show_state: true
+  - type: custom:mushroom-light-card
+    entity: light.logeerkamer
+    icon: mdi:ceiling-light
+    name: Plafond
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
 
   - !include cards/media_player_googlehome6234.yaml
-
 
   - type: entities
     show_header_toggle: false

@@ -5,31 +5,41 @@ icon: mdi:toilet
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.toilet_beweging_illuminance_lux
+      - type: entity
+        entity: binary_sensor.toilet_beweging_occupancy
+        icon: mdi:motion-sensor
+
+  - type: custom:mushroom-title-card
+    title: Toilet
+
   - type: grid
     columns: 2
     square: false
     cards:
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.toilet_klimaat_temperature
         name: Temperatuur
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.toilet_klimaat_humidity
         name: Luchtvochtigheid
 
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.toilet
-        name: Plafond
-        icon: mdi:ceiling-light
-      - type: custom:button-card
-        template: mechanische_ventilatie
-      - type: button
-        entity: binary_sensor.toilet_beweging_occupancy
-        name: Beweging
-        show_state: true
+  - type: custom:mushroom-light-card
+    entity: light.toilet
+    icon: mdi:ceiling-light
+    name: Plafond
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
+
+  - type: custom:mushroom-fan-card
+    entity: fan.mechanische_ventilatie
+    icon_animation: true
+    show_percentage_control: true
 
   - type: entities
     show_header_toggle: false

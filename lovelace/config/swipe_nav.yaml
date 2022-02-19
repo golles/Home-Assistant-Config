@@ -1,4 +1,4 @@
 wrap: true
 animate: swipe
 prevent_default: false
-swipe_amount: 15
+swipe_amount: 75

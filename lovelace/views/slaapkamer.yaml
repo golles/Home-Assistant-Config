@@ -5,12 +5,25 @@ icon: mdi:bed-king-outline
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.slaapkamer_lichtsterkte_illuminance_lux
+      - type: entity
+        entity: binary_sensor.slaapkamerraam_contact
+        icon: mdi:window-closed
+      - type: entity
+        entity: binary_sensor.slaapkamer_beweging_occupancy
+
+  - type: custom:mushroom-title-card
+    title: Slaapkamer
+
   - type: custom:simple-thermostat
     entity: climate.slaapkamer
     header: false
     step_layout: column
-    step_size: 1
-    decimals: 0
+    step_size: '1'
+    decimals: '0'
     name: false
     icon: false
     control:
@@ -22,32 +35,47 @@ cards:
       - attribute: current_humidity
         name: Luchtvochtigheid
         unit: '%'
-      - entity: sensor.slaapkamer_lichtsterkte_illuminance_lux
-        name: Lichtsterkte
+    layout:
+      mode:
+        names: true
+        icons: true
+        headings: false
+      step: column
+
+  - type: custom:mushroom-light-card
+    entity: light.slaapkamer_plafond_groep
+    icon: mdi:ceiling-light
+    name: Plafond
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
 
   - type: grid
-    columns: 3
-    square: true
+    columns: 2
+    square: false
     cards:
-      - type: light
-        entity: light.slaapkamer_plafond_groep
-        name: Plafond
-        icon: mdi:ceiling-light
-      - type: light
+      - type: custom:mushroom-light-card
         entity: light.bedlampje_links
-        name: Bedlampje links
-      - type: light
+        show_brightness_control: true
+      - type: custom:mushroom-light-card
         entity: light.bedlampje_rechts
-        name: Bedlampje rechts
-      - type: button
-        entity: cover.slaapkamer
-        name: Rolluik
-        show_state: true
-      - type: button
-        entity: binary_sensor.slaapkamerraam_contact
-        name: Raam
-        show_state: true
-      - type: button
-        entity: binary_sensor.slaapkamer_beweging_occupancy
-        name: Beweging
-        show_state: true
+        show_brightness_control: true
+
+  - type: custom:mushroom-cover-card
+    entity: cover.slaapkamer
+    show_buttons_control: true
+    show_position_control: true
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline

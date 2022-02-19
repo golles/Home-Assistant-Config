@@ -5,44 +5,70 @@ icon: mdi:countertop-outline
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.woonkamer_beweging_1_illuminance_lux
+      - type: entity
+        entity: binary_sensor.keukenraam_contact
+        icon: mdi:window-closed
+      - type: entity
+        entity: binary_sensor.woonkamer_beweging_1_occupancy
+
+  - type: custom:mushroom-title-card
+    title: Keuken
+
   - type: grid
     columns: 2
     square: false
     cards:
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.woonkamer_temperature
         name: Temperatuur
-      - type: entity
+      - type: custom:mushroom-entity-card
         entity: sensor.woonkamer_humidity
         name: Luchtvochtigheid
 
-  - type: grid
-    columns: 3
-    square: true
-    cards:
-      - type: light
-        entity: light.keuken
-        name: Plafond
-        icon: mdi:ceiling-light
+  - type: custom:mushroom-light-card
+    entity: light.keuken
+    icon: mdi:ceiling-light
+    name: Plafond
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
 
-      - type: button
-        entity: switch.keukenkastje_lamp_switch
-        name: Keukenkastje
-        icon: mdi:lightbulb
-        state_color: true
+  - type: custom:mushroom-light-card
+    entity: switch.keukenkastje_lamp_switch
+    icon: mdi:lightbulb
+    name: Keukenkastje
 
-      - type: button
-        entity: binary_sensor.woonkamer_beweging_1_occupancy
-        name: Keuken
-        show_state: true
+  - type: custom:mushroom-template-card
+    primary: Vaatwasser
+    icon: mdi:dishwasher
+    multiline_secondary: true
+    icon_color: >-
+      {{ iif(states('sensor.vaatwasser_resterende_tijd') == 'unavailable', 'grey', 'blue') }}
+    secondary: >-
+      {% if states('binary_sensor.vaatwasser_door') == 'on' -%}
+        Deur open
+      {% elif states('sensor.vaatwasser_resterende_tijd') == 'unavailable' -%}
+        Uit
+      {%- else -%}
+        Klaar over {{ states('sensor.vaatwasser_resterende_tijd') | replace(",", " en") }}
+      {%- endif %}
 
-      - type: custom:button-card
-        entity: sensor.vaatwasser_resterende_tijd
-        template: home_connect_appliance
-        name: Vaatwasser
-        icon: mdi:dishwasher
-        variables:
-          progress_entity: sensor.vaatwasser_program_progress
+  # - type: grid
+  #   columns: 2
+  #   square: true
+  #   cards:
+  #     - type: custom:button-card
+  #       entity: sensor.vaatwasser_resterende_tijd
+  #       template: home_connect_appliance
+  #       name: Vaatwasser
+  #       icon: mdi:dishwasher
+  #       variables:
+  #         progress_entity: sensor.vaatwasser_program_progress
 
   - type: entities
     show_header_toggle: false
@@ -53,6 +79,9 @@ cards:
           label: Instelingen
         padding: 0
         entities:
+          - entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline
           - entity: automation.vaatwasser_dagelijks_starten
             icon: mdi:dishwasher
           - entity: input_datetime.dishwasher_daily_start

@@ -5,6 +5,9 @@ icon: mdi:home-city-outline
 badges: []
 cards:
 
+  - type: custom:mushroom-title-card
+    title: Buurt
+
   - title: P2000
     type: entities
     show_header_toggle: false
@@ -45,8 +48,11 @@ cards:
           top: 95%
           left: 85%
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - sensor.tango_purmerend
-      - sensor.tango_winschoten
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.tango_purmerend
+      - type: custom:mushroom-entity-card
+        entity: sensor.tango_winschoten

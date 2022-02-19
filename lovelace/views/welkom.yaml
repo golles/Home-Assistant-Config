@@ -5,17 +5,37 @@ icon: mdi:home-assistant
 badges: []
 cards:
 
-  - type: glance
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: custom:mushroom-person-card
+        entity: person.sander
+        use_entity_picture: true
+      - type: custom:mushroom-alarm-control-panel-card
+        # entity: alarm_control_panel.homebase
+        entity: alarm_control_panel.huis_alarm
+        name: Alarm
+        states:
+          - armed_home
+          - armed_away
+
+  - type: entities
+    show_header_toggle: false
     entities:
-      - person.sander
       - entity: group.residents
-      - entity: input_boolean.guest_mode
-        tap_action:
-          action: toggle
-      - entity: input_boolean.vacation_mode
-        tap_action:
-          action: toggle
-      - alarm_control_panel.huis_alarm
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - entity: input_boolean.guest_mode
+            tap_action:
+              action: toggle
+          - entity: input_boolean.vacation_mode
+            tap_action:
+              action: toggle
 
   - !include cards/kamers.yaml
 
