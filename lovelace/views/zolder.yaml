@@ -71,7 +71,7 @@ cards:
       {% elif states('sensor.wasmachine_resterende_tijd') == 'unavailable' -%}
         Uit
       {%- else -%}
-        Klaar over {{ states('sensor.wasmachine_resterende_tijd') | replace(",", " en") }}
+        {{ states('sensor.wasmachine_resterende_tijd') | replace(",", " en") }}
       {%- endif %}
 
   - type: media-control

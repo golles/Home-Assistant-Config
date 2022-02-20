@@ -53,7 +53,7 @@ cards:
       {% elif states('sensor.vaatwasser_resterende_tijd') == 'unavailable' -%}
         Uit
       {%- else -%}
-        Klaar over {{ states('sensor.vaatwasser_resterende_tijd') | replace(",", " en") }}
+        {{ states('sensor.vaatwasser_resterende_tijd') | replace(",", " en") }}
       {%- endif %}
 
   # - type: grid
