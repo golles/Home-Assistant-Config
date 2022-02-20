@@ -13,7 +13,6 @@ cards:
         entity: person.sander
         use_entity_picture: true
       - type: custom:mushroom-alarm-control-panel-card
-        # entity: alarm_control_panel.homebase
         entity: alarm_control_panel.huis_alarm
         name: Alarm
         states:
