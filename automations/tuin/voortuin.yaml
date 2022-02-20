@@ -35,3 +35,43 @@
       data:
         entity_id: light.voortuin
         transition: 2
+
+- id: automatic_frontgarden_lights
+  alias: Voortuin - verlichting aan bij voordeur open
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.voordeur_contact
+      from: "off"
+      to: "on"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      below: 10
+  action:
+    - alias: Lights on
+      service: scene.turn_on
+      data:
+        transition: 2
+      target:
+        entity_id: scene.voortuin_helder
+
+    - alias: Wait for the door to be closed
+      wait_for_trigger:
+        - platform: state
+          entity_id: binary_sensor.voordeur_contact
+          from: "on"
+          to: "off"
+      timeout:
+        minutes: 5
+      continue_on_timeout: true
+    
+    - alias: Wait a little
+      delay:
+        seconds: 30
+
+    - alias: Turn the lights off
+      service: light.turn_off
+      data:
+        entity_id: light.voortuin
+        transition: 2
