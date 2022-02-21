@@ -60,7 +60,69 @@ switch:
           data:
             entity_id: climate.woonkamer
             preset_mode: away
-  
+
+template:
+  - button:
+      - name: Woonkamer opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.woonkamer
+
+      - name: Slaapkamer opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.slaapkamer
+
+      - name: Kledingkamer opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.kledingkamer
+
+      - name: Logeerkamer opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.logeerkamer
+
+      - name: Badkamer opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.badkamer
+
+      - name: Zolder opwarmen
+        icon: mdi:radiator
+        press:
+          - service: tado.set_climate_timer
+            data:
+              time_period: "00:15:00"
+              temperature: 25
+            target:
+              entity_id: climate.zolder
+
 automation:
   - id: tado_auto_home_and_away_mode
     alias: Tado - Automatisch home en away mode activeren
@@ -95,7 +157,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: proximity.residents_home
-        below: 15
+        below: 1 # Test
     condition:
       - condition: state
         entity_id: group.residents
@@ -107,7 +169,7 @@ automation:
       - condition: numeric_state
         entity_id: climate.woonkamer
         attribute: current_temperature
-        below: 18
+        below: 50 # Test
     action:
       - service: notify.telegram_sander
         data:
