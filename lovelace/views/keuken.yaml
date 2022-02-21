@@ -13,7 +13,7 @@ cards:
         entity: binary_sensor.keukenraam_contact
         icon: mdi:window-closed
       - type: entity
-        entity: binary_sensor.woonkamer_beweging_1_occupancy
+        entity: binary_sensor.keuken_beweging_occupancy
 
   - type: custom:mushroom-title-card
     title: Keuken
