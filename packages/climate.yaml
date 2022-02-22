@@ -175,8 +175,8 @@ automation:
         data:
           title: Tado
           message: |
-            Ik zie dat je bijna thuis bent. 
-            Het is hier nu nog koud, dus we gaan nu opwarmen.
+            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} naar huis komt. 
+            Het is hier nu nog koud, dus ik begin alvast met opwarmen.
 
       - alias: Set climate preset mode to home
         service: climate.set_preset_mode
