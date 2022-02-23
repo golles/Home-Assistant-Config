@@ -8,7 +8,7 @@
       cool_down: 60
       light_entity: light.wooneet
       illuminance_entity: sensor.woonkamer_lichtsterkte_illuminance_lux
-      illuminance_below: 15
+      illuminance_below: 12
       day_start_time: 08:00:00
       day_scene: scene.wooneet_avond
       day_scene_before_off: scene.wooneet_nacht
@@ -36,6 +36,30 @@
         entity_id: scene.wooneet_avond
       data:
         transition: 1
+
+- id: skull_light_woonkamer
+  alias: Skull aan doen als de avond scene actief wordt
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: event
+      event_type: call_service
+      event_data:
+        domain: scene
+        service: turn_on
+        service_data: 
+          entity_id: scene.wooneet_avond
+  action:
+    - alias: Turn on the skull
+      service: light.turn_on
+      target:
+        entity_id: light.wled_skull
+      data:
+        effect: breathe
+        brightness: 128
+        xy_color:
+          - 0.701
+          - 0.299
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron

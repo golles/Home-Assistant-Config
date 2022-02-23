@@ -8,7 +8,7 @@
       cool_down: 60
       light_entity: light.keuken
       illuminance_entity: sensor.woonkamer_beweging_1_illuminance_lux
-      illuminance_below: 15
+      illuminance_below: 12
       day_start_time: 08:00:00
       day_scene: scene.keuken_helder
       day_scene_before_off: scene.keuken_gedimd
