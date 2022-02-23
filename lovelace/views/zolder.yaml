@@ -64,14 +64,18 @@ cards:
     icon: mdi:washing-machine
     multiline_secondary: true
     icon_color: >-
-      {{ iif(states('sensor.wasmachine_resterende_tijd') == 'unavailable', 'grey', 'blue') }}
+      {{ iif(states('switch.wasmachine_power') == 'on', 'blue', 'grey') }}
     secondary: >-
-      {% if states('binary_sensor.wasmachine_door') == 'on' -%}
+      {% if states('binary_sensor.wasmachine_door') == "on" -%}
         Deur open
-      {% elif states('sensor.wasmachine_resterende_tijd') == 'unavailable' -%}
-        Uit
-      {%- else -%}
+      {% elif states("sensor.wasmachine_operation_state") == "Finished" -%}
+        Klaar
+      {% elif states("sensor.wasmachine_operation_state") == "Run" -%}
         {{ states('sensor.wasmachine_resterende_tijd') | replace(",", " en") }}
+      {% elif states("binary_sensor.wasmachine_remote_start") == "on" -%}
+        Uitgestelde start
+      {%- else -%}
+        {{ iif(states('switch.wasmachine_power') == 'on', 'Aan', 'Uit') }}
       {%- endif %}
 
   - type: media-control
