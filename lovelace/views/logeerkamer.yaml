@@ -61,6 +61,12 @@ cards:
 
   - !include cards/media_player_googlehome6234.yaml
 
+  - type: custom:mushroom-cover-card
+    entity: cover.logeerkamer
+    name: Rolgordijn
+    show_buttons_control: true
+    show_position_control: true
+
   - type: entities
     show_header_toggle: false
     entities:

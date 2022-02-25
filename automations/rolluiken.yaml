@@ -27,6 +27,17 @@
         sequence:
           - service: cover.close_cover
             entity_id: cover.kledingkamer
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.logeerkamerraam_contact
+            state: "off"
+          - condition: state
+            entity_id: cover.logeerkamer
+            state: open
+        sequence:
+          - service: cover.close_cover
+            entity_id: cover.logeerkamer
 
 - id: rolluiken_open_niemand_thuis
   alias: Rolluiken - open bij niemand thuis

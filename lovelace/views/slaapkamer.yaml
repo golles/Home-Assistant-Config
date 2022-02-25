@@ -63,6 +63,7 @@ cards:
 
   - type: custom:mushroom-cover-card
     entity: cover.slaapkamer
+    name: Rolluik
     show_buttons_control: true
     show_position_control: true
 
