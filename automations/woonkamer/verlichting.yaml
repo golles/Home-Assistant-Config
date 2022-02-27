@@ -42,24 +42,33 @@
   mode: single
   max_exceeded: silent
   trigger:
-    - platform: event
-      event_type: call_service
-      event_data:
-        domain: scene
-        service: turn_on
-        service_data: 
-          entity_id: scene.wooneet_avond
+    - platform: state
+      entity_id: light.wooneet
+      to: "off"
+    - platform: state
+      id: aan
+      entity_id: scene.wooneet_avond
   action:
-    - alias: Turn on the skull
-      service: light.turn_on
-      target:
-        entity_id: light.wled_skull
-      data:
-        effect: breathe
-        brightness: 128
-        xy_color:
-          - 0.701
-          - 0.299
+    - choose:
+      - conditions:
+          - condition: trigger
+            id: aan
+        sequence:
+          - alias: Turn on the skull
+            service: light.turn_on
+            target:
+              entity_id: light.wled_skull
+            data:
+              effect: breathe
+              brightness: 128
+              xy_color:
+                - 0.701
+                - 0.299
+      default:
+          - alias: Turn off the skull
+            service: light.turn_off
+            target:
+              entity_id: light.wled_skull
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron
