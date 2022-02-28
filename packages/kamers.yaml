@@ -33,125 +33,125 @@ template:
             {% endif %}
 
   - binary_sensor:
-    - name: Woonkamer beweging
-      device_class: motion
-      icon: mdi:motion-sensor
-      state: >
-        {{ 
-          is_state("binary_sensor.woonkamer_beweging_1_occupancy", "on") or is_state("binary_sensor.woonkamer_beweging_2_occupancy", "on")
-        }}
+      - name: Woonkamer beweging
+        device_class: motion
+        icon: mdi:motion-sensor
+        state: >
+          {{ 
+            is_state("binary_sensor.woonkamer_beweging_1_occupancy", "on") or is_state("binary_sensor.woonkamer_beweging_2_occupancy", "on")
+          }}
 
-    - name: Badkamer beweging
-      device_class: motion
-      icon: mdi:motion-sensor
-      state: >
-        {{ 
-          is_state("binary_sensor.badkamer_beweging_motion", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
-        }}
+      - name: Badkamer beweging
+        device_class: motion
+        icon: mdi:motion-sensor
+        state: >
+          {{ 
+            is_state("binary_sensor.badkamer_beweging_motion", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
+          }}
 
-    - name: Zolder beweging
-      device_class: motion
-      icon: mdi:motion-sensor
-      state: >
-        {{ 
-          is_state("binary_sensor.zolder_beweging_1_occupancy", "on") or is_state("binary_sensor.zolder_beweging_2_occupancy", "on")
-        }}
+      - name: Zolder beweging
+        device_class: motion
+        icon: mdi:motion-sensor
+        state: >
+          {{ 
+            is_state("binary_sensor.zolder_beweging_1_occupancy", "on") or is_state("binary_sensor.zolder_beweging_2_occupancy", "on")
+          }}
 
-    - name: Woonkamer bezetting
-      device_class: occupancy
-      icon: mdi:motion-sensor
-      state: >
-        {% set this = "binary_sensor.woonkamer_bezetting" %}
-        {% set motion_entities = ["binary_sensor.woonkamer_beweging_1_occupancy", "binary_sensor.woonkamer_beweging_2_occupancy"] %}
-        {% set media_entities = ["media_player.lg_c9", "media_player.mediabox", "media_player.lg_soundbar"] %}
+      - name: Woonkamer bezetting
+        device_class: occupancy
+        icon: mdi:motion-sensor
+        state: >
+          {% set this = "binary_sensor.woonkamer_bezetting" %}
+          {% set motion_entities = ["binary_sensor.woonkamer_beweging_1_occupancy", "binary_sensor.woonkamer_beweging_2_occupancy"] %}
+          {% set media_entities = ["media_player.lg_c9", "media_player.mediabox", "media_player.lg_soundbar"] %}
 
-        {% 
-        set is_motion = states.binary_sensor 
-          | selectattr("entity_id", "in", motion_entities)
-          | rejectattr("state", "in", ["off", "unavailable", "unknown"])
-          | list 
-          | count
-          > 0
-        %}
-        {% 
-        set is_playing = states.media_player 
-          | selectattr("entity_id", "in", media_entities)
-          | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
-          | list 
-          | count 
-          > 0
-        %}
+          {% 
+          set is_motion = states.binary_sensor 
+            | selectattr("entity_id", "in", motion_entities)
+            | rejectattr("state", "in", ["off", "unavailable", "unknown"])
+            | list 
+            | count
+            > 0
+          %}
+          {% 
+          set is_playing = states.media_player 
+            | selectattr("entity_id", "in", media_entities)
+            | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
+            | list 
+            | count 
+            > 0
+          %}
 
-        {% if is_state(this, "on") %}
-          {{ iif(is_motion or is_playing, "on", "off") }}
-        {% elif is_state(this, "off") %}
-          {{ iif(is_motion, "on", "off") }}
-        {% else %}
-          off
-        {% endif %}
+          {% if is_state(this, "on") %}
+            {{ iif(is_motion or is_playing, "on", "off") }}
+          {% elif is_state(this, "off") %}
+            {{ iif(is_motion, "on", "off") }}
+          {% else %}
+            off
+          {% endif %}
 
-    - name: Logeerkamer bezetting
-      device_class: occupancy
-      icon: mdi:motion-sensor
-      state: >
-        {% set this = "binary_sensor.logeerkamer_bezetting" %}
-        {% set motion_entities = ["binary_sensor.logeerkamer_beweging_occupancy", "binary_sensor.tt_macbook_in_thuis_kantoor_en_aan"] %}
-        {% set media_entities = ["media_player.googlehome6234"] %}
+      - name: Logeerkamer bezetting
+        device_class: occupancy
+        icon: mdi:motion-sensor
+        state: >
+          {% set this = "binary_sensor.logeerkamer_bezetting" %}
+          {% set motion_entities = ["binary_sensor.logeerkamer_beweging_occupancy", "binary_sensor.tt_macbook_in_thuis_kantoor_en_aan"] %}
+          {% set media_entities = ["media_player.googlehome6234"] %}
 
-        {% 
-        set is_motion = states.binary_sensor 
-          | selectattr("entity_id", "in", motion_entities)
-          | rejectattr("state", "in", ["off", "unavailable", "unknown"])
-          | list 
-          | count
-          > 0
-        %}
-        {% 
-        set is_playing = states.media_player 
-          | selectattr("entity_id", "in", media_entities)
-          | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
-          | list 
-          | count 
-          > 0
-        %}
+          {% 
+          set is_motion = states.binary_sensor 
+            | selectattr("entity_id", "in", motion_entities)
+            | rejectattr("state", "in", ["off", "unavailable", "unknown"])
+            | list 
+            | count
+            > 0
+          %}
+          {% 
+          set is_playing = states.media_player 
+            | selectattr("entity_id", "in", media_entities)
+            | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
+            | list 
+            | count 
+            > 0
+          %}
 
-        {% if is_state(this, "on") %}
-          {{ iif(is_motion or is_playing, "on", "off") }}
-        {% elif is_state(this, "off") %}
-          {{ iif(is_motion, "on", "off") }}
-        {% else %}
-          off
-        {% endif %}
+          {% if is_state(this, "on") %}
+            {{ iif(is_motion or is_playing, "on", "off") }}
+          {% elif is_state(this, "off") %}
+            {{ iif(is_motion, "on", "off") }}
+          {% else %}
+            off
+          {% endif %}
 
-    - name: Zolder bezetting
-      device_class: occupancy
-      icon: mdi:motion-sensor
-      state: >
-        {% set this = "binary_sensor.zolder_bezetting" %}
-        {% set motion_entities = ["binary_sensor.zolder_beweging_1_occupancy", "binary_sensor.zolder_beweging_2_occupancy"] %}
-        {% set media_entities = ["media_player.zolder"] %}
+      - name: Zolder bezetting
+        device_class: occupancy
+        icon: mdi:motion-sensor
+        state: >
+          {% set this = "binary_sensor.zolder_bezetting" %}
+          {% set motion_entities = ["binary_sensor.zolder_beweging_1_occupancy", "binary_sensor.zolder_beweging_2_occupancy"] %}
+          {% set media_entities = ["media_player.zolder"] %}
 
-        {% 
-        set is_motion = states.binary_sensor 
-          | selectattr("entity_id", "in", motion_entities)
-          | rejectattr("state", "in", ["off", "unavailable", "unknown"])
-          | list 
-          | count
-          > 0
-        %}
-        {% 
-        set is_playing = states.media_player 
-          | selectattr("entity_id", "in", media_entities)
-          | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
-          | list 
-          | count 
-          > 0
-        %}
+          {% 
+          set is_motion = states.binary_sensor 
+            | selectattr("entity_id", "in", motion_entities)
+            | rejectattr("state", "in", ["off", "unavailable", "unknown"])
+            | list 
+            | count
+            > 0
+          %}
+          {% 
+          set is_playing = states.media_player 
+            | selectattr("entity_id", "in", media_entities)
+            | rejectattr("state", "in", ["off", "idle", "unavailable", "unknown"])
+            | list 
+            | count 
+            > 0
+          %}
 
-        {% if is_state(this, "on") %}
-          {{ iif(is_motion or is_playing, "on", "off") }}
-        {% elif is_state(this, "off") %}
-          {{ iif(is_motion, "on", "off") }}
-        {% else %}
-          off
-        {% endif %}
+          {% if is_state(this, "on") %}
+            {{ iif(is_motion or is_playing, "on", "off") }}
+          {% elif is_state(this, "off") %}
+            {{ iif(is_motion, "on", "off") }}
+          {% else %}
+            off
+          {% endif %}
