@@ -2,13 +2,13 @@
   alias: "Notificatie: Nieuwe versie beschikbaar"
   mode: single
   trigger:
-    - platform: state
-      entity_id: binary_sensor.updater
-      attribute: newest_version
+    - platform: template
+      value_template: >
+        {{ states("sensor.current_version") != states("sensor.home_assistant_website") }}
   action:
     - service: notify.telegram_sander
       data:
         message: |
-          Versie *{{ state_attr("binary_sensor.updater", "newest_version") }}* is beschikbaar!
+          Versie *{{ states("sensor.home_assistant_website") }}* is beschikbaar!
           De huidige versie is {{ states("sensor.current_version") }}.
-          {{ state_attr("binary_sensor.updater", "release_notes") }}
+          {{ state_attr("sensor.home_assistant_website", "release_notes") }}
