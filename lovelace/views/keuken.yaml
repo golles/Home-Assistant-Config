@@ -46,18 +46,18 @@ cards:
     icon: mdi:dishwasher
     multiline_secondary: true
     icon_color: >-
-      {{ iif(states('switch.vaatwasser_power') == 'on', 'blue', 'grey') }}
+      {{ iif(states("switch.vaatwasser_power") == "on", "blue", "grey") }}
     secondary: >-
-      {% if states('binary_sensor.vaatwasser_door') == "on" -%}
+      {% if states("binary_sensor.vaatwasser_door") == "on" -%}
         Deur open
       {% elif states("sensor.vaatwasser_operation_state") == "Finished" -%}
         Klaar
       {% elif states("sensor.vaatwasser_operation_state") == "Run" -%}
-        {{ states('sensor.vaatwasser_resterende_tijd') | replace(",", " en") }}
+        {{ states("sensor.vaatwasser_resterende_tijd") | replace(",", " en") }}
       {% elif states("binary_sensor.vaatwasser_remote_start") == "on" -%}
         Uitgestelde start
       {%- else -%}
-        {{ iif(states('switch.vaatwasser_power') == 'on', 'Aan', 'Uit') }}
+        {{ iif(states("switch.vaatwasser_power") == "on", "Aan", "Uit") }}
       {%- endif %}
 
   # - type: grid
