@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.keuken_beweging_occupancy
       cool_down: 60
       light_entity: light.keuken
-      illuminance_entity: sensor.woonkamer_beweging_1_illuminance_lux
+      illuminance_entity: sensor.woonkamer_lichtsterkte_illuminance_lux
       illuminance_below: 12
       day_start_time: 08:00:00
       day_scene: scene.keuken_helder
