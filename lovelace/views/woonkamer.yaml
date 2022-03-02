@@ -89,7 +89,7 @@ cards:
         columns: 2
         square: false
         cards:
-          - type  : custom:mushroom-light-card
+          - type: custom:mushroom-light-card
             entity: light.woonkamer
             show_brightness_control: true
 
