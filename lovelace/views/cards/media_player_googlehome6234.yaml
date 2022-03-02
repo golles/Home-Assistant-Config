@@ -70,7 +70,3 @@ shortcuts:
         entity_id: media_player.googlehome6234
         media_content_id: https://19983.live.streamtheworld.com/SLAM_AAC.aac
         media_content_type: audio/mp4
-tts:
-  platform: service
-  data:
-    service: tts.microsoft_say

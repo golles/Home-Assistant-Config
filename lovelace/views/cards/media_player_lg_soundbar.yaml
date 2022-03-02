@@ -54,7 +54,3 @@ shortcuts:
       id: script.play_livingroom_radio
       data:
         stream: https://19983.live.streamtheworld.com/SLAM_AAC.aac
-tts:
-  platform: service
-  data:
-    service: tts.microsoft_say
