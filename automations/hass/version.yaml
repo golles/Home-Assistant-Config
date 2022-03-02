@@ -2,9 +2,10 @@
   alias: "Notificatie: Nieuwe versie beschikbaar"
   mode: single
   trigger:
-    - platform: template
-      value_template: >
-        {{ states("sensor.current_version") != states("sensor.home_assistant_website") }}
+    - platform: state
+      entity_id: binary_sensor.home_assistant_website_update_available
+      from: "off"
+      to: "on"
   action:
     - service: notify.telegram_sander
       data:
