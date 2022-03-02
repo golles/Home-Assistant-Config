@@ -1,7 +1,0 @@
-mqtt:
-  broker: mosquitto
-  port: 1883
-  client_id: hass
-  username: !secret mosquitto_username
-  password: !secret mosquitto_password
-  discovery: true
