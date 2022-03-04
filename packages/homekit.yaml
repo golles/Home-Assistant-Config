@@ -18,6 +18,7 @@ homekit:
   advertise_ip: !secret host_ip
   filter:
     include_entities:
+      - cover.keuken
       - cover.logeerkamer
       - fan.air_purifier
       - fan.ventilator
@@ -26,6 +27,8 @@ homekit:
       - switch.voorraadkastlamp_switch
       - switch.ziggo_decoder
   entity_config:
+    cover.keuken:
+      name: Keuken rolgordijn
     cover.logeerkamer:
       name: Logeerkamer rolgordijn
     light.wled_skull:
