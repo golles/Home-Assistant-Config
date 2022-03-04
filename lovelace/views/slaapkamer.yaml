@@ -79,4 +79,6 @@ cards:
           - entity: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto-outline
+          - entity: button.slaapkamer_my_position
+            name: Rolluik voorkeurspositie
           - button.slaapkamer_opwarmen

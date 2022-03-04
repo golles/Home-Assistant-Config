@@ -69,3 +69,5 @@ cards:
           - entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto-outline
+          - entity: button.kledingkamer_my_position
+            name: Rolluik voorkeurspositie

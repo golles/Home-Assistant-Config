@@ -41,6 +41,12 @@ cards:
     entity: switch.keukenkastje_lamp_switch
     name: Keukenkastje
 
+  - type: custom:mushroom-cover-card
+    entity: cover.keuken
+    name: Rolgordijn
+    show_buttons_control: true
+    show_position_control: true
+
   - type: custom:mushroom-template-card
     primary: Vaatwasser
     icon: mdi:dishwasher
@@ -60,18 +66,6 @@ cards:
         {{ iif(states("switch.vaatwasser_power") == "on", "Aan", "Uit") }}
       {%- endif %}
 
-  # - type: grid
-  #   columns: 2
-  #   square: true
-  #   cards:
-  #     - type: custom:button-card
-  #       entity: sensor.vaatwasser_resterende_tijd
-  #       template: home_connect_appliance
-  #       name: Vaatwasser
-  #       icon: mdi:dishwasher
-  #       variables:
-  #         progress_entity: sensor.vaatwasser_program_progress
-
   - type: entities
     show_header_toggle: false
     entities:
@@ -84,6 +78,8 @@ cards:
           - entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto-outline
+          - entity: button.keuken_rolluik_voorkeurspositie
+            name: Rolgordijn voorkeurspositie
           - entity: automation.vaatwasser_dagelijks_starten
             icon: mdi:dishwasher
           - entity: input_datetime.dishwasher_daily_start

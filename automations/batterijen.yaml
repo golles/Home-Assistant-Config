@@ -6,7 +6,7 @@
     - platform: numeric_state
       entity_id:
         - sensor.logeerkamer_battery
-        # - sensor.keuken_battery
+        - sensor.keuken_battery
       below: 25
     - platform: state
       entity_id:
