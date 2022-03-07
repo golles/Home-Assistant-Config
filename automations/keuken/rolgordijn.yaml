@@ -1,0 +1,23 @@
+- id: keuken_rolgordijn_auto
+  alias: Keuken rolgordijn automatischopen/dicht
+  mode: single
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "+00:45:00"
+      id: dicht
+    - platform: time
+      at: "08:30:00"
+  action:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: dicht
+          sequence:
+            - service: cover.close_cover
+              target:
+                entity_id: cover.keuken
+      default:
+        - service: button.press
+          target:
+            entity_id: button.keuken_rolluik_voorkeurspositie
