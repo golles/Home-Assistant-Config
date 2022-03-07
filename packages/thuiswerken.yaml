@@ -40,7 +40,7 @@ automation:
     mode: restart
     trigger:
       - platform: state
-        entity_id: binary_sensor.tt_macbook_microphone_in_use
+        entity_id: binary_sensor.tt_macbook_audio_input_in_use
         from: "off"
         to: "on"
     condition:
@@ -63,7 +63,7 @@ automation:
 
       - wait_for_trigger:
         - platform: state
-          entity_id: binary_sensor.tt_macbook_microphone_in_use
+          entity_id: binary_sensor.tt_macbook_audio_input_in_use
           from: "on"
           to: "off"
         timeout:
@@ -73,7 +73,7 @@ automation:
       - choose:
         - conditions:
             - condition: state
-              entity_id: binary_sensor.tt_macbook_microphone_in_use
+              entity_id: binary_sensor.tt_macbook_audio_input_in_use
               state: "off"
           sequence:
             - service: media_player.volume_mute
