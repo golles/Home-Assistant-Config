@@ -8,20 +8,67 @@ cards:
   - type: custom:mushroom-title-card
     title: Buurt
 
-  - title: P2000
-    type: entities
-    show_header_toggle: false
-    entities:
-      - entity: sensor.p2000_dichtbij
-        name: Dichtbij
-      - entity: sensor.p2000_ambulance
-        name: Ambulance
-      - entity: sensor.p2000_brandweer
-        name: Brandweer
-      - entity: sensor.p2000_politie
-        name: Politie
-      - entity: sensor.p2000_lifeliner_1
-        name: Lifeliner 1
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-template-card
+        entity: sensor.p2000_dichtbij
+        primary: Dichtbij
+        secondary: >-
+          {{ states("sensor.p2000_dichtbij") }}
+        multiline_secondary: true
+        icon: mdi:alert
+        icon_color: >-
+          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200, "orange", "grey") }}
+        tap_action:
+          action: more-info
+
+      - type: custom:mushroom-template-card
+        entity: sensor.p2000_ambulance
+        primary: Ambulance
+        secondary: >-
+          {{ states("sensor.p2000_ambulance") }}
+        multiline_secondary: true
+        icon: mdi:ambulance
+        icon_color: >-
+          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_ambulance", "time")) + 3600, "amber", "grey") }}
+        tap_action:
+          action: more-info
+
+      - type: custom:mushroom-template-card
+        entity: sensor.p2000_brandweer
+        primary: Brandweer
+        secondary: >-
+          {{ states("sensor.p2000_brandweer") }}
+        multiline_secondary: true
+        icon: mdi:fire-truck
+        icon_color: >-
+          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_brandweer", "time")) + 3600, "red", "grey") }}
+        tap_action:
+          action: more-info
+
+      - type: custom:mushroom-template-card
+        entity: sensor.p2000_politie
+        primary: Politie
+        secondary: >-
+          {{ states("sensor.p2000_politie") }}
+        multiline_secondary: true
+        icon: mdi:car-emergency
+        icon_color: >-
+          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_politie", "time")) + 3600, "blue", "grey") }}
+        tap_action:
+          action: more-info
+
+      - type: custom:mushroom-template-card
+        entity: sensor.p2000_lifeliner_1
+        primary: Lifeliner 1
+        secondary: >-
+          {{ states("sensor.p2000_lifeliner_1") }}
+        multiline_secondary: true
+        icon: mdi:helicopter
+        icon_color: >-
+          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_lifeliner_1", "time")) + 3600, "amber", "grey") }}
+        tap_action:
+          action: more-info
 
   - type: picture-elements
     image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
@@ -52,7 +99,20 @@ cards:
     columns: 2
     square: false
     cards:
-      - type: custom:mushroom-entity-card
+      - type: custom:mushroom-template-card
+        primary: Tango, Purmerend
+        secondary: € {{ states("sensor.tango_purmerend") | replace(".", ",") }}
+        icon: mdi:gas-station
         entity: sensor.tango_purmerend
-      - type: custom:mushroom-entity-card
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-template-card
+        primary: Tango, Winschoten
+        secondary: € {{ states("sensor.tango_winschoten") | replace(".", ",") }}
+        icon: mdi:gas-station
         entity: sensor.tango_winschoten
+        tap_action:
+          action: more-info
+        icon_color: blue

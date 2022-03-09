@@ -2,10 +2,8 @@ homeassistant:
   customize:
     sensor.tango_purmerend:
       icon: mdi:gas-station
-      state_class: measurement
     sensor.tango_winschoten:
       icon: mdi:gas-station
-      state_class: measurement
       
 sensor:
   - platform: scrape
@@ -14,6 +12,8 @@ sensor:
     select: "#euro95 > div.pump_price > span.price"
     unit_of_measurement: €
     scan_interval: 3600
+    device_class: monetary
+    state_class: measurement
 
   - platform: scrape
     resource: https://www.tango.nl/stations/tango-winschoten
@@ -21,3 +21,5 @@ sensor:
     select: "#euro95 > div.pump_price > span.price"
     unit_of_measurement: €
     scan_interval: 3600
+    device_class: monetary
+    state_class: measurement
