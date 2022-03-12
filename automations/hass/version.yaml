@@ -3,7 +3,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.home_assistant_website_update_available
+      entity_id: binary_sensor.docker_hub_update_available
       from: "off"
       to: "on"
   action:
