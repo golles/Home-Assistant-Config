@@ -48,7 +48,6 @@
 
           - choose:
             - conditions:
-                # - "{{ state_attr('media_player.lg_c9', 'source') in ['Netflix', 'Plex', 'YouTube'] }}"
                 - "{{ state_attr('media_player.lg_c9', 'source') in tv_sources_to_pause }}"
               sequence:
                 - alias: Pause tv when Netflix, Plex or Youtube is active
@@ -56,7 +55,7 @@
                   entity_id: media_player.lg_c9
 
             - conditions:
-                - "{{ is_state('media_player.mediabox', 'on') }}"
+                - "{{ not is_state('media_player.mediabox', ['idle', 'off', 'unavailable', 'unknown']) }}"
                 - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
                 - "{{ not is_state_attr('media_player.mediabox', 'play_mode', 'linear') }}"
               sequence:
