@@ -11,6 +11,26 @@ input_datetime:
     has_date: false
     has_time: true
 
+template:
+  - button:
+      - name: Logeerkamer rolgordijn voorkeurspositie
+        icon: mdi:star
+        press:
+          - service: cover.set_cover_position
+            data:
+              position: 85
+            target:
+              entity_id: cover.logeerkamer
+
+      - name: Keuken rolgordijn voorkeurspositie
+        icon: mdi:star
+        press:
+          - service: cover.set_cover_position
+            data:
+              position: 76
+            target:
+              entity_id: cover.keuken
+
 automation:
   - id: covers_down_set_daily_time
     alias: Rolluiken - Tijd voor sluiten dagelijks aanpassen

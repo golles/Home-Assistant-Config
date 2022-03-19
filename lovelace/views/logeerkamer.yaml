@@ -79,5 +79,5 @@ cards:
           - entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto-outline
-          - entity: button.logeerkamer_rolluik_voorkeurspositie
+          - entity: button.logeerkamer_rolgordijn_voorkeurspositie
             name: Rolgordijn voorkeurspositie

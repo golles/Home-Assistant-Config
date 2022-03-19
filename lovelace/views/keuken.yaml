@@ -78,7 +78,7 @@ cards:
           - entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto-outline
-          - entity: button.keuken_rolluik_voorkeurspositie
+          - entity: button.keuken_rolgordijn_voorkeurspositie
             name: Rolgordijn voorkeurspositie
           - entity: automation.vaatwasser_dagelijks_starten
             icon: mdi:dishwasher

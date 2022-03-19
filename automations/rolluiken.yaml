@@ -1,44 +1,3 @@
-- id: rolluiken_dicht
-  alias: Rolluiken - dicht in de avond
-  mode: single
-  trigger:
-    - platform: time
-      at: input_datetime.covers_down
-  action:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.slaapkamerraam_contact
-              state: "off"
-            - condition: state
-              entity_id: cover.slaapkamer
-              state: open
-          sequence:
-            - service: cover.close_cover
-              entity_id: cover.slaapkamer
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.kledingkamerraam_contact
-              state: "off"
-            - condition: state
-              entity_id: cover.kledingkamer
-              state: open
-          sequence:
-            - service: cover.close_cover
-              entity_id: cover.kledingkamer
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: binary_sensor.logeerkamerraam_contact
-              state: "off"
-            - condition: state
-              entity_id: cover.logeerkamer
-              state: open
-          sequence:
-            - service: cover.close_cover
-              entity_id: cover.logeerkamer
-
 - id: rolluiken_open_niemand_thuis
   alias: Rolluiken - open bij niemand thuis
   mode: single
@@ -60,7 +19,8 @@
               state: closed
           sequence:
             - service: cover.open_cover
-              entity_id: cover.slaapkamer
+              target:
+                entity_id: cover.slaapkamer
     - choose:
         - conditions:
             - condition: state
@@ -68,22 +28,14 @@
               state: closed
           sequence:
             - service: cover.open_cover
-              entity_id: cover.kledingkamer
-
-- id: rolluik_dicht_slaapkamer
-  alias: Rolluiken - slaapkamer dicht na sluiten raam
-  mode: single
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.slaapkamerraam_contact
-      from: "on"
-      to: "off"
-  condition:
-    - condition: state
-      entity_id: cover.kledingkamer
-      state: closed
-  action:
-    - delay:
-        seconds: 5
-    - service: cover.close_cover
-      entity_id: cover.slaapkamer
+              target:
+                entity_id: cover.kledingkamer
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: cover.logeerkamer
+              state: closed
+          sequence:
+            - service: button.press
+              target:
+                entity_id: button.logeerkamer_rolgordijn_voorkeurspositie

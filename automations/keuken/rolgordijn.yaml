@@ -1,5 +1,5 @@
 - id: keuken_rolgordijn_auto
-  alias: Keuken rolgordijn automatischopen/dicht
+  alias: Keuken rolgordijn automatisch open/dicht
   mode: single
   trigger:
     - platform: sun
@@ -20,4 +20,4 @@
       default:
         - service: button.press
           target:
-            entity_id: button.keuken_rolluik_voorkeurspositie
+            entity_id: button.keuken_rolgordijn_voorkeurspositie

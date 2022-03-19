@@ -1,0 +1,80 @@
+blueprint:
+  name: Close cover at time, but only when the window is not open.
+  description: |
+    This blueprint will close a cover at a given time but only when a window or door (or any other binary_sensor) is closed (off).
+    When the window is open, the automation will wait for a given amount of minutes to detect that the window is being closed. If so, the cover will close.
+  domain: automation
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/cover-close-at-time-check-window.yaml
+  input:
+    time_entity:
+      name: Time entity
+      description: "At this time, the automation will be triggered. (has_date: false, has_time: true)."
+      selector:
+        entity:
+          domain: input_datetime
+    cover_entity:
+      name: Cover entity
+      selector:
+        entity:
+          domain: cover
+    window_entity:
+      name: Door/window entity
+      description: This should be closed (off) to make the cover close.
+      selector:
+        entity:
+          domain: binary_sensor
+    wait_minutes:
+      name: Wait period
+      description: In case the window entity is open (true) at the moment of trigger, the cover will still be closed when the window is closed within this wait period.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 600
+          unit_of_measurement: minutes
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: time
+    at: !input time_entity
+
+action:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: !input window_entity
+            state: "off"
+          - condition: state
+            entity_id: !input cover_entity
+            state: open
+        sequence:
+          - alias: Close the cover
+            service: cover.close_cover
+            target:
+              entity_id: !input cover_entity
+
+      - conditions:
+          - condition: state
+            entity_id: !input window_entity
+            state: "on"
+        sequence:
+          - alias: Wait if the window is closed within a given time.
+            wait_for_trigger:
+              - platform: state
+                entity_id: !input window_entity
+                from: "on"
+                to: "off"
+            timeout:
+              minutes: !input wait_minutes
+            continue_on_timeout: false
+
+          - alias: Wait a little to make sure it's closed
+            delay:
+              seconds: 5
+
+          - alias: Close the cover now
+            service: cover.close_cover
+            target:
+              entity_id: !input cover_entity
