@@ -3,7 +3,7 @@ sensor:
     wastecollector: !secret wastecollector
     resources:
       - restafval
-      - gft
+      - bio-afval
       - papier
     postcode: !secret postcode
     streetnumber: !secret streetnumber
@@ -18,9 +18,9 @@ homeassistant:
     sensor.purmerend_papier:
       friendly_name: Papier
       entity_picture: /local/afval/purmerend_papier.jpg
-    sensor.purmerend_gft:
-      friendly_name: GFT
-      entity_picture: /local/afval/purmerend_gft.jpg
+    sensor.purmerend_bio_afval:
+      friendly_name: Bio
+      entity_picture: /local/afval/purmerend_bio.jpg
     
 automation:
   - id: notification_afval
