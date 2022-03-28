@@ -23,6 +23,7 @@ homekit:
       - fan.air_purifier
       - fan.ventilator
       - light.wled_skull
+      - switch.adguard_protection
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
       - switch.ziggo_decoder
@@ -33,6 +34,8 @@ homekit:
       name: Logeerkamer rolgordijn
     light.wled_skull:
       name: Skull
+    switch.adguard_protection:
+      name: Internet bescherming
     switch.keukenkastje_lamp_switch:
       name: Keukenkastje
     switch.voorraadkastlamp_switch:
