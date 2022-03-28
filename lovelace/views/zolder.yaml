@@ -71,7 +71,7 @@ cards:
       {% elif states("sensor.wasmachine_operation_state") == "Finished" -%}
         Klaar
       {% elif states("sensor.wasmachine_operation_state") == "Run" -%}
-        {{ states("sensor.wasmachine_resterende_tijd") | replace(",", " en") }}
+        {{ states("sensor.wasmachine_resterende_minuten") }}
       {% elif states("binary_sensor.wasmachine_remote_start") == "on" -%}
         Uitgestelde start
       {%- else -%}

@@ -59,7 +59,7 @@ cards:
       {% elif states("sensor.vaatwasser_operation_state") == "Finished" -%}
         Klaar
       {% elif states("sensor.vaatwasser_operation_state") == "Run" -%}
-        {{ states("sensor.vaatwasser_resterende_tijd") | replace(",", " en") }}
+        {{ states("sensor.vaatwasser_resterende_minuten") }}
       {% elif states("binary_sensor.vaatwasser_remote_start") == "on" -%}
         Uitgestelde start
       {%- else -%}

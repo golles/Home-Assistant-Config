@@ -104,6 +104,42 @@ template:
             {%- endif -%}
           {%- endif %}
 
+      - name: Wasmachine resterende minuten
+        icon: mdi:clock
+        state: >-
+          {% if is_state("sensor.wasmachine_remaining_program_time", "unavailable") or is_state("switch.wasmachine_power", "off") -%}
+            unavailable
+          {%- else -%}
+            {% set seconds = as_timestamp(states("sensor.wasmachine_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
+            {% set minutes = (seconds / 60) | round(0, "ceil") %}
+
+            {%- if minutes <= 0 -%}
+              Klaar
+            {%- elif minutes == 1 -%}
+              1 minuut
+            {%- else -%}
+              {{ minutes }} minuten
+            {%- endif -%}
+          {%- endif %}
+
+      - name: Vaatwasser resterende minuten
+        icon: mdi:clock
+        state: >-
+          {% if is_state("sensor.vaatwasser_remaining_program_time", "unavailable") or is_state("switch.vaatwasser_power", "off") -%}
+            unavailable
+          {%- else -%}
+            {% set seconds = as_timestamp(states("sensor.vaatwasser_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
+            {% set minutes = (seconds / 60) | round(0, "ceil") %}
+
+            {%- if minutes <= 0 -%}
+              Klaar
+            {%- elif minutes == 1 -%}
+              1 minuut
+            {%- else -%}
+              {{ minutes }} minuten
+            {%- endif -%}
+          {%- endif %}
+
 automation:
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten
