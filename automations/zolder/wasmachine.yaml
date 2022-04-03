@@ -22,19 +22,9 @@
         # When the fan is set to low, set it to high for a certain amount of time.
         - "{{ is_state_attr('fan.mechanische_ventilatie', 'speed', 'low') }}"
         sequence:
-          - service: fan.set_percentage
+          - service: button.press
             target:
-              entity_id: fan.mechanische_ventilatie
-            data:
-              percentage: 90
-          - delay:
-              minutes: 30
-          - service: fan.set_percentage
-            target:
-              entity_id: fan.mechanische_ventilatie
-            data:
-              percentage: 25
-
+              entity_id: button.mechanische_ventilatie_30_minuten_hoog
     - choose:
       - conditions:
         # When the room temperature is below a certain value, switch the heating on.
