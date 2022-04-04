@@ -11,48 +11,27 @@
   alias: Mechanische ventilatie tijdens douchen
   mode: restart
   trigger:
-    - platform: homeassistant
-      event: start # Listen to start event to make sure we're not staying forever in high mode.
     - platform: state
       entity_id: binary_sensor.douche_beweging_occupancy
       from: "off"
       to: "on"
-    - platform: state
-      entity_id: binary_sensor.douche_beweging_occupancy
-      from: "on"
-      to: "off"
-      for:
-        minutes: 5
   action:
-    - choose:
-      - conditions:
-        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
-        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'on') }}"
-        sequence:
-          - alias: Occupancy detected
-            service: fan.set_percentage
-            target:
-              entity_id: fan.mechanische_ventilatie
-            data:
-              percentage: 90
+    - alias: Occupancy detected, set fan to high for 30 minutes
+      service: button.press
+      target:
+        entity_id: button.mechanische_ventilatie_30_minuten_hoog
 
-      - conditions:
-        - "{{ trigger.entity_id == 'binary_sensor.douche_beweging_occupancy' }}"
-        - "{{ is_state('binary_sensor.douche_beweging_occupancy', 'off') }}"
-        sequence:
-          - delay:
-              minutes: 10
+    - alias: Wait for occupancy to be off
+      wait_for_trigger:
+        - platform: state
+          entity_id: binary_sensor.douche_beweging_occupancy
+          from: "on"
+          to: "off"
+      timeout:
+        minutes: 15
+      continue_on_timeout: false
 
-          - service: fan.set_percentage
-            target:
-              entity_id: fan.mechanische_ventilatie
-            data:
-              percentage: 25
-
-      # HA start.
-      default:
-        - service: fan.set_percentage
-          target:
-            entity_id: fan.mechanische_ventilatie
-          data:
-            percentage: 25
+    - alias: Set fan to high for 15 minutes
+      service: button.press
+      target:
+        entity_id: button.mechanische_ventilatie_15_minuten_hoog
