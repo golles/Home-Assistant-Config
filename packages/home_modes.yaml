@@ -83,8 +83,8 @@ automation:
                   entity_id: light.woonkamer_groot_2
                   profile: helder
               - wait_for_trigger:
-                - platform: time
-                  at: "23:00:00"
+                  - platform: time
+                    at: "23:00:00"
               - delay:
                   minutes: "{{ range(0, 30) | random }}"
               - service: light.turn_off

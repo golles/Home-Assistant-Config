@@ -20,10 +20,10 @@
         transition: 2
 
     - wait_for_trigger:
-      - platform: state
-        entity_id: binary_sensor.voordeur_contact
-        from: "on"
-        to: "off"
+        - platform: state
+          entity_id: binary_sensor.voordeur_contact
+          from: "on"
+          to: "off"
       timeout:
         minutes: 15
       continue_on_timeout: true

@@ -62,10 +62,10 @@ automation:
           is_volume_muted: true
 
       - wait_for_trigger:
-        - platform: state
-          entity_id: binary_sensor.tt_macbook_audio_input_in_use
-          from: "on"
-          to: "off"
+          - platform: state
+            entity_id: binary_sensor.tt_macbook_audio_input_in_use
+            from: "on"
+            to: "off"
         timeout:
           minutes: 45
         continue_on_timeout: true
