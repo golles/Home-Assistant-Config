@@ -86,11 +86,11 @@ cards:
   - type: entities
     title: Pollen
     entities:
-      - entity: sensor.climacell_tree_pollen_index
+      - entity: sensor.tomorrow_io_huis_tree_pollen_index
         name: Bomen
-      - entity: sensor.climacell_grass_pollen_index
+      - entity: sensor.tomorrow_io_huis_grass_pollen_index
         name: Grassen
-      - entity: sensor.climacell_weed_pollen_index
+      - entity: sensor.tomorrow_io_huis_weed_pollen_index
         name: Onkruiden
 
   - type: grid
