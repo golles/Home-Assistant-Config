@@ -20,7 +20,7 @@
     - choose:
       - conditions:
         # When the fan is set to low, set it to high for a certain amount of time.
-        - "{{ is_state_attr('fan.mechanische_ventilatie', 'speed', 'low') }}"
+        - "{{ is_state_attr('fan.mechanische_ventilatie', 'percentage', 25) }}"
         sequence:
           - service: button.press
             target:
@@ -50,3 +50,30 @@
     - service: notify.lg_c9
       data:
         message: Wasmachine is klaar
+
+# The washing machine remains sometimes unavailble. Reloading the integration to "fix" this
+# Issue: https://github.com/home-assistant/core/issues/66063
+- id: reload_home_connect
+  alias: Wasmachine - Herlaad Home Connect integratie
+  mode: single
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.zolder_power
+      above: 10
+      for:
+        minutes: 2
+  condition:
+    - condition: state
+      entity_id: switch.wasmachine_power
+      state: "off"
+  action:
+    - alias: Notify about this
+      service: notify.sander
+      data:
+        title: Home Connect
+        message: Integratie wordt herladen
+
+    - alias: Reload Home Connect integration
+      service: homeassistant.reload_config_entry
+      target:
+        entity_id: switch.wasmachine_power
