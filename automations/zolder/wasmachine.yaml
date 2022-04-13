@@ -62,10 +62,15 @@
       above: 10
       for:
         minutes: 2
+    - platform: numeric_state
+      entity_id: sensor.zolder_power
+      below: 2
+      for:
+        minutes: 2
   condition:
-    - condition: state
-      entity_id: switch.wasmachine_power
-      state: "off"
+    - condition: numeric_state
+      entity_id: sensor.runtime
+      above: 200 # Should be a little higher than the minutes in the triggers, to deal with reboot.
   action:
     - alias: Notify about this
       service: notify.sander
