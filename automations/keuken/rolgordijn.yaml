@@ -1,23 +1,40 @@
 - id: keuken_rolgordijn_auto
   alias: Keuken rolgordijn automatisch open/dicht
   mode: single
+  max_exceeded: silent
   trigger:
     - platform: sun
       event: sunset
       offset: "+00:45:00"
-      id: dicht
+    - platform: time # For days with late sunset.
+      at: "19:30:00"
+      id: delay
     - platform: time
       at: "08:30:00"
+      id: open
   action:
     - choose:
         - conditions:
             - condition: trigger
-              id: dicht
+              id: open
           sequence:
-            - service: cover.close_cover
+            - alias: Open the cover
+              service: button.press
               target:
-                entity_id: cover.keuken
+                entity_id: button.keuken_rolgordijn_voorkeurspositie
       default:
-        - service: button.press
-          target:
-            entity_id: button.keuken_rolgordijn_voorkeurspositie
+        - choose:
+            - conditions:
+                - condition: trigger
+                  id: delay
+              sequence:
+                - alias: Delay closing, so it doesn't close at the same time every day
+                  delay:
+                    minutes: "{{ range(0, 30) | random }}"
+
+        - alias: Close the cover
+          service: script.close_cover_window_state
+          data:
+            wait_minutes: 120
+            cover_entity: cover.keuken
+            window_entity: binary_sensor.keukenraam_contact

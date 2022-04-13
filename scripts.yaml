@@ -42,3 +42,57 @@ everything_off:
             - service: homeassistant.turn_off
               data:
                 entity_id: "{{ entities }}"
+
+close_cover_window_state:
+  alias: Close cover, depending on window state
+  mode: parallel
+  fields:
+    cover_entity:
+      name: Cover entity
+      description: Cover entity
+      selector:
+        entity:
+          domain: cover
+    window_entity:
+      name: Door/window entity
+      description: This should be closed (off) to make the cover close.
+      selector:
+        entity:
+          domain: binary_sensor
+    wait_minutes:
+      name: Wait period
+      description: In case the window entity is open (true) at the moment of trigger, the cover will still be closed when the window is closed within this wait period.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 600
+          unit_of_measurement: minutes
+  sequence:
+    - choose:
+        - conditions:
+            - "{{ is_state(window_entity, 'off') }}"
+            - "{{ is_state(cover_entity, 'open') }}"
+          sequence:
+            - alias: Close the cover
+              service: cover.close_cover
+              target:
+                entity_id: "{{ cover_entity }}"
+  
+        - conditions:
+            - "{{ is_state(window_entity, 'on') }}"
+          sequence:
+            - alias: Wait if the window is closed within a given time.
+              wait_template: "{{ is_state(window_entity, 'off') }}"
+              timeout:
+                minutes: "{{ wait_minutes }}"
+              continue_on_timeout: false
+  
+            - alias: Wait a little to make sure it's really closed
+              delay:
+                seconds: 5
+  
+            - alias: Close the cover now
+              service: cover.close_cover
+              target:
+                entity_id: "{{ cover_entity }}"

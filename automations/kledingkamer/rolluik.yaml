@@ -1,8 +1,13 @@
 - id: close_kledingkamer_cover
   alias: Kledingkamer rolluik sluiten op tijd
-  use_blueprint:
-    path: golles/cover-close-at-time-check-window.yaml
-    input:
-      time_entity: input_datetime.covers_down
-      cover_entity: cover.kledingkamer
-      window_entity: binary_sensor.kledingkamerraam_contact
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: time
+      at: input_datetime.covers_down
+  action:
+    - service: script.close_cover_window_state
+      data:
+        wait_minutes: 120
+        cover_entity: cover.kledingkamer
+        window_entity: binary_sensor.kledingkamerraam_contact
