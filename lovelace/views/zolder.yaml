@@ -62,7 +62,6 @@ cards:
   - type: custom:mushroom-template-card
     primary: Wasmachine
     icon: mdi:washing-machine
-    multiline_secondary: true
     icon_color: >-
       {{ iif(states("switch.wasmachine_power") == "on", "blue", "grey") }}
     secondary: >-

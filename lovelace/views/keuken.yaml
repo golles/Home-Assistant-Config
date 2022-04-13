@@ -50,7 +50,6 @@ cards:
   - type: custom:mushroom-template-card
     primary: Vaatwasser
     icon: mdi:dishwasher
-    multiline_secondary: true
     icon_color: >-
       {{ iif(states("switch.vaatwasser_power") == "on", "blue", "grey") }}
     secondary: >-
