@@ -59,7 +59,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.zolder_power
-      above: 10
+      above: 2
       for:
         minutes: 2
     - platform: numeric_state
