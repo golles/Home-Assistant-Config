@@ -72,12 +72,6 @@
       entity_id: sensor.runtime
       above: 200 # Should be a little higher than the minutes in the triggers, to deal with reboot.
   action:
-    - alias: Notify about this
-      service: notify.sander
-      data:
-        title: Home Connect
-        message: Integratie wordt herladen
-
     - alias: Reload Home Connect integration
       service: homeassistant.reload_config_entry
       target:
