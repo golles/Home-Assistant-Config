@@ -7,18 +7,18 @@ cards:
   - type: entities
     title: SABnzbd
     entities:
-      - sensor.sab_status
-      - sensor.sab_speed
-      - sensor.sab_queue_count
-      - sensor.sab_queue
-      - sensor.sab_disk
-      - sensor.sab_disk_free
-      - sensor.sab_left
-      - sensor.sab_daily_total
-      - sensor.sab_weekly_total
-      - sensor.sab_monthly_total
-      - sensor.sab_total
+      - sensor.sabnzbd_status
+      - sensor.sabnzbd_speed
+      - sensor.sabnzbd_queue_count
+      - sensor.sabnzbd_queue
+      - sensor.sabnzbd_disk
+      - sensor.sabnzbd_disk_free
+      - sensor.sabnzbd_left
+      - sensor.sabnzbd_daily_total
+      - sensor.sabnzbd_weekly_total
+      - sensor.sabnzbd_monthly_total
+      - sensor.sabnzbd_total
       
   - type: sensor
-    entity: sensor.sab_speed
+    entity: sensor.sabnzbd_speed
     graph: line

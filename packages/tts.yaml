@@ -1,6 +1,5 @@
 tts:
   - platform: google_translate
-    base_url: !secret external_url
     language: nl
     cache: true
     cache_dir: /tmp/tts_google_translate
