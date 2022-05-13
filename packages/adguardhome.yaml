@@ -1,0 +1,25 @@
+automation:
+  - id: adguardhome_protection_switches
+    alias: "AdGuard Home: Bescherming schakelaars"
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: switch.adguard_protection
+        to: 
+          - "on"
+          - "off"
+    action:
+      - if:
+          - condition: state
+            entity_id: switch.adguard_protection
+            state: "on"
+        then:
+          - alias: Turn the 2nd instance on
+            service: switch.turn_on
+            target:
+             entity_id: switch.adguard_protection_2
+        else:
+          - alias: Turn the 2nd instance off
+            service: switch.turn_off
+            target:
+             entity_id: switch.adguard_protection_2
