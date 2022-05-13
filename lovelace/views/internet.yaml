@@ -68,7 +68,7 @@ cards:
       method: name
 
   - type: entities
-    title: AdGuard Home (NUC)
+    title: AdGuard Home primair
     show_header_toggle: false
     entities:
       - sensor.adguard_dns_queries
@@ -80,7 +80,7 @@ cards:
       - switch.adguard_parental_control
 
   - type: entities
-    title: AdGuard Home (PI4)
+    title: AdGuard secundair
     show_header_toggle: false
     entities:
       - sensor.adguard_dns_queries_2
@@ -90,3 +90,20 @@ cards:
       - switch.adguard_protection_2
       - switch.adguard_filtering_2
       - switch.adguard_parental_control_2
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instelingen
+        padding: 0
+        entities:
+          - type: button
+            name: Run Speedtest
+            icon: mdi:speedometer
+            show_state: false
+            tap_action:
+              action: call-service
+              service: speedtestdotnet.speedtest
