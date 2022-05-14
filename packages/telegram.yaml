@@ -21,6 +21,26 @@ automation:
             {{ trigger.event.data["command"] }}
 
       - choose:
+          - alias: Start
+            conditions:
+              - "{{ command == '/start' }}"
+            sequence:
+              - service: telegram_bot.send_message
+                data:
+                  target: "{{ chat_id }}"
+                  keyboard:
+                    - /meterstanden
+                    - /wie_thuis
+                    - /weer
+                    - /ping
+                  message: >-
+                    {{ 
+                      [
+                        "Hi, Ik ben je Home Assistant... Waar kan ik je mee helpen?",
+                        "Wat kan ik voor je doen?"
+                      ] | random 
+                    }}
+
           - alias: Ping
             conditions:
               - "{{ command == '/ping' }}"
@@ -28,7 +48,8 @@ automation:
               - service: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
-                  message: Pong
+                  message: >-
+                    {{ now().strftime("%Y-%m-%d %H:%M:%S") }} Pong
 
           - alias: Meterstanden
             conditions:
@@ -67,3 +88,20 @@ automation:
                         | join(", ")
                         | default("Niemand")
                     }}
+
+          - alias: Weer
+            conditions:
+              - "{{ command == '/weer' }}"
+            sequence:
+              - service: telegram_bot.send_message
+                data:
+                  target: "{{ chat_id }}"
+                  parse_mode: markdown
+                  message: |-
+                    🌤️ *Weer thuis*:
+                    
+                    *Temperatuur*:         {{ state_attr("weather.knmi_purmerend", "temperature") }} °C
+                    *Luchtvochtigheid*: {{ state_attr("weather.knmi_purmerend", "humidity") }} %
+                    *Luchtdruk*:              {{ state_attr("weather.knmi_purmerend", "pressure") }} hPa
+
+                    {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
