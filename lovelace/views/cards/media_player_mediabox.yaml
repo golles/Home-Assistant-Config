@@ -4,7 +4,7 @@ name: Ziggo
 artwork: material
 source: full
 info: scroll
-volume_stateless: true
 hide:
   icon: true
+  volume: true
   
