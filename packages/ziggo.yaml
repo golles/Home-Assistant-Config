@@ -7,4 +7,21 @@ sensor:
       - outages
       - announcements
     resource: !secret ziggo_incidents_url
-    value_template: '{{ value_json.callback.timestamp }}'
+    value_template: "{{ value_json.callback.timestamp }}"
+
+switch:
+  - platform: template
+    switches:
+      ziggo_decoder:
+        friendly_name: Ziggo decoder
+        icon_template: mdi:television
+        value_template: >
+          {{ not is_state("media_player.mediabox", "off") }}
+        turn_on:
+          service: media_player.turn_on
+          data:
+            entity_id: media_player.mediabox
+        turn_off:
+          service: media_player.turn_off
+          data:
+            entity_id: media_player.mediabox

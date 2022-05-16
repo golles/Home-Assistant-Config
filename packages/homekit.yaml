@@ -23,10 +23,10 @@ homekit:
       - fan.air_purifier
       - fan.ventilator
       - light.wled_skull
-      - media_player.mediabox
       - switch.adguard_protection
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
+      - switch.ziggo_decoder
   entity_config:
     cover.keuken:
       name: Keuken rolgordijn
@@ -34,16 +34,11 @@ homekit:
       name: Logeerkamer rolgordijn
     light.wled_skull:
       name: Skull
-    media_player.mediabox:
-      name: Mediabox
-      feature_list:
-        - feature: on_off
-        - feature: play_pause
-        - feature: play_stop
-        - feature: toggle_mute
     switch.adguard_protection:
       name: Internet bescherming
     switch.keukenkastje_lamp_switch:
       name: Keukenkastje
     switch.voorraadkastlamp_switch:
       name: Voorraadkast
+    switch.ziggo_decoder:
+      name: Ziggo decoder
