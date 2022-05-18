@@ -132,6 +132,7 @@ cards:
           - type: custom:mushroom-light-card
             entity: switch.keukenkastje_lamp_switch
             name: Keukenkastje
+            fill_container: True
 
   - type: grid
     columns: 2
@@ -144,7 +145,6 @@ cards:
         
       - type: custom:mushroom-fan-card
         entity: fan.air_purifier
-        icon_animation: true
         show_percentage_control: true
 
       - type: conditional
@@ -155,6 +155,8 @@ cards:
           type: custom:mushroom-fan-card
           entity: fan.ventilator
           show_percentage_control: true
+          icon_animation: true
+          show_oscillate_control: true
 
   - type: vertical-stack
     cards:
