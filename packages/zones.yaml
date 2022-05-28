@@ -19,7 +19,7 @@ automation:
     condition:
       - "{{ states('sensor.visisted_parents') | int > 0 }}"
       # Can't be triggered when it was already triggered in the last 24 hours.
-      - "{{ as_timestamp(now()) - as_timestamp(state_attr('automation.komt_thuis_van_ouders', 'last_triggered')) | int >= 24 * 60 * 60 }}"
+      - "{{ as_timestamp(now()) - as_timestamp(state_attr('automation.notificatie_komt_thuis_na_bezoeken_ouders', 'last_triggered')) | int >= 24 * 60 * 60 }}"
     action:
       - service: notify.sander
         data:
