@@ -10,7 +10,7 @@ homeassistant:
       friendly_name: Woonkamer verbinding
     "binary_sensor.va1923094528_battery_state":
       friendly_name: Woonkamer batterij
-    "binary_sensor.vva1923094528_connection_state":
+    "binary_sensor.va1923094528_connection_state":
       friendly_name: Woonkamer verbinding
     "binary_sensor.va3030325248_battery_state":
       friendly_name: Woonkamer batterij
