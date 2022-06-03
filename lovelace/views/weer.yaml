@@ -60,6 +60,14 @@ cards:
       - sensor.zon_positie
       - sensor.zonsopkomst
       - sensor.zonsondergang
+      - type: divider
+      - entity: sensor.current_uv_index
+        name: Zonkracht
+      - entity: sensor.current_uv_level
+        name: Omschrijving
+      - entity: binary_sensor.protection_window
+        name: Zonbescherming
+      - type: divider
       - entity: sensor.moon
         name: Maan
 
