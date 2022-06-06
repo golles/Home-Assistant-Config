@@ -30,76 +30,6 @@ template:
           {%- endfor %}
           {{ program.name }}
 
-      - name: Wasmachine resterende tijd
-        icon: mdi:clock
-        state: >-
-          {% if is_state("sensor.wasmachine_remaining_program_time", "unavailable") or is_state("switch.wasmachine_power", "off") -%}
-            unavailable
-          {%- else -%}
-            {% set seconds = as_timestamp(states("sensor.wasmachine_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
-            {% set minutes = ((seconds % 3600) / 60) | int %}
-            {% set hours = (seconds / 3600) | int %}
-
-            {%- if seconds <= 0 -%}
-              Klaar
-            {%- elif seconds < 60 -%}
-              {{ seconds }} seconden
-            {%- else -%}
-              {%- if hours > 0 -%}
-                {%- if hours == 1 -%}
-                  1 uur
-                {%- else -%}
-                  {{ hours }} uur
-                {%- endif -%}
-              {%- endif -%}
-              {%- if minutes > 0 -%}
-                {%- if hours > 0 -%}
-                  {{ ", " }}
-                {%- endif -%}
-                {%- if minutes == 1 -%}
-                  1 minuut
-                {%- else -%}
-                  {{ minutes }} minuten
-                {%- endif -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endif %}
-
-      - name: Vaatwasser resterende tijd
-        icon: mdi:clock
-        state: >-
-          {% if is_state("sensor.vaatwasser_remaining_program_time", "unavailable") or is_state("switch.vaatwasser_power", "off") -%}
-            unavailable
-          {%- else -%}
-            {% set seconds = as_timestamp(states("sensor.vaatwasser_remaining_program_time")) - as_timestamp(utcnow()) | int  %}
-            {% set minutes = ((seconds % 3600) / 60) | int %}
-            {% set hours = (seconds / 3600) | int %}
-
-            {%- if seconds <= 0 -%}
-              Klaar
-            {%- elif seconds < 60 -%}
-              {{ seconds }} seconden
-            {%- else -%}
-              {%- if hours > 0 -%}
-                {%- if hours == 1 -%}
-                  1 uur
-                {%- else -%}
-                  {{ hours }} uur
-                {%- endif -%}
-              {%- endif -%}
-              {%- if minutes > 0 -%}
-                {%- if hours > 0 -%}
-                  {{ ", " }}
-                {%- endif -%}
-                {%- if minutes == 1 -%}
-                  1 minuut
-                {%- else -%}
-                  {{ minutes }} minuten
-                {%- endif -%}
-              {%- endif -%}
-            {%- endif -%}
-          {%- endif %}
-
       - name: Wasmachine resterende minuten
         icon: mdi:clock
         state: >-
@@ -134,6 +64,36 @@ template:
             {%- else -%}
               {{ minutes }} minuten
             {%- endif -%}
+          {%- endif %}
+
+      - name: Wasmachine status
+        icon: mdi:washing-machine
+        state: >-
+          {% if states("binary_sensor.wasmachine_door") == "on" -%}
+            Deur open
+          {% elif states("sensor.wasmachine_operation_state") == "Finished" -%}
+            Klaar
+          {% elif states("sensor.wasmachine_operation_state") == "Run" -%}
+            {{ states("sensor.wasmachine_resterende_minuten") }}
+          {% elif states("binary_sensor.wasmachine_remote_start") == "on" -%}
+            Uitgestelde start
+          {%- else -%}
+            {{ states("switch.wasmachine_power") }}
+          {%- endif %}
+
+      - name: Vaatwasser status
+        icon: mdi:dishwasher
+        state: >-
+          {% if states("binary_sensor.vaatwasser_door") == "on" -%}
+            Deur open
+          {% elif states("sensor.vaatwasser_operation_state") == "Finished" -%}
+            Klaar
+          {% elif states("sensor.vaatwasser_operation_state") == "Run" -%}
+            {{ states("sensor.vaatwasser_resterende_minuten") }}
+          {% elif states("binary_sensor.vaatwasser_remote_start") == "on" -%}
+            Uitgestelde start
+          {%- else -%}
+            {{ states("switch.vaatwasser_power") }}
           {%- endif %}
 
 automation:

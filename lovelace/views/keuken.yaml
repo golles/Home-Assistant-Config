@@ -47,23 +47,9 @@ cards:
     show_buttons_control: true
     show_position_control: true
 
-  - type: custom:mushroom-template-card
-    primary: Vaatwasser
-    icon: mdi:dishwasher
-    icon_color: >-
-      {{ iif(states("switch.vaatwasser_power") == "on", "blue", "grey") }}
-    secondary: >-
-      {% if states("binary_sensor.vaatwasser_door") == "on" -%}
-        Deur open
-      {% elif states("sensor.vaatwasser_operation_state") == "Finished" -%}
-        Klaar
-      {% elif states("sensor.vaatwasser_operation_state") == "Run" -%}
-        {{ states("sensor.vaatwasser_resterende_minuten") }}
-      {% elif states("binary_sensor.vaatwasser_remote_start") == "on" -%}
-        Uitgestelde start
-      {%- else -%}
-        {{ iif(states("switch.vaatwasser_power") == "on", "Aan", "Uit") }}
-      {%- endif %}
+  - type: custom:mushroom-entity-card
+    entity: sensor.vaatwasser_status
+    name: Vaatwasser
 
   - type: entities
     show_header_toggle: false

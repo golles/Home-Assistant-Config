@@ -59,6 +59,10 @@ cards:
     icon_animation: true
     show_percentage_control: true
 
+  - type: custom:mushroom-entity-card
+    entity: sensor.wasmachine_status
+    name: Wasmachine
+
   - type: custom:mushroom-template-card
     primary: Wasmachine
     icon: mdi:washing-machine
@@ -79,17 +83,6 @@ cards:
 
   - type: media-control
     entity: media_player.zolder
-  - type: grid
-    columns: 2
-    square: true
-    cards:
-      - type: custom:button-card
-        entity: sensor.wasmachine_resterende_tijd
-        template: home_connect_appliance
-        name: Wasmachine
-        icon: mdi:washing-machine
-        variables:
-          progress_entity: sensor.wasmachine_program_progress
 
   - type: entities
     show_header_toggle: false
