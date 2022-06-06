@@ -63,24 +63,6 @@ cards:
     entity: sensor.wasmachine_status
     name: Wasmachine
 
-  - type: custom:mushroom-template-card
-    primary: Wasmachine
-    icon: mdi:washing-machine
-    icon_color: >-
-      {{ iif(states("switch.wasmachine_power") == "on", "blue", "grey") }}
-    secondary: >-
-      {% if states("binary_sensor.wasmachine_door") == "on" -%}
-        Deur open
-      {% elif states("sensor.wasmachine_operation_state") == "Finished" -%}
-        Klaar
-      {% elif states("sensor.wasmachine_operation_state") == "Run" -%}
-        {{ states("sensor.wasmachine_resterende_minuten") }}
-      {% elif states("binary_sensor.wasmachine_remote_start") == "on" -%}
-        Uitgestelde start
-      {%- else -%}
-        {{ iif(states("switch.wasmachine_power") == "on", "Aan", "Uit") }}
-      {%- endif %}
-
   - type: media-control
     entity: media_player.zolder
 
