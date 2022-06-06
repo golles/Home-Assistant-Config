@@ -2,6 +2,8 @@ type: custom:auto-entities
 show_empty: false
 card:
   type: grid
+  columns: 2
+  square: false
   title: Let op
 card_param: cards
 filter:
@@ -11,38 +13,23 @@ filter:
     {% if state_attr("sensor.p2000_dichtbij", "time") %}
       {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
         {%- set data.entities = data.entities + [{
-          "type": "button",
-          "entity": "sensor.p2000_dichtbij",
-          "show_state": "true",
-          "show_name": "false"
+          "type": "custom:mushroom-template-card",
+          "primary": "Dichtbij",
+          "secondary": "{{ states('sensor.p2000_dichtbij') }}",
+          "layout": "vertical",
+          "multiline_secondary": "true",
+          "icon": "mdi:alert",
+          "icon_color": "orange"
         }] -%}
       {% endif %}
     {% endif %}
     
     {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
       {%- set data.entities = data.entities + [{
-        "type": "custom:button-card",
-        "template": "zonnescherm"
-      }] -%}
-    {% endif %}
-
-    {% if not states("sensor.wasmachine_resterende_tijd") in ["unavailable", "Klaar"] %}
-      {%- set data.entities = data.entities + [{
-        "type": "button",
-        "entity": "sensor.wasmachine_resterende_tijd",
-        "name": "Wasmachine",
-        "icon": "mdi:washing-machine",
-        "show_state": "true"
-      }] -%}
-    {% endif %}
-
-    {% if not states("sensor.vaatwasser_resterende_tijd") in ["unavailable", "Klaar"] %}
-      {%- set data.entities = data.entities + [{
-        "type": "button",
-        "entity": "sensor.vaatwasser_resterende_tijd",
-        "name": "Vaatwasser",
-        "icon": "mdi:dishwasher",
-        "show_state": "true"
+        "type": "custom:mushroom-cover-card",
+        "entity": "cover.zonnescherm",
+        "hide_state": "true",
+        "show_buttons_control": "true"
       }] -%}
     {% endif %}
     
@@ -50,78 +37,99 @@ filter:
       {{ data.entities }}
     {% endif %}
   include:
+    # Waste collection
     - domain: sensor
       attributes:
         Wastecollector: purmerend
         Days_until: <= 1
       options:
-        type: custom:button-card
-        template: afvalbeheer
+        type: custom:mushroom-entity-card
+        layout: vertical
+        use_entity_picture: true
       not:
         state: unknown
 
+    # Appliances
+    - entity_id: "sensor.vaatwasser_status"
+      options:
+        type: custom:mushroom-entity-card
+        name: Vaatwasser
+        layout: vertical
+      not:
+        state: "off"
+    - entity_id: "sensor.wasmachine_status"
+      options:
+        type: custom:mushroom-entity-card
+        name: Wasmachine
+        layout: vertical
+      not:
+        state: "off"
+    - entity_id: fan.air_purifier
+      state: "on"
+      options:
+        type: custom:mushroom-fan-card
+        show_percentage_control: true
+
+    # Batteries
     - attributes:
         device_class: battery
         battery: "< 15"
       options:
-        type: button
-        show_state: true
+        type: custom:mushroom-entity-card
+        layout: vertical
         icon: mdi:battery-10
+        icon_color: red
     - domain: binary_sensor
       state: "on"
       attributes:
         device_class: battery
       options:
-        type: button
-        show_state: true
-        state_color: false
+        type: custom:mushroom-entity-card
+        layout: vertical
+        icon_color: red
 
-    # - domain: plant
-    #   state: problem
-    #   options:
-    #     type: custom:button-card
-    #     template: plant
-
-    - entity_id: fan.air_purifier
-      state: "on"
-      options:
-        type: custom:button-card
-        template: air_purifier
-
-    - entity_id: "sensor.pollen_*_risk"
-      state: "*high*" # Matches "anything containing high.
-      options:
-        type: button
-        show_state: true
-
-    - entity_id: weather.knmi_purmerend
-      options:
-        type: button
-        name: Weer
-        show_state: true
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-buiten/weer
-
+    # Weather related warnings
     - entity_id: binary_sensor.stookalert_noord_holland
       state: "on"
       options:
-        type: button
+        type: custom:mushroom-entity-card
         name: Stookalert
-        show_state: true
-
+        layout: vertical
+        icon_color: orange
     - entity_id: binary_sensor.knmi_purmerend_waarschuwing
       state: "on"
       options:
-        type: button
-        show_state: true
-
+        type: custom:mushroom-entity-card
+        name: KNMI Waarschuwing
+        layout: vertical
+        icon_color: orange
     - entity_id: binary_sensor.meteoalarm
       state: "on"
       options:
-        type: button
+        type: custom:mushroom-entity-card
         name: MeteoAlarm
-        show_state: true
+        layout: vertical
+        icon_color: orange
+    - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"
+      options:
+        type: custom:mushroom-entity-card
+        layout: vertical
+      not:
+        state: none
+
+    # Zolder
+    - entity_id: binary_sensor.zolderraam_contact
+      state: "on"
+      options:
+        type: custom:mushroom-entity-card
+        name: Zolderraam
+        layout: vertical
+    - entity_id: binary_sensor.balkondeur_contact
+      state: "on"
+      options:
+        type: custom:mushroom-entity-card
+        name: Zolderdeur
+        layout: vertical
 
 sort:
   method: name
