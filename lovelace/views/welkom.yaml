@@ -12,6 +12,7 @@ cards:
       - type: custom:mushroom-person-card
         entity: person.sander
         use_entity_picture: true
+        layout: vertical
       - type: custom:mushroom-alarm-control-panel-card
         entity: alarm_control_panel.huis_alarm
         name: Alarm
@@ -36,7 +37,8 @@ cards:
             tap_action:
               action: toggle
 
-  - !include cards/kamers.yaml
+  # - !include cards/kamers.yaml
+  - !include cards/kamers2.yaml
 
   - type: conditional
     conditions:
