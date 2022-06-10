@@ -111,11 +111,10 @@ filter:
         layout: vertical
         icon_color: orange
     - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"
+      state: "*high" # Matches "anything containing high.
       options:
         type: custom:mushroom-entity-card
         layout: vertical
-      not:
-        state: none
 
     # Zolder
     - entity_id: binary_sensor.zolderraam_contact
