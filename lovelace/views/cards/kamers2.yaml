@@ -167,7 +167,7 @@ cards:
     multiline_secondary: true
     tap_action:
       action: navigate
-      navigation_path: /lovelace/dashboard-buiten/tuin
+      navigation_path: /dashboard-buiten/tuin
     hold_action:
       action: call-service
       service: light.toggle
@@ -186,7 +186,7 @@ cards:
     multiline_secondary: true
     tap_action:
       action: navigate
-      navigation_path: /lovelace/dashboard-buiten/tuin
+      navigation_path: /dashboard-buiten/tuin
     hold_action:
       action: call-service
       service: light.toggle
