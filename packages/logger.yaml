@@ -1,6 +1,9 @@
 logger:
   default: warn
   # logs:
+  #   custom_components.kamstrup_403: debug
+  #   custom_components.knmi: debug
+
   #   homeconnect: debug
   #   homeassistant.components.home_connect: debug
   #   custom_components.tahoma: debug
