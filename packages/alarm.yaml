@@ -189,11 +189,8 @@ automation:
                 title: Zet alarm uit
             url: /dashboard-status/alarm
             push:
-              thread-id: alarm-notification-group
-              sound:
-                name: alarm.caf
-                critical: 1
-                volume: 1.0
+              interruption-level: critical
+              sound: alarm.caf
 
       - alias: Wait for a response
         wait_for_trigger:
