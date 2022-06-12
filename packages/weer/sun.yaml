@@ -15,7 +15,7 @@ template:
       - name: Zon positie
         icon: mdi:weather-sunny-alert
         state: >-
-          {% if state_attr("sun.sun", "azimuth") > 105 and state_attr("sun.sun", "azimuth") < 285 -%}
+          {% if state_attr("sun.sun", "azimuth") > 105 and state_attr("sun.sun", "azimuth") < 290 -%}
             Achter
           {%- else -%}
             Voor

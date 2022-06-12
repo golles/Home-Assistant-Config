@@ -87,8 +87,6 @@ automation:
         entity_id: sensor.zon_positie
         from: Achter
         to: Voor
-        for:
-          minutes: 15
       - platform: state
         entity_id: sun.sun
         to: 
