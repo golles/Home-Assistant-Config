@@ -67,10 +67,12 @@ automation:
           message: >-
             {{ states("sensor.p2000_dichtbij") }}
           data:
+            group: p2000
+            push:
+              interruption-level: v
             action_data:
               latitude: "{{ state_attr('sensor.p2000_dichtbij', 'latitude') }}"
               longitude: "{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}"
               shows_user_location: true
-            group: p2000
             url: >-
               https://www.google.com/maps/search/?api=1&query={{ state_attr("sensor.p2000_dichtbij", "latitude") }},{{ state_attr("sensor.p2000_dichtbij", "longitude") }}
