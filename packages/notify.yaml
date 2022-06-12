@@ -15,6 +15,7 @@ notify:
     platform: group
     services:
       - service: sander
+      - service: mobile_app_ipad_mini_van_golles
 
   - name: all_phones_and_tv
     platform: group
