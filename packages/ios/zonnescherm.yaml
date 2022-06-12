@@ -106,6 +106,7 @@ automation:
         data:
           message: De zon is niet langer achter, wil je het zonnescherm sluiten?
           data:
+            tag: sun
             actions:
               - action: "{{ action_close }}"
                 title: Ja, sluit
@@ -124,6 +125,13 @@ automation:
               - service: cover.close_cover
                 target:
                   entity_id: cover.zonnescherm
+
+              - alias: Clear this notification on all devices
+                service: notify.all_phones
+                data:
+                  message: clear_notification
+                  data:
+                    tag: sun
 
   - id: ios_action_awning_can_be_opened
     alias: iOS action - Zonnescherm kan open
@@ -158,6 +166,7 @@ automation:
         data:
           message: De zon is achter, wil je het zonnescherm openen?
           data:
+            tag: sun
             actions:
               - action: "{{ action_open }}"
                 title: Ja, open
@@ -176,3 +185,10 @@ automation:
               - service: button.press
                 target:
                   entity_id: button.zonnescherm_my_position
+
+              - alias: Clear this notification on all devices
+                service: notify.all_phones
+                data:
+                  message: clear_notification
+                  data:
+                    tag: sun
