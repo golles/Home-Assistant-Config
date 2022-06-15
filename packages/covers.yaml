@@ -65,12 +65,6 @@ automation:
         for:
           minutes: 5
     action:
-      - alias: Notify about this
-        service: notify.sander
-        data:
-          title: Somfy
-          message: Integratie wordt herladen
-
       - alias: Reload Somfy integration
         service: homeassistant.reload_config_entry
         target:
