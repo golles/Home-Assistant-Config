@@ -9,6 +9,7 @@
       light_entity: light.kledingkamer
       illuminance_entity: sensor.kledingkamer_beweging_light_level
       illuminance_below: 10
+      illuminance_above: 50
       day_start_time: 08:00:00
       day_scene: scene.kledingkamer_helder
       day_scene_before_off: scene.kledingkamer_gedimd
