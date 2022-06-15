@@ -25,6 +25,10 @@
       event_type: ios.action_fired
       event_data:
         actionName: Naar bed
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionName: Gaan slapen
     - platform: state
       entity_id: cover.slaapkamer
       attribute: current_position
