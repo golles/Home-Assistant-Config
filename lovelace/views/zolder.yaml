@@ -10,13 +10,13 @@ cards:
       - type: entity
         entity: sensor.zolder_beweging_2_illuminance_lux
       - type: entity
-        entity: binary_sensor.zolderraam_contact
-        icon: mdi:window-closed
-      - type: entity
         entity: binary_sensor.balkondeur_contact
-        icon: mdi:door-closed
+        icon: mdi:door-open
       - type: entity
-        entity: binary_sensor.zolder_bezetting
+        entity: binary_sensor.zolderraam_contact
+        icon: mdi:window-open
+      - type: entity
+        entity: binary_sensor.zolder_beweging
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card

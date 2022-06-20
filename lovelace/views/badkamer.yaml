@@ -11,7 +11,7 @@ cards:
         entity: sensor.badkamer_beweging_light_level
       - type: entity
         entity: binary_sensor.badkamerraam_contact
-        icon: mdi:window-closed
+        icon: mdi:window-open
       - type: entity
         entity: binary_sensor.badkamer_beweging_motion
         icon: mdi:motion-sensor

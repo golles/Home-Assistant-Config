@@ -11,7 +11,7 @@ cards:
         entity: sensor.slaapkamer_lichtsterkte_illuminance_lux
       - type: entity
         entity: binary_sensor.slaapkamerraam_contact
-        icon: mdi:window-closed
+        icon: mdi:window-open
       - type: entity
         entity: binary_sensor.slaapkamer_beweging_occupancy
 

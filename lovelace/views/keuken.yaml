@@ -11,7 +11,7 @@ cards:
         entity: sensor.woonkamer_beweging_1_illuminance_lux
       - type: entity
         entity: binary_sensor.keukenraam_contact
-        icon: mdi:window-closed
+        icon: mdi:window-open
       - type: entity
         entity: binary_sensor.keuken_beweging_occupancy
 

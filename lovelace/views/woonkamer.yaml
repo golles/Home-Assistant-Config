@@ -11,7 +11,10 @@ cards:
         entity: sensor.woonkamer_lichtsterkte_illuminance_lux
       - type: entity
         entity: binary_sensor.achterdeur_contact
-        icon: mdi:door-closed
+        icon: mdi:door-open
+      - type: entity
+        entity: binary_sensor.achterraam_contact
+        icon: mdi:window-open
       - type: entity
         entity: binary_sensor.woonkamer_beweging
 

@@ -11,7 +11,7 @@ cards:
         entity: sensor.kledingkamer_beweging_light_level
       - type: entity
         entity: binary_sensor.kledingkamerraam_contact
-        icon: mdi:window-closed
+        icon: mdi:window-open
       - type: entity
         entity: binary_sensor.kledingkamer_beweging_motion
         icon: mdi:motion-sensor
