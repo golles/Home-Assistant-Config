@@ -9,11 +9,35 @@ cards:
     primary: Woonkamer
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:sofa-outline
     icon_color: >-
       {{ iif(is_state("light.wooneet", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.achterdeur_contact", "on") %}
+        mdi:door-open
+      {% elif is_state("binary_sensor.achterraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.woonkamer_beweging", "on") %}
+        mdi:motion-sensor
+      {% elif is_state("media_player.lg_c9", "on") %}
+        mdi:television
+      {% elif is_state("media_player.lg_soundbar", "on") %}
+        mdi:radio
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.achterdeur_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.achterraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.woonkamer_beweging", "on") %}
+        blue
+      {% elif is_state("media_player.lg_c9", "on") %}
+        blue
+      {% elif is_state("media_player.lg_soundbar", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /lovelace/woonkamer
@@ -28,11 +52,23 @@ cards:
     primary: Keuken
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:countertop-outline
     icon_color: >-
       {{ iif(is_state("light.keuken", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.keukenraam_contact", "on") %}
+        mdi:door-open
+      {% elif is_state("binary_sensor.keuken_beweging_occupancy", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.keukenraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.keuken_beweging_occupancy", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /lovelace/keuken
@@ -46,11 +82,19 @@ cards:
     primary: Toilet
     secondary: >-
       {{ states("sensor.toilet_klimaat_temperature") | float(0) | round(1) }}°C • {{ states("sensor.toilet_klimaat_humidity") | float(0) | round(1) }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:toilet
     icon_color: >-
       {{ iif(is_state("light.toilet", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.toilet_beweging_occupancy", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.toilet_beweging_occupancy", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /lovelace/toilet
@@ -65,11 +109,23 @@ cards:
     primary: Slaapkamer
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:bed-king-outline
     icon_color: >-
       {{ iif(is_state("light.slaapkamer", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.slaapkamerraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.slaapkamer_beweging_occupancy", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.slaapkamerraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.slaapkamer_beweging_occupancy", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-boven/slaapkamer
@@ -84,11 +140,23 @@ cards:
     primary: Kledingkamer
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:wardrobe-outline
     icon_color: >-
       {{ iif(is_state("light.kledingkamer", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.kledingkamerraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.kledingkamer_beweging_motion", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.kledingkamerraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.kledingkamer_beweging_motion", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-boven/kledingkamer
@@ -103,11 +171,27 @@ cards:
     primary: Logeerkamer
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:bed-outline
     icon_color: >-
       {{ iif(is_state("light.logeerkamer", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.logeerkamerraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.tt_macbook_in_thuis_kantoor_en_aan", "on") %}
+        mdi:laptop
+      {% elif is_state("binary_sensor.logeerkamer_beweging_occupancy", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.logeerkamerraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.tt_macbook_in_thuis_kantoor_en_aan", "on") %}
+        blue
+      {% elif is_state("binary_sensor.logeerkamer_beweging_occupancy", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-boven/logeerkamer
@@ -122,11 +206,27 @@ cards:
     primary: Badkamer
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:shower
     icon_color: >-
       {{ iif(is_state("light.badkamer", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.badkamerraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
+        mdi:shower-head
+      {% elif is_state("binary_sensor.badkamer_beweging_motion", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.badkamerraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.badkamer_beweging_motion", "on") %}
+        blue
+      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-boven/badkamer
@@ -141,11 +241,35 @@ cards:
     primary: Zolder
     secondary: >-
       {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:home-roof
     icon_color: >-
       {{ iif(is_state("light.zolder", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.balkondeur_contact", "on") %}
+        mdi:door-open
+      {% elif is_state("binary_sensor.zolderraam_contact", "on") %}
+        mdi:window-open
+      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
+        mdi:shower-head
+      {% elif is_state("binary_sensor.zolder_beweging", "on") %}
+        mdi:motion-sensor
+      {% elif is_state("media_player.zolder", "on") %}
+        mdi:television
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.balkondeur_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.zolderraam_contact", "on") %}
+        amber
+      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
+        blue
+      {% elif is_state("binary_sensor.zolder_beweging", "on") %}
+        blue
+      {% elif is_state("media_player.zolder", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-boven/zolder
@@ -160,11 +284,19 @@ cards:
     primary: Voortuin
     secondary: >-
       {{ state_attr(entity, "temperature") }}°C • {{ state_attr(entity, "humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:flower-tulip
     icon_color: >-
       {{ iif(is_state("light.voortuin", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.deurbel_ringing_sensor", "on") %}
+        mdi:bell
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.deurbel_ringing_sensor", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-buiten/tuin
@@ -179,11 +311,19 @@ cards:
     primary: Achtertuin
     secondary: >-
       {{ state_attr(entity, "temperature") }}°C • {{ state_attr(entity, "humidity") }}%
-    # layout: vertical
+    layout: vertical
     icon: mdi:table-chair
     icon_color: >-
       {{ iif(is_state("light.achtertuin", "on"), "orange", "grey") }}
     multiline_secondary: true
+    badge_icon: >-
+      {% if is_state("binary_sensor.hue_outdoor_motion_sensor_1_motion", "on") %}
+        mdi:motion-sensor
+      {% endif %}
+    badge_color: >-
+      {% if is_state("binary_sensor.hue_outdoor_motion_sensor_1_motion", "on") %}
+        blue
+      {% endif %}
     tap_action:
       action: navigate
       navigation_path: /dashboard-buiten/tuin
@@ -195,7 +335,7 @@ cards:
 
   - type: custom:mushroom-entity-card
     entity: weather.knmi_purmerend
-    # layout: vertical
+    layout: vertical
     icon_color: grey
     name: Weer
     hide_icon: false
