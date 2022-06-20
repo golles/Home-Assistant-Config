@@ -5,6 +5,18 @@ icon: mdi:home-city-outline
 badges: []
 cards:
 
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        double_tap_action:
+          action: none
+        hold_action:
+          action: none
+
   - type: custom:mushroom-title-card
     title: Buurt
 
