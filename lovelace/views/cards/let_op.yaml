@@ -43,9 +43,14 @@ filter:
         Wastecollector: purmerend
         Days_until: <= 1
       options:
-        type: custom:mushroom-entity-card
+        type: custom:mushroom-template-card
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
         layout: vertical
-        use_entity_picture: true
+        picture: >-
+          {{ state_attr(entity, "entity_picture") }}
       not:
         state: unknown
 

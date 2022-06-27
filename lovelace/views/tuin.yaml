@@ -56,8 +56,15 @@ cards:
           attributes:
             Wastecollector: purmerend
           options:
-            type: custom:button-card
-            template: afvalbeheer
+            type: custom:mushroom-template-card
+            primary: >-
+              {{ state_attr(entity, "friendly_name") }}
+            secondary: >-
+              {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
+            layout: vertical
+            picture: >-
+              {{ state_attr(entity, "entity_picture") }}
+
     sort:
       method: attribute
       attribute: Days_until
