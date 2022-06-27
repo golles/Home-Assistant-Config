@@ -16,7 +16,13 @@ template:
               {% set program.name = switch.name.split(prefix)[1] %}
             {%- endif %}
           {%- endfor %}
-          {{ program.name }}
+          
+          {% set programTranslation = { "Auto30": "Auto 30°C", "Auto40": "Auto 40°C", "Auto60": "Auto 60°C", "Chiffon": "Zijde", "Cotton": "Katoen", "CottonEco": "Katoen Eco", "Curtains": "Gordijnen", "DarkWash": "Donkeren was", "DelicatesSilk": "Fijne was/zijde", "Dessous": "Ondergoed", "EasyCare": "Kreukherstellend", "Mix": "Mix/Snel", "Monsoon": "Monsoon", "Outdoor": "Outdoor & Extreme Sporten", "PlushToy": "Plushen Speelgoed", "Sensitive": "Sensitive", "ShirtsBlouses": "Overhemden bloezen", "SportFitness": "Sport", "Towels": "Handdoeken", "WaterProof": "Waterbestendig", "Wool": "Wol"} %}
+          {% if program.name in programTranslation %}
+            {{ programTranslation[program.name] }}
+          {% else %}
+            {{ program.name }}
+          {% endif %}
 
       - name: Vaatwasser programma
         icon: mdi:dishwasher
@@ -28,7 +34,13 @@ template:
               {% set program.name = switch.name.split(prefix)[1] %}
             {%- endif %}
           {%- endfor %}
-          {{ program.name }}
+          
+          {% set programTranslation = {"Auto1": "Auto 1", "Auto2": "Auto 2", "Auto3": "Auto 3", "AutoHalfLoad": "Auto half beladen", "Eco50": "Eco 50°C", "ExpressSparkle65": "Express Sparkle 65°C", "Glas40": "Glas 40°C", "GlassCare": "Glasverzorging", "Intensiv45": "Intensief 45°C", "Intensiv70": "Intensief 70°C", "IntensivPower": "Intensief vermogen", "Kurz60": "Kort 60°C", "MachineCare": "Machineverzorging", "MagicDaily": "Magic Daily", "MaximumCleaning": "Maximale reiniging", "NightWash": "Nachtprogramma", "Normal45": "Normaal 45°C", "Normal65": "Normaal 65°C", "PreRinse": "Voorspoelen", "Quick45": "Snel programma 45°C", "Quick65": "Snel programma 65°C", "SteamFresh": "", "Super60": "Super 60°C"} %}
+          {% if program.name in programTranslation %}
+            {{ programTranslation[program.name] }}
+          {% else %}
+            {{ program.name }}
+          {% endif %}
 
       - name: Wasmachine resterende minuten
         icon: mdi:clock
