@@ -1,5 +1,4 @@
 swipe_nav: !include config/swipe_nav.yaml
-button_card_templates: !include config/button_card_templates.yaml
 
 views:
   - !include views/alarm.yaml

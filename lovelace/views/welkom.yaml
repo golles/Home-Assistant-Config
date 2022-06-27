@@ -37,8 +37,7 @@ cards:
             tap_action:
               action: toggle
 
-  # - !include cards/kamers.yaml
-  - !include cards/kamers2.yaml
+  - !include cards/kamers.yaml
 
   - type: conditional
     conditions:

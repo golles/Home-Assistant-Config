@@ -3,7 +3,6 @@
 RESOURCES=$(cat <<'EOF'
 auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
 battery-state-card.js           https://github.com/maxwroc/battery-state-card/releases/latest/download/battery-state-card.js
-button-card.js                  https://github.com/custom-cards/button-card/releases/latest/download/button-card.js
 elapsed-time-entity-row.js      https://github.com/golles/lovelace-elapsed-time-entity-row/releases/latest/download/elapsed-time-entity-row.js
 fold-entity-row.js              https://raw.githubusercontent.com/thomasloven/lovelace-fold-entity-row/master/fold-entity-row.js
 mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
