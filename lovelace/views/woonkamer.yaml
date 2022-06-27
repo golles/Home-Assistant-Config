@@ -180,21 +180,218 @@ cards:
     columns: 3
     square: true
     cards:
-      - type: custom:button-card
+      - type: custom:mushroom-template-card
         entity: plant.calathea_medallion
-        template: plant
-      - type: custom:button-card
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
+
+      - type: custom:mushroom-template-card
         entity: plant.calathea_ornata
-        template: plant
-      - type: custom:button-card
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
+
+      - type: custom:mushroom-template-card
         entity: plant.scindapsus_epipremnum
-        template: plant
-      - type: custom:button-card
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
+
+      - type: custom:mushroom-template-card
         entity: plant.dracaena_marginata
-        template: plant
-      - type: custom:button-card
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
+
+      - type: custom:mushroom-template-card
         entity: plant.haworthiopsis_attenuata
-        template: plant
-      - type: custom:button-card
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
+
+      - type: custom:mushroom-template-card
         entity: plant.crassula_ovata
-        template: plant
+        icon: mdi:flower
+        layout: vertical
+        icon_color: green
+        fill_container: true
+        multiline_secondary: true
+        tap_action:
+          action: more-info
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {% if is_state(entity, "problem") %}
+            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+              Onbekend
+            {% else %}
+              {{ 
+                state_attr(entity, "problem")
+                | replace("moisture high", "te vochtig")
+                | replace("moisture low", "te droog")
+                | replace("conductivity high", "hoge geleidbaarheid")
+                | replace("conductivity low", "lage geleidbaarheid")
+                | replace("temperature high", "te warm")
+                | replace("temperature low", "te koud")
+                | replace("brightness high", "te licht")
+                | replace("brightness low", "te donker")
+              }}
+            {% endif %}
+          {% else %}
+            {{ states(entity) }}
+          {% endif %}
+        badge_icon: >-
+          {{ iif(is_state(entity, "problem"), "mdi:alert") }}
+        badge_color: >-
+          {{ iif(is_state(entity, "problem"), "red") }}
