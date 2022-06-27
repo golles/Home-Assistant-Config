@@ -57,11 +57,13 @@ cards:
             Wastecollector: purmerend
           options:
             type: custom:mushroom-template-card
+            layout: vertical
+            tap_action:
+              action: more-info
             primary: >-
               {{ state_attr(entity, "friendly_name") }}
             secondary: >-
               {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
-            layout: vertical
             picture: >-
               {{ state_attr(entity, "entity_picture") }}
 
