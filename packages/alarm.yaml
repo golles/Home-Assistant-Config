@@ -27,68 +27,99 @@ automation:
               entity_id: group.residents
               state: not_home
           sequence:
-            - alias: Turn on the evening scene
+            - alias: Set the alarm to arm away
               service: alarm_control_panel.alarm_arm_away
               entity_id: alarm_control_panel.huis_alarm
         default:
-          - alias: Turn on the evening scene
+          - alias: Disarm the alarm
             service: alarm_control_panel.alarm_disarm
             entity_id: alarm_control_panel.huis_alarm
 
-  - id: alarm_trigger_lights
-    alias: Alarm - Melding in huis
+
+  - id: alarm_attic_stairs
+    alias: Alarm - Zoldertrap sensor uitzetten als de balkondeur open is
+    description: |
+      Als de balkondeur open is, mag de zoldertrap sensor het alarm niet triggeren.
+      Dit gebeurt bijvoorbeeld als er was aan het drogen is (op het dak).
     mode: single
     trigger:
       - platform: state
         entity_id: alarm_control_panel.huis_alarm
-        from: pending
-        to: triggered
+        to:
+          - armed_away
+          - disarmed
     action:
-      - alias: Set up variables for the actions
-        variables:
-          # lights_flash: "light.keuken, light.tv"
-          lights_flash: >-
-            {{
-              states.light 
-              | selectattr("attributes.is_hue_group", "equalto", true)
-              | selectattr("attributes.supported_color_modes", "equalto", ["color_temp", "hs"]) 
-              | map(attribute='entity_id')
-              | join(', ')
-            }}
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: alarm_control_panel.huis_alarm
+              state: armed_away
+            - condition: state
+              entity_id: binary_sensor.balkondeur_contact
+              state: "on"
+          sequence:
+            - alias: Disable the motion sensor
+              service: switch.turn_off
+              entity_id: switch.zoldertrap_sensor_motion
+        default:
+          - alias: Enable the motion sensor
+            service: switch.turn_n
+            entity_id: switch.zoldertrap_sensor_motion
 
-      - alias: Store the current light state
-        service: scene.create
-        data:
-          scene_id: before_alarm_trigger
-          snapshot_entities: "{{ lights_flash }}"
+  # - id: alarm_trigger_lights
+  #   alias: Alarm - Melding in huis
+  #   mode: single
+  #   trigger:
+  #     - platform: state
+  #       entity_id: alarm_control_panel.huis_alarm
+  #       from: pending
+  #       to: triggered
+  #   action:
+  #     - alias: Set up variables for the actions
+  #       variables:
+  #         # lights_flash: "light.keuken, light.tv"
+  #         lights_flash: >-
+  #           {{
+  #             states.light 
+  #             | selectattr("attributes.is_hue_group", "equalto", true)
+  #             | selectattr("attributes.supported_color_modes", "equalto", ["color_temp", "hs"]) 
+  #             | map(attribute='entity_id')
+  #             | join(', ')
+  #           }}
 
-      - alias: Turn on lights
-        service: light.turn_on
-        target:
-          entity_id: "{{ lights_flash }}"
+  #     - alias: Store the current light state
+  #       service: scene.create
+  #       data:
+  #         scene_id: before_alarm_trigger
+  #         snapshot_entities: "{{ lights_flash }}"
 
-      - alias: Wait 1 second before we start flashing
-        delay: 1
+  #     - alias: Turn on lights
+  #       service: light.turn_on
+  #       target:
+  #         entity_id: "{{ lights_flash }}"
 
-      - alias: Flash lights
-        service: light.turn_on
-        data:
-          brightness: 255
-          rgb_color: [255, 0, 0]
-          flash: long
-        target:
-          entity_id: "{{ lights_flash }}"
+  #     - alias: Wait 1 second before we start flashing
+  #       delay: 1
+
+  #     - alias: Flash lights
+  #       service: light.turn_on
+  #       data:
+  #         brightness: 255
+  #         rgb_color: [255, 0, 0]
+  #         flash: long
+  #       target:
+  #         entity_id: "{{ lights_flash }}"
       
-      - alias: Wait untill the alarm is no longer triggered
-        wait_for_trigger:
-          platform: state
-          entity_id: alarm_control_panel.huis_alarm
-          from: triggered
+  #     - alias: Wait untill the alarm is no longer triggered
+  #       wait_for_trigger:
+  #         platform: state
+  #         entity_id: alarm_control_panel.huis_alarm
+  #         from: triggered
 
-      - alias: Restore lights to previous state
-        service: scene.turn_on
-        data:
-          entity_id: scene.before_alarm_trigger
+  #     - alias: Restore lights to previous state
+  #       service: scene.turn_on
+  #       data:
+  #         entity_id: scene.before_alarm_trigger
 
   - id: alarm_system
     alias: Alarm - Melding bij beweging
@@ -178,7 +209,7 @@ automation:
         entity_id: alarm_control_panel.huis_alarm
 
       - alias: Notify user and ask to disarm
-        service: notify.sander
+        service: notify.all_phones
         data:
           title: 🚨🚨🚨 Alarm
           message: >-
