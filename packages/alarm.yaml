@@ -63,7 +63,7 @@ automation:
               entity_id: switch.zoldertrap_sensor_motion
         default:
           - alias: Enable the motion sensor
-            service: switch.turn_n
+            service: switch.turn_on
             entity_id: switch.zoldertrap_sensor_motion
 
   # - id: alarm_trigger_lights
