@@ -20,17 +20,29 @@
     - choose:
       - conditions:
         # When the fan is set to low, set it to high for a certain amount of time.
-        - "{{ is_state_attr('fan.mechanische_ventilatie', 'percentage', 25) }}"
+        - condition: numeric_state
+          entity_id: fan.mechanische_ventilatie
+          attribute: percentage
+          below: 26
         sequence:
-          - service: button.press
+          - alias: Turn on fan to reduce humidity
+            service: button.press
             target:
               entity_id: button.mechanische_ventilatie_30_minuten_hoog
     - choose:
       - conditions:
-        # When the room temperature is below a certain value, switch the heating on.
-        - "{{ state_attr('climate.zolder', 'temperature') | float(20) < 20 }}"
+        # When the heater is in auto mode, switch the heating on.
+        - condition: state
+          entity_id: climate.zolder
+          state: auto
+        # Only when the room temperature is below a certain value.
+        - condition: numeric_state
+          entity_id: climate.zolder
+          attribute: temperature
+          below: 20
         sequence:
-          - service: tado.set_climate_timer
+          - alias: Heat the room for a period of time to reduce humidity
+            service: tado.set_climate_timer
             data:
               entity_id: climate.zolder
               time_period: "02:00:00"
@@ -45,8 +57,11 @@
       from: Run
       to: Finished
   condition:
-    - "{{ is_state('media_player.lg_c9', 'on') }}"
+    - condition: state
+      entity_id: media_player.lg_c9
+      state: "on"
   action:
-    - service: notify.lg_c9
+    - alias: Notify tv watchers that the washing machine is done
+      service: notify.lg_c9
       data:
         message: Wasmachine is klaar
