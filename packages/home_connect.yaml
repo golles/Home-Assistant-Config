@@ -158,7 +158,7 @@ automation:
           entity_id: input_datetime.dishwasher_daily_start
           time: "{{ schedule_time }}"
 
-# The washing machine remains sometimes unavailble. Reloading the integration to "fix" this
+# The washing machine remains sometimes unavailable. Reloading the integration to "fix" this
 # Issue: https://github.com/home-assistant/core/issues/66063
   - id: reload_home_connect
     alias: Wasmachine - Herlaad Home Connect integratie
@@ -175,9 +175,8 @@ automation:
         for:
           minutes: 2
     condition:
-      - condition: numeric_state
-        entity_id: sensor.runtime
-        above: 200 # Should be a little higher than the minutes in the triggers, to deal with reboot.
+      # Should be a little higher than the minutes in the triggers, to deal with restarts.
+      - "{{ now() | as_timestamp(0) - states('sensor.uptime') | as_timestamp(0) > 200 }}"
     action:
       - alias: Reload Home Connect integration
         service: homeassistant.reload_config_entry

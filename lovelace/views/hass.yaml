@@ -9,12 +9,8 @@ cards:
     title: Home Assistant
     show_header_toggle: false
     entities:
-      - type: custom:elapsed-time-entity-row
-        entity: sensor.host_uptime
-        hideSeconds: "true"
-      - type: custom:elapsed-time-entity-row
-        entity: sensor.runtime
-        hideSeconds: "true"
+      - entity: sensor.last_boot
+      - entity: sensor.uptime
       - entity: sensor.mariadb_size
         icon: mdi:database
       - type: divider
@@ -53,6 +49,7 @@ cards:
         - domain: button
         - domain: scene
         - entity_id: cover.zonnescherm
+        - entity_id: "sensor.dsmr_*gas*"
       include:
         - state: unknown
   

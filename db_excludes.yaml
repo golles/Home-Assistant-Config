@@ -9,10 +9,5 @@ entities:
   - sensor.time_utc
   - sensor.internet_time
 
-  # Uptime:
-  - sensor.uptime
-  - sensor.host_uptime
-  - sensor.runtime
-
   # DSMR:
   - sensor.dsmr_reading_timestamp
