@@ -9,7 +9,6 @@ mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releas
 mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js
 multiple-entity-row.js          https://github.com/benct/lovelace-multiple-entity-row/releases/latest/download/multiple-entity-row.js
 mushroom.js                     https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js
-simple-thermostat.js            https://github.com/nervetattoo/simple-thermostat/releases/latest/download/simple-thermostat.js
 swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
 template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
 EOF

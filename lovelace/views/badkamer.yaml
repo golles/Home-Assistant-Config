@@ -32,29 +32,23 @@ cards:
   - type: custom:mushroom-title-card
     title: Badkamer
 
-  - type: custom:simple-thermostat
+  - type: custom:mushroom-climate-card
     entity: climate.badkamer
-    header: false
-    step_layout: column
-    step_size: '1'
-    decimals: '0'
-    name: false
-    icon: false
-    control:
-      - hvac
-    label:
-      temperature: Temperatuur
-      state: Status
-    sensors:
-      - attribute: current_humidity
-        name: Luchtvochtigheid
-        unit: '%'
-    layout:
-      mode:
-        names: true
-        icons: true
-        headings: false
-      step: column
+    name: Klimaat
+    icon: mdi:home-thermometer-outline
+    fill_container: true
+    show_temperature_control: true
+    collapsible_controls: false
+    hvac_modes:
+      - auto
+      - heat
+      - 'off'
+    tap_action:
+      action: more-info
+    double_tap_action:
+      action: none
+    hold_action:
+      action: none
 
   - type: custom:mushroom-light-card
     entity: light.badkamer
