@@ -29,7 +29,8 @@ automation:
         event_data:
           actionName: Naar bed
     action:
-      - service: script.everything_off
+      - alias: Turn most of the devices off
+        service: script.everything_off
         data:
           exclude_entity_ids:
             - light.woonkamer_groot_1
@@ -39,15 +40,45 @@ automation:
             - light.overloop_spot_3
             - light.gekleurde_licht
 
-      - service: light.turn_off
+      - alias: Now turn some lights off with a transition
+        service: light.turn_off
         data:
           entity_id: light.woonkamer
           transition: 30
 
-      - service: light.turn_on
+      - choose:  
+        - conditions:
+            - alias: Is the current time before input_datetime.covers_down time
+              condition: template
+              value_template: >-
+                {{ now() | as_timestamp | timestamp_custom("%H:%M:%S") < states("input_datetime.covers_down")}}
+          sequence:
+            - alias: Set the covers down time to be in a few seconds, so they all close
+              service: input_datetime.set_datetime
+              data:
+                entity_id: input_datetime.covers_down
+                time: >-
+                  {{ (now() | as_timestamp + 5) | timestamp_custom("%H:%M:%S") }}
+
+      - choose:  
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.slaapkamerraam_contact
+              state: "on"
+          sequence:
+            - alias: Wait if the window is closed within a given time
+              wait_template: >-
+                {{ is_state("binary_sensor.slaapkamerraam_contact", "off") }}
+              timeout:
+                minutes: 30
+              continue_on_timeout: false
+
+      - alias: Turn on the bed lights
+        service: scene.turn_on
         data:
-          entity_id: light.bedlampen
-          profile: nachtlampje
+          transition: 2
+        target:
+          entity_id: scene.slaapkamer_nachtlampje
 
   - id: ios_action_going_to_sleep
     alias: iOS action - Gaan slapen
@@ -59,4 +90,5 @@ automation:
         event_data:
           actionName: Gaan slapen
     action:
-      - service: script.everything_off
+      - alias: Now turn everything off
+        service: script.everything_off

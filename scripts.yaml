@@ -81,6 +81,7 @@ close_cover_window_state:
   
         - conditions:
             - "{{ is_state(window_entity, 'on') }}"
+            - "{{ is_state(cover_entity, 'open') }}"
           sequence:
             - alias: Wait if the window is closed within a given time.
               wait_template: "{{ is_state(window_entity, 'off') }}"
