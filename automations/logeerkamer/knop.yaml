@@ -5,32 +5,30 @@
     input:
       switch: sensor.logeerkamer_knop_action
       single:
-        - choose:
-          - conditions:
-              - condition: state
-                entity_id: light.logeerkamer
-                state: "off"
-            sequence:
-              - choose:
-                - conditions:
-                    - condition: time
-                      after: 08:00:00
-                      before: 00:00:00
-                  sequence:
-                    - alias: Turn on light with day scene
-                      service: scene.turn_on
-                      data:
-                        transition: 2
-                      target:
-                        entity_id: scene.logeerkamer_helder
-                default:
-                  - alias: Turn on light with night scene
-                    service: scene.turn_on
-                    data:
-                      transition: 2
-                    target:
-                      entity_id: scene.logeerkamer_nachtlampje
-          default:
+        - if:
+            - condition: state
+              entity_id: light.logeerkamer
+              state: "off"
+          then:
+            - if:
+                - condition: time
+                  after: 08:00:00
+                  before: 00:00:00
+              then:
+                - alias: Turn on light with day scene
+                  service: scene.turn_on
+                  data:
+                    transition: 2
+                  target:
+                    entity_id: scene.logeerkamer_helder
+              else:
+                - alias: Turn on light with night scene
+                  service: scene.turn_on
+                  data:
+                    transition: 2
+                  target:
+                    entity_id: scene.logeerkamer_nachtlampje
+          else:
             - alias: Turn off the light
               service: light.turn_off
               data:
@@ -40,9 +38,5 @@
           service: light.turn_on
           data:
             entity_id: light.logeerkamer
-            brightness_step: >
-              {%- if state_attr("light.logeerkamer", "brightness") % 2 == 0 %}
-                20
-              {%- else -%}
-                -20
-              {%- endif %}
+            brightness_step: >-
+              {{ iif(state_attr("light.logeerkamer", "brightness") | int(0) % 2 == 0, 20, -20) }}
