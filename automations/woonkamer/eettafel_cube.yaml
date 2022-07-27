@@ -4,6 +4,7 @@
     path: golles/zigbee2mqtt_aqara_magic_cube.yaml
     input:
       remote: sensor.eettafel_cube_action
+      side: sensor.eettafel_cube_side
 
       flip_side_0:
         - service: script.eettafel_on

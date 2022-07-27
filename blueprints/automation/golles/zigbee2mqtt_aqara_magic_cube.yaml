@@ -11,12 +11,21 @@ blueprint:
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_aqara_magic_cube.yaml
   input:
     remote:
-      name: Remote
+      name: Action entity
       description: Aqara Magic Cube to use, entity should end with _action
       selector:
         entity:
           integration: mqtt
           domain: sensor
+          multiple: false
+    side:
+      name: Side entity
+      description: Aqara Magic Cube to use, entity should end with _side
+      selector:
+        entity:
+          integration: mqtt
+          domain: sensor
+          multiple: false
 
     fall:
       name: Drop the cube
@@ -192,7 +201,6 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input remote
-    attribute: action
     to:
       - "fall"
       - "flip180"
@@ -205,8 +213,9 @@ trigger:
 
 action:
   - variables:
-      event: "{{ trigger.to_state.attributes.action }}"
-      side: "{{ trigger.to_state.attributes.side }}"
+      event: "{{ trigger.to_state.state }}"
+      side_entity: !input side
+      side: "{{ states(side_entity) }}"
 
   - choose:
     - conditions: >-
