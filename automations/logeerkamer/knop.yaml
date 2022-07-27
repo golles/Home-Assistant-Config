@@ -34,9 +34,17 @@
               data:
                 entity_id: light.logeerkamer
       hold:
-        - alias: Step brightness
-          service: light.turn_on
-          data:
-            entity_id: light.logeerkamer
-            brightness_step: >-
-              {{ iif(state_attr("light.logeerkamer", "brightness") | int(0) % 2 == 0, 20, -20) }}
+        - repeat:
+            until:
+              - condition: state
+                entity_id: sensor.logeerkamer_knop_action
+                state: release
+            sequence:
+              - alias: Step brightness
+                service: light.turn_on
+                data:
+                  entity_id: light.logeerkamer
+                  brightness_step: >-
+                    {{ iif(state_attr("light.logeerkamer", "brightness") | int(0) % 2 == 0, 20, -20) }}
+              - delay:
+                  seconds: 1
