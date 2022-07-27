@@ -90,7 +90,8 @@ script:
       - alias: Turn on the light
         service: light.turn_on
         data:
-          profile: nachtlampje
+          xy_color: [0.502, 0.414] # Nachtlampje
+          brightness: 1
           transition: 0
         target: "{{ light }}"
 
@@ -101,7 +102,8 @@ script:
       - alias: Transition the light to a brighter state
         service: light.turn_on
         data:
-          profile: energie
+          xy_color: [0.314, 0.331] # Energie
+          brightness: 255
           transition: "{{ transition }}"
         target: "{{ light }}"
   

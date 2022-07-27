@@ -17,21 +17,27 @@
                       after: 08:00:00
                       before: 00:00:00
                   sequence:
-                    - service: light.turn_on
+                    - alias: Turn on light with day scene
+                      service: scene.turn_on
                       data:
-                        entity_id: light.logeerkamer
-                        profile: helder
+                        transition: 2
+                      target:
+                        entity_id: scene.logeerkamer_helder
                 default:
-                  - service: light.turn_on
+                  - alias: Turn on light with night scene
+                    service: scene.turn_on
                     data:
-                      entity_id: light.logeerkamer
-                      profile: nachtlampje
+                      transition: 2
+                    target:
+                      entity_id: scene.logeerkamer_nachtlampje
           default:
-            - service: light.turn_off
+            - alias: Turn off the light
+              service: light.turn_off
               data:
                 entity_id: light.logeerkamer
       hold:
-        - service: light.turn_on
+        - alias: Step brightness
+          service: light.turn_on
           data:
             entity_id: light.logeerkamer
             brightness_step: >
