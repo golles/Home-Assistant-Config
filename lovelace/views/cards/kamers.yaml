@@ -2,9 +2,9 @@ type: vertical-stack
 cards: 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -59,7 +59,6 @@ cards:
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
-              layout: vertical
           - type: template
             entity: binary_sensor.achterdeur_contact
             icon: >-
@@ -86,9 +85,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -141,7 +140,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.keuken_beweging
+            entity: binary_sensor.keuken_beweging_occupancy
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
@@ -164,9 +163,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -214,9 +213,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -288,9 +287,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -356,9 +355,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -434,9 +433,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -501,9 +500,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
@@ -583,9 +582,9 @@ cards:
     cards:
       - type: custom:vertical-stack-in-card
         styles:
-          '--chip-box-shadow': none
-          '--chip-background': none
-          '--chip-spacing': 0
+          "--chip-box-shadow": none
+          "--chip-background": none
+          "--chip-spacing": 0
         cards:
           - type: horizontal-stack
             cards:
@@ -629,9 +628,9 @@ cards:
 
       - type: custom:vertical-stack-in-card
         styles:
-          '--chip-box-shadow': none
-          '--chip-background': none
-          '--chip-spacing': 0
+          "--chip-box-shadow": none
+          "--chip-background": none
+          "--chip-spacing": 0
         cards:
           - type: horizontal-stack
             cards:
@@ -701,9 +700,9 @@ cards:
 
   - type: custom:vertical-stack-in-card
     styles:
-      '--chip-box-shadow': none
-      '--chip-background': none
-      '--chip-spacing': 0
+      "--chip-box-shadow": none
+      "--chip-background": none
+      "--chip-spacing": 0
     cards:
       - type: horizontal-stack
         cards:
