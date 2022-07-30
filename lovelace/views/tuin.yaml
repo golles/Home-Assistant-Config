@@ -47,8 +47,8 @@ cards:
   - type: custom:auto-entities
     show_empty: true
     card:
-      type: grid
-      title: Afval
+      type: custom:vertical-stack-in-card
+      horizontal: true
     card_param: cards
     filter:
       include:

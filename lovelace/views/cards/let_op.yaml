@@ -123,19 +123,5 @@ filter:
         type: custom:mushroom-entity-card
         layout: vertical
 
-    # Zolder
-    - entity_id: binary_sensor.zolderraam_contact
-      state: "on"
-      options:
-        type: custom:mushroom-entity-card
-        name: Zolderraam
-        layout: vertical
-    - entity_id: binary_sensor.balkondeur_contact
-      state: "on"
-      options:
-        type: custom:mushroom-entity-card
-        name: Zolderdeur
-        layout: vertical
-
 sort:
   method: name

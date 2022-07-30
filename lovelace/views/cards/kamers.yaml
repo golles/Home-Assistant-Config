@@ -1,344 +1,800 @@
+type: vertical-stack
+cards: 
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Woonkamer
+            icon: mdi:sofa-outline
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/woonkamer
 
-type: grid
-columns: 2
-square: false
-title: Kamers
-cards:
-  - type: custom:mushroom-template-card
-    entity: climate.woonkamer
-    primary: Woonkamer
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:sofa-outline
-    icon_color: >-
-      {{ iif(is_state("light.wooneet", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.achterdeur_contact", "on") %}
-        mdi:door-open
-      {% elif is_state("binary_sensor.achterraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.woonkamer_beweging", "on") %}
-        mdi:motion-sensor
-      {% elif is_state("media_player.lg_c9", "on") %}
-        mdi:television
-      {% elif is_state("media_player.lg_soundbar", "on") %}
-        mdi:radio
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.achterdeur_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.achterraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.woonkamer_beweging", "on") %}
-        blue
-      {% elif is_state("media_player.lg_c9", "on") %}
-        blue
-      {% elif is_state("media_player.lg_soundbar", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /lovelace/woonkamer
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.wooneet
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.woonkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.woonkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+  
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.wooneet
+            icon: mdi:lamps
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: media_player.lg_c9
+            icon: mdi:television
+            icon_color: >-
+              {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
+          - type: template
+            entity: media_player.lg_soundbar
+            icon: mdi:radio
+            icon_color: >-
+              {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
+          - type: template
+            entity: binary_sensor.woonkamer_beweging
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+              layout: vertical
+          - type: template
+            entity: binary_sensor.achterdeur_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:door-open", "mdi:door-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.achterraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: cover.zonnescherm
+            icon: mdi:storefront-outline
+            icon_color: >-
+              {{ iif(is_state("binary_sensor.zonnescherm_contact_contact", "on"), "blue", "grey") }}
+            tap_action:
+              action: more-info
 
-  - type: custom:mushroom-template-card
-    entity: climate.woonkamer
-    primary: Keuken
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:countertop-outline
-    icon_color: >-
-      {{ iif(is_state("light.keuken", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.keukenraam_contact", "on") %}
-        mdi:door-open
-      {% elif is_state("binary_sensor.keuken_beweging_occupancy", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.keukenraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.keuken_beweging_occupancy", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /lovelace/keuken
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.keuken
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Keuken
+            icon: mdi:countertop-outline
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/keuken
 
-  - type: custom:mushroom-template-card
-    primary: Toilet
-    secondary: >-
-      {{ states("sensor.toilet_klimaat_temperature") | float(0) | round(1) }}°C • {{ states("sensor.toilet_klimaat_humidity") | float(0) | round(1) }}%
-    layout: vertical
-    icon: mdi:toilet
-    icon_color: >-
-      {{ iif(is_state("light.toilet", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.toilet_beweging_occupancy", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.toilet_beweging_occupancy", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /lovelace/toilet
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.toilet
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.woonkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.woonkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+  
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.keuken
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: switch.keukenkastje_lamp_switch
+            icon: mdi:lightbulb
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: sensor.vaatwasser_status
+            icon: mdi:dishwasher
+            icon_color: >-
+              {{ iif(is_state("switch.vaatwasser_power", "on"), "blue", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.keuken_beweging
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+          - type: template
+            entity: binary_sensor.keukenraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: cover.keuken
+            icon: >-
+              {{ iif(is_state(entity, "open"), "mdi:window-shutter-open", "mdi:window-shutter") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "open"), "blue", "grey") }}
+            tap_action:
+              action: more-info
 
-  - type: custom:mushroom-template-card
-    entity: climate.slaapkamer
-    primary: Slaapkamer
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:bed-king-outline
-    icon_color: >-
-      {{ iif(is_state("light.slaapkamer", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.slaapkamerraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.slaapkamer_beweging_occupancy", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.slaapkamerraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.slaapkamer_beweging_occupancy", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-boven/slaapkamer
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.slaapkamer
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Toilet
+            icon: mdi:toilet
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/toilet
 
-  - type: custom:mushroom-template-card
-    entity: climate.kledingkamer
-    primary: Kledingkamer
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:wardrobe-outline
-    icon_color: >-
-      {{ iif(is_state("light.kledingkamer", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.kledingkamerraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.kledingkamer_beweging_motion", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.kledingkamerraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.kledingkamer_beweging_motion", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-boven/kledingkamer
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.kledingkamer
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: sensor.toilet_klimaat_temperature
+                content: >-
+                  {{ states(entity) | float(0) | round(1) }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: sensor.toilet_klimaat_humidity
+                content: >-
+                  {{ states(entity) | float(0) | round(1) }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+  
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.toilet
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: binary_sensor.toilet_beweging_occupancy
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
 
-  - type: custom:mushroom-template-card
-    entity: climate.logeerkamer
-    primary: Logeerkamer
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:bed-outline
-    icon_color: >-
-      {{ iif(is_state("light.logeerkamer", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.logeerkamerraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.tt_macbook_in_thuis_kantoor_en_aan", "on") %}
-        mdi:laptop
-      {% elif is_state("binary_sensor.logeerkamer_beweging_occupancy", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.logeerkamerraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.tt_macbook_in_thuis_kantoor_en_aan", "on") %}
-        blue
-      {% elif is_state("binary_sensor.logeerkamer_beweging_occupancy", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-boven/logeerkamer
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.logeerkamer
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Slaapkamer
+            icon: mdi:bed-king-outline
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-boven/slaapkamer
 
-  - type: custom:mushroom-template-card
-    entity: climate.kledingkamer
-    primary: Badkamer
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:shower
-    icon_color: >-
-      {{ iif(is_state("light.badkamer", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.badkamerraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
-        mdi:shower-head
-      {% elif is_state("binary_sensor.badkamer_beweging_motion", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.badkamerraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.badkamer_beweging_motion", "on") %}
-        blue
-      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-boven/badkamer
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.badkamer
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.slaapkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.slaapkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+      
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.slaapkamer_plafond_groep
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: light.slaapkamer_bedlampen
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:desk-lamp-on", "mdi:desk-lamp") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: binary_sensor.slaapkamer_beweging_occupancy
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.slaapkamerraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: cover.slaapkamer
+            icon: >-
+              {{ iif(is_state(entity, "open"), "mdi:window-shutter-open", "mdi:window-shutter") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "open"), "blue", "grey") }}
+            tap_action:
+              action: more-info
 
-  - type: custom:mushroom-template-card
-    entity: climate.zolder
-    primary: Zolder
-    secondary: >-
-      {{ state_attr(entity, "current_temperature") }}°C • {{ state_attr(entity, "current_humidity") }}%
-    layout: vertical
-    icon: mdi:home-roof
-    icon_color: >-
-      {{ iif(is_state("light.zolder", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.balkondeur_contact", "on") %}
-        mdi:door-open
-      {% elif is_state("binary_sensor.zolderraam_contact", "on") %}
-        mdi:window-open
-      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
-        mdi:shower-head
-      {% elif is_state("binary_sensor.zolder_beweging", "on") %}
-        mdi:motion-sensor
-      {% elif is_state("media_player.zolder", "on") %}
-        mdi:television
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.balkondeur_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.zolderraam_contact", "on") %}
-        amber
-      {% elif is_state("binary_sensor.douche_beweging_occupancy", "on") %}
-        blue
-      {% elif is_state("binary_sensor.zolder_beweging", "on") %}
-        blue
-      {% elif is_state("media_player.zolder", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-boven/zolder
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.zolder
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Kledingkamer
+            icon: mdi:wardrobe-outline
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-boven/kledingkamer
 
-  - type: custom:mushroom-template-card
-    entity: weather.knmi_purmerend
-    primary: Voortuin
-    secondary: >-
-      {{ state_attr(entity, "temperature") }}°C • {{ state_attr(entity, "humidity") }}%
-    layout: vertical
-    icon: mdi:flower-tulip
-    icon_color: >-
-      {{ iif(is_state("light.voortuin", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.deurbel_ringing_sensor", "on") %}
-        mdi:bell
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.deurbel_ringing_sensor", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-buiten/tuin
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.voortuin
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.kledingkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.kledingkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+      
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.kledingkamer
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: binary_sensor.kledingkamer_beweging_occupancy
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.kledingkamerraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: cover.kledingkamer
+            icon: >-
+              {{ iif(is_state(entity, "open"), "mdi:window-shutter-open", "mdi:window-shutter") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "open"), "blue", "grey") }}
+            tap_action:
+              action: more-info
 
-  - type: custom:mushroom-template-card
-    entity: weather.knmi_purmerend
-    primary: Achtertuin
-    secondary: >-
-      {{ state_attr(entity, "temperature") }}°C • {{ state_attr(entity, "humidity") }}%
-    layout: vertical
-    icon: mdi:table-chair
-    icon_color: >-
-      {{ iif(is_state("light.achtertuin", "on"), "orange", "grey") }}
-    multiline_secondary: true
-    badge_icon: >-
-      {% if is_state("binary_sensor.hue_outdoor_motion_sensor_1_motion", "on") %}
-        mdi:motion-sensor
-      {% endif %}
-    badge_color: >-
-      {% if is_state("binary_sensor.hue_outdoor_motion_sensor_1_motion", "on") %}
-        blue
-      {% endif %}
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-buiten/tuin
-    hold_action:
-      action: call-service
-      service: light.toggle
-      target:
-        entity_id: light.achtertuin
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Logeerkamer
+            icon: mdi:wardrobe-outline
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-boven/logeerkamer
 
-  - type: custom:mushroom-entity-card
-    entity: weather.knmi_purmerend
-    layout: vertical
-    icon_color: grey
-    name: Weer
-    hide_icon: false
-    tap_action:
-      action: navigate
-      navigation_path: /dashboard-buiten/weer
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.logeerkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.logeerkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+      
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.logeerkamer
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: media_player.googlehome6234
+            icon: mdi:cast-audio
+            icon_color: >-
+              {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
+          - type: template
+            entity: binary_sensor.tt_macbook_active
+            icon: mdi:laptop
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "blue", "grey") }}
+          - type: template
+            entity: binary_sensor.logeerkamer_beweging_occupancy
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.logeerkamerraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: cover.logeerkamer
+            icon: >-
+              {{ iif(is_state(entity, "open"), "mdi:window-shutter-open", "mdi:window-shutter") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "open"), "blue", "grey") }}
+            tap_action:
+              action: more-info
+
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Badkamer
+            icon: mdi:shower
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-boven/badkamer
+
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.badkamer
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.badkamer
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+      
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.badkamer
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: binary_sensor.badkamer_beweging_occupancy
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.douche_beweging_occupancy
+            icon: mdi:shower-head
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "blue", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.badkamerraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Zolder
+            icon: mdi:home-roof
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-boven/zolder
+
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: climate.zolder
+                content: >-
+                  {{ state_attr(entity, "current_temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: climate.zolder
+                content: >-
+                  {{ state_attr(entity, "current_humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+      
+      - type: custom:mushroom-chips-card
+        alignment: justify
+        chips:
+          - type: template
+            entity: light.zolder
+            icon: mdi:ceiling-light
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "orange", "grey") }}
+          - type: template
+            entity: media_player.zolder
+            icon: mdi:television
+            icon_color: >-
+              {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
+          - type: template
+            entity: sensor.wasmachine_status
+            icon: mdi:washing-machine
+            icon_color: >-
+              {{ iif(is_state("switch.wasmachine_power", "on"), "blue", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.zolder_beweging
+            icon: mdi:motion-sensor
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.balkondeur_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:door-open", "mdi:door-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+          - type: template
+            entity: binary_sensor.zolderraam_contact
+            icon: >-
+              {{ iif(is_state(entity, "on"), "mdi:window-open", "mdi:window-closed") }}
+            icon_color: >-
+              {{ iif(is_state(entity, "on"), "amber", "grey") }}
+            tap_action:
+              action: more-info
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        styles:
+          '--chip-box-shadow': none
+          '--chip-background': none
+          '--chip-spacing': 0
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: Voortuin
+                layout: vertical
+                icon: mdi:flower-tulip
+                icon_color: grey
+                tap_action:
+                  action: navigate
+                  navigation_path: /dashboard-buiten/tuin
+
+              - type: custom:mushroom-chips-card
+                alignment: end
+                chips:
+                  - type: template
+                    entity: weather.knmi_purmerend
+                    content: >-
+                      {{ state_attr(entity, "temperature") }}°C
+                    icon: mdi:thermometer
+                    icon_color: grey
+                    tap_action:
+                      action: more-info
+                  - type: template
+                    entity: weather.knmi_purmerend
+                    content: >-
+                      {{ state_attr(entity, "humidity") }}%
+                    icon: mdi:water-percent
+                    icon_color: grey
+                    tap_action:
+                      action: more-info
+      
+          - type: custom:mushroom-chips-card
+            alignment: justify
+            chips:
+              - type: template
+                entity: light.voortuin
+                icon: mdi:coach-lamp
+                icon_color: >-
+                  {{ iif(is_state(entity, "on"), "orange", "grey") }}
+
+      - type: custom:vertical-stack-in-card
+        styles:
+          '--chip-box-shadow': none
+          '--chip-background': none
+          '--chip-spacing': 0
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: Achtertuin
+                layout: vertical
+                icon: mdi:table-chair
+                icon_color: grey
+                tap_action:
+                  action: navigate
+                  navigation_path: /dashboard-buiten/tuin
+
+              - type: custom:mushroom-chips-card
+                alignment: end
+                chips:
+                  - type: template
+                    entity: weather.knmi_purmerend
+                    content: >-
+                      {{ state_attr(entity, "temperature") }}°C
+                    icon: mdi:thermometer
+                    icon_color: grey
+                    tap_action:
+                      action: more-info
+                  - type: template
+                    entity: weather.knmi_purmerend
+                    content: >-
+                      {{ state_attr(entity, "humidity") }}%
+                    icon: mdi:water-percent
+                    icon_color: grey
+                    tap_action:
+                      action: more-info
+      
+          - type: custom:mushroom-chips-card
+            alignment: justify
+            chips:
+              - type: template
+                entity: light.achtertuin_groep
+                icon: mdi:coach-lamp
+                icon_color: >-
+                  {{ iif(is_state(entity, "on"), "orange", "grey") }}
+              - type: template
+                entity: light.gekleurde_licht
+                icon: mdi:led-strip-variant
+                icon_color: >-
+                  {{ iif(is_state(entity, "on"), "orange", "grey") }}
+              - type: template
+                entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
+                icon: mdi:motion-sensor
+                icon_color: >-
+                  {{ iif(is_state(entity, "on"), "green", "grey") }}
+                tap_action:
+                  action: more-info
+              - type: template
+                icon: mdi:trash-can
+                icon_color: |-
+                  {% set isPickUp = states.sensor 
+                      | selectattr("attributes.Wastecollector", "defined")
+                      | selectattr("attributes.Days_until", "eq", 1)
+                      | map(attribute="entity_id")
+                      | first
+                      | default("none")
+                  %}
+                  {{ iif(isPickUp != "none", "brown", "grey") }}
+                tap_action:
+                  action: navigate
+                  navigation_path: /dashboard-buiten/tuin
+
+  - type: custom:vertical-stack-in-card
+    styles:
+      '--chip-box-shadow': none
+      '--chip-background': none
+      '--chip-spacing': 0
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            entity: weather.knmi_purmerend
+            primary: Weer
+            secondary: >-
+              {% set state = states("weather.knmi_purmerend") %}
+              {% set states = {
+                "clear-night": "Helder, nacht",
+                "cloudy": "Bewolkt",
+                "exceptional": "Uitzonderlijk",
+                "fog": "Mist",
+                "hail": "Hagel",
+                "lightning": "Bliksem",
+                "lightning-rainy": "Bliksem, regenachtig",
+                "partlycloudy": "Gedeeltelijk bewolkt",
+                "pouring": "Gieten",
+                "rainy": "Regenachtig",
+                "snowy": "Sneeuwachtig",
+                "snowy-rainy": "Sneeuw-, regenachtig",
+                "sunny": "Zonnig",
+                "windy": "Winderig",
+                "windy-variant": "Winderig"
+              } %}
+              {% if state in states %}
+              {{ states[state] }}
+              {% endif %}
+            icon: >-
+              {% set state = states(entity) %}
+              {% set icons = {
+                "clear-night": "mdi:weather-night", 
+                "cloudy":  "mdi:weather-cloudy", 
+                "exceptional": "mdi:alert-circle-outline", 
+                "fog": "mdi:weather-fog", 
+                "hail": "mdi:weather-hail", 
+                "lightning":  "mdi:weather-lightning", 
+                "lightning-rainy": "mdi:weather-lightning-rainy",
+                "partlycloudy": "mdi:weather-partly-cloudy", 
+                "pouring": "mdi:weather-pouring",
+                "rainy": "mdi:weather-rainy", 
+                "snowy": "mdi:weather-snowy", 
+                "snowy-rainy": "mdi:weather-snowy-rainy", 
+                "sunny": "mdi:weather-sunny", 
+                "windy": "mdi:weather-windy", 
+                "windy-variant": "mdi:weather-windy-variant"
+              } %}
+              {% if state in icons %}
+                {{ icons[state] }}
+              {% else %}
+                mdi:weather-cloudy
+              {% endif %}
+            icon_color: grey
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-buiten/weer
+
+          - type: custom:mushroom-chips-card
+            alignment: end
+            chips:
+              - type: template
+                entity: weather.knmi_purmerend
+                content: >-
+                  {{ state_attr(entity, "temperature") }}°C
+                icon: mdi:thermometer
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: weather.knmi_purmerend
+                content: >-
+                  {{ state_attr(entity, "humidity") }}%
+                icon: mdi:water-percent
+                icon_color: grey
+                tap_action:
+                  action: more-info
+              - type: template
+                entity: weather.knmi_purmerend
+                content: >-
+                  {{ state_attr(entity, "pressure") }}hPa
+                icon: mdi:gauge
+                icon_color: grey
+                tap_action:
+                  action: more-info
+
+      - type: custom:mushroom-template-card
+        entity: sensor.knmi_purmerend_korte_dagverwachting
+        secondary: |-
+          {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+          {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
+        multiline_secondary: true
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-buiten/weer

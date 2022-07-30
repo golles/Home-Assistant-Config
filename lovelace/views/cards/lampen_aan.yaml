@@ -10,6 +10,7 @@ filter:
   exclude:
     - entity_id: light.achtertuin_groep
     - entity_id: light.slaapkamer
+    - entity_id: light.slaapkamer_bedlampen
     - entity_id: light.wooneet
   include:
     - domain: light

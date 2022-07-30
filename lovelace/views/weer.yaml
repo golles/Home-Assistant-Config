@@ -25,39 +25,45 @@ cards:
   - type: weather-forecast
     entity: weather.knmi_purmerend
 
-  - type: entities
+  - type: custom:vertical-stack-in-card
     title: Details
-    entities:
-      - entity: sensor.knmi_purmerend_gevoelstemperatuur
-        name: Gevoelstemperatuur
-      - entity: sensor.knmi_purmerend_dauwpunt
-        name: Dauwpunt
-      - entity: sensor.knmi_purmerend_korte_dagverwachting
-        name: Korte dagverwachting
-      - entity: binary_sensor.knmi_purmerend_waarschuwing
-        name: Waarschuwing
-      - entity: binary_sensor.stookalert_noord_holland
-        name: Stookalert
-
-  - type: conditional
-    conditions:
-      - entity: binary_sensor.knmi_purmerend_waarschuwing
-        state: "on"
-    card:
-      type: markdown
-      title: Waarschuwing (KNMI)
-      content: >-
-        {{ state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing") }}
-
-  - type: conditional
-    conditions:
-      - entity: binary_sensor.meteoalarm
-        state: "on"
-    card:
-      type: markdown
-      title: Waarschuwing (Meteo Alarm)
-      content: >-
-        {{ state_attr("binary_sensor.meteoalarm", "description") }}
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.knmi_purmerend_gevoelstemperatuur
+            name: Gevoelstemperatuur
+            layout: vertical
+          - type: custom:mushroom-entity-card
+            entity: sensor.knmi_purmerend_dauwpunt
+            name: Dauwpunt
+            layout: vertical
+          - type: custom:mushroom-entity-card
+            entity: sensor.knmi_purmerend_relatieve_luchtvochtigheid
+            name: Relatieve luchtvochtigheid
+            layout: vertical
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.knmi_purmerend_waarschuwing
+            name: Waarschuwing
+            layout: vertical
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.stookalert_noord_holland
+            name: Stookalert
+            layout: vertical
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.meteoalarm
+            name: Meteoalarm
+            layout: vertical
+      - type: custom:mushroom-template-card
+        entity: sensor.knmi_purmerend_korte_dagverwachting
+        secondary: |-
+          {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+          {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
+          {{ iif(state_attr("binary_sensor.meteoalarm", "description"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
+        multiline_secondary: true
+        tap_action: none
 
   - type: markdown
     title: Verwachting
@@ -103,14 +109,18 @@ cards:
         name: Madavi
         url: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
 
-  - type: entities
+  - type: custom:vertical-stack-in-card
     title: Pollen
-    entities:
-      - entity: sensor.tomorrow_io_huis_tree_pollen_index
+    horizontal: true
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.tomorrow_io_huis_tree_pollen_index
         name: Bomen
-      - entity: sensor.tomorrow_io_huis_grass_pollen_index
+      - type: custom:mushroom-entity-card
+        entity: sensor.tomorrow_io_huis_grass_pollen_index
         name: Grassen
-      - entity: sensor.tomorrow_io_huis_weed_pollen_index
+      - type: custom:mushroom-entity-card
+        entity: sensor.tomorrow_io_huis_weed_pollen_index
         name: Onkruiden
 
   - type: grid

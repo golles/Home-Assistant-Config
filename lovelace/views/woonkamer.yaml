@@ -50,9 +50,8 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: grid
-        columns: 4
-        square: false
+      - type: custom:vertical-stack-in-card
+        horizontal: true
         cards:
           - type: custom:mushroom-entity-card
             entity: scene.wooneet_avond

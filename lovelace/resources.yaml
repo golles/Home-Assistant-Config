@@ -2,15 +2,6 @@
   - url: /local/auto-entities.js
     type: module
 
-  - url: /local/battery-state-card.js
-    type: module
-
-  - url: /local/button-card.js
-    type: module
-
-  - url: /local/elapsed-time-entity-row.js
-    type: module
-
   - url: /local/fold-entity-row.js
     type: module
 
@@ -26,11 +17,11 @@
   - url: /local/mushroom.js
     type: module
 
-  - url: /local/simple-thermostat.js
-    type: module
-
   - url: /local/swipe-navigation.js
     type: js
 
   - url: /local/template-entity-row.js
+    type: module
+
+  - url: /local/vertical-stack-in-card.js
     type: module

@@ -11,6 +11,7 @@ multiple-entity-row.js          https://github.com/benct/lovelace-multiple-entit
 mushroom.js                     https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js
 swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
 template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
+vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
 EOF
 )
 
