@@ -40,11 +40,15 @@
       service: tts.microsoft_say
       entity_id: media_player.lg_soundbar
       data:
-        message: >
+        message: >-
           {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
           {% set day = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"][now().weekday()] %}
           {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().month-1] %}
-          
+
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
-          {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
+          {% if is_state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription", "") %}
+            {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+          {% else %}
+            {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
+          {% endif %}
