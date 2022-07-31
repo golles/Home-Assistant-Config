@@ -17,7 +17,7 @@ shortcuts:
   buttons:    
     - cover: /local/tv/ziggo.png
       type: service
-      id: script.play_livingroom_tv_source_ziggo
+      id: script.lg_c9_source_ziggo
     - cover: /local/tv/netflix.png
       type: script
       id: script.play_tv_with_source

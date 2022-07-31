@@ -46,9 +46,11 @@ automation:
       - choose:
         # Turn on.
         - conditions:
-            - "{{ is_state('media_player.mediabox', 'off') }}"
+            - condition: state
+              entity_id: media_player.mediabox
+              state: "off"
           sequence:
-            - service: script.play_livingroom_tv_source_ziggo
+            - service: script.lg_c9_source_ziggo
         # Turn off.
         default:
           - service: media_player.turn_off

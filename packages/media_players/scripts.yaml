@@ -1,0 +1,30 @@
+
+script:
+  play_tv_with_source:
+    alias: Speel tv met bron
+    icon: mdi:television
+    mode: restart
+    fields:
+      media_player:
+        description: The media player to play the stream on
+        example: media_player.tv
+      source:
+        description: The source to pick
+        example: Youtube
+    sequence:
+      - choose:
+          - conditions:
+              - "{{ is_state(media_player, 'off') }}"
+            sequence:
+              - service: media_player.turn_on
+                data:
+                  entity_id: "{{ media_player }}"
+              - wait_template: >
+                  {{ not is_state(media_player, "off") }}
+                timeout: "00:00:02"
+                continue_on_timeout: false
+
+      - service: media_player.select_source
+        data:
+          entity_id: "{{ media_player }}"
+          source: "{{ source }}"

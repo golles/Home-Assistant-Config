@@ -1,0 +1,33 @@
+automation:
+  - id: lgc9_turn_on_wol
+    alias: LG C9 - Turn on via Wake-On-LAN
+    mode: single
+    trigger:
+      - platform: webostv.turn_on
+        entity_id: media_player.lg_c9
+    action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: !secret webostv_mac
+          broadcast_address: !secret webostv_ip
+
+script:
+  lg_c9_source_ziggo:
+    alias: Speel Ziggo op LG C9
+    icon: mdi:television
+    mode: restart
+    sequence:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_c9
+              state: "off"
+          sequence:
+            - service: media_player.turn_on
+              data:
+                entity_id: media_player.mediabox
+
+      - service: script.play_tv_with_source
+        data:
+          media_player: media_player.lg_c9
+          source: Ziggo

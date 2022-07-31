@@ -1,0 +1,51 @@
+automation:
+  - id: switch_soundbar_source_and_volume_when_tv_on
+    alias: Automatisch soundbar source en volume zetten als de tv aan gaat
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: media_player.lg_c9
+        from: "off"
+        to: "on"
+    action:
+      - service: shell_command.set_soundbar_source_and_volume
+        data:
+          ip: !secret lg_soundbar_ip
+          source: 15 # HMDI ARC.
+          volume: 12
+
+shell_command:
+  set_soundbar_source_and_volume: 'python /config/custom_scripts/lg_sl10.py "{{ ip }}" "{{ source }}" "{{ volume }}"'
+
+script:
+  play_livingroom_radio:
+    alias: Speel radio in de woonkamer
+    icon: mdi:radio
+    mode: restart
+    fields:
+      stream:
+        description: The stream to play
+        example: https://stream.qmusic.nl/qmusic/mp3
+    sequence:
+      - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_soundbar
+              state: 
+                - "off"
+                - idle
+            - condition: numeric_state
+              entity_id: media_player.lg_soundbar
+              attribute: volume_level
+              above: 0.1 # 4 * 0.025
+          sequence:
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.lg_soundbar
+                volume_level: 0.1 # 4 * 0.025
+
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.lg_soundbar
+          media_content_id: "{{ stream }}"
+          media_content_type: audio/mp4
