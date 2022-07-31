@@ -10,7 +10,6 @@ automation:
         data:
           mac: !secret webostv_mac
           broadcast_address: !secret webostv_ip
-          broadcast_port: 9
 
   - id: switch_soundbar_source_and_volume_when_tv_on
     alias: Automatisch soundbar source en volume zetten als de tv aan gaat
