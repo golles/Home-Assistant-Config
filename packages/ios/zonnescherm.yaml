@@ -155,6 +155,9 @@ automation:
       - condition: template
         value_template: >-
           {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int > 20 }}
+      - condition: state
+        entity_id: binary_sensor.zonnescherm_contact_contact
+        state: "off"
     action:
       - alias: Set up variables for the actions
         variables:
