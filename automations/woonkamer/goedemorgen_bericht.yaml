@@ -47,7 +47,7 @@
 
           {{ good[(now().hour / 6) | int] }}!
           Vandaag is het {{ day }} {{ now().day }} {{ month }}.
-          {% if is_state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription", "") %}
+          {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") in ["", None] %}
             {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
           {% else %}
             {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
