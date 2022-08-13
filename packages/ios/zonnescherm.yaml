@@ -78,8 +78,8 @@ automation:
               target:
                 entity_id: cover.zonnescherm
 
-  - id: ios_action_awning_can_be_closed
-    alias: iOS action - Zonnescherm kan dicht
+  - id: auto_close_awning
+    alias: Zonnescherm automatisch sluiten
     mode: single
     max_exceeded: silent
     trigger:
@@ -89,49 +89,16 @@ automation:
         to: Voor
       - platform: state
         entity_id: sun.sun
-        to: 
-          - below_horizon
+        to: below_horizon
     condition:
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
         state: "on"
     action:
-      - alias: Set up variables for the actions
-        variables:
-          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
-          action_close: "{{ 'CLOSE_' ~ context.id }}"
-
-      - alias: Ask to close the awning
-        service: notify.all_phones
-        data:
-          message: De zon is niet langer achter, wil je het zonnescherm sluiten?
-          data:
-            tag: sun
-            actions:
-              - action: "{{ action_close }}"
-                title: Ja, sluit
-
-      - alias: Wait for a response
-        wait_for_trigger:
-          - platform: event
-            event_type: mobile_app_notification_action
-            event_data:
-              action: "{{ action_close }}"
-
-      - alias: Perform the action
-        choose:
-          - conditions: "{{ wait.trigger.event.data.action == action_close }}"
-            sequence:
-              - service: cover.close_cover
-                target:
-                  entity_id: cover.zonnescherm
-
-              - alias: Clear this notification on all devices
-                service: notify.all_phones
-                data:
-                  message: clear_notification
-                  data:
-                    tag: sun
+      - alias: Close the awning
+        service: cover.close_cover
+        target:
+          entity_id: cover.zonnescherm
 
   - id: ios_action_awning_can_be_opened
     alias: iOS action - Zonnescherm kan open
