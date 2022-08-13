@@ -46,7 +46,19 @@ cards:
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
           - type: template
             entity: media_player.lg_c9
-            icon: mdi:television
+            # icon: 
+            icon: >-
+              {% if is_state_attr(entity, "source", "YouTube") %}
+                mdi:youtube-tv
+              {% elif is_state_attr(entity, "source", "Netflix") %}
+                mdi:netflix
+              {% elif is_state_attr(entity, "source", "Nintendo Switch") %}
+                mdi:nintendo-switch
+              {% elif is_state_attr(entity, "source", "Plex") %}
+                mdi:plex
+              {% else %}
+                mdi:television
+              {% endif %}
             icon_color: >-
               {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
           - type: template
@@ -407,6 +419,8 @@ cards:
             icon: mdi:laptop
             icon_color: >-
               {{ iif(is_state(entity, "on"), "blue", "grey") }}
+            tap_action:
+              action: more-info
           - type: template
             entity: binary_sensor.logeerkamer_beweging_occupancy
             icon: mdi:motion-sensor
@@ -688,7 +702,7 @@ cards:
                 icon_color: |-
                   {% set isPickUp = states.sensor 
                       | selectattr("attributes.Wastecollector", "defined")
-                      | selectattr("attributes.Days_until", "eq", 1)
+                      | selectattr("attributes.Days_until", "lt", 2)
                       | map(attribute="entity_id")
                       | first
                       | default("none")
