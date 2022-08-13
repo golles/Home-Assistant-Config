@@ -83,27 +83,27 @@ cards:
           action: more-info
 
   - type: picture-elements
-    image: "https://www.ultimatespecs.com/cargallery/16/6523/Volkswagen-Golf-7-2.jpg"
+    image: /local/auto/golf75.jpg
     elements:
       - type: state-label
-        entity: sensor.apk_expiration
+        entity: sensor.golf_75_apk_expiration
         prefix: "APK: "
         style:
-          color: black
+          color: white
           top: 95%
           left: 20%
       - type: state-label
-        entity: binary_sensor.liability_insured
+        entity: binary_sensor.golf_75_liability_insured
         prefix: "Verzekerd: "
         style:
-          color: black
+          color: white
           top: 95%
           left: 53%
       - type: state-label
-        entity: binary_sensor.pending_recall
+        entity: binary_sensor.golf_75_pending_recall
         prefix: "Terugroep: "
         style:
-          color: black
+          color: white
           top: 95%
           left: 85%
 
