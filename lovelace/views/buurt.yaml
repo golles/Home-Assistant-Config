@@ -86,6 +86,12 @@ cards:
     image: /local/auto/golf75.jpg
     elements:
       - type: state-label
+        entity: device_tracker.golf_7_5
+        style:
+          color: white
+          top: 10%
+          left: 10%
+      - type: state-label
         entity: sensor.golf_75_apk_expiration
         prefix: "APK: "
         style:
@@ -106,6 +112,11 @@ cards:
           color: white
           top: 95%
           left: 85%
+
+  - type: map
+    default_zoom: 17
+    entities:
+      - entity: device_tracker.golf_7_5
 
   - type: custom:vertical-stack-in-card
     cards:

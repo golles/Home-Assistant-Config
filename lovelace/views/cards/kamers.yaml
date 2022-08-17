@@ -639,6 +639,15 @@ cards:
                 icon: mdi:coach-lamp
                 icon_color: >-
                   {{ iif(is_state(entity, "on"), "orange", "grey") }}
+              - type: template
+                entity: device_tracker.golf_7_5
+                icon: mdi:car
+                icon_color: grey
+                tap_action:
+                  action: more-info
+                hold_action:
+                  action: navigate
+                  navigation_path: /dashboard-buiten/buurt
 
       - type: custom:vertical-stack-in-card
         styles:

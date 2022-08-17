@@ -1,0 +1,76 @@
+- id: track_golf_75
+  alias: Golf 7.5 - Update locatie
+  description: |
+    This automation does update a car location.
+    Requirements:
+      - An iPhone
+      - Focus while driving should be set, either automatically or via Bluetooth.
+      - Shortcuts app should be installed and 2 automations should be created:
+        1. When focus Driving is turned on -> select Home Assistant event: GOLF_75_START
+        2. When focus Driving is turned off -> select Home Assistant event: GOLF_75_STOP
+    Every minute the location of the person who sent the start event is used as the car location. This is done until the stop event is sent.
+    This does only work if a defined Home Assistant person is driving the car, so no theft protection.
+  mode: restart
+  trigger:
+    - platform: event
+      event_type: GOLF_75_START
+      id: start
+    - platform: event
+      event_type: GOLF_75_STOP
+      id: stop
+  variables:
+    device_tracker_id: golf_7_5
+    throttle_seconds: 60
+  action:
+    - alias: Collect some variables
+      variables:
+        user_id: "{{ trigger.event.context.user_id }}"
+        person: >-
+          {{ 
+            states.person 
+              | selectattr("attributes.user_id", "eq", user_id)
+              | map(attribute="entity_id")
+              | first
+              | default("none")
+          }}
+
+    - choose:
+      - alias: Start event, person should be set as well
+        conditions:
+          - '{{ person != "none" }}'
+          - condition: trigger
+            id: start
+        sequence:
+          - alias: Repeat location updates until the automation is triggered with a stop event
+            repeat:
+              while: "{{ True }}"
+              sequence:
+                - alias: Set car location based on the location of the person
+                  service: device_tracker.see
+                  data:
+                    dev_id: "{{ device_tracker_id }}"
+                    gps:
+                      - '{{ state_attr(person, "latitude")}}'
+                      - '{{ state_attr(person, "longitude")}}'
+                    gps_accuracy: >-
+                      {{ state_attr(person, "gps_accuracy") }}
+
+                - alias: Throttle updates
+                  delay:
+                    seconds: "{{ throttle_seconds }}"
+
+      - alias: Stop event, person should be set as well
+        conditions:
+          - '{{ person != "none" }}'
+          - condition: trigger
+            id: stop
+        sequence:
+          - alias: Set final car location based on the location of the person
+            service: device_tracker.see
+            data:
+              dev_id: "{{ device_tracker_id }}"
+              gps:
+                - '{{ state_attr(person, "latitude")}}'
+                - '{{ state_attr(person, "longitude")}}'
+              gps_accuracy: >-
+                {{ state_attr(person, "gps_accuracy") }}
