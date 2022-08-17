@@ -35,6 +35,6 @@
         - alias: Close the cover
           service: script.close_cover_window_state
           data:
-            wait_minutes: 120
+            wait_minutes: 240
             cover_entity: cover.keuken
             window_entity: binary_sensor.keukenraam_contact
