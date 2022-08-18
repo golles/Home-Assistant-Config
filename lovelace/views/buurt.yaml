@@ -115,6 +115,7 @@ cards:
 
   - type: map
     default_zoom: 17
+    hours_to_show: 24
     entities:
       - entity: device_tracker.golf_7_5
 
