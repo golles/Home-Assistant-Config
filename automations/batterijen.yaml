@@ -5,6 +5,7 @@
   trigger:
     - platform: numeric_state
       entity_id:
+        - sensor.ipad_mini_van_golles_battery_level
         - sensor.logeerkamer_battery
         - sensor.keuken_battery
       below: 25
