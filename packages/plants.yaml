@@ -1,38 +1,12 @@
 # Plant details found on https://open.plantbook.io
 
 plant:
-  Calathea Medallion:
-    sensors:
-      moisture: sensor.plant_87_moisture
-      temperature: sensor.plant_87_temperature
-      conductivity: sensor.plant_87_soil_conductivity
-      brightness: sensor.plant_87_illuminance
-    min_moisture: 15
-    max_moisture: 65
-    min_conductivity: 350
-    max_conductivity: 1000
-    min_temperature: 12
-    max_temperature: 32
-
-  Calathea Ornata:
-    sensors:
-      moisture: sensor.plant_5d_moisture
-      temperature: sensor.plant_5d_temperature
-      conductivity: sensor.plant_5d_soil_conductivity
-      brightness: sensor.plant_5d_illuminance
-    min_moisture: 15
-    max_moisture: 65
-    min_conductivity: 350
-    max_conductivity: 1000
-    min_temperature: 12
-    max_temperature: 32
-
   Dracaena Marginata:
     sensors:
-      moisture: sensor.plant_c6_moisture
-      temperature: sensor.plant_c6_temperature
-      conductivity: sensor.plant_c6_soil_conductivity
-      brightness: sensor.plant_c6_illuminance
+      moisture: sensor.dracaena_marginata_moisture
+      temperature: sensor.dracaena_marginata_temperature
+      conductivity: sensor.dracaena_marginata_conductivity
+      brightness: sensor.dracaena_marginata_illuminance
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
@@ -42,10 +16,10 @@ plant:
 
   Scindapsus Epipremnum:
     sensors:
-      moisture: sensor.plant_71_moisture
-      temperature: sensor.plant_71_temperature
-      conductivity: sensor.plant_71_soil_conductivity
-      brightness: sensor.plant_71_illuminance
+      moisture: sensor.scindapsus_epipremnum_moisture
+      temperature: sensor.scindapsus_epipremnum_temperature
+      conductivity: sensor.scindapsus_epipremnum_conductivity
+      brightness: sensor.scindapsus_epipremnum_illuminance
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
@@ -55,10 +29,10 @@ plant:
 
   Haworthiopsis Attenuata:
     sensors:
-      moisture: sensor.plant_10_moisture
-      temperature: sensor.plant_10_temperature
-      conductivity: sensor.plant_10_soil_conductivity
-      brightness: sensor.plant_10_illuminance
+      moisture: sensor.haworthiopsis_attenuata_moisture
+      temperature: sensor.haworthiopsis_attenuata_temperature
+      conductivity: sensor.haworthiopsis_attenuata_conductivity
+      brightness: sensor.haworthiopsis_attenuata_illuminance
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
@@ -68,10 +42,10 @@ plant:
 
   Crassula Ovata:
     sensors:
-      moisture: sensor.plant_ae_moisture
-      temperature: sensor.plant_ae_temperature
-      conductivity: sensor.plant_ae_soil_conductivity
-      brightness: sensor.plant_ae_illuminance
+      moisture: sensor.crassula_ovata_moisture
+      temperature: sensor.crassula_ovata_temperature
+      conductivity: sensor.crassula_ovata_conductivity
+      brightness: sensor.crassula_ovata_illuminance
     min_moisture: 7
     max_moisture: 50
     min_conductivity: 50
