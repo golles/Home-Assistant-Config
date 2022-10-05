@@ -10,9 +10,6 @@ sensor:
       - time_utc
       - beat
 
-  - platform: season
-    type: astronomical
-
 template:
   - binary_sensor:
       - name: Zomertijd
