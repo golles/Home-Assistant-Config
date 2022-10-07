@@ -90,6 +90,10 @@ automation:
       - platform: state
         entity_id: sun.sun
         to: below_horizon
+      - platform: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: 7
     condition:
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
@@ -122,6 +126,9 @@ automation:
       - condition: template
         value_template: >-
           {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int > 20 }}
+      - condition: template
+        value_template: >-
+          {{ state_attr("weather.knmi_purmerend", "forecast")[0]["precipitation_probability"] | int == 0 }}
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
         state: "off"
