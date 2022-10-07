@@ -18,7 +18,7 @@
       entity_id: binary_sensor.morning
       state: "on"
     - condition: template
-      value_template: > # Don't trigger if it has been triggered in the lasy 6 hours.
+      value_template: > # Don't trigger if it has been triggered in the last 6 hours.
         {{ as_timestamp(now()) - as_timestamp(state_attr("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", "last_triggered")) | int >= 6 * 60 * 60 }}
   action:
     - alias: Force update weather description
@@ -52,3 +52,21 @@
           {% else %}
             {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
           {% endif %}
+          {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
+
+    - alias: Wait till the message has finished
+      wait_for_trigger:
+        - platform: state
+          entity_id: media_player.lg_soundbar
+          from: playing
+          to: idle
+      timeout:
+        minutes: 1
+      continue_on_timeout: true
+    
+    - alias: Restore soundbar volume and source
+      service: shell_command.set_soundbar_source_and_volume
+      data:
+        ip: !secret lg_soundbar_ip
+        source: 15 # HMDI ARC.
+        volume: 12
