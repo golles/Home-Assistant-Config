@@ -5,7 +5,7 @@
     input:
       day_end_time: 00:00:00
       motion_entity: binary_sensor.badkamer_beweging
-      cool_down: 90
+      cool_down: 120
       light_entity: light.badkamer
       illuminance_entity: sensor.badkamer_beweging_light_level
       illuminance_below: 15
