@@ -8,7 +8,7 @@
       - Shortcuts app should be installed and 2 automations should be created:
         1. When focus Driving is turned on -> select Home Assistant event: GOLF_75_START
         2. When focus Driving is turned off -> select Home Assistant event: GOLF_75_STOP
-    Every minute the location of the person who sent the start event is used as the car location. This is done until the stop event is sent.
+    Every {throttle_seconds} the location of the person who sent the start event is used as the car location. This is done until the stop event is sent.
     This does only work if a defined Home Assistant person is driving the car, so no theft protection.
   mode: restart
   trigger:
