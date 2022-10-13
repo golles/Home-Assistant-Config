@@ -1,0 +1,61 @@
+automation:
+  - id: check_devices_left_on
+    alias: iOS action - Apparaten aangelaten
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: group.residents
+        to: not_home
+        for:
+          minutes: 5
+    condition:
+      - condition: state
+        entity_id: input_boolean.guest_mode
+        state: "off"
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity_id: sensor.count_lights_on
+            above: 0
+          - condition: numeric_state
+            entity_id: sensor.count_speakers_on
+            above: 0
+          - condition: numeric_state
+            entity_id: sensor.count_tvs_on
+            above: 0
+    action:
+      - alias: Set up variables for the actions
+        variables:
+          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
+          action_all_off: "{{ 'ALL_OFF_' ~ context.id }}"
+
+      - alias: Message everyone
+        service: notify.all_phones
+        data:
+          title: Er is niemand meer thuis
+          message: Lijst met friendly names and room?
+          data:
+            tag: devices_left_on
+            actions:
+              - action: "{{ action_all_off }}"
+                title: Zet alles uit
+
+      - alias: Wait for a response
+        wait_for_trigger:
+          - platform: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ action_all_off }}"
+
+      - alias: Perform the action
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == action_all_off }}"
+            sequence:
+              - service: script.everything_off
+
+      - alias: Clear this notification on all devices
+        service: notify.all_phones
+        data:
+          message: clear_notification
+          data:
+            tag: devices_left_on
