@@ -11,7 +11,7 @@ sensor:
     queries:
       - name: InfluxDb size
         unit_of_measurement: MB
-        value_template: '{{ (value | default(0) | float / 1024 /1024) | round(1) }}'
+        value_template: '{{ (value | float(0.0) / 1024 /1024) | round(1) }}'
         group_function: sum
         measurement: '"monitor"."shard"'
         database: _internal
