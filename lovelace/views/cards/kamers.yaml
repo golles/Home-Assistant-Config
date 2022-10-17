@@ -71,6 +71,8 @@ cards:
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
           - type: template
             entity: binary_sensor.achterdeur_contact
             icon: >-
@@ -156,6 +158,8 @@ cards:
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
           - type: template
             entity: binary_sensor.keukenraam_contact
             icon: >-
@@ -222,6 +226,8 @@ cards:
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
+            tap_action:
+              action: more-info
 
   - type: custom:vertical-stack-in-card
     styles:
@@ -342,7 +348,7 @@ cards:
             icon_color: >-
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
           - type: template
-            entity: binary_sensor.kledingkamer_beweging_occupancy
+            entity: binary_sensor.kledingkamer_beweging_motion
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
@@ -490,7 +496,7 @@ cards:
             icon_color: >-
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
           - type: template
-            entity: binary_sensor.badkamer_beweging_occupancy
+            entity: binary_sensor.badkamer_beweging_motion
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
