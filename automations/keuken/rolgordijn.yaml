@@ -3,38 +3,30 @@
   mode: single
   max_exceeded: silent
   trigger:
-    - platform: sun
-      event: sunset
-      offset: "+00:45:00"
-    - platform: time # For days with late sunset.
+    - platform: time
+      at: input_datetime.covers_down
+    - platform: time # For days when it turns dark late.
       at: "19:30:00"
-      id: delay
     - platform: time
       at: "08:30:00"
       id: open
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: open
-          sequence:
-            - alias: Open the cover
-              service: button.press
-              target:
-                entity_id: button.keuken_rolgordijn_voorkeurspositie
-      default:
-        - choose:
-            - conditions:
-                - condition: trigger
-                  id: delay
-              sequence:
-                - alias: Delay closing, so it doesn't close at the same time every day
-                  delay:
-                    minutes: "{{ range(0, 30) | random }}"
+      - if:
+          - condition: trigger
+            id: open
+        then:
+          - alias: Open the cover
+            service: button.press
+            target:
+              entity_id: button.keuken_rolgordijn_voorkeurspositie
+        else:
+          - alias: Delay closing, so it doesn't close at the same time every day
+            delay:
+              minutes: "{{ range(0, 30) | random }}"
 
-        - alias: Close the cover
-          service: script.close_cover_window_state
-          data:
-            wait_minutes: 240
-            cover_entity: cover.keuken
-            window_entity: binary_sensor.keukenraam_contact
+          - alias: Close the cover, depending on the window state
+            service: script.close_cover_window_state
+            data:
+              wait_minutes: 240
+              cover_entity: cover.keuken
+              window_entity: binary_sensor.keukenraam_contact
