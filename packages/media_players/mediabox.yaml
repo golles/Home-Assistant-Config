@@ -2,7 +2,7 @@ switch:
   - platform: template
     switches:
       ziggo_decoder:
-        friendly_name: Ziggo decoder
+        friendly_name: Mediabox
         icon_template: mdi:television
         value_template: >-
           {{ not is_state("media_player.mediabox", "off") }}

@@ -23,6 +23,10 @@ homekit:
       - fan.air_purifier
       - fan.ventilator
       - light.wled_skull
+      - sensor.mi_air_purifier_3_3h_pm2_5
+      - sensor.particulate_matter_2_5um_concentration
+      - sensor.toilet_klimaat_humidity
+      - sensor.toilet_klimaat_temperature
       - switch.adguard_protection
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
@@ -41,4 +45,4 @@ homekit:
     switch.voorraadkastlamp_switch:
       name: Voorraadkast
     switch.ziggo_decoder:
-      name: Ziggo decoder
+      name: Mediabox
