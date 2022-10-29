@@ -106,4 +106,6 @@ cards:
             show_state: false
             tap_action:
               action: call-service
-              service: speedtestdotnet.speedtest
+              service: homeassistant.update_entity
+              target:
+                entity_id: sensor.speedtest_download
