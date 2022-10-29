@@ -176,10 +176,12 @@ automation:
           title: Tado
           message: |
             Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} naar huis komt. 
-            Het is hier nu nog koud, dus ik begin alvast met opwarmen.
+            Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
 
-      - alias: Set climate preset mode to home
-        service: climate.set_preset_mode
+      - alias: Heat up the living room for a short time
+        service: tado.set_climate_timer
         data:
+          time_period: "00:15:00"
+          temperature: 25
+        target:
           entity_id: climate.woonkamer
-          preset_mode: home
