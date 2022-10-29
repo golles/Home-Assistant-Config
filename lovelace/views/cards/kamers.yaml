@@ -421,7 +421,7 @@ cards:
             icon_color: >-
               {{ iif(states(entity) not in ["off", "unavailable", "unknown"], "blue", "grey") }}
           - type: template
-            entity: binary_sensor.tt_macbook_active
+            entity: binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
             icon: mdi:laptop
             icon_color: >-
               {{ iif(is_state(entity, "on"), "blue", "grey") }}
