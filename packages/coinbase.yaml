@@ -14,7 +14,7 @@ template:
 
           {% set total = namespace(value = 0) %}
           {% for i in number_string.split(", ") %}
-            {% set total.value = total.value + (i | float) %}
+            {% set total.value = total.value + (i | float(0)) %}
           {% endfor %}
 
           {{ total.value }}
