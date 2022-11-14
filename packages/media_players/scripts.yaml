@@ -1,4 +1,3 @@
-
 script:
   play_tv_with_source:
     alias: Speel tv met bron
@@ -16,7 +15,8 @@ script:
           - conditions:
               - "{{ is_state(media_player, 'off') }}"
             sequence:
-              - service: media_player.turn_on
+              - alias: Turn on the media player
+                service: media_player.turn_on
                 data:
                   entity_id: "{{ media_player }}"
               - wait_template: >
@@ -24,7 +24,8 @@ script:
                 timeout: "00:00:02"
                 continue_on_timeout: false
 
-      - service: media_player.select_source
+      - alias: Set the source on the media player
+        service: media_player.select_source
         data:
           entity_id: "{{ media_player }}"
           source: "{{ source }}"

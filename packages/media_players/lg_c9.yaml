@@ -17,17 +17,18 @@ script:
     icon: mdi:television
     mode: restart
     sequence:
-      - choose:
-        - conditions:
-            - condition: state
-              entity_id: media_player.lg_c9
-              state: "off"
-          sequence:
-            - service: media_player.turn_on
-              data:
-                entity_id: media_player.mediabox
+      - if:
+          - condition: state
+            entity_id: media_player.lg_c9
+            state: "off"
+        then:
+          - alias: Turn on the mediabox
+            service: media_player.turn_on
+            data:
+              entity_id: media_player.mediabox
 
-      - service: script.play_tv_with_source
+      - alias: Set the source of the tv to ziggo
+        service: script.play_tv_with_source
         data:
           media_player: media_player.lg_c9
           source: Ziggo

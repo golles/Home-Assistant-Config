@@ -8,7 +8,8 @@ automation:
         from: "off"
         to: "on"
     action:
-      - service: shell_command.set_soundbar_source_and_volume
+      - alias: Set source and volume on the soundbar
+        service: shell_command.set_soundbar_source_and_volume
         data:
           ip: !secret lg_soundbar_ip
           source: 15 # HMDI ARC.
@@ -27,24 +28,38 @@ script:
         description: The stream to play
         example: https://stream.qmusic.nl/qmusic/mp3
     sequence:
-      - choose:
-        - conditions:
-            - condition: state
+      - if:
+          - condition: state
+            entity_id: media_player.lg_soundbar
+            state: "off"
+        then:
+          - alias: Turn on the media player
+            service: media_player.turn_on
+            data:
               entity_id: media_player.lg_soundbar
-              state: 
-                - "off"
-                - idle
-            - condition: numeric_state
-              entity_id: media_player.lg_soundbar
-              attribute: volume_level
-              above: 0.1 # 4 * 0.025
-          sequence:
-            - service: media_player.volume_set
-              data:
-                entity_id: media_player.lg_soundbar
-                volume_level: 0.1 # 4 * 0.025
 
-      - service: media_player.play_media
+          - alias: Wait till the media player is idle
+            wait_for_trigger:
+              - platform: state
+                entity_id: media_player.lg_soundbar
+                to: idle
+            timeout:
+              seconds: 5
+            continue_on_timeout: true
+
+      - if:
+          - condition: state
+            entity_id: media_player.lg_soundbar
+            state: idle
+        then:
+          - alias: Set the volume
+            service: media_player.volume_set
+            data:
+              entity_id: media_player.lg_soundbar
+              volume_level: 0.1 # 4 * 0.025
+
+      - alias: Start the radio stream
+        service: media_player.play_media
         data:
           entity_id: media_player.lg_soundbar
           media_content_id: "{{ stream }}"
