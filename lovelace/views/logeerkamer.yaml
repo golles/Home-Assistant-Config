@@ -40,7 +40,8 @@ cards:
     title: Logeerkamer
 
   - type: custom:mushroom-climate-card
-    entity: climate.logeerkamer
+    # entity: climate.logeerkamer
+    entity: climate.elektrisch_kachel
     name: Klimaat
     icon: mdi:home-thermometer-outline
     fill_container: true

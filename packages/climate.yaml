@@ -37,6 +37,18 @@ homeassistant:
     "binary_sensor.va2979272704_connection_state":
       friendly_name: Zolder verbinding
 
+climate:
+  - platform: generic_thermostat
+    name: Elektrisch kachel
+    heater: switch.elektrisch_kachel
+    target_sensor: sensor.logeerkamer_temperature
+    min_temp: 5
+    max_temp: 25
+    initial_hvac_mode: "off"
+    away_temp: 14
+    home_temp: 20
+    precision: 0.5
+
 switch:
   - platform: template
     switches:
@@ -143,6 +155,12 @@ automation:
               data:
                 entity_id: climate.woonkamer
                 preset_mode: away
+
+            - alias: Set climate preset mode for electric heater to off
+              service: climate.set_preset_mode
+              data:
+                entity_id: climate.elektrisch_kachel
+                preset_mode: "off"
         default:
           - alias: Set climate preset mode to home
             service: climate.set_preset_mode
@@ -157,7 +175,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: proximity.residents_home
-        below: 15
+        below: 10
     condition:
       - condition: state
         entity_id: group.residents
@@ -175,7 +193,7 @@ automation:
         data:
           title: Tado
           message: |
-            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} naar huis komt. 
+            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} bijna thuis is. 
             Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
 
       - alias: Heat up the living room for a short time
