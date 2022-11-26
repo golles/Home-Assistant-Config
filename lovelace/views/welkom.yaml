@@ -47,26 +47,3 @@ cards:
       !include cards/lampen_aan.yaml
 
   - !include cards/let_op.yaml
-
-  - type: conditional
-    conditions:
-      - entity: media_player.lg_c9
-        state: "off"
-    card:
-      !include cards/media_player_lg_soundbar.yaml
-
-  - type: vertical-stack
-    cards:
-      - type: conditional
-        conditions:
-          - entity: media_player.mediabox
-            state_not: "off"
-        card:
-          !include cards/media_player_mediabox.yaml
-
-      - type: conditional
-        conditions:
-          - entity: media_player.lg_c9
-            state_not: "off"
-        card:
-          !include cards/media_player_lg_c9.yaml
