@@ -156,11 +156,10 @@ automation:
                 entity_id: climate.woonkamer
                 preset_mode: away
 
-            - alias: Set climate preset mode for electric heater to off
-              service: climate.set_preset_mode
+            - alias: Turn electric heater off
+              service: climate.turn_off
               data:
                 entity_id: climate.elektrisch_kachel
-                preset_mode: "off"
         default:
           - alias: Set climate preset mode to home
             service: climate.set_preset_mode
