@@ -140,6 +140,15 @@ cards:
         icon_color: blue
 
       - type: custom:mushroom-template-card
+        primary: Tango, Hoogezand
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: mdi:gas-station
+        entity: sensor.tango_hoogezand
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-template-card
         primary: Freie Tankstelle Hüsers
         secondary: € {{ states(entity) | replace(".", ",") }}
         icon: mdi:gas-station

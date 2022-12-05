@@ -25,6 +25,15 @@ sensor:
     state_class: measurement
 
   - platform: scrape
+    resource: https://www.tango.nl/stations/tango-hoogezand-hoofdstraat
+    name: Tango Hoogezand
+    select: "#euro95 > div.pump_price > span.price"
+    unit_of_measurement: €
+    scan_interval: 3600
+    device_class: monetary
+    state_class: measurement
+
+  - platform: scrape
     resource: https://mehr-tanken.de/tankstelle/6ca71ccf2/freie-tankstelle-husers-burgermeister-esders-str-1-49733-rutenbrock
     name: Freie Tankstelle Hüsers
     select: "a[href$='#s95_e5'] > div > div.col-sm-3"
