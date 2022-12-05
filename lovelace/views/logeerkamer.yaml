@@ -22,9 +22,6 @@ cards:
         entity: binary_sensor.logeerkamerraam_contact
         icon: mdi:window-open
       - type: entity
-        entity: binary_sensor.logeerkamerraam_contact
-        icon: mdi:window-open
-      - type: entity
         entity: binary_sensor.logeerkamer_beweging_occupancy
         icon: mdi:motion-sensor
       - type: conditional
