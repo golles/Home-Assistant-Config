@@ -45,8 +45,8 @@ climate:
     min_temp: 5
     max_temp: 25
     initial_hvac_mode: "off"
-    away_temp: 14
-    home_temp: 20
+    away_temp: 5
+    home_temp: 19
     precision: 0.5
 
 switch:
@@ -65,13 +65,15 @@ switch:
         turn_on:
           service: climate.set_preset_mode
           data:
-            entity_id: climate.woonkamer
             preset_mode: home
+          target:
+            entity_id: climate.woonkamer
         turn_off:
           service: climate.set_preset_mode
           data:
-            entity_id: climate.woonkamer
             preset_mode: away
+          target:
+            entity_id: climate.woonkamer
 
 template:
   - button:
@@ -153,19 +155,21 @@ automation:
             - alias: Set climate preset mode to home
               service: climate.set_preset_mode
               data:
-                entity_id: climate.woonkamer
                 preset_mode: away
+              target:
+                entity_id: climate.woonkamer
 
             - alias: Turn electric heater off
               service: climate.turn_off
-              data:
+              target:
                 entity_id: climate.elektrisch_kachel
         default:
           - alias: Set climate preset mode to home
             service: climate.set_preset_mode
             data:
-              entity_id: climate.woonkamer
               preset_mode: home
+            target:
+              entity_id: climate.woonkamer
 
   - id: tado_preheat_going_home_cold_day
     alias: Tado - Huis opwarmen op een koude dag naar huis gaan
