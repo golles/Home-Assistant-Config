@@ -39,8 +39,8 @@ homeassistant:
 
 climate:
   - platform: generic_thermostat
-    name: Elektrisch kachel
-    heater: switch.elektrisch_kachel
+    name: Elektrische kachel
+    heater: switch.elektrische_kachel
     target_sensor: sensor.logeerkamer_temperature
     min_temp: 5
     max_temp: 25
@@ -162,7 +162,7 @@ automation:
             - alias: Turn electric heater off
               service: climate.turn_off
               target:
-                entity_id: climate.elektrisch_kachel
+                entity_id: climate.elektrische_kachel
         default:
           - alias: Set climate preset mode to home
             service: climate.set_preset_mode
