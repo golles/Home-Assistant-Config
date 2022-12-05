@@ -93,7 +93,11 @@ template:
         device_class: occupancy
         icon: mdi:motion-sensor
         state: >
-          {% set motion_entities = ["binary_sensor.logeerkamer_beweging_occupancy", "binary_sensor.tt_macbook_in_thuis_kantoor_en_aan"] %}
+          {% set motion_entities = [
+            "binary_sensor.logeerkamer_beweging_occupancy", 
+            "binary_sensor.macbook_in_thuis_kantoor_en_aan", 
+            "binary_sensor.tt_macbook_in_thuis_kantoor_en_aan"
+          ] %}
           {% set media_entities = ["media_player.googlehome6234"] %}
 
           {% 
