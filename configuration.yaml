@@ -1,7 +1,4 @@
 homeassistant:
-  internal_url: !secret internal_url
-  external_url: !secret external_url
-
   packages: !include_dir_named packages
   
   allowlist_external_dirs:
