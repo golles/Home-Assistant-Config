@@ -1,6 +1,5 @@
 - id: christmas_tree_on
   alias: Kerst - Kerstboom automatisch aan
-  initial_state: off
   mode: single
   max_exceeded: silent
   trigger:
@@ -14,20 +13,16 @@
     - condition: not
       conditions:
         - condition: state
-          entity_id: light.wled_kerstboom
+          entity_id: light.kerstboom
           state: unavailable
   action:
     - alias: Turn on the christmas tree
       service: light.turn_on
-      data:
-        effect: Colortwinkles
-        brightness: 80
       target:
-        entity_id: light.wled_kerstboom
+        entity_id: light.kerstboom
 
 - id: christmas_keep_woonkamer_groot_2_off
   alias: Kerst - Houdt de woonkamer groot 2 uit
-  initial_state: off
   mode: single
   max_exceeded: silent
   trigger:
@@ -36,14 +31,14 @@
       from: "off"
       to: "on"
     - platform: state
-      entity_id: light.wled_kerstboom
+      entity_id: light.kerstboom
       from: "off"
       to: "on"
   condition:
     - condition: not
       conditions:
         - condition: state
-          entity_id: light.wled_kerstboom
+          entity_id: light.kerstboom
           state: unavailable
   action:
     - alias: Turn off the light

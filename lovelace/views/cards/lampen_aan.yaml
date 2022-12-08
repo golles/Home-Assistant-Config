@@ -33,5 +33,11 @@ filter:
         type: custom:mushroom-light-card
         show_brightness_control: true
         use_light_color: true
+    - entity_id: "light.kerstboom"
+      state: "on"
+      options:
+        type: custom:mushroom-light-card
+        show_brightness_control: true
+        use_light_color: true
 sort:
   method: name

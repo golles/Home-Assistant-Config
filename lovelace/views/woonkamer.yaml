@@ -146,6 +146,15 @@ cards:
             name: Keukenkastje
             fill_container: True
 
+          - type: conditional
+            conditions:
+              - entity: light.kerstboom
+                state_not: unavailable
+            card:
+              type: custom:mushroom-light-card
+              entity: light.kerstboom
+              fill_container: True
+
   - type: grid
     columns: 2
     square: false
