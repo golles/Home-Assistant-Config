@@ -4,41 +4,45 @@ homeassistant:
       icon: mdi:gas-station
     sensor.tango_winschoten:
       icon: mdi:gas-station
+    sensor.tango_hoogezand:
+      icon: mdi:gas-station
+    sensor.freie_tankstelle_husers:
+      icon: mdi:gas-station
       
-sensor:
-  - platform: scrape
-    resource: https://www.tango.nl/stations/tango-purmerend
-    name: Tango Purmerend
-    select: "#euro95 > div.pump_price > span.price"
-    unit_of_measurement: €
+scrape:
+  - resource: https://www.tango.nl/stations/tango-purmerend
     scan_interval: 3600
-    device_class: monetary
-    state_class: measurement
+    sensor:
+      - name: Tango Purmerend
+        select: "#euro95 > div.pump_price > span.price"
+        unit_of_measurement: €
+        device_class: monetary
+        state_class: measurement
 
-  - platform: scrape
-    resource: https://www.tango.nl/stations/tango-winschoten
-    name: Tango Winschoten
-    select: "#euro95 > div.pump_price > span.price"
-    unit_of_measurement: €
+  - resource: https://www.tango.nl/stations/tango-winschoten
     scan_interval: 3600
-    device_class: monetary
-    state_class: measurement
+    sensor:
+      - name: Tango Winschoten
+        select: "#euro95 > div.pump_price > span.price"
+        unit_of_measurement: €
+        device_class: monetary
+        state_class: measurement
 
-  - platform: scrape
-    resource: https://www.tango.nl/stations/tango-hoogezand-hoofdstraat
-    name: Tango Hoogezand
-    select: "#euro95 > div.pump_price > span.price"
-    unit_of_measurement: €
+  - resource: https://www.tango.nl/stations/tango-hoogezand-hoofdstraat
     scan_interval: 3600
-    device_class: monetary
-    state_class: measurement
+    sensor:
+      - name: Tango Hoogezand
+        select: "#euro95 > div.pump_price > span.price"
+        unit_of_measurement: €
+        device_class: monetary
+        state_class: measurement
 
-  - platform: scrape
-    resource: https://mehr-tanken.de/tankstelle/6ca71ccf2/freie-tankstelle-husers-burgermeister-esders-str-1-49733-rutenbrock
-    name: Freie Tankstelle Hüsers
-    select: "a[href$='#s95_e5'] > div > div.col-sm-3"
-    value_template: "{{ value.replace(' ', '').replace('\n', '') }}"
-    unit_of_measurement: €
+  - resource: https://mehr-tanken.de/tankstelle/6ca71ccf2/freie-tankstelle-husers-burgermeister-esders-str-1-49733-rutenbrock
     scan_interval: 3600
-    device_class: monetary
-    state_class: measurement
+    sensor:
+      - name: Freie Tankstelle Hüsers
+        select: "a[href$='#s95_e5'] > div > div.col-sm-3"
+        value_template: "{{ value.replace(' ', '').replace('\n', '') }}"
+        unit_of_measurement: €
+        device_class: monetary
+        state_class: measurement
