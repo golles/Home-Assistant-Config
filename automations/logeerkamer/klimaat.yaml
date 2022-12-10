@@ -12,6 +12,11 @@
   mode: single
   trigger:
     - platform: state
+      entity_id: 
+        - binary_sensor.macbook_in_thuis_kantoor_en_aan
+        - binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
+      to: "on"
+    - platform: state
       entity_id: binary_sensor.logeerkamer_bezetting
       to: "on"
       for:
