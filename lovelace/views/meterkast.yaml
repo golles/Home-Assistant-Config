@@ -42,20 +42,12 @@ cards:
         entity: sensor.dsmr_meter_stats_electricity_tariff
         name: Tarief
         state: "{{ 'Hoog' if is_state('sensor.dsmr_meter_stats_electricity_tariff', 'high') else 'Laag' }}"
+      - entity: sensor.dsmr_reading_electricity_currently_delivered
+        name: Verbruik
       - type: weblink
         name: DSMR Reader
         icon: mdi:link
         url: !secret dsmr_frontend
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: 
-        entities:
-          - sensor.dsmr_reading_electricity_currently_delivered
-          - sensor.dsmr_meter_stats_power_failure_count
-          - sensor.dsmr_meter_stats_long_power_failure_count
-          - sensor.dsmr_meter_stats_voltage_sag_count_l1
-          - sensor.dsmr_meter_stats_voltage_swell_count_l1
 
   - type: entities
     title: Warmtemeter
@@ -67,16 +59,10 @@ cards:
           type: section
           label: 
         entities:
-          - sensor.kamstrup_403_flow
-          - sensor.kamstrup_403_heat_energy_e1
+          - sensor.kamstrup_403_temp1
+          - sensor.kamstrup_403_temp2
           - sensor.kamstrup_403_hourcounter
           - sensor.kamstrup_403_infoevent
-          - sensor.kamstrup_403_power
-          - sensor.kamstrup_403_temp1
-          - sensor.kamstrup_403_temp1xm3
-          - sensor.kamstrup_403_temp2
-          - sensor.kamstrup_403_temp2xm3
-          - sensor.kamstrup_403_tempdiff
 
   - type: entities
     title: Watermeter
