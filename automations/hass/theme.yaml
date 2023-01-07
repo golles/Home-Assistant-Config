@@ -1,5 +1,5 @@
 - id: auto_day_night_theme
-  alias: Automatisch theme voor dag en nacht
+  alias: Automatisch thema voor dag en nacht
   mode: single
   trigger:
     - platform: homeassistant
@@ -18,8 +18,10 @@
         sequence:
           - service: frontend.set_theme
             data:
-              name: Google Dark Theme
+              name: Mushroom Shadow
+              mode: dark
       default:
         - service: frontend.set_theme
           data:
-            name: Google Light Theme
+            name: Mushroom Shadow
+            mode: light
