@@ -153,7 +153,9 @@ cards:
             card:
               type: custom:mushroom-light-card
               entity: light.kerstboom
-              fill_container: True
+              use_light_color: true
+              show_color_control: true
+              show_brightness_control: true
 
   - type: grid
     columns: 2
