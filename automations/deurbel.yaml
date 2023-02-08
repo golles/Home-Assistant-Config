@@ -9,7 +9,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.deurbel_ringing_sensor
+      entity_id: binary_sensor.deurbel_ringing
       from: "off"
       to: "on"
   action:
