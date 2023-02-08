@@ -77,7 +77,7 @@ cards:
       - type: custom:fold-entity-row
         head:
           type: section
-          label: Instelingen
+          label: Instellingen
         padding: 0
         entities:
           - entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid

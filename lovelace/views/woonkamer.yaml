@@ -334,3 +334,16 @@ cards:
           {{ iif(is_state(entity, "problem"), "mdi:alert") }}
         badge_color: >-
           {{ iif(is_state(entity, "problem"), "red") }}
+
+  - type: entities
+    show_header_toggle: false
+    entities:
+      - type: custom:fold-entity-row
+        head:
+          type: section
+          label: Instellingen
+        padding: 0
+        entities:
+          - entity: automation.automatisch_licht_aan_in_de_woonkamer
+            name: Automatisch licht
+            icon: mdi:lightbulb-auto-outline
