@@ -17,7 +17,7 @@ scrape:
         select: "#euro95 > div.pump_price > span.price"
         unit_of_measurement: €
         device_class: monetary
-        state_class: measurement
+        state_class: total
 
   - resource: https://www.tango.nl/stations/tango-winschoten
     scan_interval: 3600
@@ -26,7 +26,7 @@ scrape:
         select: "#euro95 > div.pump_price > span.price"
         unit_of_measurement: €
         device_class: monetary
-        state_class: measurement
+        state_class: total
 
   - resource: https://www.tango.nl/stations/tango-hoogezand-hoofdstraat
     scan_interval: 3600
@@ -35,7 +35,7 @@ scrape:
         select: "#euro95 > div.pump_price > span.price"
         unit_of_measurement: €
         device_class: monetary
-        state_class: measurement
+        state_class: total
 
   - resource: https://mehr-tanken.de/tankstelle/6ca71ccf2/freie-tankstelle-husers-burgermeister-esders-str-1-49733-rutenbrock
     scan_interval: 3600
@@ -45,4 +45,4 @@ scrape:
         value_template: "{{ value.replace(' ', '').replace('\n', '') }}"
         unit_of_measurement: €
         device_class: monetary
-        state_class: measurement
+        state_class: total
