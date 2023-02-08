@@ -61,7 +61,7 @@
           from: playing
           to: idle
       timeout:
-        minutes: 1
+        minutes: 2
       continue_on_timeout: true
     
     - alias: Restore soundbar volume and source
