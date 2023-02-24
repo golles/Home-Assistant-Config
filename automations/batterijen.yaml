@@ -8,6 +8,7 @@
         - sensor.ipad_mini_van_golles_battery_level
         - sensor.logeerkamer_battery
         - sensor.keuken_battery
+        - sensor.tandenborstel_battery
       below: 25
     - platform: state
       entity_id:
