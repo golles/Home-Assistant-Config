@@ -24,7 +24,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -121,7 +122,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -253,7 +255,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -327,7 +330,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -395,7 +399,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -475,7 +480,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
@@ -542,7 +548,8 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color: grey
+                icon_color:  >-
+                  {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
               - type: template
