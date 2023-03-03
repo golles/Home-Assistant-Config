@@ -8,6 +8,3 @@ entities:
   - sensor.time_date
   - sensor.time_utc
   - sensor.internet_time
-
-  # DSMR:
-  - sensor.dsmr_reading_timestamp
