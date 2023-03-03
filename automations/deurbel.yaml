@@ -63,28 +63,38 @@
                   service: media_player.media_pause
                   entity_id: media_player.mediabox
 
-          # - alias: Show camera stream in the web browser on the tv
-          #   service: webostv.command
-          #   data:
-          #     entity_id: media_player.lg_c9
-          #     command: system.launcher/open
-          #     payload:
-          #       target: "{{ internal_url }}/api/camera_proxy_stream/camera.deurbel?token={{ state_attr('camera.deurbel', 'access_token') }}"
+          - alias: Start the camera stream
+            service: eufy_security.start_p2p_livestream
+            target:
+              entity_id: camera.deurbel
 
-          # - alias: Wait a little
-          #   delay:
-          #     seconds: 15
+          - alias: Show camera stream in the web browser on the tv
+            service: webostv.command
+            data:
+              entity_id: media_player.lg_c9
+              command: system.launcher/open
+              payload:
+                target: "{{ internal_url }}/api/camera_proxy_stream/camera.deurbel?token={{ state_attr('camera.deurbel', 'access_token') }}"
 
-          # - choose:
-          #   - conditions:
-          #       - "{{ is_state_attr('media_player.lg_c9', 'source', 'Webbrowser') }}"
-          #       - "{{ tv_current_source != None }}"
-          #     sequence:
-          #       - alias: Return to the previous source on the tv
-          #         service: media_player.select_source
-          #         data:
-          #           entity_id: media_player.lg_c9
-          #           source: "{{ tv_current_source }}"
+          - alias: Wait a little
+            delay:
+              seconds: 15
+
+          - alias: Stop the camera stream
+            service: eufy_security.stop_p2p_livestream
+            target:
+              entity_id: camera.deurbel
+
+          - choose:
+            - conditions:
+                - "{{ is_state_attr('media_player.lg_c9', 'source', 'Webbrowser') }}"
+                - "{{ tv_current_source != None }}"
+              sequence:
+                - alias: Return to the previous source on the tv
+                  service: media_player.select_source
+                  data:
+                    entity_id: media_player.lg_c9
+                    source: "{{ tv_current_source }}"
 
     # Don't trigger again for a few seconds.
     - delay:
