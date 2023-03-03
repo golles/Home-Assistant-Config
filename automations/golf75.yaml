@@ -74,3 +74,45 @@
                 - '{{ state_attr(person, "longitude")}}'
               gps_accuracy: >-
                 {{ state_attr(person, "gps_accuracy") }}
+
+- id: golf75_persist_location_restart
+  alias: Golf 7.5 - Bewaar locatie tijdens herstart
+  mode: single
+  trigger:
+    - platform: homeassistant
+      event: start
+      id: start
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - if:
+        - condition: trigger
+          id: start
+      then:
+        - alias: Set car location based on the persisted data
+          service: device_tracker.see
+          data:
+            dev_id: golf_7_5
+            gps:
+              - '{{ state_attr("sensor.key_value_store", "store").golf75_attributes.value.latitude }}'
+              - '{{ state_attr("sensor.key_value_store", "store").golf75_attributes.value.longitude }}'
+            gps_accuracy: >-
+              {{ state_attr("sensor.key_value_store", "store").golf75_attributes.value.gps_accuracy }}
+
+        - alias: Unset Golf 7.5 attributes
+          event: key_value_unset
+          event_data: 
+            key: golf75_attributes
+      else:
+        - alias: Persist Golf 7.5 attributes
+          event: key_value_set
+          event_data: 
+            key: golf75_attributes
+            value: >
+              {% set data = {
+                  "latitude": state_attr("device_tracker.golf_7_5", "latitude"), 
+                  "longitude": state_attr("device_tracker.golf_7_5", "longitude"), 
+                  "gps_accuracy": state_attr("device_tracker.golf_7_5", "gps_accuracy"), 
+                } 
+              %}
+              {{ data }}
