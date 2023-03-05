@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Resouce list for javascript dependencies.
+JAVASCRIPT=$(cat <<'EOF'
+auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
+battery-state-card.js           https://github.com/maxwroc/battery-state-card/releases/latest/download/battery-state-card.js
+elapsed-time-entity-row.js      https://github.com/golles/lovelace-elapsed-time-entity-row/releases/latest/download/elapsed-time-entity-row.js
+fold-entity-row.js              https://raw.githubusercontent.com/thomasloven/lovelace-fold-entity-row/master/fold-entity-row.js
+mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
+mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js
+multiple-entity-row.js          https://github.com/benct/lovelace-multiple-entity-row/releases/latest/download/multiple-entity-row.js
+mushroom.js                     https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js
+swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
+template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
+vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
+EOF
+)
+
+# Resouce list for theme dependencies.
+THEMES=$(cat <<'EOF'
+google_theme.yaml               https://raw.githubusercontent.com/JuanMTech/google-theme/main/themes/google_theme.yaml
+mushroom-shadow.yaml            https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-shadow.yaml
+mushroom-square-shadow.yaml     https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-square-shadow.yaml
+mushroom-square.yaml            https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-square.yaml
+mushroom.yaml                   https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom.yaml
+EOF
+)
+
+update_resources () {
+    # $1 = Resource list.
+    # $2 = Folder.
+    echo "$1" | while IFS= read -r line ; do 
+        RESOUCRE=${line% *}
+        REMOTE_FILE=${line#* }
+
+        curl -sL $REMOTE_FILE --output $2/$RESOUCRE
+    done
+
+    git status $2
+}
+
+update_javascript () {
+    update_resources "$JAVASCRIPT" ../www
+}
+
+update_themes () {
+    update_resources "$THEMES" ../themes
+}
+
+usage () {
+    echo "This program requires 1 argument, eg."
+    echo "  all - Update all resources"
+    echo "  javascript - Update all javascript resources"
+    echo "  js - Update all javascript resources"
+    echo "  themes - Update all theme resources"
+}
+
+
+# Make the script dir, the working directory.
+cd $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+# $1 = User input, what to update.
+case $1 in
+    all)        update_javascript; update_themes; ;;
+    javascript|js) update_javascript ;;
+    themes)     update_themes ;;
+    *)          echo "Bad input"; usage; exit 1 ;;
+esac
