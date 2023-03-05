@@ -15,6 +15,9 @@ mushroom.js                     https://github.com/piitaya/lovelace-mushroom/rel
 swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
 template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
 vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
+webrtc-camera.js                https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/webrtc-camera.js
+video-rtc.js                    https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/video-rtc.js
+embed.html                      https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/embed.html
 EOF
 )
 
