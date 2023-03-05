@@ -5,6 +5,7 @@ blueprint:
     When it's open (binary_sensor on) hvac mode is set to off.
     When it's close (binary_sensor off) hvac mode is set to auto.
   domain: automation
+  author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/door-window-climate-control.yaml
   input:
     door_entity:
