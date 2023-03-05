@@ -28,6 +28,24 @@ mushroom.yaml                   https://raw.githubusercontent.com/piitaya/lovela
 EOF
 )
 
+# Resouce list for custom components.
+CUSTOM_COMPONENTS=$(cat <<'EOF'
+custom_components/eufy_security     https://github.com/fuatakgun/eufy_security
+custom_components/kamstrup_403      https://github.com/golles/ha-kamstrup_403
+custom_components/knmi              https://github.com/golles/ha-knmi
+custom_components/apple_tv          https://github.com/postlund/hass-atv-beta
+custom_components/p2000             https://github.com/cyberjunky/home-assistant-p2000
+custom_components/afvalbeheer       https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
+custom_components/blitzortung       https://github.com/mrk-its/homeassistant-blitzortung
+custom_components/ical              https://github.com/tybritten/ical-sensor-homeassistant
+custom_components/lghorizon         https://github.com/Sholofly/lghorizon
+custom_components/watchman          https://github.com/dummylabs/thewatchman
+custom_components/webrtc            https://github.com/AlexxIT/WebRTC
+custom_components/xiaomi_miio_fan   https://github.com/syssi/xiaomi_fan
+EOF
+)
+
+
 update_resources () {
     # $1 = Resource list.
     # $2 = Folder.
@@ -49,12 +67,61 @@ update_themes () {
     update_resources "$THEMES" ../themes
 }
 
+update_custom_components () {
+    cd ../external
+    for dir in ./*
+    do
+        if [ -d "${dir}" ]
+        then
+            cd ${dir}
+            BRANCH=$( git branch --show )
+            pwd
+            echo "On branch: ${BRANCH}, updating..."
+            git pull
+            echo ""
+            cd ../
+        fi
+    done
+}
+
+update_all () {
+    echo "Updating javascript"
+    update_javascript
+    echo -e "\nUpdating themes"
+    update_themes
+    echo -e "\nUpdating custom components"
+    update_custom_components
+}
+
+init_custom_components () {
+    mkdir -p ../external
+    mkdir -p ../custom_components
+
+    echo "$CUSTOM_COMPONENTS" | while IFS= read -r line ; do 
+        COMPONENT=${line% *}
+        REPO=${line##* }
+        FOLDER=${REPO##*/}
+        NAME=${COMPONENT##*/}
+
+        if [ ! -d "../external/${FOLDER}" ]
+        then
+            cd ../external
+            git clone ${REPO}
+
+            cd ../custom_components
+            ln -s ../external/${FOLDER}/custom_components/${NAME} ${NAME}
+        fi
+    done
+}
+
 usage () {
     echo "This program requires 1 argument, eg."
     echo "  all - Update all resources"
+    echo "  custom_components - Update all custom components"
     echo "  javascript - Update all javascript resources"
     echo "  js - Update all javascript resources"
     echo "  themes - Update all theme resources"
+    echo "  init_custom_components - Initialize all custom components"
 }
 
 
@@ -63,8 +130,10 @@ cd $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # $1 = User input, what to update.
 case $1 in
-    all)        update_javascript; update_themes; ;;
-    javascript|js) update_javascript ;;
-    themes)     update_themes ;;
-    *)          echo "Bad input"; usage; exit 1 ;;
+    all)                        update_all ;;
+    javascript|js)              update_javascript ;;
+    themes)                     update_themes ;;
+    custom_components)          update_custom_components ;;
+    init_custom_components)     init_custom_components ;;
+    *)                          echo "Bad input"; usage; exit 1 ;;
 esac
