@@ -1,0 +1,93 @@
+name: CI
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches:
+      - main
+  pull_request: ~
+
+jobs:
+  code-style:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Run prettier
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: --check .
+
+      - name: Remove symbolic links in themes
+        run: |
+          rm -rf themes/*
+
+      - name: Run yamllint
+        uses: frenck/action-yamllint@v1
+
+  mock-secrets:
+    name: Mocking secrets
+    runs-on: ubuntu-latest
+    needs: code-style
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Make empty secrets file
+        run: |
+          touch secrets.yaml
+      - name: Find all project secrets and add them to the secrets file
+        run: |
+          grep "\!secret " -r -i --include \*.yaml --include \*.yaml --exclude-dir=.github --exclude-dir=.vscode . | while read -r line ; do
+              secret=$(echo ${line} | awk '{if(/secret/) print $4}')
+              value="'value0123'"
+              if [[ $secret == *_ip ]]
+              then
+                  value="10.0.0.12"
+              elif [[ $secret == *_mac ]]
+              then
+                  value="00:00:00:00:00:00"
+              elif [[ $secret == *_url ]]
+              then
+                  value="https://foo.bar"
+              elif [[ $secret == network_subnet ]]
+              then
+                  value="10.0.0.0/8"
+              fi
+
+              if [[ ! $(grep -R "${secret}" secrets.yaml) ]]
+              then
+                  echo "${secret}: ${value}" >> secrets.yaml
+              fi
+          done
+
+      - name: Upload mocked secrets
+        uses: actions/upload-artifact@v3
+        with:
+          name: secrets
+          path: secrets.yaml
+
+  check:
+    name: Home Assistant config check
+    needs: mock-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup custom components
+        run: |
+          ./scripts/update_resources init_custom_components
+
+      - name: Download mocked secret
+        uses: actions/download-artifact@v3
+        with:
+          name: secrets
+
+      - name: Home Assistant configuration check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: ${{ github.workspace }}
+          version: stable
