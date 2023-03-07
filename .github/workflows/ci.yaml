@@ -20,10 +20,6 @@ jobs:
         with:
           prettier_options: --check .
 
-      - name: Remove symbolic links in themes
-        run: |
-          rm -rf themes/*
-
       - name: Run yamllint
         uses: frenck/action-yamllint@v1
 
