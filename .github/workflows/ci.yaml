@@ -94,8 +94,9 @@ jobs:
         run: |
           cat configuration.yaml
 
-      - name: Make working directory
+      - name: Make working directories
         run: |
+          mkdir -p /tmp
           mkdir -p www/tmp
 
       - name: Home Assistant configuration check
