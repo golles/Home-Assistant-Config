@@ -112,7 +112,7 @@ init_custom_components () {
             git clone ${REPO}
 
             cd ../custom_components
-            ln -s ../external/${FOLDER}/custom_components/${NAME} ${NAME}
+            ln -s ../external/${FOLDER}/${COMPONENT} ${NAME}
         fi
     done
 }
