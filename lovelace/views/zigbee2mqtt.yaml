@@ -4,7 +4,6 @@ panel: false
 icon: mdi:zigbee
 badges: []
 cards:
-
   - title: Zigbee2mqtt
     type: entities
     show_header_toggle: false
@@ -26,8 +25,8 @@ cards:
     filter:
       include:
         - domain: binary_sensor
-          entity_id: '*update_available'
-          state: 'on'
+          entity_id: "*update_available"
+          state: "on"
           options:
             tap_action:
               action: call-service

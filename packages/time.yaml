@@ -21,7 +21,7 @@ template:
           {% endif %}
         state: >-
           {{ now().timetuple().tm_isdst == 1 }}
-        
+
 binary_sensor:
   - platform: tod
     name: Night

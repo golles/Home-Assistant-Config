@@ -3,8 +3,7 @@ path: ramendeurcover
 panel: false
 icon: mdi:door-open
 badges: []
-cards: 
-
+cards:
   - type: custom:auto-entities
     show_empty: false
     card:
@@ -18,13 +17,13 @@ cards:
           domain: binary_sensor
           options:
             secondary_info: last-changed
-          state: 'on'
+          state: "on"
         - attributes:
             device_class: window
           domain: binary_sensor
           options:
             secondary_info: last-changed
-          state: 'on'
+          state: "on"
       exclude:
         - entity_id: binary_sensor.wasmachine_door
         - entity_id: binary_sensor.vaatwasser_door
@@ -91,4 +90,3 @@ cards:
             secondary_info: last-changed
     sort:
       method: name
-

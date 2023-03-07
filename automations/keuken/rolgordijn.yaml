@@ -11,22 +11,22 @@
       at: "08:30:00"
       id: open
   action:
-      - if:
-          - condition: trigger
-            id: open
-        then:
-          - alias: Open the cover
-            service: button.press
-            target:
-              entity_id: button.keuken_rolgordijn_voorkeurspositie
-        else:
-          - alias: Delay closing, so it doesn't close at the same time every day
-            delay:
-              minutes: "{{ range(0, 30) | random }}"
+    - if:
+        - condition: trigger
+          id: open
+      then:
+        - alias: Open the cover
+          service: button.press
+          target:
+            entity_id: button.keuken_rolgordijn_voorkeurspositie
+      else:
+        - alias: Delay closing, so it doesn't close at the same time every day
+          delay:
+            minutes: "{{ range(0, 30) | random }}"
 
-          - alias: Close the cover, depending on the window state
-            service: script.close_cover_window_state
-            data:
-              wait_minutes: 240
-              cover_entity: cover.keuken
-              window_entity: binary_sensor.keukenraam_contact
+        - alias: Close the cover, depending on the window state
+          service: script.close_cover_window_state
+          data:
+            wait_minutes: 240
+            cover_entity: cover.keuken
+            window_entity: binary_sensor.keukenraam_contact

@@ -5,7 +5,7 @@ automation:
     trigger:
       - platform: state
         entity_id: switch.adguard_protection
-        to: 
+        to:
           - "on"
           - "off"
     action:
@@ -17,9 +17,9 @@ automation:
           - alias: Turn the 2nd instance on
             service: switch.turn_on
             target:
-             entity_id: switch.adguard_protection_2
+              entity_id: switch.adguard_protection_2
         else:
           - alias: Turn the 2nd instance off
             service: switch.turn_off
             target:
-             entity_id: switch.adguard_protection_2
+              entity_id: switch.adguard_protection_2

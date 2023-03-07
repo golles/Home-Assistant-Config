@@ -18,35 +18,35 @@
       state: "off"
   action:
     - choose:
-      - conditions:
-        # When the fan is set to low, set it to high for a certain amount of time.
-        - condition: numeric_state
-          entity_id: fan.mechanische_ventilatie
-          attribute: percentage
-          below: 26
-        sequence:
-          - alias: Turn on fan to reduce humidity
-            service: button.press
-            target:
-              entity_id: button.mechanische_ventilatie_30_minuten_hoog
+        - conditions:
+            # When the fan is set to low, set it to high for a certain amount of time.
+            - condition: numeric_state
+              entity_id: fan.mechanische_ventilatie
+              attribute: percentage
+              below: 26
+          sequence:
+            - alias: Turn on fan to reduce humidity
+              service: button.press
+              target:
+                entity_id: button.mechanische_ventilatie_30_minuten_hoog
     - choose:
-      - conditions:
-        # When the heater is in auto mode, switch the heating on.
-        - condition: state
-          entity_id: climate.zolder
-          state: auto
-        # Only when the room temperature is below a certain value.
-        - condition: numeric_state
-          entity_id: climate.zolder
-          attribute: temperature
-          below: 20
-        sequence:
-          - alias: Heat the room for a period of time to reduce humidity
-            service: tado.set_climate_timer
-            data:
+        - conditions:
+            # When the heater is in auto mode, switch the heating on.
+            - condition: state
               entity_id: climate.zolder
-              time_period: "02:00:00"
-              temperature: 23
+              state: auto
+            # Only when the room temperature is below a certain value.
+            - condition: numeric_state
+              entity_id: climate.zolder
+              attribute: temperature
+              below: 20
+          sequence:
+            - alias: Heat the room for a period of time to reduce humidity
+              service: tado.set_climate_timer
+              data:
+                entity_id: climate.zolder
+                time_period: "02:00:00"
+                temperature: 23
 
 - id: notification_washing_machine
   alias: "Notificatie: Wasmachine klaar (tv)"

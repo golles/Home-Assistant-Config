@@ -4,7 +4,6 @@ panel: false
 icon: mdi:weather-sunny
 badges: []
 cards:
-
   - type: custom:mushroom-chips-card
     chips:
       - type: template
@@ -132,7 +131,7 @@ cards:
         tap_action:
           action: url
           url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-          
+
       - type: picture
         image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
         tap_action:

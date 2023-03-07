@@ -4,7 +4,6 @@ panel: false
 icon: mdi:radiator
 badges: []
 cards:
-
   - type: entities
     title: Tado
     entities:
@@ -22,7 +21,7 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.woonkamer_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - entity: sensor.mi_air_purifier_3_3h_temperature
             type: custom:multiple-entity-row
             name: Air purifier
@@ -34,7 +33,7 @@ cards:
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.ru1141249024_battery_state
               - entity: binary_sensor.va1805654016_battery_state
@@ -63,11 +62,11 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.slaapkamer_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.va2677479424_battery_state
               - entity: binary_sensor.slaapkamer_power
@@ -93,11 +92,11 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.kledingkamer_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.va3382122496_battery_state
               - entity: binary_sensor.kledingkamer_power
@@ -123,11 +122,11 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.logeerkamer_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.va4103542784_battery_state
               - entity: binary_sensor.logeerkamer_power
@@ -153,7 +152,7 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.badkamer_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - entity: sensor.badkamer_klimaat_temperature
             type: custom:multiple-entity-row
             name: Xiaomi
@@ -164,7 +163,7 @@ cards:
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.va1788876800_battery_state
               - entity: binary_sensor.badkamer_power
@@ -190,11 +189,11 @@ cards:
             state_header: Temperatuur
             entities:
               - entity: sensor.zolder_humidity
-                name: Luchtvochtigheid 
+                name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
-              label: 
+              label:
             entities:
               - entity: binary_sensor.va2979272704_battery_state
               - entity: binary_sensor.zolder_power

@@ -1,6 +1,6 @@
 blueprint:
   name: Zigbee2MQTT - Aqara Magic Cube (MFKZQ01LM)
-  description:  |
+  description: |
     This blueprint allows you to make automations for the Aqara Magic Cube, connected to Zigbee2MQTT.
 
     Limitations (these are by design):
@@ -219,95 +219,95 @@ action:
       side: "{{ states(side_entity) }}"
 
   - choose:
-    - conditions: >-
-        {{ event == "fall" }}
-      sequence: !input fall
+      - conditions: >-
+          {{ event == "fall" }}
+        sequence: !input fall
 
-    - conditions: >-
-        {{ event == "flip180" or event == "flip90" }}
-      sequence:
-        - choose:
-          - conditions: "{{ side == 0 }}"
-            sequence: !input flip_side_0
-          - conditions: "{{ side == 1 }}"
-            sequence: !input flip_side_1
-          - conditions: "{{ side == 2 }}"
-            sequence: !input flip_side_2
-          - conditions: "{{ side == 3 }}"
-            sequence: !input flip_side_3
-          - conditions: "{{ side == 4 }}"
-            sequence: !input flip_side_4
-          - conditions: "{{ side == 5 }}"
-            sequence: !input flip_side_5
+      - conditions: >-
+          {{ event == "flip180" or event == "flip90" }}
+        sequence:
+          - choose:
+              - conditions: "{{ side == 0 }}"
+                sequence: !input flip_side_0
+              - conditions: "{{ side == 1 }}"
+                sequence: !input flip_side_1
+              - conditions: "{{ side == 2 }}"
+                sequence: !input flip_side_2
+              - conditions: "{{ side == 3 }}"
+                sequence: !input flip_side_3
+              - conditions: "{{ side == 4 }}"
+                sequence: !input flip_side_4
+              - conditions: "{{ side == 5 }}"
+                sequence: !input flip_side_5
 
-    - conditions: >-
-        {{ event == "rotate_left" }}
-      sequence:
-        - choose:
-          - conditions: "{{ side == 0 }}"
-            sequence: !input rotate_left_side_0
-          - conditions: "{{ side == 1 }}"
-            sequence: !input rotate_left_side_1
-          - conditions: "{{ side == 2 }}"
-            sequence: !input rotate_left_side_2
-          - conditions: "{{ side == 3 }}"
-            sequence: !input rotate_left_side_3
-          - conditions: "{{ side == 4 }}"
-            sequence: !input rotate_left_side_4
-          - conditions: "{{ side == 5 }}"
-            sequence: !input rotate_left_side_5
+      - conditions: >-
+          {{ event == "rotate_left" }}
+        sequence:
+          - choose:
+              - conditions: "{{ side == 0 }}"
+                sequence: !input rotate_left_side_0
+              - conditions: "{{ side == 1 }}"
+                sequence: !input rotate_left_side_1
+              - conditions: "{{ side == 2 }}"
+                sequence: !input rotate_left_side_2
+              - conditions: "{{ side == 3 }}"
+                sequence: !input rotate_left_side_3
+              - conditions: "{{ side == 4 }}"
+                sequence: !input rotate_left_side_4
+              - conditions: "{{ side == 5 }}"
+                sequence: !input rotate_left_side_5
 
-    - conditions: >-
-        {{ event == "rotate_right" }}
-      sequence:
-        - choose:
-          - conditions: "{{ side == 0 }}"
-            sequence: !input rotate_right_side_0
-          - conditions: "{{ side == 1 }}"
-            sequence: !input rotate_right_side_1
-          - conditions: "{{ side == 2 }}"
-            sequence: !input rotate_right_side_2
-          - conditions: "{{ side == 3 }}"
-            sequence: !input rotate_right_side_3
-          - conditions: "{{ side == 4 }}"
-            sequence: !input rotate_right_side_4
-          - conditions: "{{ side == 5 }}"
-            sequence: !input rotate_right_side_5
+      - conditions: >-
+          {{ event == "rotate_right" }}
+        sequence:
+          - choose:
+              - conditions: "{{ side == 0 }}"
+                sequence: !input rotate_right_side_0
+              - conditions: "{{ side == 1 }}"
+                sequence: !input rotate_right_side_1
+              - conditions: "{{ side == 2 }}"
+                sequence: !input rotate_right_side_2
+              - conditions: "{{ side == 3 }}"
+                sequence: !input rotate_right_side_3
+              - conditions: "{{ side == 4 }}"
+                sequence: !input rotate_right_side_4
+              - conditions: "{{ side == 5 }}"
+                sequence: !input rotate_right_side_5
 
-    - conditions: >-
-        {{ event == "shake" }}
-      sequence: !input shake
+      - conditions: >-
+          {{ event == "shake" }}
+        sequence: !input shake
 
-    - conditions: >-
-        {{ event == "slide" }}
-      sequence:
-        - choose:
-          - conditions: "{{ side == 0 }}"
-            sequence: !input slide_side_0
-          - conditions: "{{ side == 1 }}"
-            sequence: !input slide_side_1
-          - conditions: "{{ side == 2 }}"
-            sequence: !input slide_side_2
-          - conditions: "{{ side == 3 }}"
-            sequence: !input slide_side_3
-          - conditions: "{{ side == 4 }}"
-            sequence: !input slide_side_4
-          - conditions: "{{ side == 5 }}"
-            sequence: !input slide_side_5
+      - conditions: >-
+          {{ event == "slide" }}
+        sequence:
+          - choose:
+              - conditions: "{{ side == 0 }}"
+                sequence: !input slide_side_0
+              - conditions: "{{ side == 1 }}"
+                sequence: !input slide_side_1
+              - conditions: "{{ side == 2 }}"
+                sequence: !input slide_side_2
+              - conditions: "{{ side == 3 }}"
+                sequence: !input slide_side_3
+              - conditions: "{{ side == 4 }}"
+                sequence: !input slide_side_4
+              - conditions: "{{ side == 5 }}"
+                sequence: !input slide_side_5
 
-    - conditions: >-
-        {{ event == "tap" }}
-      sequence:
-        - choose:
-          - conditions: "{{ side == 0 }}"
-            sequence: !input tap_side_0
-          - conditions: "{{ side == 1 }}"
-            sequence: !input tap_side_1
-          - conditions: "{{ side == 2 }}"
-            sequence: !input tap_side_2
-          - conditions: "{{ side == 3 }}"
-            sequence: !input tap_side_3
-          - conditions: "{{ side == 4 }}"
-            sequence: !input tap_side_4
-          - conditions: "{{ side == 5 }}"
-            sequence: !input tap_side_5
+      - conditions: >-
+          {{ event == "tap" }}
+        sequence:
+          - choose:
+              - conditions: "{{ side == 0 }}"
+                sequence: !input tap_side_0
+              - conditions: "{{ side == 1 }}"
+                sequence: !input tap_side_1
+              - conditions: "{{ side == 2 }}"
+                sequence: !input tap_side_2
+              - conditions: "{{ side == 3 }}"
+                sequence: !input tap_side_3
+              - conditions: "{{ side == 4 }}"
+                sequence: !input tap_side_4
+              - conditions: "{{ side == 5 }}"
+                sequence: !input tap_side_5

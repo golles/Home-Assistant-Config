@@ -3,7 +3,7 @@ path: sabnzbd
 panel: false
 icon: mdi:download-multiple
 badges: []
-cards: 
+cards:
   - type: entities
     title: SABnzbd
     entities:
@@ -18,7 +18,7 @@ cards:
       - sensor.sabnzbd_weekly_total
       - sensor.sabnzbd_monthly_total
       - sensor.sabnzbd_total
-      
+
   - type: sensor
     entity: sensor.sabnzbd_speed
     graph: line

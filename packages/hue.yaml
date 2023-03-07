@@ -96,7 +96,7 @@ script:
         target: "{{ light }}"
 
       - alias: Wait a second
-        delay: 
+        delay:
           seconds: 1
 
       - alias: Transition the light to a brighter state
@@ -106,7 +106,7 @@ script:
           brightness: 255
           transition: "{{ transition }}"
         target: "{{ light }}"
-  
+
 switch:
   - platform: template
     switches:

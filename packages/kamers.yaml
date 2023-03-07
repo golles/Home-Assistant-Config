@@ -13,14 +13,14 @@ template:
                   "binary_sensor.deurbel_person_detected",
                 ])
               | sort(attribute="last_changed", reverse = True) -%}
-        
+
             {%- set room = namespace(r=[]) -%}
             {% for sensor in motion_sensors | selectattr("state", "eq", "on") %}
               {% if (area_name(sensor.entity_id) != None) %}
                 {%- set room.r = room.r + [area_name(sensor.entity_id)] -%}
               {% endif %}
             {% endfor %}
-            
+
             {% if (room.r | count > 0) %}
               {{ room.r | unique | list }}
             {% else %}

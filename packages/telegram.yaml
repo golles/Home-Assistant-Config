@@ -99,7 +99,7 @@ automation:
                   parse_mode: markdown
                   message: |-
                     🌤️ *Weer thuis*:
-                    
+
                     *Temperatuur*:               {{ state_attr("weather.knmi_purmerend", "temperature") }} °C
                     *Gevoelstemperatuur*: {{ states("sensor.knmi_purmerend_gevoelstemperatuur") }} °C
                     *Luchtvochtigheid*:       {{ state_attr("weather.knmi_purmerend", "humidity") }} %

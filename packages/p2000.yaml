@@ -7,7 +7,7 @@ sensor:
     scan_interval: 60
     radius: 5000
     nolocation: True
-    
+
   - platform: p2000
     name: P2000 Brandweer
     icon: mdi:fire-truck

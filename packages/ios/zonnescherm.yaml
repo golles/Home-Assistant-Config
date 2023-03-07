@@ -50,33 +50,33 @@ automation:
           action_name: "{{ trigger.event.data.actionName }}"
 
       - choose:
-        - conditions:
-            - condition: template
-              value_template: >-
-                {{ action_name == "Zonnescherm dicht" }}
-          sequence:
-            - alias: Close awning
-              service: cover.close_cover
-              target:
-                entity_id: cover.zonnescherm
-        - conditions:
-            - condition: template
-              value_template: >-
-                {{ action_name == "Zonnescherm open" }}
-          sequence:
-            - alias: Open awning
-              service: button.press
-              target:
-                entity_id: button.zonnescherm_my_position
-        - conditions:
-            - condition: template
-              value_template: >-
-                {{ action_name == "Zonnescherm  helemaal open" }}
-          sequence:
-            - alias: My position for awning
-              service: cover.open_cover
-              target:
-                entity_id: cover.zonnescherm
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ action_name == "Zonnescherm dicht" }}
+            sequence:
+              - alias: Close awning
+                service: cover.close_cover
+                target:
+                  entity_id: cover.zonnescherm
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ action_name == "Zonnescherm open" }}
+            sequence:
+              - alias: Open awning
+                service: button.press
+                target:
+                  entity_id: button.zonnescherm_my_position
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ action_name == "Zonnescherm  helemaal open" }}
+            sequence:
+              - alias: My position for awning
+                service: cover.open_cover
+                target:
+                  entity_id: cover.zonnescherm
 
   - id: auto_close_awning
     alias: Zonnescherm automatisch sluiten

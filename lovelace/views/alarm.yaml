@@ -4,7 +4,6 @@ panel: false
 icon: mdi:alarm-light
 badges: []
 cards:
-
   - type: alarm-panel
     entity: alarm_control_panel.huis_alarm
 

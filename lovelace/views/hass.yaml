@@ -4,7 +4,6 @@ panel: false
 icon: mdi:home-assistant
 badges: []
 cards:
-
   - type: entities
     title: Home Assistant
     show_header_toggle: false
@@ -16,7 +15,7 @@ cards:
       - type: divider
       - entity: sensor.current_version
       - entity: sensor.docker_hub
-    
+
   - type: custom:auto-entities
     show_empty: true
     card:
@@ -33,7 +32,7 @@ cards:
           "state": states[d[0]] | count
         }] -%}
         {%- endfor %}
-        
+
         {{ data.entities }}
     sort:
       method: name
@@ -52,4 +51,3 @@ cards:
         - entity_id: "sensor.dsmr_*gas*"
       include:
         - state: unknown
-  

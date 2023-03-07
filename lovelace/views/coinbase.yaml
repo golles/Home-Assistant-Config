@@ -4,7 +4,6 @@ panel: false
 icon: mdi:cash-multiple
 badges: []
 cards:
-  
   - type: custom:auto-entities
     card:
       type: entities

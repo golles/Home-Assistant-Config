@@ -3,8 +3,7 @@ path: meterkast
 panel: false
 icon: mdi:gauge
 badges: []
-cards: 
-
+cards:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
@@ -57,7 +56,7 @@ cards:
       - type: custom:fold-entity-row
         head:
           type: section
-          label: 
+          label:
         entities:
           - sensor.kamstrup_403_temp1
           - sensor.kamstrup_403_temp2
@@ -72,7 +71,7 @@ cards:
       - type: custom:fold-entity-row
         head:
           type: section
-          label: 
+          label:
         entities:
           - entity: sensor.waterverbruik_per_dag
             name: Verbruik vandaag

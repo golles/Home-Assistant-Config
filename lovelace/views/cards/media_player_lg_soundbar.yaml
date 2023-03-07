@@ -13,7 +13,7 @@ hide:
 shortcuts:
   columns: 4
   column_height: 60
-  buttons:    
+  buttons:
     - cover: /local/radio/npo1.png
       type: script
       id: script.play_livingroom_radio

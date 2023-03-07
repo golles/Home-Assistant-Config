@@ -4,7 +4,6 @@ panel: false
 icon: mdi:cloud-upload
 badges: []
 cards:
-
   - type: entity
     entity: input_text.borg
 

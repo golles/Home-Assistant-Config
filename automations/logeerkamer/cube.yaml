@@ -14,7 +14,7 @@
         - variables:
             stream: https://stream.qmusic.nl/qmusic/mp3
             speaker: media_player.googlehome6234
-            
+
         - choose:
             - conditions:
                 condition: or
@@ -42,7 +42,7 @@
         - service: media_player.turn_off
           target:
             entity_id: media_player.googlehome6234
-            
+
       rotate_left_side_0:
         - service: light.turn_on
           data:

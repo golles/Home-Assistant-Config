@@ -15,16 +15,16 @@ automation:
           minutes: 10
     action:
       - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-              below: 15
-          sequence:
-            - service: shell_command.dlink_set_night_mode
-              data:
-                host: !secret dlink_camera_host
-                username: !secret dlink_camera_username
-                password: !secret dlink_camera_password
+          - conditions:
+              - condition: numeric_state
+                entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+                below: 15
+            sequence:
+              - service: shell_command.dlink_set_night_mode
+                data:
+                  host: !secret dlink_camera_host
+                  username: !secret dlink_camera_username
+                  password: !secret dlink_camera_password
         default:
           - service: shell_command.dlink_set_day_mode
             data:

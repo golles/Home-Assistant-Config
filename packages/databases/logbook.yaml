@@ -1,3 +1,2 @@
 logbook:
-  exclude: 
-    !include ../../db_excludes.yaml
+  exclude: !include ../../db_excludes.yaml

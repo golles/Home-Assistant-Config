@@ -1,6 +1,6 @@
 # This feature requires running an mDNS forwarder on your Docker host, e.g., avahi-daemon in reflector mode.
 #
-# In /etc/avahi/avahi-daemon.conf 
+# In /etc/avahi/avahi-daemon.conf
 # - server section, set cache-entries-max to 0, this prevents zeroconf.NonUniqueNameException.
 # - reflector section, make sure those 3 lines are not commented out.
 #

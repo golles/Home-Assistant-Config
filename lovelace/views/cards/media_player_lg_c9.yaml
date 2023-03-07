@@ -14,7 +14,7 @@ hide:
 shortcuts:
   columns: 4
   column_height: 60
-  buttons:    
+  buttons:
     - cover: /local/tv/ziggo.png
       type: service
       id: script.lg_c9_source_ziggo

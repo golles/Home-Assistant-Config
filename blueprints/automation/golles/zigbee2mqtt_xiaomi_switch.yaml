@@ -63,26 +63,26 @@ trigger:
       - "quadruple"
       - "hold"
       - "release"
-    
+
 action:
   - variables:
       to_state: "{{ trigger.to_state.state }}"
 
   - choose:
-    - conditions: "{{ to_state == 'single' }}"
-      sequence: !input single
+      - conditions: "{{ to_state == 'single' }}"
+        sequence: !input single
 
-    - conditions: "{{ to_state == 'double' }}"
-      sequence: !input double
+      - conditions: "{{ to_state == 'double' }}"
+        sequence: !input double
 
-    - conditions: "{{ to_state == 'triple' }}"
-      sequence: !input triple
+      - conditions: "{{ to_state == 'triple' }}"
+        sequence: !input triple
 
-    - conditions: "{{ to_state == 'quadruple' }}"
-      sequence: !input quadruple
+      - conditions: "{{ to_state == 'quadruple' }}"
+        sequence: !input quadruple
 
-    - conditions: "{{ to_state == 'hold' }}"
-      sequence: !input hold
+      - conditions: "{{ to_state == 'hold' }}"
+        sequence: !input hold
 
-    - conditions: "{{ to_state == 'release' }}"
-      sequence: !input release
+      - conditions: "{{ to_state == 'release' }}"
+        sequence: !input release

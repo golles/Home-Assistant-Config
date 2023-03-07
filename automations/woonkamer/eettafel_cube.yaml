@@ -11,7 +11,7 @@
       flip_side_1:
         - variables:
             stream: https://stream.qmusic.nl/qmusic/mp3
-            
+
         - choose:
             - conditions:
                 condition: or
@@ -30,7 +30,7 @@
         - service: media_player.turn_off
           target:
             entity_id: media_player.lg_soundbar
-            
+
       rotate_left_side_0:
         - service: light.turn_on
           data:

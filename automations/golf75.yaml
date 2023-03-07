@@ -35,45 +35,45 @@
           }}
 
     - choose:
-      - alias: Start event, person should be set as well
-        conditions:
-          - '{{ person != "none" }}'
-          - condition: trigger
-            id: start
-        sequence:
-          - alias: Repeat location updates until the automation is triggered with a stop event
-            repeat:
-              while: "{{ True }}"
-              sequence:
-                - alias: Set car location based on the location of the person
-                  service: device_tracker.see
-                  data:
-                    dev_id: "{{ device_tracker_id }}"
-                    gps:
-                      - '{{ state_attr(person, "latitude")}}'
-                      - '{{ state_attr(person, "longitude")}}'
-                    gps_accuracy: >-
-                      {{ state_attr(person, "gps_accuracy") }}
+        - alias: Start event, person should be set as well
+          conditions:
+            - '{{ person != "none" }}'
+            - condition: trigger
+              id: start
+          sequence:
+            - alias: Repeat location updates until the automation is triggered with a stop event
+              repeat:
+                while: "{{ True }}"
+                sequence:
+                  - alias: Set car location based on the location of the person
+                    service: device_tracker.see
+                    data:
+                      dev_id: "{{ device_tracker_id }}"
+                      gps:
+                        - '{{ state_attr(person, "latitude")}}'
+                        - '{{ state_attr(person, "longitude")}}'
+                      gps_accuracy: >-
+                        {{ state_attr(person, "gps_accuracy") }}
 
-                - alias: Throttle updates
-                  delay:
-                    seconds: "{{ throttle_seconds }}"
+                  - alias: Throttle updates
+                    delay:
+                      seconds: "{{ throttle_seconds }}"
 
-      - alias: Stop event, person should be set as well
-        conditions:
-          - '{{ person != "none" }}'
-          - condition: trigger
-            id: stop
-        sequence:
-          - alias: Set final car location based on the location of the person
-            service: device_tracker.see
-            data:
-              dev_id: "{{ device_tracker_id }}"
-              gps:
-                - '{{ state_attr(person, "latitude")}}'
-                - '{{ state_attr(person, "longitude")}}'
-              gps_accuracy: >-
-                {{ state_attr(person, "gps_accuracy") }}
+        - alias: Stop event, person should be set as well
+          conditions:
+            - '{{ person != "none" }}'
+            - condition: trigger
+              id: stop
+          sequence:
+            - alias: Set final car location based on the location of the person
+              service: device_tracker.see
+              data:
+                dev_id: "{{ device_tracker_id }}"
+                gps:
+                  - '{{ state_attr(person, "latitude")}}'
+                  - '{{ state_attr(person, "longitude")}}'
+                gps_accuracy: >-
+                  {{ state_attr(person, "gps_accuracy") }}
 
 - id: golf75_persist_location_restart
   alias: Golf 7.5 - Bewaar locatie tijdens herstart
@@ -101,12 +101,12 @@
 
         - alias: Unset Golf 7.5 attributes
           event: key_value_unset
-          event_data: 
+          event_data:
             key: golf75_attributes
       else:
         - alias: Persist Golf 7.5 attributes
           event: key_value_set
-          event_data: 
+          event_data:
             key: golf75_attributes
             value: >
               {% set data = {

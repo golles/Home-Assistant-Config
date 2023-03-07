@@ -1,13 +1,12 @@
 - id: slaapkamer_knop_links
   alias: Slaapkamer knop links
   use_blueprint:
-      path: golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml
-      input:
-        day_end_time: 00:00:00
-        day_start_time: 08:00:00
-        smart_button: sensor.bedlampje_knop_links_action
-        light_entity_bed: light.bedlampje_links
-        light_entity_ceiling: light.slaapkamer_plafond_groep
-        night_profile: nachtlampje
-        day_profile: gedimd
-  
+    path: golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml
+    input:
+      day_end_time: 00:00:00
+      day_start_time: 08:00:00
+      smart_button: sensor.bedlampje_knop_links_action
+      light_entity_bed: light.bedlampje_links
+      light_entity_ceiling: light.slaapkamer_plafond_groep
+      night_profile: nachtlampje
+      day_profile: gedimd

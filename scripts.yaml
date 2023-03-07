@@ -78,7 +78,7 @@ close_cover_window_state:
               service: cover.close_cover
               target:
                 entity_id: "{{ cover_entity }}"
-  
+
         - conditions:
             - "{{ is_state(window_entity, 'on') }}"
             - "{{ is_state(cover_entity, 'open') }}"
@@ -88,11 +88,11 @@ close_cover_window_state:
               timeout:
                 minutes: "{{ wait_minutes }}"
               continue_on_timeout: false
-  
+
             - alias: Wait a little to make sure it's really closed
               delay:
                 seconds: 5
-  
+
             - alias: Close the cover now
               service: cover.close_cover
               target:

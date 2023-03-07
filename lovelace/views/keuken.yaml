@@ -4,7 +4,6 @@ panel: false
 icon: mdi:countertop-outline
 badges: []
 cards:
-
   - type: custom:mushroom-chips-card
     chips:
       - type: template

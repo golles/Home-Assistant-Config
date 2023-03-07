@@ -50,25 +50,25 @@
       entity_id: scene.wooneet_avond
   action:
     - choose:
-      - conditions:
-          - condition: trigger
-            id: aan
-        sequence:
-          - alias: Turn on the skull
-            service: light.turn_on
-            target:
-              entity_id: light.wled_skull
-            data:
-              effect: breathe
-              brightness: 128
-              xy_color:
-                - 0.701
-                - 0.299
+        - conditions:
+            - condition: trigger
+              id: aan
+          sequence:
+            - alias: Turn on the skull
+              service: light.turn_on
+              target:
+                entity_id: light.wled_skull
+              data:
+                effect: breathe
+                brightness: 128
+                xy_color:
+                  - 0.701
+                  - 0.299
       default:
-          - alias: Turn off the skull
-            service: light.turn_off
-            target:
-              entity_id: light.wled_skull
+        - alias: Turn off the skull
+          service: light.turn_off
+          target:
+            entity_id: light.wled_skull
 
 - id: tv_lights_based_on_source
   alias: TV verlichting aanpassen op basis van de bron
@@ -87,7 +87,7 @@
       below: 10
     - condition: state
       entity_id: media_player.lg_c9
-      state: "on" 
+      state: "on"
     - condition: state
       entity_id: media_player.lg_c9
       attribute: source

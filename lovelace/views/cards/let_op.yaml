@@ -23,7 +23,7 @@ filter:
         }] -%}
       {% endif %}
     {% endif %}
-    
+
     {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
       {%- set data.entities = data.entities + [{
         "type": "custom:mushroom-cover-card",
@@ -32,7 +32,7 @@ filter:
         "show_buttons_control": "true"
       }] -%}
     {% endif %}
-    
+
     {% if data.entities | length > 0 %}
       {{ data.entities }}
     {% endif %}

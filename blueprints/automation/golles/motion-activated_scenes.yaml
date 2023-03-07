@@ -79,7 +79,7 @@ blueprint:
       description: Till this time the day scene will be used to switch on the light.
       default: "23:00"
       selector:
-        time: 
+        time:
     day_scene:
       name: Day time scene name when turning on
       selector:
@@ -126,7 +126,7 @@ condition:
   - condition: state
     entity_id: !input motion_entity
     state: "on"
-    
+
 action:
   - choose:
       - conditions:
@@ -187,40 +187,40 @@ action:
               for: !input cool_down
 
           - choose:
-            # Only continue when the light are still on, user might have turned it off manually.
-            - conditions:
-                - condition: state
-                  entity_id: !input light_entity
-                  state: "on"
-              sequence:
-                - choose:
-                  # Day time.
-                  - conditions:
-                      - condition: time
-                        after: !input day_start_time
-                        before: !input day_end_time
-                    sequence:
-                      - alias: Turn on light with day before off scene
+              # Only continue when the light are still on, user might have turned it off manually.
+              - conditions:
+                  - condition: state
+                    entity_id: !input light_entity
+                    state: "on"
+                sequence:
+                  - choose:
+                      # Day time.
+                      - conditions:
+                          - condition: time
+                            after: !input day_start_time
+                            before: !input day_end_time
+                        sequence:
+                          - alias: Turn on light with day before off scene
+                            service: scene.turn_on
+                            data:
+                              transition: 1
+                            target:
+                              entity_id: !input day_scene_before_off
+                    # Other times
+                    default:
+                      - alias: Turn on light with night before off scene
                         service: scene.turn_on
                         data:
                           transition: 1
                         target:
-                          entity_id: !input day_scene_before_off
-                  # Other times
-                  default:
-                    - alias: Turn on light with night before off scene
-                      service: scene.turn_on
-                      data:
-                        transition: 1
-                      target:
-                        entity_id: !input night_scene_before_off
+                          entity_id: !input night_scene_before_off
 
-                - alias: Wait for the no motion wait delay
-                  delay: !input no_motion_wait
+                  - alias: Wait for the no motion wait delay
+                    delay: !input no_motion_wait
 
-                - alias: Turn off the light
-                  service: light.turn_off
-                  data:
-                    transition: 1
-                  target:
-                    entity_id: !input light_entity
+                  - alias: Turn off the light
+                    service: light.turn_off
+                    data:
+                      transition: 1
+                    target:
+                      entity_id: !input light_entity

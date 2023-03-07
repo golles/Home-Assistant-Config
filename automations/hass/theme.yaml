@@ -6,20 +6,20 @@
       event: start
     - platform: state
       entity_id: sun.sun
-      to: 
+      to:
         - below_horizon
         - above_horizon
   action:
     - choose:
-      - conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: below_horizon
-        sequence:
-          - service: frontend.set_theme
-            data:
-              name: Mushroom Shadow
-              mode: dark
+        - conditions:
+            - condition: state
+              entity_id: sun.sun
+              state: below_horizon
+          sequence:
+            - service: frontend.set_theme
+              data:
+                name: Mushroom Shadow
+                mode: dark
       default:
         - service: frontend.set_theme
           data:

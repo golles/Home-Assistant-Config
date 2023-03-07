@@ -4,8 +4,8 @@ sensor:
     entity_id: person.sander
     state: Ouders
     type: count
-    start: '{{ now().replace(hour=0, minute=0, second=0) }}'
-    end: '{{ now() }}'
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
 
 automation:
   - id: notification_arrived_home_after_visited_parents
@@ -29,4 +29,3 @@ automation:
             group: zone_ouders
             shortcut:
               name: Home Assistant - Ouders bericht
- 

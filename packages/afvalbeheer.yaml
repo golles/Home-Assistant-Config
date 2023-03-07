@@ -21,7 +21,7 @@ homeassistant:
     sensor.purmerend_bio_afval:
       friendly_name: Bio
       entity_picture: /local/afval/purmerend_bio.jpg
-    
+
 automation:
   - id: notification_afval
     alias: "Notificatie: Afval wordt morgen opgehaald"

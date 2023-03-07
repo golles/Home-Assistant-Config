@@ -14,15 +14,15 @@
         minutes: 10
   action:
     - choose:
-      - conditions:
-          - condition: numeric_state
-            entity_id: sensor.slaapkamer_lichtsterkte_illuminance_lux
-            below: 15
-        sequence:
-          - service: switch.turn_on
-            data:
-              entity_id:
-                - switch.bed_ledstrip_switch
+        - conditions:
+            - condition: numeric_state
+              entity_id: sensor.slaapkamer_lichtsterkte_illuminance_lux
+              below: 15
+          sequence:
+            - service: switch.turn_on
+              data:
+                entity_id:
+                  - switch.bed_ledstrip_switch
       default:
         - service: switch.turn_off
           data:

@@ -147,22 +147,22 @@ automation:
         entity_id: group.residents
     action:
       - choose:
-        - conditions:
-            - condition: state
-              entity_id: group.residents
-              state: not_home
-          sequence:
-            - alias: Set climate preset mode to home
-              service: climate.set_preset_mode
-              data:
-                preset_mode: away
-              target:
-                entity_id: climate.woonkamer
+          - conditions:
+              - condition: state
+                entity_id: group.residents
+                state: not_home
+            sequence:
+              - alias: Set climate preset mode to home
+                service: climate.set_preset_mode
+                data:
+                  preset_mode: away
+                target:
+                  entity_id: climate.woonkamer
 
-            - alias: Turn electric heater off
-              service: climate.turn_off
-              target:
-                entity_id: climate.elektrische_kachel
+              - alias: Turn electric heater off
+                service: climate.turn_off
+                target:
+                  entity_id: climate.elektrische_kachel
         default:
           - alias: Set climate preset mode to home
             service: climate.set_preset_mode

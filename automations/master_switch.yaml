@@ -6,9 +6,9 @@
       hold_cooldown: "3"
       smart_button: sensor.master_switch_action
       press_action:
-      - service: script.everything_off
-        data:
-          exclude_entity_ids:
-            - light.hal_lamp
-            - light.gekleurde_licht
-            - light.voortuin
+        - service: script.everything_off
+          data:
+            exclude_entity_ids:
+              - light.hal_lamp
+              - light.gekleurde_licht
+              - light.voortuin

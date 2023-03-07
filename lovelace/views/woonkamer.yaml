@@ -3,8 +3,7 @@ path: woonkamer
 panel: false
 icon: mdi:sofa-outline
 badges: []
-cards: 
-
+cards:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
@@ -45,7 +44,7 @@ cards:
     hvac_modes:
       - auto
       - heat
-      - 'off'
+      - "off"
     tap_action:
       action: more-info
     double_tap_action:
@@ -165,7 +164,7 @@ cards:
         entity: cover.zonnescherm
         hide_state: true
         show_buttons_control: true
-        
+
       - type: custom:mushroom-fan-card
         entity: fan.air_purifier
         show_percentage_control: true

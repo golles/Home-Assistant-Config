@@ -44,13 +44,13 @@ automation:
           actionName: Ziggo
     action:
       - choose:
-        # Turn on.
-        - conditions:
-            - condition: state
-              entity_id: media_player.mediabox
-              state: "off"
-          sequence:
-            - service: script.lg_c9_source_ziggo
+          # Turn on.
+          - conditions:
+              - condition: state
+                entity_id: media_player.mediabox
+                state: "off"
+            sequence:
+              - service: script.lg_c9_source_ziggo
         # Turn off.
         default:
           - service: media_player.turn_off

@@ -1,5 +1,5 @@
 type: vertical-stack
-cards: 
+cards:
   - type: custom:vertical-stack-in-card
     styles:
       "--chip-box-shadow": none
@@ -24,7 +24,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -36,7 +36,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-  
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -47,7 +47,7 @@ cards:
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
           - type: template
             entity: media_player.lg_c9
-            # icon: 
+            # icon:
             icon: >-
               {% if is_state_attr(entity, "source", "YouTube") %}
                 mdi:youtube-tv
@@ -122,7 +122,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -134,7 +134,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-  
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -214,7 +214,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-  
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -255,7 +255,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -267,7 +267,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-      
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -330,7 +330,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -342,7 +342,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-      
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -399,7 +399,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -411,7 +411,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-      
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -480,7 +480,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -492,7 +492,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-      
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -548,7 +548,7 @@ cards:
                 content: >-
                   {{ state_attr(entity, "current_temperature") }}°C
                 icon: mdi:thermometer
-                icon_color:  >-
+                icon_color: >-
                   {{ iif(is_state_attr(entity, "hvac_action", "heating"), "#ff5722", "grey") }}
                 tap_action:
                   action: more-info
@@ -560,7 +560,7 @@ cards:
                 icon_color: grey
                 tap_action:
                   action: more-info
-      
+
       - type: custom:mushroom-chips-card
         alignment: justify
         chips:
@@ -643,7 +643,7 @@ cards:
                     icon_color: grey
                     tap_action:
                       action: more-info
-      
+
           - type: custom:mushroom-chips-card
             alignment: justify
             chips:
@@ -698,7 +698,7 @@ cards:
                     icon_color: grey
                     tap_action:
                       action: more-info
-      
+
           - type: custom:mushroom-chips-card
             alignment: justify
             chips:

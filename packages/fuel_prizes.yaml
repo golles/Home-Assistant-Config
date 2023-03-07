@@ -8,7 +8,7 @@ homeassistant:
       icon: mdi:gas-station
     sensor.freie_tankstelle_husers:
       icon: mdi:gas-station
-      
+
 scrape:
   - resource: https://www.tango.nl/stations/tango-purmerend
     scan_interval: 3600

@@ -8,25 +8,25 @@
       hold_cooldown: "1"
       smart_button: sensor.eettafelknop_2_action
       press_action:
-      - service: switch.toggle
-        entity_id: switch.eettafellamp
+        - service: switch.toggle
+          entity_id: switch.eettafellamp
       hold_action:
-      - choose:
-        # Light is off.
-        - conditions:
-            - condition: state
-              entity_id: light.eettafel
-              state: "off"
-          sequence:
-            - service: script.eettafel_on
-        # Light is on.
-        default:
-          - service: light.turn_on
-            data:
-              entity_id: light.eettafel
-              brightness_step: >
-                {%- if state_attr("light.eettafel", "brightness") % 2 == 0 %}
-                  {{ step }}
-                {%- else -%}
-                  -{{ step }}
-                {%- endif %}
+        - choose:
+            # Light is off.
+            - conditions:
+                - condition: state
+                  entity_id: light.eettafel
+                  state: "off"
+              sequence:
+                - service: script.eettafel_on
+          # Light is on.
+          default:
+            - service: light.turn_on
+              data:
+                entity_id: light.eettafel
+                brightness_step: >
+                  {%- if state_attr("light.eettafel", "brightness") % 2 == 0 %}
+                    {{ step }}
+                  {%- else -%}
+                    -{{ step }}
+                  {%- endif %}

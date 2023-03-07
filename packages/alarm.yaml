@@ -17,24 +17,23 @@ automation:
     trigger:
       - platform: state
         entity_id: group.residents
-        to: 
+        to:
           - home
           - not_home
     action:
       - choose:
-        - conditions:
-            - condition: state
-              entity_id: group.residents
-              state: not_home
-          sequence:
-            - alias: Set the alarm to arm away
-              service: alarm_control_panel.alarm_arm_away
-              entity_id: alarm_control_panel.huis_alarm
+          - conditions:
+              - condition: state
+                entity_id: group.residents
+                state: not_home
+            sequence:
+              - alias: Set the alarm to arm away
+                service: alarm_control_panel.alarm_arm_away
+                entity_id: alarm_control_panel.huis_alarm
         default:
           - alias: Disarm the alarm
             service: alarm_control_panel.alarm_disarm
             entity_id: alarm_control_panel.huis_alarm
-
 
   - id: alarm_attic_stairs
     alias: Alarm - Zoldertrap sensor uitzetten als de balkondeur open is
@@ -50,17 +49,17 @@ automation:
           - disarmed
     action:
       - choose:
-        - conditions:
-            - condition: state
-              entity_id: alarm_control_panel.huis_alarm
-              state: armed_away
-            - condition: state
-              entity_id: binary_sensor.balkondeur_contact
-              state: "on"
-          sequence:
-            - alias: Disable the motion sensor
-              service: switch.turn_off
-              entity_id: switch.zoldertrap_sensor_motion
+          - conditions:
+              - condition: state
+                entity_id: alarm_control_panel.huis_alarm
+                state: armed_away
+              - condition: state
+                entity_id: binary_sensor.balkondeur_contact
+                state: "on"
+            sequence:
+              - alias: Disable the motion sensor
+                service: switch.turn_off
+                entity_id: switch.zoldertrap_sensor_motion
         default:
           - alias: Enable the motion sensor
             service: switch.turn_on
@@ -80,9 +79,9 @@ automation:
   #         # lights_flash: "light.keuken, light.tv"
   #         lights_flash: >-
   #           {{
-  #             states.light 
+  #             states.light
   #             | selectattr("attributes.is_hue_group", "equalto", true)
-  #             | selectattr("attributes.supported_color_modes", "equalto", ["color_temp", "hs"]) 
+  #             | selectattr("attributes.supported_color_modes", "equalto", ["color_temp", "hs"])
   #             | map(attribute='entity_id')
   #             | join(', ')
   #           }}
@@ -109,7 +108,7 @@ automation:
   #         flash: long
   #       target:
   #         entity_id: "{{ lights_flash }}"
-      
+
   #     - alias: Wait untill the alarm is no longer triggered
   #       wait_for_trigger:
   #         platform: state
@@ -168,7 +167,7 @@ automation:
     condition:
       - condition: state
         entity_id: alarm_control_panel.huis_alarm
-        state: 
+        state:
           - armed_away
           - pending
           - triggered
@@ -181,7 +180,7 @@ automation:
           # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
           action_disarm_alarm: >-
             {{ "DISARM_ALARM_" ~ context.id }}
-          area_name : >-
+          area_name: >-
             {{ area_name(trigger.entity_id) }}
           trigger_friendly_name: >-
             {{ 

@@ -8,4 +8,3 @@ sensor:
       - announcements
     resource: !secret ziggo_incidents_url
     value_template: "{{ value_json.callback.timestamp }}"
-

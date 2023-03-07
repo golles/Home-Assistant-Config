@@ -52,18 +52,18 @@ action:
       to_state: "{{ trigger.to_state.state }}"
 
   - choose:
-    # Button is being pressed.
-    - conditions:
-        - "{{ to_state in ['on', 'off'] }}"
-      sequence: !input press_action
+      # Button is being pressed.
+      - conditions:
+          - "{{ to_state in ['on', 'off'] }}"
+        sequence: !input press_action
 
-    # Button is being hold.
-    - conditions:
-        - "{{ to_state == 'hold' }}"
-      sequence: 
-        - choose:
-          - conditions:
-              - "{{ true }}"
-            sequence: !input hold_action
-        - delay:
-           seconds: !input hold_cooldown
+      # Button is being hold.
+      - conditions:
+          - "{{ to_state == 'hold' }}"
+        sequence:
+          - choose:
+              - conditions:
+                  - "{{ true }}"
+                sequence: !input hold_action
+          - delay:
+              seconds: !input hold_cooldown

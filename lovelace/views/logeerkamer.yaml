@@ -4,7 +4,6 @@ panel: false
 icon: mdi:bed-outline
 badges: []
 cards:
-
   - type: custom:mushroom-chips-card
     chips:
       - type: template
@@ -27,7 +26,7 @@ cards:
       - type: conditional
         conditions:
           - entity: binary_sensor.tt_macbook_in_thuis_kantoor
-            state: 'on'
+            state: "on"
         chip:
           type: entity
           entity: binary_sensor.tt_macbook_active
@@ -47,7 +46,7 @@ cards:
     hvac_modes:
       - auto
       - heat
-      - 'off'
+      - "off"
     tap_action:
       action: more-info
     double_tap_action:

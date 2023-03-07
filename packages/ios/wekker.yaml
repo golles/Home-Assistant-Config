@@ -33,11 +33,11 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
-        # It should come from Sander and he should be home.
-        - conditions:
-          - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
-          - "{{ is_state('person.sander', 'home') }}"
-          sequence: []
+          # It should come from Sander and he should be home.
+          - conditions:
+              - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+              - "{{ is_state('person.sander', 'home') }}"
+            sequence: []
 
   - id: ios_action_alarm_clock_snooze
     alias: iOS action - Wekker gesnoozed
@@ -53,17 +53,17 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
-        # Temperature should be higher than a certain amount.
-        - conditions:
-            - "{{ state_attr('weather.knmi_purmerend', 'temperature') > -2 }}"
-          sequence:
-            - choose:
-              # It should come from Sander and he should be home.
-              - conditions:
-                  - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
-                  - "{{ is_state('person.sander', 'home') }}"
-                sequence:
-                  service: cover.set_cover_position
-                  data:
-                    entity_id: cover.slaapkamer
-                    position: 12
+          # Temperature should be higher than a certain amount.
+          - conditions:
+              - "{{ state_attr('weather.knmi_purmerend', 'temperature') > -2 }}"
+            sequence:
+              - choose:
+                  # It should come from Sander and he should be home.
+                  - conditions:
+                      - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+                      - "{{ is_state('person.sander', 'home') }}"
+                    sequence:
+                      service: cover.set_cover_position
+                      data:
+                        entity_id: cover.slaapkamer
+                        position: 12
