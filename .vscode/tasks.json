@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run prettier",
+      "type": "shell",
+      "command": "prettier --check ."
+    },
+    {
+      "label": "Run prettier:fix",
+      "type": "shell",
+      "command": "prettier --check . --write"
+    },
+    {
+      "label": "Run yamllint",
+      "type": "shell",
+      "command": "yamllint ."
+    }
+  ]
+}
