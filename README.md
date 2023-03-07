@@ -1,49 +1,33 @@
-# My Devices
+# My Home Assistant configurations
 
-intro
+[![GitHub Repo stars][stars-shield]][stars]
+[![License][license-shield]](LICENSE)
+[![GitHub Activity][commits-shield]][commits]
+[![CI Workflow][ci-workflow-shield]][ci-workflow]
+[![Project Maintenance][maintenance-shield]][maintainer]
+[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
-## Hardware
+## TODO
 
-NUC
-PI4
-UPS
+Need to write docs about:
 
-## Network
+- [ ] Language EN/NL
+- [ ] Packages
+- [ ] Blueprints
+- [ ] ESPhome
+- [ ] My custom components
+- [ ] My update script
+- [ ] CI mocking secrets
+- [ ] Devices I own?
 
-TP Link deco
-24 ports switch
-8 ports switch
-Ziggo?
-
-## Bridges
-
-(powered by usb charger thingy)
-ZZH
-Tado
-Hue
-Somfy
-Eufy
-
-## Cameras
-
-Eufy doorbell
-
-## ESP
-
-Particulate matter      ESP8266   nodemcuv2               ESPHome
-Planthub                ESP32     esp32doit-devkit-v1     ESPHome
-Watermeter              ESP8266   D1 Mini                 ESPHome
-E-paper                 ESP32     esp32doit-devkit-v1     ESPHome
-Mechanische ventilate   ESP32     esp32doit-devkit-v1     ESPHome
-Light                   ESP8266   D1 Mini                 Wled
-
-## Heating
-
-Tado thermostat
-Tado valves
-
-## Zigbee
-
-name          | Connected to
-Hue bla         Hue bridge
-Blitzwolf       Zigbee2MQTT
+[buymecoffee]: https://www.buymeacoffee.com/golles
+[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/golles/Home-Assistant-Config.svg?style=for-the-badge
+[commits]: https://github.com/golles/Home-Assistant-Config/commits/main
+[license-shield]: https://img.shields.io/github/license/golles/Home-Assistant-Config.svg?style=for-the-badge
+[maintainer]: https://github.com/golles
+[maintenance-shield]: https://img.shields.io/badge/maintainer-golles-blue.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/golles/Home-Assistant-Config?style=for-the-badge
+[stars]: https://github.com/golles/Home-Assistant-Config/stargazers
+[ci-workflow-shield]: https://img.shields.io/github/actions/workflow/status/golles/Home-Assistant-Config/ci.yaml?style=for-the-badge
+[ci-workflow]: https://github.com/golles/Home-Assistant-Config/actions/workflows/ci.yaml
