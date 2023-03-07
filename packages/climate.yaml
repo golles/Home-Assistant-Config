@@ -196,7 +196,7 @@ automation:
         data:
           title: Tado
           message: |
-            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} bijna thuis is. 
+            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} bijna thuis is.
             Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
 
       - alias: Heat up the living room for a short time

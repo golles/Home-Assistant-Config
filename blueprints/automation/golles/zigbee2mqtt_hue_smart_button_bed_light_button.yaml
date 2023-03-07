@@ -3,9 +3,9 @@ blueprint:
   description: |
     This button blueprint allows you to setup automatic for a bed light button, clicking the button will turn on/off
     the bed led, holding the button will turn on/off the ceiling light.
-    This automation does require to setup light profiles, a light profile contains the color (in xy), birghtness 
-    and a transition time. This makes the automation much simpler plus it allows you to maintain these states in a 
-    general place. For more information about light profiles, you could check the documentation 
+    This automation does require to setup light profiles, a light profile contains the color (in xy), birghtness
+    and a transition time. This makes the automation much simpler plus it allows you to maintain these states in a
+    general place. For more information about light profiles, you could check the documentation
     https://www.home-assistant.io/integrations/light/
     This automation should work with any lights, but only with Philips Hue smart button connected throught Zigbee2MQTT.
   domain: automation

@@ -16,11 +16,11 @@ cards:
           {% else %}
             {% for outage in state_attr(config.entities[0], 'outages') -%}
             **[{{ outage.status }}]: {{ outage.title }}**
-            
+
             {{ outage.announcement }}
-            
+
             Verwachte opgelost: {{ outage.expected_solv_time }}
-            
+
             {%- endfor %}
           {%- endif %}
 

@@ -6,7 +6,7 @@ sensor:
     disciplines: Ambulancediensten
     scan_interval: 60
     radius: 5000
-    nolocation: True
+    nolocation: true
 
   - platform: p2000
     name: P2000 Brandweer
@@ -15,7 +15,7 @@ sensor:
     disciplines: Brandweerdiensten
     scan_interval: 60
     radius: 5000
-    nolocation: True
+    nolocation: true
 
   - platform: p2000
     name: P2000 Dichtbij
@@ -24,7 +24,7 @@ sensor:
     # disciplines: Ambulancediensten,Brandweerdiensten,Politiediensten
     scan_interval: 60
     radius: 250
-    nolocation: False
+    nolocation: false
 
   - platform: p2000
     name: P2000 Politie
@@ -33,7 +33,7 @@ sensor:
     disciplines: Politiediensten
     scan_interval: 60
     radius: 5000
-    nolocation: True
+    nolocation: true
 
   - platform: p2000
     name: P2000 Lifeliner 1
@@ -41,7 +41,7 @@ sensor:
     regios: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25
     capcodes: 0120901
     scan_interval: 60
-    nolocation: True
+    nolocation: true
 
 automation:
   - id: notification_p2000

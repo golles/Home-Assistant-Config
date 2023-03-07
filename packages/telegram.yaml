@@ -34,11 +34,11 @@ automation:
                     - /weer
                     - /ping
                   message: >-
-                    {{ 
+                    {{
                       [
                         "Hi, Ik ben je Home Assistant... Waar kan ik je mee helpen?",
                         "Wat kan ik voor je doen?"
-                      ] | random 
+                      ] | random
                     }}
 
           - alias: Ping
@@ -80,9 +80,9 @@ automation:
                   target: "{{ chat_id }}"
                   parse_mode: markdown
                   message: |-
-                    Op dit moment thuis: 
-                    {{ 
-                      states.person 
+                    Op dit moment thuis:
+                    {{
+                      states.person
                         | selectattr("state", "eq", "home")
                         | map(attribute="attributes.friendly_name")
                         | join(", ")

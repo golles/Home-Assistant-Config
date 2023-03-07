@@ -1,11 +1,11 @@
 input_boolean:
   guest_mode:
     name: Gastmodus
-    initial: off
+    initial: false
     icon: mdi:account-check
   vacation_mode:
     name: Vakantiemodus
-    initial: off
+    initial: false
     icon: mdi:beach
 
 group:

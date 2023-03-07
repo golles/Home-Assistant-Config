@@ -26,8 +26,8 @@
       variables:
         user_id: "{{ trigger.event.context.user_id }}"
         person: >-
-          {{ 
-            states.person 
+          {{
+            states.person
               | selectattr("attributes.user_id", "eq", user_id)
               | map(attribute="entity_id")
               | first
@@ -110,9 +110,9 @@
             key: golf75_attributes
             value: >
               {% set data = {
-                  "latitude": state_attr("device_tracker.golf_7_5", "latitude"), 
-                  "longitude": state_attr("device_tracker.golf_7_5", "longitude"), 
-                  "gps_accuracy": state_attr("device_tracker.golf_7_5", "gps_accuracy"), 
-                } 
+                  "latitude": state_attr("device_tracker.golf_7_5", "latitude"),
+                  "longitude": state_attr("device_tracker.golf_7_5", "longitude"),
+                  "gps_accuracy": state_attr("device_tracker.golf_7_5", "gps_accuracy"),
+                }
               %}
               {{ data }}

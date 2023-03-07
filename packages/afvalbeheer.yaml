@@ -28,8 +28,8 @@ automation:
     mode: single
     variables:
       entity: >-
-        {{ 
-          states.sensor 
+        {{
+          states.sensor
             | selectattr("attributes.Wastecollector", "defined")
             | selectattr("attributes.Days_until", "eq", 1)
             | map(attribute="entity_id")

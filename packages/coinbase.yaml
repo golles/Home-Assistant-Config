@@ -4,7 +4,7 @@ template:
         unit_of_measurement: EUR
         icon: mdi:currency-eur
         state: >-
-          {% set number_string = states.sensor 
+          {% set number_string = states.sensor
             | selectattr("attributes.Balance in native currency", "defined")
             | map(attribute="attributes.Balance in native currency")
             | join(", ")

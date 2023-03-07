@@ -1,7 +1,7 @@
 blueprint:
   name: Motion-activated scenes based on time and light level and with a grace period.
   description: |
-    This motion-activated blueprint allows you to setup automatic light switching like the Philips Hue motion 
+    This motion-activated blueprint allows you to setup automatic light switching like the Philips Hue motion
     sensors do. When motion is detected, the light will be turned on, when the motion is no longer detected,
     the lights will go to another state for a given amount of seconds before switching off.
     This allows anyone to not be left in the dark, you will be warned before the light switches off.

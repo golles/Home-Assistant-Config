@@ -143,7 +143,7 @@ cards:
           - type: custom:mushroom-light-card
             entity: switch.keukenkastje_lamp_switch
             name: Keukenkastje
-            fill_container: True
+            fill_container: true
 
           - type: conditional
             conditions:
@@ -206,7 +206,7 @@ cards:
             {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
               Onbekend
             {% else %}
-              {{ 
+              {{
                 state_attr(entity, "problem")
                 | replace("moisture high", "te vochtig")
                 | replace("moisture low", "te droog")
@@ -242,7 +242,7 @@ cards:
             {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
               Onbekend
             {% else %}
-              {{ 
+              {{
                 state_attr(entity, "problem")
                 | replace("moisture high", "te vochtig")
                 | replace("moisture low", "te droog")
@@ -278,7 +278,7 @@ cards:
             {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
               Onbekend
             {% else %}
-              {{ 
+              {{
                 state_attr(entity, "problem")
                 | replace("moisture high", "te vochtig")
                 | replace("moisture low", "te droog")
@@ -314,7 +314,7 @@ cards:
             {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
               Onbekend
             {% else %}
-              {{ 
+              {{
                 state_attr(entity, "problem")
                 | replace("moisture high", "te vochtig")
                 | replace("moisture low", "te droog")

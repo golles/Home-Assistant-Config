@@ -183,7 +183,7 @@ automation:
           area_name: >-
             {{ area_name(trigger.entity_id) }}
           trigger_friendly_name: >-
-            {{ 
+            {{
               state_attr(trigger.entity_id, "friendly_name")
               | replace(" occupancy", "")
               | replace(" motion", "")
@@ -200,7 +200,7 @@ automation:
             {% elif trigger_device_class == "window" %}
               {{ trigger_friendly_name }} is geopend
             {% elif trigger_device_class == "motion" %}
-              {{ trigger_friendly_name }} heeft beweging gedetecteerd 
+              {{ trigger_friendly_name }} heeft beweging gedetecteerd
             {% endif %}
 
       - alias: Trigger the alarm

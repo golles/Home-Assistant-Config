@@ -722,7 +722,7 @@ cards:
               - type: template
                 icon: mdi:trash-can
                 icon_color: |-
-                  {% set isPickUp = states.sensor 
+                  {% set isPickUp = states.sensor
                       | selectattr("attributes.Wastecollector", "defined")
                       | selectattr("attributes.Days_until", "lt", 2)
                       | map(attribute="entity_id")
@@ -770,20 +770,20 @@ cards:
             icon: >-
               {% set state = states(entity) %}
               {% set icons = {
-                "clear-night": "mdi:weather-night", 
-                "cloudy":  "mdi:weather-cloudy", 
-                "exceptional": "mdi:alert-circle-outline", 
-                "fog": "mdi:weather-fog", 
-                "hail": "mdi:weather-hail", 
-                "lightning":  "mdi:weather-lightning", 
+                "clear-night": "mdi:weather-night",
+                "cloudy":  "mdi:weather-cloudy",
+                "exceptional": "mdi:alert-circle-outline",
+                "fog": "mdi:weather-fog",
+                "hail": "mdi:weather-hail",
+                "lightning":  "mdi:weather-lightning",
                 "lightning-rainy": "mdi:weather-lightning-rainy",
-                "partlycloudy": "mdi:weather-partly-cloudy", 
+                "partlycloudy": "mdi:weather-partly-cloudy",
                 "pouring": "mdi:weather-pouring",
-                "rainy": "mdi:weather-rainy", 
-                "snowy": "mdi:weather-snowy", 
-                "snowy-rainy": "mdi:weather-snowy-rainy", 
-                "sunny": "mdi:weather-sunny", 
-                "windy": "mdi:weather-windy", 
+                "rainy": "mdi:weather-rainy",
+                "snowy": "mdi:weather-snowy",
+                "snowy-rainy": "mdi:weather-snowy-rainy",
+                "sunny": "mdi:weather-sunny",
+                "windy": "mdi:weather-windy",
                 "windy-variant": "mdi:weather-windy-variant"
               } %}
               {% if state in icons %}
