@@ -82,22 +82,18 @@ jobs:
         with:
           name: secrets
 
-      - name: working directory
-        run: |
-          pwd
-
       - name: list files
         run: |
           ls -lah
-
-      - name: cat config
-        run: |
-          cat configuration.yaml
 
       - name: Make working directories
         run: |
           mkdir -p /tmp
           mkdir -p www/tmp
+
+      - name: list files in www folder
+        run: |
+          ls -lah www
 
       - name: Home Assistant configuration check
         uses: frenck/action-home-assistant@v1.4
