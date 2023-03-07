@@ -82,8 +82,20 @@ jobs:
         with:
           name: secrets
 
+      - name: working directory
+        run: |
+          pwd
+
+      - name: list files
+        run: |
+          ls -lah
+
+      - name: cat config
+        run: |
+          cat configuration.yaml
+
       - name: Home Assistant configuration check
-        uses: frenck/action-home-assistant@v1
+        uses: frenck/action-home-assistant@v1.4
         with:
-          path: ${{ github.workspace }}
+          path: "."
           version: stable
