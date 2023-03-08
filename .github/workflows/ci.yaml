@@ -31,33 +31,9 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Make empty secrets file
+      - name: Make secrets file
         run: |
-          touch secrets.yaml
-      - name: Find all project secrets and add them to the secrets file
-        run: |
-          grep "\!secret " -r -i --include \*.yaml --include \*.yaml --exclude-dir=.github --exclude-dir=.vscode . | while read -r line ; do
-              secret=$(echo ${line} | awk '{if(/secret/) print $4}')
-              value="'value0123'"
-              if [[ $secret == *_ip ]]
-              then
-                  value="10.0.0.12"
-              elif [[ $secret == *_mac ]]
-              then
-                  value="00:00:00:00:00:00"
-              elif [[ $secret == *_url ]]
-              then
-                  value="https://foo.bar"
-              elif [[ $secret == network_subnet ]]
-              then
-                  value="10.0.0.0/8"
-              fi
-
-              if [[ ! $(grep -R "${secret}" secrets.yaml) ]]
-              then
-                  echo "${secret}: ${value}" >> secrets.yaml
-              fi
-          done
+          ./scripts/mock_secrets
 
       - name: Upload mocked secrets
         uses: actions/upload-artifact@v3
@@ -81,19 +57,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: secrets
-
-      - name: list files
-        run: |
-          ls -lah
-
-      - name: Make working directories
-        run: |
-          mkdir -p /tmp
-          mkdir -p www/tmp
-
-      - name: list files in www folder
-        run: |
-          ls -lah www
 
       - name: Home Assistant configuration check
         uses: frenck/action-home-assistant@v1.4
