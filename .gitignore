@@ -1,9 +1,9 @@
-external/*/
+external
 .HA_VERSION
-.storage/
+.cloud
+.storage
 watchman_report.txt
 webostv.conf
-www/tmp/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/osx,linux,git,visualstudiocode,homeassistant
