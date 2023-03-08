@@ -2,6 +2,7 @@ external
 .HA_VERSION
 .cloud
 .storage
+image
 watchman_report.txt
 webostv.conf
 
@@ -54,14 +55,13 @@ tts
 # automatically downloaded dependencies
 deps
 lib
-www
 
 # Log files
 home-assistant.log
 ozw_log.txt
 
 # Development files
-custom_components/
+custom_components
 
 ### Linux ###
 *~
