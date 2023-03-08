@@ -9,12 +9,17 @@
     {
       "label": "Run prettier:fix",
       "type": "shell",
-      "command": "prettier --check . --write"
+      "command": "prettier --write ."
     },
     {
       "label": "Run yamllint",
       "type": "shell",
       "command": "yamllint ."
+    },
+    {
+      "label": "Check config (Dev container)",
+      "type": "shell",
+      "command": "./.devcontainer/scripts/check_config"
     }
   ]
 }

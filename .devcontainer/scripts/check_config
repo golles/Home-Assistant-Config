@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Make the parent dir, the working directory.
+cd "$(dirname "$0")/../.."
+
+# Create a clean working directory for Home Assistant
+sudo rm -rf /hass
+sudo mkdir /hass
+sudo chown vscode:vscode /hass
+
+# Copy the entire config
+cp -r ./* /hass
+
+# Check Home Assistant config
+hass -c /hass --config /hass --script check_config

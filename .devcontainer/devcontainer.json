@@ -1,0 +1,35 @@
+{
+  "name": "My HA development",
+  "image": "mcr.microsoft.com/vscode/devcontainers/python:0-3.10-bullseye",
+  "postCreateCommand": ".devcontainer/scripts/setup",
+  "forwardPorts": [8123],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "github.vscode-pull-request-github",
+        "keesschollaart.vscode-home-assistant",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "editor.tabSize": 4,
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "files.trimTrailingWhitespace": true,
+        "files.associations": { "*.yaml": "home-assistant" },
+        "editor.defaultFormatter": null,
+        "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+        "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+        "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+        "[yaml]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+      }
+    }
+  },
+  "remoteUser": "vscode",
+  "features": {
+    "node": "latest",
+    "rust": "latest"
+  }
+}

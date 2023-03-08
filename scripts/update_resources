@@ -52,7 +52,7 @@ EOF
 update_resources () {
     # $1 = Resource list.
     # $2 = Folder.
-    echo "$1" | while IFS= read -r line ; do 
+    echo "$1" | while IFS= read -r line ; do
         RESOUCRE=${line% *}
         REMOTE_FILE=${line#* }
 
@@ -100,7 +100,7 @@ init_custom_components () {
     mkdir -p ../external
     mkdir -p ../custom_components
 
-    echo "$CUSTOM_COMPONENTS" | while IFS= read -r line ; do 
+    echo "$CUSTOM_COMPONENTS" | while IFS= read -r line ; do
         COMPONENT=${line% *}
         REPO=${line##* }
         FOLDER=${REPO##*/}
@@ -128,8 +128,8 @@ usage () {
 }
 
 
-# Make the script dir, the working directory.
-cd $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+# Make the parent dir, the working directory.
+cd "$(dirname "$0")/.."
 
 # $1 = User input, what to update.
 case $1 in
