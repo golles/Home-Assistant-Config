@@ -63,15 +63,15 @@ update_resources () {
 }
 
 update_javascript () {
-    update_resources "$JAVASCRIPT" ../www
+    update_resources "$JAVASCRIPT" www
 }
 
 update_themes () {
-    update_resources "$THEMES" ../themes
+    update_resources "$THEMES" themes
 }
 
 update_custom_components () {
-    cd ../external
+    cd external
     for dir in ./*
     do
         if [ -d "${dir}" ]
@@ -97,8 +97,8 @@ update_all () {
 }
 
 init_custom_components () {
-    mkdir -p ../external
-    mkdir -p ../custom_components
+    mkdir -p external
+    mkdir -p custom_components
 
     echo "$CUSTOM_COMPONENTS" | while IFS= read -r line ; do
         COMPONENT=${line% *}
@@ -106,13 +106,14 @@ init_custom_components () {
         FOLDER=${REPO##*/}
         NAME=${COMPONENT##*/}
 
-        if [ ! -d "../external/${FOLDER}" ]
+        if [ ! -d "external/${FOLDER}" ]
         then
-            cd ../external
+            cd external
             git clone ${REPO}
 
             cd ../custom_components
             ln -s ../external/${FOLDER}/${COMPONENT} ${NAME}
+            cd ../
         fi
     done
 }
