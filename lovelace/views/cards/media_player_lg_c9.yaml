@@ -12,7 +12,7 @@ hide:
   prev: true
   next: true
 shortcuts:
-  columns: 4
+  columns: 3
   column_height: 60
   buttons:
     - cover: /local/tv/ziggo.png
@@ -48,9 +48,3 @@ shortcuts:
       data:
         media_player: media_player.lg_c9
         source: Smart TV Club
-    - cover: /local/tv/viaplay.png
-      type: script
-      id: script.play_tv_with_source
-      data:
-        media_player: media_player.lg_c9
-        source: Viaplay
