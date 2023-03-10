@@ -33,18 +33,19 @@ EOF
 
 # Resouce list for custom components.
 CUSTOM_COMPONENTS=$(cat <<'EOF'
-custom_components/eufy_security     https://github.com/fuatakgun/eufy_security
-custom_components/kamstrup_403      https://github.com/golles/ha-kamstrup_403
-custom_components/knmi              https://github.com/golles/ha-knmi
-custom_components/apple_tv          https://github.com/postlund/hass-atv-beta
-custom_components/p2000             https://github.com/cyberjunky/home-assistant-p2000
-custom_components/afvalbeheer       https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
-custom_components/blitzortung       https://github.com/mrk-its/homeassistant-blitzortung
-custom_components/ical              https://github.com/tybritten/ical-sensor-homeassistant
-custom_components/lghorizon         https://github.com/Sholofly/lghorizon
-custom_components/watchman          https://github.com/dummylabs/thewatchman
-custom_components/webrtc            https://github.com/AlexxIT/WebRTC
-custom_components/xiaomi_miio_fan   https://github.com/syssi/xiaomi_fan
+custom_components/eufy_security             https://github.com/fuatakgun/eufy_security
+custom_components/kamstrup_403              https://github.com/golles/ha-kamstrup_403
+custom_components/knmi                      https://github.com/golles/ha-knmi
+custom_components/apple_tv                  https://github.com/postlund/hass-atv-beta
+custom_components/p2000                     https://github.com/cyberjunky/home-assistant-p2000
+custom_components/afvalbeheer               https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
+custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
+custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
+custom_components/lghorizon                 https://github.com/Sholofly/lghorizon
+custom_components/watchman                  https://github.com/dummylabs/thewatchman
+custom_components/webrtc                    https://github.com/AlexxIT/WebRTC
+custom_components/xiaomi_miio_fan           https://github.com/syssi/xiaomi_fan
+custom_components/media_player_template     https://github.com/Sennevds/media_player.template
 EOF
 )
 

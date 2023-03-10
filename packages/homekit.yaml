@@ -30,7 +30,6 @@ homekit:
       - switch.adguard_protection
       - switch.keukenkastje_lamp_switch
       - switch.voorraadkastlamp_switch
-      - switch.ziggo_decoder
   entity_config:
     cover.keuken:
       name: Keuken rolgordijn
@@ -44,5 +43,3 @@ homekit:
       name: Keukenkastje
     switch.voorraadkastlamp_switch:
       name: Voorraadkast
-    switch.ziggo_decoder:
-      name: Mediabox
