@@ -48,10 +48,14 @@ automation:
 
       - choose:
           - conditions:
-              - alias: Is the current time before input_datetime.covers_down time
+              - alias: If any of the covers is still open
                 condition: template
                 value_template: >-
-                  {{ now() | as_timestamp | timestamp_custom("%H:%M:%S") < states("input_datetime.covers_down")}}
+                  {{
+                    is_state("cover.slaapkamer", "open") or
+                    is_state("cover.kledingkamer", "open") or
+                    is_state("cover.logeerkamer", "open")
+                  }}
             sequence:
               - alias: Set the covers down time to be in a few seconds, so they all close
                 service: input_datetime.set_datetime
