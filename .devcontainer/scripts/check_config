@@ -14,4 +14,4 @@ sudo chown vscode:vscode /hass
 cp -r ./* /hass
 
 # Check Home Assistant config
-hass -c /hass --config /hass --script check_config
+hass --config /hass --script check_config
