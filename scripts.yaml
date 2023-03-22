@@ -23,6 +23,7 @@ everything_off:
           expand(
             states.media_player
             | rejectattr('state', 'in', ['off', 'unavailable'])
+            | rejectattr('attributes.friendly_name', 'match', 'Plex*')
           ) +
           expand(
             states.fan
