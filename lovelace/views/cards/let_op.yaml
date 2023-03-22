@@ -14,12 +14,16 @@ filter:
       {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
         {%- set data.entities = data.entities + [{
           "type": "custom:mushroom-template-card",
+          "entity": "sensor.p2000_dichtbij",
           "primary": "Dichtbij",
-          "secondary": "{{ states('sensor.p2000_dichtbij') }}",
+          "secondary": "{{ states(entity) }}",
           "layout": "vertical",
           "multiline_secondary": "true",
           "icon": "mdi:alert",
-          "icon_color": "orange"
+          "icon_color": "orange",
+          "tap_action": {
+            "action": "more-info"
+          }
         }] -%}
       {% endif %}
     {% endif %}
