@@ -15,7 +15,7 @@
   mode: single
   trigger:
     - platform: numeric_state
-      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      entity_id: sensor.achtertuin_sensor_illuminance
       below: 60
       for:
         minutes: 5
@@ -36,12 +36,12 @@
       from: "off"
       to: "on"
     - platform: state
-      entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
+      entity_id: binary_sensor.achtertuin_sensor_motion
       from: "off"
       to: "on"
   condition:
     - condition: numeric_state
-      entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
+      entity_id: sensor.achtertuin_sensor_illuminance
       below: 10
   action:
     - alias: Lights on

@@ -16,9 +16,9 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.hue_outdoor_motion_sensor_1_illuminance
+        entity: sensor.achtertuin_sensor_illuminance
       - type: entity
-        entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
+        entity: binary_sensor.achtertuin_sensor_motion
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
