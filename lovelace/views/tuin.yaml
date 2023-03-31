@@ -41,7 +41,8 @@ cards:
     show_color_temp_control: true
 
   - type: custom:mushroom-light-card
-    entity: light.gekleurde_licht
+    entity: switch.gekleurde_licht
+    icon: mdi:led-strip-variant
 
   - type: custom:auto-entities
     show_empty: true

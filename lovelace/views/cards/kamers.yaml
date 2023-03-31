@@ -708,7 +708,7 @@ cards:
                 icon_color: >-
                   {{ iif(is_state(entity, "on"), "orange", "grey") }}
               - type: template
-                entity: light.gekleurde_licht
+                entity: switch.gekleurde_licht
                 icon: mdi:led-strip-variant
                 icon_color: >-
                   {{ iif(is_state(entity, "on"), "orange", "grey") }}

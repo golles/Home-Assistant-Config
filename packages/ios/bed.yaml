@@ -38,7 +38,7 @@ automation:
             - light.overloop_spot_1
             - light.overloop_spot_2
             - light.overloop_spot_3
-            - light.gekleurde_licht
+            - switch.gekleurde_licht
 
       - alias: Now turn some lights off with a transition
         service: light.turn_off

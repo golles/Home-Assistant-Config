@@ -1,15 +1,3 @@
-- id: licht_uit_achtertuin
-  alias: Achtertuin - Lampen uit achtertuin om middernacht
-  mode: single
-  trigger:
-    - platform: time
-      at: "00:00:00"
-  action:
-    - service: light.turn_off
-      data:
-        entity_id: light.achtertuin
-        transition: 2
-
 - id: kerst_sfeer_achtertuin
   alias: Achtertuin - Kerst sfeer
   mode: single
@@ -24,8 +12,18 @@
     value_template: > # All days in December after Sinterklaas.
       {{ now().month == 12 and now().day >= 6 }}
   action:
-    - service: light.turn_on
-      entity_id: light.gekleurde_licht
+    - alias: Turn on the light
+      service: switch.turn_on
+      entity_id: switch.gekleurde_licht
+
+    - alias: Wait for midnight
+      wait_for_trigger:
+        - platform: time
+          at: "00:00:00"
+
+    - alias: Turn off the light
+      service: switch.turn_off
+      entity_id: switch.gekleurde_licht
 
 - id: automatic_backgarden_lights
   alias: Achtertuin - verlichting aan bij deur open of beweging
