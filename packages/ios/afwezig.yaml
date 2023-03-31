@@ -32,10 +32,15 @@ automation:
       - alias: Message everyone
         service: notify.all_phones
         data:
-          title: Er is niemand meer thuis
-          message: Lijst met friendly names and room?
+          title: Niemand meer thuis
+          message: >-
+            Dit staat nog aan:
+            {% if states("sensor.count_lights_on") not in ["unknown", "0"] %}{{ states("sensor.count_lights_on") }}💡 {% endif %}
+            {% if states("sensor.count_tvs_on") not in ["unknown", "0"] %}{{ states("sensor.count_tvs_on") }}📺  {% endif %}
+            {% if states("sensor.count_speakers_on") not in ["unknown", "0"] %}{{ states("sensor.count_speakers_on") }}🔊 {% endif %}
           data:
             tag: devices_left_on
+            url: /lovelace/welkom
             actions:
               - action: "{{ action_all_off }}"
                 title: Zet alles uit
