@@ -713,7 +713,7 @@ cards:
                 icon_color: >-
                   {{ iif(is_state(entity, "on"), "orange", "grey") }}
               - type: template
-                entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
+                entity: binary_sensor.achtertuin_sensor_motion
                 icon: mdi:motion-sensor
                 icon_color: >-
                   {{ iif(is_state(entity, "on"), "green", "grey") }}
