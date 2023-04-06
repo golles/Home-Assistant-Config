@@ -67,14 +67,14 @@ filter:
         name: Vaatwasser
         layout: vertical
       not:
-        state: "off"
+        state: "/off|unavailable/"
     - entity_id: "sensor.wasmachine_status"
       options:
         type: custom:mushroom-entity-card
         name: Wasmachine
         layout: vertical
       not:
-        state: "off"
+        state: "/off|unavailable/"
     - entity_id: fan.air_purifier
       state: "on"
       options:
