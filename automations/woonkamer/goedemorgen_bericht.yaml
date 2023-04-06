@@ -42,12 +42,10 @@
       entity_id: media_player.lg_soundbar
       data:
         message: >-
-          {% set good = ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"] %}
-          {% set day = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"][now().weekday()] %}
-          {% set month = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().month-1] %}
+          {% from 'nl.jinja' import month, day, daypart %}
 
-          {{ good[(now().hour / 6) | int] }}!
-          Vandaag is het {{ day }} {{ now().day }} {{ month }}.
+          {{ daypart() }}!
+          Vandaag is het {{ day() }} {{ now().day }} {{ month() }}.
           {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") in ["", None] %}
             {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
           {% else %}
