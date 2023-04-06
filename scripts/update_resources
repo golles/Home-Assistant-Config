@@ -6,7 +6,6 @@ set -e
 JAVASCRIPT=$(cat <<'EOF'
 auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
 battery-state-card.js           https://github.com/maxwroc/battery-state-card/releases/latest/download/battery-state-card.js
-elapsed-time-entity-row.js      https://github.com/golles/lovelace-elapsed-time-entity-row/releases/latest/download/elapsed-time-entity-row.js
 fold-entity-row.js              https://raw.githubusercontent.com/thomasloven/lovelace-fold-entity-row/master/fold-entity-row.js
 mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
 mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js
@@ -15,8 +14,8 @@ mushroom.js                     https://github.com/piitaya/lovelace-mushroom/rel
 swipe-navigation.js             https://raw.githubusercontent.com/maykar/lovelace-swipe-navigation/master/swipe-navigation.js
 template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
 vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
-webrtc-camera.js                https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/webrtc-camera.js
 video-rtc.js                    https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/video-rtc.js
+webrtc-camera.js                https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/webrtc-camera.js
 embed.html                      https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/embed.html
 EOF
 )
@@ -33,19 +32,19 @@ EOF
 
 # Resouce list for custom components.
 CUSTOM_COMPONENTS=$(cat <<'EOF'
+custom_components/afvalbeheer               https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
+custom_components/apple_tv                  https://github.com/postlund/hass-atv-beta
+custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
 custom_components/eufy_security             https://github.com/fuatakgun/eufy_security
+custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
 custom_components/kamstrup_403              https://github.com/golles/ha-kamstrup_403
 custom_components/knmi                      https://github.com/golles/ha-knmi
-custom_components/apple_tv                  https://github.com/postlund/hass-atv-beta
-custom_components/p2000                     https://github.com/cyberjunky/home-assistant-p2000
-custom_components/afvalbeheer               https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
-custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
-custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
 custom_components/lghorizon                 https://github.com/Sholofly/lghorizon
+custom_components/media_player_template     https://github.com/Sennevds/media_player.template
+custom_components/p2000                     https://github.com/cyberjunky/home-assistant-p2000
 custom_components/watchman                  https://github.com/dummylabs/thewatchman
 custom_components/webrtc                    https://github.com/AlexxIT/WebRTC
 custom_components/xiaomi_miio_fan           https://github.com/syssi/xiaomi_fan
-custom_components/media_player_template     https://github.com/Sennevds/media_player.template
 EOF
 )
 
