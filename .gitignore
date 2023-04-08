@@ -1,10 +1,5 @@
 external
-.HA_VERSION
-.cloud
-.storage
-image
 watchman_report.txt
-webostv.conf
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/osx,linux,git,visualstudiocode,homeassistant
@@ -30,7 +25,10 @@ webostv.conf
 *.crt
 *.csr
 *.key
+.cloud
 .google.token
+.HA_VERSION
+.storage
 .uuid
 icloud/
 google_calendars.yaml
@@ -39,6 +37,7 @@ home-assistant.db
 home-assistant_v2.db
 home-assistant_v2.db-*
 html5_push_registrations.conf
+image
 ip_bans.yaml
 known_devices.yaml
 phue.conf
@@ -46,6 +45,7 @@ plex.conf
 pyozw.sqlite
 secrets.yaml
 tradfri.conf
+webostv.conf
 
 # Temporary files
 *.db-journal
@@ -58,6 +58,7 @@ lib
 
 # Log files
 home-assistant.log
+home-assistant.log.*
 ozw_log.txt
 
 # Development files
