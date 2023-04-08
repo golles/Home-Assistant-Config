@@ -5,7 +5,7 @@ blueprint:
     Actions can be set up for single press and hold, hold you can configure with a cooldown, to prevent your actions from running on every single hold action.
   domain: automation
   author: golles
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles//zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
   input:
     smart_button:
       name: Smart button

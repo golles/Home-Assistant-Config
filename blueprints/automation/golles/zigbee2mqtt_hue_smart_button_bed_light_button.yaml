@@ -10,7 +10,7 @@ blueprint:
     This automation should work with any lights, but only with Philips Hue smart button connected throught Zigbee2MQTT.
   domain: automation
   author: golles
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_hue_smart_button_bed_light_button.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles//zigbee2mqtt_hue_smart_button_bed_light_button.yaml
   input:
     smart_button:
       name: Smart button

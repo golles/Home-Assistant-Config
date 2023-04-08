@@ -4,7 +4,7 @@ blueprint:
     This blueprint allows you to make automations for the Xiaomi Aqara switch and Xiaomi MiJia wireless switch, connected to Zigbee2MQTT.
   domain: automation
   author: golles
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Blueprints/main/zigbee2mqtt_xiaomi_switch.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles//zigbee2mqtt_xiaomi_switch.yaml
   input:
     switch:
       name: Switch
