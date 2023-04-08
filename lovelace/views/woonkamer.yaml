@@ -202,25 +202,8 @@ cards:
         primary: >-
           {{ state_attr(entity, "friendly_name") }}
         secondary: >-
-          {% if is_state(entity, "problem") %}
-            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
-              Onbekend
-            {% else %}
-              {{
-                state_attr(entity, "problem")
-                | replace("moisture high", "te vochtig")
-                | replace("moisture low", "te droog")
-                | replace("conductivity high", "hoge geleidbaarheid")
-                | replace("conductivity low", "lage geleidbaarheid")
-                | replace("temperature high", "te warm")
-                | replace("temperature low", "te koud")
-                | replace("brightness high", "te licht")
-                | replace("brightness low", "te donker")
-              }}
-            {% endif %}
-          {% else %}
-            {{ states(entity) }}
-          {% endif %}
+          {% from "plants.jinja" import state %}
+          {{ state(entity) }}
         badge_icon: >-
           {{ iif(is_state(entity, "problem"), "mdi:alert") }}
         badge_color: >-
@@ -238,25 +221,8 @@ cards:
         primary: >-
           {{ state_attr(entity, "friendly_name") }}
         secondary: >-
-          {% if is_state(entity, "problem") %}
-            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
-              Onbekend
-            {% else %}
-              {{
-                state_attr(entity, "problem")
-                | replace("moisture high", "te vochtig")
-                | replace("moisture low", "te droog")
-                | replace("conductivity high", "hoge geleidbaarheid")
-                | replace("conductivity low", "lage geleidbaarheid")
-                | replace("temperature high", "te warm")
-                | replace("temperature low", "te koud")
-                | replace("brightness high", "te licht")
-                | replace("brightness low", "te donker")
-              }}
-            {% endif %}
-          {% else %}
-            {{ states(entity) }}
-          {% endif %}
+          {% from "plants.jinja" import state %}
+          {{ state(entity) }}
         badge_icon: >-
           {{ iif(is_state(entity, "problem"), "mdi:alert") }}
         badge_color: >-
@@ -274,25 +240,8 @@ cards:
         primary: >-
           {{ state_attr(entity, "friendly_name") }}
         secondary: >-
-          {% if is_state(entity, "problem") %}
-            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
-              Onbekend
-            {% else %}
-              {{
-                state_attr(entity, "problem")
-                | replace("moisture high", "te vochtig")
-                | replace("moisture low", "te droog")
-                | replace("conductivity high", "hoge geleidbaarheid")
-                | replace("conductivity low", "lage geleidbaarheid")
-                | replace("temperature high", "te warm")
-                | replace("temperature low", "te koud")
-                | replace("brightness high", "te licht")
-                | replace("brightness low", "te donker")
-              }}
-            {% endif %}
-          {% else %}
-            {{ states(entity) }}
-          {% endif %}
+          {% from "plants.jinja" import state %}
+          {{ state(entity) }}
         badge_icon: >-
           {{ iif(is_state(entity, "problem"), "mdi:alert") }}
         badge_color: >-
@@ -310,25 +259,8 @@ cards:
         primary: >-
           {{ state_attr(entity, "friendly_name") }}
         secondary: >-
-          {% if is_state(entity, "problem") %}
-            {% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
-              Onbekend
-            {% else %}
-              {{
-                state_attr(entity, "problem")
-                | replace("moisture high", "te vochtig")
-                | replace("moisture low", "te droog")
-                | replace("conductivity high", "hoge geleidbaarheid")
-                | replace("conductivity low", "lage geleidbaarheid")
-                | replace("temperature high", "te warm")
-                | replace("temperature low", "te koud")
-                | replace("brightness high", "te licht")
-                | replace("brightness low", "te donker")
-              }}
-            {% endif %}
-          {% else %}
-            {{ states(entity) }}
-          {% endif %}
+          {% from "plants.jinja" import state %}
+          {{ state(entity) }}
         badge_icon: >-
           {{ iif(is_state(entity, "problem"), "mdi:alert") }}
         badge_color: >-

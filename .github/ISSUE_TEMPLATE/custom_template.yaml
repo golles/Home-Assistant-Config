@@ -1,0 +1,53 @@
+name: Custom template
+description: Report an issue related to a custom template (jinja file)
+labels: [custom_template]
+body:
+  - type: input
+    id: filename
+    validations:
+      required: true
+    attributes:
+      label: Custom template filename
+      placeholder: template.jinja
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: The problem
+      description: >-
+        Describe the issue you are experiencing here to communicate to the maintainers. Tell us what you were trying to do and what happened.
+        Provide a clear and concise description of what the problem is. What did you expect to happen?
+
+  - type: input
+    id: ha_version
+    validations:
+      required: true
+    attributes:
+      label: What version of Home Assistant Core has the issue?
+      placeholder: core-2023.4.3
+      description: >
+        Can be found in the Configuration panel -> Info.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Details
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Home Assistant log
+      description: Paste your full log here, Please copy from your log file and not from the frontend, thanks.
+      render: sh
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: If you have any additional information, use the field below. Please note, you can attach screenshots or screen recordings here, by dragging and dropping files in the field below.
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this issue!

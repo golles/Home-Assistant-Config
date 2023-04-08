@@ -1,11 +1,14 @@
-{% macro month() %}
+{# Full name of the month in Dutch #}
+{%- macro month() -%}
 {{ ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"][now().month-1] }}
-{% endmacro %}
+{%- endmacro -%}
 
-{% macro day() %}
+{# Full name of the day in Dutch #}
+{%- macro day() -%}
 {{ ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"][now().weekday()] }}
-{% endmacro %}
+{%- endmacro -%}
 
-{% macro daypart() %}
-{{ ["Goedenacht", "Goedemorgen","Goedemiddag", "Goedeavond"][(now().hour / 6) | int] }}
-{% endmacro %}
+{# Full name of the daypart in Dutch #}
+{%- macro daypart() -%}
+{{ ["nacht", "morgen", "middag", "avond"][(now().hour / 6) | int] }}
+{%- endmacro -%}

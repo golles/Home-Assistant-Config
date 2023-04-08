@@ -42,6 +42,14 @@ I've created a few [blueprints](blueprints/automation/golles/) to repeat logic i
 - [Button press and hold (Hue smart button, zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml)
 - [Xiaomi switches (zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_xiaomi_switch.yaml)
 
+### Custom templates
+
+For the same reason as for blueprints, I've created a few [custom_templates](custom_templates/) to reuse jinja tempaltes.
+
+- [Home Connect helpers](custom_templates/home_connect.jinja)
+- [Dutch translation helpers](custom_templates/nl.jinja)
+- [Plant sensor helpers](custom_templates/plants.jinja)
+
 If you like any of these blueprints, then you can import these into your own Home Assistant.
 
 ### Custom components

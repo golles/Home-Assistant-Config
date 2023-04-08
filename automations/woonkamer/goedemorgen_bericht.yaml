@@ -44,7 +44,7 @@
         message: >-
           {% from 'nl.jinja' import month, day, daypart %}
 
-          {{ daypart() }}!
+          Goede{{ daypart() }}!
           Vandaag is het {{ day() }} {{ now().day }} {{ month() }}.
           {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") in ["", None] %}
             {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}

@@ -1,0 +1,25 @@
+{#
+Make up the state of a plant, the problem attribute is taken into account. The result is in Dutch.
+entity: the entity id of the sensor.
+#}
+{% macro state(entity) %}
+{% if is_state(entity, "problem") %}
+{% if is_state_attr(entity, "problem", "moisture unavailable, temperature unavailable, conductivity unavailable, brightness unavailable") %}
+    Onbekend
+{% else %}
+    {{
+    state_attr(entity, "problem")
+    | replace("moisture high", "te vochtig")
+    | replace("moisture low", "te droog")
+    | replace("conductivity high", "hoge geleidbaarheid")
+    | replace("conductivity low", "lage geleidbaarheid")
+    | replace("temperature high", "te warm")
+    | replace("temperature low", "te koud")
+    | replace("brightness high", "te licht")
+    | replace("brightness low", "te donker")
+    }}
+{% endif %}
+{% else %}
+{{ states(entity) }}
+{% endif %}
+{% endmacro %}
