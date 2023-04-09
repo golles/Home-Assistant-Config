@@ -83,3 +83,19 @@ cards:
             name: Verbruik dit kwartaal
           - entity: sensor.waterverbruik_per_jaar
             name: Verbruik dit jaar
+
+  - type: entities
+    title: APC Back-UPS BX950MI
+    entities:
+      - entity: sensor.apc_back_ups_bx950mi_status
+        name: Status
+      - entity: sensor.apc_back_ups_bx950mi_battery_charge
+        name: Battery Charge
+      - entity: sensor.apc_back_ups_bx950mi_battery_runtime
+        name: Battery runtime
+      - entity: sensor.apc_back_ups_bx950mi_load
+        name: Load
+      - entity: sensor.apc_back_ups_bx950mi_input_voltage
+        name: Input Voltage
+      - entity: sensor.apc_back_ups_bx950mi_self_test_result
+        name: Self-test result
