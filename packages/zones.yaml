@@ -19,7 +19,8 @@ automation:
     condition:
       - "{{ states('sensor.visisted_parents') | int > 0 }}"
       - condition: template
-        value_template: > # Can't be triggered when it was already triggered in the last 24 hours.
+        value_template:
+          > # Can't be triggered when it was already triggered in the last 24 hours.
           {% from "automations.jinja" import was_within %}
           {{ was_within("automation.notificatie_komt_thuis_na_bezoeken_ouders", 24 * 60 * 60) }}
     action:
