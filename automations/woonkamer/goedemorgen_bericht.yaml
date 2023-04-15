@@ -18,9 +18,9 @@
       entity_id: binary_sensor.morning
       state: "on"
     - condition: template
-      value_template:
-        > # Don't trigger if it has been triggered in the last 6 hours.
-        {{ as_timestamp(now()) - as_timestamp(state_attr("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", "last_triggered")) | int >= 6 * 60 * 60 }}
+      value_template: > # Don't trigger if it has been triggered in the last 6 hours.
+        {% from "automations.jinja" import was_within %}
+        {{ was_within("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", 6 * 60 * 60) }}
   action:
     - alias: Force update weather description
       service: homeassistant.update_entity

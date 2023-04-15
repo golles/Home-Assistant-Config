@@ -1,0 +1,8 @@
+{#
+A macro, useful for automation conditions, to check if a certain automation was triggered before within a given time.
+automation_entity_id: the automation entity, eg "automation.my_automation".
+seconds: the number of seconds to perform the check against.
+#}
+{%- macro was_within(automation_entity_id, seconds) -%}
+{{ as_timestamp(now()) - as_timestamp(state_attr(automation_entity_id, "last_triggered")) | int >= seconds }}
+{%- endmacro -%}
