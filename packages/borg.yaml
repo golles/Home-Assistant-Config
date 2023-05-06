@@ -11,6 +11,9 @@ automation:
     trigger:
       - platform: webhook
         webhook_id: borg
+        allowed_methods:
+          - POST
+        local_only: true
     action:
       - service: input_text.set_value
         data_template:
@@ -26,7 +29,7 @@ automation:
         for:
           minutes: 30
     condition:
-      - "{{ states('input_text.borg') != 'Backup and Prune finished successfully' }}"
+      - "{{ states('input_text.borg') == 'Backup and/or Prune finished with errors' }}"
     action:
       - service: notify.sander
         data:
