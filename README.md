@@ -46,6 +46,7 @@ I've created a few [blueprints](blueprints/automation/golles/) to repeat logic i
 
 For the same reason as for blueprints, I've created a few [custom_templates](custom_templates/) to reuse jinja tempaltes.
 
+- [Automation helpers](custom_templates/automations.jinja)
 - [Home Connect helpers](custom_templates/home_connect.jinja)
 - [Dutch translation helpers](custom_templates/nl.jinja)
 - [Plant sensor helpers](custom_templates/plants.jinja)
