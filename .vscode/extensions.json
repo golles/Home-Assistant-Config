@@ -3,6 +3,7 @@
     "esbenp.prettier-vscode",
     "github.vscode-pull-request-github",
     "keesschollaart.vscode-home-assistant",
+    "lukas-tr.materialdesignicons-intellisense",
     "redhat.vscode-yaml"
   ]
 }
