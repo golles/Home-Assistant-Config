@@ -1,0 +1,20 @@
+- id: mechanische_ventilatie_toilet
+  alias: Mechanische ventilatie toilet
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.toilet_beweging_occupancy
+      from: "off"
+      to: "on"
+  condition:
+    # Only when the fan is set to low, we don't want to interfere with the shower automation.
+    - condition: numeric_state
+      entity_id: fan.mechanische_ventilatie
+      attribute: percentage
+      below: 26
+  action:
+    - alias: Occupancy detected, set fan speed
+      service: esphome.mechanische_ventilatie_set_speed_timer
+      data:
+        speed: 2 # 50%
+        timer: 15

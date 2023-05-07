@@ -19,7 +19,7 @@
   action:
     - choose:
         - conditions:
-            # When the fan is set to low, set it to high for a certain amount of time.
+            # Only when the fan is set to low, we don't want to interfere with the shower automation.
             - condition: numeric_state
               entity_id: fan.mechanische_ventilatie
               attribute: percentage
