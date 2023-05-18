@@ -37,10 +37,8 @@ cards:
         name: Laagtarief
       - entity: sensor.dsmr_reading_electricity_delivered_2
         name: Normaaltarief
-      - type: custom:template-entity-row
-        entity: sensor.dsmr_meter_stats_electricity_tariff
+      - entity: sensor.dsmr_meter_stats_electricity_tariff
         name: Tarief
-        state: "{{ 'Hoog' if is_state('sensor.dsmr_meter_stats_electricity_tariff', 'high') else 'Laag' }}"
       - entity: sensor.dsmr_reading_electricity_currently_delivered
         name: Verbruik
       - type: weblink
