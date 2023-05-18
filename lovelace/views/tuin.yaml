@@ -72,12 +72,6 @@ cards:
       attribute: Days_until
       numeric: true
 
-  - type: picture-glance
-    title: Deurbel laatste
-    image: camera.deurbel
-    entities: []
-    camera_image: camera.deurbel
-
   - type: entities
     show_header_toggle: false
     entities:
