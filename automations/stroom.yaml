@@ -1,0 +1,33 @@
+- id: electricity_low_today
+  alias: "Notificatie: elektriciteit laag tarief vandaag"
+  mode: single
+  trigger:
+    - platform: time
+      at: "10:30:00"
+    - platform: state
+      entity_id: group.residents
+      from: not_home
+      to: home
+  condition:
+    - condition: state
+      entity_id: sensor.dsmr_meter_stats_electricity_tariff
+      state: low
+    - condition: state
+      entity_id: group.residents
+      state: home
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - alias: Notify users about low tarif today
+      service: notify.all_phones
+      data:
+        title: 🔌 Elektriciteit
+        message: >-
+          Vandaag is de Elektriciteit de hele dag laag tarief
+        data:
+          group: elektriciteit
