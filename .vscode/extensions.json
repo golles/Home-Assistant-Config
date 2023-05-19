@@ -4,6 +4,7 @@
     "github.vscode-pull-request-github",
     "keesschollaart.vscode-home-assistant",
     "lukas-tr.materialdesignicons-intellisense",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker"
   ]
 }
