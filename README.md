@@ -76,6 +76,7 @@ For the same reason as for blueprints, I've created a few [custom_templates](cus
 
 | Template                                                  | Summary                   |
 | --------------------------------------------------------- | ------------------------- |
+| [aqi.jinja](custom_templates/aqi.jinja)                   | Air quality index helpers |
 | [automations.jinja](custom_templates/automations.jinja)   | Automation helpers        |
 | [home_connect.jinja](custom_templates/home_connect.jinja) | Home Connect helpers      |
 | [nl.jinja](custom_templates/nl.jinja)                     | Dutch translation helpers |

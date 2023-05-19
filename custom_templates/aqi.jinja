@@ -1,0 +1,47 @@
+{#
+A macro, that translates a PM2.5 value to a human readble air quality index.
+value: the number of the current PM2.5 value.
+#}
+{%- macro pm25(value) -%}
+{% if value == None or value == 'unavailable' %}
+Onbekend
+{% elif value | int < 12 %}
+Goed
+{%- elif value | int <= 35.4 -%}
+Matig
+{%- elif value | int <= 55.4 -%}
+Ongezond voor gevoelige groepen
+{%- elif value | int <= 150.4 -%}
+Ongezond
+{%- elif value | int <= 250.4 -%}
+Heel ongezond
+{%- elif value | int > 250.4 -%}
+Gevaarlijk
+{%- else -%}
+Onbekend
+{% endif %}
+{%- endmacro -%}
+
+{#
+A macro, that translates a PM10 value to a human readble air quality index.
+value: the number of the current PM10 value.
+#}
+{%- macro pm10(value) -%}
+{% if value == None or value == 'unavailable' %}
+Onbekend
+{% elif value | int < 54 %}
+Goed
+{%- elif value | int <= 154 -%}
+Matig
+{%- elif value | int <= 254 -%}
+Ongezond voor gevoelige groepen
+{%- elif value | int <= 354 -%}
+Ongezond
+{%- elif value | int <= 424 -%}
+Heel ongezond
+{%- elif value | int > 424 -%}
+Gevaarlijk
+{%- else -%}
+Onbekend
+{% endif %}
+{%- endmacro -%}

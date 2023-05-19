@@ -11,23 +11,7 @@ fan:
 
 template:
   - sensor:
-      - name: Luchtkwaliteit
+      - name: Woonkamer luchtkwaliteit
         state: >-
-          {% set aqi = states("sensor.mi_air_purifier_3_3h_pm2_5") %}
-          {% if aqi == None or aqi == 'unavailable' %}
-            Onbekend
-          {% elif aqi | int < 12 %}
-            Goed
-          {%- elif aqi | int <= 35.4 -%}
-            Matig
-          {%- elif aqi | int <= 55.4 -%}
-            Ongezond voor gevoelige groepen
-          {%- elif aqi | int <= 150.4 -%}
-            Ongezond
-          {%- elif aqi | int <= 250.4 -%}
-            Heel ongezond
-          {%- elif aqi | int > 250.4 -%}
-            Gevaarlijk
-          {%- else -%}
-            Onbekend
-          {% endif %}
+          {% from "aqi.jinja" import pm25 %}
+          {{ pm25(states("sensor.mi_air_purifier_3_3h_pm2_5")) }}
