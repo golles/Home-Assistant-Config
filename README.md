@@ -72,7 +72,7 @@ I've made a few [custom_scripts](custom_scripts/) to control devices at my home.
 
 ### Custom templates
 
-For the same reason as for blueprints, I've created a few [custom_templates](custom_templates/); to reuse jinja tempaltes.
+For the same reason as for blueprints, I've created a few [custom_templates](custom_templates/); to reuse jinja templates.
 
 | Template                                                  | Summary                   |
 | --------------------------------------------------------- | ------------------------- |
