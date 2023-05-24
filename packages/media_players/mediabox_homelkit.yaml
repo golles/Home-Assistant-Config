@@ -160,7 +160,7 @@ media_player:
               source: ESPN
             target:
               entity_id: media_player.mediabox
-          Eurosport: # Eurosport 1
+          Eurosport 1:
             service: media_player.select_source
             data:
               source: Eurosport 1
