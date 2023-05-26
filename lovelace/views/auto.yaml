@@ -1,0 +1,108 @@
+title: Auto
+path: auto
+panel: false
+icon: mdi:car
+badges: []
+cards:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        double_tap_action:
+          action: none
+        hold_action:
+          action: none
+
+  - type: custom:mushroom-title-card
+    title: Auto
+
+  - type: picture-elements
+    image: /local/auto/golf75.jpg
+    elements:
+      - type: state-label
+        entity: device_tracker.golf_7_5
+        style:
+          color: white
+          top: 10%
+          left: 10%
+      - type: state-label
+        entity: sensor.golf_75_apk_expiration
+        prefix: "APK: "
+        style:
+          color: white
+          top: 95%
+          left: 20%
+      - type: state-label
+        entity: binary_sensor.golf_75_liability_insured
+        prefix: "Verzekerd: "
+        style:
+          color: white
+          top: 95%
+          left: 53%
+      - type: state-label
+        entity: binary_sensor.golf_75_pending_recall
+        prefix: "Terugroep: "
+        style:
+          color: white
+          top: 95%
+          left: 85%
+
+  - type: custom:mushroom-template-card
+    primary: >-
+      {{ state_attr(entity, "friendly_name") }}
+    secondary: >-
+      {{ iif(is_state(entity, "on"), "Vandaag kun je de auto wassen", "Voorlopig kun je beter wachten") }}
+    icon: >-
+      {{ state_attr(entity, "icon") }}
+    entity: binary_sensor.auto_wassen
+    icon_color: >-
+      {{ iif(is_state(entity, "on"), "green", "orange") }}
+    tap_action:
+      action: more-info
+
+  - type: map
+    default_zoom: 17
+    hours_to_show: 24
+    entities:
+      - entity: device_tracker.golf_7_5
+
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:mushroom-template-card
+        primary: Tango, Purmerend
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: mdi:gas-station
+        entity: sensor.tango_purmerend
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-template-card
+        primary: Tango, Winschoten
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: mdi:gas-station
+        entity: sensor.tango_winschoten
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-template-card
+        primary: Tango, Hoogezand
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: mdi:gas-station
+        entity: sensor.tango_hoogezand
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-template-card
+        primary: Freie Tankstelle Hüsers
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: mdi:gas-station
+        entity: sensor.freie_tankstelle_husers
+        tap_action:
+          action: more-info
+        icon_color: blue
