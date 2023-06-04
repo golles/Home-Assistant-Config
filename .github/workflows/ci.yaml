@@ -36,7 +36,7 @@ jobs:
           ./scripts/update_resources init_custom_components
 
       - name: Mock secrets
-        uses: golles/mock-yaml-secrets-action@main
+        uses: golles/mock-yaml-secrets-action@v1
         with:
           configFile: ".github/workflows/mock-secrets-config.json"
 
