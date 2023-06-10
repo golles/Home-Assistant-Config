@@ -22,6 +22,9 @@
         - wed
         - thu
         - fri
+    - condition: time # Tarif is always low in this time period.
+      after: "07:00:00"
+      before: "23:00:00"
   action:
     - alias: Notify users about low tarif today
       service: notify.all_phones
