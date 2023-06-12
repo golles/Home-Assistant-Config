@@ -18,6 +18,15 @@ ios:
         icon: sleep
         color: "#ffffff"
 
+    - name: Uit bed
+      background_color: "#4c00ff"
+      label:
+        text: Uit bed
+        color: "#ffffff"
+      icon:
+        icon: sleep-off
+        color: "#ffffff"
+
 automation:
   - id: ios_action_going_to_bed
     alias: iOS action - Naar bed
@@ -96,3 +105,40 @@ automation:
     action:
       - alias: Now turn everything off
         service: script.everything_off
+
+  - id: ios_action_going_out_of_bed
+    alias: iOS action - Uit bed
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: Uit bed
+    action:
+      - alias: Act based on predicted temperature
+        if:
+          - condition: template
+            value_template: >-
+              {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int >= 28 }}
+        then:
+          - alias: It will be warm today, set south facing covers to their preference position
+            service: button.press
+            target:
+              entity_id:
+                - button.kledingkamer_my_position
+                - button.slaapkamer_my_position
+        else:
+          - alias: Open south facing covers
+            service: cover.open_cover
+            target:
+              entity_id:
+                - cover.kledingkamer
+                - cover.slaapkamer
+
+      - alias: Set curtains to preference position
+        service: button.press
+        target:
+          entity_id:
+            - button.logeerkamer_rolgordijn_voorkeurspositie
+            - button.keuken_rolgordijn_voorkeurspositie
