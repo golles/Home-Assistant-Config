@@ -97,5 +97,7 @@
   action:
     service: scene.turn_on
     data:
-      entity_id: scene.wooneet_film
+      entity_id:
+        - scene.wooneet_film
+        - scene.tv_film
       transition: 1
