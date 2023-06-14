@@ -5,44 +5,59 @@ everything_off:
     exclude_entity_ids:
       description: entity_ids to exclude
   variables:
-    entities: >
-      {% if exclude_entity_ids is not defined %}
-        {% set exclude_entity_ids = [] %}
-      {% endif %}
-
-      {% set exclude_entity_ids = exclude_entity_ids + ['fan.air_purifier', 'fan.mechanische_ventilatie'] %}
-
+    exclude_ids: >
+      {{ exclude_entity_ids | default([]) }}
+    fans: >
       {{
-        (
-          expand(
-            states.light
-            | selectattr('state', 'eq', 'on')
-            | rejectattr('attributes.is_hue_group', 'defined')
-            | rejectattr('attributes.entity_id', 'defined')
-          ) +
-          expand(
-            states.media_player
-            | rejectattr('state', 'in', ['off', 'unavailable'])
-            | rejectattr('attributes.friendly_name', 'match', 'Plex*')
-          ) +
-          expand(
-            states.fan
-            | rejectattr('state', 'in', ['off', 'unavailable'])
-          )
-        )
-        | rejectattr('entity_id', 'in', exclude_entity_ids)
+        states.fan
+        | selectattr('state', 'eq', 'on')
+        | rejectattr('entity_id', 'in', ['fan.air_purifier', 'fan.mechanische_ventilatie'])
+        | rejectattr('entity_id', 'in', exclude_ids)
+        | map(attribute='entity_id')
+        | join(', ')
+      }}
+    media_players: >
+      {{
+        states.media_player
+        | rejectattr('state', 'in', ['off', 'unavailable'])
+        | rejectattr('entity_id', 'match', 'media_player.plex')
+        | rejectattr('entity_id', 'in', ['media_player.mediabox_homekit'])
+        | rejectattr('entity_id', 'in', exclude_ids)
+        | map(attribute='entity_id')
+        | join(', ')
+      }}
+    lights: >
+      {{
+        states.light
+        | selectattr('state', 'eq', 'on')
+        | rejectattr('attributes.is_hue_group', 'defined')
+        | rejectattr('attributes.entity_id', 'defined')
+        | rejectattr('entity_id', 'in', exclude_ids)
         | map(attribute='entity_id')
         | join(', ')
       }}
   sequence:
-    - choose:
-        - alias: Turn everything off that is turned on
-          conditions:
-            - "{{ entities != '' }}"
-          sequence:
-            - service: homeassistant.turn_off
-              data:
-                entity_id: "{{ entities }}"
+    - if:
+        - "{{ fans != '' }}"
+      then:
+        - alias: Turn off all fans
+          service: fan.turn_off
+          target:
+            entity_id: "{{ fans }}"
+    - if:
+        - "{{ media_players != '' }}"
+      then:
+        - alias: Turn off all media players
+          service: media_player.turn_off
+          target:
+            entity_id: "{{ media_players }}"
+    - if:
+        - "{{ lights != '' }}"
+      then:
+        - alias: Turn off all lights
+          service: light.turn_off
+          target:
+            entity_id: "{{ lights }}"
 
 close_cover_window_state:
   alias: Close cover, depending on window state
