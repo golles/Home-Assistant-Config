@@ -144,7 +144,7 @@ cards:
             icon_color: >-
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
           - type: template
-            entity: switch.keukenkastje_lamp_switch
+            entity: light.keukenkastje_lamp
             icon: mdi:lightbulb
             icon_color: >-
               {{ iif(is_state(entity, "on"), "orange", "grey") }}
