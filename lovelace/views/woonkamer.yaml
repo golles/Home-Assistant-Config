@@ -143,7 +143,7 @@ cards:
             show_brightness_control: true
 
           - type: custom:mushroom-light-card
-            entity: switch.keukenkastje_lamp_switch
+            entity: light.keukenkastje_lamp
             name: Keukenkastje
             fill_container: true
 

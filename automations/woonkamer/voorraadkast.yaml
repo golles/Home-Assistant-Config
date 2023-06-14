@@ -15,15 +15,15 @@
               entity_id: binary_sensor.voorraadkastdeur_contact
               state: "on"
           sequence:
-            - service: switch.turn_on
-              entity_id: switch.voorraadkastlamp_switch
+            - service: light.turn_on
+              entity_id: light.voorraadkastlamp
 
             - delay:
                 minutes: 10
 
-            - service: switch.turn_off
-              entity_id: switch.voorraadkastlamp_switch
+            - service: light.turn_off
+              entity_id: light.voorraadkastlamp
 
       default:
-        - service: switch.turn_off
-          entity_id: switch.voorraadkastlamp_switch
+        - service: light.turn_off
+          entity_id: light.voorraadkastlamp

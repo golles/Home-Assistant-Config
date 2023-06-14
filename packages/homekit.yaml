@@ -22,24 +22,24 @@ homekit:
       - cover.logeerkamer
       - fan.air_purifier
       - fan.ventilator
+      - light.keukenkastje_lamp
+      - light.voorraadkastlamp
       - light.wled_skull
       - sensor.mi_air_purifier_3_3h_pm2_5
       - sensor.particulate_matter_2_5um_concentration
       - sensor.toilet_klimaat_humidity
       - sensor.toilet_klimaat_temperature
       - switch.adguard_protection
-      - switch.keukenkastje_lamp_switch
-      - switch.voorraadkastlamp_switch
   entity_config:
     cover.keuken:
       name: Keuken rolgordijn
     cover.logeerkamer:
       name: Logeerkamer rolgordijn
+    light.keukenkastje_lamp:
+      name: Keukenkastje
+    light.voorraadkastlamp:
+      name: Voorraadkast
     light.wled_skull:
       name: Skull
     switch.adguard_protection:
       name: Internet bescherming
-    switch.keukenkastje_lamp_switch:
-      name: Keukenkastje
-    switch.voorraadkastlamp_switch:
-      name: Voorraadkast
