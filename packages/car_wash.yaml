@@ -2,3 +2,53 @@ binary_sensor:
   - platform: car_wash
     name: Auto wassen
     weather: weather.knmi_purmerend
+
+multiscrape:
+  - resource: https://carwashplus.carwash-cms.com/customerportal/Transaction
+    scan_interval: 10800
+    form_submit:
+      submit_once: true
+      resource: https://carwashplus.carwash-cms.com/customerportal/Account/Login
+      select: "#loginForm > form"
+      input:
+        UserName: !secret carwashplus_username
+        Password: !secret carwashplus_password
+    sensor:
+      - name: Saldo
+        unique_id: carwashplus_saldo
+        icon: mdi:currency-eur
+        select: "body > div > div > div.row.mb-3.align-items-center > div.col-lg-6.text-lg-right > div:nth-child(1) > div > h4"
+        value_template: >
+          {{ value.split("€")[1] | trim | replace(",", ".") }}
+        unit_of_measurement: €
+        device_class: monetary
+        attributes:
+          - name: Pasnummer
+            select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(8)"
+            value_template: >
+              {{ value | trim }}
+
+      - name: Laatste bezoek
+        unique_id: carwashplus_laatste_bezoek
+        icon: mdi:car-wash
+        select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(2)"
+        device_class: timestamp
+        value_template: >
+          {% set value = value | trim %}
+          {% set date = value.split(" ")[0].split("-") %}
+          {% set time = value.split(" ")[1].split(":") %}
+          {{
+            now().replace(
+              year=date[2] | int, month=date[1] | int, day=date[0] | int,
+              hour=time[0] | int, minute=time[1] | int, second=time[2] | int, microsecond=0
+            )
+          }}
+        attributes:
+          - name: Product
+            select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(4)"
+            value_template: >
+              {{ value | trim }}
+          - name: Bedrag
+            select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(5)"
+            value_template: >
+              {{ value | trim }}

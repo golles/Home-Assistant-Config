@@ -50,18 +50,35 @@ cards:
           top: 95%
           left: 85%
 
-  - type: custom:mushroom-template-card
-    primary: >-
-      {{ state_attr(entity, "friendly_name") }}
-    secondary: >-
-      {{ iif(is_state(entity, "on"), "Vandaag kun je de auto wassen", "Voorlopig kun je beter wachten") }}
-    icon: >-
-      {{ state_attr(entity, "icon") }}
-    entity: binary_sensor.auto_wassen
-    icon_color: >-
-      {{ iif(is_state(entity, "on"), "green", "orange") }}
-    tap_action:
-      action: more-info
+  - type: custom:vertical-stack-in-card
+    title: Auto wassen
+    cards:
+      - type: custom:mushroom-template-card
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: >-
+          {{ iif(is_state(entity, "on"), "Vandaag kun je de auto wassen", "Voorlopig kun je beter wachten") }}
+        icon: >-
+          {{ state_attr(entity, "icon") }}
+        entity: binary_sensor.auto_wassen
+        icon_color: >-
+          {{ iif(is_state(entity, "on"), "green", "orange") }}
+        tap_action:
+          action: more-info
+
+      - type: custom:mushroom-template-card
+        primary: >-
+          {{ state_attr(entity, "friendly_name") }}
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: >-
+          {{ state_attr(entity, "icon") }}
+        entity: sensor.carwashplus_saldo
+        tap_action:
+          action: more-info
+        icon_color: blue
+
+      - type: custom:mushroom-entity-card
+        entity: sensor.carwashplus_laatste_bezoek
 
   - type: map
     default_zoom: 17
@@ -70,6 +87,7 @@ cards:
       - entity: device_tracker.golf_7_5
 
   - type: custom:vertical-stack-in-card
+    title: Benzineprijzen
     cards:
       - type: custom:mushroom-template-card
         primary: Tango, Purmerend

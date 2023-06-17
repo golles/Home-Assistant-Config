@@ -80,3 +80,32 @@ cards:
           {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 3600, "amber", "grey") }}
         tap_action:
           action: more-info
+
+  - type: custom:vertical-stack-in-card
+    title: Leeghwaterbad
+    cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.leeghwaterbad_volgende_bestelling
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.leeghwaterbad_volgende_bestelling
+            primary: Ordernummer
+            secondary: >-
+              {{ state_attr(entity, "ordernummer") }}
+            icon: mdi:pound
+            icon_color: blue
+            tap_action:
+              action: more-info
+          - type: markdown
+            content: >-
+              [Tickets]({{ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket") }})
+
+      - type: divider
+
+      - type: custom:mushroom-entity-card
+        entity: sensor.leeghwaterbad_abonnement_beschikbare_tickets
+
+      - type: custom:mushroom-entity-card
+        entity: sensor.leeghwaterbad_abonnement_verloopdatum

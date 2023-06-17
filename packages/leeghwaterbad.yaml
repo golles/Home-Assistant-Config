@@ -1,0 +1,110 @@
+multiscrape:
+  - resource: https://spurd.booqi.me/client/subscriptions
+    scan_interval: 10800
+    form_submit:
+      submit_once: true
+      resource: https://spurd.booqi.me/client/login
+      select: "#login_form"
+      input:
+        email: !secret leeghwaterbad_username
+        password: !secret leeghwaterbad_password
+    sensor:
+      - name: Beschikbare tickets
+        unique_id: leeghwaterbad_abonnement_beschikbare_tickets
+        icon: mdi:playlist-check
+        select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
+        value_template: >
+          {{ value.split("/")[0] | trim }}
+        attributes:
+          - name: Totaal
+            select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
+            value_template: >
+              {{ value.split("/")[1].split("-")[0] | trim }}
+          - name: Procent
+            select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
+            value_template: >
+              {{ value.split("-")[1].split("%")[0] | trim }}
+      - name: Verloopdatum
+        unique_id: leeghwaterbad_abonnement_verloopdatum
+        icon: mdi:calendar-sync
+        device_class: timestamp
+        select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(4)"
+        value_template: >
+          {% set value = value | trim %}
+          {% set date = value.split(" ")[0].split("-") %}
+          {{
+            now().replace(
+              year=date[2] | int, month=date[1] | int, day=date[0] | int,
+              hour=0, minute=0, second=0, microsecond=0
+            )
+          }}
+
+  - resource: https://spurd.booqi.me/client/orders
+    scan_interval: 10800
+    form_submit:
+      submit_once: true
+      resource: https://spurd.booqi.me/client/login
+      select: "#login_form"
+      input:
+        email: !secret leeghwaterbad_username
+        password: !secret leeghwaterbad_password
+    sensor:
+      - name: Volgende bestelling
+        unique_id: leeghwaterbad_volgende_bestelling
+        icon: mdi:swim
+        device_class: timestamp
+        select: "#orders_usable > div > div:nth-child(2) > div:nth-child(4)"
+        value_template: >
+          {% set value = value | trim %}
+          {% set date = value.split(" ")[0].split("-") %}
+          {% set time = value.split(" ")[1].split(":") %}
+          {{
+            now().replace(
+              year=date[2] | int, month=date[1] | int, day=date[0] | int,
+              hour=time[0] | int, minute=time[1] | int, second=0, microsecond=0
+            )
+          }}
+        attributes:
+          - name: Product
+            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(1) > span > span > strong"
+          - name: Aantal
+            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(3) > span:nth-child(1)"
+            value_template: >
+              {{ value.split(" ")[0] | trim }}
+          - name: Ordernummer
+            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(1) > span > span > small"
+          - name: Status
+            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(2) > span"
+            value_template: "{{ value | trim }}"
+          - name: Ticket
+            select: "#orders_usable > div > div:nth-child(2) > div.nk-tb-col.nk-tb-col-tools > ul > li:nth-child(2) > a"
+            attribute: href
+            value_template: "https://spurd.booqi.me{{ value }}"
+
+automation:
+  - id: notification_leeghwaterbad_ticket
+    alias: "Notificatie: Leeghwaterbad ticket"
+    mode: single
+    trigger:
+      platform: state
+      entity_id: person.sander
+      to: Leeghwaterbad
+    condition:
+      - condition: template
+        value_template: >-
+          {{
+            as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling"))  <= (as_timestamp(now()) + 60 * 60)
+          }}
+    action:
+      - service: notify.sander
+        data:
+          title: 🏊 Veel plezier met zwemmen!
+          message: >-
+            Klik voor de tickets
+          data:
+            tag: leeghwaterbad
+            image: >-
+              {{ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket")}}
+            content-type: pdf
+            url: >-
+              {{ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket")}}

@@ -37,6 +37,7 @@ custom_components/apple_tv                  https://github.com/postlund/hass-atv
 custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
 custom_components/car_wash                  https://github.com/Limych/ha-car_wash
 custom_components/eufy_security             https://github.com/fuatakgun/eufy_security
+custom_components/multiscrape               https://github.com/danieldotnl/ha-multiscrape
 custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
 custom_components/kamstrup_403              https://github.com/golles/ha-kamstrup_403
 custom_components/knmi                      https://github.com/golles/ha-knmi
