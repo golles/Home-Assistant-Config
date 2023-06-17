@@ -126,6 +126,7 @@ filter:
       options:
         type: custom:mushroom-entity-card
         layout: vertical
+        icon_color: red
 
 sort:
   method: name
