@@ -1,6 +1,6 @@
 {
   "name": "My HA development",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:0-3.10-bullseye",
+  "image": "mcr.microsoft.com/vscode/devcontainers/python:0-3.11-bullseye",
   "postCreateCommand": ".devcontainer/scripts/setup",
   "forwardPorts": [8123],
   "customizations": {
