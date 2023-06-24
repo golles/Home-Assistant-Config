@@ -53,7 +53,7 @@ multiscrape:
         unique_id: leeghwaterbad_volgende_bestelling
         icon: mdi:swim
         device_class: timestamp
-        select: "#orders_usable > div > div:nth-child(2) > div:nth-child(4)"
+        select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(4)"
         value_template: >
           {% set value = value | trim %}
           {% set date = value.split(" ")[0].split("-") %}
@@ -66,18 +66,18 @@ multiscrape:
           }}
         attributes:
           - name: Product
-            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(1) > span > span > strong"
+            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > strong"
           - name: Aantal
-            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(3) > span:nth-child(1)"
+            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(3) > span:nth-child(1)"
             value_template: >
               {{ value.split(" ")[0] | trim }}
           - name: Ordernummer
-            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(1) > span > span > small"
+            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > small"
           - name: Status
-            select: "#orders_usable > div > div:nth-child(2) > div:nth-child(2) > span"
+            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(2) > span"
             value_template: "{{ value | trim }}"
           - name: Ticket
-            select: "#orders_usable > div > div:nth-child(2) > div.nk-tb-col.nk-tb-col-tools > ul > li:nth-child(2) > a"
+            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div.nk-tb-col.nk-tb-col-tools > ul > li:nth-child(2) > a"
             attribute: href
             value_template: "https://spurd.booqi.me{{ value }}"
 
@@ -93,7 +93,7 @@ automation:
       - condition: template
         value_template: >-
           {{
-            as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling"))  <= (as_timestamp(now()) + 60 * 60)
+            0 <= as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling")) - as_timestamp(now()) <= 60 * 60
           }}
     action:
       - service: notify.sander
@@ -105,6 +105,5 @@ automation:
             tag: leeghwaterbad
             image: >-
               {{ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket")}}
-            content-type: pdf
             url: >-
               {{ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket")}}
