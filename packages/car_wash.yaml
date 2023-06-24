@@ -44,11 +44,19 @@ multiscrape:
             )
           }}
         attributes:
+          - name: Vestiging
+            select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(1)"
+            value_template: >
+              {{ value | trim }}
           - name: Product
             select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(4)"
             value_template: >
               {{ value | trim }}
           - name: Bedrag
             select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(5)"
+            value_template: >
+              {{ value | trim }}
+          - name: Betaald
+            select: "body > div > div > div.table-responsive-lg > table > tbody > tr:nth-child(1) > td:nth-child(6)"
             value_template: >
               {{ value | trim }}
