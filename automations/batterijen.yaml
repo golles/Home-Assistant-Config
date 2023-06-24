@@ -48,3 +48,5 @@
         data:
           group: battery
           url: /dashboard-status/batterijen
+          tag: >-
+            {{ "battery-" ~ trigger.entity_id }}
