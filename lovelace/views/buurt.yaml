@@ -109,7 +109,6 @@ cards:
                 )
               }}
 
-
       - type: divider
 
       - type: custom:mushroom-entity-card
