@@ -1,6 +1,6 @@
-- id: notification_low_battery
-  alias: "Notificatie: Batterij laag"
-  description: Meldingen voor lage batterij, alleen voor apparaten die belangrijk zijn
+- id: notification_battery_low_or_full
+  alias: "Notificatie: Batterij laag of vol"
+  description: Meldingen voor lage of volle batterij, alleen voor apparaten die belangrijk zijn
   mode: single
   trigger:
     - platform: numeric_state
@@ -10,6 +10,14 @@
         - sensor.keuken_battery
         - sensor.tandenborstel_battery
       below: 25
+    - platform: numeric_state
+      entity_id:
+        - sensor.iphone_van_golles_battery_level
+        - sensor.ipad_mini_van_golles_battery_level
+        - sensor.logeerkamer_battery
+        - sensor.keuken_battery
+        - sensor.tandenborstel_battery
+      above: 99
     - platform: state
       entity_id:
         - binary_sensor.va1788876800_battery_state
@@ -23,11 +31,20 @@
       from: "off"
       to: "on"
   action:
-    - service: notify.sander
+    - variables:
+        device: >-
+          {{ device_attr(device_id(trigger.entity_id), "model") }}
+        area: >-
+          {{ area_name(trigger.entity_id) }}
+        state: >-
+          {{ iif(trigger.to_state.state | int >= 99, "vol", "leeg") }}
+
+    - alias: Send message
+      service: notify.sander
       data:
-        title: 🔋 Batterij laag
+        title: 🔋 Batterij {{ state }}
         message: >-
-          {{ device_attr(device_id(trigger.entity_id), "model") }} batterij in de {{ area_name(trigger.entity_id) }} is laag
+          {{ device ~ " batterij " ~ iif(area != None, "in de " ~ area, "") ~ "is " ~ state }}
         data:
           group: battery
           url: /dashboard-status/batterijen
