@@ -65,6 +65,7 @@
 
             - alias: Start the camera stream
               service: eufy_security.start_p2p_livestream
+              continue_on_error: true
               target:
                 entity_id: camera.deurbel
 
