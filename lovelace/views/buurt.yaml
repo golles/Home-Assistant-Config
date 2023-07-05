@@ -93,17 +93,17 @@ cards:
             entity: sensor.leeghwaterbad_volgende_bestelling
             primary: Ordernummer
             secondary: >-
-              {{ iif(states(entity) != "unavailable", state_attr(entity, "ordernummer"), "Niet beschikbaar") }}
+              {{ iif(states(entity) != "unknown", state_attr(entity, "ordernummer"), "Onbekend") }}
             icon: mdi:ticket-confirmation
             icon_color: >-
-              {{ iif(states(entity) != "unavailable", "blue", "grey") }}
+              {{ iif(states(entity) != "unknown", "blue", "grey") }}
             tap_action:
               action: more-info
           - type: markdown
             content: >-
               {{
                 iif(states(
-                  "sensor.leeghwaterbad_volgende_bestelling") != "unavailable",
+                  "sensor.leeghwaterbad_volgende_bestelling") != "unknown",
                   "[Tickets](" ~ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket") ~ ")",
                   ""
                 )

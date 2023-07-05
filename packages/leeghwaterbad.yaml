@@ -56,32 +56,47 @@ multiscrape:
         select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(4)"
         value_template: >
           {% set value = value | trim %}
-          {% set date = value.split(" ")[0].split("-") %}
-          {% set time = value.split(" ")[1].split(":") %}
-          {{
-            now().replace(
-              year=date[2] | int, month=date[1] | int, day=date[0] | int,
-              hour=time[0] | int, minute=time[1] | int, second=0, microsecond=0
-            )
-          }}
+          {% if value != "Bezoekdatum" -%}
+            {% set date = value.split(" ")[0].split("-") %}
+            {% set time = value.split(" ")[1].split(":") %}
+            {{
+              now().replace(
+                year=date[2] | int, month=date[1] | int, day=date[0] | int,
+                hour=time[0] | int, minute=time[1] | int, second=0, microsecond=0
+              )
+            }}
+          {%- endif %}
         attributes:
           - name: Product
             select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > strong"
+            on_error:
+              log: false
           - name: Aantal
             select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(3) > span:nth-child(1)"
             value_template: >-
-              {{ (value | trim).split(" ")[0] }}
+              {% set value = value | trim %}
+              {% if value != "Bedrag" -%}
+                {{ (value | trim).split(" ")[0] }}
+              {%- endif %}
           - name: Ordernummer
             select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > small"
             value_template: >-
               {{ (value | trim).split("#")[1] }}
+            on_error:
+              log: false
           - name: Status
             select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(2) > span"
-            value_template: "{{ value | trim }}"
+            value_template: >-
+              {% set value = value | trim %}
+              {% if value != "Status" -%}
+                {{ (value | trim).split(" ")[0] }}
+              {%- endif %}
           - name: Ticket
             select: "#orders_usable > div > div.nk-tb-item:last-of-type > div.nk-tb-col.nk-tb-col-tools > ul > li:nth-child(2) > a"
             attribute: href
             value_template: "https://spurd.booqi.me{{ value }}"
+            on_error:
+              log: false
 
 automation:
   - id: notification_leeghwaterbad_ticket
