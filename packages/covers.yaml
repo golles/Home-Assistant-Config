@@ -1,7 +1,7 @@
 homeassistant:
   customize:
     binary_sensor.zonnescherm_contact_contact:
-      device_class: shade # This shouldn't be a door.
+      device_class: awning # This shouldn't be a door.
     cover.zonnescherm:
       icon: mdi:storefront-outline
 
@@ -10,6 +10,32 @@ input_datetime:
     name: Rolluiken dicht
     has_date: false
     has_time: true
+
+cover:
+  - platform: template
+    covers:
+      zonnescherm_template:
+        device_class: awning
+        friendly_name: Zonnescherm
+        icon_template: mdi:storefront-outline
+        value_template: >-
+          {{ iif(states("binary_sensor.zonnescherm_contact_contact") == "on", "open", "closed") }}
+        availability_template: >-
+          {{ states("cover.zonnescherm") != "unavailable" }}
+        position_template: >-
+          {{ iif(states("binary_sensor.zonnescherm_contact_contact") == "on", 50, 0) }}
+        open_cover:
+          service: cover.open_cover
+          target:
+            entity_id: cover.zonnescherm
+        close_cover:
+          service: cover.close_cover
+          target:
+            entity_id: cover.zonnescherm
+        stop_cover:
+          service: cover.stop_cover
+          target:
+            entity_id: cover.zonnescherm
 
 template:
   - button:

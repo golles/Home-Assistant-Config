@@ -163,8 +163,7 @@ cards:
     square: false
     cards:
       - type: custom:mushroom-cover-card
-        entity: cover.zonnescherm
-        hide_state: true
+        entity: cover.zonnescherm_template
         show_buttons_control: true
 
       - type: custom:mushroom-fan-card
