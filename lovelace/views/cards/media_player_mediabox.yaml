@@ -1,9 +1,0 @@
-type: custom:mini-media-player
-entity: media_player.mediabox
-name: Ziggo
-artwork: material
-source: full
-info: scroll
-hide:
-  icon: true
-  volume: true

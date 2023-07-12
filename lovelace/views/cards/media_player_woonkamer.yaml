@@ -1,7 +1,6 @@
 type: custom:mini-media-player
-entity: media_player.lg_c9
+entity: media_player.woonkamer
 name: TV
-icon: mdi:television
 artwork: cover
 source: full
 info: scroll
@@ -12,7 +11,7 @@ hide:
   prev: true
   next: true
 shortcuts:
-  columns: 3
+  columns: 5
   column_height: 60
   buttons:
     - cover: /local/tv/ziggo.png
@@ -42,9 +41,3 @@ shortcuts:
       data:
         media_player: media_player.lg_c9
         source: Plex
-    - cover: /local/tv/smart_tv_club.png
-      type: script
-      id: script.play_tv_with_source
-      data:
-        media_player: media_player.lg_c9
-        source: Smart TV Club
