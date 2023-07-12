@@ -24,7 +24,6 @@ media_player:
     attributes:
       is_volume_muted: media_player.lg_c9|is_volume_muted
 
-
 automation:
   - id: lgc9_turn_on_wol
     alias: LG C9 - Turn on via Wake-On-LAN
