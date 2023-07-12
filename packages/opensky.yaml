@@ -1,0 +1,8 @@
+sensor:
+  - platform: opensky
+    name: Opensky regio
+    radius: 5
+
+  - platform: opensky
+    name: Opensky huis
+    radius: 1
