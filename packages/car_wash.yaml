@@ -4,7 +4,8 @@ binary_sensor:
     weather: weather.knmi_purmerend
 
 multiscrape:
-  - resource: https://carwashplus.carwash-cms.com/customerportal/Transaction
+  - name: CarwashPlus scraper
+    resource: https://carwashplus.carwash-cms.com/customerportal/Transaction
     scan_interval: 10800
     form_submit:
       submit_once: true

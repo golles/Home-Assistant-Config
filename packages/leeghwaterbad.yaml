@@ -1,5 +1,6 @@
 multiscrape:
-  - resource: https://spurd.booqi.me/client/subscriptions
+  - name: Leeghwaterbad abonnement scraper
+    resource: https://spurd.booqi.me/client/subscriptions
     scan_interval: 10800
     form_submit:
       submit_once: true
@@ -39,7 +40,8 @@ multiscrape:
             )
           }}
 
-  - resource: https://spurd.booqi.me/client/orders
+  - name: Leeghwaterbad bestelling scraper
+    resource: https://spurd.booqi.me/client/orders
     scan_interval: 10800
     form_submit:
       submit_once: true
