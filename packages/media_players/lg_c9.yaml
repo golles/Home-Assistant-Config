@@ -1,3 +1,30 @@
+media_player:
+  - platform: universal
+    name: Woonkamer
+    children:
+      - media_player.plex_plex_for_lg_lg_oled65c9pla
+      - media_player.mediabox
+      - media_player.lg_c9
+    commands:
+      volume_up:
+        service: media_player.volume_up
+        target:
+          entity_id: media_player.lg_c9
+      volume_down:
+        service: media_player.volume_down
+        target:
+          entity_id: media_player.lg_c9
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          is_volume_muted: >-
+            {{ not state_attr("media_player.lg_c9", "is_volume_muted") }}
+        target:
+          entity_id: media_player.lg_c9
+    attributes:
+      is_volume_muted: media_player.lg_c9|is_volume_muted
+
+
 automation:
   - id: lgc9_turn_on_wol
     alias: LG C9 - Turn on via Wake-On-LAN
