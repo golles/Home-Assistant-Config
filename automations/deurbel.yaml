@@ -25,7 +25,9 @@
 
     - choose:
         - conditions:
-            - "{{ is_state('binary_sensor.tt_macbook_in_thuis_kantoor_en_aan', 'on') }}"
+            - condition: state
+              entity_id: binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
+              state: "on"
           sequence:
             - alias: Notify Sander when he's working from home, he might not hear the doorbell as he's really busy
               service: notify.sander
@@ -39,7 +41,9 @@
 
     - choose:
         - conditions:
-            - "{{ is_state('media_player.lg_c9', 'on') }}"
+            - condition: state
+              entity_id: media_player.lg_c9
+              state: "on"
           sequence:
             - alias: Notify tv when on
               service: notify.lg_c9
@@ -64,10 +68,18 @@
                       entity_id: media_player.mediabox
 
             - alias: Start the camera stream
-              service: eufy_security.start_p2p_livestream
-              continue_on_error: true
+              service: button.press
               target:
-                entity_id: camera.deurbel
+                entity_id: button.deurbel_start_p2p_stream
+
+            - alias: Wait till the stream is ready
+              wait_for_trigger:
+                - platform: state
+                  entity_id: sensor.deurbel_stream_status
+                  to: StreamStatus.STREAMING
+              timeout:
+                seconds: 5
+              continue_on_timeout: false
 
             - alias: Show camera stream in the web browser on the tv
               service: webostv.command
@@ -82,9 +94,9 @@
                 seconds: 15
 
             - alias: Stop the camera stream
-              service: eufy_security.stop_p2p_livestream
+              service: button.press
               target:
-                entity_id: camera.deurbel
+                entity_id: button.deurbel_stop_p2p_stream
 
             - choose:
                 - conditions:
@@ -94,8 +106,9 @@
                     - alias: Return to the previous source on the tv
                       service: media_player.select_source
                       data:
-                        entity_id: media_player.lg_c9
                         source: "{{ tv_current_source }}"
+                      target:
+                        entity_id: media_player.lg_c9
 
     # Don't trigger again for a few seconds.
     - delay:
