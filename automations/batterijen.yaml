@@ -3,14 +3,18 @@
   description: Meldingen voor lage of volle batterij, alleen voor apparaten die belangrijk zijn
   mode: single
   trigger:
-    - platform: numeric_state
+    - alias: Important devices getting low
+      platform: numeric_state
       entity_id:
+        - sensor.iphone_van_golles_battery_level
         - sensor.ipad_mini_van_golles_battery_level
         - sensor.logeerkamer_battery
         - sensor.keuken_battery
         - sensor.tandenborstel_battery
       below: 25
-    - platform: numeric_state
+
+    - alias: Important devices getting full
+      platform: numeric_state
       entity_id:
         - sensor.iphone_van_golles_battery_level
         - sensor.ipad_mini_van_golles_battery_level
@@ -18,7 +22,9 @@
         - sensor.keuken_battery
         - sensor.tandenborstel_battery
       above: 99
-    - platform: state
+
+    - alias: Tado devices getting low
+      platform: state
       entity_id:
         - binary_sensor.va1788876800_battery_state
         - binary_sensor.va1805654016_battery_state
@@ -30,23 +36,33 @@
         - binary_sensor.va4103542784_battery_state
       from: "off"
       to: "on"
+  condition:
+    - alias: Do not trigger for unknown -> 100, this happens after a HA restart
+      condition: template
+      value_template: >-
+        {{ not (trigger.to_state.state | int == 100 and trigger.from_state.state == "unknown") }}
   action:
     - variables:
-        device: >-
-          {{ device_attr(device_id(trigger.entity_id), "model") }}
+        device_id: >-
+          {{ device_id(trigger.entity_id) }}
+        device_model: >-
+          {{ device_attr(device_id, "model") }}
         area: >-
           {{ area_name(trigger.entity_id) }}
         state: >-
           {{ iif(trigger.to_state.state | int >= 99, "vol", "leeg") }}
+        title: >-
+          {{ iif(trigger.id == "stopped_charging", "clear_notification", "🔋 Batterij " ~ state ) }}
 
     - alias: Send message
       service: notify.sander
       data:
-        title: 🔋 Batterij {{ state }}
+        title: >-
+          {{ title }}
         message: >-
-          {{ device ~ " batterij " ~ iif(area != None, "in de " ~ area, "") ~ "is " ~ state }}
+          {{ device_model ~ " batterij" ~ iif(area != None, " in de " ~ area, "") ~ " is " ~ state }}
         data:
           group: battery
           url: /dashboard-status/batterijen
           tag: >-
-            {{ "battery-" ~ trigger.entity_id }}
+            {{ "battery-" ~ device_id }}
