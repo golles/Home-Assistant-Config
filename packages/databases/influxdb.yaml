@@ -2,6 +2,22 @@ influxdb:
   host: influxdb
   port: 8086
   database: homeassistant
+  include:
+    domains:
+      - climate
+      - weather
+    entity_globs:
+      - sensor.*_illuminance # Xiaomi RTCGQ11LM
+      - sensor.*_illuminance_lux # Xiaomi RTCGQ11LM
+      - sensor.*_light_level # Hue motion
+      - sensor.*_humidity # Xiaomi WSDCGQ11LM
+      - sensor.*_pressure # Xiaomi WSDCGQ11LM
+      - sensor.*_temperature # Xiaomi WSDCGQ11LM
+      - sensor.dsmr_*
+      - sensor.kamstrup_403_*
+      - sensor.knmi_*
+      - sensor.speedtest_*
+      - sensor.watermeter_*
 
 sensor:
   - platform: influxdb
