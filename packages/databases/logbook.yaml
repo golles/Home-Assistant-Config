@@ -1,2 +1,0 @@
-logbook:
-  exclude: !include ../../db_excludes.yaml

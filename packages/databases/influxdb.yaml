@@ -2,7 +2,6 @@ influxdb:
   host: influxdb
   port: 8086
   database: homeassistant
-  exclude: !include ../../db_excludes.yaml
 
 sensor:
   - platform: influxdb

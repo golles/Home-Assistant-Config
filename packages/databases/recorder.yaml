@@ -1,4 +1,3 @@
 recorder:
   db_url: !secret mariadb_connection
-  purge_keep_days: 5
-  exclude: !include ../../db_excludes.yaml
+  purge_keep_days: 31
