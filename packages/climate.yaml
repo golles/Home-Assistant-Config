@@ -136,6 +136,20 @@ template:
               temperature: 25
             target:
               entity_id: climate.zolder
+  - sensor:
+      - name: Binnen temperatuur
+        icon: mdi:thermometer
+        state: >-
+          {%
+            set temps = states.climate
+            | map(attribute="attributes.current_temperature")
+            | sort
+          %}
+          {% if -1 < temps[0] - temps[-1] < 1 %}
+            {{ temps[-1] ~ " °C" }}
+          {% else %}
+            {{ temps[0] ~ " - " ~ temps[-1] ~ " °C" }}
+          {% endif %}
 
 automation:
   - id: tado_auto_home_and_away_mode
