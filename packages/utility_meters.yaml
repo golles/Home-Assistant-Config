@@ -1,0 +1,25 @@
+rest_command:
+  post_daily_meter_values:
+    url: !secret meter_readings_url
+    method: POST
+    payload: >-
+      {
+        "date": "{{ now().strftime("%Y-%m-%d") }}",
+        "electricity_low": {{ states("sensor.dsmr_reading_electricity_delivered_1") }},
+        "electricity_high": {{ states("sensor.dsmr_reading_electricity_delivered_2") }},
+        "heat_energy": {{ states("sensor.kamstrup_403_heat_energy_e1") }},
+        "heat_volume": {{ states("sensor.kamstrup_403_volume") }}
+      }
+    content_type: "application/json; charset=utf-8"
+    verify_ssl: true
+
+automation:
+  - id: post_daily_meter_values_at_midnight
+    alias: Meterstanden posten om middernacht
+    mode: single
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - alias: Post values
+        service: rest_command.post_daily_meter_values
