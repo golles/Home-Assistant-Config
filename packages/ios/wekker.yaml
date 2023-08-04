@@ -63,7 +63,9 @@ automation:
                       - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
                       - "{{ is_state('person.sander', 'home') }}"
                     sequence:
-                      service: cover.set_cover_position
-                      data:
-                        entity_id: cover.slaapkamer
-                        position: 12
+                      - alias: Set covers to their preference position
+                        service: button.press
+                        target:
+                          entity_id:
+                            - button.kledingkamer_my_position
+                            - button.slaapkamer_my_position
