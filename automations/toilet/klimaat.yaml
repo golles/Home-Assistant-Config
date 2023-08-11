@@ -9,7 +9,7 @@
   condition:
     # Only when the fan is set to low, we don't want to interfere with the shower automation.
     - condition: numeric_state
-      entity_id: fan.mechanische_ventilatie
+      entity_id: fan.mechanische_ventilatie_ventilatie
       attribute: percentage
       below: 26
   action:

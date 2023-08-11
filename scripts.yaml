@@ -11,7 +11,7 @@ everything_off:
       {{
         states.fan
         | selectattr('state', 'eq', 'on')
-        | rejectattr('entity_id', 'in', ['fan.air_purifier', 'fan.mechanische_ventilatie'])
+        | rejectattr('entity_id', 'in', ['fan.air_purifier', 'fan.mechanische_ventilatie_ventilatie'])
         | rejectattr('entity_id', 'in', exclude_ids)
         | map(attribute='entity_id')
         | join(', ')
