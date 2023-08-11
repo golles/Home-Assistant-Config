@@ -16,8 +16,8 @@ homeassistant:
 template:
   - sensor:
       - name: Count lights on
-        icon: mdi:counter
-        state: >
+        icon: mdi:lightbulb
+        state: >-
           {{
             states.light
             | selectattr("state", "eq", "on")
@@ -28,8 +28,9 @@ template:
           }}
 
       - name: Count doors open
-        icon: mdi:counter
-        state: >
+        icon: >-
+          {{ iif(this.state == "0", "mdi:door-closed", "mdi:door-open") }}
+        state: >-
           {{
             states.binary_sensor
             | selectattr("state", "eq", "on")
@@ -43,8 +44,9 @@ template:
           }}
 
       - name: Count windows open
-        icon: mdi:counter
-        state: >
+        icon: >-
+          {{ iif(this.state == "0", "mdi:window-closed", "mdi:window-open") }}
+        state: >-
           {{
             states.binary_sensor
             | selectattr("state", "eq", "on")
@@ -54,8 +56,8 @@ template:
           }}
 
       - name: Count media players on
-        icon: mdi:counter
-        state: >
+        icon: mdi:cast-connected
+        state: >-
           {{
             states.media_player
             | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
@@ -64,8 +66,8 @@ template:
           }}
 
       - name: Count tvs on
-        icon: mdi:counter
-        state: >
+        icon: mdi:television
+        state: >-
           {{
             states.media_player
             | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
@@ -75,8 +77,8 @@ template:
           }}
 
       - name: Count speakers on
-        icon: mdi:counter
-        state: >
+        icon: mdi:speaker
+        state: >-
           {{
             states.media_player
             | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
