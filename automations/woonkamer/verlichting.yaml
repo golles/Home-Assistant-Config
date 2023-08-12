@@ -78,26 +78,37 @@
     - platform: state
       entity_id: media_player.lg_c9
       attribute: source
-      to:
-        - Netflix
-        - Plex
-  condition:
-    - condition: numeric_state
+    - platform: numeric_state
       entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
       below: 10
-    - condition: state
-      entity_id: media_player.lg_c9
-      state: "on"
-    - condition: state
-      entity_id: media_player.lg_c9
-      attribute: source
-      state:
-        - Netflix
-        - Plex
   action:
-    service: scene.turn_on
-    data:
-      entity_id:
-        - scene.wooneet_film
-        - scene.tv_film
-      transition: 1
+    - if:
+        - condition: state
+          entity_id: media_player.lg_c9
+          attribute: source
+          state:
+            - Netflix
+            - Plex
+        - condition: numeric_state
+          entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
+          below: 10
+      then:
+        - alias: Turn on movie scenes
+          service: scene.turn_on
+          data:
+            entity_id:
+              - scene.wooneet_film
+              - scene.tv_film
+
+        - alias: Disable automatic lights
+          service: automation.turn_off
+          entity_id: automation.automatisch_licht_aan_in_de_woonkamer
+      else:
+        - alias: Turn off tv light
+          service: light.turn_off
+          target:
+            entity_id: light.tv
+
+        - alias: Enable automatic lights
+          service: automation.turn_on
+          entity_id: automation.automatisch_licht_aan_in_de_woonkamer
