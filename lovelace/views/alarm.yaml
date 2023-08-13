@@ -31,6 +31,8 @@ cards:
       # Begaande grond.
       - binary_sensor.woonkamer_beweging_1_occupancy
       - binary_sensor.woonkamer_beweging_2_occupancy
+      - binary_sensor.epo1_occupancy
+      - binary_sensor.epo2_occupancy
       - binary_sensor.hal_sensor_motion
       - binary_sensor.toilet_beweging_occupancy
       - binary_sensor.overloop_sensor_1_motion
