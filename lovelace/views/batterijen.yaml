@@ -4,13 +4,27 @@ panel: false
 icon: "mdi:battery-charging-wireless"
 badges: []
 cards:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        double_tap_action:
+          action: none
+        hold_action:
+          action: none
+
+  - type: custom:mushroom-title-card
+    title: Batterijen
+
   - type: custom:auto-entities
     show_empty: true
     card:
       type: grid
       columns: 2
       square: false
-      title: Deuren
     card_param: cards
     filter:
       include:
