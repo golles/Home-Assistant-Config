@@ -26,7 +26,7 @@ homekit:
       - light.voorraadkastlamp
       - light.wled_skull
       - sensor.mi_air_purifier_3_3h_pm2_5
-      - sensor.particulate_matter_2_5um_concentration
+      - sensor.particulate_matter_pm_25
       - sensor.toilet_klimaat_humidity
       - sensor.toilet_klimaat_temperature
       - switch.adguard_protection
