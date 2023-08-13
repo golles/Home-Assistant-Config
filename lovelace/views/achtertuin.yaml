@@ -1,7 +1,7 @@
-title: Tuin
-path: tuin
+title: Achtertuin
+path: achtertuin
 panel: false
-icon: mdi:watering-can-outline
+icon: mdi:bench-back
 badges: []
 cards:
   - type: custom:mushroom-chips-card
@@ -22,15 +22,7 @@ cards:
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
-    title: Tuin
-
-  - type: custom:mushroom-light-card
-    entity: light.voortuin
-    name: Voortuin
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+    title: Achtertuin
 
   - type: custom:mushroom-light-card
     entity: light.achtertuin_groep

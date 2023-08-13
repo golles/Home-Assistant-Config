@@ -16,71 +16,117 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.logeerkamer_beweging_illuminance_lux
-      - type: entity
-        entity: binary_sensor.logeerkamerraam_contact
-        icon: mdi:window-open
-      - type: entity
         entity: binary_sensor.logeerkamer_beweging_occupancy
         icon: mdi:motion-sensor
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.tt_macbook_in_thuis_kantoor
-            state: "on"
-        chip:
-          type: entity
-          entity: binary_sensor.tt_macbook_active
-          icon: mdi:laptop
 
   - type: custom:mushroom-title-card
     title: Logeerkamer
 
-  - type: custom:mushroom-climate-card
-    # entity: climate.logeerkamer
-    entity: climate.elektrische_kachel
-    name: Klimaat
-    icon: mdi:home-thermometer-outline
-    fill_container: true
-    show_temperature_control: true
-    collapsible_controls: false
-    hvac_modes:
-      - auto
-      - heat
-      - "off"
-    tap_action:
-      action: more-info
-    double_tap_action:
-      action: none
-    hold_action:
-      action: none
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
 
-  - type: custom:mushroom-light-card
-    entity: light.logeerkamer
-    name: Plafond
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.logeerkamer
+            name: Plafond
 
-  - !include cards/media_player_googlehome6234.yaml
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Klimaat
 
-  - type: custom:mushroom-cover-card
-    entity: cover.logeerkamer
-    name: Rolgordijn
-    show_buttons_control: true
-    show_position_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: climate.logeerkamer
+            name: Verwarming
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Apparaten
+
+      - !include cards/media_player_googlehome6234.yaml
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.macbook_in_thuis_kantoor_en_aan
+                state: "on"
+            card:
+              type: tile
+              entity: binary_sensor.macbook_pro_van_sander_active
+              name: Laptop
+              icon: mdi:laptop
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.tt_macbook_in_thuis_kantoor
+                state: "on"
+            card:
+              type: tile
+              entity: binary_sensor.tt_macbook_active
+              name: Laptop (werk)
+              icon: mdi:laptop
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Deuren en ramen
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: cover.logeerkamer
+            name: Rolgordijn
+          - type: tile
+            entity: binary_sensor.logeerkamerraam_contact
+            name: Raam
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.logeerkamer_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.logeerkamer_humidity
+            name: Luchtvochtigheid
+          - type: tile
+            entity: sensor.logeerkamer_beweging_illuminance_lux
+            name: Lichtsterkte
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: automation.logeerkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
-            icon: mdi:lightbulb-auto-outline
-          - entity: button.logeerkamer_rolgordijn_voorkeurspositie
-            name: Rolgordijn voorkeurspositie
+            icon: mdi:lightbulb-auto
+          - type: tile
+            entity: button.logeerkamer_rolgordijn_voorkeurspositie
+            name: Voorkeurspositie
+            icon: mdi:window-shutter

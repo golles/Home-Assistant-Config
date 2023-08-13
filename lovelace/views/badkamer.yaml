@@ -16,61 +16,88 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.badkamer_beweging_light_level
-      - type: entity
-        entity: binary_sensor.badkamerraam_contact
-        icon: mdi:window-open
-      - type: entity
         entity: binary_sensor.badkamer_beweging_motion
         icon: mdi:motion-sensor
       - type: entity
         entity: binary_sensor.douche_beweging_occupancy
-        name: Douche
         icon: mdi:shower-head
 
   - type: custom:mushroom-title-card
     title: Badkamer
 
-  - type: custom:mushroom-climate-card
-    entity: climate.badkamer
-    name: Klimaat
-    icon: mdi:home-thermometer-outline
-    fill_container: true
-    show_temperature_control: true
-    collapsible_controls: false
-    hvac_modes:
-      - auto
-      - heat
-      - "off"
-    tap_action:
-      action: more-info
-    double_tap_action:
-      action: none
-    hold_action:
-      action: none
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
 
-  - type: custom:mushroom-light-card
-    entity: light.badkamer
-    name: Plafond
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.badkamer
+            name: Plafond
 
-  - type: custom:mushroom-fan-card
-    entity: fan.mechanische_ventilatie
-    icon_animation: true
-    show_percentage_control: true
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Klimaat
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: climate.badkamer
+            name: Verwarming
+          - type: tile
+            entity: fan.mechanische_ventilatie_ventilatie
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Deuren en ramen
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: binary_sensor.badkamerraam_contact
+            name: Raam
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.badkamer_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.badkamer_humidity
+            name: Luchtvochtigheid
+          - type: tile
+            entity: sensor.badkamer_beweging_light_level
+            name: Lichtsterkte
+          - type: tile
+            entity: sensor.tandenborstel_battery
+            name: Tandenborstel
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
-            icon: mdi:lightbulb-auto-outline
+            icon: mdi:lightbulb-auto

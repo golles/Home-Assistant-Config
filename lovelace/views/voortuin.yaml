@@ -1,0 +1,67 @@
+title: Voortuin
+path: voortuin
+panel: false
+icon: mdi:watering-can-outline
+badges: []
+cards:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        double_tap_action:
+          action: none
+        hold_action:
+          action: none
+
+  - type: custom:mushroom-title-card
+    title: Voortuin
+
+  - type: custom:mushroom-light-card
+    entity: light.voortuin
+    name: Voortuin
+    use_light_color: true
+    show_color_control: true
+    show_brightness_control: true
+    show_color_temp_control: true
+
+  - type: vertical-stack
+    cards:
+      - type: picture-entity
+        entity: camera.deurbel
+        camera_image: camera.deurbel
+        camera_view: auto
+        # show_state: false
+        # show_name: false
+
+      - type: conditional
+        conditions:
+          - entity: sensor.deurbel_stream_status
+            state: StreamStatus.STREAMING
+        card:
+          type: button
+          entity: button.deurbel_stop_p2p_stream
+          name: Stop deurbel stream
+          icon: mdi:video-off
+          show_name: true
+          show_icon: false
+          show_state: false
+          tap_action:
+            action: toggle
+
+      - type: conditional
+        conditions:
+          - entity: sensor.deurbel_stream_status
+            state_not: StreamStatus.STREAMING
+        card:
+          type: button
+          entity: button.deurbel_start_p2p_stream
+          name: Start deurbel stream
+          icon: mdi:video
+          show_name: true
+          show_icon: false
+          show_state: false
+          tap_action:
+            action: toggle

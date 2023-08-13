@@ -2,7 +2,3 @@ swipe_nav: !include lovelace/config/swipe_nav.yaml
 
 views:
   - !include lovelace/views/welkom.yaml
-  - !include lovelace/views/woonkamer.yaml
-  - !include lovelace/views/keuken.yaml
-  - !include lovelace/views/toilet.yaml
-  - !include lovelace/views/meterkast.yaml

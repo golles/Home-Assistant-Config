@@ -16,60 +16,87 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.kledingkamer_beweging_light_level
-      - type: entity
-        entity: binary_sensor.kledingkamerraam_contact
-        icon: mdi:window-open
-      - type: entity
         entity: binary_sensor.kledingkamer_beweging_motion
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
     title: Kledingkamer
 
-  - type: custom:mushroom-climate-card
-    entity: climate.kledingkamer
-    name: Klimaat
-    icon: mdi:home-thermometer-outline
-    fill_container: true
-    show_temperature_control: true
-    collapsible_controls: false
-    hvac_modes:
-      - auto
-      - heat
-      - "off"
-    tap_action:
-      action: more-info
-    double_tap_action:
-      action: none
-    hold_action:
-      action: none
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
 
-  - type: custom:mushroom-light-card
-    entity: light.kledingkamer
-    name: Plafond
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.kledingkamer
+            name: Plafond
 
-  - type: custom:mushroom-cover-card
-    entity: cover.kledingkamer
-    name: Rolluik
-    show_buttons_control: true
-    show_position_control: true
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Klimaat
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: climate.kledingkamer
+            name: Verwarming
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Deuren en ramen
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: cover.kledingkamer
+            name: Rolluik
+          - type: tile
+            entity: binary_sensor.kledingkamerraam_contact
+            name: Raam
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.kledingkamer_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.kledingkamer_humidity
+            name: Luchtvochtigheid
+          - type: tile
+            entity: sensor.kledingkamer_beweging_light_level
+            name: Lichtsterkte
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
-            icon: mdi:lightbulb-auto-outline
-          - entity: button.kledingkamer_my_position
-            name: Rolluik voorkeurspositie
+            icon: mdi:lightbulb-auto
+          - type: tile
+            entity: button.kledingkamer_my_position
+            name: Voorkeurspositie
+            icon: mdi:window-shutter

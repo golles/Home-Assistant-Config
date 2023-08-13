@@ -11,8 +11,8 @@ hide:
   play_pause: false
   play_stop: false
 shortcuts:
-  columns: 4
-  column_height: 60
+  columns: 6
+  column_height: 48
   buttons:
     - cover: /local/radio/npo1.png
       type: script
@@ -34,11 +34,6 @@ shortcuts:
       id: script.play_livingroom_radio
       data:
         stream: https://stream.qmusic.nl/qmusic/mp3
-    - cover: /local/radio/skyradio.png
-      type: script
-      id: script.play_livingroom_radio
-      data:
-        stream: https://19993.live.streamtheworld.com/SKYRADIO.mp3
     - cover: /local/radio/radio10.png
       type: script
       id: script.play_livingroom_radio
@@ -49,8 +44,3 @@ shortcuts:
       id: script.play_livingroom_radio
       data:
         stream: https://18973.live.streamtheworld.com/RADIO538.mp3
-    - cover: /local/radio/slam.png
-      type: script
-      id: script.play_livingroom_radio
-      data:
-        stream: https://19983.live.streamtheworld.com/SLAM_AAC.aac

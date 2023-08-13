@@ -16,64 +16,97 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.woonkamer_beweging_1_illuminance_lux
-      - type: entity
-        entity: binary_sensor.keukenraam_contact
-        icon: mdi:window-open
-      - type: entity
         entity: binary_sensor.keuken_beweging_occupancy
+        icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
     title: Keuken
 
-  - type: grid
-    columns: 2
-    square: false
+  - type: vertical-stack
     cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.woonkamer_temperature
-        name: Temperatuur
-      - type: custom:mushroom-entity-card
-        entity: sensor.woonkamer_humidity
-        name: Luchtvochtigheid
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
 
-  - type: custom:mushroom-light-card
-    entity: light.keuken
-    name: Plafond
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.keuken
+            name: Plafond
+          - type: tile
+            entity: light.keukenkastje_lamp
+            name: Keukenkastje
 
-  - type: custom:mushroom-light-card
-    entity: light.keukenkastje_lamp
-    name: Keukenkastje
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Apparaten
 
-  - type: custom:mushroom-cover-card
-    entity: cover.keuken
-    name: Rolgordijn
-    show_buttons_control: true
-    show_position_control: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.vaatwasser_status
+            name: Vaatwasser
 
-  - type: custom:mushroom-entity-card
-    entity: sensor.vaatwasser_status
-    name: Vaatwasser
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Deuren en ramen
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: cover.keuken
+            name: Rolgordijn
+          - type: tile
+            entity: binary_sensor.keukenraam_contact
+            name: Raam
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.woonkamer_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.woonkamer_humidity
+            name: Luchtvochtigheid
+          - type: tile
+            entity: sensor.woonkamer_beweging_1_illuminance_lux
+            name: Lichtsterkte
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
-            icon: mdi:lightbulb-auto-outline
-          - entity: button.keuken_rolgordijn_voorkeurspositie
-            name: Rolgordijn voorkeurspositie
-          - entity: automation.vaatwasser_dagelijks_starten
+            icon: mdi:lightbulb-auto
+          - type: tile
+            entity: button.keuken_rolgordijn_voorkeurspositie
+            name: Voorkeurspositie
+            icon: mdi:window-shutter
+          - type: tile
+            entity: automation.vaatwasser_dagelijks_starten
             icon: mdi:dishwasher
-          - entity: input_datetime.dishwasher_daily_start
+            name: Vaatwasser auto start
+          - type: tile
+            entity: input_datetime.dishwasher_daily_start
             name: Vaatwasser starttijd

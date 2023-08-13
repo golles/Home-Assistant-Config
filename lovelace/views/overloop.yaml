@@ -1,7 +1,7 @@
-title: Toilet
-path: toilet
+title: Overloop
+path: overloop
 panel: false
-icon: mdi:toilet
+icon: mdi:stairs
 badges: []
 cards:
   - type: custom:mushroom-chips-card
@@ -16,11 +16,11 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: binary_sensor.toilet_beweging_occupancy
+        entity: binary_sensor.trap_beweging
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
-    title: Toilet
+    title: Trap & overloop
 
   - type: vertical-stack
     cards:
@@ -32,50 +32,43 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: light.toilet
+            entity: light.overloop
             name: Plafond
 
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
-        subtitle: Klimaat
+        subtitle: Sensoren boven
 
       - type: grid
         columns: 2
         square: false
         cards:
           - type: tile
-            entity: fan.mechanische_ventilatie_ventilatie
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.toilet_klimaat_temperature
+            entity: sensor.overloop_sensor_2_temperature
             name: Temperatuur
           - type: tile
-            entity: sensor.toilet_klimaat_humidity
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.toilet_beweging_illuminance_lux
+            entity: sensor.overloop_sensor_2_light_level
             name: Lichtsterkte
+          - type: tile
+            entity: binary_sensor.overloop_sensor_2_motion
+            name: Beweging
 
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
+        subtitle: Sensoren beneden
 
       - type: grid
         columns: 2
         square: false
         cards:
           - type: tile
-            entity: automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
+            entity: sensor.overloop_sensor_1_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.overloop_sensor_1_light_level
+            name: Lichtsterkte
+          - type: tile
+            entity: binary_sensor.overloop_sensor_1_motion
+            name: Beweging

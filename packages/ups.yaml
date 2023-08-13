@@ -14,4 +14,4 @@ automation:
             {{ states("sensor.apc_back_ups_bx950mi_status") }}
           data:
             group: ups
-            url: /lovelace/meterkast
+            url: /lovelace/hal

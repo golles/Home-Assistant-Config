@@ -1,0 +1,38 @@
+title: Ramen
+path: ramen
+panel: false
+icon: mdi:window-open
+badges: []
+cards:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        double_tap_action:
+          action: none
+        hold_action:
+          action: none
+
+  - type: custom:mushroom-title-card
+    title: Ramen
+
+  - type: custom:auto-entities
+    show_empty: true
+    card:
+      type: grid
+      columns: 2
+      square: false
+    card_param: cards
+    filter:
+      include:
+        - domain: binary_sensor
+          attributes:
+            device_class: window
+          options:
+            type: tile
+    sort:
+      method: state
+      reverse: true

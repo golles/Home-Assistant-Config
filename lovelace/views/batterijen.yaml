@@ -10,7 +10,7 @@ cards:
       type: grid
       columns: 2
       square: false
-      title: Batterijen
+      title: Deuren
     card_param: cards
     filter:
       include:
@@ -18,49 +18,7 @@ cards:
           attributes:
             device_class: battery
           options:
-            type: custom:mushroom-template-card
-            primary: |-
-              {{ device_attr(device_id(entity), "name") }}
-            secondary: |-
-              {% set state = states(entity) | int(-1) %}
-
-              {% if state is number and state >= 0 %}
-                {{ state }}%
-              {% else %}
-                {{ states(entity) }}
-              {% endif %}
-            icon: |-
-              {% set state = states(entity) | int(-1) %}
-
-              {% if state is number %}
-                {% if state >= 55 %}
-                  mdi:battery-high
-                {% elif state >= 20 %}
-                 mdi:battery-medium
-                {% else %}
-                  mdi:battery-low
-                {% endif %}
-              {% else %}
-                mdi:battery-alert-variant-outline
-              {% endif %}
-            layout: vertical
-            icon_color: |-
-              {% set state = states(entity) | int(-1) %}
-
-              {% if state is number %}
-                {% if state >= 55 %}
-                 green
-                {% elif state >= 20 %}
-                 orange
-                {% else %}
-                  red
-                {% endif %}
-              {% else %}
-                grey
-              {% endif %}
-            tap_action:
-              action: more-info
-
+            type: tile
     sort:
       method: state
       numeric: true

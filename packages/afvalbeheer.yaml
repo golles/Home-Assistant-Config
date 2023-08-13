@@ -59,4 +59,4 @@ automation:
             group: afval
             image: >-
               {{ external_url }}{{ state_attr(entity, "entity_picture") }}
-            url: /dashboard-buiten/tuin
+            url: /dashboard-buiten/achtertuin

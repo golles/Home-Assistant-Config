@@ -68,6 +68,14 @@ template:
             is_state("binary_sensor.zolder_beweging_1_occupancy", "on") or is_state("binary_sensor.zolder_beweging_2_occupancy", "on")
           }}
 
+      - name: Trap beweging
+        device_class: motion
+        icon: mdi:motion-sensor
+        state: >
+          {{
+            is_state("binary_sensor.overloop_sensor_1_motion", "on") or is_state("binary_sensor.overloop_sensor_1_motion", "on")
+          }}
+
       - name: Woonkamer bezetting
         device_class: occupancy
         icon: mdi:motion-sensor

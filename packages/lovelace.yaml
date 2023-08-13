@@ -3,11 +3,11 @@ lovelace:
   resources: !include ../lovelace/resources.yaml
 
   dashboards:
-    dashboard-boven:
+    dashboard-kamers:
       mode: yaml
-      filename: lovelace/dashboard_boven.yaml
-      title: Boven
-      icon: mdi:home-minus
+      filename: lovelace/dashboard_binnen.yaml
+      title: Binnen
+      icon: mdi:home
 
     dashboard-buiten:
       mode: yaml
@@ -26,3 +26,12 @@ lovelace:
       filename: lovelace/dashboard_status.yaml
       title: Status
       icon: mdi:tools
+
+template:
+  - sensor:
+      - name: UI helper show zonnescherm
+        state: >-
+          {{
+            is_state("cover.zonnescherm_template", "open") or
+            state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int >= 23
+          }}

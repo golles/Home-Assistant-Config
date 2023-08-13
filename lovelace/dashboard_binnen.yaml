@@ -1,6 +1,11 @@
 swipe_nav: !include config/swipe_nav.yaml
 
 views:
+  - !include views/woonkamer.yaml
+  - !include views/keuken.yaml
+  - !include views/toilet.yaml
+  - !include views/hal.yaml
+  - !include views/overloop.yaml
   - !include views/slaapkamer.yaml
   - !include views/kledingkamer.yaml
   - !include views/logeerkamer.yaml

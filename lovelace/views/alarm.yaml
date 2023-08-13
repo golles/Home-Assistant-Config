@@ -1,7 +1,7 @@
 title: Alarm
 path: alarm
 panel: false
-icon: mdi:alarm-light
+icon: mdi:shield
 badges: []
 cards:
   - type: alarm-panel

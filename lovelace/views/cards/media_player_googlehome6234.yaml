@@ -11,8 +11,8 @@ hide:
   play_pause: false
   play_stop: false
 shortcuts:
-  columns: 4
-  column_height: 60
+  columns: 6
+  column_height: 48
   buttons:
     - cover: /local/radio/npo1.png
       type: service
@@ -42,13 +42,6 @@ shortcuts:
         entity_id: media_player.googlehome6234
         media_content_id: https://stream.qmusic.nl/qmusic/mp3
         media_content_type: audio/mp4
-    - cover: /local/radio/skyradio.png
-      type: service
-      id: media_player.play_media
-      data:
-        entity_id: media_player.googlehome6234
-        media_content_id: https://19993.live.streamtheworld.com/SKYRADIO.mp3
-        media_content_type: audio/mp4
     - cover: /local/radio/radio10.png
       type: service
       id: media_player.play_media
@@ -62,11 +55,4 @@ shortcuts:
       data:
         entity_id: media_player.googlehome6234
         media_content_id: https://18973.live.streamtheworld.com/RADIO538.mp3
-        media_content_type: audio/mp4
-    - cover: /local/radio/slam.png
-      type: service
-      id: media_player.play_media
-      data:
-        entity_id: media_player.googlehome6234
-        media_content_id: https://19983.live.streamtheworld.com/SLAM_AAC.aac
         media_content_type: audio/mp4

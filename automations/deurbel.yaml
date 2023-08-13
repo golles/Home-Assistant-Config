@@ -37,7 +37,7 @@
                 data:
                   group: deurbel
                   entity_id: camera.deurbel
-                  url: /dashboard-buiten/tuin
+                  url: /dashboard-buiten/voortuin
 
     - choose:
         - conditions:

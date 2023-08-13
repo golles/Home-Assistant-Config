@@ -1,7 +1,8 @@
 swipe_nav: !include config/swipe_nav.yaml
 
 views:
-  - !include views/tuin.yaml
+  - !include views/voortuin.yaml
+  - !include views/achtertuin.yaml
   - !include views/buurt.yaml
   - !include views/auto.yaml
   - !include views/weer.yaml

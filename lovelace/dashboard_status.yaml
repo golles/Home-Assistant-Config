@@ -2,5 +2,7 @@ swipe_nav: !include config/swipe_nav.yaml
 
 views:
   - !include views/alarm.yaml
+  - !include views/lampen.yaml
+  - !include views/deuren.yaml
+  - !include views/ramen.yaml
   - !include views/batterijen.yaml
-  - !include views/raamdeurcover.yaml

@@ -91,9 +91,9 @@ cards:
   - type: entities
     title: Fijnstof meter
     entities:
-      - entity: sensor.particulate_matter_2_5um_concentration
+      - entity: sensor.particulate_matter_pm_10
         name: PM2,5
-      - entity: sensor.particulate_matter_10_0um_concentration
+      - entity: sensor.particulate_matter_pm_25
         name: PM10
       - entity: sensor.particulate_matter_temperature
         name: Temperatuur
