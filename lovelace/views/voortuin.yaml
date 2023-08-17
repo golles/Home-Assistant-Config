@@ -19,22 +19,27 @@ cards:
   - type: custom:mushroom-title-card
     title: Voortuin
 
-  - type: custom:mushroom-light-card
-    entity: light.voortuin
-    name: Voortuin
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.voortuin
 
   - type: vertical-stack
     cards:
+      - type: custom:mushroom-title-card
+        subtitle: Apparaten
+
       - type: picture-entity
         entity: camera.deurbel
         camera_image: camera.deurbel
         camera_view: auto
-        # show_state: false
-        # show_name: false
 
       - type: conditional
         conditions:
@@ -65,3 +70,4 @@ cards:
           show_state: false
           tap_action:
             action: toggle
+

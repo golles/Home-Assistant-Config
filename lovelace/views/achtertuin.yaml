@@ -16,63 +16,111 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: sensor.achtertuin_sensor_illuminance
-      - type: entity
         entity: binary_sensor.achtertuin_sensor_motion
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
     title: Achtertuin
 
-  - type: custom:mushroom-light-card
-    entity: light.achtertuin_groep
-    name: Achtertuin
-    use_light_color: true
-    show_color_control: true
-    show_brightness_control: true
-    show_color_temp_control: true
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Verlichting
 
-  - type: custom:mushroom-light-card
-    entity: switch.gekleurde_licht
-    icon: mdi:led-strip-variant
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: light.achtertuin_groep
+            name: Achtertuin
+          - type: tile
+            entity: switch.gekleurde_licht
+            icon: mdi:led-strip-variant
 
-  - type: custom:auto-entities
-    show_empty: true
-    card:
-      type: custom:vertical-stack-in-card
-      horizontal: true
-    card_param: cards
-    filter:
-      include:
-        - domain: sensor
-          attributes:
-            Wastecollector: purmerend
-          options:
-            type: custom:mushroom-template-card
-            layout: vertical
-            tap_action:
-              action: more-info
-            primary: >-
-              {{ state_attr(entity, "friendly_name") }}
-            secondary: >-
-              {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
-            picture: >-
-              {{ state_attr(entity, "entity_picture") }}
 
-    sort:
-      method: attribute
-      attribute: Days_until
-      numeric: true
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Afval
 
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - entity: automation.achtertuin_verlichting_aan_bij_deur_open_of_beweging
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            - domain: sensor
+              attributes:
+                Wastecollector: purmerend
+              options:
+                type: custom:mushroom-template-card
+                tap_action:
+                  action: more-info
+                primary: >-
+                  {{ state_attr(entity, "friendly_name") }}
+                secondary: >-
+                  {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
+                picture: >-
+                  {{ state_attr(entity, "entity_picture") }}
+        sort:
+          method: attribute
+          attribute: Days_until
+          numeric: true
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Deuren en ramen
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: binary_sensor.poortdeur_contact
+            name: Poort
+          - type: tile
+            entity: cover.zonnescherm_template
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.particulate_matter_temperature
+            name: Temperatuur
+          - type: tile
+            entity: sensor.particulate_matter_humidity
+            name: Luchtvochtigheid
+          - type: tile
+            entity: sensor.achtertuin_sensor_illuminance
+            name: Lichtsterkte
+          - type: tile
+            entity: sensor.particulate_matter_pm_25
+            name: PM 2,5
+          - type: tile
+            entity: sensor.particulate_matter_pm_10
+            name: PM 10
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: automation.achtertuin_verlichting_aan_bij_deur_open_of_beweging
             name: Automatisch licht
-            icon: mdi:lightbulb-auto-outline
+            icon: mdi:lightbulb-auto
