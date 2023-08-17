@@ -70,4 +70,3 @@ cards:
           show_state: false
           tap_action:
             action: toggle
-

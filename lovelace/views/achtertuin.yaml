@@ -38,7 +38,6 @@ cards:
             entity: switch.gekleurde_licht
             icon: mdi:led-strip-variant
 
-
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
