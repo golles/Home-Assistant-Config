@@ -138,6 +138,13 @@ cards:
 
       - !include cards/media_player_woonkamer.yaml
 
+      - type: conditional
+        conditions:
+          - entity: media_player.lg_soundbar
+            state_not: "off"
+        card:
+          !include cards/media_player_lg_soundbar.yaml
+
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
