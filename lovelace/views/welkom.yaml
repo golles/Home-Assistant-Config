@@ -135,6 +135,13 @@ cards:
             card:
               type: tile
               entity: fan.ventilator
+          - type: conditional
+            conditions:
+              - entity: fan.air_purifier
+                state: "on"
+            card:
+              type: tile
+              entity: fan.air_purifier
 
       - !include cards/media_player_woonkamer.yaml
 
