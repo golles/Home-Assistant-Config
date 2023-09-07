@@ -142,6 +142,7 @@ template:
         state: >-
           {%
             set temps = states.climate
+            | selectattr('attributes.current_temperature', 'defined')
             | map(attribute="attributes.current_temperature")
             | sort
           %}
