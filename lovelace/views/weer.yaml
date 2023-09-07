@@ -21,8 +21,10 @@ cards:
 
   - type: weather-forecast
     entity: weather.huis
+    forecast_type: hourly
   - type: weather-forecast
     entity: weather.knmi_purmerend
+    forecast_type: daily
 
   - type: custom:vertical-stack-in-card
     title: Details

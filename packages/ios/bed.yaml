@@ -118,9 +118,9 @@ automation:
     action:
       - alias: Act based on predicted temperature
         if:
-          - condition: template
-            value_template: >-
-              {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int >= 28 }}
+          - condition: numeric_state
+            entity_id: sensor.knmi_max_temp_vandaag
+            above: 27
         then:
           - alias: It will be warm today, set south facing covers to their preference position
             service: button.press

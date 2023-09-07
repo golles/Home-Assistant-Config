@@ -33,5 +33,5 @@ template:
         state: >-
           {{
             is_state("cover.zonnescherm_template", "open") or
-            state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int >= 23
+            states("sensor.knmi_max_temp_vandaag") | int >= 23
           }}

@@ -1,0 +1,17 @@
+template:
+  - trigger:
+      - platform: time_pattern
+        minutes: /10
+    action:
+      - service: weather.get_forecast
+        data:
+          type: daily
+        target:
+          entity_id: weather.knmi_purmerend
+        response_variable: forecast
+    binary_sensor:
+      - name: KNMI regen vandaag
+        state: "{{ forecast.forecast[0].precipitation_probability > 0 }}"
+    sensor:
+      - name: KNMI max temp vandaag
+        state: "{{ forecast.forecast[0].temperature }}"

@@ -123,14 +123,17 @@ automation:
       - condition: state
         entity_id: sensor.zon_positie
         state: Achter
-      - condition: template
-        value_template: >-
-          {{ state_attr("weather.knmi_purmerend", "forecast")[0]["temperature"] | int > 20 }}
-      - condition: template
-        value_template: >-
-          {{ state_attr("weather.knmi_purmerend", "forecast")[0]["precipitation_probability"] | int == 0 }}
+      - condition: numeric_state
+        entity_id: sensor.knmi_max_temp_vandaag
+        above: 19
+      - condition: state
+        entity_id: binary_sensor.knmi_regen_vandaag
+        state: "off"
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.vacation_mode
         state: "off"
     action:
       - alias: Set up variables for the actions
