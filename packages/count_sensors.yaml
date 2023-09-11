@@ -18,71 +18,141 @@ template:
       - name: Count lights on
         icon: mdi:lightbulb
         state: >-
-          {{
-            states.light
-            | selectattr("state", "eq", "on")
-            | rejectattr("attributes.is_hue_group", "defined")
-            | rejectattr("attributes.entity_id", "defined")
-            | list
-            | count
-          }}
+          {{ this.attributes.on | default([], true) | count }}
+        attributes:
+          "on": >-
+            {{
+              states.light
+              | selectattr("state", "eq", "on")
+              | rejectattr("attributes.is_hue_group", "defined")
+              | rejectattr("attributes.entity_id", "defined")
+              | map(attribute='entity_id')
+              | list
+            }}
+          "off": >-
+            {{
+              states.light
+              | selectattr("state", "eq", "off")
+              | rejectattr("attributes.is_hue_group", "defined")
+              | rejectattr("attributes.entity_id", "defined")
+              | map(attribute='entity_id')
+              | list
+            }}
 
       - name: Count doors open
         icon: >-
           {{ iif(this.state == "0", "mdi:door-closed", "mdi:door-open") }}
         state: >-
-          {{
-            states.binary_sensor
-            | selectattr("state", "eq", "on")
-            | selectattr("attributes.device_class", "==", "door")
-            | rejectattr("entity_id", "in", [
-              "binary_sensor.vaatwasser_door",
-              "binary_sensor.wasmachine_door",
-            ])
-            | list
-            | count
-          }}
+          {{ this.attributes.open | default([], true) | count }}
+        attributes:
+          open: >-
+            {{
+              states.binary_sensor
+              | selectattr("state", "eq", "on")
+              | selectattr("attributes.device_class", "==", "door")
+              | rejectattr("entity_id", "in", [
+                "binary_sensor.vaatwasser_door",
+                "binary_sensor.wasmachine_door",
+              ])
+              | map(attribute='entity_id')
+              | list
+            }}
+          closed: >-
+            {{
+              states.binary_sensor
+              | selectattr("state", "eq", "off")
+              | selectattr("attributes.device_class", "==", "door")
+              | rejectattr("entity_id", "in", [
+                "binary_sensor.vaatwasser_door",
+                "binary_sensor.wasmachine_door",
+              ])
+              | map(attribute='entity_id')
+              | list
+            }}
 
       - name: Count windows open
         icon: >-
           {{ iif(this.state == "0", "mdi:window-closed", "mdi:window-open") }}
         state: >-
-          {{
-            states.binary_sensor
-            | selectattr("state", "eq", "on")
-            | selectattr("attributes.device_class", "==", "window")
-            | list
-            | count
-          }}
+          {{ this.attributes.open | default([], true) | count }}
+        attributes:
+          open: >-
+            {{
+              states.binary_sensor
+              | selectattr("state", "eq", "on")
+              | selectattr("attributes.device_class", "==", "window")
+              | map(attribute='entity_id')
+              | list
+            }}
+          closed: >-
+            {{
+              states.binary_sensor
+              | selectattr("state", "eq", "off")
+              | selectattr("attributes.device_class", "==", "window")
+              | map(attribute='entity_id')
+              | list
+            }}
 
       - name: Count media players on
         icon: mdi:cast-connected
         state: >-
-          {{
-            states.media_player
-            | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-            | list
-            | count
-          }}
+          {{ this.attributes.on | default([], true) | count }}
+        attributes:
+          "on": >-
+            {{
+              states.media_player
+              | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
+          "off": >-
+            {{
+              states.media_player
+              | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
 
       - name: Count tvs on
         icon: mdi:television
         state: >-
-          {{
-            states.media_player
-            | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
-            | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-            | list
-            | count
-          }}
+          {{ this.attributes.on | default([], true) | count }}
+        attributes:
+          "on": >-
+            {{
+              states.media_player
+              | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
+              | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
+          "off": >-
+            {{
+              states.media_player
+              | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
+              | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
 
       - name: Count speakers on
         icon: mdi:speaker
         state: >-
-          {{
-            states.media_player
-            | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
-            | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-            | list
-            | count
-          }}
+          {{ this.attributes.on | default([], true) | count }}
+        attributes:
+          "on": >-
+            {{
+              states.media_player
+              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
+              | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
+          "off": >-
+            {{
+              states.media_player
+              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
+              | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
+              | map(attribute='entity_id')
+              | list
+            }}
