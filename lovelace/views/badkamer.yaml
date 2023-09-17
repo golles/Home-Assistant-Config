@@ -101,3 +101,7 @@ cards:
             entity: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto
+          - type: tile
+            entity: button.mechanische_ventilatie_15_minuten_hoog
+            name: 15 Minuten hoog
+            icon: mdi:fan
