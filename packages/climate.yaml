@@ -142,17 +142,23 @@ template:
         state: >-
           {%
             set temps = states.climate
-            | selectattr('attributes.current_temperature', 'defined')
+            | rejectattr("attributes.current_temperature", "none")
             | map(attribute="attributes.current_temperature")
             | sort
           %}
-          {% if temps | count < 2 %}
-            unknown
-          {% elif -1 < temps[0] - temps[-1] < 1 %}
+          {% if -1 < temps[0] - temps[-1] < 1 %}
             {{ temps[-1] ~ " °C" }}
           {% else %}
             {{ temps[0] ~ " - " ~ temps[-1] ~ " °C" }}
           {% endif %}
+        availability: >-
+          {%
+            set temps = states.climate
+            | rejectattr("attributes.current_temperature", "none")
+            | map(attribute="attributes.current_temperature")
+            | sort
+          %}
+          {{ temps | count > 2 }}
 
 automation:
   - id: tado_auto_home_and_away_mode
