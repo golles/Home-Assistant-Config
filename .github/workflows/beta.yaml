@@ -1,0 +1,30 @@
+name: Beta check
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 1-7 * 3"
+
+jobs:
+  beta:
+    name: Home Assistant config check
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup custom components
+        run: |
+          ./scripts/update_resources init_custom_components
+
+      - name: Mock secrets
+        uses: golles/mock-yaml-secrets-action@v1
+        with:
+          configFile: ".github/workflows/mock-secrets-config.json"
+
+      - name: Home Assistant configuration check
+        uses: frenck/action-home-assistant@v1.4
+        with:
+          path: "."
+          version: beta
