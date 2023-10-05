@@ -185,24 +185,6 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
-        subtitle: Planten
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: plant.scindapsus_epipremnum
-          - type: tile
-            entity: plant.dracaena_marginata
-          - type: tile
-            entity: plant.haworthiopsis_attenuata
-          - type: tile
-            entity: plant.crassula_ovata
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
         subtitle: Instellingen en acties
 
       - type: grid
