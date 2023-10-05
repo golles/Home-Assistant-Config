@@ -414,6 +414,8 @@ cards:
               icon: mdi:laptop
               icon_color: >-
                 {{ iif(is_state(entity, "on"), "blue", "grey") }}
+              tap_action:
+                action: more-info
           - type: conditional
             conditions:
               - entity: binary_sensor.tt_macbook_in_thuis_kantoor
@@ -424,6 +426,8 @@ cards:
               icon: mdi:laptop
               icon_color: >-
                 {{ iif(is_state(entity, "on"), "blue", "grey") }}
+              tap_action:
+                action: more-info
 
       - type: grid
         columns: 2
