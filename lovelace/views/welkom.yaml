@@ -59,6 +59,8 @@ cards:
         entity: person.sander
         use_entity_picture: true
 
+  - !include cards/let_op.yaml
+
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card

@@ -2,7 +2,7 @@ type: custom:auto-entities
 show_empty: false
 card:
   type: grid
-  columns: 2
+  columns: 3
   square: false
   title: Let op
 card_param: cards
@@ -13,28 +13,14 @@ filter:
     {% if state_attr("sensor.p2000_dichtbij", "time") %}
       {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
         {%- set data.entities = data.entities + [{
-          "type": "custom:mushroom-template-card",
+          "type": "tile",
           "entity": "sensor.p2000_dichtbij",
-          "primary": "Dichtbij",
-          "secondary": "{{ states(entity) }}",
-          "layout": "vertical",
-          "multiline_secondary": "true",
+          "name": "Dichtbij",
           "icon": "mdi:alert",
-          "icon_color": "orange",
-          "tap_action": {
-            "action": "more-info"
-          }
+          "color": "orange",
+          "vertical": true
         }] -%}
       {% endif %}
-    {% endif %}
-
-    {% if is_state("binary_sensor.zonnescherm_contact_contact", "on") %}
-      {%- set data.entities = data.entities + [{
-        "type": "custom:mushroom-cover-card",
-        "entity": "cover.zonnescherm",
-        "hide_state": "true",
-        "show_buttons_control": "true"
-      }] -%}
     {% endif %}
 
     {% if data.entities | length > 0 %}
@@ -47,86 +33,80 @@ filter:
         Wastecollector: purmerend
         Days_until: <= 1
       options:
-        type: custom:mushroom-template-card
-        layout: vertical
-        tap_action:
-          action: more-info
-        primary: >-
-          {{ state_attr(entity, "friendly_name") }}
-        secondary: >-
-          {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
-        picture: >-
-          {{ state_attr(entity, "entity_picture") }}
+        type: tile
+        show_entity_picture: true
+        vertical: true
       not:
         state: unknown
 
     # Appliances
     - entity_id: "sensor.vaatwasser_status"
       options:
-        type: custom:mushroom-entity-card
+        type: tile
         name: Vaatwasser
-        layout: vertical
+        vertical: true
       not:
-        state: "/off|unavailable/"
+        state: "/off|unavailable|unknown/"
     - entity_id: "sensor.wasmachine_status"
       options:
-        type: custom:mushroom-entity-card
+        type: tile
         name: Wasmachine
-        layout: vertical
+        vertical: true
       not:
-        state: "/off|unavailable/"
+        state: "/off|unavailable|unknown/"
     - entity_id: fan.air_purifier
       state: "on"
       options:
-        type: custom:mushroom-fan-card
-        show_percentage_control: true
+        type: tile
+        vertical: true
 
     # Batteries
     - attributes:
         device_class: battery
         battery: "< 15"
       options:
-        type: custom:mushroom-entity-card
-        layout: vertical
+        type: tile
         icon: mdi:battery-10
-        icon_color: red
+        vertical: true
+        color: red
     - domain: binary_sensor
       state: "on"
       attributes:
         device_class: battery
       options:
-        type: custom:mushroom-entity-card
-        layout: vertical
-        icon_color: red
+        type: tile
+        vertical: true
+        color: red
 
     # Weather related warnings
     - entity_id: binary_sensor.stookalert_noord_holland
       state: "on"
       options:
-        type: custom:mushroom-entity-card
+        type: tile
         name: Stookalert
-        layout: vertical
-        icon_color: orange
+        vertical: true
+        color: orange
     - entity_id: binary_sensor.knmi_purmerend_waarschuwing
       state: "on"
       options:
-        type: custom:mushroom-entity-card
+        type: tile
         name: KNMI Waarschuwing
-        layout: vertical
-        icon_color: orange
+        icon: mdi:alert
+        vertical: true
+        color: orange
     - entity_id: binary_sensor.meteoalarm
       state: "on"
       options:
-        type: custom:mushroom-entity-card
+        type: tile
         name: MeteoAlarm
-        layout: vertical
-        icon_color: orange
+        vertical: true
+        color: orange
     - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"
       state: "*high" # Matches "anything containing high.
       options:
-        type: custom:mushroom-entity-card
-        layout: vertical
-        icon_color: red
+        type: tile
+        vertical: true
+        color: red
 
 sort:
   method: name
