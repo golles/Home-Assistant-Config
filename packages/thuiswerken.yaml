@@ -63,6 +63,7 @@ automation:
         state:
           - Slack
           - Microsoft Teams
+          - Microsoft Teams classic
     action:
       - service: media_player.volume_mute
         data:
