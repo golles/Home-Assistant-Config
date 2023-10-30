@@ -11,4 +11,5 @@
             exclude_entity_ids:
               - light.hal_lamp
               - light.voortuin
+              - light.voortuin_lamp
               - switch.gekleurde_licht
