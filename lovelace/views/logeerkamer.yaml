@@ -47,6 +47,9 @@ cards:
           - type: tile
             entity: climate.logeerkamer
             name: Verwarming
+          - type: tile
+            entity: climate.elektrische_kachel
+            name: Elektrische kachel
 
   - type: vertical-stack
     cards:

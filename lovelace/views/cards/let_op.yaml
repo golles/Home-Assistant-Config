@@ -84,6 +84,7 @@ filter:
       options:
         type: tile
         name: Stookalert
+        icon: mdi:alert
         vertical: true
         color: orange
     - entity_id: binary_sensor.knmi_purmerend_waarschuwing
@@ -99,6 +100,7 @@ filter:
       options:
         type: tile
         name: MeteoAlarm
+        icon: mdi:alert
         vertical: true
         color: orange
     - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"

@@ -195,3 +195,6 @@ cards:
             entity: automation.automatisch_licht_aan_in_de_woonkamer
             name: Automatisch licht
             icon: mdi:lightbulb-auto
+          - type: tile
+            entity: button.woonkamer_opwarmen
+            name: Opwarmen
