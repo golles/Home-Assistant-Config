@@ -8,7 +8,7 @@ blueprint:
     This automation should work with any lights, motion sensors and illuminance sensors.
   domain: automation
   author: golles
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles//motion-activated_scenes.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/motion-activated_scenes.yaml
   input:
     motion_entity:
       name: Motion sensor

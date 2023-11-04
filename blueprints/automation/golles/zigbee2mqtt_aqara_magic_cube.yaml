@@ -9,7 +9,7 @@ blueprint:
     - For shake there are no separate actions for the side, due to the nature of shaking it isn't always clear which side is up.
   domain: automation
   author: golles
-  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles//zigbee2mqtt_aqara_magic_cube.yaml
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/zigbee2mqtt_aqara_magic_cube.yaml
   input:
     remote:
       name: Action entity
