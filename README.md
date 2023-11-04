@@ -35,14 +35,15 @@ Some general scripts are in the [scripts](scripts.yaml) file.
 
 I've created a few [blueprints](blueprints/automation/golles/) to repeat logic in different rooms or for different devices.
 
-| Blueprint                                                                                                                                      | Summary                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [Doow/window climate control](blueprints/automation/golles/door-window-climate-control.yaml)                                                   | Turn on/off a climate entity when a door/window opens/closes         |
-| [Motion activated scenes](blueprints/automation/golles/motion-activated_scenes.yaml)                                                           | Turn on lights (by scene) based on motion                            |
-| [Aqara magic cube (zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_aqara_magic_cube.yaml)                                               | Blueprint to control a Aqara magic cube                              |
-| [Bed light button (Hue smart button, zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml)            | Bed button, single click for bed light, long click for ceiling light |
-| [Button press and hold (Hue smart button, zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml) | Blueprint for Hue buttons that support press and hold                |
-| [Xiaomi switches (zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_xiaomi_switch.yaml)                                                   | Blueprint for several Xiaomi switches                                |
+| Blueprint                                                                                                                                      | Summary                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Awtrix clock](blueprints/automation/golles/awtrix_clock.yaml)                                                                                 | Manage display on/off state and device apps from Home Assistant states |
+| [Doow/window climate control](blueprints/automation/golles/door-window-climate-control.yaml)                                                   | Turn on/off a climate entity when a door/window opens/closes           |
+| [Motion activated scenes](blueprints/automation/golles/motion-activated_scenes.yaml)                                                           | Turn on lights (by scene) based on motion                              |
+| [Aqara magic cube (zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_aqara_magic_cube.yaml)                                               | Blueprint to control a Aqara magic cube                                |
+| [Bed light button (Hue smart button, zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml)            | Bed button, single click for bed light, long click for ceiling light   |
+| [Button press and hold (Hue smart button, zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml) | Blueprint for Hue buttons that support press and hold                  |
+| [Xiaomi switches (zigbee2mqtt)](blueprints/automation/golles/zigbee2mqtt_xiaomi_switch.yaml)                                                   | Blueprint for several Xiaomi switches                                  |
 
 If you like any of these blueprints, then you can import these into your own Home Assistant.
 [Report an issue with a blueprint](https://github.com/golles/Home-Assistant-Config/issues/new?assignees=&labels=blueprint&projects=&template=blueprint.yaml).

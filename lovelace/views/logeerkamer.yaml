@@ -81,6 +81,16 @@ cards:
               name: Laptop (werk)
               icon: mdi:laptop
 
+          - type: tile
+            entity: light.logeerkamer_klok_matrix
+            name: Klok
+            state_content: state
+            icon_tap_action:
+              action: call-service
+              service: script.awtrix_default_settings
+              data:
+                topic: awtrix_b92250
+
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card

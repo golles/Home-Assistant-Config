@@ -1,0 +1,176 @@
+script:
+  awtrix_default_settings:
+    alias: Awtrix standaard instellingen
+    mode: parallel
+    fields:
+      topic:
+        selector:
+          text: null
+        name: Topic
+        description: The device mqtt topic
+        default: awtrix_XXXXXX
+        required: true
+    sequence:
+      - alias: Switch app
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/switch"
+          payload: >-
+            {"name": "Time"}
+
+      - alias: Set settings
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/settings"
+          payload: >-
+            {
+                "WD": true,
+                "TIME_COL": [255, 255, 255],
+                "TMODE": 1,
+                "ABRI": true,
+                "ATRANS": true,
+                "ATIME": 60,
+                "TEFF": 1
+            }
+
+  awtrix_night_clock:
+    alias: Awtrix nachtklok
+    mode: parallel
+    fields:
+      topic:
+        selector:
+          text: null
+        name: Topic
+        description: The device mqtt topic
+        default: awtrix_XXXXXX
+        required: true
+    sequence:
+      - alias: Switch app
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/switch"
+          payload: >-
+            {"name": "Time"}
+
+      - alias: Set settings
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/settings"
+          payload: >-
+            {
+                "WD": false,
+                "TIME_COL": [255, 0, 0],
+                "TMODE": 0,
+                "BRI": 1,
+                "ABRI": false,
+                "ATRANS": false
+            }
+
+  awtrix_set_effect:
+    alias: Awtrix zet effect
+    mode: parallel
+    fields:
+      topic:
+        selector:
+          text: null
+        name: Topic
+        description: The device mqtt topic
+        default: awtrix_XXXXXX
+        required: true
+      effect:
+        selector:
+          select:
+            mode: list
+            options:
+              - BrickBreaker
+              - Checkerboard
+              - Fireworks
+              - PingPong
+              - Radar
+              - Ripple
+              - Snake
+              - TwinklingStars
+              - TheaterChase
+              - ColorWaves
+              - SwirlOut
+              - SwirlIn
+              - LookingEyes
+              - Matrix
+              - Pacifica
+              - Plasma
+              - PlasmaCloud
+              - MovingLine
+        name: Effect
+        description: "The effects which should be displayed. See: https://blueforcer.github.io/awtrix-light/#/effects"
+        default: Matrix
+        required: true
+      duration:
+        selector:
+          number:
+            min: 1
+            max: 999
+            mode: slider
+            unit_of_measurement: seconds
+        name: Effect duration
+        description: Select how long each effect should be displayed.
+        default: 600
+        required: true
+    sequence:
+      - alias: Set effect
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/custom/effect"
+          payload: >-
+            {
+              "effect": "{{ effect }}",
+              "duration": "{{ duration }}"
+            }
+
+      - alias: Switch app
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/switch"
+          payload: >-
+            {"name": "effect"}
+
+      - alias: Wait a little
+        delay:
+          seconds: "{{ duration }}"
+
+      - alias: Remove effect
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/custom/effect"
+
+  awtrix_remove_effect:
+    alias: Awtrix verwijder effect
+    mode: parallel
+    fields:
+      topic:
+        selector:
+          text: null
+        name: Topic
+        description: The device mqtt topic
+        default: awtrix_XXXXXX
+        required: true
+    sequence:
+      - alias: Remove effect
+        service: mqtt.publish
+        data:
+          qos: 0
+          retain: false
+          topic: "{{ topic }}/custom/effect"

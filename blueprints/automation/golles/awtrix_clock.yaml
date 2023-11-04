@@ -1,0 +1,141 @@
+blueprint:
+  name: Awtrix clock
+  description: |
+    ### Overview
+
+    This blueprint offers comprehensive control for Awtrix clocks, boasting the following functionalities:
+
+      - Automatically toggle the display based on room occupancy.
+      - Convenient manual display control via a button.
+      - Display informative apps, including:
+        - Real-time room temperature.
+        - External temperature with weather-dependent icons.
+
+    ### Weather Icons
+    Get a variety of weather icons on your clock by running my [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/scripts/awtrix) script.
+
+    ### Extra scripts
+    A variety of extra scripts can be found in my [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/packages/awtrix.yaml) package.
+  domain: automation
+  author: golles
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/awtrix_clock.yaml
+  input:
+    topic:
+      selector:
+        text: null
+      name: Topic
+      description: The device mqtt topic
+      default: awtrix_XXXXXX
+    light_entity:
+      selector:
+        entity:
+          domain: light
+          integration: mqtt
+      name: Display entity
+      description: The device display entity
+      default: light.awtrix_matrix
+    button_entity:
+      selector:
+        entity:
+          domain: binary_sensor
+          integration: mqtt
+      name: Middle button
+      description: The device middle button, to toggle the screen
+      default: binary_sensor.awtrix_button_select
+    temp_entity:
+      selector:
+        entity:
+          domain: sensor
+          device_class: temperature
+      name: Temperature entity
+      description: Used for inside temperature
+      default: sensor.room_temperature
+    weather_entity:
+      selector:
+        entity:
+          domain: weather
+      name: Weather entity
+      description: Used for outisde temperature
+      default: weather.home
+    occupancy_entity:
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: occupancy
+      name: Room occupancy sensor
+      description: Turn display automatically on or off depending on occupancy
+      default: binary_sensor.room_occupancy
+
+mode: parallel
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    id: button_click
+    entity_id: !input button_entity
+    to: "on"
+  - platform: state
+    id: occupancy_on
+    entity_id: !input occupancy_entity
+    to: "on"
+  - platform: state
+    id: occupancy_off
+    entity_id: !input occupancy_entity
+    to: "off"
+    for:
+      minutes: 10
+  - platform: state
+    id: apps
+    entity_id:
+      - !input temp_entity
+      - !input weather_entity
+
+action:
+  - variables:
+      topic: !input topic
+      button_entity: !input button_entity
+      light_entity: !input light_entity
+      temp_entity: !input temp_entity
+      weather_entity: !input weather_entity
+
+  - choose:
+      - conditions: "{{ trigger.id == 'button_click' }}"
+        sequence:
+          - alias: Toggle display
+            service: light.toggle
+            target:
+              entity_id: "{{ light_entity }}"
+
+      - conditions: "{{ trigger.id == 'occupancy_on' }}"
+        sequence:
+          - alias: Turn display on
+            service: light.turn_on
+            target:
+              entity_id: "{{ light_entity }}"
+
+      - conditions: "{{ trigger.id == 'occupancy_off' }}"
+        sequence:
+          - alias: Turn display off
+            service: light.turn_off
+            target:
+              entity_id: "{{ light_entity }}"
+
+      - conditions: "{{ trigger.id == 'apps' }}"
+        sequence:
+          - alias: Update apps
+            service: mqtt.publish
+            data:
+              topic: "{{ topic }}/custom/pages"
+              payload: >-
+                {{
+                  [
+                    dict(
+                        text = states(temp_entity) | round ~ state_attr(temp_entity, "unit_of_measurement"),
+                        icon = "temp-inside",
+                    ),
+                    dict(
+                        text = state_attr(weather_entity, "temperature") | round ~ state_attr(weather_entity, "temperature_unit"),
+                        icon = states(weather_entity),
+                    )
+                  ] | to_json
+                }}

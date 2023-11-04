@@ -1,0 +1,11 @@
+- id: logeerkamer_awtrix_klok
+  alias: Logeerkamer Awtrix klok
+  use_blueprint:
+    path: golles/awtrix_clock.yaml
+    input:
+      light_entity: light.logeerkamer_klok_matrix
+      topic: awtrix_b92250
+      button_entity: binary_sensor.logeerkamer_klok_button_select
+      temp_entity: sensor.logeerkamer_temperature
+      weather_entity: weather.knmi_purmerend
+      occupancy_entity: binary_sensor.logeerkamer_bezetting

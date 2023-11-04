@@ -137,6 +137,15 @@ cards:
           - type: tile
             entity: media_player.woonkamer_homepod_mini
             name: Homepod mini
+          - type: tile
+            entity: light.woonkamer_klok_matrix
+            name: Klok
+            state_content: state
+            icon_tap_action:
+              action: call-service
+              service: script.awtrix_default_settings
+              data:
+                topic: awtrix_b92250
 
   - type: vertical-stack
     cards:
