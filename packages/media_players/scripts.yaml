@@ -5,11 +5,21 @@ script:
     mode: restart
     fields:
       media_player:
+        name: Media player
         description: The media player to play the stream on
         example: media_player.tv
+        required: true
+        selector:
+          target:
+            entity:
+              domain: media_player
       source:
+        name: Source
         description: The source to pick
         example: Youtube
+        required: true
+        selector:
+          text: null
     sequence:
       - choose:
           - conditions:

@@ -3,7 +3,11 @@ everything_off:
   mode: single
   fields:
     exclude_entity_ids:
-      description: entity_ids to exclude
+      name: Exclude
+      description: entities to exclude
+      selector:
+        entity:
+          multiple: true
   variables:
     exclude_ids: >
       {{ exclude_entity_ids | default([]) }}
@@ -66,12 +70,14 @@ close_cover_window_state:
     cover_entity:
       name: Cover entity
       description: Cover entity
+      required: true
       selector:
         entity:
           domain: cover
     window_entity:
       name: Door/window entity
       description: This should be closed (off) to make the cover close.
+      required: true
       selector:
         entity:
           domain: binary_sensor

@@ -25,8 +25,12 @@ script:
     mode: restart
     fields:
       stream:
+        name: Stream
         description: The stream to play
         example: https://stream.qmusic.nl/qmusic/mp3
+        required: true
+        selector:
+          text: null
     sequence:
       - if:
           - condition: state
