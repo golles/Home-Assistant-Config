@@ -80,7 +80,6 @@ For the same reason as for blueprints, I've created a few [custom_templates](cus
 | [automations.jinja](custom_templates/automations.jinja)   | Automation helpers        |
 | [home_connect.jinja](custom_templates/home_connect.jinja) | Home Connect helpers      |
 | [nl.jinja](custom_templates/nl.jinja)                     | Dutch translation helpers |
-| [plants.jinja](custom_templates/plants.jinja)             | Plant sensor helpers      |
 
 If you like any of these custom templates, then you can download them into your own Home Assistant.
 [Report an issue with a custom template](https://github.com/golles/Home-Assistant-Config/issues/new?assignees=&labels=custom_template&projects=&template=custom_template.yaml).
