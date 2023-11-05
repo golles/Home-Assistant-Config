@@ -84,12 +84,8 @@ cards:
           - type: tile
             entity: light.logeerkamer_klok_matrix
             name: Klok
+            color: primary
             state_content: state
-            icon_tap_action:
-              action: call-service
-              service: script.awtrix_default_settings
-              data:
-                topic: awtrix_b92250
 
   - type: vertical-stack
     cards:
