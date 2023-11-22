@@ -110,5 +110,13 @@ filter:
         vertical: true
         color: red
 
+    # Modes
+    - entity_id: input_boolean.vacation_mode
+      state: "on"
+      options:
+        type: tile
+        vertical: true
+        color: green
+
 sort:
   method: name
