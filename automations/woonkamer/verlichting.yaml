@@ -99,16 +99,34 @@
             entity_id:
               - scene.wooneet_film
               - scene.tv_film
-
-        - alias: Disable automatic lights
-          service: automation.turn_off
-          entity_id: automation.automatisch_licht_aan_in_de_woonkamer
       else:
         - alias: Turn off tv light
           service: light.turn_off
           target:
             entity_id: light.tv
 
+- id: disable_automatic_lights_movie_scene
+  alias: Woonkamer automatisch aan/uit door film scene
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: state
+      id: disable
+      entity_id: scene.wooneet_film
+    - platform: state
+      entity_id:
+        - scene.wooneet_avond
+        - scene.wooneet_eten
+        - scene.wooneet_nacht
+  action:
+    - if:
+        - condition: trigger
+          id: disable
+      then:
+        - alias: Disable automatic lights
+          service: automation.turn_off
+          entity_id: automation.automatisch_licht_aan_in_de_woonkamer
+      else:
         - alias: Enable automatic lights
           service: automation.turn_on
           entity_id: automation.automatisch_licht_aan_in_de_woonkamer
