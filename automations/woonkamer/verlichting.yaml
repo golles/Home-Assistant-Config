@@ -118,6 +118,9 @@
         - scene.wooneet_avond
         - scene.wooneet_eten
         - scene.wooneet_nacht
+    - platform: state
+      entity_id: light.tv
+      to: "off"
   action:
     - if:
         - condition: trigger
