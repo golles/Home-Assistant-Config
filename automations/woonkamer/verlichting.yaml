@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.woonkamer_bezetting
       cool_down: 60
       light_entity: light.wooneet
-      illuminance_entity: sensor.epo2_illuminance
+      illuminance_entity: sensor.epo1_illuminance
       illuminance_below: 2
       day_start_time: 08:00:00
       day_scene: scene.wooneet_avond
@@ -27,7 +27,7 @@
       to: home
   condition:
     - condition: numeric_state
-      entity_id: sensor.epo2_illuminance
+      entity_id: sensor.epo1_illuminance
       below: 2.5
   action:
     - alias: Turn on the evening scene
@@ -79,7 +79,7 @@
       entity_id: media_player.lg_c9
       attribute: source
     - platform: numeric_state
-      entity_id: sensor.epo2_illuminance
+      entity_id: sensor.epo1_illuminance
       below: 2.5
   action:
     - if:
@@ -90,7 +90,7 @@
             - Netflix
             - Plex
         - condition: numeric_state
-          entity_id: sensor.epo2_illuminance
+          entity_id: sensor.epo1_illuminance
           below: 2.5
       then:
         - alias: Turn on movie scenes
