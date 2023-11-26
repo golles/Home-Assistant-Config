@@ -203,6 +203,8 @@ automation:
               {{ trigger_friendly_name }} is geopend
             {% elif trigger_device_class == "motion" %}
               {{ trigger_friendly_name }} heeft beweging gedetecteerd
+            {% elif trigger_device_class == "occupancy" %}
+              {{ trigger_friendly_name }} heeft beweging gedetecteerd
             {% endif %}
 
       - alias: Trigger the alarm
