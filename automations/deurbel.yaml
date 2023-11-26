@@ -67,48 +67,48 @@
                       service: media_player.media_pause
                       entity_id: media_player.mediabox
 
-            - alias: Start the camera stream
-              service: button.press
-              target:
-                entity_id: button.deurbel_start_p2p_stream
+            # - alias: Start the camera stream
+            #   service: button.press
+            #   target:
+            #     entity_id: button.deurbel_start_p2p_stream
 
-            - alias: Wait till the stream is ready
-              wait_for_trigger:
-                - platform: state
-                  entity_id: sensor.deurbel_stream_status
-                  to: StreamStatus.STREAMING
-              timeout:
-                seconds: 5
-              continue_on_timeout: false
+            # - alias: Wait till the stream is ready
+            #   wait_for_trigger:
+            #     - platform: state
+            #       entity_id: sensor.deurbel_stream_status
+            #       to: StreamStatus.STREAMING
+            #   timeout:
+            #     seconds: 5
+            #   continue_on_timeout: false
 
-            - alias: Show camera stream in the web browser on the tv
-              service: webostv.command
-              data:
-                entity_id: media_player.lg_c9
-                command: system.launcher/open
-                payload:
-                  target: "{{ internal_url }}/api/camera_proxy_stream/camera.deurbel?token={{ state_attr('camera.deurbel', 'access_token') }}"
+            # - alias: Show camera stream in the web browser on the tv
+            #   service: webostv.command
+            #   data:
+            #     entity_id: media_player.lg_c9
+            #     command: system.launcher/open
+            #     payload:
+            #       target: "{{ internal_url }}/api/camera_proxy_stream/camera.deurbel?token={{ state_attr('camera.deurbel', 'access_token') }}"
 
-            - alias: Wait a little
-              delay:
-                seconds: 15
+            # - alias: Wait a little
+            #   delay:
+            #     seconds: 15
 
-            - alias: Stop the camera stream
-              service: button.press
-              target:
-                entity_id: button.deurbel_stop_p2p_stream
+            # - alias: Stop the camera stream
+            #   service: button.press
+            #   target:
+            #     entity_id: button.deurbel_stop_p2p_stream
 
-            - choose:
-                - conditions:
-                    - "{{ is_state_attr('media_player.lg_c9', 'source', 'Webbrowser') }}"
-                    - "{{ tv_current_source != None }}"
-                  sequence:
-                    - alias: Return to the previous source on the tv
-                      service: media_player.select_source
-                      data:
-                        source: "{{ tv_current_source }}"
-                      target:
-                        entity_id: media_player.lg_c9
+            # - choose:
+            #     - conditions:
+            #         - "{{ is_state_attr('media_player.lg_c9', 'source', 'Webbrowser') }}"
+            #         - "{{ tv_current_source != None }}"
+            #       sequence:
+            #         - alias: Return to the previous source on the tv
+            #           service: media_player.select_source
+            #           data:
+            #             source: "{{ tv_current_source }}"
+            #           target:
+            #             entity_id: media_player.lg_c9
 
     # Don't trigger again for a few seconds.
     - delay:
