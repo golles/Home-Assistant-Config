@@ -34,7 +34,12 @@ script:
                 "ABRI": true,
                 "ATRANS": true,
                 "ATIME": 60,
-                "TEFF": 1
+                "TEFF": 1,
+                "TIM": true,
+                "DAT": false,
+                "HUM": false,
+                "TEMP": false,
+                "BAT": false
             }
 
   awtrix_night_clock:
