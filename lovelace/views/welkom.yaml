@@ -610,3 +610,19 @@ cards:
           - type: tile
             entity: switch.gekleurde_licht
             icon: mdi:led-strip-variant
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Instellingen en acties
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: input_boolean.vacation_mode
+          - type: tile
+            entity: input_boolean.guest_mode
+          - type: tile
+            entity: switch.tado_home_mode
