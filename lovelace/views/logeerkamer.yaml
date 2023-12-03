@@ -139,3 +139,5 @@ cards:
             entity: button.logeerkamer_rolgordijn_voorkeurspositie
             name: Voorkeurspositie
             icon: mdi:window-shutter
+          - type: tile
+            entity: input_boolean.guest_mode
