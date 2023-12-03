@@ -23,6 +23,17 @@ filter:
       {% endif %}
     {% endif %}
 
+    {% if is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_purmerend_waarschuwing", "off") %}
+      {%- set data.entities = data.entities + [{
+        "type": "tile",
+        "entity": "binary_sensor.meteoalarm",
+        "name": "MeteoAlarm",
+        "icon": "mdi:alert",
+        "color": "orange",
+        "vertical": true
+      }] -%}
+    {% endif %}
+
     {% if data.entities | length > 0 %}
       {{ data.entities }}
     {% endif %}
@@ -92,14 +103,6 @@ filter:
       options:
         type: tile
         name: KNMI Waarschuwing
-        icon: mdi:alert
-        vertical: true
-        color: orange
-    - entity_id: binary_sensor.meteoalarm
-      state: "on"
-      options:
-        type: tile
-        name: MeteoAlarm
         icon: mdi:alert
         vertical: true
         color: orange
