@@ -5,7 +5,7 @@
 Standaard:
   # Home Assistant override
   ha-card-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16)
-  ha-card-border-width: 0
+  ha-card-border-width: 0px
   # Card override
   mush-card-primary-font-size: 14px
   mush-card-secondary-font-size: 12px
