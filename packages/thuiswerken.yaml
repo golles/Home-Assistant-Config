@@ -62,8 +62,7 @@ automation:
         entity_id: sensor.tt_macbook_frontmost_app
         state:
           - Slack
-          - Microsoft Teams
-          - Microsoft Teams classic
+          - Microsoft Teams (work or school)
     action:
       - service: media_player.volume_mute
         data:
