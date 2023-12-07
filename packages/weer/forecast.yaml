@@ -3,7 +3,7 @@ template:
       - platform: time_pattern
         minutes: /10
     action:
-      - service: weather.get_forecast
+      - service: weather.get_forecasts
         data:
           type: daily
         target:
@@ -11,7 +11,11 @@ template:
         response_variable: forecast
     binary_sensor:
       - name: KNMI regen vandaag
-        state: "{{ forecast.forecast[0].precipitation_probability > 0 }}"
+        state: "{{ forecast['weather.knmi_purmerend'].forecast[0].precipitation_probability > 0 }}"
+        availability: "{{ is_number(forecast['weather.knmi_purmerend'].forecast[0].precipitation_probability) }}"
     sensor:
       - name: KNMI max temp vandaag
-        state: "{{ forecast.forecast[0].temperature }}"
+        state: "{{ forecast['weather.knmi_purmerend'].forecast[0].temperature }}"
+        availability: "{{ is_number(forecast['weather.knmi_purmerend'].forecast[0].temperature) }}"
+        unit_of_measurement: "°C"
+        device_class: temperature
