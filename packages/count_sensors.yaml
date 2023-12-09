@@ -26,10 +26,7 @@ template:
               | selectattr("state", "eq", "on")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
-              | rejectattr("entity_id", "in", [
-                "light.woonkamer_klok_matrix",
-                "light.logeerkamer_klok_matrix",
-              ])
+              | rejectattr("entity_id", "search", "light.*_klok_*")
               | map(attribute='entity_id')
               | list
             }}
