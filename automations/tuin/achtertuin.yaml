@@ -1,6 +1,7 @@
 - id: kerst_sfeer_achtertuin
   alias: Achtertuin - Kerst sfeer
   mode: single
+  max_exceeded: silent
   trigger:
     - platform: numeric_state
       entity_id: sensor.achtertuin_sensor_illuminance
