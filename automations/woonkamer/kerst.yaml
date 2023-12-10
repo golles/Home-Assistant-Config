@@ -1,21 +1,68 @@
-- id: christmas_tree_on
-  alias: Kerst - Kerstboom automatisch aan
+- id: auto_christmas_tree_light
+  alias: Kerst - Kerstboom automatisch aan/uit door aanwezigheid
   mode: single
   max_exceeded: silent
   trigger:
     - platform: state
       entity_id: binary_sensor.woonkamer_bezetting
-      to: "on"
+      to:
+        - "on"
+        - "off"
   condition:
-    - condition: time
-      after: "07:00:00"
-      before: "00:00:00"
     - condition: not
       conditions:
         - condition: state
           entity_id: light.kerstboom
           state: unavailable
   action:
+    - choose:
+        - conditions:
+            - condition: time
+              after: "07:00:00"
+              before: "00:00:00"
+            - condition: state
+              entity_id: binary_sensor.woonkamer_bezetting
+              state: "on"
+          sequence:
+            - alias: Set effect
+              service: mqtt.publish
+              data:
+                topic: zigbee2mqtt/Kerstboom/set
+                payload_template: |-
+                  {
+                      "effect": {
+                          "effect": "glow",
+                          "speed": 50,
+                          "colors": [
+                              {
+                                  "r": 255,
+                                  "g": 0,
+                                  "b": 0
+                              },
+                              {
+                                  "r": 0,
+                                  "g": 255,
+                                  "b": 0
+                              },
+                              {
+                                  "r": 0,
+                                  "g": 0,
+                                  "b": 255
+                              },
+                              {
+                                  "r": 255,
+                                  "g": 255,
+                                  "b": 0
+                              }
+                          ]
+                      }
+                  }
+
+      default:
+        - service: light.turn_off
+          target:
+            entity_id: light.kerstboom
+
     - alias: Turn on the christmas tree
       service: light.turn_on
       target:
