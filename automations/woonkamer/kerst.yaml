@@ -58,15 +58,16 @@
                       }
                   }
 
+            - alias: Turn on the light
+              service: light.turn_on
+              target:
+                entity_id: light.kerstboom
+
       default:
-        - service: light.turn_off
+        - alias: Turn off the light
+          service: light.turn_off
           target:
             entity_id: light.kerstboom
-
-    - alias: Turn on the christmas tree
-      service: light.turn_on
-      target:
-        entity_id: light.kerstboom
 
 - id: christmas_keep_woonkamer_groot_2_off
   alias: Kerst - Houdt de woonkamer groot 2 uit
