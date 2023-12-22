@@ -6,9 +6,11 @@ media_player:
       - media_player.mediabox
       - media_player.lg_c9
     active_child_template: >-
-      {% set has_entity = ["Plex", "Ziggo"] %}
-      {% if not state_attr("media_player.lg_c9", "source") in has_entity %}
-         media_player.lg_c9
+      {% set source = state_attr("media_player.lg_c9", "source") %}
+      {% if source == "Plex" %}
+        media_player.plex_plex_for_lg_lg_oled65c9pla
+      {% elif source == "Ziggo" %}
+        media_player.mediabox
       {% endif %}
     commands:
       turn_on:
