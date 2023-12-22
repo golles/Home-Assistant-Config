@@ -383,7 +383,7 @@ cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: template
-            entity: climate.logeerkamer
+            entity: climate.elektrische_kachel
             content: >-
               {{ state_attr(entity, "current_temperature") }}°C
             icon: mdi:thermometer
