@@ -61,7 +61,7 @@
                 - conditions:
                     - "{{ not is_state('media_player.mediabox', ['idle', 'off', 'unavailable', 'unknown']) }}"
                     - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
-                    - "{{ not is_state_attr('media_player.mediabox', 'play_mode', 'linear') }}"
+                    - "{{ not state_attr('media_player.mediabox', 'play_mode') in [null, 'linear'] }}"
                   sequence:
                     - alias: Pause Ziggo, but not when watching linear tv
                       service: media_player.media_pause
