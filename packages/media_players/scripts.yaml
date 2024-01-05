@@ -21,18 +21,19 @@ script:
         selector:
           text: null
     sequence:
-      - choose:
-          - conditions:
-              - "{{ is_state(media_player, 'off') }}"
-            sequence:
-              - alias: Turn on the media player
-                service: media_player.turn_on
-                data:
-                  entity_id: "{{ media_player }}"
-              - wait_template: >
-                  {{ not is_state(media_player, "off") }}
-                timeout: "00:00:02"
-                continue_on_timeout: false
+      - if:
+          - "{{ is_state(media_player, 'off') }}"
+        then:
+          - alias: Turn on the media player
+            service: media_player.turn_on
+            data:
+              entity_id: "{{ media_player }}"
+
+          - wait_template: >
+              {{ not is_state(media_player, "off") }}
+            timeout:
+              seconds: 5
+            continue_on_timeout: false
 
       - alias: Set the source on the media player
         service: media_player.select_source
