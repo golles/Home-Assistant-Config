@@ -25,6 +25,11 @@
     - condition: time # Tarif is always low in this time period.
       after: "07:00:00"
       before: "23:00:00"
+    - condition: template
+      value_template:
+        > # Can't be triggered when it was already triggered in the last 24 hours.
+        {% from "automations.jinja" import was_within %}
+        {{ was_within("automation.notificatie_elektriciteit_laag_tarief_vandaag", 24 * 60 * 60) }}
   action:
     - alias: Notify users about low tarif today
       service: notify.all_phones
