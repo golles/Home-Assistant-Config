@@ -11,7 +11,7 @@
         minutes: 5
     - platform: time
       id: xmas_off
-      at: "00:00:00"
+      at: "23:59:59" # Can't be 00:00:00 because then it won't turn off on 1st of January.
   condition:
     condition: template
     value_template: > # All days in December after Sinterklaas.
