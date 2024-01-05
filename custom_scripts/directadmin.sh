@@ -52,10 +52,8 @@ add_new_record() {
 }
 
 subdomain_encoded=$(url_encode $5)
-#echo "Encoded subdomain: ${subdomain_encoded}"
 
 remove_result=$(remove_existing_record $1 $2 $3 $4 $subdomain_encoded)
-#echo "Delete result: ${remove_result}"
 
 if [[ ${remove_result} = error=0* ]]; then
     echo "Successfully deleted previous record"
@@ -65,7 +63,6 @@ else
 fi
 
 add_result=$(add_new_record $1 $2 $3 $4 $subdomain_encoded $6)
-#echo "Add result: ${add_result}"
 
 if [[ ${add_result} = error=0* ]]; then
     echo "Successfully added updated record"
@@ -75,4 +72,3 @@ else
 fi
 
 exit 0
-
