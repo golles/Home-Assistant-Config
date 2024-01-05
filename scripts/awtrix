@@ -78,13 +78,13 @@ upload_icons () {
 }
 
 check_programs () {
-  for program in convert curl; do
-    if ! hash "$program" 2>/dev/null
-    then
-      info "$program is not installed"
-      exit 2
-    fi
-  done
+    for program in convert curl; do
+        if ! hash "$program" 2>/dev/null
+        then
+            info "$program is not installed"
+            exit 2
+        fi
+    done
 }
 
 usage () {
