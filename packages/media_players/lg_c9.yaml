@@ -11,6 +11,8 @@ media_player:
         media_player.plex_plex_for_lg_lg_oled65c9pla
       {% elif source == "Ziggo" %}
         media_player.mediabox
+      {% else %}
+        media_player.lg_c9
       {% endif %}
     commands:
       turn_on:
