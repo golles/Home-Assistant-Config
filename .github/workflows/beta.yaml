@@ -11,7 +11,7 @@ jobs:
     name: Home Assistant config check
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup custom components
