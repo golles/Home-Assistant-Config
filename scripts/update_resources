@@ -36,6 +36,7 @@ custom_components/afvalbeheer               https://github.com/pippyn/Home-Assis
 custom_components/apple_tv                  https://github.com/postlund/hass-atv-beta
 custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
 custom_components/car_wash                  https://github.com/Limych/ha-car_wash
+custom_components/flightradar24             https://github.com/AlexandrErohin/home-assistant-flightradar24
 custom_components/eufy_security             https://github.com/fuatakgun/eufy_security
 custom_components/multiscrape               https://github.com/danieldotnl/ha-multiscrape
 custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
