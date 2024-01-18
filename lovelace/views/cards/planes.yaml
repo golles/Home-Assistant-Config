@@ -1,0 +1,41 @@
+type: custom:auto-entities
+show_empty: false
+card:
+  type: grid
+  columns: 2
+  square: false
+  title: Vliegtuigen
+card_param: cards
+filter:
+  template: >-
+    {%- set data = namespace(entities=[]) -%}
+
+    {% set flights = state_attr("sensor.flightradar24_current_in_area", "flights") %}
+
+    {% if flights | length %}
+      {% for flight in flights %}
+        {%- set data.entities = data.entities + [{
+          "type": "custom:mushroom-template-card",
+          "primary": flight.aircraft_model,
+          "secondary": flight.airline_short ~ "\n" ~ flight.airport_origin_city ~ " (" ~ flight.airport_origin_country_code  ~ ") -> " ~ flight.airport_destination_city ~ " (" ~ flight.airport_destination_country_code  ~ ")",
+          "multiline_secondary": true,
+          "picture": flight.aircraft_photo_small,
+          "badge_icon": "mdi:airplane",
+          "tap_action": {
+            "action": "url",
+            "url_path": "https://www.flightradar24.com/" ~ flight.id
+          }
+        }] -%}
+      {% endfor %}
+    {% endif %}
+
+    {% if data.entities | length > 0 %}
+      {{ data.entities }}
+    {% endif %}
+  include:
+    - entity_id: sensor.flightradar24_current_in_area
+      options:
+        type: tile
+        name: Aantal
+sort:
+  method: name

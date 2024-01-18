@@ -116,3 +116,5 @@ cards:
 
       - type: custom:mushroom-entity-card
         entity: sensor.leeghwaterbad_abonnement_verloopdatum
+
+  - !include cards/planes.yaml
