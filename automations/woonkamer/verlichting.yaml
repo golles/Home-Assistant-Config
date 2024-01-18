@@ -8,7 +8,8 @@
       cool_down: 60
       light_entity: light.wooneet
       illuminance_entity: sensor.epo1_illuminance
-      illuminance_below: 2
+      illuminance_below: 8
+      illuminance_above: 25
       day_start_time: 08:00:00
       day_scene: scene.wooneet_avond
       day_scene_before_off: scene.wooneet_nacht
@@ -28,7 +29,7 @@
   condition:
     - condition: numeric_state
       entity_id: sensor.epo1_illuminance
-      below: 2.5
+      below: 8
   action:
     - alias: Turn on the evening scene
       service: scene.turn_on
@@ -78,9 +79,32 @@
     - platform: state
       entity_id: media_player.lg_c9
       attribute: source
+      from:
+        - Netflix
+        - Plex
+    - platform: state
+      entity_id: media_player.lg_c9
+      attribute: source
+      to:
+        - Netflix
+        - Plex
     - platform: numeric_state
+      id: illuminance
       entity_id: sensor.epo1_illuminance
-      below: 2.5
+      below: 8
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.epo1_illuminance
+      below: 8
+    - condition: state
+      entity_id: light.woonkamer
+      state: "on"
+    - condition: template
+      value_template: >-
+        {{
+          trigger.id != "illuminance" or
+          trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Netflix", "Plex"]
+        }}
   action:
     - if:
         - condition: state
@@ -89,9 +113,6 @@
           state:
             - Netflix
             - Plex
-        - condition: numeric_state
-          entity_id: sensor.epo1_illuminance
-          below: 2.5
       then:
         - alias: Turn on movie scenes
           service: scene.turn_on
@@ -100,6 +121,22 @@
               - scene.wooneet_film
               - scene.tv_film
       else:
+        - if:
+            - condition: time
+              # These times macht the times defined in automation auto_light_woonkamer.
+              after: 08:00:00
+              before: 00:00:00
+          then:
+            - alias: Turn on evening scene
+              service: scene.turn_on
+              data:
+                entity_id: scene.wooneet_avond
+          else:
+            - alias: Turn on night scene
+              service: scene.turn_on
+              data:
+                entity_id: scene.wooneet_nacht
+
         - alias: Turn off tv light
           service: light.turn_off
           target:

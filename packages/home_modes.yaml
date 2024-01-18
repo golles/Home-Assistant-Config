@@ -50,7 +50,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.epo1_illuminance
-        below: 1
+        below: 4
         for:
           minutes: 30
         id: woonkamer_avond
