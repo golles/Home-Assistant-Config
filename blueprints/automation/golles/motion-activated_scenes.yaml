@@ -108,31 +108,117 @@ max_exceeded: silent
 
 trigger:
   - platform: state
+    id: motion_on
     entity_id: !input motion_entity
-    from: "off"
     to: "on"
+  - platform: state
+    id: motion_off
+    entity_id: !input motion_entity
+    to: "off"
+    for: !input cool_down
   - platform: numeric_state
+    id: illuminance_low
     entity_id: !input illuminance_entity
     below: !input illuminance_below
     for:
       minutes: 5
   - platform: numeric_state
+    id: illuminance_high
     entity_id: !input illuminance_entity
     above: !input illuminance_above
     for:
       minutes: 5
 
-condition:
-  - condition: state
-    entity_id: !input motion_entity
-    state: "on"
-
 action:
   - choose:
       - conditions:
-          - condition: numeric_state
-            entity_id: !input illuminance_entity
-            above: !input illuminance_above
+          - condition: or
+            conditions:
+              - condition: and
+                conditions:
+                  - condition: trigger
+                    id: motion_on
+                  - condition: or
+                    conditions:
+                      - condition: numeric_state
+                        entity_id: !input illuminance_entity
+                        below: !input illuminance_below
+                      - condition: state
+                        entity_id: !input light_entity
+                        state: "on"
+              - condition: and
+                conditions:
+                  - condition: trigger
+                    id: illuminance_low
+                  - condition: state
+                    entity_id: !input motion_entity
+                    state: "on"
+                  - condition: state
+                    entity_id: !input light_entity
+                    state: "off"
+        sequence:
+          - if:
+              - condition: time
+                after: !input day_start_time
+                before: !input day_end_time
+            then:
+              # Day time.
+              - alias: Turn on light with day scene
+                service: scene.turn_on
+                data:
+                  transition: 1
+                target:
+                  entity_id: !input day_scene
+            else:
+              # Other times
+              - alias: Turn on light with night scene
+                service: scene.turn_on
+                data:
+                  transition: 1
+                target:
+                  entity_id: !input night_scene
+
+      - conditions:
+          - condition: trigger
+            id: motion_off
+          - condition: state
+            entity_id: !input light_entity
+            state: "on"
+        sequence:
+          - if:
+              - condition: time
+                after: !input day_start_time
+                before: !input day_end_time
+            then:
+              # Day time.
+              - alias: Turn on light with day before off scene
+                service: scene.turn_on
+                data:
+                  transition: 1
+                target:
+                  entity_id: !input day_scene_before_off
+            else:
+              # Other times
+              - alias: Turn on light with night before off scene
+                service: scene.turn_on
+                data:
+                  transition: 1
+                target:
+                  entity_id: !input night_scene_before_off
+
+          - alias: Wait for the no motion wait delay
+            delay: !input no_motion_wait
+
+          - alias: Turn off the light
+            service: light.turn_off
+            data:
+              transition: 1
+            target:
+              entity_id: !input light_entity
+
+      - conditions:
+          - condition: trigger
+            id: illuminance_high
           - condition: state
             entity_id: !input light_entity
             state: "on"
@@ -143,84 +229,3 @@ action:
               transition: 1
             target:
               entity_id: !input light_entity
-
-      - conditions:
-          condition: or
-          conditions:
-            # The illuminance should be below the given value...
-            - condition: numeric_state
-              entity_id: !input illuminance_entity
-              below: !input illuminance_below
-            # ...or the light is already on (the illuminance might have gone up when the lights turned on).
-            - condition: state
-              entity_id: !input light_entity
-              state: "on"
-        sequence:
-          - choose:
-              # Day time.
-              - conditions:
-                  - condition: time
-                    after: !input day_start_time
-                    before: !input day_end_time
-                sequence:
-                  - alias: Turn on light with day scene
-                    service: scene.turn_on
-                    data:
-                      transition: 1
-                    target:
-                      entity_id: !input day_scene
-            # Other times
-            default:
-              - alias: Turn on light with night scene
-                service: scene.turn_on
-                data:
-                  transition: 1
-                target:
-                  entity_id: !input night_scene
-
-          - alias: Wait untill there is no more motion
-            wait_for_trigger:
-              platform: state
-              entity_id: !input motion_entity
-              from: "on"
-              to: "off"
-              for: !input cool_down
-
-          - choose:
-              # Only continue when the light are still on, user might have turned it off manually.
-              - conditions:
-                  - condition: state
-                    entity_id: !input light_entity
-                    state: "on"
-                sequence:
-                  - choose:
-                      # Day time.
-                      - conditions:
-                          - condition: time
-                            after: !input day_start_time
-                            before: !input day_end_time
-                        sequence:
-                          - alias: Turn on light with day before off scene
-                            service: scene.turn_on
-                            data:
-                              transition: 1
-                            target:
-                              entity_id: !input day_scene_before_off
-                    # Other times
-                    default:
-                      - alias: Turn on light with night before off scene
-                        service: scene.turn_on
-                        data:
-                          transition: 1
-                        target:
-                          entity_id: !input night_scene_before_off
-
-                  - alias: Wait for the no motion wait delay
-                    delay: !input no_motion_wait
-
-                  - alias: Turn off the light
-                    service: light.turn_off
-                    data:
-                      transition: 1
-                    target:
-                      entity_id: !input light_entity
