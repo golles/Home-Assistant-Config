@@ -31,6 +31,7 @@ automation:
       - platform: state
         entity_id: sensor.tt_macbook_frontmost_app
         to: loginwindow
+        for: 3
     condition:
       - condition: state
         entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
