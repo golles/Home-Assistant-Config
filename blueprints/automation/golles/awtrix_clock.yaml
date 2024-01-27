@@ -122,20 +122,29 @@ action:
 
       - conditions: "{{ trigger.id == 'apps' }}"
         sequence:
-          - alias: Update apps
+          - alias: Update inside temp
             service: mqtt.publish
             data:
-              topic: "{{ topic }}/custom/pages"
+              topic: "{{ topic }}/custom/temp-inside"
               payload: >-
-                {{
-                  [
+                {% if states(temp_entity) != None %}
+                  {{
                     dict(
-                        text = states(temp_entity) | round ~ state_attr(temp_entity, "unit_of_measurement"),
-                        icon = "temp-inside",
-                    ),
+                      text = states(temp_entity) | round ~ state_attr(temp_entity, "unit_of_measurement"),
+                      icon = "temp-inside",
+                    ) }}
+                {% endif %}
+
+          - alias: Update weather
+            service: mqtt.publish
+            data:
+              topic: "{{ topic }}/custom/weather"
+              payload: >-
+                {% if state_attr(weather_entity, "temperature") != None %}
+                  {{
                     dict(
-                        text = state_attr(weather_entity, "temperature") | round ~ state_attr(weather_entity, "temperature_unit"),
-                        icon = states(weather_entity),
+                      text = state_attr(weather_entity, "temperature") | round ~ state_attr(weather_entity, "temperature_unit"),
+                      icon = states(weather_entity),
                     )
-                  ] | to_json
-                }}
+                  }}
+                {% endif %}
