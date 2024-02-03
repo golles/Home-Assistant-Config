@@ -18,10 +18,10 @@
           sequence:
             - service: frontend.set_theme
               data:
-                name: Standaard
+                name: Mushroom Shadow
                 mode: dark
       default:
         - service: frontend.set_theme
           data:
-            name: Standaard
+            name: Mushroom Shadow
             mode: light
