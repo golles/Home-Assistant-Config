@@ -201,15 +201,14 @@ automation:
     max_exceeded: silent
     trigger:
       - platform: numeric_state
-        entity_id: proximity.residents_home
+        entity_id: sensor.huis_nearest_distance
         below: 10
     condition:
       - condition: state
         entity_id: group.residents
         state: not_home
       - condition: state
-        entity_id: proximity.residents_home
-        attribute: dir_of_travel
+        entity_id: sensor.huis_nearest_direction_of_travel
         state: towards
       - condition: numeric_state
         entity_id: climate.woonkamer
@@ -220,7 +219,7 @@ automation:
         data:
           title: Tado
           message: |
-            Ik zie dat {{ state_attr("proximity.residents_home", "nearest") }} bijna thuis is.
+            Ik zie dat {{ states("sensor.huis_nearest_device") }} bijna thuis is.
             Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
 
       - alias: Heat up the living room for a short time
