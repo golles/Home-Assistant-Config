@@ -93,7 +93,7 @@ cards:
   - type: entities
     title: Fijnstof meter
     entities:
-      - entity: sensor.particulate_matter_pm_25
+      - entity: sensor.particulate_matter_pm_2_5
         name: PM 2,5
       - entity: sensor.particulate_matter_pm_10
         name: PM 10

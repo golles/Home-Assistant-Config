@@ -104,7 +104,7 @@ cards:
             entity: sensor.achtertuin_sensor_illuminance
             name: Lichtsterkte
           - type: tile
-            entity: sensor.particulate_matter_pm_25
+            entity: sensor.particulate_matter_pm_2_5
             name: PM 2,5
           - type: tile
             entity: sensor.particulate_matter_pm_10
