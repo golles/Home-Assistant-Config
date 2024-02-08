@@ -8,6 +8,8 @@ ios:
       icon:
         icon: bed
         color: "#ffffff"
+      show_in_carplay: false
+      show_in_watch: true
 
     - name: Gaan slapen
       background_color: "#4c00ff"
@@ -17,6 +19,8 @@ ios:
       icon:
         icon: sleep
         color: "#ffffff"
+      show_in_carplay: false
+      show_in_watch: true
 
     - name: Uit bed
       background_color: "#4c00ff"
@@ -26,6 +30,8 @@ ios:
       icon:
         icon: sleep-off
         color: "#ffffff"
+      show_in_carplay: false
+      show_in_watch: true
 
 automation:
   - id: ios_action_going_to_bed

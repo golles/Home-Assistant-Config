@@ -8,6 +8,8 @@ ios:
       icon:
         icon: radio
         color: "#ffffff"
+      show_in_carplay: false
+      show_in_watch: true
 
     - name: Ziggo
       background_color: "#ffffff"
@@ -17,6 +19,8 @@ ios:
       icon:
         icon: television-classic
         color: "#f48c00"
+      show_in_carplay: false
+      show_in_watch: true
 
 automation:
   - id: ios_action_radio_qmusic

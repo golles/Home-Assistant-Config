@@ -26,6 +26,8 @@ ios:
       icon:
         icon: arrow-down-box
         color: "#000000"
+      show_in_carplay: false
+      show_in_watch: true
 
 automation:
   - id: ios_action_awning_command

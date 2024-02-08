@@ -8,6 +8,8 @@ ios:
       icon:
         icon: alarm-off
         color: "#ff0000"
+      show_in_carplay: false
+      show_in_watch: true
 
     - name: Wekker gesnoozed
       background_color: "#000000"
@@ -17,6 +19,8 @@ ios:
       icon:
         icon: alarm-snooze
         color: "#ff0000"
+      show_in_carplay: false
+      show_in_watch: true
 
 automation:
   - id: ios_action_alarm_clock_off
