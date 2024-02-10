@@ -1,0 +1,197 @@
+automation:
+  - id: send_particulate_matter_data
+    alias: Fijnstofmeter data versturen naar externe services
+    mode: single
+    max_exceeded: silent
+    trigger:
+      - platform: state
+        id: sds011
+        entity_id:
+          - sensor.particulate_matter_pm_10
+          - sensor.particulate_matter_pm_2_5
+      - platform: state
+        id: bme280
+        entity_id:
+          - sensor.particulate_matter_humidity
+          - sensor.particulate_matter_pressure
+          - sensor.particulate_matter_temperature
+    condition:
+      - condition: state
+        entity_id: switch.particulate_matter_standalone_mode
+        state: "off"
+    action:
+      - alias: Wait a second, to make sure all values are up-to-date
+        delay: 1
+
+      - alias: Which sensor group?
+        choose:
+          - conditions:
+              - condition: trigger
+                id: sds011
+              - not:
+                  - condition: state
+                    entity_id: sensor.particulate_matter_pm_10
+                    state:
+                      - unavailable
+                      - unknown
+                  - condition: state
+                    entity_id: sensor.particulate_matter_pm_2_5
+                    state:
+                      - unavailable
+                      - unknown
+                  - condition: state
+                    entity_id: sensor.particulate_matter_wifi_signal
+                    state:
+                      - unavailable
+                      - unknown
+            sequence:
+              - alias: Post to Luftdaten
+                service: rest_command.post_luftdaten_sds011
+              - alias: Post to Madavi
+                service: rest_command.post_madavi_sds011
+              - alias: Post to openSenseMap
+                service: rest_command.post_opensensemap_sds011
+
+          - conditions:
+              - condition: trigger
+                id: bme280
+              - not:
+                  - condition: state
+                    entity_id: sensor.particulate_matter_humidity
+                    state:
+                      - unavailable
+                      - unknown
+                  - condition: state
+                    entity_id: sensor.particulate_matter_pressure
+                    state:
+                      - unavailable
+                      - unknown
+                  - condition: state
+                    entity_id: sensor.particulate_matter_temperature
+                    state:
+                      - unavailable
+                      - unknown
+                  - condition: state
+                    entity_id: sensor.particulate_matter_wifi_signal
+                    state:
+                      - unavailable
+                      - unknown
+            sequence:
+              - alias: Post to Luftdaten
+                service: rest_command.post_luftdaten_bme280
+              - alias: Post to Madavi
+                service: rest_command.post_madavi_bme280
+              - alias: Post to openSenseMap
+                service: rest_command.post_opensensemap_bme280
+
+rest_command:
+  post_luftdaten_sds011:
+    url: https://api.sensor.community/v1/push-sensor-data/
+    method: POST
+    headers:
+      X-Pin: 1 # This tells Luftdaten that it is SDS011 data.
+      X-Sensor: !secret luftdaten_x_sensor
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          software_version = device_attr(device_id("sensor.particulate_matter_pm_10"), "sw_version").split(" ")[0],
+          sensordatavalues = [
+            dict(value_type = "P1", value = states("sensor.particulate_matter_pm_10")),
+            dict(value_type = "P2", value = states("sensor.particulate_matter_pm_2_5")),
+          ],
+        ) | to_json
+      }}
+
+  post_madavi_sds011:
+    url: https://api-rrd.madavi.de/data.php
+    method: POST
+    headers:
+      X-Pin: 0
+      X-Sensor: !secret luftdaten_x_sensor
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          software_version = device_attr(device_id("sensor.particulate_matter_pm_10"), "sw_version").split(" ")[0],
+          sensordatavalues = [
+            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10")),
+            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5")),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+          ],
+        ) | to_json
+      }}
+
+  post_opensensemap_sds011:
+    url: !secret opensensemap_url # https://api.opensensemap.org/boxes/YOUR_BOX_ID/data?luftdaten=1
+    method: POST
+    headers:
+      Authorization: !secret opensensemap_access_token
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          sensordatavalues = [
+            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10")),
+            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5")),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+          ],
+        ) | to_json
+      }}
+
+  post_luftdaten_bme280:
+    url: https://api.sensor.community/v1/push-sensor-data/
+    method: POST
+    headers:
+      X-Pin: 11 ## This tells Luftdaten that it is BME280 data
+      X-Sensor: !secret luftdaten_x_sensor
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          software_version = device_attr(device_id("sensor.particulate_matter_humidity"), "sw_version").split(" ")[0],
+          sensordatavalues = [
+            dict(value_type = "humidity", value = states("sensor.particulate_matter_humidity")),
+            dict(value_type = "pressure", value = states("sensor.particulate_matter_pressure")),
+            dict(value_type = "temperature", value = states("sensor.particulate_matter_temperature")),
+          ],
+        ) | to_json
+      }}
+
+  post_madavi_bme280:
+    url: https://api-rrd.madavi.de/data.php
+    method: POST
+    headers:
+      X-Pin: 0
+      X-Sensor: !secret luftdaten_x_sensor
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          software_version = device_attr(device_id("sensor.particulate_matter_humidity"), "sw_version").split(" ")[0],
+          sensordatavalues = [
+            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity")),
+            dict(value_type = "BME280_pressure", value = states("sensor.particulate_matter_pressure")),
+            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature")),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+          ],
+        ) | to_json
+      }}
+
+  post_opensensemap_bme280:
+    url: !secret opensensemap_url # https://api.opensensemap.org/boxes/YOUR_BOX_ID/data?luftdaten=1
+    method: POST
+    headers:
+      Authorization: !secret opensensemap_access_token
+    content_type: application/json
+    payload: >-
+      {{
+        dict(
+          sensordatavalues = [
+            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity")),
+            dict(value_type = "BME280_pressure", value = states("sensor.particulate_matter_pressure")),
+            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature")),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+          ],
+        ) | to_json
+      }}
