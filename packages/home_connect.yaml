@@ -65,6 +65,24 @@ template:
           {%- endif %}
 
 automation:
+  - id: home_connect_conversation_remaining_time
+    alias: "Spraakassistent: Wanneer is de machine klaar"
+    mode: single
+    trigger:
+      platform: conversation
+      command:
+        - Wanneer is de {machine} klaar
+    action:
+      - alias: Set repsonse
+        set_conversation_response: >-
+          {% if trigger.slots.machine == "vaatwasser" and states("sensor.vaatwasser_resterende_minuten") != "unavailable" %}
+            over {{ states("sensor.vaatwasser_resterende_minuten") }}
+          {% elif trigger.slots.machine == "wasmachine" and states("sensor.wasmachine_resterende_minuten") != "unavailable" %}
+            over {{ states("sensor.wasmachine_resterende_minuten") }}
+          {% else %}
+            Ik weet het niet, staat de {{ trigger.slots.machine }} wel aan?
+          {% endif %}
+
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten
     mode: single
