@@ -19,6 +19,12 @@ cards:
   - type: custom:mushroom-title-card
     title: Weer
 
+  - type: markdown
+    content: >-
+      {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
+      {{ iif(state_attr("binary_sensor.meteoalarm", "description"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
+      {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+
   - type: weather-forecast
     entity: weather.huis
     forecast_type: hourly
@@ -26,103 +32,97 @@ cards:
     entity: weather.knmi_purmerend
     forecast_type: daily
 
-  - type: custom:vertical-stack-in-card
-    title: Details
+  - type: vertical-stack
     cards:
-      - type: horizontal-stack
+      - type: custom:mushroom-title-card
+        subtitle: Nu
+
+      - type: grid
+        columns: 2
+        square: false
         cards:
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: sensor.knmi_purmerend_gevoelstemperatuur
             name: Gevoelstemperatuur
-            layout: vertical
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: sensor.knmi_purmerend_dauwpunt
             name: Dauwpunt
-            layout: vertical
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: sensor.knmi_purmerend_relatieve_luchtvochtigheid
             name: Relatieve luchtvochtigheid
-            layout: vertical
-      - type: horizontal-stack
+          - type: tile
+            entity: sensor.knmi_purmerend_wind
+            name: Wind
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Waarschuwingen
+
+      - type: grid
+        columns: 2
+        square: false
         cards:
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: binary_sensor.knmi_purmerend_waarschuwing
-            name: Waarschuwing
-            layout: vertical
-          - type: custom:mushroom-entity-card
+            name: KNMI
+            layout:
+          - type: tile
             entity: binary_sensor.stookalert_noord_holland
             name: Stookalert
-            layout: vertical
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: binary_sensor.meteoalarm
-            name: Meteoalarm
-            layout: vertical
-      - type: custom:mushroom-template-card
-        entity: sensor.knmi_purmerend_korte_dagverwachting
-        secondary: |-
-          {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
-          {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
-          {{ iif(state_attr("binary_sensor.meteoalarm", "description"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
-        multiline_secondary: true
-        tap_action: none
+            name: MeteoAlarm
 
-  - type: markdown
-    title: Verwachting
-    content: >-
-      {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
-
-  - type: entities
-    title: Zon/Maan
-    entities:
-      - entity: sun.sun
-        name: Zon
-      - sensor.zon_positie
-      - sensor.zonsopkomst
-      - sensor.zonsondergang
-      - type: divider
-      - entity: sensor.current_uv_index
-        name: Zonkracht
-      - entity: sensor.current_uv_level
-        name: Omschrijving
-      - entity: binary_sensor.protection_window
-        name: Zonbescherming
-      - type: divider
-      - entity: sensor.moon
-        name: Maan
-
-  - type: entities
-    title: Fijnstof meter
-    entities:
-      - entity: sensor.particulate_matter_pm_2_5
-        name: PM 2,5
-      - entity: sensor.particulate_matter_pm_10
-        name: PM 10
-      - entity: sensor.particulate_matter_temperature
-        name: Temperatuur
-      - entity: sensor.particulate_matter_humidity
-        name: Luchtvochtigheid
-      - entity: sensor.particulate_matter_pressure
-        name: Luchtdruk
-      - type: weblink
-        name: Opensensemap
-        url: https://opensensemap.org/explore/60d8388f8855dd001c008870
-      - type: weblink
-        name: Madavi
-        url: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
-
-  - type: custom:vertical-stack-in-card
-    title: Pollen
-    horizontal: true
+  - type: vertical-stack
     cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.tomorrow_io_huis_tree_pollen_index
-        name: Bomen
-      - type: custom:mushroom-entity-card
-        entity: sensor.tomorrow_io_huis_grass_pollen_index
-        name: Grassen
-      - type: custom:mushroom-entity-card
-        entity: sensor.tomorrow_io_huis_weed_pollen_index
-        name: Onkruiden
+      - type: custom:mushroom-title-card
+        subtitle: Pollen
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.tomorrow_io_huis_tree_pollen_index
+            name: Bomen
+          - type: tile
+            entity: sensor.tomorrow_io_huis_grass_pollen_index
+            name: Grassen
+          - type: tile
+            entity: sensor.tomorrow_io_huis_weed_pollen_index
+            name: Onkruiden
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        subtitle: Zon/maan
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sun.sun
+            name: Zon
+          - type: tile
+            entity: sensor.zon_positie
+          - type: tile
+            entity: sensor.zonsopkomst
+          - type: tile
+            entity: sensor.zonsondergang
+          - type: tile
+            entity: sensor.current_uv_index
+            name: UV-index
+          - type: tile
+            entity: sensor.current_uv_level
+            name: UV-niveau
+          - type: tile
+            entity: binary_sensor.protection_window
+            name: Zonbescherming
+          - type: tile
+            entity: sensor.moon
+            name: Maan
 
   - type: grid
     columns: 3
@@ -145,7 +145,3 @@ cards:
         tap_action:
           action: url
           url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
-
-  - type: iframe
-    url: https://embed.windy.com/embed2.html?lat=52.406&lon=4.971&detailLat=52.406&detailLon=4.971&width=650&height=450&zoom=10&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1
-    aspect_ratio: 100%

@@ -88,7 +88,7 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
-        subtitle: Sensoren
+        subtitle: Fijnstof meter
 
       - type: grid
         columns: 2
@@ -109,6 +109,22 @@ cards:
           - type: tile
             entity: sensor.particulate_matter_pm_10
             name: PM 10
+          - type: tile
+            entity: sensor.particulate_matter_pm_2_5
+            name: Opensensemap
+            icon: mdi:link
+            hide_state: true
+            tap_action:
+              action: url
+              url_path: https://opensensemap.org/explore/60d8388f8855dd001c008870
+          - type: tile
+            entity: sensor.particulate_matter_pm_2_5
+            name: Madavi
+            icon: mdi:link
+            hide_state: true
+            tap_action:
+              action: url
+              url_path: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
 
   - type: vertical-stack
     cards:

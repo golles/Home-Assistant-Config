@@ -9,6 +9,12 @@ cards:
       - type: entity
         entity: sensor.binnen_temperatuur
         icon_color: red
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/klimaat
+        hold_action:
+          action: more-info
+
       - type: template
         entity: sensor.count_lights_on
         icon: >-
@@ -18,10 +24,11 @@ cards:
         content: >-
           {{ iif(states(entity) == "0", "Alle uit", states(entity) ~ " aan") }}
         tap_action:
-          action: more-info
-        hold_action:
           action: navigate
           navigation_path: /dashboard-status/lampen
+        hold_action:
+          action: more-info
+
       - type: template
         entity: sensor.count_windows_open
         icon: >-
@@ -31,10 +38,11 @@ cards:
         content: >-
           {{ iif(states(entity) == "0", "Alle dicht", states(entity) ~ " open") }}
         tap_action:
-          action: more-info
-        hold_action:
           action: navigate
           navigation_path: /dashboard-status/ramen
+        hold_action:
+          action: more-info
+
       - type: template
         entity: sensor.count_doors_open
         icon: >-
@@ -44,17 +52,30 @@ cards:
         content: >-
           {{ iif(states(entity) == "0", "Alle dicht", states(entity) ~ " open") }}
         tap_action:
-          action: more-info
-        hold_action:
           action: navigate
           navigation_path: /dashboard-status/deuren
+        hold_action:
+          action: more-info
+
       - type: alarm-control-panel
         entity: alarm_control_panel.huis_alarm
         content_info: state
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/alarm
+        hold_action:
+          action: more-info
+
       - type: weather
         entity: weather.knmi_purmerend
         show_conditions: true
         show_temperature: true
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-buiten/weer
+        hold_action:
+          action: more-info
+
       - type: entity
         entity: person.sander
         use_entity_picture: true

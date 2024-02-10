@@ -1,8 +1,9 @@
 swipe_nav: !include config/swipe_nav.yaml
 
 views:
-  - !include views/alarm.yaml
+  - !include views/klimaat.yaml
   - !include views/lampen.yaml
   - !include views/deuren.yaml
   - !include views/ramen.yaml
+  - !include views/alarm.yaml
   - !include views/batterijen.yaml
