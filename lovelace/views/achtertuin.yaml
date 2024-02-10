@@ -88,6 +88,19 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
+        subtitle: Sensoren
+
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.achtertuin_sensor_illuminance
+            name: Lichtsterkte
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
         subtitle: Fijnstof meter
 
       - type: grid
@@ -101,8 +114,8 @@ cards:
             entity: sensor.particulate_matter_humidity
             name: Luchtvochtigheid
           - type: tile
-            entity: sensor.achtertuin_sensor_illuminance
-            name: Lichtsterkte
+            entity: sensor.particulate_matter_pressure
+            name: Luchtdruk
           - type: tile
             entity: sensor.particulate_matter_pm_2_5
             name: PM 2,5
