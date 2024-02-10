@@ -10,7 +10,7 @@
       to: home
   condition:
     - condition: numeric_state
-      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      entity_id: sensor.achtertuin_sensor_illuminance
       below: 10
   action:
     - service: scene.turn_on
@@ -45,7 +45,7 @@
       to: "on"
   condition:
     - condition: numeric_state
-      entity_id: sensor.achtertuin_lichtsterkte_illuminance_lux
+      entity_id: sensor.achtertuin_sensor_illuminance
       below: 10
   action:
     - alias: Lights on
