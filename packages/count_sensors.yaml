@@ -2,6 +2,8 @@ homeassistant:
   customize:
     sensor.count_lights_on:
       friendly_name: Lichten aan
+    sensor.count_inside_lights_on:
+      friendly_name: Lichten aan (binnen)
     sensor.count_doors_open:
       friendly_name: Deuren open
     sensor.count_windows_open:
@@ -36,6 +38,41 @@ template:
               | selectattr("state", "eq", "off")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
+              | map(attribute='entity_id')
+              | list
+            }}
+
+      - name: Count inside lights on
+        icon: mdi:lightbulb
+        state: >-
+          {{ this.attributes.on | default([], true) | count }}
+        attributes:
+          "on": >-
+            {{
+              states.light
+              | selectattr("state", "eq", "on")
+              | rejectattr("attributes.is_hue_group", "defined")
+              | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "in", [
+                "light.voortuin_lamp",
+                "light.achtertuin_lamp_1",
+                "light.achtertuin_lamp_2",
+              ])
+              | map(attribute='entity_id')
+              | list
+            }}
+          "off": >-
+            {{
+              states.light
+              | selectattr("state", "eq", "off")
+              | rejectattr("attributes.is_hue_group", "defined")
+              | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "in", [
+                "light.voortuin_lamp",
+                "light.achtertuin_lamp_1",
+                "light.achtertuin_lamp_2",
+              ])
               | map(attribute='entity_id')
               | list
             }}

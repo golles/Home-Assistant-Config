@@ -41,7 +41,7 @@ automation:
       - condition: or
         conditions:
           - condition: numeric_state
-            entity_id: sensor.count_lights_on
+            entity_id: sensor.count_inside_lights_on
             above: 0
           - condition: numeric_state
             entity_id: sensor.count_speakers_on
@@ -61,7 +61,7 @@ automation:
           title: Niemand meer thuis
           message: >-
             Dit staat nog aan:
-            {% if states("sensor.count_lights_on") not in ["unknown", "0"] %}{{ states("sensor.count_lights_on") }}💡 {% endif %}
+            {% if states("sensor.count_inside_lights_on") not in ["unknown", "0"] %}{{ states("sensor.count_inside_lights_on") }}💡 {% endif %}
             {% if states("sensor.count_tvs_on") not in ["unknown", "0"] %}{{ states("sensor.count_tvs_on") }}📺  {% endif %}
             {% if states("sensor.count_speakers_on") not in ["unknown", "0"] %}{{ states("sensor.count_speakers_on") }}🔊 {% endif %}
           data:
