@@ -12,7 +12,7 @@ ios:
       show_in_watch: true
 
 automation:
-  - id: ios_action_going_to_sleep
+  - id: ios_action_everything_off
     alias: iOS action - Alles uit
     mode: single
     max_exceeded: silent
