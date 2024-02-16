@@ -112,16 +112,16 @@ automation:
     max_exceeded: silent
     trigger:
       - platform: numeric_state
-        entity_id: sensor.achtertuin_lichtsterkte_illuminance
-        above: 34000
+        entity_id: sensor.achtertuin_sensor_illuminance
+        above: 15000
       - platform: state
         entity_id: sensor.zon_positie
         from: Voor
         to: Achter
     condition:
       - condition: numeric_state
-        entity_id: sensor.achtertuin_lichtsterkte_illuminance
-        above: 34000
+        entity_id: sensor.achtertuin_sensor_illuminance
+        above: 15000
       - condition: state
         entity_id: sensor.zon_positie
         state: Achter
