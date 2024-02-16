@@ -124,24 +124,47 @@ cards:
             entity: sensor.moon
             name: Maan
 
-  - type: grid
-    columns: 3
-    square: true
+  - type: vertical-stack
     cards:
-      - type: picture
-        image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-        tap_action:
-          action: url
-          url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+      - type: custom:mushroom-title-card
+        subtitle: Radars
 
-      - type: picture
-        image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
-        tap_action:
-          action: url
-          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
+      - type: grid
+        columns: 3
+        square: true
+        cards:
+          - type: picture
+            image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+            tap_action:
+              action: url
+              url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
 
-      - type: picture
-        image: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
-        tap_action:
-          action: url
-          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+          - type: picture
+            image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
+            tap_action:
+              action: url
+              url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
+
+          - type: picture
+            image: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+            tap_action:
+              action: url
+              url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+
+  - type: conditional
+    conditions:
+      - entity: sensor.blitzortung_lightning_counter
+        state_not: '0'
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:mushroom-title-card
+          subtitle: Onweer
+        - type: map
+          entities:
+            - entity: zone.home
+          geo_location_sources:
+            - blitzortung
+          default_zoom: 10
+          aspect_ratio: '80%'
+          auto_fit: true
