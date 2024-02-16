@@ -97,8 +97,8 @@ rest_command:
         dict(
           software_version = device_attr(device_id("sensor.particulate_matter_pm_10"), "sw_version").split(" ")[0],
           sensordatavalues = [
-            dict(value_type = "P1", value = states("sensor.particulate_matter_pm_10")),
-            dict(value_type = "P2", value = states("sensor.particulate_matter_pm_2_5")),
+            dict(value_type = "P1", value = states("sensor.particulate_matter_pm_10") | float),
+            dict(value_type = "P2", value = states("sensor.particulate_matter_pm_2_5") | float),
           ],
         ) | to_json
       }}
@@ -107,7 +107,6 @@ rest_command:
     url: https://api-rrd.madavi.de/data.php
     method: POST
     headers:
-      X-Pin: 0
       X-Sensor: !secret luftdaten_x_sensor
     content_type: application/json
     payload: >-
@@ -115,9 +114,9 @@ rest_command:
         dict(
           software_version = device_attr(device_id("sensor.particulate_matter_pm_10"), "sw_version").split(" ")[0],
           sensordatavalues = [
-            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10")),
-            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5")),
-            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10") | float),
+            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5") | float),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal") | int),
           ],
         ) | to_json
       }}
@@ -132,9 +131,9 @@ rest_command:
       {{
         dict(
           sensordatavalues = [
-            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10")),
-            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5")),
-            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+            dict(value_type = "SDS_P1", value = states("sensor.particulate_matter_pm_10") | float),
+            dict(value_type = "SDS_P2", value = states("sensor.particulate_matter_pm_2_5") | float),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal") | int),
           ],
         ) | to_json
       }}
@@ -151,9 +150,9 @@ rest_command:
         dict(
           software_version = device_attr(device_id("sensor.particulate_matter_humidity"), "sw_version").split(" ")[0],
           sensordatavalues = [
-            dict(value_type = "humidity", value = states("sensor.particulate_matter_humidity")),
-            dict(value_type = "pressure", value = states("sensor.particulate_matter_pressure")),
-            dict(value_type = "temperature", value = states("sensor.particulate_matter_temperature")),
+            dict(value_type = "humidity", value = states("sensor.particulate_matter_humidity") | float),
+            dict(value_type = "pressure", value = (states("sensor.particulate_matter_pressure") | float * 100) | round),
+            dict(value_type = "temperature", value = states("sensor.particulate_matter_temperature") | float),
           ],
         ) | to_json
       }}
@@ -162,7 +161,6 @@ rest_command:
     url: https://api-rrd.madavi.de/data.php
     method: POST
     headers:
-      X-Pin: 0
       X-Sensor: !secret luftdaten_x_sensor
     content_type: application/json
     payload: >-
@@ -170,10 +168,10 @@ rest_command:
         dict(
           software_version = device_attr(device_id("sensor.particulate_matter_humidity"), "sw_version").split(" ")[0],
           sensordatavalues = [
-            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity")),
-            dict(value_type = "BME280_pressure", value = states("sensor.particulate_matter_pressure")),
-            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature")),
-            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity") | float),
+            dict(value_type = "BME280_pressure", value = (states("sensor.particulate_matter_pressure") | float * 100) | round),
+            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature") | float),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal") | int),
           ],
         ) | to_json
       }}
@@ -188,10 +186,10 @@ rest_command:
       {{
         dict(
           sensordatavalues = [
-            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity")),
-            dict(value_type = "BME280_pressure", value = states("sensor.particulate_matter_pressure")),
-            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature")),
-            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal")),
+            dict(value_type = "BME280_humidity", value = states("sensor.particulate_matter_humidity") | float),
+            dict(value_type = "BME280_pressure", value = states("sensor.particulate_matter_pressure") | float),
+            dict(value_type = "BME280_temperature", value = states("sensor.particulate_matter_temperature") | float),
+            dict(value_type = "signal", value = states("sensor.particulate_matter_wifi_signal") | int),
           ],
         ) | to_json
       }}
