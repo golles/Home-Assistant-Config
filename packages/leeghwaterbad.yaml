@@ -3,7 +3,6 @@ multiscrape:
     resource: https://spurd.booqi.me/client/subscriptions
     scan_interval: 10800
     form_submit:
-      submit_once: true
       resource: https://spurd.booqi.me/client/login
       select: "#login_form"
       input:
@@ -44,7 +43,6 @@ multiscrape:
     resource: https://spurd.booqi.me/client/orders
     scan_interval: 10800
     form_submit:
-      submit_once: true
       resource: https://spurd.booqi.me/client/login
       select: "#login_form"
       input:

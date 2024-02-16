@@ -8,7 +8,6 @@ multiscrape:
     resource: https://carwashplus.carwash-cms.com/customerportal/Transaction
     scan_interval: 10800
     form_submit:
-      submit_once: true
       resource: https://carwashplus.carwash-cms.com/customerportal/Account/Login
       select: "#loginForm > form"
       input:
