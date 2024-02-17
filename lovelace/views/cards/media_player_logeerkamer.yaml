@@ -1,5 +1,5 @@
 type: custom:mini-media-player
-entity: media_player.googlehome6234
+entity: media_player.logeerkamer
 name: Google Home
 icon: mdi:radio
 artwork: cover
@@ -18,41 +18,41 @@ shortcuts:
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: https://icecast.omroep.nl/radio1-bb-mp3
         media_content_type: audio/mp4
     - cover: /local/radio/npo2.png
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: https://icecast.omroep.nl/radio2-bb-mp3
         media_content_type: audio/mp4
     - cover: /local/radio/npo3fm.png
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: https://icecast.omroep.nl/3fm-bb-mp3
         media_content_type: audio/mp4
     - cover: /local/radio/qmusic.png
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: https://stream.qmusic.nl/qmusic/mp3
         media_content_type: audio/mp4
     - cover: /local/radio/radio10.png
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: http://19993.live.streamtheworld.com/RADIO10.mp3
         media_content_type: audio/mp4
     - cover: /local/radio/538.jpg
       type: service
       id: media_player.play_media
       data:
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         media_content_id: https://18973.live.streamtheworld.com/RADIO538.mp3
         media_content_type: audio/mp4

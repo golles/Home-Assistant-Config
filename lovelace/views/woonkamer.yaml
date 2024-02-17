@@ -85,7 +85,7 @@ cards:
           - type: tile
             entity: light.tv
           - type: tile
-            entity: light.wled_skull
+            entity: light.skull
           - type: tile
             entity: light.keuken
             name: Keuken
@@ -174,10 +174,10 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.woonkamer_temperature
+            entity: sensor.woonkamer_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.woonkamer_humidity
+            entity: sensor.woonkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
             entity: sensor.epo1_illuminance
@@ -197,7 +197,7 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: automation.automatisch_licht_aan_in_de_woonkamer
+            entity: automation.woonkamer_automatisch_aan_uit_door_aanwezigheid
             name: Automatisch licht
             icon: mdi:lightbulb-auto
           - type: tile

@@ -8,7 +8,7 @@ cards:
     title: Home Assistant
     show_header_toggle: false
     entities:
-      - entity: sensor.last_boot
+      - entity: sensor.system_monitor_last_boot
       - entity: sensor.uptime
       - entity: sensor.mariadb_size
         icon: mdi:database

@@ -6,7 +6,7 @@
     - platform: time
       at: input_datetime.covers_down
     - platform: numeric_state # For days when it turns dark early.
-      entity_id: sensor.achtertuin_sensor_illuminance
+      entity_id: sensor.achtertuin_sensor_licht
       below: 40
       for:
         minutes: 5

@@ -16,7 +16,7 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: binary_sensor.badkamer_beweging_motion
+        entity: binary_sensor.badkamer_beweging_beweging
         icon: mdi:motion-sensor
       - type: entity
         entity: binary_sensor.douche_beweging_occupancy
@@ -76,13 +76,13 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.badkamer_temperature
+            entity: sensor.badkamer_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.badkamer_humidity
+            entity: sensor.badkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
-            entity: sensor.badkamer_beweging_light_level
+            entity: sensor.badkamer_beweging_licht
             name: Lichtsterkte
           - type: tile
             entity: sensor.tandenborstel_battery

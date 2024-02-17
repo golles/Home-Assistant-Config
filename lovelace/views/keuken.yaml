@@ -77,10 +77,10 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.woonkamer_temperature
+            entity: sensor.woonkamer_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.woonkamer_humidity
+            entity: sensor.woonkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
             entity: sensor.woonkamer_beweging_1_illuminance_lux

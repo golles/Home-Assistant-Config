@@ -15,19 +15,19 @@ cards:
       - type: entities
         title: Woonkamer
         entities:
-          - entity: sensor.woonkamer_temperature
+          - entity: sensor.woonkamer_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.woonkamer_humidity
+              - entity: sensor.woonkamer_luchtvochtigheid
                 name: Luchtvochtigheid
-          - entity: sensor.mi_air_purifier_3_3h_temperature
+          - entity: sensor.air_purifier_temperature
             type: custom:multiple-entity-row
             name: Air purifier
             state_header: Temperatuur
             entities:
-              - entity: sensor.mi_air_purifier_3_3h_humidity
+              - entity: sensor.air_purifier_humidity
                 type: custom:multiple-entity-row
                 name: Luchtvochtigheid
           - type: custom:fold-entity-row
@@ -35,16 +35,16 @@ cards:
               type: section
               label:
             entities:
-              - entity: binary_sensor.ru1141249024_battery_state
-              - entity: binary_sensor.va1805654016_battery_state
-              - entity: binary_sensor.va1923094528_battery_state
-              - entity: binary_sensor.va3030325248_battery_state
-              - entity: binary_sensor.woonkamer_power
-              - entity: sensor.woonkamer_heating
+              - entity: binary_sensor.ru1141249024_batterij
+              - entity: binary_sensor.va1805654016_batterij
+              - entity: binary_sensor.va1923094528_batterij
+              - entity: binary_sensor.va3030325248_batterij
+              - entity: binary_sensor.woonkamer_vermogen
+              - entity: sensor.woonkamer_verwarmen
               - entity: sensor.woonkamer_tado_mode
-              - entity: binary_sensor.woonkamer_early_start
-              - entity: binary_sensor.woonkamer_link
-              - entity: binary_sensor.woonkamer_open_window
+              - entity: binary_sensor.woonkamer_vroege_start
+              - entity: binary_sensor.woonkamer_connectiviteit
+              - entity: binary_sensor.woonkamer_raam
               - entity: binary_sensor.woonkamer_overlay
       - type: history-graph
         entities:
@@ -56,25 +56,25 @@ cards:
       - type: entities
         title: Slaapkamer
         entities:
-          - entity: sensor.slaapkamer_temperature
+          - entity: sensor.slaapkamer_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.slaapkamer_humidity
+              - entity: sensor.slaapkamer_luchtvochtigheid
                 name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
               label:
             entities:
-              - entity: binary_sensor.va2677479424_battery_state
-              - entity: binary_sensor.slaapkamer_power
-              - entity: sensor.slaapkamer_heating
+              - entity: binary_sensor.va2677479424_batterij
+              - entity: binary_sensor.slaapkamer_vermogen
+              - entity: sensor.slaapkamer_verwarmen
               - entity: sensor.slaapkamer_tado_mode
-              - entity: binary_sensor.slaapkamer_early_start
-              - entity: binary_sensor.slaapkamer_link
-              - entity: binary_sensor.slaapkamer_open_window
+              - entity: binary_sensor.slaapkamer_vroege_start
+              - entity: binary_sensor.slaapkamer_connectiviteit
+              - entity: binary_sensor.slaapkamer_raam
               - entity: binary_sensor.slaapkamer_overlay
       - type: history-graph
         entities:
@@ -86,25 +86,25 @@ cards:
       - type: entities
         title: Kledingkamer
         entities:
-          - entity: sensor.kledingkamer_temperature
+          - entity: sensor.kledingkamer_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.kledingkamer_humidity
+              - entity: sensor.kledingkamer_luchtvochtigheid
                 name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
               label:
             entities:
-              - entity: binary_sensor.va3382122496_battery_state
-              - entity: binary_sensor.kledingkamer_power
-              - entity: sensor.kledingkamer_heating
+              - entity: binary_sensor.va3382122496_batterij
+              - entity: binary_sensor.kledingkamer_vermogen
+              - entity: sensor.kledingkamer_verwarmen
               - entity: sensor.kledingkamer_tado_mode
-              - entity: binary_sensor.kledingkamer_early_start
-              - entity: binary_sensor.kledingkamer_link
-              - entity: binary_sensor.kledingkamer_open_window
+              - entity: binary_sensor.kledingkamer_vroege_start
+              - entity: binary_sensor.kledingkamer_connectiviteit
+              - entity: binary_sensor.kledingkamer_raam
               - entity: binary_sensor.kledingkamer_overlay
       - type: history-graph
         entities:
@@ -116,25 +116,25 @@ cards:
       - type: entities
         title: Logeerkamer
         entities:
-          - entity: sensor.logeerkamer_temperature
+          - entity: sensor.logeerkamer_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.logeerkamer_humidity
+              - entity: sensor.logeerkamer_luchtvochtigheid
                 name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
               label:
             entities:
-              - entity: binary_sensor.va4103542784_battery_state
-              - entity: binary_sensor.logeerkamer_power
-              - entity: sensor.logeerkamer_heating
+              - entity: binary_sensor.va4103542784_batterij
+              - entity: binary_sensor.logeerkamer_vermogen
+              - entity: sensor.logeerkamer_verwarmen
               - entity: sensor.logeerkamer_tado_mode
-              - entity: binary_sensor.logeerkamer_early_start
-              - entity: binary_sensor.logeerkamer_link
-              - entity: binary_sensor.logeerkamer_open_window
+              - entity: binary_sensor.logeerkamer_vroege_start
+              - entity: binary_sensor.logeerkamer_connectiviteit
+              - entity: binary_sensor.logeerkamer_raam
               - entity: binary_sensor.logeerkamer_overlay
       - type: history-graph
         entities:
@@ -146,12 +146,12 @@ cards:
       - type: entities
         title: Badkamer
         entities:
-          - entity: sensor.badkamer_temperature
+          - entity: sensor.badkamer_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.badkamer_humidity
+              - entity: sensor.badkamer_luchtvochtigheid
                 name: Luchtvochtigheid
           - entity: sensor.badkamer_klimaat_temperature
             type: custom:multiple-entity-row
@@ -165,13 +165,13 @@ cards:
               type: section
               label:
             entities:
-              - entity: binary_sensor.va1788876800_battery_state
-              - entity: binary_sensor.badkamer_power
-              - entity: sensor.badkamer_heating
+              - entity: binary_sensor.va1788876800_batterij
+              - entity: binary_sensor.badkamer_vermogen
+              - entity: sensor.badkamer_verwarmen
               - entity: sensor.badkamer_tado_mode
-              - entity: binary_sensor.badkamer_early_start
-              - entity: binary_sensor.badkamer_link
-              - entity: binary_sensor.badkamer_open_window
+              - entity: binary_sensor.badkamer_vroege_start
+              - entity: binary_sensor.badkamer_connectiviteit
+              - entity: binary_sensor.badkamer_raam
               - entity: binary_sensor.badkamer_overlay
       - type: history-graph
         entities:
@@ -183,25 +183,25 @@ cards:
       - type: entities
         title: Zolder
         entities:
-          - entity: sensor.zolder_temperature
+          - entity: sensor.zolder_temperatuur
             type: custom:multiple-entity-row
             name: Tado
             state_header: Temperatuur
             entities:
-              - entity: sensor.zolder_humidity
+              - entity: sensor.zolder_luchtvochtigheid
                 name: Luchtvochtigheid
           - type: custom:fold-entity-row
             head:
               type: section
               label:
             entities:
-              - entity: binary_sensor.va2979272704_battery_state
-              - entity: binary_sensor.zolder_power
-              - entity: sensor.zolder_heating
+              - entity: binary_sensor.va2979272704_batterij
+              - entity: binary_sensor.zolder_vermogen
+              - entity: sensor.zolder_verwarmen
               - entity: sensor.zolder_tado_mode
-              - entity: binary_sensor.zolder_early_start
-              - entity: binary_sensor.zolder_link
-              - entity: binary_sensor.zolder_open_window
+              - entity: binary_sensor.zolder_vroege_start
+              - entity: binary_sensor.zolder_connectiviteit
+              - entity: binary_sensor.zolder_raam
               - entity: binary_sensor.zolder_overlay
       - type: history-graph
         entities:

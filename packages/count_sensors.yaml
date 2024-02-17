@@ -181,7 +181,7 @@ template:
           "on": >-
             {{
               states.media_player
-              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
+              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.logeerkamer"])
               | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
               | map(attribute='entity_id')
               | list
@@ -189,7 +189,7 @@ template:
           "off": >-
             {{
               states.media_player
-              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.googlehome6234"])
+              | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.logeerkamer"])
               | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
               | map(attribute='entity_id')
               | list

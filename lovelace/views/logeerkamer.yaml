@@ -56,7 +56,7 @@ cards:
       - type: custom:mushroom-title-card
         subtitle: Apparaten
 
-      - !include cards/media_player_googlehome6234.yaml
+      - !include cards/media_player_logeerkamer.yaml
 
       - type: grid
         columns: 2
@@ -113,10 +113,10 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.logeerkamer_temperature
+            entity: sensor.logeerkamer_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.logeerkamer_humidity
+            entity: sensor.logeerkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
             entity: sensor.logeerkamer_beweging_illuminance_lux

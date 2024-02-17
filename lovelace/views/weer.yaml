@@ -26,9 +26,6 @@ cards:
       {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
 
   - type: weather-forecast
-    entity: weather.huis
-    forecast_type: hourly
-  - type: weather-forecast
     entity: weather.knmi_purmerend
     forecast_type: daily
 
@@ -84,13 +81,13 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.tomorrow_io_huis_tree_pollen_index
+            entity: sensor.tomorrow_io_tree_pollen_index
             name: Bomen
           - type: tile
-            entity: sensor.tomorrow_io_huis_grass_pollen_index
+            entity: sensor.tomorrow_io_grass_pollen_index
             name: Grassen
           - type: tile
-            entity: sensor.tomorrow_io_huis_weed_pollen_index
+            entity: sensor.tomorrow_io_weed_pollen_index
             name: Onkruiden
 
   - type: vertical-stack
@@ -112,16 +109,16 @@ cards:
           - type: tile
             entity: sensor.zonsondergang
           - type: tile
-            entity: sensor.current_uv_index
+            entity: sensor.openuv_huidig_uv_niveau
             name: UV-index
           - type: tile
-            entity: sensor.current_uv_level
+            entity: sensor.openuv_huidige_uv_index
             name: UV-niveau
           - type: tile
-            entity: binary_sensor.protection_window
+            entity: binary_sensor.openuv_bescherming_venster
             name: Zonbescherming
           - type: tile
-            entity: sensor.moon
+            entity: sensor.moon_fase
             name: Maan
 
   - type: vertical-stack

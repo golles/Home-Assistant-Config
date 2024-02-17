@@ -16,7 +16,7 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: binary_sensor.achtertuin_sensor_motion
+        entity: binary_sensor.achtertuin_sensor_beweging
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
@@ -95,7 +95,7 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.achtertuin_sensor_illuminance
+            entity: sensor.achtertuin_sensor_licht
             name: Lichtsterkte
 
   - type: vertical-stack

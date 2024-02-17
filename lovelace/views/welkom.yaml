@@ -136,7 +136,7 @@ cards:
           - type: tile
             entity: light.tv
           - type: tile
-            entity: light.wled_skull
+            entity: light.skull
           - type: conditional
             conditions:
               - entity: light.kerstboom
@@ -267,7 +267,7 @@ cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: template
-            entity: sensor.hal_sensor_temperature
+            entity: sensor.hal_sensor_temperatuur
             content: >-
               {{ states(entity) }}°C
             icon: mdi:thermometer
@@ -275,7 +275,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.hal_sensor_motion
+            entity: binary_sensor.hal_sensor_beweging
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
@@ -367,7 +367,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.kledingkamer_beweging_motion
+            entity: binary_sensor.kledingkamer_beweging_beweging
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
@@ -463,7 +463,7 @@ cards:
             entity: cover.logeerkamer
             name: Rolgordijn
 
-      - !include cards/media_player_googlehome6234.yaml
+      - !include cards/media_player_logeerkamer.yaml
 
   - type: vertical-stack
     cards:
@@ -485,7 +485,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.badkamer_beweging_motion
+            entity: binary_sensor.badkamer_beweging_beweging
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
@@ -606,7 +606,7 @@ cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: template
-            entity: binary_sensor.achtertuin_sensor_motion
+            entity: binary_sensor.achtertuin_sensor_beweging
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}

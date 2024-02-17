@@ -3,7 +3,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.zoldertrap_beweging_motion
+      entity_id: binary_sensor.zoldertrap_beweging_beweging
       to: "on"
   condition:
     condition: and
@@ -12,7 +12,7 @@
         entity_id: binary_sensor.zolder_beweging
         state: "on"
       - condition: numeric_state
-        entity_id: sensor.overloop_sensor_2_light_level
+        entity_id: sensor.overloop_sensor_2_licht
         below: 10
       - condition: or
         conditions:

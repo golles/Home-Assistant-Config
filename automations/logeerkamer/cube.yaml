@@ -13,14 +13,14 @@
       flip_side_1:
         - variables:
             stream: https://stream.qmusic.nl/qmusic/mp3
-            speaker: media_player.googlehome6234
+            speaker: media_player.logeerkamer
 
         - choose:
             - conditions:
                 condition: or
                 conditions:
-                  - "{{ state_attr('media_player.googlehome6234', 'media_content_id') == None }}"
-                  - "{{ stream not in state_attr('media_player.googlehome6234', 'media_content_id') }}"
+                  - "{{ state_attr('media_player.logeerkamer', 'media_content_id') == None }}"
+                  - "{{ stream not in state_attr('media_player.logeerkamer', 'media_content_id') }}"
               sequence:
                 - service: media_player.volume_set
                   data:
@@ -41,7 +41,7 @@
       flip_side_4:
         - service: media_player.turn_off
           target:
-            entity_id: media_player.googlehome6234
+            entity_id: media_player.logeerkamer
 
       rotate_left_side_0:
         - service: light.turn_on
@@ -59,16 +59,16 @@
       rotate_left_side_1:
         - service: media_player.volume_down
           target:
-            entity_id: media_player.googlehome6234
+            entity_id: media_player.logeerkamer
       rotate_right_side_1:
         - service: media_player.volume_up
           target:
-            entity_id: media_player.googlehome6234
+            entity_id: media_player.logeerkamer
 
       shake:
         - service: media_player.volume_mute
           target:
-            entity_id: media_player.googlehome6234
+            entity_id: media_player.logeerkamer
           data:
             is_volume_muted: >-
-              {{ not state_attr("media_player.googlehome6234", "is_volume_muted") }}
+              {{ not state_attr("media_player.logeerkamer", "is_volume_muted") }}

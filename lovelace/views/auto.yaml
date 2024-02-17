@@ -29,21 +29,21 @@ cards:
           top: 10%
           left: 10%
       - type: state-label
-        entity: sensor.golf_75_apk_expiration
+        entity: sensor.golf_7_5_apk_expiration
         prefix: "APK: "
         style:
           color: white
           top: 95%
           left: 20%
       - type: state-label
-        entity: binary_sensor.golf_75_liability_insured
+        entity: binary_sensor.golf_7_5_liability_insured
         prefix: "Verzekerd: "
         style:
           color: white
           top: 95%
           left: 53%
       - type: state-label
-        entity: binary_sensor.golf_75_pending_recall
+        entity: binary_sensor.golf_7_5_pending_recall
         prefix: "Terugroep: "
         style:
           color: white

@@ -16,7 +16,7 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: binary_sensor.hal_sensor_motion
+        entity: binary_sensor.hal_sensor_beweging
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
@@ -58,10 +58,10 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.hal_sensor_temperature
+            entity: sensor.hal_sensor_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.hal_sensor_light_level
+            entity: sensor.hal_sensor_licht
             name: Lichtsterkte
 
   - type: vertical-stack
@@ -184,6 +184,6 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: switch.hal_sensor_motion
+            entity: switch.hal_sensor_bewegingssensor_ingeschakeld
             name: Automatisch licht
             icon: mdi:lightbulb-auto

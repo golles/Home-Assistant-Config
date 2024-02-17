@@ -5,7 +5,7 @@
   trigger:
     - platform: numeric_state
       id: xmas_on
-      entity_id: sensor.achtertuin_sensor_illuminance
+      entity_id: sensor.achtertuin_sensor_licht
       below: 60
       for:
         minutes: 5
@@ -43,12 +43,12 @@
       from: "off"
       to: "on"
     - platform: state
-      entity_id: binary_sensor.achtertuin_sensor_motion
+      entity_id: binary_sensor.achtertuin_sensor_beweging
       from: "off"
       to: "on"
   condition:
     - condition: numeric_state
-      entity_id: sensor.achtertuin_sensor_illuminance
+      entity_id: sensor.achtertuin_sensor_licht
       below: 10
   action:
     - alias: Lights on
@@ -56,7 +56,7 @@
       data:
         transition: 2
       target:
-        entity_id: scene.achtertuin_helder_2
+        entity_id: scene.achtertuin_helder
 
     - alias: Wait a little
       delay:

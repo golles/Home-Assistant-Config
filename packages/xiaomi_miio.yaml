@@ -14,4 +14,4 @@ template:
       - name: Woonkamer luchtkwaliteit
         state: >-
           {% from "aqi.jinja" import pm25 %}
-          {{ pm25(states("sensor.mi_air_purifier_3_3h_pm2_5")) }}
+          {{ pm25(states("sensor.air_purifier_pm2_5")) }}

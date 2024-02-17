@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.badkamer_beweging
       cool_down: 120
       light_entity: light.badkamer
-      illuminance_entity: sensor.badkamer_beweging_light_level
+      illuminance_entity: sensor.badkamer_beweging_licht
       illuminance_below: 15
       day_start_time: 08:00:00
       day_scene: scene.badkamer_helder

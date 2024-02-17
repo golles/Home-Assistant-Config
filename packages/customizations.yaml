@@ -9,6 +9,6 @@ homeassistant:
       icon: mdi:motion-sensor
 
   customize:
-    light.wled_skull:
+    light.skull:
       friendly_name: Skull
       icon: mdi:skull

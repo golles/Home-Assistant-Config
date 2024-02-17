@@ -45,13 +45,13 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.overloop_sensor_2_temperature
+            entity: sensor.overloop_sensor_2_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.overloop_sensor_2_light_level
+            entity: sensor.overloop_sensor_2_licht
             name: Lichtsterkte
           - type: tile
-            entity: binary_sensor.overloop_sensor_2_motion
+            entity: binary_sensor.overloop_sensor_2_beweging
             name: Beweging
 
   - type: vertical-stack
@@ -64,11 +64,11 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.overloop_sensor_1_temperature
+            entity: sensor.overloop_sensor_1_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.overloop_sensor_1_light_level
+            entity: sensor.overloop_sensor_1_licht
             name: Lichtsterkte
           - type: tile
-            entity: binary_sensor.overloop_sensor_1_motion
+            entity: binary_sensor.overloop_sensor_1_beweging
             name: Beweging

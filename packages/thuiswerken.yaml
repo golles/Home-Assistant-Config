@@ -37,12 +37,12 @@ automation:
         entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
         state: "on"
       - condition: state
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         state: playing
     action:
       - service: media_player.turn_off
         data:
-          entity_id: media_player.googlehome6234
+          entity_id: media_player.logeerkamer
 
   - id: home_office_meeting
     alias: Thuiswerken, stop muziek bij vergadering
@@ -57,7 +57,7 @@ automation:
         entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
         state: "on"
       - condition: state
-        entity_id: media_player.googlehome6234
+        entity_id: media_player.logeerkamer
         state: playing
       - condition: state
         entity_id: sensor.tt_macbook_frontmost_app
@@ -67,7 +67,7 @@ automation:
     action:
       - service: media_player.volume_mute
         data:
-          entity_id: media_player.googlehome6234
+          entity_id: media_player.logeerkamer
           is_volume_muted: true
 
       - wait_for_trigger:
@@ -87,9 +87,9 @@ automation:
             sequence:
               - service: media_player.volume_mute
                 data:
-                  entity_id: media_player.googlehome6234
+                  entity_id: media_player.logeerkamer
                   is_volume_muted: false
         default:
           - service: media_player.turn_off
             data:
-              entity_id: media_player.googlehome6234
+              entity_id: media_player.logeerkamer

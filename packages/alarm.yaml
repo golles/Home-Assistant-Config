@@ -59,11 +59,11 @@ automation:
             sequence:
               - alias: Disable the motion sensor
                 service: switch.turn_off
-                entity_id: switch.zoldertrap_sensor_motion
+                entity_id: switch.zoldertrap_beweging_bewegingssensor_ingeschakeld
         default:
           - alias: Enable the motion sensor
             service: switch.turn_on
-            entity_id: switch.zoldertrap_sensor_motion
+            entity_id: switch.zoldertrap_beweging_bewegingssensor_ingeschakeld
 
   # - id: alarm_trigger_lights
   #   alias: Alarm - Melding in huis
@@ -152,17 +152,17 @@ automation:
           - binary_sensor.woonkamer_beweging_2_occupancy
           - binary_sensor.epo1_occupancy
           - binary_sensor.epo2_occupancy
-          - binary_sensor.hal_sensor_motion
+          - binary_sensor.hal_sensor_beweging
           - binary_sensor.toilet_beweging_occupancy
-          - binary_sensor.overloop_sensor_1_motion
+          - binary_sensor.overloop_sensor_1_beweging
           # Eerste verdieping.
-          - binary_sensor.overloop_sensor_2_motion
-          - binary_sensor.kledingkamer_beweging_motion
-          - binary_sensor.badkamer_beweging_motion
+          - binary_sensor.overloop_sensor_2_beweging
+          - binary_sensor.kledingkamer_beweging_beweging
+          - binary_sensor.badkamer_beweging_beweging
           - binary_sensor.logeerkamer_beweging_occupancy
           - binary_sensor.slaapkamer_beweging_occupancy
           # Tweede verdieping.
-          - binary_sensor.zoldertrap_beweging_motion
+          - binary_sensor.zoldertrap_beweging_beweging
           - binary_sensor.zolder_beweging_1_occupancy
           - binary_sensor.zolder_beweging_2_occupancy
         to: "on"

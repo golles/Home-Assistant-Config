@@ -1,47 +1,47 @@
 homeassistant:
   customize:
-    "binary_sensor.ru1141249024_battery_state":
+    "binary_sensor.ru1141249024_batterij":
       friendly_name: Thermostaat batterij
-    "binary_sensor.ru1141249024_connection_state":
+    "binary_sensor.ru1141249024_connectiestatus":
       friendly_name: Thermostaat verbinding
-    "binary_sensor.va1805654016_battery_state":
+    "binary_sensor.va1805654016_batterij":
       friendly_name: Woonkamer batterij
-    "binary_sensor.va1805654016_connection_state":
+    "binary_sensor.va1805654016_connectiestatus":
       friendly_name: Woonkamer verbinding
-    "binary_sensor.va1923094528_battery_state":
+    "binary_sensor.va1923094528_batterij":
       friendly_name: Woonkamer batterij
-    "binary_sensor.va1923094528_connection_state":
+    "binary_sensor.va1923094528_connectiestatus":
       friendly_name: Woonkamer verbinding
-    "binary_sensor.va3030325248_battery_state":
+    "binary_sensor.va3030325248_batterij":
       friendly_name: Woonkamer batterij
-    "binary_sensor.va3030325248_connection_state":
+    "binary_sensor.va3030325248_connectiestatus":
       friendly_name: Woonkamer verbinding
-    "binary_sensor.va2677479424_battery_state":
+    "binary_sensor.va2677479424_batterij":
       friendly_name: Slaapkamer batterij
-    "binary_sensor.va2677479424_connection_state":
+    "binary_sensor.va2677479424_connectiestatus":
       friendly_name: Slaapkamer verbinding
-    "binary_sensor.va3382122496_battery_state":
+    "binary_sensor.va3382122496_batterij":
       friendly_name: Kledingkamer batterij
-    "binary_sensor.va3382122496_connection_state":
+    "binary_sensor.va3382122496_connectiestatus":
       friendly_name: Kledingkamer verbinding
-    "binary_sensor.va4103542784_battery_state":
+    "binary_sensor.va4103542784_batterij":
       friendly_name: Logeerkamer batterij
-    "binary_sensor.va4103542784_connection_state":
+    "binary_sensor.va4103542784_connectiestatus":
       friendly_name: Logeerkamer verbinding
-    "binary_sensor.va1788876800_battery_state":
+    "binary_sensor.va1788876800_batterij":
       friendly_name: Badkamer batterij
-    "binary_sensor.va1788876800_connection_state":
+    "binary_sensor.va1788876800_connectiestatus":
       friendly_name: Badkamer verbinding
-    "binary_sensor.va2979272704_battery_state":
+    "binary_sensor.va2979272704_batterij":
       friendly_name: Zolder batterij
-    "binary_sensor.va2979272704_connection_state":
+    "binary_sensor.va2979272704_connectiestatus":
       friendly_name: Zolder verbinding
 
 climate:
   - platform: generic_thermostat
     name: Elektrische kachel
     heater: switch.elektrische_kachel
-    target_sensor: sensor.logeerkamer_temperature
+    target_sensor: sensor.logeerkamer_temperatuur
     min_temp: 5
     max_temp: 25
     initial_hvac_mode: "off"

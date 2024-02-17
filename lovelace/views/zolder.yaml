@@ -91,10 +91,10 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.zolder_temperature
+            entity: sensor.zolder_temperatuur
             name: Temperatuur
           - type: tile
-            entity: sensor.zolder_humidity
+            entity: sensor.zolder_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
             entity: sensor.zolder_beweging_2_illuminance_lux
