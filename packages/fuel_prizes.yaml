@@ -49,7 +49,7 @@ sensor:
     headers:
       Content-Type: application/json; charset=utf-8
     payload: >-
-      { "serviceStationId": "6ca71ccf2", "updateDB": false, "includeServiceImages": fals }
+      { "serviceStationId": "6ca71ccf2", "updateDB": false, "includeServiceImages": false }
     value_template: >-
       {% set price = namespace(value = "unavailable") %}
       {% for product in value_json.station.prices %}
