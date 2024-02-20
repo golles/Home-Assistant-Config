@@ -29,7 +29,7 @@ homekit:
       - sensor.particulate_matter_pm_2_5
       - sensor.toilet_klimaat_humidity
       - sensor.toilet_klimaat_temperature
-      - switch.adguard_protection
+      - switch.adguard_home_primary_bescherming
   entity_config:
     cover.keuken:
       name: Keuken rolgordijn
@@ -41,5 +41,5 @@ homekit:
       name: Voorraadkast
     light.skull:
       name: Skull
-    switch.adguard_protection:
+    switch.adguard_home_primary_bescherming:
       name: Internet bescherming

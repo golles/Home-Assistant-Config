@@ -67,6 +67,30 @@ cards:
       method: name
 
   - type: entities
+    title: AdGuard Home primair
+    show_header_toggle: false
+    entities:
+      - sensor.adguard_home_primary_dns_query_s
+      - sensor.adguard_home_primary_aantal_dns_query_s_geblokkeerd
+      - sensor.adguard_home_primary_dns_query_s_geblokkeerd_ratio
+      - sensor.adguard_home_primary_gemiddelde_verwerkingssnelheid
+      - switch.adguard_home_primary_bescherming
+      - switch.adguard_home_primary_filteren
+      - switch.adguard_home_primary_ouderlijk_toezicht
+
+  - type: entities
+    title: AdGuard secundair
+    show_header_toggle: false
+    entities:
+      - sensor.adguard_home_secondary_dns_query_s
+      - sensor.adguard_home_secondary_aantal_dns_query_s_geblokkeerd
+      - sensor.adguard_home_secondary_dns_query_s_geblokkeerd_ratio
+      - sensor.adguard_home_secondary_gemiddelde_verwerkingssnelheid
+      - switch.adguard_home_secondary_bescherming
+      - switch.adguard_home_secondary_filteren
+      - switch.adguard_home_secondary_ouderlijk_toezicht
+
+  - type: entities
     show_header_toggle: false
     entities:
       - type: custom:fold-entity-row
