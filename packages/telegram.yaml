@@ -101,13 +101,13 @@ automation:
                     🌤️ *Weer thuis*:
 
                     *Temperatuur*:               {{ state_attr("weather.knmi_purmerend", "temperature") }} °C
-                    *Gevoelstemperatuur*: {{ states("sensor.knmi_purmerend_gevoelstemperatuur") }} °C
+                    *Gevoelstemperatuur*: {{ states("sensor.knmi_gevoelstemperatuur") }} °C
                     *Luchtvochtigheid*:       {{ state_attr("weather.knmi_purmerend", "humidity") }} %
                     *Luchtdruk*:                    {{ state_attr("weather.knmi_purmerend", "pressure") }} hPa
 
                     {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") }}
 
-                    {% if is_state("binary_sensor.knmi_purmerend_waarschuwing", "on") %}
+                    {% if is_state("binary_sensor.knmi_waarschuwing", "on") %}
                     ⚠️ *Waarschuwing*
-                    {{ state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing") }}
+                    {{ state_attr("binary_sensor.knmi_waarschuwing", "description") }}
                     {% endif %}

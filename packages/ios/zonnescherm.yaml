@@ -126,10 +126,10 @@ automation:
         entity_id: sensor.zon_positie
         state: Achter
       - condition: numeric_state
-        entity_id: sensor.knmi_max_temp_vandaag
+        entity_id: sensor.knmi_max_temperatuur_vandaag
         above: 19
       - condition: state
-        entity_id: binary_sensor.knmi_regen_vandaag
+        entity_id: sensor.knmi_neerslag_vandaag
         state: "off"
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact

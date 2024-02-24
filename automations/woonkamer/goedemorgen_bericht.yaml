@@ -48,12 +48,12 @@
           Goede{{ daypart() }}!
           Vandaag is het {{ day() }} {{ now().day }} {{ month() }}.
           {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") in ["", "----", None] %}
-            {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+            {{ states("sensor.knmi_weersverwachting") }}
           {% else %}
             {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
           {% endif %}
 
-          {{ iif(is_state("binary_sensor.knmi_purmerend_waarschuwing", "on"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
+          {{ iif(is_state("binary_sensor.knmi_waarschuwing", "on"), state_attr("binary_sensor.knmi_waarschuwing", "description"), "") }}
 
     - alias: Wait till the message has finished
       wait_for_trigger:

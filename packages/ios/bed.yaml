@@ -125,7 +125,7 @@ automation:
       - alias: Act based on predicted temperature
         if:
           - condition: numeric_state
-            entity_id: sensor.knmi_max_temp_vandaag
+            entity_id: sensor.knmi_max_temperatuur_vandaag
             above: 27
         then:
           - alias: It will be warm today, set south facing covers to their preference position

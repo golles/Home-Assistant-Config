@@ -23,7 +23,7 @@ filter:
       {% endif %}
     {% endif %}
 
-    {% if is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_purmerend_waarschuwing", "off") %}
+    {% if is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off") %}
       {%- set data.entities = data.entities + [{
         "type": "tile",
         "entity": "binary_sensor.meteoalarm",
@@ -98,7 +98,7 @@ filter:
         icon: mdi:alert
         vertical: true
         color: orange
-    - entity_id: binary_sensor.knmi_purmerend_waarschuwing
+    - entity_id: binary_sensor.knmi_waarschuwing
       state: "on"
       options:
         type: tile

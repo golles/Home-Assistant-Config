@@ -33,7 +33,7 @@ template:
         state: >-
           {{
             is_state("cover.zonnescherm_template", "open") or
-            states("sensor.knmi_max_temp_vandaag") | int >= 23
+            states("sensor.knmi_max_temperatuur_vandaag") | int >= 23
           }}
         availability: >-
-          {{ is_number(states("sensor.knmi_max_temp_vandaag")) }}
+          {{ is_number(states("sensor.knmi_max_temperatuur_vandaag")) }}

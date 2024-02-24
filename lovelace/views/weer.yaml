@@ -19,15 +19,22 @@ cards:
   - type: custom:mushroom-title-card
     title: Weer
 
-  - type: markdown
-    content: >-
-      {{ iif(state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), state_attr("binary_sensor.knmi_purmerend_waarschuwing", "Waarschuwing"), "") }}
-      {{ iif(state_attr("binary_sensor.meteoalarm", "description"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
-      {{ states("sensor.knmi_purmerend_korte_dagverwachting") }}
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: weather-forecast
+        entity: weather.knmi_purmerend
+        forecast_type: hourly
 
-  - type: weather-forecast
-    entity: weather.knmi_purmerend
-    forecast_type: daily
+      - type: weather-forecast
+        entity: weather.knmi_purmerend
+        forecast_type: daily
+        show_current: false
+
+      - type: markdown
+        content: >-
+          {{ states("sensor.knmi_weersverwachting") }}
+          {{ iif(is_state("binary_sensor.knmi_waarschuwing", "on"), state_attr("binary_sensor.knmi_waarschuwing", "description"), "") }}
+          {{ iif(is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
 
   - type: vertical-stack
     cards:
@@ -39,17 +46,23 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: sensor.knmi_purmerend_gevoelstemperatuur
+            entity: sensor.knmi_gevoelstemperatuur
             name: Gevoelstemperatuur
           - type: tile
-            entity: sensor.knmi_purmerend_dauwpunt
+            entity: sensor.knmi_dauwpunt
             name: Dauwpunt
           - type: tile
-            entity: sensor.knmi_purmerend_relatieve_luchtvochtigheid
-            name: Relatieve luchtvochtigheid
+            entity: sensor.knmi_luchtvochtigheid
+            name: Luchtvochtigheid
           - type: tile
-            entity: sensor.knmi_purmerend_wind
+            entity: sensor.knmi_windsnelheid
             name: Wind
+          - type: tile
+            entity: sensor.knmi_weercode
+            name: Code
+          - type: tile
+            entity: sensor.knmi_globale_stralingsintensiteit
+            name: Stralingsintensiteit
 
   - type: vertical-stack
     cards:
@@ -61,7 +74,7 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: binary_sensor.knmi_purmerend_waarschuwing
+            entity: binary_sensor.knmi_waarschuwing
             name: KNMI
             layout:
           - type: tile
