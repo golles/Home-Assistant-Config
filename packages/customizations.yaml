@@ -9,6 +9,53 @@ homeassistant:
       icon: mdi:motion-sensor
 
   customize:
+    light.badkamer:
+      icon: mdi:ceiling-light
+    light.bedlampje_links:
+      icon: mdi:desk-lamp
+    light.bedlampje_rechts:
+      icon: mdi:desk-lamp
+    light.achtertuin_groep:
+      icon: mdi:coach-lamp
+    light.eettafel:
+      icon: mdi:vanity-light
+    light.hal:
+      icon: mdi:ceiling-light
+    light.kerstboom:
+      icon: mdi:pine-tree
+    light.keuken:
+      icon: mdi:ceiling-light
+    light.kledingkamer:
+      icon: mdi:ceiling-light
+    light.logeerkamer:
+      icon: mdi:ceiling-light
+    light.overloop:
+      icon: mdi:ceiling-light
     light.skull:
       friendly_name: Skull
       icon: mdi:skull
+    light.slaapkamer_plafond_groep:
+      icon: mdi:ceiling-light
+    light.toilet:
+      icon: mdi:ceiling-light
+    light.tv:
+      icon: mdi:television-ambient-light
+    light.voortuin:
+      icon: mdi:coach-lamp
+    light.woonkamer:
+      icon: mdi:lamps
+    light.zolder:
+      icon: mdi:ceiling-light
+
+    scene.wooneet_avond:
+      friendly_name: Avond
+      icon: mdi:weather-sunset
+    scene.wooneet_eten:
+      friendly_name: Eten
+      icon: mdi:food-turkey
+    scene.wooneet_film:
+      friendly_name: Film
+      icon: mdi:movie-open
+    scene.wooneet_nacht:
+      friendly_name: Nacht
+      icon: mdi:weather-night
