@@ -3,7 +3,7 @@
   mode: single
   trigger:
     - platform: state
-      entity_id: binary_sensor.woonkamer_beweging
+      entity_id: binary_sensor.overloop_sensor_1_beweging
       to: "on"
   condition:
     - condition: state
