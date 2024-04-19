@@ -35,9 +35,9 @@ shortcuts:
       data:
         media_player: media_player.lg_c9
         source: Nintendo Switch
-    - cover: /local/tv/plex.png
+    - cover: /local/tv/jellyfin.png
       type: script
       id: script.play_tv_with_source
       data:
         media_player: media_player.lg_c9
-        source: Plex
+        source: Jellyfin

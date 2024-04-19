@@ -24,8 +24,12 @@ everything_off:
       {{
         states.media_player
         | rejectattr('state', 'in', ['off', 'unavailable'])
-        | rejectattr('entity_id', 'match', 'media_player.plex')
         | rejectattr('entity_id', 'in', ['media_player.mediabox_homekit'])
+        | rejectattr('entity_id', 'in',
+            integration_entities("jellyfin")
+            | select("match", "media_player.")
+            | list
+          )
         | rejectattr('entity_id', 'in', exclude_ids)
         | map(attribute='entity_id')
         | join(', ')

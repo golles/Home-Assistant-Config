@@ -2,13 +2,13 @@ media_player:
   - platform: universal
     name: Woonkamer
     children:
-      - media_player.plex_plex_for_lg_lg_oled65c9pla
+      - media_player.lg_smart_tv
       - media_player.mediabox
       - media_player.lg_c9
     active_child_template: >-
       {% set source = state_attr("media_player.lg_c9", "source") %}
-      {% if source == "Plex" %}
-        media_player.plex_plex_for_lg_lg_oled65c9pla
+      {% if source == "Jellyfin" %}
+        media_player.lg_smart_tv
       {% elif source == "Ziggo" %}
         media_player.mediabox
       {% else %}

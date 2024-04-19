@@ -4,7 +4,7 @@
     Wanneer er op de deurbel gedrukt wordt:
       - Stuur een melding naar Sander wanneer hij aan het thuiswerken is.
       - Stuur een melding naar de tv en start de stream wanneer de tv aan staat.
-      - Pauzeer de tv als Netflix, Plex of Youtube aan staat.
+      - Pauzeer de tv als Jellyfin, Netflix of Youtube aan staat.
       - Pauzeer Ziggo wanneer die geen lineaire tv afspeelt.
   mode: single
   trigger:
@@ -17,8 +17,8 @@
         message_title: Ding dong!
         message_text: Iemand staat bij de deur
         tv_sources_to_pause:
+          - Jellyfin
           - Netflix
-          - Plex
           - YouTube
         tv_current_source: "{{ state_attr('media_player.lg_c9', 'source') }}" # Will be None when the tv is off.
         internal_url: !secret internal_url
@@ -54,7 +54,7 @@
                 - conditions:
                     - "{{ state_attr('media_player.lg_c9', 'source') in tv_sources_to_pause }}"
                   sequence:
-                    - alias: Pause tv when Netflix, Plex or Youtube is active
+                    - alias: Pause tv for given sources
                       service: media_player.media_pause
                       entity_id: media_player.lg_c9
 

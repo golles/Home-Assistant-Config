@@ -80,14 +80,14 @@
       entity_id: media_player.lg_c9
       attribute: source
       from:
+        - Jellyfin
         - Netflix
-        - Plex
     - platform: state
       entity_id: media_player.lg_c9
       attribute: source
       to:
+        - Jellyfin
         - Netflix
-        - Plex
     - platform: numeric_state
       id: illuminance
       entity_id: sensor.epo1_illuminance
@@ -103,7 +103,7 @@
       value_template: >-
         {{
           trigger.id != "illuminance" or
-          trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Netflix", "Plex"]
+          trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Jellyfin", "Netflix"]
         }}
   action:
     - if:
@@ -111,8 +111,8 @@
           entity_id: media_player.lg_c9
           attribute: source
           state:
+            - Jellyfin
             - Netflix
-            - Plex
       then:
         - alias: Turn on movie scenes
           service: scene.turn_on
