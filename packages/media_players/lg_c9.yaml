@@ -42,6 +42,18 @@ media_player:
             {{ not state_attr("media_player.lg_c9", "is_volume_muted") }}
         target:
           entity_id: media_player.lg_c9
+      media_play:
+        service: media_player.media_play
+        target:
+          entity_id: media_player.lg_c9
+      media_pause:
+        service: media_player.media_pause
+        target:
+          entity_id: media_player.lg_c9
+      media_play_pause:
+        service: media_player.media_play_pause
+        target:
+          entity_id: media_player.lg_c9
     attributes:
       is_volume_muted: media_player.lg_c9|is_volume_muted
 
