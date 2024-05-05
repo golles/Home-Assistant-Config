@@ -18,16 +18,3 @@ automation:
           data:
             group: ddns
             url: /dashboard-systems/internet
-
-      - service: shell_command.update_remote_ip
-        data:
-          username: !secret direct_admin_username
-          password: !secret direct_admin_password
-          server: !secret direct_admin_server
-          domain: !secret direct_admin_domain
-          subdomain: !secret direct_admin_subdomain
-          ip: >-
-            {{ states("sensor.myip") }}
-
-shell_command:
-  update_remote_ip: '/config/custom_scripts/directadmin.sh "{{ username }}" "{{ password }}" "{{ server }}" "{{ domain }}" "{{ subdomain }}" "{{ ip }}"'
