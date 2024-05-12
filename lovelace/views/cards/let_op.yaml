@@ -106,6 +106,14 @@ filter:
         icon: mdi:alert
         vertical: true
         color: orange
+    - entity_id: binary_sensor.aurora_52_4
+      state: "on"
+      options:
+        type: tile
+        name: Noorderlicht
+        icon: mdi:aurora
+        vertical: true
+        color: teal
     - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"
       state: "*high" # Matches "anything containing high.
       options:
