@@ -58,7 +58,7 @@ cards:
           action: more-info
 
       - type: alarm-control-panel
-        entity: alarm_control_panel.huis_alarm
+        entity: alarm_control_panel.alarmo
         content_info: state
         tap_action:
           action: navigate

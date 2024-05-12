@@ -33,7 +33,7 @@ EOF
 # Resouce list for custom components.
 CUSTOM_COMPONENTS=$(cat <<'EOF'
 custom_components/afvalbeheer               https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer
-custom_components/apple_tv                  https://github.com/postlund/hass-atv-beta
+custom_components/alarmo                    https://github.com/nielsfaber/alarmo
 custom_components/blitzortung               https://github.com/mrk-its/homeassistant-blitzortung
 custom_components/car_wash                  https://github.com/Limych/ha-car_wash
 custom_components/flightradar24             https://github.com/AlexandrErohin/home-assistant-flightradar24
