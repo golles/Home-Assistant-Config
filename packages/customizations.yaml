@@ -1,7 +1,5 @@
 homeassistant:
   customize_glob:
-    "binary_sensor.*raam_contact":
-      device_class: window
     "group.*kamer_motion":
       device_class: motion
 
@@ -9,6 +7,41 @@ homeassistant:
       icon: mdi:motion-sensor
 
   customize:
+    # Remove door suffix from doors.
+    binary_sensor.achterdeur_contact:
+      friendly_name: Achterdeur
+    binary_sensor.balkondeur_contact:
+      friendly_name: Balkondeur
+    binary_sensor.poortdeur_contact:
+      friendly_name: Poort
+    binary_sensor.voordeur_contact:
+      friendly_name: Voordeur
+    binary_sensor.voorraadkastdeur_contact:
+      friendly_name: Voorraadkastdeur
+
+    # Remove door suffix from windows and set proper device class.
+    binary_sensor.achterraam_contact:
+      device_class: window
+      friendly_name: Achterraam
+    binary_sensor.badkamerraam_contact:
+      device_class: window
+      friendly_name: Badkamerraam
+    binary_sensor.keukenraam_contact:
+      device_class: window
+      friendly_name: Keukenraam
+    binary_sensor.kledingkamerraam_contact:
+      device_class: window
+      friendly_name: Kledingkamerraam
+    binary_sensor.logeerkamerraam_contact:
+      device_class: window
+      friendly_name: Logeerkamerraam
+    binary_sensor.slaapkamerraam_contact:
+      device_class: window
+      friendly_name: Slaapkamerraam
+    binary_sensor.zolderraam_contact:
+      device_class: window
+      friendly_name: Zolderraam
+
     light.badkamer:
       icon: mdi:ceiling-light
     light.bedlampje_links:
