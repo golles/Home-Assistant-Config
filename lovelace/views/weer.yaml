@@ -178,3 +178,19 @@ cards:
           default_zoom: 10
           aspect_ratio: "80%"
           auto_fit: true
+        - type: grid
+          columns: 2
+          square: false
+          cards:
+            - type: tile
+              entity: sensor.blitzortung_lightning_counter
+              name: Aantal
+              state_content:
+                - state
+                - last-changed
+            - type: tile
+              entity: sensor.blitzortung_lightning_distance
+              name: Afstand
+              state_content:
+                - state
+                - last-changed
