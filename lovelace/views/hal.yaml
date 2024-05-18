@@ -130,7 +130,7 @@ cards:
         subtitle: Watermeter
         subtitle_tap_action:
           action: navigate
-          navigation_path: /config/devices/device/17534b3bf3454794b9ff69fa3fecb013
+          navigation_path: /config/devices/device/425c78c444f128b6f6cc374e7b26b15c
 
       - type: grid
         columns: 2

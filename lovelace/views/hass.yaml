@@ -9,8 +9,11 @@ cards:
     show_header_toggle: false
     entities:
       - entity: sensor.system_monitor_last_boot
+        name: Host last boot
       - entity: sensor.uptime
+        name: Container last boot
       - entity: sensor.mariadb_size
+        name: MariaDB size
         icon: mdi:database
       - type: divider
       - entity: sensor.current_version
