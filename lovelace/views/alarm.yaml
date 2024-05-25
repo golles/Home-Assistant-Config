@@ -53,7 +53,7 @@ cards:
       - binary_sensor.overloop_sensor_1_beweging
       # Eerste verdieping.
       - binary_sensor.overloop_sensor_2_beweging
-      - binary_sensor.kledingkamer_beweging_beweging
+      - binary_sensor.kledingkamer_beweging_occupancy
       - binary_sensor.badkamer_beweging_beweging
       - binary_sensor.logeerkamer_beweging_occupancy
       - binary_sensor.slaapkamer_beweging_occupancy
@@ -92,7 +92,7 @@ cards:
       - binary_sensor.overloop_sensor_1_beweging
       # Eerste verdieping.
       - binary_sensor.overloop_sensor_2_beweging
-      - binary_sensor.kledingkamer_beweging_beweging
+      - binary_sensor.kledingkamer_beweging_occupancy
       - binary_sensor.badkamer_beweging_beweging
       - binary_sensor.logeerkamer_beweging_occupancy
       - binary_sensor.slaapkamer_beweging_occupancy

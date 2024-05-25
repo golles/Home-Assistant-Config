@@ -367,7 +367,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.kledingkamer_beweging_beweging
+            entity: binary_sensor.kledingkamer_beweging_occupancy
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}

@@ -16,7 +16,7 @@ cards:
         hold_action:
           action: none
       - type: entity
-        entity: binary_sensor.kledingkamer_beweging_beweging
+        entity: binary_sensor.kledingkamer_beweging_occupancy
         icon: mdi:motion-sensor
 
   - type: custom:mushroom-title-card
@@ -80,7 +80,7 @@ cards:
             entity: sensor.kledingkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
-            entity: sensor.kledingkamer_beweging_licht
+            entity: sensor.kledingkamer_lichtsterkte_illuminance_lux
             name: Lichtsterkte
 
   - type: vertical-stack
