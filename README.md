@@ -53,11 +53,11 @@ If you like any of these blueprints, then you can import these into your own Hom
 Custom components that I've installed are set in the `CUSTOM_COMPONENTS` variable in the [update_resources](scripts/update_resources) script.
 There are also a few components that I've developed:
 
-| Component                                                               | Installations                                                                                     | Stars                                                                                                 |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| [KNMI](https://github.com/golles/ha-knmi)                               | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/knmi.svg)         | ![starts](https://img.shields.io/github/stars/golles/ha-knmi?style=for-the-badge)                     |
-| [Kamstrup 403](https://github.com/golles/ha-kamstrup_403)               | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/kamstrup_403.svg) | ![starts](https://img.shields.io/github/stars/golles/ha-kamstrup_403?style=for-the-badge)             |
-| [Kamstrup MC66C](https://github.com/golles/Home-Assistant-Sensor-MC66C) | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/mc66c.svg)        | ![starts](https://img.shields.io/github/stars/golles/Home-Assistant-Sensor-MC66C?style=for-the-badge) |
+| Component                                                               | Installations                                                                                            | Stars                                                                                                 |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [KNMI](https://github.com/golles/ha-knmi)                               | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/badges/knmi.svg)         | ![starts](https://img.shields.io/github/stars/golles/ha-knmi?style=for-the-badge)                     |
+| [Kamstrup 403](https://github.com/golles/ha-kamstrup_403)               | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/badges/kamstrup_403.svg) | ![starts](https://img.shields.io/github/stars/golles/ha-kamstrup_403?style=for-the-badge)             |
+| [Kamstrup MC66C](https://github.com/golles/Home-Assistant-Sensor-MC66C) | ![](https://raw.githubusercontent.com/golles/ha-active-installation-badges/main/badges/mc66c.svg)        | ![starts](https://img.shields.io/github/stars/golles/Home-Assistant-Sensor-MC66C?style=for-the-badge) |
 
 Interested in how I track custom component installs? See my [ha-active-installation-badges](https://github.com/golles/ha-active-installation-badges) repository.
 
