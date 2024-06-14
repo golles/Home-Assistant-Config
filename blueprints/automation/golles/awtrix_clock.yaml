@@ -57,6 +57,20 @@ blueprint:
       name: Weather entity
       description: Used for outisde temperature
       default: weather.home
+    dishwasher_entity:
+      selector:
+        entity:
+          domain: sensor
+      name: Dishwasher remaining time entity
+      description: Used for dishwasher remaining time
+      default: sensor.dishwasher_remaining_time
+    washing_machine_entity:
+      selector:
+        entity:
+          domain: sensor
+      name: Washing machine remaining time entity
+      description: Used for washing machine remaining time
+      default: sensor.washing_machine_remaining_time
     occupancy_entity:
       selector:
         entity:
@@ -89,6 +103,8 @@ trigger:
     entity_id:
       - !input temp_entity
       - !input weather_entity
+      - !input dishwasher_entity
+      - !input washing_machine_entity
 
 action:
   - variables:
@@ -96,6 +112,8 @@ action:
       button_entity: !input button_entity
       light_entity: !input light_entity
       temp_entity: !input temp_entity
+      dishwasher_entity: !input dishwasher_entity
+      washing_machine_entity: !input washing_machine_entity
       weather_entity: !input weather_entity
 
   - choose:
@@ -127,7 +145,7 @@ action:
             data:
               topic: "{{ topic }}/custom/temp-inside"
               payload: >-
-                {% if states(temp_entity) != None %}
+                {% if states(temp_entity) not in [None, "unknown"] %}
                   {{
                     dict(
                       text = states(temp_entity) | round ~ state_attr(temp_entity, "unit_of_measurement"),
@@ -140,11 +158,39 @@ action:
             data:
               topic: "{{ topic }}/custom/weather"
               payload: >-
-                {% if state_attr(weather_entity, "temperature") != None %}
+                {% if state_attr(weather_entity, "temperature") not in [None, "unknown"] %}
                   {{
                     dict(
                       text = state_attr(weather_entity, "temperature") | round ~ state_attr(weather_entity, "temperature_unit"),
                       icon = states(weather_entity),
+                    )
+                  }}
+                {% endif %}
+
+          - alias: Update dishwasher
+            service: mqtt.publish
+            data:
+              topic: "{{ topic }}/custom/dishwasher"
+              payload: >-
+                {% if states(dishwasher_entity) not in ["unknown", "unavailable"] %}
+                  {{
+                    dict(
+                      text = states(dishwasher_entity) | replace("minuten", ""),
+                      icon = "dishwasher",
+                    )
+                  }}
+                {% endif %}
+
+          - alias: Update washing machine
+            service: mqtt.publish
+            data:
+              topic: "{{ topic }}/custom/washing_machine"
+              payload: >-
+                {% if states(washing_machine_entity) not in ["unknown", "unavailable"] %}
+                  {{
+                    dict(
+                      text = states(washing_machine_entity) | replace("minuten", ""),
+                      icon = "washing_machine",
                     )
                   }}
                 {% endif %}

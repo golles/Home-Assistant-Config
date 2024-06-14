@@ -31,6 +31,10 @@ humidity            53495
 bio_afval           14764
 restafval           14765
 papier              42817
+
+# Appliances
+washing_machine     53358
+dishwasher          53366
 EOF
 )
 
