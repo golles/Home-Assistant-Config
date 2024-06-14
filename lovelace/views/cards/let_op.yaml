@@ -71,24 +71,6 @@ filter:
         type: tile
         vertical: true
 
-    # Batteries
-    - attributes:
-        device_class: battery
-        battery: "< 15"
-      options:
-        type: tile
-        icon: mdi:battery-10
-        vertical: true
-        color: red
-    - domain: binary_sensor
-      state: "on"
-      attributes:
-        device_class: battery
-      options:
-        type: tile
-        vertical: true
-        color: red
-
     # Weather related warnings
     - entity_id: binary_sensor.stookalert_noord_holland
       state: "on"

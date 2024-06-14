@@ -14,6 +14,8 @@ homeassistant:
       friendly_name: TV's aan
     sensor.count_speakers_on:
       friendly_name: Speakers aan
+    sensor.count_batteries_low:
+      friendly_name: Batterijen laag
 
 template:
   - sensor:
@@ -29,7 +31,7 @@ template:
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
               | rejectattr("entity_id", "search", "light.*_klok_*")
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           "off": >-
@@ -38,7 +40,7 @@ template:
               | selectattr("state", "eq", "off")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -59,7 +61,7 @@ template:
                 "light.achtertuin_lamp_1",
                 "light.achtertuin_lamp_2",
               ])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           "off": >-
@@ -73,7 +75,7 @@ template:
                 "light.achtertuin_lamp_1",
                 "light.achtertuin_lamp_2",
               ])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -92,7 +94,7 @@ template:
                 "binary_sensor.vaatwasser_door",
                 "binary_sensor.wasmachine_door",
               ])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           closed: >-
@@ -104,7 +106,7 @@ template:
                 "binary_sensor.vaatwasser_door",
                 "binary_sensor.wasmachine_door",
               ])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -119,7 +121,7 @@ template:
               states.binary_sensor
               | selectattr("state", "eq", "on")
               | selectattr("attributes.device_class", "==", "window")
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           closed: >-
@@ -127,7 +129,7 @@ template:
               states.binary_sensor
               | selectattr("state", "eq", "off")
               | selectattr("attributes.device_class", "==", "window")
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -140,14 +142,14 @@ template:
             {{
               states.media_player
               | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           "off": >-
             {{
               states.media_player
               | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -161,7 +163,7 @@ template:
               states.media_player
               | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
               | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           "off": >-
@@ -169,7 +171,7 @@ template:
               states.media_player
               | selectattr("entity_id", "in", ["media_player.lg_c9", "media_player.zolder"])
               | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
 
@@ -183,7 +185,7 @@ template:
               states.media_player
               | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.logeerkamer"])
               | rejectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
               | list
             }}
           "off": >-
@@ -191,6 +193,43 @@ template:
               states.media_player
               | selectattr("entity_id", "in", ["media_player.lg_soundbar", "media_player.logeerkamer"])
               | selectattr("state", "in", ["idle", "off", "unavailable", "unknown"])
-              | map(attribute='entity_id')
+              | map(attribute="entity_id")
+              | list
+            }}
+
+      - name: Count batteries_low
+        icon: mdi:battery-alert-variant-outline
+        state: >-
+          {{ this.attributes.low | default([], true) | count }}
+        attributes:
+          "low": >-
+            {%
+              set binary_sensors = states.binary_sensor
+              | selectattr("attributes.device_class", "==", "battery")
+              | selectattr("state", "eq", "on")
+              | list
+            %}
+            {%
+              set sensors = states.sensor
+              | selectattr("attributes.device_class", "==", "battery")
+              | selectattr("attributes.unit_of_measurement", "==", "%")
+              | selectattr("entity_id", "has_value")
+              | list
+            %}
+            {%
+              set low_sensors = sensors
+              | map(attribute="state")
+              | map("int")
+              | select("<=", 20)
+              | map("string")
+              | list
+            %}
+            {{
+              sensors
+              | selectattr("state", "in", low_sensors)
+              | map(attribute="entity_id")
+              | list
+              + binary_sensors
+              | map(attribute="entity_id")
               | list
             }}

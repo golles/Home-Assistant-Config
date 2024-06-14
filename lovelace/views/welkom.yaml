@@ -57,6 +57,26 @@ cards:
         hold_action:
           action: more-info
 
+      - type: conditional
+        conditions:
+          - condition: numeric_state
+            entity: sensor.count_batteries_low
+            above: 0
+        chip:
+          type: template
+          entity: sensor.count_batteries_low
+          icon: >-
+            {{ state_attr(entity, "icon") }}
+          icon_color: >-
+            {{ iif(states(entity) == "0", "grey", "red") }}
+          content: >-
+            {{ states(entity) ~ " laag" }}
+          tap_action:
+            action: navigate
+            navigation_path: /dashboard-status/batterijen
+          hold_action:
+            action: more-info
+
       - type: alarm-control-panel
         entity: alarm_control_panel.alarmo
         content_info: state
