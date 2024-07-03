@@ -7,8 +7,8 @@
       motion_entity: binary_sensor.woonkamer_bezetting
       cool_down: 60
       light_entity: light.wooneet
-      illuminance_entity: sensor.epo1_illuminance
-      illuminance_below: 8
+      illuminance_entity: sensor.epl_woonkamer_illuminance
+      illuminance_below: 1.2
       illuminance_above: 25
       day_start_time: 08:00:00
       day_scene: scene.wooneet_avond
@@ -28,7 +28,7 @@
       to: home
   condition:
     - condition: numeric_state
-      entity_id: sensor.epo1_illuminance
+      entity_id: sensor.epl_woonkamer_illuminance
       below: 8
   action:
     - alias: Turn on the evening scene
@@ -90,12 +90,12 @@
         - Netflix
     - platform: numeric_state
       id: illuminance
-      entity_id: sensor.epo1_illuminance
-      below: 8
+      entity_id: sensor.epl_woonkamer_illuminance
+      below: 1.2
   condition:
     - condition: numeric_state
-      entity_id: sensor.epo1_illuminance
-      below: 8
+      entity_id: sensor.epl_woonkamer_illuminance
+      below: 1.2
     - condition: state
       entity_id: light.woonkamer
       state: "on"

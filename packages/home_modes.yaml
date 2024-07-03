@@ -49,8 +49,8 @@ automation:
     mode: parallel
     trigger:
       - platform: numeric_state
-        entity_id: sensor.epo1_illuminance
-        below: 4
+        entity_id: sensor.epl_woonkamer_illuminance
+        below: 1
         for:
           minutes: 30
         id: woonkamer_avond

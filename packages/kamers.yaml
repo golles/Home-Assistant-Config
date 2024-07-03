@@ -40,8 +40,8 @@ template:
           {{
             is_state("binary_sensor.woonkamer_beweging_1_occupancy", "on") or
             is_state("binary_sensor.woonkamer_beweging_2_occupancy", "on") or
-            is_state("binary_sensor.epo1_occupancy", "on") or
-            is_state("binary_sensor.epo2_occupancy", "on")
+            is_state("binary_sensor.epl_woonkamer_occupancy", "on") or
+            is_state("binary_sensor.epl_eettafel_occupancy", "on")
           }}
 
       - name: Badkamer beweging
@@ -83,8 +83,8 @@ template:
           {% set motion_entities = [
             "binary_sensor.woonkamer_beweging_1_occupancy",
             "binary_sensor.woonkamer_beweging_2_occupancy",
-            "binary_sensor.epo1_occupancy",
-            "binary_sensor.epo2_occupancy"
+            "binary_sensor.epl_woonkamer_occupancy",
+            "binary_sensor.epl_eettafel_occupancy"
           ] %}
           {% set media_entities = ["media_player.lg_c9", "media_player.lg_soundbar"] %}
 

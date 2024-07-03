@@ -180,7 +180,7 @@ cards:
             entity: sensor.woonkamer_luchtvochtigheid
             name: Luchtvochtigheid
           - type: tile
-            entity: sensor.epo1_illuminance
+            entity: sensor.epl_woonkamer_illuminance
             name: Lichtsterkte
           - type: tile
             entity: sensor.woonkamer_luchtkwaliteit
