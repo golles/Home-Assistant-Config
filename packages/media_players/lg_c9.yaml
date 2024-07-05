@@ -2,14 +2,11 @@ media_player:
   - platform: universal
     name: Woonkamer
     children:
-      - media_player.lg_smart_tv
       - media_player.mediabox
       - media_player.lg_c9
     active_child_template: >-
       {% set source = state_attr("media_player.lg_c9", "source") %}
-      {% if source == "Jellyfin" %}
-        media_player.lg_smart_tv
-      {% elif source == "Ziggo" %}
+      {% if source == "Ziggo" %}
         media_player.mediabox
       {% else %}
         media_player.lg_c9
@@ -40,18 +37,6 @@ media_player:
         data:
           is_volume_muted: >-
             {{ not state_attr("media_player.lg_c9", "is_volume_muted") }}
-        target:
-          entity_id: media_player.lg_c9
-      media_play:
-        service: media_player.media_play
-        target:
-          entity_id: media_player.lg_c9
-      media_pause:
-        service: media_player.media_pause
-        target:
-          entity_id: media_player.lg_c9
-      media_play_pause:
-        service: media_player.media_play_pause
         target:
           entity_id: media_player.lg_c9
     attributes:
