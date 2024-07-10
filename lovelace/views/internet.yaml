@@ -7,22 +7,28 @@ cards:
   - type: vertical-stack
     cards:
       - type: markdown
-        title: Ziggo storingen
+        title: Ziggo meldingen
         entities:
           - sensor.ziggo_incidents
         content: >-
-          {% if not state_attr(config.entities[0], 'outages') -%}
+          {% set announcements = state_attr("sensor.ziggo_incidents", "announcements") | default([], true) %}
+          {% set outages = state_attr("sensor.ziggo_incidents", "outages") | default([], true) %}
+          {% set combined = announcements + outages %}
+
+          {% if combined | count == 0 %}
             Geen
           {% else %}
-            {% for outage in state_attr(config.entities[0], 'outages') -%}
-            **[{{ outage.status }}]: {{ outage.title }}**
+            {% for event in combined %}
+            **[{{ event.status }}]: {{ iif("title" in event, event.title, event.id) }}**
 
-            {{ outage.announcement }}
+            {{ event.announcement }}
 
-            Verwachte opgelost: {{ outage.expected_solv_time }}
+            Begint: {{ event.create_date | as_datetime }}
+            Verwachte opgelost: {{ event.expec_solv_time | as_datetime }}
+            Werkelijk opgelost: {{ event.solv_time | as_datetime }}
 
-            {%- endfor %}
-          {%- endif %}
+            {% endfor %}
+          {% endif %}
 
       - type: entities
         title: Internet
