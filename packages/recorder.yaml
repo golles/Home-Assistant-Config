@@ -1,3 +1,7 @@
 recorder:
   db_url: !secret mariadb_connection
   purge_keep_days: 31
+  exclude:
+    entities:
+      - sensor.watchman_missing_entities
+      - sensor.watchman_missing_services
