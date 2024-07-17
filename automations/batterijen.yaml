@@ -1,6 +1,6 @@
-- id: notification_battery_low_or_full
-  alias: "Notificatie: Batterij laag of vol"
-  description: Meldingen voor lage of volle batterij, alleen voor apparaten die belangrijk zijn
+- id: notification_low_battery
+  alias: "Notificatie: Batterij laag"
+  description: Meldingen voor lage batterij, alleen voor apparaten die belangrijk zijn
   mode: single
   trigger:
     - alias: Important devices getting low
@@ -13,34 +13,19 @@
         - sensor.tandenborstel_battery
       below: 25
 
-    - alias: Important devices getting full
-      platform: numeric_state
-      entity_id:
-        - sensor.iphone_van_golles_battery_level
-        - sensor.ipad_mini_van_golles_battery_level
-        - sensor.logeerkamer_battery
-        - sensor.keuken_battery
-        - sensor.tandenborstel_battery
-      above: 99
-
     - alias: Tado devices getting low
       platform: state
       entity_id:
-        - binary_sensor.va1788876800_battery_state
-        - binary_sensor.va1805654016_battery_state
-        - binary_sensor.va1923094528_battery_state
-        - binary_sensor.va2677479424_battery_state
-        - binary_sensor.va2979272704_battery_state
-        - binary_sensor.va3030325248_battery_state
-        - binary_sensor.va3382122496_battery_state
-        - binary_sensor.va4103542784_battery_state
+        - binary_sensor.va1788876800_batterij
+        - binary_sensor.va1805654016_batterij
+        - binary_sensor.va1923094528_batterij
+        - binary_sensor.va2677479424_batterij
+        - binary_sensor.va2979272704_batterij
+        - binary_sensor.va3030325248_batterij
+        - binary_sensor.va3382122496_batterij
+        - binary_sensor.va4103542784_batterij
       from: "off"
       to: "on"
-  condition:
-    - alias: Do not trigger for unknown -> 100, this happens after a HA restart
-      condition: template
-      value_template: >-
-        {{ not (trigger.to_state.state | int == 100 and trigger.from_state.state == "unknown") }}
   action:
     - variables:
         device_id: >-
@@ -49,18 +34,13 @@
           {{ device_attr(device_id, "model") }}
         area: >-
           {{ area_name(trigger.entity_id) }}
-        state: >-
-          {{ iif(trigger.to_state.state | int >= 99, "vol", "leeg") }}
-        title: >-
-          {{ iif(trigger.id == "stopped_charging", "clear_notification", "🔋 Batterij " ~ state ) }}
 
     - alias: Send message
       service: notify.sander
       data:
-        title: >-
-          {{ title }}
+        title: 🔋 Batterij leeg
         message: >-
-          {{ device_model ~ " batterij" ~ iif(area != None, " in de " ~ area, "") ~ " is " ~ state }}
+          {{ device_model ~ " batterij" ~ iif(area != None, " in de " ~ area, "") ~ " is leeg" }}
         data:
           group: battery
           url: /dashboard-status/batterijen
