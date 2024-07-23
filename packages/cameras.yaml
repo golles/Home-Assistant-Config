@@ -4,21 +4,21 @@ automation:
     mode: single
     trigger:
       - platform: numeric_state
-        entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-        below: 15
+        entity_id: sensor.epl_eettafel_illuminance
+        below: 2.2
         for:
           minutes: 10
       - platform: numeric_state
-        entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-        above: 25
+        entity_id: sensor.epl_eettafel_illuminance
+        above: 3
         for:
           minutes: 10
     action:
       - choose:
           - conditions:
               - condition: numeric_state
-                entity_id: sensor.woonkamer_lichtsterkte_illuminance_lux
-                below: 15
+                entity_id: sensor.epl_eettafel_illuminance
+                below: 2.2
             sequence:
               - service: shell_command.dlink_set_night_mode
                 data:

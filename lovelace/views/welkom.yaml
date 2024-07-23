@@ -214,7 +214,7 @@ cards:
             tap_action:
               action: more-info
           - type: template
-            entity: binary_sensor.keuken_beweging_occupancy
+            entity: binary_sensor.epl_keuken_zone_1_occupancy
             icon: mdi:motion-sensor
             icon_color: >-
               {{ iif(is_state(entity, "on"), "green", "grey") }}
