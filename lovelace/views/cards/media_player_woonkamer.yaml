@@ -11,8 +11,8 @@ hide:
   prev: true
   next: true
 shortcuts:
-  columns: 5
-  column_height: 60
+  columns: 6
+  column_height: 48
   buttons:
     - cover: /local/tv/ziggo.png
       type: service
@@ -41,3 +41,9 @@ shortcuts:
       data:
         media_player: media_player.lg_c9
         source: Jellyfin
+    - cover: /local/tv/iptv_smarters_pro.png
+      type: script
+      id: script.play_tv_with_source
+      data:
+        media_player: media_player.lg_c9
+        source: IPTVSmartersPro
