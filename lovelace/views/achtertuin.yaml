@@ -43,32 +43,19 @@ cards:
       - type: custom:mushroom-title-card
         subtitle: Afval
 
-      - type: custom:auto-entities
-        show_empty: true
-        card:
-          type: grid
-          columns: 2
-          square: false
-        card_param: cards
-        filter:
-          include:
-            - domain: sensor
-              attributes:
-                Wastecollector: purmerend
-              options:
-                type: custom:mushroom-template-card
-                tap_action:
-                  action: more-info
-                primary: >-
-                  {{ state_attr(entity, "friendly_name") }}
-                secondary: >-
-                  {{ iif("," in states(entity), states(entity).split(",")[0], states(entity)) }}
-                picture: >-
-                  {{ state_attr(entity, "entity_picture") }}
-        sort:
-          method: attribute
-          attribute: Days_until
-          numeric: true
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: tile
+            entity: sensor.purmerend_bio_afval
+            show_entity_picture: true
+          - type: tile
+            entity: sensor.purmerend_papier
+            show_entity_picture: true
+          - type: tile
+            entity: sensor.purmerend_restafval
+            show_entity_picture: true
 
   - type: vertical-stack
     cards:
