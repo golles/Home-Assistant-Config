@@ -11,7 +11,7 @@
         - sensor.logeerkamer_battery
         - sensor.keuken_battery
         - sensor.tandenborstel_battery
-      below: 25
+      below: 30
 
     - alias: Tado devices getting low
       platform: state
