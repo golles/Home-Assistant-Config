@@ -91,7 +91,7 @@
             - alias: Set car location based on last known location from SQL sensor
               service: device_tracker.see
               data:
-                dev_id: golf_7_5
+                dev_id: "{{ device_tracker_id }}"
                 gps:
                   - '{{ states("sensor.golf_7_5_last_known_location").split(", ")[0] }}'
                   - '{{ states("sensor.golf_7_5_last_known_location").split(", ")[1] }}'
