@@ -122,25 +122,8 @@ automation:
         event_data:
           actionName: Uit bed
     action:
-      - alias: Act based on predicted temperature
-        if:
-          - condition: numeric_state
-            entity_id: sensor.knmi_max_temperatuur_vandaag
-            above: 27
-        then:
-          - alias: It will be warm today, set south facing covers to their preference position
-            service: button.press
-            target:
-              entity_id:
-                - button.kledingkamer_my_position
-                - button.slaapkamer_my_position
-        else:
-          - alias: Open south facing covers
-            service: cover.open_cover
-            target:
-              entity_id:
-                - cover.kledingkamer
-                - cover.slaapkamer
+      - alias: Open south facing covers based on temperature
+        service: script.open_south_facing_covers_based_on_weather
 
       - alias: Set curtains to preference position
         service: button.press

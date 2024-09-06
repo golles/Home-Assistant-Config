@@ -12,33 +12,9 @@
       entity_id: input_boolean.guest_mode
       state: "off"
   action:
-    - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: cover.slaapkamer
-              attribute: current_position
-              below: 100
-          sequence:
-            - service: cover.open_cover
-              target:
-                entity_id: cover.slaapkamer
-    - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: cover.kledingkamer
-              attribute: current_position
-              below: 100
-          sequence:
-            - service: cover.open_cover
-              target:
-                entity_id: cover.kledingkamer
-    - choose:
-        - conditions:
-            - condition: numeric_state
-              entity_id: cover.logeerkamer
-              attribute: current_position
-              below: 86
-          sequence:
-            - service: button.press
-              target:
-                entity_id: button.logeerkamer_rolgordijn_voorkeurspositie
+    - alias: Open south facing covers based on temperature
+      service: script.open_south_facing_covers_based_on_weather
+
+    - service: button.press
+      target:
+        entity_id: button.logeerkamer_rolgordijn_voorkeurspositie
