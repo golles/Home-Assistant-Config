@@ -10,6 +10,7 @@ ios:
         color: "#ffffff"
       show_in_carplay: true
       show_in_watch: true
+      use_custom_colors: true
 
 automation:
   - id: ios_action_everything_off

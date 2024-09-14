@@ -8,6 +8,7 @@ ios:
       icon:
         icon: arrow-up-box
         color: "#000000"
+      use_custom_colors: true
 
     - name: Zonnescherm open
       background_color: "#ffff00"
@@ -17,6 +18,7 @@ ios:
       icon:
         icon: arrow-down-box
         color: "#000000"
+      use_custom_colors: true
 
     - name: Zonnescherm helemaal open
       background_color: "#ffff00"
@@ -28,6 +30,7 @@ ios:
         color: "#000000"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
 automation:
   - id: ios_action_awning_command

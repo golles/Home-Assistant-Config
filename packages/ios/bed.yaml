@@ -10,6 +10,7 @@ ios:
         color: "#ffffff"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
     - name: Gaan slapen
       background_color: "#4c00ff"
@@ -21,6 +22,7 @@ ios:
         color: "#ffffff"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
     - name: Uit bed
       background_color: "#4c00ff"
@@ -32,6 +34,7 @@ ios:
         color: "#ffffff"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
 automation:
   - id: ios_action_going_to_bed

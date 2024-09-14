@@ -10,6 +10,7 @@ ios:
         color: "#ff0000"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
     - name: Wekker gesnoozed
       background_color: "#000000"
@@ -21,6 +22,7 @@ ios:
         color: "#ff0000"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
 automation:
   - id: ios_action_alarm_clock_off

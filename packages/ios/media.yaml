@@ -10,6 +10,7 @@ ios:
         color: "#ffffff"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
     - name: Ziggo
       background_color: "#ffffff"
@@ -21,6 +22,7 @@ ios:
         color: "#f48c00"
       show_in_carplay: false
       show_in_watch: true
+      use_custom_colors: true
 
 automation:
   - id: ios_action_radio_qmusic
