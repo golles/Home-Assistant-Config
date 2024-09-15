@@ -91,11 +91,11 @@
     - platform: numeric_state
       id: illuminance
       entity_id: sensor.epl_eettafel_illuminance
-      below: 2.2
+      below: 4
   condition:
     - condition: numeric_state
       entity_id: sensor.epl_eettafel_illuminance
-      below: 2.2
+      below: 4
     - condition: state
       entity_id: light.woonkamer
       state: "on"
