@@ -23,6 +23,7 @@ template:
         icon: mdi:lightbulb
         state: >-
           {{ this.attributes.on | default([], true) | count }}
+        unit_of_measurement: aan
         attributes:
           "on": >-
             {{
@@ -48,6 +49,7 @@ template:
         icon: mdi:lightbulb
         state: >-
           {{ this.attributes.on | default([], true) | count }}
+        unit_of_measurement: aan
         attributes:
           "on": >-
             {{
@@ -84,6 +86,7 @@ template:
           {{ iif(this.state == "0", "mdi:door-closed", "mdi:door-open") }}
         state: >-
           {{ this.attributes.open | default([], true) | count }}
+        unit_of_measurement: open
         attributes:
           open: >-
             {{
@@ -115,6 +118,7 @@ template:
           {{ iif(this.state == "0", "mdi:window-closed", "mdi:window-open") }}
         state: >-
           {{ this.attributes.open | default([], true) | count }}
+        unit_of_measurement: open
         attributes:
           open: >-
             {{
@@ -137,6 +141,7 @@ template:
         icon: mdi:cast-connected
         state: >-
           {{ this.attributes.on | default([], true) | count }}
+        unit_of_measurement: aan
         attributes:
           "on": >-
             {{
@@ -157,6 +162,7 @@ template:
         icon: mdi:television
         state: >-
           {{ this.attributes.on | default([], true) | count }}
+        unit_of_measurement: aan
         attributes:
           "on": >-
             {{
@@ -179,6 +185,7 @@ template:
         icon: mdi:speaker
         state: >-
           {{ this.attributes.on | default([], true) | count }}
+        unit_of_measurement: aan
         attributes:
           "on": >-
             {{
@@ -201,6 +208,7 @@ template:
         icon: mdi:battery-alert-variant-outline
         state: >-
           {{ this.attributes.low | default([], true) | count }}
+        unit_of_measurement: laag
         attributes:
           "low": >-
             {%
