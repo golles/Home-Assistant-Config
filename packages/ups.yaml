@@ -5,6 +5,15 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.apc_back_ups_bx950mi_status
+    condition:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.apc_back_ups_bx950mi_status
+            state: unavailable
+          - condition: state
+            entity_id: sensor.apc_back_ups_bx950mi_self_test_result
+            state: In progress
     action:
       - alias: Sent a notification with the state
         service: notify.sander
