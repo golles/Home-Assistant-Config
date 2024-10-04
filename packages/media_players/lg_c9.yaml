@@ -62,9 +62,14 @@ script:
     mode: restart
     sequence:
       - if:
-          - condition: state
-            entity_id: media_player.lg_c9
-            state: "off"
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: media_player.lg_c9
+                state: "off"
+              - condition: state
+                entity_id: media_player.mediabox
+                state: "off"
         then:
           - alias: Turn on the mediabox
             action: media_player.turn_on

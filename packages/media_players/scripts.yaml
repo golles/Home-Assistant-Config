@@ -32,7 +32,7 @@ script:
           - wait_template: >
               {{ not is_state(media_player, "off") }}
             timeout:
-              seconds: 5
+              seconds: 10
             continue_on_timeout: false
 
       - alias: Set the source on the media player
