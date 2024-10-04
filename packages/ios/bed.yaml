@@ -41,14 +41,14 @@ automation:
     alias: iOS action - Naar bed
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Naar bed
-    action:
+    actions:
       - alias: Turn most of the devices off
-        service: script.everything_off
+        action: script.everything_off
         data:
           exclude_entity_ids:
             - light.woonkamer_groot_1
@@ -59,7 +59,7 @@ automation:
             - switch.gekleurde_licht
 
       - alias: Now turn some lights off with a transition
-        service: light.turn_off
+        action: light.turn_off
         data:
           entity_id: light.woonkamer
           transition: 30
@@ -76,7 +76,7 @@ automation:
                   }}
             sequence:
               - alias: Set the covers down time to be in a few seconds, so they all close
-                service: input_datetime.set_datetime
+                action: input_datetime.set_datetime
                 data:
                   entity_id: input_datetime.covers_down
                   time: >-
@@ -96,7 +96,7 @@ automation:
                 continue_on_timeout: false
 
       - alias: Turn on the bed lights
-        service: scene.turn_on
+        action: scene.turn_on
         data:
           transition: 2
         target:
@@ -106,30 +106,30 @@ automation:
     alias: iOS action - Gaan slapen
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Gaan slapen
-    action:
+    actions:
       - alias: Now turn everything off
-        service: script.everything_off
+        action: script.everything_off
 
   - id: ios_action_going_out_of_bed
     alias: iOS action - Uit bed
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Uit bed
-    action:
+    actions:
       - alias: Open south facing covers based on temperature
-        service: script.open_south_facing_covers_based_on_weather
+        action: script.open_south_facing_covers_based_on_weather
 
       - alias: Set curtains to preference position
-        service: button.press
+        action: button.press
         target:
           entity_id:
             - button.logeerkamer_rolgordijn_voorkeurspositie

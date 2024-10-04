@@ -21,18 +21,18 @@
   alias: Automatisch licht aan in de woonkamer wanneer iemand thuis komt
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.residents
       from: not_home
       to: home
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.epl_eettafel_illuminance
       below: 2.2
-  action:
+  actions:
     - alias: Turn on the evening scene
-      service: scene.turn_on
+      action: scene.turn_on
       target:
         entity_id: scene.wooneet_avond
       data:
@@ -42,21 +42,21 @@
   alias: Skull aan doen als de avond scene actief wordt
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: light.wooneet
       to: "off"
-    - platform: state
+    - trigger: state
       id: aan
       entity_id: scene.wooneet_avond
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: trigger
               id: aan
           sequence:
             - alias: Turn on the skull
-              service: light.turn_on
+              action: light.turn_on
               target:
                 entity_id: light.skull
               data:
@@ -67,7 +67,7 @@
                   - 0.299
       default:
         - alias: Turn off the skull
-          service: light.turn_off
+          action: light.turn_off
           target:
             entity_id: light.skull
 
@@ -75,24 +75,24 @@
   alias: TV verlichting aanpassen op basis van de bron
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: media_player.lg_c9
       attribute: source
       from:
         - Jellyfin
         - Netflix
-    - platform: state
+    - trigger: state
       entity_id: media_player.lg_c9
       attribute: source
       to:
         - Jellyfin
         - Netflix
-    - platform: numeric_state
+    - trigger: numeric_state
       id: illuminance
       entity_id: sensor.epl_eettafel_illuminance
       below: 4
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.epl_eettafel_illuminance
       below: 4
@@ -105,7 +105,7 @@
           trigger.id != "illuminance" or
           trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Jellyfin", "Netflix"]
         }}
-  action:
+  actions:
     - if:
         - condition: state
           entity_id: media_player.lg_c9
@@ -115,7 +115,7 @@
             - Netflix
       then:
         - alias: Turn on movie scenes
-          service: scene.turn_on
+          action: scene.turn_on
           data:
             entity_id:
               - scene.wooneet_film
@@ -128,17 +128,17 @@
               before: 00:00:00
           then:
             - alias: Turn on evening scene
-              service: scene.turn_on
+              action: scene.turn_on
               data:
                 entity_id: scene.wooneet_avond
           else:
             - alias: Turn on night scene
-              service: scene.turn_on
+              action: scene.turn_on
               data:
                 entity_id: scene.wooneet_nacht
 
         - alias: Turn off tv light
-          service: light.turn_off
+          action: light.turn_off
           target:
             entity_id: light.tv
 
@@ -146,27 +146,27 @@
   alias: Woonkamer automatisch aan/uit door film scene
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       id: disable
       entity_id: scene.wooneet_film
-    - platform: state
+    - trigger: state
       entity_id:
         - scene.wooneet_avond
         - scene.wooneet_eten
         - scene.wooneet_nacht
-    - platform: state
+    - trigger: state
       entity_id: light.tv
       to: "off"
-  action:
+  actions:
     - if:
         - condition: trigger
           id: disable
       then:
         - alias: Disable automatic lights
-          service: automation.turn_off
+          action: automation.turn_off
           entity_id: automation.woonkamer_automatisch_aan_uit_door_aanwezigheid
       else:
         - alias: Enable automatic lights
-          service: automation.turn_on
+          action: automation.turn_on
           entity_id: automation.woonkamer_automatisch_aan_uit_door_aanwezigheid

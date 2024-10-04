@@ -19,16 +19,16 @@ automation:
   - id: vacation_mode
     alias: Vakantie modus - automatisch activeren en deactiveren
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: group.residents
         to: not_home
         for: "24:00:00"
         id: aan
-      - platform: state
+      - trigger: state
         entity_id: group.residents
         to: home
-    action:
+    actions:
       - if:
           - condition: trigger
             id: aan
@@ -37,40 +37,40 @@ automation:
             state: "off"
         then:
           - alias: Turn on vacation mode
-            service: input_boolean.turn_on
+            action: input_boolean.turn_on
             entity_id: input_boolean.vacation_mode
         else:
           - alias: Turn off vacation mode
-            service: input_boolean.turn_off
+            action: input_boolean.turn_off
             entity_id: input_boolean.vacation_mode
 
   - id: vacation_mode_presence
     alias: Vakantie modus - aanwezigheid nabootsen
     mode: parallel
-    trigger:
-      - platform: numeric_state
+    triggers:
+      - trigger: numeric_state
         entity_id: sensor.epl_eettafel_illuminance
         below: 2.2
         for:
           minutes: 30
         id: woonkamer_avond
-      - platform: time
+      - trigger: time
         at: "23:30:00"
         id: tanden_poetsen
-      - platform: time
+      - trigger: time
         at: "00:45:00"
         id: nacht_toilet
-      - platform: time
+      - trigger: time
         at: "00:00:00"
         id: alles_uit
-    condition:
+    conditions:
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: "on"
       - condition: state
         entity_id: input_boolean.guest_mode
         state: "off"
-    action:
+    actions:
       - choose:
           - conditions:
               - condition: trigger
@@ -80,7 +80,7 @@ automation:
                 delay:
                   minutes: "{{ range(0, 15) | random }}"
               - alias: Turn on the light
-                service: light.turn_on
+                action: light.turn_on
                 data:
                   xy_color: [0.459, 0.408] # Helder
                   brightness: 1
@@ -88,13 +88,13 @@ automation:
                   entity_id: light.woonkamer_groot_2
               - alias: Wait till a certain time
                 wait_for_trigger:
-                  - platform: time
+                  - trigger: time
                     at: "22:00:00"
               - alias: Wait a little to randomize the behavior
                 delay:
                   minutes: "{{ range(0, 30) | random }}"
               - alias: Turn off the light
-                service: light.turn_off
+                action: light.turn_off
                 target:
                   entity_id: light.woonkamer_groot_2
 
@@ -107,14 +107,14 @@ automation:
                   minutes: "{{ range(0, 30) | random }}"
 
               - alias: Turn on the light
-                service: scene.turn_on
+                action: scene.turn_on
                 target:
                   entity_id: scene.badkamer_helder
               - alias: Wait a little to randomize the behavior
                 delay:
                   minutes: "{{ range(3, 5) | random }}"
               - alias: Turn off the light
-                service: light.turn_off
+                action: light.turn_off
                 target:
                   entity_id: light.badkamer
 
@@ -126,14 +126,14 @@ automation:
                 delay:
                   minutes: "{{ range(0, 30) | random }}"
               - alias: Turn on the light
-                service: scene.turn_on
+                action: scene.turn_on
                 target:
                   entity_id: scene.badkamer_ontspannen
               - alias: Wait a little to randomize the behavior
                 delay:
                   minutes: "{{ range(1, 3) | random }}"
               - alias: Turn off the light
-                service: light.turn_off
+                action: light.turn_off
                 target:
                   entity_id: light.badkamer
 
@@ -142,4 +142,4 @@ automation:
                 id: alles_uit
             sequence:
               - alias: Make sure everything is off
-                service: script.everything_off
+                action: script.everything_off

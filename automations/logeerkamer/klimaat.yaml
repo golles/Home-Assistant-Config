@@ -10,32 +10,32 @@
 - id: logeerkamer_electric_heater
   alias: Logeerkamer - Elektrische verwarming
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - binary_sensor.macbook_in_thuis_kantoor_en_aan
         - binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
       to: "on"
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.logeerkamer_bezetting
       to: "on"
       for:
         minutes: 5
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.logeerkamer_bezetting
       to: "off"
-  action:
+  actions:
     - if:
         - condition: state
           entity_id: binary_sensor.logeerkamer_bezetting
           state: "on"
       then:
         - alias: Turn electric heater on
-          service: climate.turn_on
+          action: climate.turn_on
           target:
             entity_id: climate.elektrische_kachel
       else:
         - alias: Turn electric heater off
-          service: climate.turn_off
+          action: climate.turn_off
           target:
             entity_id: climate.elektrische_kachel

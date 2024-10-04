@@ -19,15 +19,15 @@
 - id: badkamer_enable_automatic_lights
   alias: Badkamerlamp weer op automatisch zetten
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: light.badkamer
       from: "on"
       to: "off"
-  condition:
-    condition: state
-    entity_id: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
-    state: "off"
-  action:
-    - service: automation.turn_on
+  conditions:
+    - condition: state
+      entity_id: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid
+      state: "off"
+  actions:
+    - action: automation.turn_on
       entity_id: automation.badkamerlamp_automatisch_aan_uit_door_aanwezigheid

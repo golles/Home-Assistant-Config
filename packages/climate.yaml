@@ -63,13 +63,13 @@ switch:
         value_template: >
           {{ is_state_attr("climate.woonkamer", "preset_mode", "home") }}
         turn_on:
-          service: climate.set_preset_mode
+          action: climate.set_preset_mode
           data:
             preset_mode: home
           target:
             entity_id: climate.woonkamer
         turn_off:
-          service: climate.set_preset_mode
+          action: climate.set_preset_mode
           data:
             preset_mode: away
           target:
@@ -80,7 +80,7 @@ template:
       - name: Woonkamer opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -90,7 +90,7 @@ template:
       - name: Slaapkamer opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -100,7 +100,7 @@ template:
       - name: Kledingkamer opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -110,7 +110,7 @@ template:
       - name: Logeerkamer opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -120,7 +120,7 @@ template:
       - name: Badkamer opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -130,7 +130,7 @@ template:
       - name: Zolder opwarmen
         icon: mdi:radiator
         press:
-          - service: tado.set_climate_timer
+          - action: tado.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -166,10 +166,10 @@ automation:
     alias: Tado - Automatisch home en away mode activeren
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: group.residents
-    action:
+    actions:
       - choose:
           - conditions:
               - condition: state
@@ -177,19 +177,19 @@ automation:
                 state: not_home
             sequence:
               - alias: Set climate preset mode to home
-                service: climate.set_preset_mode
+                action: climate.set_preset_mode
                 data:
                   preset_mode: away
                 target:
                   entity_id: climate.woonkamer
 
               - alias: Turn electric heater off
-                service: climate.turn_off
+                action: climate.turn_off
                 target:
                   entity_id: climate.elektrische_kachel
         default:
           - alias: Set climate preset mode to home
-            service: climate.set_preset_mode
+            action: climate.set_preset_mode
             data:
               preset_mode: home
             target:
@@ -199,11 +199,11 @@ automation:
     alias: Tado - Huis opwarmen op een koude dag naar huis gaan
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: numeric_state
+    triggers:
+      - trigger: numeric_state
         entity_id: sensor.huis_nearest_distance
         below: 10
-    condition:
+    conditions:
       - condition: state
         entity_id: group.residents
         state: not_home
@@ -214,8 +214,8 @@ automation:
         entity_id: climate.woonkamer
         attribute: current_temperature
         below: 18
-    action:
-      - service: notify.telegram_huisgroep
+    actions:
+      - action: notify.telegram_huisgroep
         data:
           title: Tado
           message: |
@@ -223,7 +223,7 @@ automation:
             Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
 
       - alias: Heat up the living room for a short time
-        service: tado.set_climate_timer
+        action: tado.set_climate_timer
         data:
           time_period: "00:15:00"
           temperature: 25

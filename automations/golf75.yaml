@@ -11,20 +11,20 @@
     Every {throttle_seconds} the location of the person who sent the start event is used as the car location. This is done until the stop event is sent.
     This does only work if a defined Home Assistant person is driving the car, so no theft protection.
   mode: restart
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: GOLF_75_START
       id: start
-    - platform: event
+    - trigger: event
       event_type: GOLF_75_STOP
       id: stop
-    - platform: homeassistant
+    - trigger: homeassistant
       event: start
       id: restore
   variables:
     device_tracker_id: golf_7_5
     throttle_seconds: 30
-  action:
+  actions:
     - alias: Collect some variables
       variables:
         user_id: >-
@@ -54,7 +54,7 @@
                 while: "{{ True }}"
                 sequence:
                   - alias: Set car location based on the location of the person
-                    service: device_tracker.see
+                    action: device_tracker.see
                     data:
                       dev_id: "{{ device_tracker_id }}"
                       gps:
@@ -74,7 +74,7 @@
               id: stop
           sequence:
             - alias: Set final car location based on the location of the person
-              service: device_tracker.see
+              action: device_tracker.see
               data:
                 dev_id: "{{ device_tracker_id }}"
                 gps:
@@ -89,7 +89,7 @@
               id: restore
           sequence:
             - alias: Set car location based on last known location from SQL sensor
-              service: device_tracker.see
+              action: device_tracker.see
               data:
                 dev_id: "{{ device_tracker_id }}"
                 gps:

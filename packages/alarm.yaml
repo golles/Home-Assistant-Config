@@ -2,13 +2,13 @@ automation:
   - id: alarm_auto_on_off
     alias: Alarm - Automatisch aan/uit bij aanwezigheid
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: group.residents
         to:
           - home
           - not_home
-    action:
+    actions:
       - choose:
           - conditions:
               - condition: state
@@ -16,9 +16,9 @@ automation:
                 state: not_home
             sequence:
               - alias: Set the alarm to arm away
-                service: alarm_control_panel.alarm_arm_away
+                action: alarm_control_panel.alarm_arm_away
                 entity_id: alarm_control_panel.alarmo
         default:
           - alias: Disarm the alarm
-            service: alarm_control_panel.alarm_disarm
+            action: alarm_control_panel.alarm_disarm
             entity_id: alarm_control_panel.alarmo

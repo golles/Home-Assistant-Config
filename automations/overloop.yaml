@@ -1,11 +1,11 @@
 - id: overloop_on_from_zolder
   alias: Overloop lamp automatisch aandoen als iemand van zolder komt
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.zoldertrap_beweging_beweging
       to: "on"
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: state
@@ -23,8 +23,8 @@
             entity_id: light.overloop
             attribute: brightness
             below: 25
-  action:
-    - service: light.turn_on
+  actions:
+    - action: light.turn_on
       data:
         entity_id: light.overloop_spot_2 # Only switch the light on that is pointing to the stairs.
         profile: helder

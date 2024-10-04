@@ -2,31 +2,31 @@ automation:
   - id: dlink_auto_day_night_mode
     alias: Automatisch Dlink camera in day of night mode zetten
     mode: single
-    trigger:
-      - platform: numeric_state
+    triggers:
+      - trigger: numeric_state
         entity_id: sensor.epl_eettafel_illuminance
         below: 2.2
         for:
           minutes: 10
-      - platform: numeric_state
+      - trigger: numeric_state
         entity_id: sensor.epl_eettafel_illuminance
         above: 3
         for:
           minutes: 10
-    action:
+    actions:
       - choose:
           - conditions:
               - condition: numeric_state
                 entity_id: sensor.epl_eettafel_illuminance
                 below: 2.2
             sequence:
-              - service: shell_command.dlink_set_night_mode
+              - action: shell_command.dlink_set_night_mode
                 data:
                   host: !secret dlink_camera_host
                   username: !secret dlink_camera_username
                   password: !secret dlink_camera_password
         default:
-          - service: shell_command.dlink_set_day_mode
+          - action: shell_command.dlink_set_day_mode
             data:
               host: !secret dlink_camera_host
               username: !secret dlink_camera_username

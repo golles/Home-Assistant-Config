@@ -53,8 +53,8 @@ blueprint:
 mode: restart
 max_exceeded: silent
 
-trigger:
-  - platform: state
+triggers:
+  - trigger: state
     entity_id: !input switch
     to:
       - "single"
@@ -64,7 +64,7 @@ trigger:
       - "hold"
       - "release"
 
-action:
+actions:
   - variables:
       to_state: "{{ trigger.to_state.state }}"
 

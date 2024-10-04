@@ -17,9 +17,9 @@ automation:
   - id: post_daily_meter_values_at_midnight
     alias: Meterstanden posten om middernacht
     mode: single
-    trigger:
-      - platform: time
+    triggers:
+      - trigger: time
         at: "00:00:00"
-    action:
+    actions:
       - alias: Post values
-        service: rest_command.post_daily_meter_values
+        action: rest_command.post_daily_meter_values

@@ -2,11 +2,11 @@
   alias: Slaapkamer rolluik sluiten op tijd
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: input_datetime.covers_down
-  action:
-    - service: script.close_cover_window_state
+  actions:
+    - action: script.close_cover_window_state
       data:
         wait_minutes: 240
         cover_entity: cover.slaapkamer

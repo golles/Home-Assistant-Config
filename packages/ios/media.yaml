@@ -29,13 +29,13 @@ automation:
     alias: iOS action - Qmusic
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Qmusic
-    action:
-      - service: script.play_livingroom_radio
+    actions:
+      - action: script.play_livingroom_radio
         data:
           stream: https://stream.qmusic.nl/qmusic/mp3
 
@@ -43,12 +43,12 @@ automation:
     alias: iOS action - Ziggo
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Ziggo
-    action:
+    actions:
       - choose:
           # Turn on.
           - conditions:
@@ -56,8 +56,8 @@ automation:
                 entity_id: media_player.mediabox
                 state: "off"
             sequence:
-              - service: script.lg_c9_source_ziggo
+              - action: script.lg_c9_source_ziggo
         # Turn off.
         default:
-          - service: media_player.turn_off
+          - action: media_player.turn_off
             entity_id: media_player.mediabox

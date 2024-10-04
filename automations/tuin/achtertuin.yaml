@@ -2,28 +2,28 @@
   alias: Achtertuin - Kerst sfeer
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: numeric_state
+  triggers:
+    - trigger: numeric_state
       id: xmas_on
       entity_id: sensor.achtertuin_sensor_licht
       below: 60
       for:
         minutes: 5
-    - platform: time
+    - trigger: time
       id: xmas_off
       at: "23:59:59" # Can't be 00:00:00 because then it won't turn off on 1st of January.
-  condition:
-    condition: template
-    value_template: > # All days in December after Sinterklaas.
-      {{ now().month == 12 and now().day >= 6 }}
-  action:
+  conditions:
+    - condition: template
+      value_template: > # All days in December after Sinterklaas.
+        {{ now().month == 12 and now().day >= 6 }}
+  actions:
     - choose:
         - conditions:
             - condition: trigger
               id: xmas_on
           sequence:
             - alias: Turn on the light
-              service: switch.turn_on
+              action: switch.turn_on
               entity_id: switch.gekleurde_licht
 
         - conditions:
@@ -31,28 +31,28 @@
               id: xmas_off
           sequence:
             - alias: Turn off the light
-              service: switch.turn_off
+              action: switch.turn_off
               entity_id: switch.gekleurde_licht
 
 - id: automatic_backgarden_lights
   alias: Achtertuin - verlichting aan bij deur open of beweging
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.achterdeur_contact
       from: "off"
       to: "on"
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.achtertuin_sensor_beweging
       from: "off"
       to: "on"
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.achtertuin_sensor_licht
       below: 10
-  action:
+  actions:
     - alias: Lights on
-      service: scene.turn_on
+      action: scene.turn_on
       data:
         transition: 2
       target:
@@ -63,7 +63,7 @@
         minutes: 10
 
     - alias: Lights off
-      service: light.turn_off
+      action: light.turn_off
       data:
         entity_id: light.achtertuin_groep
         transition: 2

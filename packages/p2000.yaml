@@ -47,15 +47,15 @@ automation:
   - id: notification_p2000
     alias: "Notificatie: P200 bericht in de buurt"
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.p2000_dichtbij
-    condition:
+    conditions:
       - condition: template
         value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
-    action:
+    actions:
       - alias: Sent a notification with url
-        service: notify.all_phones_and_tv
+        action: notify.all_phones_and_tv
         data:
           title: >-
             {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}

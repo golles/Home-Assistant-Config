@@ -2,19 +2,19 @@
   alias: Kerst - Kerstboom automatisch aan/uit door aanwezigheid
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.woonkamer_bezetting
       to:
         - "on"
         - "off"
-  condition:
+  conditions:
     - condition: not
       conditions:
         - condition: state
           entity_id: light.kerstboom
           state: unavailable
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: time
@@ -25,7 +25,7 @@
               state: "on"
           sequence:
             - alias: Set effect
-              service: mqtt.publish
+              action: mqtt.publish
               data:
                 topic: zigbee2mqtt/Kerstboom/set
                 payload_template: |-
@@ -69,13 +69,13 @@
                   }
 
             - alias: Turn on the light
-              service: light.turn_on
+              action: light.turn_on
               target:
                 entity_id: light.kerstboom
 
       default:
         - alias: Turn off the light
-          service: light.turn_off
+          action: light.turn_off
           target:
             entity_id: light.kerstboom
 
@@ -83,23 +83,23 @@
   alias: Kerst - Houdt de woonkamer groot 2 uit
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: light.woonkamer_groot_2
       from: "off"
       to: "on"
-    - platform: state
+    - trigger: state
       entity_id: light.kerstboom
       from: "off"
       to: "on"
-  condition:
+  conditions:
     - condition: not
       conditions:
         - condition: state
           entity_id: light.kerstboom
           state: unavailable
-  action:
+  actions:
     - alias: Turn off the light
-      service: light.turn_off
+      action: light.turn_off
       target:
         entity_id: light.woonkamer_groot_2

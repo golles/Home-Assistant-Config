@@ -36,21 +36,21 @@ automation:
             | first
             | default("none")
         }}
-    trigger:
-      platform: time
+    triggers:
+      trigger: time
       at: "19:30:00"
-    condition:
+    conditions:
       - condition: template
         value_template: >-
           {{ entity != "none" }}
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: "off"
-    action:
+    actions:
       - variables:
           external_url: !secret external_url
 
-      - service: notify.sander
+      - action: notify.sander
         data:
           title: Afval
           message: >-

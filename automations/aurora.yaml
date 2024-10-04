@@ -1,12 +1,12 @@
 - id: notification_aurora
   alias: "Notificatie: Noorderlicht"
-  trigger:
-    platform: state
-    entity_id: binary_sensor.aurora_52_4
-    from: "off"
-    to: "on"
-  action:
-    - service: notify.all_phones_and_tv
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.aurora_52_4
+      from: "off"
+      to: "on"
+  actions:
+    - action: notify.all_phones_and_tv
       data:
         title: 🌌✨💫 Noorderlicht
         message: >-

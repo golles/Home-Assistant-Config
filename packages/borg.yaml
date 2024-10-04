@@ -8,14 +8,14 @@ automation:
   - id: borg_webhook
     alias: Borg backup webhook
     mode: restart
-    trigger:
-      - platform: webhook
+    triggers:
+      - trigger: webhook
         webhook_id: borg
         allowed_methods:
           - POST
         local_only: true
-    action:
-      - service: input_text.set_value
+    actions:
+      - action: input_text.set_value
         data_template:
           entity_id: input_text.borg
           value: "{{ trigger.json.status }}"
@@ -23,15 +23,15 @@ automation:
   - id: notification_borg_warning
     alias: "Notificatie: Borg backup waarschuwing"
     mode: restart
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: input_text.borg
         for:
           minutes: 30
-    condition:
+    conditions:
       - "{{ states('input_text.borg') == 'Backup and/or Prune finished with errors' }}"
-    action:
-      - service: notify.sander
+    actions:
+      - action: notify.sander
         data:
           title: Borg backup
           message: >-

@@ -1,25 +1,26 @@
 - id: someone_arrives_home
   alias: Voortuin - verlichting aan als het donker is en iemand thuis komt
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         # List all individual residents and not the group as it won't work if someone comes home while someone else is already at home.
         - person.sander
       from: not_home
       to: home
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.achtertuin_sensor_licht
       below: 10
-  action:
-    - service: scene.turn_on
+  actions:
+    - action: scene.turn_on
       data:
         transition: 2
       target:
         entity_id: scene.voortuin_helder
+
     - wait_for_trigger:
-        - platform: state
+        - trigger: state
           entity_id: binary_sensor.voordeur_contact
           from: "on"
           to: "off"
@@ -30,7 +31,7 @@
     - delay:
         seconds: 5
 
-    - service: light.turn_off
+    - action: light.turn_off
       data:
         entity_id: light.voortuin
         transition: 2
@@ -38,18 +39,18 @@
 - id: automatic_frontgarden_lights
   alias: Voortuin - verlichting aan bij voordeur open
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.voordeur_contact
       from: "off"
       to: "on"
-  condition:
+  conditions:
     - condition: numeric_state
       entity_id: sensor.achtertuin_sensor_licht
       below: 10
-  action:
+  actions:
     - alias: Lights on
-      service: scene.turn_on
+      action: scene.turn_on
       data:
         transition: 2
       target:
@@ -57,7 +58,7 @@
 
     - alias: Wait for the door to be closed
       wait_for_trigger:
-        - platform: state
+        - trigger: state
           entity_id: binary_sensor.voordeur_contact
           from: "on"
           to: "off"
@@ -70,7 +71,7 @@
         seconds: 30
 
     - alias: Turn the lights off
-      service: light.turn_off
+      action: light.turn_off
       data:
         entity_id: light.voortuin
         transition: 2

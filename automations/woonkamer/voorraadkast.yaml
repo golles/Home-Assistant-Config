@@ -2,28 +2,28 @@
   alias: Voorraadkast verlichting automatisch aan en uit
   mode: restart
   max_exceeded: silent
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.voorraadkastdeur_contact
       to:
         - "on"
         - "off"
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: state
               entity_id: binary_sensor.voorraadkastdeur_contact
               state: "on"
           sequence:
-            - service: light.turn_on
+            - action: light.turn_on
               entity_id: light.voorraadkastlamp
 
             - delay:
                 minutes: 10
 
-            - service: light.turn_off
+            - action: light.turn_off
               entity_id: light.voorraadkastlamp
 
       default:
-        - service: light.turn_off
+        - action: light.turn_off
           entity_id: light.voorraadkastlamp

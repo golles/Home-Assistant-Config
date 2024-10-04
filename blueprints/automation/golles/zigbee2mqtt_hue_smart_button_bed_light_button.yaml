@@ -53,15 +53,15 @@ blueprint:
 mode: single
 max_exceeded: silent
 
-trigger:
-  platform: state
+triggers:
+  trigger: state
   entity_id: !input smart_button
   to:
     - "on"
     - "off"
     - "hold"
 
-action:
+actions:
   - variables:
       to_state: "{{ trigger.to_state.state }}"
 
@@ -82,17 +82,17 @@ action:
                             after: !input day_start_time
                             before: !input day_end_time
                         sequence:
-                          - service: light.turn_on
+                          - action: light.turn_on
                             data:
                               entity_id: !input light_entity_bed
                               profile: !input day_profile
                     default:
-                      - service: light.turn_on
+                      - action: light.turn_on
                         data:
                           entity_id: !input light_entity_bed
                           profile: !input night_profile
             default:
-              - service: light.turn_off
+              - action: light.turn_off
                 entity_id: !input light_entity_bed
 
       # Button is being hold.
@@ -111,17 +111,17 @@ action:
                             after: !input day_start_time
                             before: !input day_end_time
                         sequence:
-                          - service: light.turn_on
+                          - action: light.turn_on
                             data:
                               entity_id: !input light_entity_ceiling
                               profile: !input day_profile
                     default:
-                      - service: light.turn_on
+                      - action: light.turn_on
                         data:
                           entity_id: !input light_entity_ceiling
                           profile: !input night_profile
             default:
-              - service: light.turn_off
+              - action: light.turn_off
                 data:
                   entity_id: !input light_entity_ceiling
           - delay:

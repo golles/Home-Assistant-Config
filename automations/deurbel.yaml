@@ -7,12 +7,12 @@
       - Pauzeer de tv als Jellyfin, Netflix of Youtube aan staat.
       - Pauzeer Ziggo wanneer die geen lineaire tv afspeelt.
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.deurbel_ringing
       from: "off"
       to: "on"
-  action:
+  actions:
     - variables:
         message_title: Ding dong!
         message_text: Iemand staat bij de deur
@@ -30,7 +30,7 @@
               state: "on"
           sequence:
             - alias: Notify Sander when he's working from home, he might not hear the doorbell as he's really busy
-              service: notify.sander
+              action: notify.sander
               data:
                 title: "{{ message_title }}"
                 message: "{{ message_text }}"
@@ -46,7 +46,7 @@
               state: "on"
           sequence:
             - alias: Notify tv when on
-              service: notify.lg_c9
+              action: notify.lg_c9
               data:
                 message: "{{ message_title }} {{ message_text }}"
 
@@ -55,7 +55,7 @@
                     - "{{ state_attr('media_player.lg_c9', 'source') in tv_sources_to_pause }}"
                   sequence:
                     - alias: Pause tv for given sources
-                      service: media_player.media_pause
+                      action: media_player.media_pause
                       entity_id: media_player.lg_c9
 
                 - conditions:
@@ -64,17 +64,17 @@
                     - "{{ not state_attr('media_player.mediabox', 'play_mode') in [null, 'linear'] }}"
                   sequence:
                     - alias: Pause Ziggo, but not when watching linear tv
-                      service: media_player.media_pause
+                      action: media_player.media_pause
                       entity_id: media_player.mediabox
 
     # - alias: Start the camera stream
-    #   service: button.press
+    #   action: button.press
     #   target:
     #     entity_id: button.deurbel_start_p2p_stream
 
     # - alias: Wait till the stream is ready
     #   wait_for_trigger:
-    #     - platform: state
+    #     - trigger: state
     #       entity_id: sensor.deurbel_stream_status
     #       to: StreamStatus.STREAMING
     #   timeout:
@@ -82,7 +82,7 @@
     #   continue_on_timeout: false
 
     # - alias: Show camera stream in the web browser on the tv
-    #   service: webostv.command
+    #   action: webostv.command
     #   data:
     #     entity_id: media_player.lg_c9
     #     command: system.launcher/open
@@ -94,7 +94,7 @@
     #     seconds: 15
 
     # - alias: Stop the camera stream
-    #   service: button.press
+    #   action: button.press
     #   target:
     #     entity_id: button.deurbel_stop_p2p_stream
 
@@ -104,7 +104,7 @@
     #         - "{{ tv_current_source != None }}"
     #       sequence:
     #         - alias: Return to the previous source on the tv
-    #           service: media_player.select_source
+    #           action: media_player.select_source
     #           data:
     #             source: "{{ tv_current_source }}"
     #           target:

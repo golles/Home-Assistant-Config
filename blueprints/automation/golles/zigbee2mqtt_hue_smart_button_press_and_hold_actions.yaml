@@ -39,15 +39,15 @@ blueprint:
 mode: single
 max_exceeded: silent
 
-trigger:
-  platform: state
+triggers:
+  trigger: state
   entity_id: !input smart_button
   to:
     - "on"
     - "off"
     - "hold"
 
-action:
+actions:
   - variables:
       to_state: "{{ trigger.to_state.state }}"
 

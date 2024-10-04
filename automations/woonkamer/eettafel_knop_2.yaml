@@ -8,7 +8,7 @@
       hold_cooldown: "1"
       smart_button: sensor.eettafelknop_2_action
       press_action:
-        - service: switch.toggle
+        - action: switch.toggle
           entity_id: switch.eettafellamp
       hold_action:
         - choose:
@@ -18,10 +18,10 @@
                   entity_id: light.eettafel
                   state: "off"
               sequence:
-                - service: script.eettafel_on
+                - action: script.eettafel_on
           # Light is on.
           default:
-            - service: light.turn_on
+            - action: light.turn_on
               data:
                 entity_id: light.eettafel
                 brightness_step: >

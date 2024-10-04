@@ -1,14 +1,14 @@
 - id: electricity_low_today
   alias: "Notificatie: elektriciteit laag tarief vandaag"
   mode: single
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: "10:30:00"
-    - platform: state
+    - trigger: state
       entity_id: group.residents
       from: not_home
       to: home
-  condition:
+  conditions:
     - condition: state
       entity_id: sensor.dsmr_meter_stats_electricity_tariff
       state: low
@@ -30,9 +30,9 @@
         > # Can't be triggered when it was already triggered in the last 24 hours.
         {% from "automations.jinja" import was_within %}
         {{ was_within("automation.notificatie_elektriciteit_laag_tarief_vandaag", 24 * 60 * 60) }}
-  action:
+  actions:
     - alias: Notify users about low tarif today
-      service: notify.all_phones
+      action: notify.all_phones
       data:
         title: 🔌 Elektriciteit
         message: >-

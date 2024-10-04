@@ -32,17 +32,17 @@ blueprint:
 mode: restart
 max_exceeded: silent
 
-trigger:
-  - platform: state
+triggers:
+  - trigger: state
     entity_id: !input door_entity
     from: "off"
     to: "on"
-  - platform: state
+  - trigger: state
     entity_id: !input door_entity
     from: "on"
     to: "off"
 
-action:
+actions:
   - choose:
       - conditions:
           - condition: state
@@ -53,14 +53,14 @@ action:
             delay: !input turn_off_delay
 
           - alias: Turn off climate.
-            service: climate.set_hvac_mode
+            action: climate.set_hvac_mode
             entity_id: !input climate_entity
             data:
               hvac_mode: "off"
 
     default:
       - alias: Turn on climate.
-        service: climate.set_hvac_mode
+        action: climate.set_hvac_mode
         entity_id: !input climate_entity
         data:
           hvac_mode: auto

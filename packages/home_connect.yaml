@@ -68,11 +68,11 @@ automation:
   - id: home_connect_conversation_remaining_time
     alias: "Spraakassistent: Wanneer is de machine klaar"
     mode: single
-    trigger:
-      platform: conversation
-      command:
-        - Wanneer is de {machine} klaar
-    action:
+    triggers:
+      - trigger: conversation
+        command:
+          - Wanneer is de {machine} klaar
+    actions:
       - alias: Set repsonse
         set_conversation_response: >-
           {% if trigger.slots.machine == "vaatwasser" and states("sensor.vaatwasser_resterende_minuten") != "unavailable" %}
@@ -86,26 +86,26 @@ automation:
   - id: dishwasher_auto_daily_start
     alias: Vaatwasser dagelijks starten
     mode: single
-    trigger:
-      platform: time
-      at: input_datetime.dishwasher_daily_start
-    condition:
+    triggers:
+      - trigger: time
+        at: input_datetime.dishwasher_daily_start
+    conditions:
       - condition: state
         entity_id: binary_sensor.vaatwasser_remote_start
         state: "on"
-    action:
-      - service: switch.turn_on
+    actions:
+      - action: switch.turn_on
         entity_id: switch.vaatwasser_program_auto2
 
   - id: dishwasher_set_daily_start_time
     alias: Vaatwasser tijd dagelijks aanpassen
     mode: single
-    trigger:
-      - platform: homeassistant
+    triggers:
+      - trigger: homeassistant
         event: start
-      - platform: time
+      - trigger: time
         at: "12:00:00"
-    action:
+    actions:
       - variables:
           weekday_time: "04:30"
           weekend_time: "07:30"
@@ -127,7 +127,7 @@ automation:
               {% endif %}
             {% endif %}
 
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         data:
           entity_id: input_datetime.dishwasher_daily_start
           time: "{{ schedule_time }}"
@@ -137,22 +137,22 @@ automation:
   - id: reload_home_connect
     alias: Wasmachine - Herlaad Home Connect integratie
     mode: single
-    trigger:
-      - platform: numeric_state
+    triggers:
+      - trigger: numeric_state
         entity_id: sensor.zolder_power
         above: 2
         for:
           minutes: 2
-      - platform: numeric_state
+      - trigger: numeric_state
         entity_id: sensor.zolder_power
         below: 2
         for:
           minutes: 2
-    condition:
+    conditions:
       # Should be a little higher than the minutes in the triggers, to deal with restarts.
       - "{{ now() | as_timestamp(0) - states('sensor.uptime') | as_timestamp(0) > 200 }}"
-    action:
+    actions:
       - alias: Reload Home Connect integration
-        service: homeassistant.reload_config_entry
+        action: homeassistant.reload_config_entry
         target:
           entity_id: switch.wasmachine_power

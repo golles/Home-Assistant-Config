@@ -16,21 +16,21 @@
                   before: 00:00:00
               then:
                 - alias: Turn on light with day scene
-                  service: scene.turn_on
+                  action: scene.turn_on
                   data:
                     transition: 2
                   target:
                     entity_id: scene.logeerkamer_helder
               else:
                 - alias: Turn on light with night scene
-                  service: scene.turn_on
+                  action: scene.turn_on
                   data:
                     transition: 2
                   target:
                     entity_id: scene.logeerkamer_nachtlampje
           else:
             - alias: Turn off the light
-              service: light.turn_off
+              action: light.turn_off
               data:
                 entity_id: light.logeerkamer
       hold:
@@ -41,7 +41,7 @@
                 state: release
             sequence:
               - alias: Step brightness
-                service: light.turn_on
+                action: light.turn_on
                 data:
                   entity_id: light.logeerkamer
                   brightness_step: >-

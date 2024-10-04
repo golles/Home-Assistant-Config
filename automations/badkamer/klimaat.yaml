@@ -10,20 +10,20 @@
 - id: mechanische_ventilatie_douchen
   alias: Mechanische ventilatie tijdens douchen
   mode: restart
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.douche_beweging_occupancy
       from: "off"
       to: "on"
-  action:
+  actions:
     - alias: Occupancy detected, set fan to high for 30 minutes
-      service: button.press
+      action: button.press
       target:
         entity_id: button.mechanische_ventilatie_30_minuten_hoog
 
     - alias: Wait for occupancy to be off
       wait_for_trigger:
-        - platform: state
+        - trigger: state
           entity_id: binary_sensor.douche_beweging_occupancy
           from: "on"
           to: "off"
@@ -32,6 +32,6 @@
       continue_on_timeout: false
 
     - alias: Set fan to high for 15 minutes
-      service: button.press
+      action: button.press
       target:
         entity_id: button.mechanische_ventilatie_15_minuten_hoog

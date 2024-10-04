@@ -3,23 +3,23 @@ automation:
     alias: Fijnstofmeter data versturen naar externe services
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         id: sds011
         entity_id:
           - sensor.particulate_matter_pm_10
           - sensor.particulate_matter_pm_2_5
-      - platform: state
+      - trigger: state
         id: bme280
         entity_id:
           - sensor.particulate_matter_humidity
           - sensor.particulate_matter_pressure
           - sensor.particulate_matter_temperature
-    condition:
+    conditions:
       - condition: state
         entity_id: switch.particulate_matter_standalone_mode
         state: "off"
-    action:
+    actions:
       - alias: Wait a second, to make sure all values are up-to-date
         delay: 1
 
@@ -46,11 +46,11 @@ automation:
                       - unknown
             sequence:
               - alias: Post to Luftdaten
-                service: rest_command.post_luftdaten_sds011
+                action: rest_command.post_luftdaten_sds011
               - alias: Post to Madavi
-                service: rest_command.post_madavi_sds011
+                action: rest_command.post_madavi_sds011
               - alias: Post to openSenseMap
-                service: rest_command.post_opensensemap_sds011
+                action: rest_command.post_opensensemap_sds011
 
           - conditions:
               - condition: trigger
@@ -78,11 +78,11 @@ automation:
                       - unknown
             sequence:
               - alias: Post to Luftdaten
-                service: rest_command.post_luftdaten_bme280
+                action: rest_command.post_luftdaten_bme280
               - alias: Post to Madavi
-                service: rest_command.post_madavi_bme280
+                action: rest_command.post_madavi_bme280
               - alias: Post to openSenseMap
-                service: rest_command.post_opensensemap_bme280
+                action: rest_command.post_opensensemap_bme280
 
 rest_command:
   post_luftdaten_sds011:

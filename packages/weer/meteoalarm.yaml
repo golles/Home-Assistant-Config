@@ -7,17 +7,17 @@ binary_sensor:
 automation:
   - id: notification_meteoalarm
     alias: "Notificatie: MeteoAlarm waarschuwing"
-    trigger:
-      platform: state
+    triggers:
+      trigger: state
       entity_id: binary_sensor.meteoalarm
       from: "off"
       to: "on"
-    condition:
+    conditions:
       - "{{ state_attr('binary_sensor.meteoalarm', 'headline') != None }}"
       - "{{ state_attr('binary_sensor.meteoalarm', 'description') != None }}"
       - "{{ state_attr('binary_sensor.meteoalarm', 'instruction') != None }}"
-    action:
-      - service: notify.all_phones_and_tv
+    actions:
+      - action: notify.all_phones_and_tv
         data:
           title: >-
             ⚠️ {{state_attr("binary_sensor.meteoalarm", "headline")}}

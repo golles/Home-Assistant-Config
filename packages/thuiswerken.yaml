@@ -21,38 +21,38 @@ automation:
   - id: home_office_laptop_inactive
     alias: Thuiswerken, stop muziek laptop inactive
     mode: restart
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: binary_sensor.tt_macbook_active
         from: "on"
         to: "off"
         for:
           minutes: 15
-      - platform: state
+      - trigger: state
         entity_id: sensor.tt_macbook_frontmost_app
         to: loginwindow
         for: 1
-    condition:
+    conditions:
       - condition: state
         entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
         state: "on"
       - condition: state
         entity_id: media_player.logeerkamer
         state: playing
-    action:
-      - service: media_player.turn_off
+    actions:
+      - action: media_player.turn_off
         data:
           entity_id: media_player.logeerkamer
 
   - id: home_office_meeting
     alias: Thuiswerken, stop muziek bij vergadering
     mode: restart
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: binary_sensor.tt_macbook_audio_input_in_use
         from: "off"
         to: "on"
-    condition:
+    conditions:
       - condition: state
         entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
         state: "on"
@@ -64,14 +64,14 @@ automation:
         state:
           - Slack
           - Microsoft Teams
-    action:
-      - service: media_player.volume_mute
+    actions:
+      - action: media_player.volume_mute
         data:
           entity_id: media_player.logeerkamer
           is_volume_muted: true
 
       - wait_for_trigger:
-          - platform: state
+          - trigger: state
             entity_id: binary_sensor.tt_macbook_audio_input_in_use
             from: "on"
             to: "off"
@@ -85,11 +85,11 @@ automation:
                 entity_id: binary_sensor.tt_macbook_audio_input_in_use
                 state: "off"
             sequence:
-              - service: media_player.volume_mute
+              - action: media_player.volume_mute
                 data:
                   entity_id: media_player.logeerkamer
                   is_volume_muted: false
         default:
-          - service: media_player.turn_off
+          - action: media_player.turn_off
             data:
               entity_id: media_player.logeerkamer

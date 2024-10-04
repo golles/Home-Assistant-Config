@@ -12,31 +12,31 @@ script:
       delay_ms: 100
       brightness: 128
     sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_5
           brightness: "{{ brightness }}"
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_4
           brightness: "{{ brightness }}"
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_3
           brightness: "{{ brightness }}"
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_2
           brightness: "{{ brightness }}"
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.eettafel_hanglamp_1
           brightness: "{{ brightness }}"
@@ -46,23 +46,23 @@ script:
     variables:
       delay_ms: 100
     sequence:
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.eettafel_hanglamp_1
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.eettafel_hanglamp_2
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.eettafel_hanglamp_3
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.eettafel_hanglamp_4
       - delay:
           milliseconds: "{{ delay_ms }}"
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.eettafel_hanglamp_5
 
   wake_up_light:
@@ -88,7 +88,7 @@ script:
             max: 3600
     sequence:
       - alias: Turn on the light
-        service: light.turn_on
+        action: light.turn_on
         data:
           xy_color: [0.502, 0.414] # Nachtlampje
           brightness: 1
@@ -100,7 +100,7 @@ script:
           seconds: 1
 
       - alias: Transition the light to a brighter state
-        service: light.turn_on
+        action: light.turn_on
         data:
           xy_color: [0.314, 0.331] # Energie
           brightness: 255
@@ -116,6 +116,6 @@ switch:
         value_template: >
           {{ is_state("light.eettafel", "on") }}
         turn_on:
-          service: script.eettafel_on
+          action: script.eettafel_on
         turn_off:
-          service: script.eettafel_off
+          action: script.eettafel_off

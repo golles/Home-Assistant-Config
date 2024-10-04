@@ -1,35 +1,35 @@
 - id: air_purifier_off_door_open
   alias: Air purifier uit als de achterdeur of keukenraam open staat
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.achterdeur_contact
       to: "on"
       for:
         minutes: 5
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.keukenraam_contact
       to: "on"
       for:
         minutes: 5
-  condition:
+  conditions:
     - condition: state
       entity_id: fan.air_purifier
       state: "on"
-  action:
-    - service: fan.turn_off
+  actions:
+    - action: fan.turn_off
       entity_id: fan.air_purifier
 
 - id: air_purifier_on_based_on_aqi
   alias: Air purifier aan gebasseerd op aqi
   mode: single
-  trigger:
-    - platform: numeric_state
+  triggers:
+    - trigger: numeric_state
       entity_id: sensor.air_purifier_pm2_5
       above: 10
       for:
         minutes: 2
-  condition:
+  conditions:
     - condition: state
       entity_id: fan.air_purifier
       state: "off"
@@ -39,23 +39,23 @@
     - condition: state
       entity_id: binary_sensor.keukenraam_contact
       state: "off"
-  action:
-    - service: fan.turn_on
+  actions:
+    - action: fan.turn_on
       entity_id: fan.air_purifier
 
 - id: air_purifier_off_based_on_aqi
   alias: Air purifier uit gebasseerd op aqi
   mode: single
-  trigger:
-    - platform: numeric_state
+  triggers:
+    - trigger: numeric_state
       entity_id: sensor.air_purifier_pm2_5
       below: 5
       for:
         minutes: 2
-  condition:
+  conditions:
     - condition: state
       entity_id: fan.air_purifier
       state: "on"
-  action:
-    - service: fan.turn_off
+  actions:
+    - action: fan.turn_off
       entity_id: fan.air_purifier

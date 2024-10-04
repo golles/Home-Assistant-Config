@@ -1,11 +1,11 @@
 - id: goedemorgen_bericht
   alias: Goedemorgen bericht bij 1e beweging in de woonkamer
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.overloop_sensor_1_beweging
       to: "on"
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.lg_c9
       state: "off"
@@ -22,14 +22,14 @@
         > # Don't trigger if it has been triggered in the last 6 hours.
         {% from "automations.jinja" import was_within %}
         {{ was_within("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", 6 * 60 * 60) }}
-  action:
+  actions:
     - alias: Force update weather description
-      service: homeassistant.update_entity
+      action: homeassistant.update_entity
       target:
         entity_id: sensor.lokaal_weer_en_verkeer
 
     - alias: Set soundbar volume
-      service: media_player.volume_set
+      action: media_player.volume_set
       data:
         entity_id: media_player.lg_soundbar
         volume_level: 0.25 # 10 * 0.025
@@ -39,7 +39,7 @@
         seconds: 5
 
     - alias: Speak message
-      service: tts.microsoft_say
+      action: tts.microsoft_say
       entity_id: media_player.lg_soundbar
       data:
         message: >-
@@ -57,7 +57,7 @@
 
     - alias: Wait till the message has finished
       wait_for_trigger:
-        - platform: state
+        - trigger: state
           entity_id: media_player.lg_soundbar
           from: playing
           to: idle
@@ -66,7 +66,7 @@
       continue_on_timeout: true
 
     - alias: Restore soundbar volume and source
-      service: shell_command.set_soundbar_source_and_volume
+      action: shell_command.set_soundbar_source_and_volume
       data:
         ip: !secret lg_soundbar_ip
         source: 15 # HMDI ARC.

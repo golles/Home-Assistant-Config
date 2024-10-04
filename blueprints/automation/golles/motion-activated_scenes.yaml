@@ -107,29 +107,29 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-  - platform: state
+  - trigger: state
     id: motion_on
     entity_id: !input motion_entity
     to: "on"
-  - platform: state
+  - trigger: state
     id: motion_off
     entity_id: !input motion_entity
     to: "off"
     for: !input cool_down
-  - platform: numeric_state
+  - trigger: numeric_state
     id: illuminance_low
     entity_id: !input illuminance_entity
     below: !input illuminance_below
     for:
       minutes: 5
-  - platform: numeric_state
+  - trigger: numeric_state
     id: illuminance_high
     entity_id: !input illuminance_entity
     above: !input illuminance_above
     for:
       minutes: 5
 
-action:
+actions:
   - choose:
       - conditions:
           - condition: or
@@ -164,7 +164,7 @@ action:
             then:
               # Day time.
               - alias: Turn on light with day scene
-                service: scene.turn_on
+                action: scene.turn_on
                 data:
                   transition: 1
                 target:
@@ -172,7 +172,7 @@ action:
             else:
               # Other times
               - alias: Turn on light with night scene
-                service: scene.turn_on
+                action: scene.turn_on
                 data:
                   transition: 1
                 target:
@@ -192,7 +192,7 @@ action:
             then:
               # Day time.
               - alias: Turn on light with day before off scene
-                service: scene.turn_on
+                action: scene.turn_on
                 data:
                   transition: 1
                 target:
@@ -200,7 +200,7 @@ action:
             else:
               # Other times
               - alias: Turn on light with night before off scene
-                service: scene.turn_on
+                action: scene.turn_on
                 data:
                   transition: 1
                 target:
@@ -210,7 +210,7 @@ action:
             delay: !input no_motion_wait
 
           - alias: Turn off the light
-            service: light.turn_off
+            action: light.turn_off
             data:
               transition: 1
             target:
@@ -224,7 +224,7 @@ action:
             state: "on"
         sequence:
           - alias: Turn off the light, illuminance is high enough
-            service: light.turn_off
+            action: light.turn_off
             data:
               transition: 1
             target:

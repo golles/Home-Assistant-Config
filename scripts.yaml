@@ -49,20 +49,20 @@ everything_off:
         - "{{ fans != '' }}"
       then:
         - alias: Turn off all fans
-          service: fan.turn_off
+          action: fan.turn_off
           target:
             entity_id: "{{ fans }}"
     - if:
         - "{{ media_players != '' }}"
       then:
         - alias: Turn off all media players
-          service: media_player.turn_off
+          action: media_player.turn_off
           target:
             entity_id: "{{ media_players }}"
     - if:
         - "{{ lights != '' }}"
       then:
         - alias: Turn off all lights
-          service: light.turn_off
+          action: light.turn_off
           target:
             entity_id: "{{ lights }}"

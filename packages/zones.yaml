@@ -12,19 +12,19 @@ automation:
     alias: "Notificatie: Komt thuis na bezoeken ouders"
     description: Automation wanneer Sander thuis komt nadat hij bij zijn ouders is geweest.
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: person.sander
         to: home
-    condition:
+    conditions:
       - "{{ states('sensor.visisted_parents') | int > 0 }}"
       - condition: template
         value_template:
           > # Can't be triggered when it was already triggered in the last 24 hours.
           {% from "automations.jinja" import was_within %}
           {{ was_within("automation.notificatie_komt_thuis_na_bezoeken_ouders", 24 * 60 * 60) }}
-    action:
-      - service: notify.sander
+    actions:
+      - action: notify.sander
         data:
           title: Welkom thuis
           message: Je bent vandaag bij ouders geweest

@@ -19,18 +19,18 @@
 - id: zolder_auto_off
   alias: Zolder verlichting uit bij geen beweging
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.zolder_bezetting
       to: "off"
       for:
         minutes: 10
-    - platform: state
+    - trigger: state
       entity_id: light.zolder
       to: "on"
       for:
         minutes: 5
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.zolder_bezetting
       state: "off"
@@ -39,6 +39,6 @@
     - condition: state
       entity_id: light.zolder
       state: "on"
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       entity_id: light.zolder

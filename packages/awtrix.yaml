@@ -12,7 +12,7 @@ script:
         required: true
     sequence:
       - alias: Switch app
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -21,7 +21,7 @@ script:
             {"name": "Time"}
 
       - alias: Set settings
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -55,7 +55,7 @@ script:
         required: true
     sequence:
       - alias: Switch app
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -64,7 +64,7 @@ script:
             {"name": "Time"}
 
       - alias: Set settings
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -130,7 +130,7 @@ script:
         required: true
     sequence:
       - alias: Set effect
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -142,7 +142,7 @@ script:
             }
 
       - alias: Switch app
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -155,7 +155,7 @@ script:
           seconds: "{{ duration }}"
 
       - alias: Remove effect
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false
@@ -174,7 +174,7 @@ script:
         required: true
     sequence:
       - alias: Remove effect
-        service: mqtt.publish
+        action: mqtt.publish
         data:
           qos: 0
           retain: false

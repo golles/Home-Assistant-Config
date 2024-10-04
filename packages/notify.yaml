@@ -2,26 +2,26 @@ notify:
   - name: sander
     platform: group
     services:
-      - service: mobile_app_iphone_van_golles
-      - service: mobile_app_macbook_pro_van_sander
-      - service: mobile_app_tt_macbook
+      - action: mobile_app_iphone_van_golles
+      - action: mobile_app_macbook_pro_van_sander
+      - action: mobile_app_tt_macbook
 
   - name: sander_work
     platform: group
     services:
-      - service: mobile_app_tt_macbook
+      - action: mobile_app_tt_macbook
 
   - name: all_phones
     platform: group
     services:
-      - service: sander
-      - service: mobile_app_ipad_mini_van_golles
+      - action: sander
+      - action: mobile_app_ipad_mini_van_golles
 
   - name: all_phones_and_tv
     platform: group
     services:
-      - service: all_phones
-      - service: lg_c9
+      - action: all_phones
+      - action: lg_c9
 
   - platform: telegram
     name: telegram_huisgroep

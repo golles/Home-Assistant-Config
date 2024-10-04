@@ -10,10 +10,10 @@ automation:
     alias: Telegram commandos
     description: Telegram commandos
     mode: parallel
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: telegram_command
-    action:
+    actions:
       - variables:
           chat_id: >-
             {{ trigger.event.data["chat_id"] }}
@@ -25,7 +25,7 @@ automation:
             conditions:
               - "{{ command == '/start' }}"
             sequence:
-              - service: telegram_bot.send_message
+              - action: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
                   keyboard:
@@ -45,7 +45,7 @@ automation:
             conditions:
               - "{{ command == '/ping' }}"
             sequence:
-              - service: telegram_bot.send_message
+              - action: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
                   message: >-
@@ -55,7 +55,7 @@ automation:
             conditions:
               - "{{ command == '/meterstanden' }}"
             sequence:
-              - service: telegram_bot.send_message
+              - action: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
                   parse_mode: markdown
@@ -75,7 +75,7 @@ automation:
             conditions:
               - "{{ command == '/wie_thuis' }}"
             sequence:
-              - service: telegram_bot.send_message
+              - action: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
                   parse_mode: markdown
@@ -93,7 +93,7 @@ automation:
             conditions:
               - "{{ command == '/weer' }}"
             sequence:
-              - service: telegram_bot.send_message
+              - action: telegram_bot.send_message
                 data:
                   target: "{{ chat_id }}"
                   parse_mode: markdown

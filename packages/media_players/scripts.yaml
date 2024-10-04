@@ -25,7 +25,7 @@ script:
           - "{{ is_state(media_player, 'off') }}"
         then:
           - alias: Turn on the media player
-            service: media_player.turn_on
+            action: media_player.turn_on
             data:
               entity_id: "{{ media_player }}"
 
@@ -36,7 +36,7 @@ script:
             continue_on_timeout: false
 
       - alias: Set the source on the media player
-        service: media_player.select_source
+        action: media_player.select_source
         data:
           entity_id: "{{ media_player }}"
           source: "{{ source }}"

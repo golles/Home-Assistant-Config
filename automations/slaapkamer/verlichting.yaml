@@ -20,33 +20,33 @@
   alias: Slaapkamerlamp niet automatisch tijdens slaap
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: Naar bed
-    - platform: event
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: Gaan slapen
-    - platform: event
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionName: Uit bed
       id: aan
-    - platform: state
+    - trigger: state
       entity_id: cover.slaapkamer
       attribute: current_position
       to: 100
       id: aan
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: trigger
               id: aan
           sequence:
-            - service: automation.turn_on
+            - action: automation.turn_on
               entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
       default:
-        - service: automation.turn_off
+        - action: automation.turn_off
           entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid

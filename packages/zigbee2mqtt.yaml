@@ -19,15 +19,15 @@ mqtt:
 automation:
   - id: zigbee2mqtt_create_notification_on_successfull_interview
     alias: Zigbee new device persistent notification
-    trigger:
-      platform: mqtt
+    triggers:
+      trigger: mqtt
       topic: zigbee2mqtt/bridge/log
-    condition:
+    conditions:
       condition: template
       value_template: >
         {{ trigger.payload_json.type == "pairing" and trigger.payload_json.message == "interview_successful" }}
-    action:
-      - service: persistent_notification.create
+    actions:
+      - action: persistent_notification.create
         data:
           title: Device joined the zigbee2mqtt network
           message: >

@@ -2,26 +2,26 @@
   alias: Keuken rolgordijn automatisch open/dicht
   mode: single
   max_exceeded: silent
-  trigger:
-    - platform: time
+  triggers:
+    - trigger: time
       at: input_datetime.covers_down
-    - platform: numeric_state # For days when it turns dark early.
+    - trigger: numeric_state # For days when it turns dark early.
       entity_id: sensor.achtertuin_sensor_licht
       below: 40
       for:
         minutes: 5
-    - platform: time # For days when it turns dark late.
+    - trigger: time # For days when it turns dark late.
       at: "19:30:00"
-    - platform: time
+    - trigger: time
       at: "08:30:00"
       id: open
-  action:
+  actions:
     - if:
         - condition: trigger
           id: open
       then:
         - alias: Open the cover
-          service: button.press
+          action: button.press
           target:
             entity_id: button.keuken_rolgordijn_voorkeurspositie
       else:
@@ -30,7 +30,7 @@
             minutes: "{{ range(0, 30) | random }}"
 
         - alias: Close the cover, depending on the window state
-          service: script.close_cover_window_state
+          action: script.close_cover_window_state
           data:
             wait_minutes: 240
             cover_entity: cover.keuken

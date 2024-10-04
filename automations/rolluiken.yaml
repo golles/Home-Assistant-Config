@@ -1,20 +1,20 @@
 - id: rolluiken_open_niemand_thuis
   alias: Rolluiken - open bij niemand thuis
   mode: single
-  trigger:
-    platform: time
-    at: "09:00:00"
-  condition:
+  triggers:
+    - trigger: time
+      at: "09:00:00"
+  conditions:
     - condition: state
       entity_id: group.residents
       state: not_home
     - condition: state
       entity_id: input_boolean.guest_mode
       state: "off"
-  action:
+  actions:
     - alias: Open south facing covers based on temperature
-      service: script.open_south_facing_covers_based_on_weather
+      action: script.open_south_facing_covers_based_on_weather
 
-    - service: button.press
+    - action: button.press
       target:
         entity_id: button.logeerkamer_rolgordijn_voorkeurspositie

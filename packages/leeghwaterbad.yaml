@@ -102,18 +102,18 @@ automation:
   - id: notification_leeghwaterbad_ticket
     alias: "Notificatie: Leeghwaterbad ticket"
     mode: single
-    trigger:
-      platform: state
-      entity_id: person.sander
-      to: Leeghwaterbad
-    condition:
+    triggers:
+      - trigger: state
+        entity_id: person.sander
+        to: Leeghwaterbad
+    conditions:
       - condition: template
         value_template: >-
           {{
             0 <= as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling")) - as_timestamp(now()) <= 60 * 60
           }}
-    action:
-      - service: notify.sander
+    actions:
+      - action: notify.sander
         data:
           title: 🏊 Veel plezier met zwemmen!
           message: >-

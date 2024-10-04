@@ -1,12 +1,12 @@
 - id: washing_machine_door_open_when_done
   alias: Wasmachine deur open als hij klaar is
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.wasmachine_operation_state
       from: Finished
       to: Ready
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.wasmachine_door
       state: "on"
@@ -16,7 +16,7 @@
     - condition: state # Window should be closed.
       entity_id: binary_sensor.zolderraam_contact
       state: "off"
-  action:
+  actions:
     - choose:
         - conditions:
             # Only when the fan is set to low, we don't want to interfere with the shower automation.
@@ -26,7 +26,7 @@
               below: 26
           sequence:
             - alias: Turn on fan to reduce humidity
-              service: button.press
+              action: button.press
               target:
                 entity_id: button.mechanische_ventilatie_30_minuten_hoog
     - choose:
@@ -42,7 +42,7 @@
               below: 20
           sequence:
             - alias: Heat the room for a period of time to reduce humidity
-              service: tado.set_climate_timer
+              action: tado.set_climate_timer
               data:
                 entity_id: climate.zolder
                 time_period: "02:00:00"
@@ -51,17 +51,17 @@
 - id: notification_washing_machine
   alias: "Notificatie: Wasmachine klaar (tv)"
   mode: single
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: sensor.wasmachine_operation_state
       from: Run
       to: Finished
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.lg_c9
       state: "on"
-  action:
+  actions:
     - alias: Notify tv watchers that the washing machine is done
-      service: notify.lg_c9
+      action: notify.lg_c9
       data:
         message: Wasmachine is klaar

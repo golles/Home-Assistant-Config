@@ -7,7 +7,7 @@
       side: sensor.logeerkamer_cube_side
 
       flip_side_0:
-        - service: light.turn_on
+        - action: light.turn_on
           target:
             entity_id: light.logeerkamer
       flip_side_1:
@@ -22,51 +22,51 @@
                   - "{{ state_attr('media_player.logeerkamer', 'media_content_id') == None }}"
                   - "{{ stream not in state_attr('media_player.logeerkamer', 'media_content_id') }}"
               sequence:
-                - service: media_player.volume_set
+                - action: media_player.volume_set
                   data:
                     volume_level: 0.1
                   target:
                     entity_id: "{{ speaker }}"
 
-                - service: media_player.play_media
+                - action: media_player.play_media
                   target:
                     entity_id: "{{ speaker }}"
                   data:
                     media_content_id: "{{ stream }}"
                     media_content_type: audio/mp3
       flip_side_3:
-        - service: light.turn_off
+        - action: light.turn_off
           target:
             entity_id: light.logeerkamer
       flip_side_4:
-        - service: media_player.turn_off
+        - action: media_player.turn_off
           target:
             entity_id: media_player.logeerkamer
 
       rotate_left_side_0:
-        - service: light.turn_on
+        - action: light.turn_on
           data:
             brightness_step: -25
           target:
             entity_id: light.logeerkamer
       rotate_right_side_0:
-        - service: light.turn_on
+        - action: light.turn_on
           data:
             brightness_step: 25
           target:
             entity_id: light.logeerkamer
 
       rotate_left_side_1:
-        - service: media_player.volume_down
+        - action: media_player.volume_down
           target:
             entity_id: media_player.logeerkamer
       rotate_right_side_1:
-        - service: media_player.volume_up
+        - action: media_player.volume_up
           target:
             entity_id: media_player.logeerkamer
 
       shake:
-        - service: media_player.volume_mute
+        - action: media_player.volume_mute
           target:
             entity_id: media_player.logeerkamer
           data:

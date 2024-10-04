@@ -21,8 +21,8 @@ blueprint:
         device:
           integration: mobile_app
 
-trigger:
-  platform: state
+triggers:
+  trigger: state
   entity_id: !input person_entity
 
 variables:
@@ -32,11 +32,11 @@ variables:
   person_entity: !input person_entity
   person_name: "{{ states[person_entity].name }}"
 
-condition:
+conditions:
   condition: template
   value_template: "{{ trigger.from_state.state == zone_state and trigger.to_state.state != zone_state }}"
 
-action:
+actions:
   domain: mobile_app
   type: notify
   device_id: !input notify_device

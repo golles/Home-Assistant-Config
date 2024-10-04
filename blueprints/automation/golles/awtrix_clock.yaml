@@ -83,22 +83,22 @@ blueprint:
 mode: parallel
 max_exceeded: silent
 
-trigger:
-  - platform: state
+triggers:
+  - trigger: state
     id: button_click
     entity_id: !input button_entity
     to: "on"
-  - platform: state
+  - trigger: state
     id: occupancy_on
     entity_id: !input occupancy_entity
     to: "on"
-  - platform: state
+  - trigger: state
     id: occupancy_off
     entity_id: !input occupancy_entity
     to: "off"
     for:
       minutes: 10
-  - platform: state
+  - trigger: state
     id: apps
     entity_id:
       - !input temp_entity
@@ -106,7 +106,7 @@ trigger:
       - !input dishwasher_entity
       - !input washing_machine_entity
 
-action:
+actions:
   - variables:
       topic: !input topic
       button_entity: !input button_entity
@@ -120,28 +120,28 @@ action:
       - conditions: "{{ trigger.id == 'button_click' }}"
         sequence:
           - alias: Toggle display
-            service: light.toggle
+            action: light.toggle
             target:
               entity_id: "{{ light_entity }}"
 
       - conditions: "{{ trigger.id == 'occupancy_on' }}"
         sequence:
           - alias: Turn display on
-            service: light.turn_on
+            action: light.turn_on
             target:
               entity_id: "{{ light_entity }}"
 
       - conditions: "{{ trigger.id == 'occupancy_off' }}"
         sequence:
           - alias: Turn display off
-            service: light.turn_off
+            action: light.turn_off
             target:
               entity_id: "{{ light_entity }}"
 
       - conditions: "{{ trigger.id == 'apps' }}"
         sequence:
           - alias: Update inside temp
-            service: mqtt.publish
+            action: mqtt.publish
             data:
               topic: "{{ topic }}/custom/temp-inside"
               payload: >-
@@ -154,7 +154,7 @@ action:
                 {% endif %}
 
           - alias: Update weather
-            service: mqtt.publish
+            action: mqtt.publish
             data:
               topic: "{{ topic }}/custom/weather"
               payload: >-
@@ -168,7 +168,7 @@ action:
                 {% endif %}
 
           - alias: Update dishwasher
-            service: mqtt.publish
+            action: mqtt.publish
             data:
               topic: "{{ topic }}/custom/dishwasher"
               payload: >-
@@ -182,7 +182,7 @@ action:
                 {% endif %}
 
           - alias: Update washing machine
-            service: mqtt.publish
+            action: mqtt.publish
             data:
               topic: "{{ topic }}/custom/washing_machine"
               payload: >-

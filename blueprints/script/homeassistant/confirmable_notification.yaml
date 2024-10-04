@@ -65,7 +65,7 @@ sequence:
           title: !input dismiss_text
   - alias: "Awaiting response"
     wait_for_trigger:
-      - platform: event
+      - trigger: event
         event_type: mobile_app_notification_action
   - choose:
       - conditions: "{{ wait.trigger.event.data.action == 'CONFIRM' }}"

@@ -2,9 +2,9 @@
   alias: "Notificatie: Batterij laag"
   description: Meldingen voor lage batterij, alleen voor apparaten die belangrijk zijn
   mode: single
-  trigger:
+  triggers:
     - alias: Important devices getting low
-      platform: numeric_state
+      trigger: numeric_state
       entity_id:
         - sensor.iphone_van_golles_battery_level
         - sensor.iphone_van_golles_watch_battery
@@ -15,7 +15,7 @@
       below: 30
 
     - alias: Tado devices getting low
-      platform: state
+      trigger: state
       entity_id:
         - binary_sensor.va1788876800_batterij
         - binary_sensor.va1805654016_batterij
@@ -27,7 +27,7 @@
         - binary_sensor.va4103542784_batterij
       from: "off"
       to: "on"
-  action:
+  actions:
     - variables:
         device_id: >-
           {{ device_id(trigger.entity_id) }}
@@ -37,7 +37,7 @@
           {{ area_name(trigger.entity_id) }}
 
     - alias: Send message
-      service: notify.sander
+      action: notify.sander
       data:
         title: 🔋 Batterij leeg
         message: >-

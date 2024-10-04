@@ -2,14 +2,14 @@ automation:
   - id: switch_soundbar_source_and_volume_when_tv_on
     alias: Automatisch soundbar source en volume zetten als de tv aan gaat
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: media_player.lg_c9
         from: "off"
         to: "on"
-    action:
+    actions:
       - alias: Set source and volume on the soundbar
-        service: shell_command.set_soundbar_source_and_volume
+        action: shell_command.set_soundbar_source_and_volume
         data:
           ip: !secret lg_soundbar_ip
           source: 15 # HMDI ARC.
@@ -38,13 +38,13 @@ script:
             state: "off"
         then:
           - alias: Turn on the media player
-            service: media_player.turn_on
+            action: media_player.turn_on
             data:
               entity_id: media_player.lg_soundbar
 
           - alias: Wait till the media player is idle
             wait_for_trigger:
-              - platform: state
+              - trigger: state
                 entity_id: media_player.lg_soundbar
                 to: idle
             timeout:
@@ -57,13 +57,13 @@ script:
             state: idle
         then:
           - alias: Set the volume
-            service: media_player.volume_set
+            action: media_player.volume_set
             data:
               entity_id: media_player.lg_soundbar
               volume_level: 0.1 # 4 * 0.025
 
       - alias: Start the radio stream
-        service: media_player.play_media
+        action: media_player.play_media
         data:
           entity_id: media_player.lg_soundbar
           media_content_id: "{{ stream }}"

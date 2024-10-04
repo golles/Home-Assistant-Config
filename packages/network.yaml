@@ -2,15 +2,15 @@ automation:
   - id: notification_ip_changed
     alias: "Notificatie: Externe IP veranderd"
     mode: single
-    trigger:
-      platform: state
-      entity_id: sensor.myip
-    condition:
+    triggers:
+      - trigger: state
+        entity_id: sensor.myip
+    conditions:
       - condition: template
         value_template: >-
           {{ trigger.to_state.state not in [trigger.from_state.state, "unknown", "unavailable"] }}
-    action:
-      - service: notify.sander
+    actions:
+      - action: notify.sander
         data:
           title: 🌍 Externe IP gewijzigd
           message: >-

@@ -37,20 +37,20 @@ automation:
     alias: iOS action - Zonnescherm
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: event
+    triggers:
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Zonnescherm dicht
-      - platform: event
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Zonnescherm open
-      - platform: event
+      - trigger: event
         event_type: ios.action_fired
         event_data:
           actionName: Zonnescherm helemaal open
-    action:
+    actions:
       - variables:
           action_name: "{{ trigger.event.data.actionName }}"
 
@@ -61,7 +61,7 @@ automation:
                   {{ action_name == "Zonnescherm dicht" }}
             sequence:
               - alias: Close awning
-                service: cover.close_cover
+                action: cover.close_cover
                 target:
                   entity_id: cover.zonnescherm
           - conditions:
@@ -70,7 +70,7 @@ automation:
                   {{ action_name == "Zonnescherm open" }}
             sequence:
               - alias: Open awning
-                service: button.press
+                action: button.press
                 target:
                   entity_id: button.zonnescherm_my_position
           - conditions:
@@ -79,7 +79,7 @@ automation:
                   {{ action_name == "Zonnescherm  helemaal open" }}
             sequence:
               - alias: My position for awning
-                service: cover.open_cover
+                action: cover.open_cover
                 target:
                   entity_id: cover.zonnescherm
 
@@ -87,25 +87,25 @@ automation:
     alias: Zonnescherm automatisch sluiten
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.zon_positie
         from: Achter
         to: Voor
-      - platform: state
+      - trigger: state
         entity_id: sun.sun
         to: below_horizon
-      - platform: numeric_state
+      - trigger: numeric_state
         entity_id: sun.sun
         attribute: elevation
         below: 7
-    condition:
+    conditions:
       - condition: state
         entity_id: binary_sensor.zonnescherm_contact_contact
         state: "on"
-    action:
+    actions:
       - alias: Close the awning
-        service: cover.close_cover
+        action: cover.close_cover
         target:
           entity_id: cover.zonnescherm
 
@@ -113,15 +113,15 @@ automation:
     alias: iOS action - Zonnescherm kan open
     mode: single
     max_exceeded: silent
-    trigger:
-      - platform: numeric_state
+    triggers:
+      - trigger: numeric_state
         entity_id: sensor.0x04cf8cdf3c7cb18a_illuminance_lux
         above: 30000
-      - platform: state
+      - trigger: state
         entity_id: sensor.zon_positie
         from: Voor
         to: Achter
-    condition:
+    conditions:
       - condition: numeric_state
         entity_id: sensor.0x04cf8cdf3c7cb18a_illuminance_lux
         above: 30000
@@ -140,14 +140,14 @@ automation:
       - condition: state
         entity_id: input_boolean.vacation_mode
         state: "off"
-    action:
+    actions:
       - alias: Set up variables for the actions
         variables:
           # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
           action_open: "{{ 'OPEN_' ~ context.id }}"
 
       - alias: Ask to close the awning
-        service: notify.all_phones
+        action: notify.all_phones
         data:
           message: De zon is achter, wil je het zonnescherm openen?
           data:
@@ -158,7 +158,7 @@ automation:
 
       - alias: Wait for a response
         wait_for_trigger:
-          - platform: event
+          - trigger: event
             event_type: mobile_app_notification_action
             event_data:
               action: "{{ action_open }}"
@@ -167,12 +167,12 @@ automation:
         choose:
           - conditions: "{{ wait.trigger.event.data.action == action_open }}"
             sequence:
-              - service: button.press
+              - action: button.press
                 target:
                   entity_id: button.zonnescherm_my_position
 
               - alias: Clear this notification on all devices
-                service: notify.all_phones
+                action: notify.all_phones
                 data:
                   message: clear_notification
                   data:

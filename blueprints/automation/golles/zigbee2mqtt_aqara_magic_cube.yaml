@@ -199,8 +199,8 @@ mode: queued
 max: 5
 max_exceeded: silent
 
-trigger:
-  - platform: state
+triggers:
+  - trigger: state
     entity_id: !input remote
     to:
       - "fall"
@@ -212,7 +212,7 @@ trigger:
       - "slide"
       - "tap"
 
-action:
+actions:
   - variables:
       event: "{{ trigger.to_state.state }}"
       side_entity: !input side

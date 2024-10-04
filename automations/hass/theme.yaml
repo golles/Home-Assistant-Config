@@ -1,27 +1,27 @@
 - id: auto_day_night_theme
   alias: Automatisch thema voor dag en nacht
   mode: single
-  trigger:
-    - platform: homeassistant
+  triggers:
+    - trigger: homeassistant
       event: start
-    - platform: state
+    - trigger: state
       entity_id: sun.sun
       to:
         - below_horizon
         - above_horizon
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: state
               entity_id: sun.sun
               state: below_horizon
           sequence:
-            - service: frontend.set_theme
+            - action: frontend.set_theme
               data:
                 name: Mushroom Shadow
                 mode: dark
       default:
-        - service: frontend.set_theme
+        - action: frontend.set_theme
           data:
             name: Mushroom Shadow
             mode: light

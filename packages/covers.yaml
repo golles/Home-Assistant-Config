@@ -25,15 +25,15 @@ cover:
         position_template: >-
           {{ iif(states("binary_sensor.zonnescherm_contact_contact") == "on", 50, 0) }}
         open_cover:
-          service: cover.open_cover
+          action: cover.open_cover
           target:
             entity_id: cover.zonnescherm
         close_cover:
-          service: cover.close_cover
+          action: cover.close_cover
           target:
             entity_id: cover.zonnescherm
         stop_cover:
-          service: cover.stop_cover
+          action: cover.stop_cover
           target:
             entity_id: cover.zonnescherm
 
@@ -42,7 +42,7 @@ template:
       - name: Logeerkamer rolgordijn voorkeurspositie
         icon: mdi:star
         press:
-          - service: cover.set_cover_position
+          - action: cover.set_cover_position
             data:
               position: 85
             target:
@@ -51,7 +51,7 @@ template:
       - name: Keuken rolgordijn voorkeurspositie
         icon: mdi:star
         press:
-          - service: cover.set_cover_position
+          - action: cover.set_cover_position
             data:
               position: 80
             target:
@@ -61,13 +61,13 @@ automation:
   - id: covers_down_set_daily_time
     alias: Rolluiken - Tijd voor sluiten dagelijks aanpassen
     mode: single
-    trigger:
-      - platform: homeassistant
+    triggers:
+      - trigger: homeassistant
         event: start
-      - platform: time
+      - trigger: time
         at: "12:00:00"
-    action:
-      - service: input_datetime.set_datetime
+    actions:
+      - action: input_datetime.set_datetime
         data:
           entity_id: input_datetime.covers_down
           time: >
@@ -84,25 +84,25 @@ automation:
   - id: covers_overkiz_reload_integration
     alias: Rolluiken - Overkiz integratie herladen bij probleem
     mode: single
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: cover.slaapkamer
         to: unavailable
         for:
           minutes: 5 # Quick action.
-      - platform: state
+      - trigger: state
         entity_id: cover.slaapkamer
         to: unavailable
         for:
           minutes: 60 # Habdle longer outages.
-    action:
+    actions:
       - alias: Reload Overkiz integration
-        service: homeassistant.reload_config_entry
+        action: homeassistant.reload_config_entry
         target:
           entity_id: cover.slaapkamer
 
       - alias: Clear the notification
-        service: persistent_notification.dismiss
+        action: persistent_notification.dismiss
         data:
           notification_id: config_entry_reconfigure
 
@@ -118,21 +118,21 @@ script:
             above: 27
         then:
           - alias: It will be warm today, set south facing covers to their preference position
-            service: button.press
+            action: button.press
             target:
               entity_id:
                 - button.kledingkamer_my_position
                 - button.slaapkamer_my_position
         else:
           - alias: Open south facing covers
-            service: cover.open_cover
+            action: cover.open_cover
             target:
               entity_id:
                 - cover.kledingkamer
                 - cover.slaapkamer
 
       - alias: Set curtains to preference position
-        service: button.press
+        action: button.press
         target:
           entity_id:
             - button.logeerkamer_rolgordijn_voorkeurspositie
@@ -172,7 +172,7 @@ script:
               - "{{ is_state(cover_entity, 'open') }}"
             sequence:
               - alias: Close the cover
-                service: cover.close_cover
+                action: cover.close_cover
                 target:
                   entity_id: "{{ cover_entity }}"
 
@@ -191,6 +191,6 @@ script:
                   seconds: 5
 
               - alias: Close the cover now
-                service: cover.close_cover
+                action: cover.close_cover
                 target:
                   entity_id: "{{ cover_entity }}"
