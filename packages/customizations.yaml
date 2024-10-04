@@ -80,6 +80,18 @@ homeassistant:
     light.zolder:
       icon: mdi:ceiling-light
 
+    scene.slaapkamer_helder:
+      friendly_name: Helder
+      icon: mdi:lightbulb-on
+    scene.slaapkamer_gedimd:
+      friendly_name: Gedimd
+      icon: mdi:lightbulb-on-50
+    scene.slaapkamer_love:
+      friendly_name: Love
+      icon: mdi:heart-half-full
+    scene.slaapkamer_naar_bed:
+      friendly_name: Naar bed
+      icon: mdi:weather-night
     scene.wooneet_avond:
       friendly_name: Avond
       icon: mdi:weather-sunset

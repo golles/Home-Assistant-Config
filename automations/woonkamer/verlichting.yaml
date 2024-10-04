@@ -117,9 +117,7 @@
         - alias: Turn on movie scenes
           action: scene.turn_on
           data:
-            entity_id:
-              - scene.wooneet_film
-              - scene.tv_film
+            entity_id: scene.wooneet_film
       else:
         - if:
             - condition: time
@@ -136,11 +134,6 @@
               action: scene.turn_on
               data:
                 entity_id: scene.wooneet_nacht
-
-        - alias: Turn off tv light
-          action: light.turn_off
-          target:
-            entity_id: light.tv
 
 - id: disable_automatic_lights_movie_scene
   alias: Woonkamer automatisch aan/uit door film scene

@@ -100,7 +100,7 @@ automation:
         data:
           transition: 2
         target:
-          entity_id: scene.slaapkamer_bedlampen_nachtlampje
+          entity_id: scene.slaapkamer_naar_bed
 
   - id: ios_action_going_to_sleep
     alias: iOS action - Gaan slapen
