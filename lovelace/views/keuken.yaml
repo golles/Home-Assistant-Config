@@ -1,112 +1,111 @@
 title: Keuken
 path: keuken
-panel: false
 icon: mdi:countertop-outline
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Keuken
+        heading_style: title
+        icon: mdi:countertop-outline
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.keuken
+        name: Plafond
+      - type: tile
+        entity: light.keukenkastje_lamp
+        name: Keukenkastje
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Klimaat
+        heading_style: subtitle
+      - type: tile
+        entity: climate.woonkamer
+        name: Verwarming
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Apparaten
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.vaatwasser_status
+        name: Vaatwasser
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: cover.keuken
+        name: Rolgordijn
+      - type: tile
+        entity: binary_sensor.keukenraam_contact
+        name: Raam
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.epl_keuken_zone_1_occupancy
+        name: Beweging
         icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.woonkamer_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.woonkamer_luchtvochtigheid
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.epl_keuken_illuminance
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Keuken
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.keuken
-            name: Plafond
-          - type: tile
-            entity: light.keukenkastje_lamp
-            name: Keukenkastje
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Apparaten
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.vaatwasser_status
-            name: Vaatwasser
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: cover.keuken
-            name: Rolgordijn
-          - type: tile
-            entity: binary_sensor.keukenraam_contact
-            name: Raam
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.woonkamer_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.woonkamer_luchtvochtigheid
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.epl_keuken_illuminance
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
-          - type: tile
-            entity: button.keuken_rolgordijn_voorkeurspositie
-            name: Voorkeurspositie
-            icon: mdi:window-shutter
-          - type: tile
-            entity: automation.vaatwasser_dagelijks_starten
-            icon: mdi:dishwasher
-            name: Vaatwasser auto start
-          - type: tile
-            entity: input_datetime.dishwasher_daily_start
-            name: Vaatwasser starttijd
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.keukenlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto
+      - type: tile
+        entity: button.keuken_rolgordijn_voorkeurspositie
+        name: Voorkeurspositie
+        icon: mdi:window-shutter
+      - type: tile
+        entity: automation.vaatwasser_dagelijks_starten
+        icon: mdi:dishwasher
+        name: Vaatwasser auto start
+      - type: tile
+        entity: input_datetime.dishwasher_daily_start
+        name: Vaatwasser starttijd

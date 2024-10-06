@@ -1,41 +1,45 @@
 title: Deuren
 path: deuren
-panel: false
 icon: mdi:door-open
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Deuren
-
-  - type: custom:auto-entities
-    show_empty: true
-    card:
-      type: grid
-      columns: 2
-      square: false
-    card_param: cards
-    filter:
-      include:
-        - domain: binary_sensor
-          attributes:
-            device_class: door
-          options:
-            type: tile
-      exclude:
-        - entity_id: binary_sensor.wasmachine_door
-        - entity_id: binary_sensor.vaatwasser_door
-    sort:
-      method: state
-      reverse: true
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Deuren
+        heading_style: title
+        icon: mdi:door-open
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            - domain: binary_sensor
+              attributes:
+                device_class: door
+              options:
+                type: tile
+          exclude:
+            - entity_id: binary_sensor.wasmachine_door
+            - entity_id: binary_sensor.vaatwasser_door
+        sort:
+          method: state
+          reverse: true
+        layout_options:
+          grid_columns: full

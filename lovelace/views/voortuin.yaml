@@ -1,82 +1,102 @@
 title: Voortuin
 path: voortuin
-panel: false
 icon: mdi:watering-can-outline
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Voortuin
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 4
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
+      - type: heading
+        heading: Voortuin
+        heading_style: title
+        icon: mdi:watering-can-outline
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.voortuin
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Apparaten
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.voortuin
 
-      - type: conditional
-        conditions:
-          - entity: sensor.deurbel_stream_status
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.deurbel_battery_percentage
+
+  - type: grid
+    column_span: 2
+    cards:
+      - type: heading
+        heading: Apparaten
+        heading_style: subtitle
+      - show_state: true
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: camera.deurbel
+        camera_image: camera.deurbel
+        layout_options:
+          grid_columns: full
+        visibility:
+          - condition: state
+            entity: sensor.deurbel_stream_status
             state: StreamStatus.STREAMING
-        card:
-          type: vertical-stack
-          cards:
-            - type: picture-entity
-              entity: camera.deurbel
-              camera_image: camera.deurbel
-              camera_view: auto
-
-            - type: button
-              entity: button.deurbel_stop_p2p_stream
-              name: Stop deurbel stream
-              icon: mdi:video-off
-              show_name: true
-              show_icon: false
-              show_state: false
-              tap_action:
-                action: toggle
-
-      - type: conditional
-        conditions:
-          - entity: sensor.deurbel_stream_status
+      - type: button
+        entity: button.deurbel_stop_p2p_stream
+        name: Stop deurbel stream
+        icon: mdi:video-off
+        show_name: true
+        show_icon: false
+        show_state: false
+        tap_action:
+          action: toggle
+        layout_options:
+          grid_columns: full
+        visibility:
+          - condition: state
+            entity: sensor.deurbel_stream_status
+            state: StreamStatus.STREAMING
+      - show_state: true
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: image.deurbel_event_image
+        name: Deurbel
+        layout_options:
+          grid_columns: full
+        visibility:
+          - condition: state
+            entity: sensor.deurbel_stream_status
             state_not: StreamStatus.STREAMING
-        card:
-          type: vertical-stack
-          cards:
-            - type: picture-entity
-              entity: image.deurbel_event_image
-              camera_view: auto
-              name: Deurbel
-              show_state: true
-
-            - type: button
-              entity: button.deurbel_start_p2p_stream
-              name: Start deurbel stream
-              icon: mdi:video
-              show_name: true
-              show_icon: false
-              show_state: false
-              tap_action:
-                action: toggle
+      - type: button
+        entity: button.deurbel_start_p2p_stream
+        name: Start deurbel stream
+        icon: mdi:video
+        show_name: true
+        show_icon: false
+        show_state: false
+        tap_action:
+          action: toggle
+        layout_options:
+          grid_columns: full
+        visibility:
+          - condition: state
+            entity: sensor.deurbel_stream_status
+            state_not: StreamStatus.STREAMING

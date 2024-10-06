@@ -1,189 +1,166 @@
 title: Hal
 path: hal
-panel: false
 icon: mdi:coat-rack
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Hal
+        heading_style: title
+        icon: mdi:coat-rack
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.hal
+        name: Plafond
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.voordeur_contact
+        name: Voordeur
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.hal_sensor_beweging
+        name: Beweging
         icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.hal_sensor_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.hal_sensor_licht
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Hal
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
+      - type: heading
+        heading: Meterkast
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.meterkast_klimaat_temperature
+        name: Temperatuur
+      - type: tile
+        entity: sensor.meterkast_klimaat_humidity
+        name: Luchtvochtigheid
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.hal
-            name: Plafond
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: binary_sensor.voordeur_contact
-            name: Voordeur
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.hal_sensor_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.hal_sensor_licht
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Meterkast
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.meterkast_klimaat_temperature
-            name: Temperatuur
-          - type: tile
-            entity: sensor.meterkast_klimaat_humidity
-            name: Luchtvochtigheid
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Elektriciteitsmeter
-        subtitle_tap_action:
+      - type: heading
+        heading: Elektriciteitsmeter
+        heading_style: subtitle
+        tap_action:
           action: url
           url_path: !secret dsmr_frontend
+      - type: tile
+        entity: sensor.dsmr_reading_electricity_delivered_1
+        name: Laagtarief
+      - type: tile
+        entity: sensor.dsmr_reading_electricity_delivered_2
+        name: Normaaltarief
+      - type: tile
+        entity: sensor.dsmr_meter_stats_electricity_tariff
+        name: Tarief
+      - type: tile
+        entity: sensor.dsmr_reading_electricity_currently_delivered
+        name: Verbruik
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.dsmr_reading_electricity_delivered_1
-            name: Laagtarief
-          - type: tile
-            entity: sensor.dsmr_reading_electricity_delivered_2
-            name: Normaaltarief
-          - type: tile
-            entity: sensor.dsmr_meter_stats_electricity_tariff
-            name: Tarief
-          - type: tile
-            entity: sensor.dsmr_reading_electricity_currently_delivered
-            name: Verbruik
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Warmtemeter
-        subtitle_tap_action:
+      - type: heading
+        heading: Warmtemeter
+        heading_style: subtitle
+        tap_action:
           action: navigate
           navigation_path: /config/devices/device/ed19689a887b6c65c66a16c91f52b91f
+      - type: tile
+        entity: sensor.kamstrup_403_heat_energy_e1
+        name: Energie
+      - type: tile
+        entity: sensor.kamstrup_403_volume
+        name: Volume
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.kamstrup_403_heat_energy_e1
-            name: Energie
-          - type: tile
-            entity: sensor.kamstrup_403_volume
-            name: Volume
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Watermeter
-        subtitle_tap_action:
+      - type: heading
+        heading: Watermeter
+        heading_style: subtitle
+        tap_action:
           action: navigate
           navigation_path: /config/devices/device/425c78c444f128b6f6cc374e7b26b15c
+      - type: tile
+        entity: sensor.watermeter_totaal
+        name: Stand
+      - type: tile
+        entity: sensor.waterverbruik_per_dag
+        name: Vandaag
+      - type: tile
+        entity: sensor.waterverbruik_per_week
+        name: Week
+      - type: tile
+        entity: sensor.waterverbruik_per_maand
+        name: Maand
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.watermeter_totaal
-            name: Stand
-          - type: tile
-            entity: sensor.waterverbruik_per_dag
-            name: Vandaag
-          - type: tile
-            entity: sensor.waterverbruik_per_week
-            name: Week
-          - type: tile
-            entity: sensor.waterverbruik_per_maand
-            name: Maand
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: UPS
-        subtitle_tap_action:
+      - type: heading
+        heading: UPS
+        heading_style: subtitle
+        tap_action:
           action: navigate
           navigation_path: /config/devices/device/3b35d47b35a6b96848962b937ee493ce
+      - type: tile
+        entity: sensor.apc_back_ups_bx950mi_status
+        name: Status
+      - type: tile
+        entity: sensor.apc_back_ups_bx950mi_battery_charge
+        name: Batterij
+      - type: tile
+        entity: sensor.apc_back_ups_bx950mi_battery_runtime
+        name: Batterij tijd
+      - type: tile
+        entity: sensor.apc_back_ups_bx950mi_self_test_result
+        name: Test
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.apc_back_ups_bx950mi_status
-            name: Status
-          - type: tile
-            entity: sensor.apc_back_ups_bx950mi_battery_charge
-            name: Batterij
-          - type: tile
-            entity: sensor.apc_back_ups_bx950mi_battery_runtime
-            name: Batterij tijd
-          - type: tile
-            entity: sensor.apc_back_ups_bx950mi_self_test_result
-            name: Test
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: switch.hal_sensor_bewegingssensor_ingeschakeld
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: switch.hal_sensor_bewegingssensor_ingeschakeld
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto

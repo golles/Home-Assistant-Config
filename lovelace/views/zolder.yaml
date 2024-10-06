@@ -1,115 +1,100 @@
 title: zolder
 path: zolder
-panel: false
 icon: mdi:home-roof
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Zolder
+        heading_style: title
+        icon: mdi:home-roof
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.zolder
+        name: Plafond
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Klimaat
+        heading_style: subtitle
+      - type: tile
+        entity: climate.zolder
+        name: Verwarming
+      - type: tile
+        entity: fan.mechanische_ventilatie_ventilatie
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Apparaten
+        heading_style: subtitle
+      - type: tile
+        entity: media_player.zolder
+      - type: tile
+        entity: sensor.wasmachine_status
+        name: Wasmachine
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.balkondeur_contact
+        name: Balkondeur
+      - type: tile
+        entity: binary_sensor.zolderraam_contact
+        name: Raam
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.zolder_beweging
-        icon: mdi:motion-sensor
+        name: Beweging
+      - type: tile
+        entity: sensor.zolder_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.zolder_luchtvochtigheid
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.zolder_beweging_2_illuminance_lux
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Zolder
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.zolder
-            name: Plafond
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Klimaat
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: climate.zolder
-            name: Verwarming
-          - type: tile
-            entity: fan.mechanische_ventilatie_ventilatie
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Apparaten
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: media_player.zolder
-          - type: tile
-            entity: sensor.wasmachine_status
-            name: Wasmachine
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: binary_sensor.balkondeur_contact
-            name: Balkondeur
-          - type: tile
-            entity: binary_sensor.zolderraam_contact
-            name: Raam
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.zolder_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.zolder_luchtvochtigheid
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.zolder_beweging_2_illuminance_lux
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.zolderlamp_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.zolderlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto

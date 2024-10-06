@@ -1,205 +1,164 @@
 title: Woonkamer
 path: woonkamer
-panel: false
 icon: mdi:sofa-outline
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
-        entity: binary_sensor.woonkamer_beweging
-        icon: mdi:motion-sensor
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Woonkamer
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 4
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
+      - type: heading
+        heading: Woonkamer
+        heading_style: title
+        icon: mdi:sofa-outline
 
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
       - type: custom:vertical-stack-in-card
         horizontal: true
         cards:
-          - type: custom:mushroom-entity-card
+          - type: tile
             entity: scene.wooneet_avond
-            secondary_info: none
-            layout: vertical
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              target:
-                entity_id: scene.wooneet_avond
-            icon_color: orange
-          - type: custom:mushroom-entity-card
+            vertical: true
+            hide_state: true
+            color: orange
+          - type: tile
             entity: scene.wooneet_eten
-            secondary_info: none
-            layout: vertical
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              target:
-                entity_id: scene.wooneet_eten
-            icon_color: orange
-          - type: custom:mushroom-entity-card
+            vertical: true
+            hide_state: true
+            color: orange
+          - type: tile
             entity: scene.wooneet_film
-            secondary_info: none
-            layout: vertical
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              target:
-                entity_id:
-                  - scene.wooneet_film
-                  - scene.tv_film
-            icon_color: deep-orange
-          - type: custom:mushroom-entity-card
+            vertical: true
+            hide_state: true
+            color: deep-orange
+          - type: tile
             entity: scene.wooneet_nacht
-            secondary_info: none
-            layout: vertical
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              target:
-                entity_id: scene.wooneet_nacht
-            icon_color: grey
+            vertical: true
+            hide_state: true
+            color: grey
+      - type: tile
+        entity: light.woonkamer
+        name: Lampen
+      - type: tile
+        entity: light.eettafel
+      - type: tile
+        entity: light.tv
+      - type: tile
+        entity: light.skull
+      - type: tile
+        entity: light.keuken
+        name: Keuken
+      - type: tile
+        entity: light.keukenkastje_lamp
+        name: Keukenkastje
+      - type: tile
+        entity: light.kerstboom
+        visibility:
+          - condition: state
+            entity: light.kerstboom
+            state_not: unavailable
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.woonkamer
-            name: Lampen
-          - type: tile
-            entity: light.eettafel
-          - type: tile
-            entity: light.tv
-          - type: tile
-            entity: light.skull
-          - type: tile
-            entity: light.keuken
-            name: Keuken
-          - type: tile
-            entity: light.keukenkastje_lamp
-            name: Keukenkastje
-          - type: conditional
-            conditions:
-              - entity: light.kerstboom
-                state_not: unavailable
-            card:
-              type: tile
-              entity: light.kerstboom
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Klimaat
+      - type: heading
+        heading: Klimaat
+        heading_style: subtitle
+      - type: tile
+        entity: climate.woonkamer
+        name: Verwarming
+      - type: tile
+        entity: fan.air_purifier
+      - type: tile
+        entity: fan.ventilator
+        visibility:
+          - condition: state
+            entity: fan.ventilator
+            state_not: unavailable
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: climate.woonkamer
-            name: Verwarming
-          - type: tile
-            entity: fan.air_purifier
-          - type: conditional
-            conditions:
-              - entity: fan.ventilator
-                state_not: unavailable
-            card:
-              type: tile
-              entity: fan.ventilator
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Apparaten
-
+      - type: heading
+        heading: Apparaten
+        heading_style: subtitle
       - !include cards/media_player_woonkamer.yaml
       - !include cards/media_player_lg_soundbar.yaml
+      - type: tile
+        entity: media_player.woonkamer_homepod_mini
+        name: Homepod mini
+      - type: tile
+        entity: light.woonkamer_klok_matrix
+        name: Klok
+        state_content: state
+        color: primary
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: media_player.woonkamer_homepod_mini
-            name: Homepod mini
-          - type: tile
-            entity: light.woonkamer_klok_matrix
-            name: Klok
-            color: primary
-            state_content: state
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.achterdeur_contact
+        name: Achterdeur
+      - type: tile
+        entity: binary_sensor.achterraam_contact
+        name: Achterraam
+      - type: tile
+        entity: binary_sensor.voorraadkastdeur_contact
+        name: Voorraadkastdeur
+      - type: tile
+        entity: cover.zonnescherm_template
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: binary_sensor.achterdeur_contact
-            name: Achterdeur
-          - type: tile
-            entity: binary_sensor.achterraam_contact
-            name: Achterraam
-          - type: tile
-            entity: binary_sensor.voorraadkastdeur_contact
-            name: Voorraadkastdeur
-          - type: tile
-            entity: cover.zonnescherm_template
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.woonkamer_beweging
+        name: Beweging
+      - type: tile
+        entity: sensor.woonkamer_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.woonkamer_luchtvochtigheid
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.epl_woonkamer_illuminance
+        name: Lichtsterkte
+      - type: tile
+        entity: sensor.woonkamer_luchtkwaliteit
+        name: Luchtkwaliteit
+        icon: mdi:molecule
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.woonkamer_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.woonkamer_luchtvochtigheid
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.epl_woonkamer_illuminance
-            name: Lichtsterkte
-          - type: tile
-            entity: sensor.woonkamer_luchtkwaliteit
-            name: Luchtkwaliteit
-            icon: mdi:molecule
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.woonkamer_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
-          - type: tile
-            entity: button.woonkamer_opwarmen
-            name: Opwarmen
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.woonkamer_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto
+      - type: tile
+        entity: button.woonkamer_opwarmen
+        name: Opwarmen

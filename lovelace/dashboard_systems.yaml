@@ -4,5 +4,4 @@ views:
   - !include views/hass.yaml
   - !include views/borg.yaml
   - !include views/internet.yaml
-  - !include views/sabnzbd.yaml
   - !include views/tado.yaml

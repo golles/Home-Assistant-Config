@@ -1,103 +1,215 @@
 title: Alarm
 path: alarm
-panel: false
 icon: mdi:shield
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Alarm
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Alarm
+        heading_style: title
+        icon: mdi:shield
 
-  - type: alarm-panel
-    entity: alarm_control_panel.alarmo
+  - type: grid
+    column_span: 2
+    cards:
+      - type: heading
+        heading: Alarm
+        heading_style: subtitle
+      - type: tile
+        entity: alarm_control_panel.alarmo
+        features:
+          - type: alarm-modes
+        layout_options:
+          grid_columns: full
 
-  - type: entity-filter
-    card:
-      title: Sensoren actief
-    entities:
-      # Deur/raam sensoren:
-      # Begaande grond.
-      - binary_sensor.achterdeur_contact
-      - binary_sensor.achterraam_contact
-      - binary_sensor.keukenraam_contact
-      - binary_sensor.voordeur_contact
-      - binary_sensor.voorraadkastdeur_contact
-      # Eerste verdieping.
-      - binary_sensor.slaapkamerraam_contact
-      - binary_sensor.kledingkamerraam_contact
-      - binary_sensor.badkamerraam_contact
-      - binary_sensor.logeerkamerraam_contact
-      # Tweede verdieping.
-      - binary_sensor.balkondeur_contact
-      - binary_sensor.zolderraam_contact
+  - type: grid
+    column_span: 2
+    cards:
+      - type: heading
+        heading: Geschiedenis
+        heading_style: subtitle
+      - type: logbook
+        entities:
+          # Deur/raam sensoren:
+          # Begaande grond.
+          - binary_sensor.achterdeur_contact
+          - binary_sensor.achterraam_contact
+          - binary_sensor.keukenraam_contact
+          - binary_sensor.voordeur_contact
+          - binary_sensor.voorraadkastdeur_contact
+          # Eerste verdieping.
+          - binary_sensor.slaapkamerraam_contact
+          - binary_sensor.kledingkamerraam_contact
+          - binary_sensor.badkamerraam_contact
+          - binary_sensor.logeerkamerraam_contact
+          # Tweede verdieping.
+          - binary_sensor.balkondeur_contact
+          - binary_sensor.zolderraam_contact
 
-      # Bewegingssensoren:
-      # Begaande grond.
-      - binary_sensor.epl_woonkamer_occupancy
-      - binary_sensor.epl_eettafel_occupancy
-      - binary_sensor.epl_keuken_occupancy
-      - binary_sensor.hal_sensor_beweging
-      - binary_sensor.toilet_beweging_occupancy
-      - binary_sensor.overloop_sensor_1_beweging
-      # Eerste verdieping.
-      - binary_sensor.overloop_sensor_2_beweging
-      - binary_sensor.kledingkamer_beweging_occupancy
-      - binary_sensor.badkamer_beweging_beweging
-      - binary_sensor.logeerkamer_beweging_occupancy
-      - binary_sensor.slaapkamer_beweging_occupancy
-      # Tweede verdieping.
-      - binary_sensor.zoldertrap_beweging_beweging
-      - binary_sensor.zolder_beweging_1_occupancy
-      - binary_sensor.zolder_beweging_2_occupancy
-    state_filter:
-      - "on"
+          # Bewegingssensoren:
+          # Begaande grond.
+          - binary_sensor.epl_woonkamer_occupancy
+          - binary_sensor.epl_eettafel_occupancy
+          - binary_sensor.epl_keuken_occupancy
+          - binary_sensor.hal_sensor_beweging
+          - binary_sensor.toilet_beweging_occupancy
+          - binary_sensor.overloop_sensor_1_beweging
+          # Eerste verdieping.
+          - binary_sensor.overloop_sensor_2_beweging
+          - binary_sensor.kledingkamer_beweging_occupancy
+          - binary_sensor.badkamer_beweging_beweging
+          - binary_sensor.logeerkamer_beweging_occupancy
+          - binary_sensor.slaapkamer_beweging_occupancy
+          # Tweede verdieping.
+          - binary_sensor.zoldertrap_beweging_beweging
+          - binary_sensor.zolder_beweging_1_occupancy
+          - binary_sensor.zolder_beweging_2_occupancy
+        hours_to_show: 3
+        layout_options:
+          grid_columns: full
 
-  - type: logbook
-    title: Geschiedenis
-    entities:
-      # Deur/raam sensoren:
-      # Begaande grond.
-      - binary_sensor.achterdeur_contact
-      - binary_sensor.achterraam_contact
-      - binary_sensor.keukenraam_contact
-      - binary_sensor.voordeur_contact
-      - binary_sensor.voorraadkastdeur_contact
-      # Eerste verdieping.
-      - binary_sensor.slaapkamerraam_contact
-      - binary_sensor.kledingkamerraam_contact
-      - binary_sensor.badkamerraam_contact
-      - binary_sensor.logeerkamerraam_contact
-      # Tweede verdieping.
-      - binary_sensor.balkondeur_contact
-      - binary_sensor.zolderraam_contact
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Sensoren actief
+        heading_style: subtitle
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            # Deur/raam sensoren:
+            # Begaande grond.
+            - entity_id: binary_sensor.achterdeur_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.achterraam_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.keukenraam_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.voordeur_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.voorraadkastdeur_contact
+              state: "on"
+              options:
+                type: tile
+            # Eerste verdieping.
+            - entity_id: binary_sensor.slaapkamerraam_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.kledingkamerraam_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.badkamerraam_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.logeerkamerraam_contact
+              state: "on"
+              options:
+                type: tile
+            # Tweede verdieping.
+            - entity_id: binary_sensor.balkondeur_contact
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.zolderraam_contact
+              state: "on"
+              options:
+                type: tile
 
-      # Bewegingssensoren:
-      # Begaande grond.
-      - binary_sensor.epl_woonkamer_occupancy
-      - binary_sensor.epl_eettafel_occupancy
-      - binary_sensor.epl_keuken_occupancy
-      - binary_sensor.hal_sensor_beweging
-      - binary_sensor.toilet_beweging_occupancy
-      - binary_sensor.overloop_sensor_1_beweging
-      # Eerste verdieping.
-      - binary_sensor.overloop_sensor_2_beweging
-      - binary_sensor.kledingkamer_beweging_occupancy
-      - binary_sensor.badkamer_beweging_beweging
-      - binary_sensor.logeerkamer_beweging_occupancy
-      - binary_sensor.slaapkamer_beweging_occupancy
-      # Tweede verdieping.
-      - binary_sensor.zoldertrap_beweging_beweging
-      - binary_sensor.zolder_beweging_1_occupancy
-      - binary_sensor.zolder_beweging_2_occupancy
-    hours_to_show: 3
+            # Bewegingssensoren:
+            # Begaande grond.
+            - entity_id: binary_sensor.epl_woonkamer_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.epl_eettafel_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.epl_keuken_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.hal_sensor_beweging
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.toilet_beweging_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.overloop_sensor_1_beweging
+              state: "on"
+              options:
+                type: tile
+            # Eerste verdieping.
+            - entity_id: binary_sensor.overloop_sensor_2_beweging
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.kledingkamer_beweging_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.badkamer_beweging_beweging
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.logeerkamer_beweging_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.slaapkamer_beweging_occupancy
+              state: "on"
+              options:
+                type: tile
+            # Tweede verdieping.
+            - entity_id: binary_sensor.zoldertrap_beweging_beweging
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.zolder_beweging_1_occupancy
+              state: "on"
+              options:
+                type: tile
+            - entity_id: binary_sensor.zolder_beweging_2_occupancy
+              state: "on"
+              options:
+                type: tile
+          exclude:
+            - entity_id: binary_sensor.wasmachine_door
+            - entity_id: binary_sensor.vaatwasser_door
+        sort:
+          method: state
+          reverse: true
+        layout_options:
+          grid_columns: full

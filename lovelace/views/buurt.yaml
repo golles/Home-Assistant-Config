@@ -1,120 +1,78 @@
-title: In de buurt
+title: Buurt
 path: buurt
-panel: false
 icon: mdi:home-city-outline
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Buurt
-
-  - type: custom:vertical-stack-in-card
+  - type: grid
+    column_span: 4
     cards:
-      - type: custom:mushroom-template-card
+      - type: heading
+        heading: Buurt
+        heading_style: title
+        icon: mdi:home-city-outline
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: P2000
+        heading_style: subtitle
+      - type: tile
         entity: sensor.p2000_dichtbij
-        primary: Dichtbij
-        secondary: >-
-          {{ states(entity) }}
-        multiline_secondary: true
-        icon: mdi:alert
-        icon_color: >-
-          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 7200, "orange", "grey") }}
-        tap_action:
-          action: more-info
-
-      - type: custom:mushroom-template-card
+      - type: tile
         entity: sensor.p2000_ambulance
-        primary: Ambulance
-        secondary: >-
-          {{ states(entity) }}
-        multiline_secondary: true
-        icon: mdi:ambulance
-        icon_color: >-
-          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 3600, "amber", "grey") }}
-        tap_action:
-          action: more-info
-
-      - type: custom:mushroom-template-card
+      - type: tile
         entity: sensor.p2000_brandweer
-        primary: Brandweer
-        secondary: >-
-          {{ states(entity) }}
-        multiline_secondary: true
-        icon: mdi:fire-truck
-        icon_color: >-
-          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 3600, "red", "grey") }}
-        tap_action:
-          action: more-info
-
-      - type: custom:mushroom-template-card
+      - type: tile
         entity: sensor.p2000_politie
-        primary: Politie
-        secondary: >-
-          {{ states(entity) }}
-        multiline_secondary: true
-        icon: mdi:car-emergency
-        icon_color: >-
-          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 3600, "blue", "grey") }}
-        tap_action:
-          action: more-info
-
-      - type: custom:mushroom-template-card
+      - type: tile
         entity: sensor.p2000_lifeliner_1
-        primary: Lifeliner 1
-        secondary: >-
-          {{ states(entity) }}
-        multiline_secondary: true
-        icon: mdi:helicopter
-        icon_color: >-
-          {{ iif(as_timestamp(now()) <= as_timestamp(state_attr(entity, "time")) + 3600, "amber", "grey") }}
-        tap_action:
-          action: more-info
 
-  - type: custom:vertical-stack-in-card
-    title: Leeghwaterbad
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-entity-card
+      - type: heading
+        heading: Leeghwaterbad
+        heading_style: subtitle
+      - type: tile
         entity: sensor.leeghwaterbad_volgende_bestelling
-
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.leeghwaterbad_volgende_bestelling
-            primary: Ordernummer
-            secondary: >-
-              {{ iif(states(entity) != "unknown", state_attr(entity, "ordernummer"), "Onbekend") }}
-            icon: mdi:ticket-confirmation
-            icon_color: >-
-              {{ iif(states(entity) != "unknown", "blue", "grey") }}
-            tap_action:
-              action: more-info
-          - type: markdown
-            content: >-
-              {{
-                iif(states(
-                  "sensor.leeghwaterbad_volgende_bestelling") != "unknown",
-                  "[Tickets](" ~ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket") ~ ")",
-                  ""
-                )
-              }}
-
-      - type: divider
-
-      - type: custom:mushroom-entity-card
+      - type: tile
+        entity: sensor.leeghwaterbad_volgende_bestelling
+        name: Ordernummer
+        state_content: Ordernummer
+      - type: markdown
+        layout_options:
+          grid_columns: 2
+          grid_rows: 1
+        content: >-
+          {{
+            iif(
+              states("sensor.leeghwaterbad_volgende_bestelling") not in ["unknown", "unavailable"],
+              "[Tickets](" ~ state_attr("sensor.leeghwaterbad_volgende_bestelling", "ticket") ~ ")",
+              "Geen ticket"
+            )
+          }}
+      - type: tile
         entity: sensor.leeghwaterbad_abonnement_beschikbare_tickets
-
-      - type: custom:mushroom-entity-card
+      - type: tile
         entity: sensor.leeghwaterbad_abonnement_verloopdatum
 
-  - !include cards/planes.yaml
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Vliegtuigen
+        heading_style: subtitle
+
+      - !include cards/planes.yaml

@@ -1,85 +1,76 @@
 title: Toilet
 path: toilet
-panel: false
 icon: mdi:toilet
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Toilet
+        heading_style: title
+        icon: mdi:toilet
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.toilet
+        name: Plafond
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Klimaat
+        heading_style: subtitle
+      - type: tile
+        entity: fan.mechanische_ventilatie_ventilatie
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.toilet_beweging_occupancy
-        icon: mdi:motion-sensor
+        name: Beweging
+      - type: tile
+        entity: sensor.toilet_klimaat_temperature
+        name: Temperatuur
+      - type: tile
+        entity: sensor.toilet_klimaat_humidity
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.toilet_beweging_illuminance_lux
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Toilet
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.toilet
-            name: Plafond
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Klimaat
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: fan.mechanische_ventilatie_ventilatie
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.toilet_klimaat_temperature
-            name: Temperatuur
-          - type: tile
-            entity: sensor.toilet_klimaat_humidity
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.toilet_beweging_illuminance_lux
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
-          - type: tile
-            entity: button.mechanische_ventilatie_15_minuten_hoog
-            name: 15 Minuten hoog
-            icon: mdi:fan
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.toiletlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto
+      - type: tile
+        entity: button.mechanische_ventilatie_15_minuten_hoog
+        name: 15 Minuten hoog
+        icon: mdi:fan

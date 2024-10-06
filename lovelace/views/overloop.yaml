@@ -1,74 +1,77 @@
 title: Overloop
 path: overloop
-panel: false
 icon: mdi:stairs
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Overloop
+        heading_style: title
+        icon: mdi:stairs
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.overloop
+        name: Plafond
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.trap_beweging
+        name: Beweging
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren boven
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.overloop_sensor_2_beweging
+        name: Beweging
         icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.overloop_sensor_2_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.overloop_sensor_2_licht
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Trap & overloop
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.overloop
-            name: Plafond
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren boven
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.overloop_sensor_2_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.overloop_sensor_2_licht
-            name: Lichtsterkte
-          - type: tile
-            entity: binary_sensor.overloop_sensor_2_beweging
-            name: Beweging
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren beneden
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.overloop_sensor_1_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.overloop_sensor_1_licht
-            name: Lichtsterkte
-          - type: tile
-            entity: binary_sensor.overloop_sensor_1_beweging
-            name: Beweging
+      - type: heading
+        heading: Sensoren beneden
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.overloop_sensor_1_beweging
+        name: Beweging
+        icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.overloop_sensor_1_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.overloop_sensor_1_licht
+        name: Lichtsterkte

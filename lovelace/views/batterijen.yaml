@@ -1,38 +1,42 @@
 title: Batterijen
 path: batterijen
-panel: false
-icon: "mdi:battery-charging-wireless"
-badges: []
-cards:
+icon: mdi:battery-charging-wireless
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: custom:mushroom-title-card
-    title: Batterijen
-
-  - type: custom:auto-entities
-    show_empty: true
-    card:
-      type: grid
-      columns: 2
-      square: false
-    card_param: cards
-    filter:
-      include:
-        - domain: sensor
-          attributes:
-            device_class: battery
-          options:
-            type: tile
-    sort:
-      method: state
-      numeric: true
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Batterijen
+        heading_style: title
+        icon: mdi:battery-charging-wireless
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            - domain: sensor
+              attributes:
+                device_class: battery
+              options:
+                type: tile
+        sort:
+          method: state
+          numeric: true
+        layout_options:
+          grid_columns: full

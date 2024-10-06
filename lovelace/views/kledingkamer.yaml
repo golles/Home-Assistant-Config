@@ -1,102 +1,90 @@
 title: Kledingkamer
 path: kledingkamer
-panel: false
 icon: mdi:wardrobe-outline
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Kledingkamer
+        heading_style: title
+        icon: mdi:wardrobe-outline
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.kledingkamer
+        name: Plafond
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Klimaat
+        heading_style: subtitle
+      - type: tile
+        entity: climate.kledingkamer
+        name: Verwarming
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: cover.kledingkamer
+        name: Rolluik
+      - type: tile
+        entity: binary_sensor.kledingkamerraam_contact
+        name: Raam
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.kledingkamer_beweging_occupancy
-        icon: mdi:motion-sensor
+        name: Beweging
+      - type: tile
+        entity: sensor.kledingkamer_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.kledingkamer_luchtvochtigheid
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.kledingkamer_lichtsterkte_illuminance_lux
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Kledingkamer
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.kledingkamer
-            name: Plafond
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Klimaat
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: climate.kledingkamer
-            name: Verwarming
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: cover.kledingkamer
-            name: Rolluik
-          - type: tile
-            entity: binary_sensor.kledingkamerraam_contact
-            name: Raam
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.kledingkamer_temperatuur
-            name: Temperatuur
-          - type: tile
-            entity: sensor.kledingkamer_luchtvochtigheid
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.kledingkamer_lichtsterkte_illuminance_lux
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
-          - type: tile
-            entity: button.kledingkamer_my_position
-            name: Voorkeurspositie
-            icon: mdi:window-shutter
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.kledingkamerlamp_automatisch_aan_uit_door_aanwezigheid
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto
+      - type: tile
+        entity: button.kledingkamer_my_position
+        name: Voorkeurspositie
+        icon: mdi:window-shutter

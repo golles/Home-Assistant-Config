@@ -28,8 +28,8 @@ lovelace:
       icon: mdi:tools
 
 template:
-  - sensor:
-      - name: UI helper show zonnescherm
+  - binary_sensor:
+      - name: UI helper let op zonnescherm
         state: >-
           {{
             is_state("cover.zonnescherm_template", "open") or
@@ -37,3 +37,61 @@ template:
           }}
         availability: >-
           {{ is_number(states("sensor.knmi_max_temperatuur_vandaag")) }}
+      - name: UI helper let op p2000 dichtbij
+        state: >-
+          {{
+            state_attr("sensor.p2000_dichtbij", "time") and
+            as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200
+          }}
+      - name: UI helper let op meteoalarm
+        state: >-
+          {{
+            is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off")
+          }}
+      - name: UI helper let op afval bio
+        state: >-
+          {{
+            state_attr("sensor.purmerend_bio_afval", "Days_until") <= 1
+          }}
+        availability: >-
+          {{ state_attr("sensor.purmerend_bio_afval", "Days_until") is not none }}
+      - name: UI helper let op afval papier
+        state: >-
+          {{
+            state_attr("sensor.purmerend_papier", "Days_until") <= 1
+          }}
+        availability: >-
+          {{ state_attr("sensor.purmerend_papier", "Days_until") is not none }}
+      - name: UI helper let op afval rest
+        state: >-
+          {{
+            state_attr("sensor.purmerend_restafval", "Days_until") <= 1
+          }}
+        availability: >-
+          {{ state_attr("sensor.purmerend_restafval", "Days_until") is not none }}
+      - name: UI helper let op vaatwasser
+        state: >-
+          {{
+            states("sensor.vaatwasser_status") not in ["off", "unavailable", "unknown"]
+          }}
+      - name: UI helper let op wasmachine
+        state: >-
+          {{
+            states("sensor.wasmachine_status") not in ["off", "unavailable", "unknown"]
+          }}
+      - name: UI helper let op section
+        state: >-
+          {{
+            is_state("binary_sensor.ui_helper_let_op_p2000_dichtbij", "on") or
+            is_state("binary_sensor.ui_helper_let_op_meteoalarm", "on") or
+            is_state("binary_sensor.stookalert_noord_holland", "on") or
+            is_state("binary_sensor.knmi_waarschuwing", "on") or
+            is_state("binary_sensor.aurora_52_4", "on") or
+            is_state("binary_sensor.ui_helper_let_op_afval_bio", "on") or
+            is_state("binary_sensor.ui_helper_let_op_afval_rest", "on") or
+            is_state("binary_sensor.ui_helper_let_op_afval_papier", "on") or
+            is_state("binary_sensor.ui_helper_let_op_vaatwasser", "on") or
+            is_state("binary_sensor.ui_helper_let_op_wasmachine", "on") or
+            is_state("input_boolean.vacation_mode", "on") or
+            is_state("binary_sensor.ui_helper_let_op_zonnescherm", "on")
+          }}

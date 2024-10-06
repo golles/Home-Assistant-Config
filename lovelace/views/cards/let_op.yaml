@@ -1,115 +1,107 @@
-type: custom:auto-entities
-show_empty: false
-card:
-  type: grid
-  columns: 2
-  square: false
-  title: Let op
-card_param: cards
-filter:
-  template: >-
-    {%- set data = namespace(entities=[]) -%}
+type: grid
+column_span: 4
+visibility:
+  - condition: state
+    entity: binary_sensor.ui_helper_let_op_section
+    state: "on"
+cards:
+  - type: heading
+    icon: mdi:alert-outline
+    heading: Let op
+    heading_style: title
 
-    {% if state_attr("sensor.p2000_dichtbij", "time") %}
-      {% if as_timestamp(now()) <= as_timestamp(state_attr("sensor.p2000_dichtbij", "time")) + 7200 %}
-        {%- set data.entities = data.entities + [{
-          "type": "tile",
-          "entity": "sensor.p2000_dichtbij",
-          "name": "Dichtbij",
-          "icon": "mdi:alert",
-          "color": "orange",
-          "vertical": true
-        }] -%}
-      {% endif %}
-    {% endif %}
+  - type: tile
+    entity: sensor.p2000_dichtbij
+    name: Dichtbij
+    color: accent
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_p2000_dichtbij
+        state: "on"
 
-    {% if is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off") %}
-      {%- set data.entities = data.entities + [{
-        "type": "tile",
-        "entity": "binary_sensor.meteoalarm",
-        "name": "MeteoAlarm",
-        "icon": "mdi:alert",
-        "color": "orange",
-        "vertical": true
-      }] -%}
-    {% endif %}
+  - type: tile
+    entity: binary_sensor.meteoalarm
+    name: MeteoAlarm
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_meteoalarm
+        state: "on"
 
-    {% if data.entities | length > 0 %}
-      {{ data.entities }}
-    {% endif %}
-  include:
-    # Waste collection
-    - domain: sensor
-      attributes:
-        Wastecollector: purmerend
-        Days_until: <= 1
-      options:
-        type: tile
-        show_entity_picture: true
-        vertical: true
-      not:
-        state: unknown
+  - type: tile
+    entity: binary_sensor.stookalert_noord_holland
+    name: Stookalert
+    visibility:
+      - condition: state
+        entity: binary_sensor.stookalert_noord_holland
+        state: "on"
 
-    # Appliances
-    - entity_id: "sensor.vaatwasser_status"
-      options:
-        type: tile
-        name: Vaatwasser
-        vertical: true
-      not:
-        state: "/off|unavailable|unknown/"
-    - entity_id: "sensor.wasmachine_status"
-      options:
-        type: tile
-        name: Wasmachine
-        vertical: true
-      not:
-        state: "/off|unavailable|unknown/"
-    - entity_id: fan.air_purifier
-      state: "on"
-      options:
-        type: tile
-        vertical: true
+  - type: tile
+    entity: binary_sensor.knmi_waarschuwing
+    name: KNMI
+    visibility:
+      - condition: state
+        entity: binary_sensor.knmi_waarschuwing
+        state: "on"
 
-    # Weather related warnings
-    - entity_id: binary_sensor.stookalert_noord_holland
-      state: "on"
-      options:
-        type: tile
-        name: Stookalert
-        icon: mdi:alert
-        vertical: true
-        color: orange
-    - entity_id: binary_sensor.knmi_waarschuwing
-      state: "on"
-      options:
-        type: tile
-        name: KNMI Waarschuwing
-        icon: mdi:alert
-        vertical: true
-        color: orange
-    - entity_id: binary_sensor.aurora_52_4
-      state: "on"
-      options:
-        type: tile
-        name: Noorderlicht
-        icon: mdi:aurora
-        vertical: true
-        color: teal
-    - entity_id: "sensor.tomorrow_io_huis_*_pollen_index"
-      state: "*high" # Matches "anything containing high.
-      options:
-        type: tile
-        vertical: true
-        color: red
+  - type: tile
+    entity: binary_sensor.aurora_52_4
+    color: teal
+    visibility:
+      - condition: state
+        entity: binary_sensor.aurora_52_4
+        state: "on"
 
-    # Modes
-    - entity_id: input_boolean.vacation_mode
-      state: "on"
-      options:
-        type: tile
-        vertical: true
-        color: green
+  - type: tile
+    entity: sensor.purmerend_bio_afval
+    show_entity_picture: true
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_afval_bio
+        state: "on"
 
-sort:
-  method: name
+  - type: tile
+    entity: sensor.purmerend_restafval
+    show_entity_picture: true
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_afval_rest
+        state: "on"
+
+  - type: tile
+    entity: sensor.purmerend_papier
+    show_entity_picture: true
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_afval_papier
+        state: "on"
+
+  - type: tile
+    entity: sensor.vaatwasser_status
+    name: Vaatwasser
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_vaatwasser
+        state: "on"
+
+  - type: tile
+    entity: sensor.wasmachine_status
+    name: Wasmachine
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_wasmachine
+        state: "on"
+
+  - type: tile
+    entity: input_boolean.vacation_mode
+    visibility:
+      - condition: state
+        entity: input_boolean.vacation_mode
+        state: "on"
+
+  - type: tile
+    entity: cover.zonnescherm_template
+    state_content: state
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_zonnescherm
+        state: "on"

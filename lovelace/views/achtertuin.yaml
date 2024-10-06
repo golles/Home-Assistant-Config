@@ -1,141 +1,127 @@
 title: Achtertuin
 path: achtertuin
-panel: false
 icon: mdi:bench-back
-badges: []
-cards:
+type: sections
+sections:
   - type: custom:mushroom-chips-card
     chips:
       - type: template
-        icon: mdi:arrow-left
         tap_action:
           action: navigate
           navigation_path: /lovelace/welkom
-        double_tap_action:
-          action: none
-        hold_action:
-          action: none
-      - type: entity
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Achtertuin
+        heading_style: title
+        icon: mdi:bench-back
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: light.achtertuin_groep
+        name: Achtertuin
+      - type: tile
+        entity: switch.gekleurde_licht
+        icon: mdi:led-strip-variant
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Afval
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.purmerend_bio_afval
+        show_entity_picture: true
+      - type: tile
+        entity: sensor.purmerend_papier
+        show_entity_picture: true
+      - type: tile
+        entity: sensor.purmerend_restafval
+        show_entity_picture: true
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Deuren en ramen
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.poortdeur_contact
+        name: Poort
+      - type: tile
+        entity: cover.zonnescherm_template
+
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
         entity: binary_sensor.achtertuin_sensor_beweging
+        name: Beweging
         icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.achtertuin_sensor_licht
+        name: Lichtsterkte
 
-  - type: custom:mushroom-title-card
-    title: Achtertuin
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Verlichting
+      - type: heading
+        heading: Fijnstof meter
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.particulate_matter_temperature
+        name: Temperatuur
+      - type: tile
+        entity: sensor.particulate_matter_humidity
+        name: Luchtvochtigheid
+      - type: tile
+        entity: sensor.particulate_matter_pressure
+        name: Luchtdruk
+      - type: tile
+        entity: sensor.particulate_matter_pm_2_5
+        name: PM 2,5
+      - type: tile
+        entity: sensor.particulate_matter_pm_10
+        name: PM 10
+      - type: tile
+        entity: sensor.particulate_matter_pm_2_5
+        name: Opensensemap
+        icon: mdi:link
+        hide_state: true
+        tap_action:
+          action: url
+          url_path: https://opensensemap.org/explore/60d8388f8855dd001c008870
+      - type: tile
+        entity: sensor.particulate_matter_pm_2_5
+        name: Madavi
+        icon: mdi:link
+        hide_state: true
+        tap_action:
+          action: url
+          url_path: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
 
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: light.achtertuin_groep
-            name: Achtertuin
-          - type: tile
-            entity: switch.gekleurde_licht
-            icon: mdi:led-strip-variant
-
-  - type: vertical-stack
+  - type: grid
+    column_span: 1
     cards:
-      - type: custom:mushroom-title-card
-        subtitle: Afval
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.purmerend_bio_afval
-            show_entity_picture: true
-          - type: tile
-            entity: sensor.purmerend_papier
-            show_entity_picture: true
-          - type: tile
-            entity: sensor.purmerend_restafval
-            show_entity_picture: true
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Deuren en ramen
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: binary_sensor.poortdeur_contact
-            name: Poort
-          - type: tile
-            entity: cover.zonnescherm_template
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Sensoren
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.achtertuin_sensor_licht
-            name: Lichtsterkte
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Fijnstof meter
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: sensor.particulate_matter_temperature
-            name: Temperatuur
-          - type: tile
-            entity: sensor.particulate_matter_humidity
-            name: Luchtvochtigheid
-          - type: tile
-            entity: sensor.particulate_matter_pressure
-            name: Luchtdruk
-          - type: tile
-            entity: sensor.particulate_matter_pm_2_5
-            name: PM 2,5
-          - type: tile
-            entity: sensor.particulate_matter_pm_10
-            name: PM 10
-          - type: tile
-            entity: sensor.particulate_matter_pm_2_5
-            name: Opensensemap
-            icon: mdi:link
-            hide_state: true
-            tap_action:
-              action: url
-              url_path: https://opensensemap.org/explore/60d8388f8855dd001c008870
-          - type: tile
-            entity: sensor.particulate_matter_pm_2_5
-            name: Madavi
-            icon: mdi:link
-            hide_state: true
-            tap_action:
-              action: url
-              url_path: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        subtitle: Instellingen en acties
-
-      - type: grid
-        columns: 2
-        square: false
-        cards:
-          - type: tile
-            entity: automation.achtertuin_verlichting_aan_bij_deur_open_of_beweging
-            name: Automatisch licht
-            icon: mdi:lightbulb-auto
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: automation.achtertuin_verlichting_aan_bij_deur_open_of_beweging
+        name: Automatisch licht
+        icon: mdi:lightbulb-auto
