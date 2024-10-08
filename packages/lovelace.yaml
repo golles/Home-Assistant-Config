@@ -51,21 +51,24 @@ template:
       - name: UI helper let op afval bio
         state: >-
           {{
-            state_attr("sensor.purmerend_bio_afval", "Days_until") <= 1
+            state_attr("sensor.purmerend_bio_afval", "Days_until") == 1 and now() > today_at("18:00") or
+            state_attr("sensor.purmerend_bio_afval", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
           {{ state_attr("sensor.purmerend_bio_afval", "Days_until") is not none }}
       - name: UI helper let op afval papier
         state: >-
           {{
-            state_attr("sensor.purmerend_papier", "Days_until") <= 1
+            state_attr("sensor.purmerend_papier", "Days_until") == 1 and now() > today_at("18:00") or
+            state_attr("sensor.purmerend_papier", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
           {{ state_attr("sensor.purmerend_papier", "Days_until") is not none }}
       - name: UI helper let op afval rest
         state: >-
           {{
-            state_attr("sensor.purmerend_restafval", "Days_until") <= 1
+            state_attr("sensor.purmerend_restafval", "Days_until") == 1 and now() > today_at("18:00") or
+            state_attr("sensor.purmerend_restafval", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
           {{ state_attr("sensor.purmerend_restafval", "Days_until") is not none }}
