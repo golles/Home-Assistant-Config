@@ -1,0 +1,68 @@
+rest:
+  - resource: !secret pwn_incidents_url # https://www.pwn.nl/api/Outage?postalCode=<postal_code>
+    scan_interval: 600
+    binary_sensor:
+      - name: PWN Storing
+        icon: >-
+          {{ iif(is_state("binary_sensor.pwn_storing", "on"), "mdi:water-pump-off", "mdi:water-pump") }}
+        value_template: >-
+          {{ value_json[0].status.name == "Actief" }}
+    sensor:
+      - name: PWN Effect
+        value_template: >-
+          {{ value_json[0].effects[0].name }}
+        json_attributes_path: "$.[0].effects[0]"
+        json_attributes:
+          - descriptionUnplanned
+          - descriptionPlanned
+      - name: PWN Categorie
+        value_template: >-
+          {{ value_json[0].category.name }}
+        json_attributes_path: "$.[0].category"
+        json_attributes:
+          - isPlanned
+      - name: PWN Start reparatie
+        device_class: timestamp
+        value_template: >-
+          {{ value_json[0].actualStartOutage if value_json[0].actualStartOutage != None else "1970-01-01T00:00:00.0000000Z" }}
+        availability: >-
+          {{ states("sensor.pwn_verwachte_einddatum") != "1970-01-01T00:00:00+00:00" }}
+      - name: PWN Verwachte einddatum
+        device_class: timestamp
+        value_template: >-
+          {{ value_json[0].actualEndOutage if value_json[0].actualEndOutage != None else "1970-01-01T00:00:00.0000000Z" }}
+        availability: >-
+          {{ states("sensor.pwn_verwachte_einddatum") != "1970-01-01T00:00:00+00:00" }}
+
+automation:
+  - id: notification_pwn
+    alias: "Notificatie: PWN storing"
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.pwn_storing
+    actions:
+      - if:
+          - condition: state
+            entity_id: binary_sensor.pwn_storing
+            state: "on"
+        then:
+          - alias: Notify users
+            action: notify.all_phones
+            data:
+              title: >-
+                PWN {{ states("sensor.pwn_categorie") }}: {{ states("sensor.pwn_effect") }}
+              message: >-
+                {{ state_attr("sensor.pwn_effect", "descriptionUnplanned") }}
+              data:
+                group: pwn
+        else:
+          - alias: Notify users
+            action: notify.all_phones
+            data:
+              title: >-
+                PWN {{ states("sensor.pwn_categorie") }}: {{ states("sensor.pwn_effect") }}
+              message: >-
+                Opgelost
+              data:
+                group: pwn
