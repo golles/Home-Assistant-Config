@@ -87,14 +87,29 @@ sections:
         heading: Pollen
         heading_style: subtitle
       - type: tile
-        entity: sensor.tomorrow_io_tree_pollen_index
+        entity: sensor.huis_boompollen_vandaag
         name: Bomen
+        state_content:
+          - level
+          - state
       - type: tile
-        entity: sensor.tomorrow_io_grass_pollen_index
+        entity: sensor.huis_graspollen_vandaag
         name: Grassen
+        state_content:
+          - level
+          - state
       - type: tile
-        entity: sensor.tomorrow_io_weed_pollen_index
+        entity: sensor.huis_ambrosiapollen_vandaag
         name: Onkruiden
+        state_content:
+          - level
+          - state
+      - type: tile
+        entity: sensor.huis_schimmel_vandaag
+        name: Schimmels
+        state_content:
+          - level
+          - state
 
   - type: grid
     cards:
