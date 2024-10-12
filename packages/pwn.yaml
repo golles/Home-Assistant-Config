@@ -6,31 +6,31 @@ rest:
         icon: >-
           {{ iif(is_state("binary_sensor.pwn_storing", "on"), "mdi:water-pump-off", "mdi:water-pump") }}
         value_template: >-
-          {{ value_json[0].status.name == "Actief" }}
+          {{ value_json | length > 0 and value_json[0].status.name == "Actief" }}
     sensor:
       - name: PWN Effect
         value_template: >-
-          {{ value_json[0].effects[0].name }}
+          {{ value_json[0].effects[0].name if value_json | length > 0 else "unavailable" }}
         json_attributes_path: "$.[0].effects[0]"
         json_attributes:
           - descriptionUnplanned
           - descriptionPlanned
       - name: PWN Categorie
         value_template: >-
-          {{ value_json[0].category.name }}
+          {{ value_json[0].category.name if value_json | length > 0 else "unavailable" }}
         json_attributes_path: "$.[0].category"
         json_attributes:
           - isPlanned
       - name: PWN Start reparatie
         device_class: timestamp
         value_template: >-
-          {{ value_json[0].actualStartOutage if value_json[0].actualStartOutage != None else "1970-01-01T00:00:00.0000000Z" }}
+          {{ value_json[0].actualStartOutage if value_json | length > 0 and value_json[0].actualStartOutage != None else "1970-01-01T00:00:00.0000000Z" }}
         availability: >-
-          {{ states("sensor.pwn_verwachte_einddatum") != "1970-01-01T00:00:00+00:00" }}
+          {{ states("sensor.pwn_start_reparatie") != "1970-01-01T00:00:00+00:00" }}
       - name: PWN Verwachte einddatum
         device_class: timestamp
         value_template: >-
-          {{ value_json[0].actualEndOutage if value_json[0].actualEndOutage != None else "1970-01-01T00:00:00.0000000Z" }}
+          {{ value_json[0].actualEndOutage if value_json | length > 0 and value_json[0].actualEndOutage != None else "1970-01-01T00:00:00.0000000Z" }}
         availability: >-
           {{ states("sensor.pwn_verwachte_einddatum") != "1970-01-01T00:00:00+00:00" }}
 
@@ -48,7 +48,7 @@ automation:
         conditions:
           - condition: state
             entity_id: sensor.pwn_effect
-            state: unknown
+            state: unavailable
     actions:
       - if:
           - condition: state
