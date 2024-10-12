@@ -40,7 +40,15 @@ automation:
     mode: single
     triggers:
       - trigger: state
+        entity_id: sensor.pwn_effect
+      - trigger: state
         entity_id: binary_sensor.pwn_storing
+    conditions:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.pwn_effect
+            state: unknown
     actions:
       - if:
           - condition: state
