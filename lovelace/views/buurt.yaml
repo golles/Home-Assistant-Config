@@ -23,7 +23,6 @@ sections:
         icon: mdi:home-city-outline
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: P2000
@@ -40,7 +39,6 @@ sections:
         entity: sensor.p2000_lifeliner_1
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Leeghwaterbad
@@ -69,7 +67,6 @@ sections:
         entity: sensor.leeghwaterbad_abonnement_verloopdatum
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Vliegtuigen

@@ -23,7 +23,6 @@ sections:
         icon: mdi:stairs
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -33,7 +32,6 @@ sections:
         name: Plafond
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -43,7 +41,6 @@ sections:
         name: Beweging
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren boven
@@ -60,7 +57,6 @@ sections:
         name: Lichtsterkte
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren beneden

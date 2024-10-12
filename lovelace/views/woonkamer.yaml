@@ -23,7 +23,6 @@ sections:
         icon: mdi:sofa-outline
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -74,7 +73,6 @@ sections:
             state_not: unavailable
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Klimaat
@@ -92,7 +90,6 @@ sections:
             state_not: unavailable
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Apparaten
@@ -109,7 +106,6 @@ sections:
         color: primary
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -127,7 +123,6 @@ sections:
         entity: cover.zonnescherm_template
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -150,7 +145,6 @@ sections:
         icon: mdi:molecule
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties

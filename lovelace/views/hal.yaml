@@ -23,7 +23,6 @@ sections:
         icon: mdi:coat-rack
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -33,7 +32,6 @@ sections:
         name: Plafond
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -43,7 +41,6 @@ sections:
         name: Voordeur
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -60,7 +57,6 @@ sections:
         name: Lichtsterkte
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Meterkast
@@ -73,7 +69,6 @@ sections:
         name: Luchtvochtigheid
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Elektriciteitsmeter
@@ -95,7 +90,6 @@ sections:
         name: Verbruik
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Warmtemeter
@@ -111,7 +105,6 @@ sections:
         name: Volume
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Watermeter
@@ -133,7 +126,6 @@ sections:
         name: Maand
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: UPS
@@ -155,7 +147,6 @@ sections:
         name: Test
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties

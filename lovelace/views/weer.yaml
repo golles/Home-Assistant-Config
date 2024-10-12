@@ -23,7 +23,6 @@ sections:
         icon: mdi:weather-sunny
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verwachting
@@ -46,7 +45,6 @@ sections:
               {{ iif(is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Actueel
@@ -84,7 +82,6 @@ sections:
         name: MeteoAlarm
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Pollen
@@ -100,7 +97,6 @@ sections:
         name: Onkruiden
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Zon/maan

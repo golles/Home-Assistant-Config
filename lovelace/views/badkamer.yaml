@@ -23,7 +23,6 @@ sections:
         icon: mdi:shower
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -33,7 +32,6 @@ sections:
         name: Plafond
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Klimaat
@@ -45,7 +43,6 @@ sections:
         entity: fan.mechanische_ventilatie_ventilatie
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -55,7 +52,6 @@ sections:
         name: Raam
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -82,7 +78,6 @@ sections:
         name: Tandenborstel
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties

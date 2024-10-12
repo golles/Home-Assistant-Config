@@ -23,7 +23,6 @@ sections:
         icon: mdi:bed-king-outline
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -60,7 +59,6 @@ sections:
         entity: light.bedlampje_rechts
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Klimaat
@@ -70,7 +68,6 @@ sections:
         name: Verwarming
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -83,7 +80,6 @@ sections:
         name: Raam
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -102,7 +98,6 @@ sections:
         name: Lichtsterkte
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties

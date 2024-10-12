@@ -23,7 +23,6 @@ sections:
         icon: mdi:countertop-outline
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -36,7 +35,6 @@ sections:
         name: Keukenkastje
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Klimaat
@@ -46,7 +44,6 @@ sections:
         name: Verwarming
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Apparaten
@@ -56,7 +53,6 @@ sections:
         name: Vaatwasser
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -69,7 +65,6 @@ sections:
         name: Raam
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -89,7 +84,6 @@ sections:
         name: Lichtsterkte
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties

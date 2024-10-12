@@ -90,7 +90,6 @@ sections:
 
   # Woonkamer
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:sofa-outline
@@ -166,7 +165,6 @@ sections:
 
   # Keuken
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:countertop-outline
@@ -206,7 +204,6 @@ sections:
 
   # Toilet
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:toilet
@@ -231,7 +228,6 @@ sections:
 
   # Hal
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:coat-rack
@@ -262,7 +258,6 @@ sections:
 
   # Slaapkamer
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:bed-king-outline
@@ -302,7 +297,6 @@ sections:
 
   # Kledingkamer
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:wardrobe-outline
@@ -338,7 +332,6 @@ sections:
 
   # Logeerkamer
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:bed-outline
@@ -396,7 +389,6 @@ sections:
 
   # Badkamer
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:shower
@@ -439,7 +431,6 @@ sections:
 
   # Zolder
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:home-roof
@@ -480,7 +471,6 @@ sections:
 
   # Voortuin
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:watering-can-outline
@@ -500,7 +490,6 @@ sections:
 
   # Achtertuin
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:bench-back
@@ -530,7 +519,6 @@ sections:
 
   # Instellingen en acties
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         icon: mdi:cog-outline

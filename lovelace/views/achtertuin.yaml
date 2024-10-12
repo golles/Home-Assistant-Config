@@ -23,7 +23,6 @@ sections:
         icon: mdi:bench-back
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Verlichting
@@ -36,7 +35,6 @@ sections:
         icon: mdi:led-strip-variant
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Afval
@@ -52,7 +50,6 @@ sections:
         show_entity_picture: true
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Deuren en ramen
@@ -64,7 +61,6 @@ sections:
         entity: cover.zonnescherm_template
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Sensoren
@@ -78,7 +74,6 @@ sections:
         name: Lichtsterkte
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Fijnstof meter
@@ -116,7 +111,6 @@ sections:
           url_path: https://api-rrd.madavi.de/grafana/d/GUaL5aZMz/pm-sensors?var-chipID=esp8266-13081988&orgId=1
 
   - type: grid
-    column_span: 1
     cards:
       - type: heading
         heading: Instellingen en acties
