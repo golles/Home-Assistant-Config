@@ -38,6 +38,9 @@ cards:
   - type: tile
     entity: binary_sensor.knmi_waarschuwing
     name: KNMI
+    state_content:
+      - state
+      - code
     visibility:
       - condition: state
         entity: binary_sensor.knmi_waarschuwing

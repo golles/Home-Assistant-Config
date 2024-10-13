@@ -73,7 +73,9 @@ sections:
       - type: tile
         entity: binary_sensor.knmi_waarschuwing
         name: KNMI
-        layout:
+        state_content:
+          - state
+          - code
       - type: tile
         entity: binary_sensor.stookalert_noord_holland
         name: Stookalert
