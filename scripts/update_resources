@@ -45,7 +45,7 @@ custom_components/knmi                      https://github.com/golles/ha-knmi
 custom_components/lghorizon                 https://github.com/Sholofly/lghorizon
 custom_components/media_player_template     https://github.com/Sennevds/media_player.template
 custom_components/p2000                     https://github.com/cyberjunky/home-assistant-p2000
-custom_components/watchman                  https://github.com/dummylabs/thewatchman
+custom_components/spook                     https://github.com/frenck/spook
 custom_components/webrtc                    https://github.com/AlexxIT/WebRTC
 custom_components/xiaomi_miio_fan           https://github.com/syssi/xiaomi_fan
 EOF
