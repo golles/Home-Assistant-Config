@@ -17,4 +17,4 @@ automation:
             Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is.
           data:
             group: ddns
-            url: /dashboard-systems/internet
+            url: /dashboard-status/internet

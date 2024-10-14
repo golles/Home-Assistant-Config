@@ -1,13 +1,42 @@
 title: Borg backup
 path: borg
-panel: false
 icon: mdi:cloud-upload
-badges: []
-cards:
-  - type: entity
-    entity: input_text.borg
+type: sections
+max_columns: 4
+sections:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
 
-  - type: logbook
-    entities:
-      - input_text.borg
-    hours_to_show: 72
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Borg backup
+        heading_style: title
+        icon: mdi:cloud-upload
+      - type: entity
+        entity: input_text.borg
+        name: Status
+        layout_options:
+          grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Log
+        heading_style: subtitle
+      - type: logbook
+        entities:
+          - input_text.borg
+        hours_to_show: 72
+        layout_options:
+          grid_columns: full

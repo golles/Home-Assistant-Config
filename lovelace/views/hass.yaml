@@ -1,56 +1,208 @@
 title: Home Assistant
 path: hass
-panel: false
 icon: mdi:home-assistant
-badges: []
-cards:
-  - type: entities
-    title: Home Assistant
-    show_header_toggle: false
-    entities:
-      - entity: sensor.system_monitor_last_boot
+type: sections
+sections:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Home Assistant
+        heading_style: title
+        icon: mdi:home-assistant
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Run time
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.system_monitor_last_boot
         name: Host last boot
-      - entity: sensor.uptime
+      - type: tile
+        entity: sensor.uptime
         name: Container last boot
-      - entity: sensor.mariadb_size
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Database
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.mariadb_size
         name: MariaDB size
         icon: mdi:database
-      - type: divider
-      - entity: sensor.current_version
-      - entity: sensor.docker_hub
 
-  - type: custom:auto-entities
-    show_empty: true
-    card:
-      type: entities
-      title: Info
-    filter:
-      template: >-
-        {%- set data = namespace(entities=[]) -%}
-        {%- for d in states | groupby("domain") %}
-        {%- set data.entities = data.entities + [{
-          "type": "custom:template-entity-row",
-          "name": d[0],
-          "icon": "mdi:eye",
-          "state": states[d[0]] | count
-        }] -%}
-        {%- endfor %}
+  - type: grid
+    cards:
+      - type: heading
+        heading: Version
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.current_version
+      - type: tile
+        entity: sensor.docker_hub
 
-        {{ data.entities }}
-    sort:
-      method: name
-
-  - type: custom:auto-entities
-    show_empty: false
-    card:
-      show_header_toggle: false
-      title: Entities onbekend
-      type: entities
-    filter:
-      exclude:
-        - domain: button
-        - domain: scene
-        - entity_id: cover.zonnescherm
-        - entity_id: "sensor.dsmr_*gas*"
-      include:
-        - state: unknown
+  - type: grid
+    cards:
+      - type: heading
+        heading: Domains
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.persistent_notifications
+        name: Persistent notifications
+      - type: tile
+        entity: sensor.images
+        name: Images
+      - type: tile
+        entity: sensor.remotes
+        name: Remotes
+      - type: tile
+        entity: sensor.alarm_control_panels
+        name: Alarm control panels
+      - type: tile
+        entity: sensor.devices
+        name: Devices
+      - type: tile
+        entity: sensor.automations
+        name: Automations
+      - type: tile
+        entity: sensor.covers
+        name: Covers
+      - type: tile
+        entity: sensor.binary_sensors
+        name: Binary sensors
+      - type: tile
+        entity: sensor.water_heaters
+        name: Water heaters
+      - type: tile
+        entity: sensor.cameras
+        name: Cameras
+      - type: tile
+        entity: sensor.custom_integrations
+        name: Custom integrations
+      - type: tile
+        entity: sensor.datetimes
+        name: Datetimes
+      - type: tile
+        entity: sensor.dates
+        name: Dates
+      - type: tile
+        entity: sensor.entities
+        name: Entities
+      - type: tile
+        entity: sensor.numbers
+        name: Numbers
+      - type: tile
+        entity: sensor.integrations
+        name: Integrations
+      - type: tile
+        entity: sensor.input_booleans
+        name: Input booleans
+      - type: tile
+        entity: sensor.input_datetimes
+        name: Input datetimes
+      - type: tile
+        entity: sensor.input_numbers
+        name: Input numbers
+      - type: tile
+        entity: sensor.input_buttons
+        name: Input buttons
+      - type: tile
+        entity: sensor.input_selects
+        name: Input selects
+      - type: tile
+        entity: sensor.input_texts
+        name: Input texts
+      - type: tile
+        entity: sensor.calendars
+        name: Calendars
+      - type: tile
+        entity: sensor.climate
+        name: Climate
+      - type: tile
+        entity: sensor.buttons
+        name: Buttons
+      - type: tile
+        entity: sensor.lights
+        name: Lights
+      - type: tile
+        entity: sensor.device_trackers
+        name: Device trackers
+      - type: tile
+        entity: sensor.humidifiers
+        name: Humidifiers
+      - type: tile
+        entity: sensor.air_quality
+        name: Aair quality
+      - type: tile
+        entity: sensor.media_players
+        name: Media players
+      - type: tile
+        entity: sensor.persons
+        name: Persons
+      - type: tile
+        entity: sensor.areas
+        name: Areas
+      - type: tile
+        entity: sensor.scenes
+        name: Scenes
+      - type: tile
+        entity: sensor.switches
+        name: Switches
+      - type: tile
+        entity: sensor.scripts
+        name: Scripts
+      - type: tile
+        entity: sensor.selects
+        name: Selects
+      - type: tile
+        entity: sensor.sensors
+        name: Sensors
+      - type: tile
+        entity: sensor.sirens
+        name: Sirens
+      - type: tile
+        entity: sensor.locks
+        name: Locks
+      - type: tile
+        entity: sensor.stt
+        name: STT
+      - type: tile
+        entity: sensor.vacuums
+        name: Vacuums
+      - type: tile
+        entity: sensor.tts
+        name: TTS
+      - type: tile
+        entity: sensor.texts
+        name: Texts
+      - type: tile
+        entity: sensor.times
+        name: times
+      - type: tile
+        entity: sensor.update
+        name: Update
+      - type: tile
+        entity: sensor.fans
+        name: Fans
+      - type: tile
+        entity: sensor.weather
+        name: Weather
+      - type: tile
+        entity: sensor.zones
+        name: Zones
+      - type: tile
+        entity: sensor.suns
+        name: Suns

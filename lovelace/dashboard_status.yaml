@@ -7,3 +7,6 @@ views:
   - !include views/ramen.yaml
   - !include views/alarm.yaml
   - !include views/batterijen.yaml
+  - !include views/hass.yaml
+  - !include views/borg.yaml
+  - !include views/internet.yaml

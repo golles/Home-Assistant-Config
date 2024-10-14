@@ -1,15 +1,31 @@
 title: Internet
 path: internet
-panel: false
 icon: mdi:web
-badges: []
-cards:
-  - type: vertical-stack
+type: sections
+sections:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
     cards:
+      - type: heading
+        heading: Internet
+        heading_style: title
+        icon: mdi:web
       - type: markdown
         title: Ziggo meldingen
-        entities:
-          - sensor.ziggo_incidents
+        entities: sensor.ziggo_incidents
+        layout_options:
+          grid_columns: full
         content: >-
           {% set announcements = state_attr("sensor.ziggo_incidents", "announcements") | default([], true) %}
           {% set outages = state_attr("sensor.ziggo_incidents", "outages") | default([], true) %}
@@ -30,87 +46,125 @@ cards:
             {% endfor %}
           {% endif %}
 
-      - type: entities
-        title: Internet
-        entities:
-          - sensor.myip
-          - entity: sensor.speedtest_download
-            name: Download
-            secondary_info: last-changed
-          - entity: sensor.speedtest_upload
-            name: Upload
-            secondary_info: last-changed
-          - entity: sensor.speedtest_ping
-            name: Ping
-            secondary_info: last-changed
+  - type: grid
+    cards:
+      - type: heading
+        heading: Internet
+        heading_style: subtitle
+      - type: sensor
+        entity: sensor.speedtest_download
+        graph: line
+        name: Download
+        layout_options:
+          grid_columns: full
+      - type: sensor
+        entity: sensor.speedtest_upload
+        graph: line
+        name: Upload
+        layout_options:
+          grid_columns: full
+      - type: sensor
+        entity: sensor.speedtest_ping
+        graph: line
+        name: Ping
+        layout_options:
+          grid_columns: full
 
-      - type: horizontal-stack
-        cards:
-          - type: sensor
-            entity: sensor.speedtest_download
-            graph: line
-            name: Download
+  - type: grid
+    cards:
+      - type: heading
+        heading: Certificaten
+        heading_style: subtitle
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            - entity_id: "sensor.*_cert_expiry"
+              options:
+                type: tile
+        sort:
+          method: state
 
-          - type: sensor
-            entity: sensor.speedtest_upload
-            graph: line
-            name: Upload
+  - type: grid
+    cards:
+      - type: heading
+        heading: AdGuard Home primair
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.adguard_home_primary_dns_query_s
+        name: DNS query's
+      - type: tile
+        entity: sensor.adguard_home_primary_aantal_dns_query_s_geblokkeerd
+        name: Aantal DNS query's geblokkeerd
+      - type: tile
+        entity: sensor.adguard_home_primary_dns_query_s_geblokkeerd_ratio
+        name: DNS query's geblokkeerd ratio
+      - type: tile
+        entity: sensor.adguard_home_primary_gemiddelde_verwerkingssnelheid
+        name: Gemiddelde verwerkingssnelheid
+      - type: heading
+        heading: AdGuard Home primair beheer
+        heading_style: subtitle
+      - type: tile
+        entity: switch.adguard_home_primary_bescherming
+        name: Bescherming
+      - type: tile
+        entity: switch.adguard_home_primary_filteren
+        name: Filteren
+      - type: tile
+        entity: switch.adguard_home_primary_ouderlijk_toezicht
+        name: Ouderlijk toezicht
 
-          - type: sensor
-            entity: sensor.speedtest_ping
-            graph: line
-            name: Ping
+  - type: grid
+    cards:
+      - type: heading
+        heading: AdGuard Home secundair
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.adguard_home_secondary_dns_query_s
+        name: DNS query's
+      - type: tile
+        entity: sensor.adguard_home_secondary_aantal_dns_query_s_geblokkeerd
+        name: Aantal DNS query's geblokkeerd
+      - type: tile
+        entity: sensor.adguard_home_secondary_dns_query_s_geblokkeerd_ratio
+        name: DNS query's geblokkeerd ratio
+      - type: tile
+        entity: sensor.adguard_home_secondary_gemiddelde_verwerkingssnelheid
+        name: Gemiddelde verwerkingssnelheid
+      - type: heading
+        heading: AdGuard Home secundair beheer
+        heading_style: subtitle
+      - type: tile
+        entity: switch.adguard_home_secondary_bescherming
+        name: Bescherming
+      - type: tile
+        entity: switch.adguard_home_secondary_filteren
+        name: Filteren
+      - type: tile
+        entity: switch.adguard_home_secondary_ouderlijk_toezicht
+        name: Ouderlijk toezicht
 
-  - type: custom:auto-entities
-    card:
-      type: entities
-      title: Certificaten
-      show_header_toggle: false
-    filter:
-      include:
-        - entity_id: "sensor.*_cert_expiry"
-    sort:
-      method: name
-
-  - type: entities
-    title: AdGuard Home primair
-    show_header_toggle: false
-    entities:
-      - sensor.adguard_home_primary_dns_query_s
-      - sensor.adguard_home_primary_aantal_dns_query_s_geblokkeerd
-      - sensor.adguard_home_primary_dns_query_s_geblokkeerd_ratio
-      - sensor.adguard_home_primary_gemiddelde_verwerkingssnelheid
-      - switch.adguard_home_primary_bescherming
-      - switch.adguard_home_primary_filteren
-      - switch.adguard_home_primary_ouderlijk_toezicht
-
-  - type: entities
-    title: AdGuard secundair
-    show_header_toggle: false
-    entities:
-      - sensor.adguard_home_secondary_dns_query_s
-      - sensor.adguard_home_secondary_aantal_dns_query_s_geblokkeerd
-      - sensor.adguard_home_secondary_dns_query_s_geblokkeerd_ratio
-      - sensor.adguard_home_secondary_gemiddelde_verwerkingssnelheid
-      - switch.adguard_home_secondary_bescherming
-      - switch.adguard_home_secondary_filteren
-      - switch.adguard_home_secondary_ouderlijk_toezicht
-
-  - type: entities
-    show_header_toggle: false
-    entities:
-      - type: custom:fold-entity-row
-        head:
-          type: section
-          label: Instellingen
-        padding: 0
-        entities:
-          - type: button
-            name: Run Speedtest
-            icon: mdi:speedometer
-            show_state: false
-            tap_action:
-              action: call-service
-              service: homeassistant.update_entity
-              target:
-                entity_id: sensor.speedtest_download
+  - type: grid
+    cards:
+      - type: heading
+        heading: Instellingen en acties
+        heading_style: subtitle
+      - type: tile
+        entity: sensor.speedtest_download
+        vertical: false
+        hide_state: true
+        name: Run Speedtest
+        icon_tap_action:
+          action: none
+        tap_action:
+          action: perform-action
+          perform_action: homeassistant.update_entity
+          data:
+            entity_id:
+              - sensor.speedtest_download
