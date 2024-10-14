@@ -21,6 +21,10 @@ sections:
         heading: Klimaat
         heading_style: title
         icon: mdi:thermometer
+      - type: tile
+        entity: switch.tado_home_mode
+        layout_options:
+          grid_columns: full
       - type: custom:auto-entities
         show_empty: true
         card:
