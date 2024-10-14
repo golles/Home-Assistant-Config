@@ -2,9 +2,8 @@
   alias: "Notificatie: Nieuwe versie beschikbaar"
   mode: single
   triggers:
-    - trigger: template
-      value_template: >
-        {{ version(states("sensor.current_version")) < version(states("sensor.docker_hub")) }}
+    - trigger: state
+      entity_id: binary_sensor.docker_hub_update_available
   actions:
     - action: notify.telegram_sander
       data:
