@@ -168,3 +168,6 @@ sections:
           data:
             entity_id:
               - sensor.speedtest_download
+      - type: tile
+        entity: automation.adguard_home_bescherming_schakelaars
+        name: AdGuard sync
