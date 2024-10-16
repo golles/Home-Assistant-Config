@@ -82,6 +82,9 @@ sections:
       - type: tile
         entity: sensor.epl_keuken_illuminance
         name: Lichtsterkte
+      - type: tile
+        entity: sensor.keuken_battery
+        name: Rolgordijn batterij
 
   - type: grid
     cards:
