@@ -2,7 +2,7 @@
   alias: "Notificatie: Noorderlicht"
   triggers:
     - trigger: state
-      entity_id: binary_sensor.aurora_52_4
+      entity_id: binary_sensor.aurora_visibility_visibility_alert
       from: "off"
       to: "on"
   actions:
@@ -10,7 +10,7 @@
       data:
         title: 🌌✨💫 Noorderlicht
         message: >-
-          {{ states("sensor.aurora_52_4") }}% kans op het noorderlicht
+          {{ states("sensor.aurora_visibility_visibility") }}% kans op het noorderlicht
         data:
           group: weather
           push:

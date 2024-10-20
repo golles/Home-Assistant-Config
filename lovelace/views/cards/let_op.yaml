@@ -47,11 +47,11 @@ cards:
         state: "on"
 
   - type: tile
-    entity: binary_sensor.aurora_52_4
+    entity: binary_sensor.aurora_visibility_visibility_alert
     color: teal
     visibility:
       - condition: state
-        entity: binary_sensor.aurora_52_4
+        entity: binary_sensor.aurora_visibility_visibility_alert
         state: "on"
 
   - type: tile

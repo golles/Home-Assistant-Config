@@ -42,7 +42,7 @@ homeassistant:
       device_class: window
       friendly_name: Zolderraam
 
-    binary_sensor.aurora_52_4:
+    binary_sensor.aurora_visibility_visibility_alert:
       friendly_name: Noorderlicht
       icon: mdi:aurora
 
