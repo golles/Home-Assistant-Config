@@ -16,8 +16,8 @@ homeassistant:
       friendly_name: Poort
     binary_sensor.voordeur_contact:
       friendly_name: Voordeur
-    binary_sensor.voorraadkastdeur_contact:
-      friendly_name: Voorraadkastdeur
+    binary_sensor.trapkastdeur_contact:
+      friendly_name: Trapkastdeur
 
     # Remove door suffix from windows and set proper device class.
     binary_sensor.achterraam_contact:

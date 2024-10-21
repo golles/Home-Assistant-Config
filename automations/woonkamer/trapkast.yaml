@@ -1,10 +1,10 @@
-- id: voorraadkast_light_bsaed_on_door
-  alias: Voorraadkast verlichting automatisch aan en uit
+- id: trapkast_light_bsaed_on_door
+  alias: trapkast verlichting automatisch aan en uit
   mode: restart
   max_exceeded: silent
   triggers:
     - trigger: state
-      entity_id: binary_sensor.voorraadkastdeur_contact
+      entity_id: binary_sensor.trapkastdeur_contact
       to:
         - "on"
         - "off"
@@ -12,18 +12,18 @@
     - choose:
         - conditions:
             - condition: state
-              entity_id: binary_sensor.voorraadkastdeur_contact
+              entity_id: binary_sensor.trapkastdeur_contact
               state: "on"
           sequence:
             - action: light.turn_on
-              entity_id: light.voorraadkastlamp
+              entity_id: light.trapkastlamp
 
             - delay:
                 minutes: 10
 
             - action: light.turn_off
-              entity_id: light.voorraadkastlamp
+              entity_id: light.trapkastlamp
 
       default:
         - action: light.turn_off
-          entity_id: light.voorraadkastlamp
+          entity_id: light.trapkastlamp

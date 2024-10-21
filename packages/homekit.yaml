@@ -24,7 +24,7 @@ homekit:
       - fan.air_purifier
       - fan.ventilator
       - light.keukenkastje_lamp
-      - light.voorraadkastlamp
+      - light.trapkastlamp
       - light.skull
       - sensor.air_purifier_pm2_5
       - sensor.particulate_matter_pm_2_5
@@ -40,8 +40,8 @@ homekit:
       name: Logeerkamer rolgordijn
     light.keukenkastje_lamp:
       name: Keukenkastje
-    light.voorraadkastlamp:
-      name: Voorraadkast
+    light.trapkastlamp:
+      name: Trapkast
     light.skull:
       name: Skull
     switch.adguard_home_primary_bescherming:

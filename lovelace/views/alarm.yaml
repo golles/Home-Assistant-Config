@@ -49,7 +49,7 @@ sections:
           - binary_sensor.achterraam_contact
           - binary_sensor.keukenraam_contact
           - binary_sensor.voordeur_contact
-          - binary_sensor.voorraadkastdeur_contact
+          - binary_sensor.trapkastdeur_contact
           # Eerste verdieping.
           - binary_sensor.slaapkamerraam_contact
           - binary_sensor.kledingkamerraam_contact
@@ -114,7 +114,7 @@ sections:
               state: "on"
               options:
                 type: tile
-            - entity_id: binary_sensor.voorraadkastdeur_contact
+            - entity_id: binary_sensor.trapkastdeur_contact
               state: "on"
               options:
                 type: tile

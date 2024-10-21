@@ -60,11 +60,8 @@ sections:
       - type: tile
         entity: light.skull
       - type: tile
-        entity: light.keuken
-        name: Keuken
-      - type: tile
-        entity: light.keukenkastje_lamp
-        name: Keukenkastje
+        entity: light.trapkastlamp
+        name: Trapkast
       - type: tile
         entity: light.kerstboom
         visibility:
@@ -117,8 +114,8 @@ sections:
         entity: binary_sensor.achterraam_contact
         name: Achterraam
       - type: tile
-        entity: binary_sensor.voorraadkastdeur_contact
-        name: Voorraadkastdeur
+        entity: binary_sensor.trapkastdeur_contact
+        name: Trapkastdeur
       - type: tile
         entity: cover.zonnescherm_template
 
