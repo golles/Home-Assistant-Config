@@ -5,13 +5,10 @@ set -e
 # Resouce list for javascript dependencies.
 JAVASCRIPT=$(cat <<'EOF'
 auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
-fold-entity-row.js              https://raw.githubusercontent.com/thomasloven/lovelace-fold-entity-row/master/fold-entity-row.js
 mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
 mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js
-multiple-entity-row.js          https://github.com/benct/lovelace-multiple-entity-row/releases/latest/download/multiple-entity-row.js
 mushroom.js                     https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js
 swipe-navigation.js             https://github.com/zanna-37/hass-swipe-navigation/releases/latest/download/swipe-navigation.js
-template-entity-row.js          https://raw.githubusercontent.com/thomasloven/lovelace-template-entity-row/master/template-entity-row.js
 vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
 digital-ptz.js                  https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/digital-ptz.js
 video-rtc.js                    https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/video-rtc.js
@@ -38,7 +35,6 @@ custom_components/blitzortung               https://github.com/mrk-its/homeassis
 custom_components/car_wash                  https://github.com/Limych/ha-car_wash
 custom_components/flightradar24             https://github.com/AlexandrErohin/home-assistant-flightradar24
 custom_components/eufy_security             https://github.com/fuatakgun/eufy_security
-custom_components/multiscrape               https://github.com/danieldotnl/ha-multiscrape
 custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
 custom_components/kamstrup_403              https://github.com/golles/ha-kamstrup_403
 custom_components/knmi                      https://github.com/golles/ha-knmi

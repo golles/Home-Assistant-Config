@@ -1,16 +1,10 @@
 - url: /local/auto-entities.js
   type: module
 
-- url: /local/fold-entity-row.js
-  type: module
-
 - url: /local/mini-graph-card-bundle.js
   type: module
 
 - url: /local/mini-media-player-bundle.js
-  type: module
-
-- url: /local/multiple-entity-row.js
   type: module
 
 - url: /local/mushroom.js
@@ -18,9 +12,6 @@
 
 - url: /local/swipe-navigation.js
   type: js
-
-- url: /local/template-entity-row.js
-  type: module
 
 - url: /local/vertical-stack-in-card.js
   type: module
