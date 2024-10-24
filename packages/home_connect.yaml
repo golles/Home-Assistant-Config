@@ -19,7 +19,7 @@ template:
         state: >-
           {% from "home_connect.jinja" import program_translation %}
           {% set prefix = "Vaatwasser Program " %}
-          {% set translations = {"BottomHeating": "Onderwarmte", "HotAir": "Warme lucht", "HotAirGrilling": "Warme lucht en grill", "KeepWarm": "Warmhouden", "PizzaSetting": "Pizzastand", "PreHeating": "Voorverwarmen", "PreheatOvenware": "Servies voorverwarmen", "SlowCook": "Langzaam garen", "TopBottomHeating": "Boven- en onder warmte", "TopBottomHeatingEco": "Boven- en onder warmte Eco"} %}
+          {% set translations = {"Auto2": "Auto 45-65°C", "Eco50": "Eco 50°C", "Glas40": "Glas 40°C", "Intensiv70": "Intensief 70°C", "Kurz60": "Kort 60°C", "MachineCare": "Machineverzorging", "NightWash": "Nachtprogramma", "PreRinse": "Voorspoelen", "Quick45": "Snel programma 45°C"} %}
           {{ program_translation(prefix, translations) }}
 
       - name: Oven programma
@@ -27,7 +27,7 @@ template:
         state: >-
           {% from "home_connect.jinja" import program_translation %}
           {% set prefix = "Oven Program " %}
-          {% set translations = {"Auto2": "Auto 45-65°C", "Eco50": "Eco 50°C", "Glas40": "Glas 40°C", "Intensiv70": "Intensief 70°C", "Kurz60": "Kort 60°C", "MachineCare": "Machineverzorging", "NightWash": "Nachtprogramma", "PreRinse": "Voorspoelen", "Quick45": "Snel programma 45°C"} %}
+          {% set translations = {"BottomHeating": "Onderwarmte", "HotAir": "4D Hete lucht", "HotAirGrilling": "Warme lucht en grill", "KeepWarm": "Warmhouden", "PizzaSetting": "Pizzastand", "PreHeating": "Voorverwarmen", "PreheatOvenware": "Servies voorverwarmen", "SlowCook": "Langzaam garen", "TopBottomHeating": "Boven- en onder warmte", "TopBottomHeatingEco": "Boven- en onder warmte Eco"} %}
           {{ program_translation(prefix, translations) }}
 
       - name: Wasmachine resterende minuten
