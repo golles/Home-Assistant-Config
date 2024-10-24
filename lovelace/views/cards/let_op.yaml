@@ -95,6 +95,14 @@ cards:
         state: "on"
 
   - type: tile
+    entity: sensor.oven_status
+    name: Oven
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_oven
+        state: "on"
+
+  - type: tile
     entity: input_boolean.vacation_mode
     visibility:
       - condition: state

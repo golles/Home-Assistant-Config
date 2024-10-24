@@ -199,6 +199,9 @@ sections:
         entity: cover.keuken
         name: Rolgordijn
       - type: tile
+        entity: sensor.oven_status
+        name: Oven
+      - type: tile
         entity: sensor.vaatwasser_status
         name: Vaatwasser
 

@@ -76,6 +76,11 @@ template:
           {{
             states("sensor.wasmachine_status") not in ["off", "unavailable", "unknown"]
           }}
+      - name: UI helper let op oven
+        state: >-
+          {{
+            states("sensor.oven_status") not in ["off", "unavailable", "unknown"]
+          }}
       - name: UI helper let op section
         state: >-
           {{
@@ -89,6 +94,7 @@ template:
             is_state("binary_sensor.ui_helper_let_op_afval_papier", "on") or
             is_state("binary_sensor.ui_helper_let_op_vaatwasser", "on") or
             is_state("binary_sensor.ui_helper_let_op_wasmachine", "on") or
+            is_state("binary_sensor.ui_helper_let_op_oven", "on") or
             is_state("input_boolean.vacation_mode", "on") or
             is_state("binary_sensor.ui_helper_let_op_zonnescherm", "on")
           }}

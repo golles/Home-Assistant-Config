@@ -19,6 +19,14 @@ template:
         state: >-
           {% from "home_connect.jinja" import program_translation %}
           {% set prefix = "Vaatwasser Program " %}
+          {% set translations = {"BottomHeating": "Onderwarmte", "HotAir": "Warme lucht", "HotAirGrilling": "Warme lucht en grill", "KeepWarm": "Warmhouden", "PizzaSetting": "Pizzastand", "PreHeating": "Voorverwarmen", "PreheatOvenware": "Servies voorverwarmen", "SlowCook": "Langzaam garen", "TopBottomHeating": "Boven- en onder warmte", "TopBottomHeatingEco": "Boven- en onder warmte Eco"} %}
+          {{ program_translation(prefix, translations) }}
+
+      - name: Oven programma
+        icon: mdi:stove
+        state: >-
+          {% from "home_connect.jinja" import program_translation %}
+          {% set prefix = "Oven Program " %}
           {% set translations = {"Auto2": "Auto 45-65°C", "Eco50": "Eco 50°C", "Glas40": "Glas 40°C", "Intensiv70": "Intensief 70°C", "Kurz60": "Kort 60°C", "MachineCare": "Machineverzorging", "NightWash": "Nachtprogramma", "PreRinse": "Voorspoelen", "Quick45": "Snel programma 45°C"} %}
           {{ program_translation(prefix, translations) }}
 
@@ -33,6 +41,12 @@ template:
         state: >-
           {% from "home_connect.jinja" import remaining_time %}
           {{ remaining_time("sensor.vaatwasser_remaining_program_time", "switch.vaatwasser_power") }}
+
+      - name: Oven resterende minuten
+        icon: mdi:clock
+        state: >-
+          {% from "home_connect.jinja" import remaining_time %}
+          {{ remaining_time("sensor.oven_remaining_program_time", "switch.oven_power") }}
 
       - name: Wasmachine status
         icon: mdi:washing-machine
@@ -64,6 +78,21 @@ template:
             {{ states("switch.vaatwasser_power") }}
           {%- endif %}
 
+      - name: Oven status
+        icon: mdi:stove
+        state: >-
+          {% if states("binary_sensor.oven_door") == "on" -%}
+            Deur open
+          {% elif states("sensor.oven_operation_state") == "Finished" -%}
+            Klaar
+          {% elif states("sensor.oven_operation_state") == "Run" -%}
+            {{ states("sensor.oven_resterende_minuten") }}
+          {% elif states("binary_sensor.oven_remote_start") == "on" -%}
+            Uitgestelde start
+          {%- else -%}
+            {{ states("switch.oven_power") }}
+          {%- endif %}
+
 automation:
   - id: home_connect_conversation_remaining_time
     alias: "Spraakassistent: Wanneer is de machine klaar"
@@ -79,6 +108,8 @@ automation:
             over {{ states("sensor.vaatwasser_resterende_minuten") }}
           {% elif trigger.slots.machine == "wasmachine" and states("sensor.wasmachine_resterende_minuten") != "unavailable" %}
             over {{ states("sensor.wasmachine_resterende_minuten") }}
+          {% elif trigger.slots.machine == "oven" and states("sensor.oven_resterende_minuten") != "unavailable" %}
+            over {{ states("sensor.oven_resterende_minuten") }}
           {% else %}
             Ik weet het niet, staat de {{ trigger.slots.machine }} wel aan?
           {% endif %}
