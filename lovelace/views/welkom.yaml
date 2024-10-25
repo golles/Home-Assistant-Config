@@ -428,9 +428,6 @@ sections:
       - type: tile
         entity: light.kledingkamer
         name: Plafond
-      - type: tile
-        entity: cover.kledingkamer
-        name: Rolluik
 
   # Zolder
   - type: grid
