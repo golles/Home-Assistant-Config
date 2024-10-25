@@ -61,10 +61,6 @@ sections:
         name: Beweging
         icon: mdi:motion-sensor
       - type: tile
-        entity: binary_sensor.douche_beweging_occupancy
-        name: Douche
-        icon: mdi:shower-head
-      - type: tile
         entity: sensor.badkamer_temperatuur
         name: Temperatuur
       - type: tile
@@ -76,6 +72,22 @@ sections:
       - type: tile
         entity: sensor.tandenborstel_battery
         name: Tandenborstel
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Douche
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.douche_beweging_occupancy
+        name: Beweging
+        icon: mdi:shower-head
+      - type: tile
+        entity: sensor.badkamer_klimaat_temperature
+        name: Temperatuur
+      - type: tile
+        entity: sensor.badkamer_klimaat_humidity
+        name: Luchtvochtigheid
 
   - type: grid
     cards:
