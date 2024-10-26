@@ -4,6 +4,9 @@
   triggers:
     - trigger: state
       entity_id: binary_sensor.docker_hub_update_available
+      to: "on"
+      for:
+        minutes: 90
   actions:
     - action: notify.telegram_sander
       data:
