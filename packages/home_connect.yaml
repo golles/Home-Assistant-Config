@@ -1,97 +1,93 @@
-input_datetime:
-  dishwasher_daily_start:
-    name: Vaatwasser start
-    has_date: false
-    has_time: true
-
 template:
   - sensor:
-      - name: Wasmachine programma
-        icon: mdi:washing-machine
-        state: >-
-          {% from "home_connect.jinja" import program_translation %}
-          {% set prefix = "Wasmachine Program " %}
-          {% set translations = {"Auto40": "Auto 40°C", "Cotton": "Katoen", "DelicatesSilk": "Fijne was/zijde", "EasyCare": "Kreukherstellend", "Mix": "Mix/Snel", "Sensitive": "Sensitive", "SportFitness": "Sport", "Wool": "Wol"} %}
-          {{ program_translation(prefix, translations) }}
-
-      - name: Vaatwasser programma
-        icon: mdi:dishwasher
-        state: >-
-          {% from "home_connect.jinja" import program_translation %}
-          {% set prefix = "Vaatwasser Program " %}
-          {% set translations = {"Auto2": "Auto 45-65°C", "Eco50": "Eco 50°C", "Glas40": "Glas 40°C", "Intensiv70": "Intensief 70°C", "Kurz60": "Kort 60°C", "MachineCare": "Machineverzorging", "NightWash": "Nachtprogramma", "PreRinse": "Voorspoelen", "Quick45": "Snel programma 45°C"} %}
-          {{ program_translation(prefix, translations) }}
-
-      - name: Oven programma
-        icon: mdi:stove
-        state: >-
-          {% from "home_connect.jinja" import program_translation %}
-          {% set prefix = "Oven Program " %}
-          {% set translations = {"BottomHeating": "Onderwarmte", "HotAir": "4D Hete lucht", "HotAirGrilling": "Warme lucht en grill", "KeepWarm": "Warmhouden", "PizzaSetting": "Pizzastand", "PreHeating": "Voorverwarmen", "PreheatOvenware": "Servies voorverwarmen", "SlowCook": "Langzaam garen", "TopBottomHeating": "Boven- en onder warmte", "TopBottomHeatingEco": "Boven- en onder warmte Eco"} %}
-          {{ program_translation(prefix, translations) }}
-
       - name: Wasmachine resterende minuten
         icon: mdi:clock
         state: >-
           {% from "home_connect.jinja" import remaining_time %}
-          {{ remaining_time("sensor.wasmachine_remaining_program_time", "switch.wasmachine_power") }}
+          {{
+            remaining_time(
+              "sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_remainingprogramtime",
+              "sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_setting_powerstate"
+            )
+          }}
 
       - name: Vaatwasser resterende minuten
         icon: mdi:clock
         state: >-
           {% from "home_connect.jinja" import remaining_time %}
-          {{ remaining_time("sensor.vaatwasser_remaining_program_time", "switch.vaatwasser_power") }}
+          {{
+            remaining_time(
+              "sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_remainingprogramtime",
+              "sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate"
+            )
+          }}
 
       - name: Oven resterende minuten
         icon: mdi:clock
         state: >-
           {% from "home_connect.jinja" import remaining_time %}
-          {{ remaining_time("sensor.oven_remaining_program_time", "switch.oven_power") }}
+          {{
+            remaining_time(
+              "sensor.384090532720002735_001_bsh_common_option_remainingprogramtime",
+              "sensor.384090532720002735_001_bsh_common_setting_powerstate"
+            )
+          }}
 
       - name: Wasmachine status
         icon: mdi:washing-machine
         state: >-
-          {% if states("binary_sensor.wasmachine_door") == "on" -%}
+          {% if states("binary_sensor.bosch_wawh2643nl_68a40e31630b_connected") in ["unavailable", "off"] -%}
+            off
+          {% elif is_state("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_doorstate", "on") -%}
             Deur open
-          {% elif states("sensor.wasmachine_operation_state") == "Finished" -%}
-            Klaar
-          {% elif states("sensor.wasmachine_operation_state") == "Run" -%}
+          {% elif is_state("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate", "Loopt") -%}
             {{ states("sensor.wasmachine_resterende_minuten") }}
-          {% elif states("binary_sensor.wasmachine_remote_start") == "on" -%}
+          {% elif is_state("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_remotecontrolstartallowed", "on") -%}
             Uitgestelde start
           {%- else -%}
-            {{ states("switch.wasmachine_power") }}
+            {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate") }}
           {%- endif %}
+        attributes:
+          "programma": >-
+            {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_active_program") }}
 
       - name: Vaatwasser status
         icon: mdi:dishwasher
         state: >-
-          {% if states("binary_sensor.vaatwasser_door") == "on" -%}
+          {% if is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_connected", "off") -%}
+            Verbroken
+          {% elif is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_doorstate", "on") -%}
             Deur open
-          {% elif states("sensor.vaatwasser_operation_state") == "Finished" -%}
-            Klaar
-          {% elif states("sensor.vaatwasser_operation_state") == "Run" -%}
+          {% elif is_state("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate", "Loopt") -%}
             {{ states("sensor.vaatwasser_resterende_minuten") }}
-          {% elif states("binary_sensor.vaatwasser_remote_start") == "on" -%}
+          {% elif is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_remotecontrolstartallowed", "on") -%}
             Uitgestelde start
+          {% elif is_state("switch.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate", "off") -%}
+            off
           {%- else -%}
-            {{ states("switch.vaatwasser_power") }}
+            {{ states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate") }}
           {%- endif %}
+        attributes:
+          "programma": >-
+            {{ states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_active_program") }}
 
       - name: Oven status
         icon: mdi:stove
         state: >-
-          {% if states("binary_sensor.oven_door") == "on" -%}
+          {% if is_state("binary_sensor.384090532720002735_001_connected", "off") -%}
+            Verbroken
+          {% elif is_state("binary_sensor.384090532720002735_001_bsh_common_status_doorstate", "on") -%}
             Deur open
-          {% elif states("sensor.oven_operation_state") == "Finished" -%}
-            Klaar
-          {% elif states("sensor.oven_operation_state") == "Run" -%}
+          {% elif is_state("sensor.384090532720002735_001_bsh_common_status_operationstate", "Loopt") -%}
             {{ states("sensor.oven_resterende_minuten") }}
-          {% elif states("binary_sensor.oven_remote_start") == "on" -%}
-            Uitgestelde start
+          {% elif states("sensor.384090532720002735_001_bsh_common_setting_powerstate") != "Aan" -%}
+            off
           {%- else -%}
-            {{ states("switch.oven_power") }}
+            {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
           {%- endif %}
+        attributes:
+          "programma": >-
+            {{ states("sensor.384090532720002735_001_active_program") }}
 
 automation:
   - id: home_connect_conversation_remaining_time
@@ -113,77 +109,3 @@ automation:
           {% else %}
             Ik weet het niet, staat de {{ trigger.slots.machine }} wel aan?
           {% endif %}
-
-  - id: dishwasher_auto_daily_start
-    alias: Vaatwasser dagelijks starten
-    mode: single
-    triggers:
-      - trigger: time
-        at: input_datetime.dishwasher_daily_start
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.vaatwasser_remote_start
-        state: "on"
-    actions:
-      - action: switch.turn_on
-        entity_id: switch.vaatwasser_program_auto2
-
-  - id: dishwasher_set_daily_start_time
-    alias: Vaatwasser tijd dagelijks aanpassen
-    mode: single
-    triggers:
-      - trigger: homeassistant
-        event: start
-      - trigger: time
-        at: "12:00:00"
-    actions:
-      - variables:
-          weekday_time: "04:30"
-          weekend_time: "07:30"
-          schedule_time: >
-            {% set weekday = now().isoweekday() %}
-            {% set hour = now().hour %}
-
-            {% if hour < 4 %}
-              {% if weekday in [6, 7] %}
-                {{ weekend_time }}
-              {% else %}
-                {{ weekday_time }}
-              {% endif %}
-            {% else %}
-              {% if weekday in [5, 6] %}
-                {{ weekend_time }}
-              {% else %}
-                {{ weekday_time }}
-              {% endif %}
-            {% endif %}
-
-      - action: input_datetime.set_datetime
-        data:
-          entity_id: input_datetime.dishwasher_daily_start
-          time: "{{ schedule_time }}"
-
-  # The washing machine remains sometimes unavailable. Reloading the integration to "fix" this
-  # Issue: https://github.com/home-assistant/core/issues/66063
-  - id: reload_home_connect
-    alias: Wasmachine - Herlaad Home Connect integratie
-    mode: single
-    triggers:
-      - trigger: numeric_state
-        entity_id: sensor.zolder_power
-        above: 2
-        for:
-          minutes: 2
-      - trigger: numeric_state
-        entity_id: sensor.zolder_power
-        below: 2
-        for:
-          minutes: 2
-    conditions:
-      # Should be a little higher than the minutes in the triggers, to deal with restarts.
-      - "{{ now() | as_timestamp(0) - states('sensor.uptime') | as_timestamp(0) > 200 }}"
-    actions:
-      - alias: Reload Home Connect integration
-        action: homeassistant.reload_config_entry
-        target:
-          entity_id: switch.wasmachine_power

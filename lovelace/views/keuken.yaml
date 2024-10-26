@@ -102,10 +102,3 @@ sections:
         entity: button.keuken_rolgordijn_voorkeurspositie
         name: Voorkeurspositie
         icon: mdi:window-shutter
-      - type: tile
-        entity: automation.vaatwasser_dagelijks_starten
-        icon: mdi:dishwasher
-        name: Vaatwasser auto start
-      - type: tile
-        entity: input_datetime.dishwasher_daily_start
-        name: Vaatwasser starttijd

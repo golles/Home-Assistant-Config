@@ -1,41 +1,31 @@
 {#
-Home Connect remaining program time, will return `unavailable` when the device is off, the time in minutes, or `klaar` when done.
-remaining_program_time_sensor: the timestamp sensor from the integration.
-power_switch: the power switch from the integration.
+Home Connect remaining program time.
+
+Params:
+  remaining_program_time_sensor: the timestamp sensor from the integration.
+  powerstate_sensor: the power switch from the integration.
+
+Returns:
+  When the powerstate_sensor evaluates falsy the result will be `unavailable`.
+  When the time is not computable, it will also result in `unavailable`.
+  Else it will return `x minuten`, `1 minuut` or `klaar`
 #}
-{% macro remaining_time(remaining_program_time_sensor, power_switch) %}
-{% if is_state(remaining_program_time_sensor, "unavailable") or is_state(power_switch, "off") -%}
+{% macro remaining_time(remaining_program_time_sensor, powerstate_sensor) %}
+{% if states(powerstate_sensor) | lower in ["unknown", "unavailable", "off", "uit"] %}
   unavailable
 {%- else -%}
-  {% set seconds = as_timestamp(states(remaining_program_time_sensor)) - as_timestamp(utcnow()) | int  %}
-  {% set minutes = (seconds / 60) | round(0, "ceil") %}
-
-  {%- if minutes <= 0 -%}
-    Klaar
-  {%- elif minutes == 1 -%}
-    1 minuut
-  {%- else -%}
-    {{ minutes }} minuten
-  {%- endif -%}
-{%- endif %}
-{% endmacro %}
-
-{#
-Home Connect program translations. The switch names are technical and not user friendly, this macro translates them.
-switch_prefix: the prefix of your device switches, the device is usually named like"<DEVICE_NAME> Program <PROGRAM_NAME>", in this case the prefix is "<DEVICE_NAME> Program ".
-translations: a mapping with the key values, eg. {"Auto40": "Auto 40°C"}.
-#}
-{% macro program_translation(switch_prefix, translations) %}
-{% set program = namespace(name = "unavailable") %}
-{% for switch in integration_entities("home_connect") | select("match", "switch.*") | list -%}
-{%- if state_attr(switch, "friendly_name").startswith(switch_prefix) and is_state(switch, "on") %}
-    {% set program.name = state_attr(switch, "friendly_name").split(switch_prefix)[1] %}
-{%- endif %}
-{%- endfor %}
-
-{% if program.name in translations %}
-{{ translations[program.name] }}
-{% else %}
-{{ program.name }}
+  {% set end_time = states(remaining_program_time_sensor) %}
+  {% if end_time in ["unknown", "unavailable"] %}
+    unavailable
+  {% else %}
+    {% set minutes = ((as_timestamp(end_time) - as_timestamp(now())) / 60) | int %}
+    {%- if minutes <= 0 -%}
+      Klaar
+    {%- elif minutes == 1 -%}
+      1 minuut
+    {%- else -%}
+      {{ minutes }} minuten
+    {%- endif -%}
+  {% endif %}
 {% endif %}
 {% endmacro %}

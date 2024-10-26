@@ -3,12 +3,12 @@
   mode: single
   triggers:
     - trigger: state
-      entity_id: sensor.wasmachine_operation_state
-      from: Finished
-      to: Ready
+      entity_id: sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate
+      from: Afgerond
+      to: Klaar
   conditions:
     - condition: state
-      entity_id: binary_sensor.wasmachine_door
+      entity_id: binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_doorstate
       state: "on"
     - condition: state # Door should be closed.
       entity_id: binary_sensor.balkondeur_contact
@@ -53,9 +53,9 @@
   mode: single
   triggers:
     - trigger: state
-      entity_id: sensor.wasmachine_operation_state
-      from: Run
-      to: Finished
+      entity_id: sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate
+      from: Loopt
+      to: Afgerond
   conditions:
     - condition: state
       entity_id: media_player.lg_c9
