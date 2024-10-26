@@ -88,6 +88,7 @@ rest_command:
   post_luftdaten_sds011:
     url: https://api.sensor.community/v1/push-sensor-data/
     method: POST
+    timeout: 60
     headers:
       X-Pin: 1 # This tells Luftdaten that it is SDS011 data.
       X-Sensor: !secret luftdaten_x_sensor
@@ -106,6 +107,7 @@ rest_command:
   post_madavi_sds011:
     url: https://api-rrd.madavi.de/data.php
     method: POST
+    timeout: 60
     headers:
       X-Sensor: !secret luftdaten_x_sensor
     content_type: application/json
@@ -124,6 +126,7 @@ rest_command:
   post_opensensemap_sds011:
     url: !secret opensensemap_url # https://api.opensensemap.org/boxes/YOUR_BOX_ID/data?luftdaten=1
     method: POST
+    timeout: 60
     headers:
       Authorization: !secret opensensemap_access_token
     content_type: application/json
@@ -141,6 +144,7 @@ rest_command:
   post_luftdaten_bme280:
     url: https://api.sensor.community/v1/push-sensor-data/
     method: POST
+    timeout: 60
     headers:
       X-Pin: 11 ## This tells Luftdaten that it is BME280 data
       X-Sensor: !secret luftdaten_x_sensor
@@ -160,6 +164,7 @@ rest_command:
   post_madavi_bme280:
     url: https://api-rrd.madavi.de/data.php
     method: POST
+    timeout: 60
     headers:
       X-Sensor: !secret luftdaten_x_sensor
     content_type: application/json
@@ -179,6 +184,7 @@ rest_command:
   post_opensensemap_bme280:
     url: !secret opensensemap_url # https://api.opensensemap.org/boxes/YOUR_BOX_ID/data?luftdaten=1
     method: POST
+    timeout: 60
     headers:
       Authorization: !secret opensensemap_access_token
     content_type: application/json
