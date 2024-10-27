@@ -426,7 +426,7 @@ sections:
             entity: binary_sensor.badkamerraam_contact
             color: state
       - type: tile
-        entity: light.kledingkamer
+        entity: light.badkamer
         name: Plafond
 
   # Zolder
