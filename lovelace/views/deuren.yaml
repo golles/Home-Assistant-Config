@@ -36,8 +36,8 @@ sections:
               options:
                 type: tile
           exclude:
-            - entity_id: binary_sensor.wasmachine_door
-            - entity_id: binary_sensor.vaatwasser_door
+            - integration: home_connect
+            - integration: home_connect_alt
         sort:
           method: state
           reverse: true
