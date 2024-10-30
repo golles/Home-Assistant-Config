@@ -111,6 +111,33 @@ template:
             off
           {% endif %}
 
+      - name: Keuken bezetting
+        device_class: occupancy
+        icon: mdi:motion-sensor
+        state: >
+          {% set motion_entities = [
+            "binary_sensor.epl_keuken_zone_1_occupancy",
+          ] %}
+
+          {% set is_oven_on = is_state("sensor.384090532720002735_001_bsh_common_setting_powerstate", "Aan") %}
+
+          {%
+          set is_motion = states.binary_sensor
+            | selectattr("entity_id", "in", motion_entities)
+            | rejectattr("state", "in", ["off", "unavailable", "unknown"])
+            | list
+            | count
+            > 0
+          %}
+
+          {% if (this.state == "on") %}
+            {{ iif(is_motion or is_oven_on, "on", "off") }}
+          {% elif (this.state == "off") %}
+            {{ iif(is_motion, "on", "off") }}
+          {% else %}
+            off
+          {% endif %}
+
       - name: Logeerkamer bezetting
         device_class: occupancy
         icon: mdi:motion-sensor

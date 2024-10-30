@@ -4,7 +4,7 @@
     path: golles/motion-activated_scenes.yaml
     input:
       day_end_time: 00:00:00
-      motion_entity: binary_sensor.epl_keuken_zone_1_occupancy
+      motion_entity: binary_sensor.keuken_bezetting
       cool_down: 30
       light_entity: light.keuken
       illuminance_entity: sensor.epl_keuken_illuminance
