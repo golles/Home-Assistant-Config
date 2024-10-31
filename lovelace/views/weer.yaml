@@ -44,6 +44,25 @@ sections:
               {{ iif(is_state("binary_sensor.knmi_waarschuwing", "on"), state_attr("binary_sensor.knmi_waarschuwing", "description"), "") }}
               {{ iif(is_state("binary_sensor.meteoalarm", "on") and is_state("binary_sensor.knmi_waarschuwing", "off"), state_attr("binary_sensor.meteoalarm", "description"), "") }}
 
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Waarschuwingen
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.knmi_waarschuwing
+        name: KNMI
+        state_content:
+          - state
+          - code
+      - type: tile
+        entity: binary_sensor.stookalert_noord_holland
+        name: Stookalert
+      - type: tile
+        entity: binary_sensor.meteoalarm
+        name: MeteoAlarm
+
   - type: grid
     cards:
       - type: heading
@@ -67,24 +86,23 @@ sections:
       - type: tile
         entity: sensor.knmi_globale_stralingsintensiteit
         name: Stralingsintensiteit
+
       - type: heading
-        heading: Waarschuwingen
+        heading: Blikseminslagen
         heading_style: subtitle
       - type: tile
-        entity: binary_sensor.knmi_waarschuwing
-        name: KNMI
+        entity: sensor.blitzortung_lightning_counter
+        name: Aantal
         state_content:
           - state
-          - code
+          - last-changed
       - type: tile
-        entity: binary_sensor.stookalert_noord_holland
-        name: Stookalert
-      - type: tile
-        entity: binary_sensor.meteoalarm
-        name: MeteoAlarm
+        entity: sensor.blitzortung_lightning_distance
+        name: Afstand
+        state_content:
+          - state
+          - last-changed
 
-  - type: grid
-    cards:
       - type: heading
         heading: Pollen
         heading_style: subtitle
@@ -116,7 +134,7 @@ sections:
   - type: grid
     cards:
       - type: heading
-        heading: Zon/maan
+        heading: Zon
         heading_style: subtitle
       - type: tile
         entity: sun.sun
@@ -136,50 +154,23 @@ sections:
       - type: tile
         entity: binary_sensor.openuv_bescherming_venster
         name: Zonbescherming
+
+      - type: heading
+        heading: Maan
+        heading_style: subtitle
       - type: tile
         entity: sensor.moon_fase
         name: Maan
 
   - type: grid
-    column_span: 2
-    cards:
-      - type: heading
-        heading: Radars
-        heading_style: subtitle
-      - type: picture
-        image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-        tap_action:
-          action: url
-          url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
-        layout_options:
-          grid_columns: 2
-          grid_rows: 3
-      - type: picture
-        image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
-        tap_action:
-          action: url
-          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
-        layout_options:
-          grid_columns: 2
-          grid_rows: 3
-      - type: picture
-        image: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
-        tap_action:
-          action: url
-          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
-        layout_options:
-          grid_columns: 2
-          grid_rows: 3
-
-  - type: grid
-    column_span: 2
+    column_span: 4
     visibility:
       - condition: state
         entity: sensor.blitzortung_lightning_counter
         state_not: "0"
     cards:
       - type: heading
-        heading: Onweer
+        heading: Blikseminslagen
         heading_style: subtitle
       - type: map
         entities:
@@ -191,17 +182,38 @@ sections:
         aspect_ratio: "80%"
         auto_fit: true
         layout_options:
-          grid_columns: 8
+          grid_columns: full
           grid_rows: 8
-      - type: tile
-        entity: sensor.blitzortung_lightning_counter
-        name: Aantal
-        state_content:
-          - state
-          - last-changed
-      - type: tile
-        entity: sensor.blitzortung_lightning_distance
-        name: Afstand
-        state_content:
-          - state
-          - last-changed
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: KNMI radar
+        heading_style: subtitle
+      - type: picture
+        image: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+        tap_action:
+          action: url
+          url_path: http://cdn.knmi.nl/knmi/map/general/weather-map.gif
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Buienradar regen
+        heading_style: subtitle
+      - type: picture
+        image: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
+        tap_action:
+          action: url
+          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=2&forecast=8&skip=4
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Buienradar bewolking
+        heading_style: subtitle
+      - type: picture
+        image: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
+        tap_action:
+          action: url
+          url_path: https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?height=512&width=500&extension=gif&renderBackground=True&renderBranding=False&renderText=True&history=3&forecast=16&skip=4
