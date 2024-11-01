@@ -1,18 +1,40 @@
+switch:
+  - platform: template
+    switches:
+      back_ups_bx950mi_beeper:
+        friendly_name: UPS Beeper
+        icon_template: >
+          {% if is_state("sensor.back_ups_bx950mi_pieperstatus", "enabled") %}
+            mdi:volume-high
+          {% else %}
+            mdi:volume-off
+          {% endif %}
+        value_template: >
+          {{ is_state("sensor.back_ups_bx950mi_pieperstatus", "enabled") }}
+        turn_on:
+          type: beeper_enable
+          device_id: 6ddd1bfc38e356168076c2e876b86b18
+          domain: nut
+        turn_off:
+          type: beeper_disable
+          device_id: 6ddd1bfc38e356168076c2e876b86b18
+          domain: nut
+
 automation:
   - id: ups_state_change
     alias: UPS status verandering
     mode: single
     triggers:
       - trigger: state
-        entity_id: sensor.apc_back_ups_bx950mi_status
+        entity_id: sensor.back_ups_bx950mi_status
     conditions:
       - condition: not
         conditions:
           - condition: state
-            entity_id: sensor.apc_back_ups_bx950mi_status
+            entity_id: sensor.back_ups_bx950mi_status
             state: unavailable
           - condition: state
-            entity_id: sensor.apc_back_ups_bx950mi_self_test_result
+            entity_id: sensor.back_ups_bx950mi_resultaat_zelftest
             state: In progress
     actions:
       - alias: Sent a notification with the state
@@ -20,7 +42,7 @@ automation:
         data:
           title: UPS status
           message: >-
-            {{ states("sensor.apc_back_ups_bx950mi_status") }}
+            {{ states("sensor.back_ups_bx950mi_status") }}
           data:
             group: ups
             url: /lovelace/hal

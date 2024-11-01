@@ -132,18 +132,18 @@ sections:
         heading_style: subtitle
         tap_action:
           action: navigate
-          navigation_path: /config/devices/device/3b35d47b35a6b96848962b937ee493ce
+          navigation_path: /config/devices/device/6ddd1bfc38e356168076c2e876b86b18
       - type: tile
-        entity: sensor.apc_back_ups_bx950mi_status
+        entity: sensor.back_ups_bx950mi_status
         name: Status
       - type: tile
-        entity: sensor.apc_back_ups_bx950mi_battery_charge
+        entity: sensor.back_ups_bx950mi_batterijlading
         name: Batterij
       - type: tile
-        entity: sensor.apc_back_ups_bx950mi_battery_runtime
+        entity: sensor.back_ups_bx950mi_batterijduur
         name: Batterij tijd
       - type: tile
-        entity: sensor.apc_back_ups_bx950mi_self_test_result
+        entity: sensor.back_ups_bx950mi_resultaat_zelftest
         name: Test
 
   - type: grid
