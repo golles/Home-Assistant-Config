@@ -48,8 +48,34 @@ template:
             {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate") }}
           {%- endif %}
         attributes:
+          "bedrijfsstatus": >-
+            {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate") }}
+          "deur": >-
+            {{
+              iif(
+                states("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_doorstate") == "on",
+                "Open",
+                "Gesloten"
+              )
+            }}
           "programma": >-
-            {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_active_program") }}
+            {{ states("sensor.bosch_wawh2643nl_68a40e31630b_active_program") }}
+          "Verbonden": >-
+            {{
+              iif(
+                states("binary_sensor.bosch_wawh2643nl_68a40e31630b_connected") == "on",
+                "Verbonden",
+                "Verbroken"
+              )
+            }}
+          "voortgang": >-
+            {{
+              iif(
+                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress") != "unavailable",
+                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress")~"%",
+                "unavailable"
+              )
+            }}
 
       - name: Vaatwasser status
         icon: mdi:dishwasher
@@ -68,8 +94,34 @@ template:
             {{ states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate") }}
           {%- endif %}
         attributes:
+          "bedrijfsstatus": >-
+            {{ states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate") }}
+          "deur": >-
+            {{
+              iif(
+                states("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_doorstate") == "on",
+                "Open",
+                "Gesloten"
+              )
+            }}
           "programma": >-
             {{ states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_active_program") }}
+          "Verbonden": >-
+            {{
+              iif(
+                states("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_connected") == "on",
+                "Verbonden",
+                "Verbroken"
+              )
+            }}
+          "voortgang": >-
+            {{
+              iif(
+                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress") != "unavailable",
+                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress")~"%",
+                "unavailable"
+              )
+            }}
 
       - name: Oven status
         icon: mdi:stove
@@ -79,15 +131,45 @@ template:
           {% elif is_state("binary_sensor.384090532720002735_001_bsh_common_status_doorstate", "on") -%}
             Deur open
           {% elif is_state("sensor.384090532720002735_001_bsh_common_status_operationstate", "Loopt") -%}
-            {{ states("sensor.oven_resterende_minuten") }}
+            {% if is_state("sensor.oven_resterende_minuten", "unavailable") -%}
+              {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
+            {%- else -%}
+              {{ states("sensor.oven_resterende_minuten") }}
+            {%- endif %}
           {% elif states("sensor.384090532720002735_001_bsh_common_setting_powerstate") != "Aan" -%}
             off
           {%- else -%}
             {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
           {%- endif %}
         attributes:
+          "bedrijfsstatus": >-
+            {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
+          "deur": >-
+            {{
+              iif(
+                states("binary_sensor.384090532720002735_001_bsh_common_status_doorstate") == "on",
+                "Open",
+                "Gesloten"
+              )
+            }}
           "programma": >-
             {{ states("sensor.384090532720002735_001_active_program") }}
+          "Verbonden": >-
+            {{
+              iif(
+                states("binary_sensor.384090532720002735_001_connected") == "on",
+                "Verbonden",
+                "Verbroken"
+              )
+            }}
+          "voortgang": >-
+            {{
+              iif(
+                states("sensor.384090532720002735_001_bsh_common_option_programprogress") != "unavailable",
+                states("sensor.384090532720002735_001_bsh_common_option_programprogress")~"%",
+                "unavailable"
+              )
+            }}
 
 automation:
   - id: home_connect_conversation_remaining_time
