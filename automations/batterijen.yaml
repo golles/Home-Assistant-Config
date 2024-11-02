@@ -32,7 +32,7 @@
         device_id: >-
           {{ device_id(trigger.entity_id) }}
         device_model: >-
-          {{ device_attr(device_id, "model") }}
+          {{ iif("watch_battery" in trigger.entity_id, "Apple Watch", device_attr(device_id, "model")) }}
         area: >-
           {{ area_name(trigger.entity_id) }}
 
