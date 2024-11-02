@@ -31,11 +31,14 @@ automation:
       - condition: not
         conditions:
           - condition: state
-            entity_id: sensor.back_ups_bx950mi_status
-            state: unavailable
-          - condition: state
             entity_id: sensor.back_ups_bx950mi_resultaat_zelftest
             state: In progress
+      - condition: template
+        value_template: >
+          {{
+            trigger.from_state.state not in ["unavailable", "Online", "Online Battery Charging"] and
+            trigger.to_state.state not in ["unavailable", "Online", "Online Battery Charging"]
+          }}
     actions:
       - alias: Sent a notification with the state
         action: notify.sander
