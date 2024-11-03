@@ -155,3 +155,5 @@ sections:
         entity: switch.hal_sensor_bewegingssensor_ingeschakeld
         name: Automatisch licht
         icon: mdi:lightbulb-auto
+      - type: tile
+        entity: switch.back_ups_bx950mi_beeper
