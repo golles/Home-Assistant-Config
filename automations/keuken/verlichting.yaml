@@ -5,7 +5,7 @@
     input:
       day_end_time: 00:00:00
       motion_entity: binary_sensor.keuken_bezetting
-      cool_down: 30
+      cool_down: 60
       light_entity: light.keuken
       illuminance_entity: sensor.epl_keuken_illuminance
       illuminance_below: 2
