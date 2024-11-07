@@ -16,10 +16,24 @@
       from: "off"
       to: "on"
   actions:
-    - alias: Occupancy detected, set fan to high for 30 minutes
-      action: button.press
-      target:
-        entity_id: button.mechanische_ventilatie_30_minuten_hoog
+    - alias: Repeat setting the fan to high, to make sure it happens
+      repeat:
+        while:
+          - alias: While fan is low
+            condition: numeric_state
+            entity_id: fan.mechanische_ventilatie_ventilatie
+            attribute: percentage
+            below: 74
+          - alias: Don't do it too many times
+            condition: template
+            value_template: "{{ repeat.index <= 5 }}"
+        sequence:
+          - alias: Set fan to high for 30 minutes
+            action: button.press
+            target:
+              entity_id: button.mechanische_ventilatie_30_minuten_hoog
+          - delay:
+              seconds: 10
 
     - alias: Wait for occupancy to be off
       wait_for_trigger:
