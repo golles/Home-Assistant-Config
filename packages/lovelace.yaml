@@ -49,7 +49,7 @@ template:
             state_attr("sensor.purmerend_bio_afval", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
-          {{ state_attr("sensor.purmerend_bio_afval", "Days_until") is not none }}
+          {{ not is_state("sensor.purmerend_bio_afval", "unknown") and state_attr("sensor.purmerend_bio_afval", "Days_until") is not none }}
       - name: UI helper let op afval papier
         state: >-
           {{
@@ -57,7 +57,7 @@ template:
             state_attr("sensor.purmerend_papier", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
-          {{ state_attr("sensor.purmerend_papier", "Days_until") is not none }}
+          {{ not is_state("sensor.purmerend_papier", "unknown") and state_attr("sensor.purmerend_papier", "Days_until") is not none }}
       - name: UI helper let op afval rest
         state: >-
           {{
@@ -65,7 +65,7 @@ template:
             state_attr("sensor.purmerend_restafval", "Days_until") == 0 and now() < today_at("12:00")
           }}
         availability: >-
-          {{ state_attr("sensor.purmerend_restafval", "Days_until") is not none }}
+          {{ not is_state("sensor.purmerend_restafval", "unknown") and state_attr("sensor.purmerend_restafval", "Days_until") is not none }}
       - name: UI helper let op vaatwasser
         state: >-
           {{
