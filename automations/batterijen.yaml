@@ -3,16 +3,23 @@
   description: Meldingen voor lage batterij, alleen voor apparaten die belangrijk zijn
   mode: single
   triggers:
-    - alias: Important devices getting low
+    - alias: Mobile devices getting low
       trigger: numeric_state
       entity_id:
         - sensor.iphone_van_golles_battery_level
         - sensor.iphone_van_golles_watch_battery
         - sensor.ipad_mini_van_golles_battery_level
+      below: 30
+
+    - alias: Important devices getting low
+      trigger: numeric_state
+      entity_id:
         - sensor.logeerkamer_battery
         - sensor.keuken_battery
         - sensor.tandenborstel_battery
       below: 30
+      for:
+        minutes: 30
 
     - alias: Tado devices getting low
       trigger: state
