@@ -15,6 +15,3 @@
 
 - url: /local/vertical-stack-in-card.js
   type: module
-
-- url: /local/webrtc-camera.js
-  type: module

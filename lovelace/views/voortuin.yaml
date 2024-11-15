@@ -44,12 +44,8 @@ sections:
       - type: heading
         heading: Apparaten
         heading_style: subtitle
-      - show_state: true
-        show_name: true
-        camera_view: auto
-        type: picture-entity
+      - type: custom:webrtc-camera
         entity: camera.deurbel
-        camera_image: camera.deurbel
         layout_options:
           grid_columns: full
         visibility:
@@ -71,12 +67,13 @@ sections:
           - condition: state
             entity: sensor.deurbel_stream_status
             state: StreamStatus.STREAMING
-      - show_state: true
-        show_name: true
-        camera_view: auto
-        type: picture-entity
+
+      - type: picture-entity
         entity: image.deurbel_event_image
         name: Deurbel
+        show_state: true
+        show_name: true
+        camera_view: auto
         layout_options:
           grid_columns: full
         visibility:

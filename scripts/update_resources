@@ -10,10 +10,6 @@ mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/rele
 mushroom.js                     https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js
 swipe-navigation.js             https://github.com/zanna-37/hass-swipe-navigation/releases/latest/download/swipe-navigation.js
 vertical-stack-in-card.js       https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js
-digital-ptz.js                  https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/digital-ptz.js
-video-rtc.js                    https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/video-rtc.js
-webrtc-camera.js                https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/webrtc-camera.js
-embed.html                      https://raw.githubusercontent.com/AlexxIT/WebRTC/master/custom_components/webrtc/www/embed.html
 EOF
 )
 
