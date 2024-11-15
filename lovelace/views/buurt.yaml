@@ -45,10 +45,6 @@ sections:
         heading_style: subtitle
       - type: tile
         entity: sensor.leeghwaterbad_volgende_bestelling
-      - type: tile
-        entity: sensor.leeghwaterbad_volgende_bestelling
-        name: Ordernummer
-        state_content: Ordernummer
       - type: markdown
         layout_options:
           grid_columns: 2
@@ -62,9 +58,9 @@ sections:
             )
           }}
       - type: tile
-        entity: sensor.leeghwaterbad_abonnement_beschikbare_tickets
+        entity: sensor.leeghwaterbad_beschikbare_tickets
       - type: tile
-        entity: sensor.leeghwaterbad_abonnement_verloopdatum
+        entity: sensor.leeghwaterbad_verloopdatum
 
   - type: grid
     cards:

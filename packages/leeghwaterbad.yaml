@@ -1,102 +1,42 @@
-multiscrape:
-  - name: Leeghwaterbad abonnement scraper
-    resource: https://spurd.booqi.me/client/subscriptions
-    scan_interval: 10800
-    form_submit:
-      resource: https://spurd.booqi.me/client/login
-      select: "#login_form"
-      input:
-        email: !secret leeghwaterbad_username
-        password: !secret leeghwaterbad_password
-    sensor:
-      - name: Beschikbare tickets
-        unique_id: leeghwaterbad_abonnement_beschikbare_tickets
-        icon: mdi:playlist-check
-        select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
-        value_template: >
-          {{ value.split("/")[0] | trim }}
-        attributes:
-          - name: Totaal
-            select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
-            value_template: >
-              {{ value.split("/")[1].split("-")[0] | trim }}
-          - name: Procent
-            select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)"
-            value_template: >
-              {{ value.split("-")[1].split("%")[0] | trim }}
-      - name: Verloopdatum
-        unique_id: leeghwaterbad_abonnement_verloopdatum
-        icon: mdi:calendar-sync
-        device_class: timestamp
-        select: "#subscriptions_active > div > div:nth-child(2) > div:nth-child(4)"
-        value_template: >
-          {% set value = value | trim %}
-          {% set date = value.split(" ")[0].split("-") %}
-          {{
-            now().replace(
-              year=date[2] | int, month=date[1] | int, day=date[0] | int,
-              hour=0, minute=0, second=0, microsecond=0
-            )
-          }}
-
-  - name: Leeghwaterbad bestelling scraper
-    resource: https://spurd.booqi.me/client/orders
-    scan_interval: 10800
-    form_submit:
-      resource: https://spurd.booqi.me/client/login
-      select: "#login_form"
-      input:
-        email: !secret leeghwaterbad_username
-        password: !secret leeghwaterbad_password
-    sensor:
-      - name: Volgende bestelling
-        unique_id: leeghwaterbad_volgende_bestelling
-        icon: mdi:swim
-        device_class: timestamp
-        select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(4)"
-        value_template: >
-          {% set value = value | trim %}
-          {% if value != "Bezoekdatum" -%}
-            {% set date = value.split(" ")[0].split("-") %}
-            {% set time = value.split(" ")[1].split(":") %}
-            {{
-              now().replace(
-                year=date[2] | int, month=date[1] | int, day=date[0] | int,
-                hour=time[0] | int, minute=time[1] | int, second=0, microsecond=0
-              )
-            }}
-          {%- endif %}
-        attributes:
-          - name: Product
-            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > strong"
-            on_error:
-              log: false
-          - name: Aantal
-            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(3) > span:nth-child(1)"
-            value_template: >-
-              {% set value = value | trim %}
-              {% if value != "Bedrag" -%}
-                {{ (value | trim).split(" ")[0] }}
-              {%- endif %}
-          - name: Ordernummer
-            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(1) > span > span > small"
-            value_template: >-
-              {{ (value | trim).split("#")[1] }}
-            on_error:
-              log: false
-          - name: Status
-            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div:nth-child(2) > span"
-            value_template: >-
-              {% set value = value | trim %}
-              {% if value != "Status" -%}
-                {{ (value | trim).split(" ")[0] }}
-              {%- endif %}
-          - name: Ticket
-            select: "#orders_usable > div > div.nk-tb-item:last-of-type > div.nk-tb-col.nk-tb-col-tools > ul > li:nth-child(2) > a"
-            attribute: href
-            value_template: "https://spurd.booqi.me{{ value }}"
-            on_error:
-              log: false
+command_line:
+  - sensor:
+      name: Leeghwaterbad Beschikbare tickets
+      unique_id: leeghwaterbad_beschikbare_tickets
+      icon: mdi:playlist-check
+      scan_interval: 10800
+      command: !secret leeghwaterbad_command # "python custom_scripts/leeghwaterbad.py 'email' 'password'"
+      command_timeout: 120
+      value_template: "{{ value_json.abonnement.beschikbaar }}"
+      json_attributes_path: "$.abonnement"
+      json_attributes:
+        - totaal
+        - procent
+  - sensor:
+      name: Leeghwaterbad Verloopdatum
+      unique_id: leeghwaterbad_verloopdatum
+      icon: mdi:calendar-sync
+      scan_interval: 10800
+      command: !secret leeghwaterbad_command # "python custom_scripts/leeghwaterbad.py 'email' 'password'"
+      command_timeout: 120
+      value_template: "{{ value_json.abonnement.verloopdatum }}"
+      device_class: timestamp
+  - sensor:
+      name: Leeghwaterbad Volgende bestelling
+      unique_id: leeghwaterbad_volgende_bestelling
+      icon: mdi:swim
+      scan_interval: 10800
+      command: !secret leeghwaterbad_command # "python custom_scripts/leeghwaterbad.py 'email' 'password'"
+      command_timeout: 120
+      value_template: "{{ value_json.bestelling.volgende }}"
+      json_attributes_path: "$.bestelling"
+      json_attributes:
+        - product
+        - aantal
+        - ordernummer
+        - ticket
+      device_class: timestamp
+      availability: >-
+        {{ states("sensor.leeghwaterbad_volgende_bestelling") != "1970-01-01T00:00:00+00:00" }}
 
 automation:
   - id: notification_leeghwaterbad_ticket
