@@ -1,0 +1,2 @@
+go2rtc:
+  url: !secret go2rtc_url
