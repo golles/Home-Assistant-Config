@@ -68,7 +68,6 @@ I've made a few [custom_scripts](custom_scripts/) to control devices at my home.
 | Script                                                  | Summary                                                             |
 | ------------------------------------------------------- | ------------------------------------------------------------------- |
 | [carwashplus.py](custom_scripts/carwashplus.py)         | Scraper script to get data from Carwash Plus                        |
-| [dlink_day_night.sh](custom_scripts/dlink_day_night.sh) | Simple script to set a DLink wifi camera in day/night mode          |
 | [leeghwaterbad.py](custom_scripts/leeghwaterbad.py)     | Scraper script to get data from Leeghwaterbad                       |
 | [lg_sl10.py](custom_scripts/lg_sl10.py)                 | Script that can set the source and/or volume of an LG SL10 soundbar |
 
