@@ -42,7 +42,7 @@
           from: "on"
           to: "off"
       timeout:
-        minutes: 15
+        minutes: 45
       continue_on_timeout: false
 
     - alias: Set fan to high for 15 minutes
