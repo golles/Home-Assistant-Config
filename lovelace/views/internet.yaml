@@ -49,30 +49,6 @@ sections:
   - type: grid
     cards:
       - type: heading
-        heading: Internet
-        heading_style: subtitle
-      - type: sensor
-        entity: sensor.speedtest_download
-        graph: line
-        name: Download
-        layout_options:
-          grid_columns: full
-      - type: sensor
-        entity: sensor.speedtest_upload
-        graph: line
-        name: Upload
-        layout_options:
-          grid_columns: full
-      - type: sensor
-        entity: sensor.speedtest_ping
-        graph: line
-        name: Ping
-        layout_options:
-          grid_columns: full
-
-  - type: grid
-    cards:
-      - type: heading
         heading: Certificaten
         heading_style: subtitle
       - type: custom:auto-entities
@@ -171,3 +147,48 @@ sections:
       - type: tile
         entity: automation.adguard_home_bescherming_schakelaars
         name: AdGuard sync
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Snelheden
+        heading_style: subtitle
+      - type: custom:mini-graph-card
+        name: Download
+        icon: mdi:speedometer
+        entities:
+          - sensor.speedtest_download
+        line_color: blue
+        points_per_hour: 2
+        hours_to_show: 24
+        hour24: true
+        more_info: false
+        show:
+          legend: false
+          extrema: true
+      - type: custom:mini-graph-card
+        name: Upload
+        icon: mdi:speedometer
+        entities:
+          - sensor.speedtest_upload
+        line_color: red
+        points_per_hour: 2
+        hours_to_show: 24
+        hour24: true
+        more_info: false
+        show:
+          legend: false
+          extrema: true
+      - type: custom:mini-graph-card
+        name: Ping
+        icon: mdi:speedometer
+        entities:
+          - sensor.speedtest_ping
+        points_per_hour: 2
+        hours_to_show: 24
+        hour24: true
+        more_info: false
+        show:
+          legend: false
+          extrema: true
