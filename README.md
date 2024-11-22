@@ -65,11 +65,11 @@ Interested in how I track custom component installs? See my [ha-active-installat
 
 I've made a few [custom_scripts](custom_scripts/) to control devices at my home.
 
-| Script                                                  | Summary                                                             |
-| ------------------------------------------------------- | ------------------------------------------------------------------- |
-| [carwashplus.py](custom_scripts/carwashplus.py)         | Scraper script to get data from Carwash Plus                        |
-| [leeghwaterbad.py](custom_scripts/leeghwaterbad.py)     | Scraper script to get data from Leeghwaterbad                       |
-| [lg_sl10.py](custom_scripts/lg_sl10.py)                 | Script that can set the source and/or volume of an LG SL10 soundbar |
+| Script                                              | Summary                                                             |
+| --------------------------------------------------- | ------------------------------------------------------------------- |
+| [carwashplus.py](custom_scripts/carwashplus.py)     | Scraper script to get data from Carwash Plus                        |
+| [leeghwaterbad.py](custom_scripts/leeghwaterbad.py) | Scraper script to get data from Leeghwaterbad                       |
+| [lg_sl10.py](custom_scripts/lg_sl10.py)             | Script that can set the source and/or volume of an LG SL10 soundbar |
 
 ### Custom templates
 
