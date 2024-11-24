@@ -6,4 +6,5 @@ sensor:
       - outages
       - announcements
     resource: !secret ziggo_incidents_url
-    value_template: "{{ value_json.outages | count }}"
+    value_template: >-
+      {{ value_json.outages | count }}
