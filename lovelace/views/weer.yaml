@@ -188,6 +188,26 @@ sections:
           grid_rows: 8
 
   - type: grid
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.knmi_waarschuwing
+            state: "on"
+          - condition: state
+            entity: binary_sensor.meteoalarm
+            state: "on"
+    cards:
+      - type: heading
+        heading: KNMI waarschuwing
+        heading_style: subtitle
+      - type: picture
+        image: https://cdn.knmi.nl/knmi/map/general/waarschuwing_land_48_new.gif
+        tap_action:
+          action: url
+          url_path: https://cdn.knmi.nl/knmi/map/general/waarschuwing_land_48_new.gif
+
+  - type: grid
     cards:
       - type: heading
         heading: KNMI radar
