@@ -13,8 +13,7 @@
       attribute: percentage
       below: 26
   actions:
-    - alias: Occupancy detected, set fan speed
-      action: esphome.mechanische_ventilatie_set_speed_timer
-      data:
-        speed: 2 # 50%
-        timer: 15
+    - alias: Set fan to medium for 15 minutes
+      action: button.press
+      target:
+        entity_id: button.mechanische_ventilatie_15_minuten_medium

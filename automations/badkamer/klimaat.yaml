@@ -18,29 +18,31 @@
   actions:
     - alias: Repeat setting the fan to high, to make sure it happens
       repeat:
-        while:
-          - alias: While fan is low
-            condition: numeric_state
-            entity_id: fan.mechanische_ventilatie_ventilatie
-            attribute: percentage
-            below: 74
-          - alias: Don't do it too many times
-            condition: template
-            value_template: "{{ repeat.index <= 5 }}"
         sequence:
           - alias: Set fan to high for 30 minutes
             action: button.press
             target:
-              entity_id: button.mechanische_ventilatie_30_minuten_hoog
+              entity_id: button.mechanische_ventilatie_30_minuten_extra_hoog
           - delay:
               seconds: 10
+        until:
+          - alias: While fan is low
+            condition: numeric_state
+            entity_id: fan.mechanische_ventilatie_ventilatie
+            attribute: percentage
+            above: 74
+          - alias: Don't do it too many times
+            condition: template
+            value_template: "{{ repeat.index <= 5 }}"
 
-    - alias: Wait for occupancy to be off
+    - alias: Wait for occupancy to be off for 5 minutes
       wait_for_trigger:
         - trigger: state
           entity_id: binary_sensor.douche_beweging_occupancy
           from: "on"
           to: "off"
+          for:
+            minutes: 5
       timeout:
         minutes: 45
       continue_on_timeout: false

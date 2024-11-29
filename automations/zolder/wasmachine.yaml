@@ -19,11 +19,11 @@
   actions:
     - choose:
         - conditions:
-            # Only when the fan is set to low, we don't want to interfere with the shower automation.
+            # Only when the fan is set to low or medium, we don't want to interfere with the shower automation.
             - condition: numeric_state
               entity_id: fan.mechanische_ventilatie_ventilatie
               attribute: percentage
-              below: 26
+              below: 51
           sequence:
             - alias: Turn on fan to reduce humidity
               action: button.press

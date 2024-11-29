@@ -67,6 +67,6 @@ sections:
         name: Automatisch licht
         icon: mdi:lightbulb-auto
       - type: tile
-        entity: button.mechanische_ventilatie_15_minuten_hoog
-        name: 15 Minuten hoog
+        entity: button.mechanische_ventilatie_15_minuten_medium
+        name: 15 Minuten medium
         icon: mdi:fan
