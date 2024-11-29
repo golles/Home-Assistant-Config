@@ -411,7 +411,7 @@ sections:
           - type: entity
             show_state: false
             show_icon: true
-            entity: binary_sensor.badkamer_beweging_beweging
+            entity: binary_sensor.badkamer_sensor_beweging
             icon: mdi:motion-sensor
             color: state
           - type: entity
@@ -502,7 +502,7 @@ sections:
           - type: entity
             show_state: false
             show_icon: true
-            entity: binary_sensor.achtertuin_sensor_beweging
+            entity: binary_sensor.achtertuin_beweging
             icon: mdi:motion-sensor
             color: state
           - type: entity

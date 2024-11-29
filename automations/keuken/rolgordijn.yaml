@@ -6,7 +6,7 @@
     - trigger: time
       at: input_datetime.covers_down
     - trigger: numeric_state # For days when it turns dark early.
-      entity_id: sensor.achtertuin_sensor_licht
+      entity_id: sensor.achtertuin_sensor_1_licht
       below: 40
       for:
         minutes: 5

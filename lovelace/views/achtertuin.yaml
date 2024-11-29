@@ -63,14 +63,27 @@ sections:
   - type: grid
     cards:
       - type: heading
-        heading: Sensoren
+        heading: Sensoren huis
         heading_style: subtitle
       - type: tile
-        entity: binary_sensor.achtertuin_sensor_beweging
+        entity: binary_sensor.achtertuin_sensor_1_beweging
         name: Beweging
         icon: mdi:motion-sensor
       - type: tile
-        entity: sensor.achtertuin_sensor_licht
+        entity: sensor.achtertuin_sensor_1_licht
+        name: Lichtsterkte
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Sensoren poort
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.achtertuin_sensor_2_beweging
+        name: Beweging
+        icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.achtertuin_sensor_2_licht
         name: Lichtsterkte
 
   - type: grid

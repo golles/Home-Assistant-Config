@@ -48,7 +48,7 @@ template:
         icon: mdi:motion-sensor
         state: >
           {{
-            is_state("binary_sensor.badkamer_beweging_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
+            is_state("binary_sensor.badkamer_sensor_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
           }}
 
       - name: Badkamer beweging
@@ -56,7 +56,7 @@ template:
         icon: mdi:motion-sensor
         state: >
           {{
-            is_state("binary_sensor.badkamer_beweging_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
+            is_state("binary_sensor.badkamer_sensor_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
           }}
 
       - name: Zolder beweging
@@ -73,6 +73,14 @@ template:
         state: >
           {{
             is_state("binary_sensor.overloop_sensor_1_beweging", "on") or is_state("binary_sensor.overloop_sensor_1_beweging", "on")
+          }}
+
+      - name: Achtertuin beweging
+        device_class: motion
+        icon: mdi:motion-sensor
+        state: >
+          {{
+            is_state("binary_sensor.achtertuin_sensor_1_beweging", "on") or is_state("binary_sensor.achtertuin_sensor_2_beweging", "on")
           }}
 
       - name: Woonkamer bezetting

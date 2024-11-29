@@ -5,7 +5,7 @@
   triggers:
     - trigger: numeric_state
       id: xmas_on
-      entity_id: sensor.achtertuin_sensor_licht
+      entity_id: sensor.achtertuin_sensor_1_licht
       below: 60
       for:
         minutes: 5
@@ -43,12 +43,12 @@
       from: "off"
       to: "on"
     - trigger: state
-      entity_id: binary_sensor.achtertuin_sensor_beweging
+      entity_id: binary_sensor.achtertuin_beweging
       from: "off"
       to: "on"
   conditions:
     - condition: numeric_state
-      entity_id: sensor.achtertuin_sensor_licht
+      entity_id: sensor.achtertuin_sensor_1_licht
       below: 10
   actions:
     - alias: Lights on

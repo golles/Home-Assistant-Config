@@ -3,7 +3,7 @@
   mode: single
   triggers:
     - trigger: state
-      entity_id: binary_sensor.zoldertrap_beweging_beweging
+      entity_id: binary_sensor.zoldertrap_sensor_beweging
       to: "on"
   conditions:
     condition: and

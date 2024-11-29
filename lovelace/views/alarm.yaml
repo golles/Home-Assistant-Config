@@ -70,11 +70,11 @@ sections:
           # Eerste verdieping.
           - binary_sensor.overloop_sensor_2_beweging
           - binary_sensor.kledingkamer_beweging_occupancy
-          - binary_sensor.badkamer_beweging_beweging
+          - binary_sensor.badkamer_sensor_beweging
           - binary_sensor.logeerkamer_beweging_occupancy
           - binary_sensor.slaapkamer_beweging_occupancy
           # Tweede verdieping.
-          - binary_sensor.zoldertrap_beweging_beweging
+          - binary_sensor.zoldertrap_sensor_beweging
           - binary_sensor.zolder_beweging_1_occupancy
           - binary_sensor.zolder_beweging_2_occupancy
         hours_to_show: 3
@@ -180,7 +180,7 @@ sections:
               state: "on"
               options:
                 type: tile
-            - entity_id: binary_sensor.badkamer_beweging_beweging
+            - entity_id: binary_sensor.badkamer_sensor_beweging
               state: "on"
               options:
                 type: tile
@@ -193,7 +193,7 @@ sections:
               options:
                 type: tile
             # Tweede verdieping.
-            - entity_id: binary_sensor.zoldertrap_beweging_beweging
+            - entity_id: binary_sensor.zoldertrap_sensor_beweging
               state: "on"
               options:
                 type: tile

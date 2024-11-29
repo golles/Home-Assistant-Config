@@ -57,7 +57,7 @@ sections:
         heading: Sensoren
         heading_style: subtitle
       - type: tile
-        entity: binary_sensor.badkamer_beweging_beweging
+        entity: binary_sensor.badkamer_sensor_beweging
         name: Beweging
         icon: mdi:motion-sensor
       - type: tile
@@ -67,7 +67,7 @@ sections:
         entity: sensor.badkamer_luchtvochtigheid
         name: Luchtvochtigheid
       - type: tile
-        entity: sensor.badkamer_beweging_licht
+        entity: sensor.badkamer_sensor_licht
         name: Lichtsterkte
       - type: tile
         entity: sensor.tandenborstel_battery
