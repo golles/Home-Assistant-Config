@@ -43,22 +43,6 @@ sections:
   - type: grid
     cards:
       - type: heading
-        heading: Sensoren boven
-        heading_style: subtitle
-      - type: tile
-        entity: binary_sensor.overloop_sensor_2_beweging
-        name: Beweging
-        icon: mdi:motion-sensor
-      - type: tile
-        entity: sensor.overloop_sensor_2_temperatuur
-        name: Temperatuur
-      - type: tile
-        entity: sensor.overloop_sensor_2_licht
-        name: Lichtsterkte
-
-  - type: grid
-    cards:
-      - type: heading
         heading: Sensoren beneden
         heading_style: subtitle
       - type: tile
@@ -70,4 +54,20 @@ sections:
         name: Temperatuur
       - type: tile
         entity: sensor.overloop_sensor_1_licht
+        name: Lichtsterkte
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Sensoren boven
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.overloop_sensor_2_beweging
+        name: Beweging
+        icon: mdi:motion-sensor
+      - type: tile
+        entity: sensor.overloop_sensor_2_temperatuur
+        name: Temperatuur
+      - type: tile
+        entity: sensor.overloop_sensor_2_licht
         name: Lichtsterkte
