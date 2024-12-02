@@ -10,6 +10,7 @@ template:
               "sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_setting_powerstate"
             )
           }}
+        unit_of_measurement: minuten
 
       - name: Vaatwasser resterende minuten
         icon: mdi:clock
@@ -21,6 +22,7 @@ template:
               "sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate"
             )
           }}
+        unit_of_measurement: minuten
 
       - name: Oven resterende minuten
         icon: mdi:clock
@@ -32,6 +34,7 @@ template:
               "sensor.384090532720002735_001_bsh_common_setting_powerstate"
             )
           }}
+        unit_of_measurement: minuten
 
       - name: Wasmachine status
         icon: mdi:washing-machine
@@ -41,7 +44,8 @@ template:
           {% elif is_state("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_doorstate", "on") -%}
             Deur open
           {% elif is_state("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate", "Loopt") -%}
-            {{ states("sensor.wasmachine_resterende_minuten") }}
+            {% set minuten = states("sensor.wasmachine_resterende_minuten") %}
+            {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
           {% elif is_state("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_remotecontrolstartallowed", "on") -%}
             Uitgestelde start
           {%- else -%}
@@ -85,7 +89,8 @@ template:
           {% elif is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_doorstate", "on") -%}
             Deur open
           {% elif is_state("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate", "Loopt") -%}
-            {{ states("sensor.vaatwasser_resterende_minuten") }}
+            {% set minuten = states("sensor.vaatwasser_resterende_minuten") %}
+            {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
           {% elif is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_remotecontrolstartallowed", "on") -%}
             Uitgestelde start
           {% elif is_state("switch.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate", "off") -%}
@@ -134,7 +139,8 @@ template:
             {% if is_state("sensor.oven_resterende_minuten", "unavailable") -%}
               {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
             {%- else -%}
-              {{ states("sensor.oven_resterende_minuten") }}
+              {% set minuten = states("sensor.oven_resterende_minuten") %}
+              {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
             {%- endif %}
           {% elif states("sensor.384090532720002735_001_bsh_common_setting_powerstate") != "Aan" -%}
             off

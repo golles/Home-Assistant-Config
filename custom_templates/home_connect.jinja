@@ -6,26 +6,19 @@ Params:
   powerstate_sensor: the power switch from the integration.
 
 Returns:
-  When the powerstate_sensor evaluates falsy the result will be `unavailable`.
-  When the time is not computable, it will also result in `unavailable`.
-  Else it will return `x minuten`, `1 minuut` or `klaar`
+  - When the powerstate_sensor evaluates falsy or the time is not computable, it will return `-1`.
+  - Otherwise, it returns the remaining time in minutes as an integer.
 #}
 {% macro remaining_time(remaining_program_time_sensor, powerstate_sensor) %}
 {% if states(powerstate_sensor) | lower in ["unknown", "unavailable", "off", "uit"] %}
-  unavailable
+  -1
 {%- else -%}
   {% set end_time = states(remaining_program_time_sensor) %}
   {% if end_time in ["unknown", "unavailable"] %}
-    unavailable
+    -1
   {% else %}
     {% set minutes = ((as_timestamp(end_time) - as_timestamp(now())) / 60) | int %}
-    {%- if minutes <= 0 -%}
-      Klaar
-    {%- elif minutes == 1 -%}
-      1 minuut
-    {%- else -%}
-      {{ minutes }} minuten
-    {%- endif -%}
+    {{ minutes if minutes > 0 else 0 }}
   {% endif %}
 {% endif %}
 {% endmacro %}

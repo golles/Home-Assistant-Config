@@ -10,6 +10,7 @@ blueprint:
       - Display informative apps, including:
         - Real-time room temperature.
         - External temperature with weather-dependent icons.
+        - Appliance remaining time.
 
     ### Weather Icons
     Get a variety of weather icons on your clock by running my [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/scripts/awtrix) script.
@@ -172,10 +173,11 @@ actions:
             data:
               topic: "{{ topic }}/custom/dishwasher"
               payload: >-
-                {% if states(dishwasher_entity) not in ["unknown", "unavailable"] %}
+                {% set minutes = states(dishwasher_entity) %}
+                {% if minutes not in ["-1", "unknown", "unavailable"] %}
                   {{
                     dict(
-                      text = states(dishwasher_entity) | replace("minuten", ""),
+                      text = iif(minutes == "0", "Klaar", minutes),
                       icon = "dishwasher",
                     )
                   }}
@@ -186,10 +188,11 @@ actions:
             data:
               topic: "{{ topic }}/custom/washing_machine"
               payload: >-
-                {% if states(washing_machine_entity) not in ["unknown", "unavailable"] %}
+                {% set minutes = states(washing_machine_entity) %}
+                {% if minutes not in ["-1", "unknown", "unavailable"] %}
                   {{
                     dict(
-                      text = states(washing_machine_entity) | replace("minuten", ""),
+                      text = iif(minutes == "0", "Klaar", minutes),
                       icon = "washing_machine",
                     )
                   }}
