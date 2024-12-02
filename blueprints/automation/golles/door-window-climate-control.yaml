@@ -1,27 +1,34 @@
 blueprint:
-  name: Door/window based climate control
+  name: Door or Window Climate Control Automation
   description: |
-    This blueprint will set the hvac mode of a climate entity based on the state of a door or window (or any other binary_sensor).
-    When it's open (binary_sensor on) hvac mode is set to off.
-    When it's close (binary_sensor off) hvac mode is set to auto.
+    Automate HVAC control based on the state of doors or windows (or other binary sensors).
+    - When a door/window is **open** (binary_sensor is `on`), the HVAC mode is set to **off**.
+    - When a door/window is **closed** (binary_sensor is `off`), the HVAC mode is set to **auto**.
+
+    You can specify a delay to prevent the HVAC from turning off immediately when the door/window is briefly opened.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/door-window-climate-control.yaml
   input:
     door_entity:
-      name: Door/window entity
-      description: or any other binary_sensor.
+      name: Door/Window Sensor
+      description: Select a binary sensor for a door, window, or similar entity.
       selector:
         entity:
-          domain: binary_sensor
+          filter:
+            - domain: binary_sensor
+              device_class: door
+            - domain: binary_sensor
+              device_class: window
     climate_entity:
-      name: Climate entity
+      name: Climate Device
+      description: Select the climate entity to control.
       selector:
         entity:
           domain: climate
     turn_off_delay:
-      name: Turn off delay
-      description: Time to wait before turning off, eg. don't turn off when the door/window is open for a few seconds.
+      name: Delay Before Turning Off
+      description: Time (in seconds) to wait before turning off the HVAC when the door/window is opened.
       default: 120
       selector:
         number:
@@ -49,17 +56,17 @@ actions:
             entity_id: !input door_entity
             state: "on"
         sequence:
-          - alias: Door or window opened, now wait.
+          - alias: Wait before turning off climate.
             delay: !input turn_off_delay
 
-          - alias: Turn off climate.
+          - alias: Set climate to off.
             action: climate.set_hvac_mode
             entity_id: !input climate_entity
             data:
               hvac_mode: "off"
 
     default:
-      - alias: Turn on climate.
+      - alias: Set climate to auto.
         action: climate.set_hvac_mode
         entity_id: !input climate_entity
         data:

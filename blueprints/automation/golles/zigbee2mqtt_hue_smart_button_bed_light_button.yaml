@@ -1,74 +1,83 @@
 blueprint:
   name: Zigbee2MQTT - Hue smart button - press and hold actions for a bed light button
   description: |
-    This button blueprint allows you to setup automatic for a bed light button, clicking the button will turn on/off
-    the bed led, holding the button will turn on/off the ceiling light.
-    This automation does require to setup light profiles, a light profile contains the color (in xy), birghtness
-    and a transition time. This makes the automation much simpler plus it allows you to maintain these states in a
-    general place. For more information about light profiles, you could check the documentation
-    https://www.home-assistant.io/integrations/light/
-    This automation should work with any lights, but only with Philips Hue smart button connected throught Zigbee2MQTT.
+    Automate actions for a Philips Hue smart button connected via Zigbee2MQTT to control bedside and ceiling lights.
+    - **Single Press:** Toggles the bedside light on or off.
+    - **Hold:** Toggles the ceiling light on or off.
+
+    This automation uses light profiles for color, brightness, and transition settings. To simplify configuration and centralize light state management, set up light profiles. Learn more in the [Home Assistant Light Profile documentation](https://www.home-assistant.io/integrations/light/).
+
+    **Note:** Works exclusively with the Philips Hue smart button (8718699693985) integrated via Zigbee2MQTT.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/zigbee2mqtt_hue_smart_button_bed_light_button.yaml
   input:
     smart_button:
-      name: Smart button
-      description: Hue smart button to use (pick the sensor that end with _action).
+      name: Hue Smart Button Device
+      description: The Hue smart button device connected via Zigbee2MQTT.
       selector:
-        entity:
+        device:
           integration: mqtt
-          domain: sensor
+          manufacturer: Philips
+          model: Hue smart button (8718699693985)
     light_entity_bed:
-      name: Night stand light
+      name: Bedside Light
+      description: The light entity for the bedside lamp.
       selector:
         entity:
           domain: light
     light_entity_ceiling:
-      name: Ceiling light
+      name: Ceiling Light
+      description: The light entity for the ceiling lamp.
       selector:
         entity:
           domain: light
     day_start_time:
-      name: Day start time
-      description: From this time the day profile will be used to switch on the light.
+      name: Start Time for Day Profile
+      description: The time after which the day profile will be used for lighting.
       default: "08:00"
       selector:
         time:
     day_end_time:
-      name: Day end time
-      description: Till this time the day profile will be used to switch on the light.
+      name: End Time for Day Profile
+      description: The time before which the day profile will be used for lighting.
       default: "23:00"
       selector:
         time:
     day_profile:
-      name: Day time profile name
-      description: The default is reading.
+      name: Daytime Light Profile
+      description: Light profile to use during the day. Defaults to "reading."
       default: reading
     night_profile:
-      name: Night time profile name
-      description: The default is energize.
+      name: Nighttime Light Profile
+      description: Light profile to use at night. Defaults to "energize."
       default: energize
 
 mode: single
 max_exceeded: silent
 
 triggers:
-  trigger: state
-  entity_id: !input smart_button
-  to:
-    - "on"
-    - "off"
-    - "hold"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: "on"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: "off"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: hold
 
 actions:
-  - variables:
-      to_state: "{{ trigger.to_state.state }}"
-
   - choose:
       # Button is being pressed.
       - conditions:
-          - "{{ to_state in ['on', 'off'] }}"
+          - "{{ trigger.payload in ['on', 'off'] }}"
         sequence:
           - choose:
               - conditions:
@@ -97,7 +106,7 @@ actions:
 
       # Button is being hold.
       - conditions:
-          - "{{ to_state == 'hold' }}"
+          - "{{ trigger.payload == 'hold' }}"
         sequence:
           - choose:
               - conditions:

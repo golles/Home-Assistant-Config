@@ -3,8 +3,7 @@
   use_blueprint:
     path: golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
     input:
-      hold_cooldown: "3"
-      smart_button: sensor.master_switch_action
+      smart_button: b3bc5b7c5959416cb5cc4e9d556b39ff
       press_action:
         - action: script.everything_off
           data:

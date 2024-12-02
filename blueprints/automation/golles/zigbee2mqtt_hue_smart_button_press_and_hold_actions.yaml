@@ -1,34 +1,38 @@
 blueprint:
   name: Zigbee2MQTT - Hue smart button - press and hold actions
   description: |
-    This blueprint allows you to make automations based on the Hue smart button, connected to Zigbee2MQTT.
-    Actions can be set up for single press and hold, hold you can configure with a cooldown, to prevent your actions from running on every single hold action.
+    Automate actions for the Philips Hue smart button connected via Zigbee2MQTT.
+    - **Press Action:** Trigger a predefined action on a single button press.
+    - **Hold Action:** Trigger a separate action on button hold, with a configurable delay to manage repeated triggers.
+
+    This blueprint allows you to create flexible automations with delay to prevent excessive triggering on hold actions.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
   input:
     smart_button:
-      name: Smart button
-      description: Hue smart button to use (pick the sensor that end with _action).
+      name: Hue Smart Button Device
+      description: The Hue smart button device connected via Zigbee2MQTT.
       selector:
-        entity:
+        device:
           integration: mqtt
-          domain: sensor
+          manufacturer: Philips
+          model: Hue smart button (8718699693985)
     press_action:
-      name: Press
-      description: Action to run on button press.
+      name: Action on Press
+      description: The action to execute when the button is pressed.
       default: []
       selector:
         action:
     hold_action:
-      name: Hold
-      description: Action to run on button hold.
+      name: Action on Hold
+      description: The action to execute when the button is held down.
       default: []
       selector:
         action:
-    hold_cooldown:
-      name: Hold cool down
-      description: Prevent this automation from being ran more often than only once while in this cool down.
+    hold_delay:
+      name: Hold Action delay
+      description: The delay in seconds before the hold action can be triggered again.
       default: 3
       selector:
         number:
@@ -40,30 +44,36 @@ mode: single
 max_exceeded: silent
 
 triggers:
-  trigger: state
-  entity_id: !input smart_button
-  to:
-    - "on"
-    - "off"
-    - "hold"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: "on"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: "off"
+  - trigger: device
+    domain: mqtt
+    device_id: !input smart_button
+    type: action
+    subtype: hold
 
 actions:
-  - variables:
-      to_state: "{{ trigger.to_state.state }}"
-
   - choose:
       # Button is being pressed.
       - conditions:
-          - "{{ to_state in ['on', 'off'] }}"
+          - "{{ trigger.payload in ['on', 'off'] }}"
         sequence: !input press_action
 
       # Button is being hold.
       - conditions:
-          - "{{ to_state == 'hold' }}"
+          - "{{ trigger.payload == 'hold' }}"
         sequence:
           - choose:
               - conditions:
                   - "{{ true }}"
                 sequence: !input hold_action
           - delay:
-              seconds: !input hold_cooldown
+              seconds: !input hold_delay

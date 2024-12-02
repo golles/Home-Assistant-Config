@@ -1,22 +1,22 @@
 blueprint:
-  name: Awtrix clock
+  name: Awtrix Clock Control and Display Automation
   description: |
     ### Overview
 
-    This blueprint offers comprehensive control for Awtrix clocks, boasting the following functionalities:
+    This blueprint provides automated control for an Awtrix clock, offering the following features:
 
-      - Automatically toggle the display based on room occupancy.
-      - Convenient manual display control via a button.
-      - Display informative apps, including:
-        - Real-time room temperature.
-        - External temperature with weather-dependent icons.
-        - Appliance remaining time.
+      - Automatically toggles the display based on room occupancy.
+      - Manual control of the display via a button.
+      - Displays real-time data, including:
+        - Current room temperature.
+        - Outdoor temperature with appropriate weather icons.
+        - Remaining time for appliances such as dishwasher and washing machine.
 
-    ### Weather Icons
-    Get a variety of weather icons on your clock by running my [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/scripts/awtrix) script.
+    ### Weather Icons Integration
+    Display dynamic weather icons on your Awtrix clock by using the [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/scripts/awtrix) script.
 
-    ### Extra scripts
-    A variety of extra scripts can be found in my [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/packages/awtrix.yaml) package.
+    ### Additional Scripts and Configuration
+    Explore extra configurations and scripts for enhanced functionality in the [awtrix](https://github.com/golles/Home-Assistant-Config/blob/main/packages/awtrix.yaml) package.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/awtrix_clock.yaml
@@ -25,7 +25,7 @@ blueprint:
       selector:
         text: null
       name: Topic
-      description: The device mqtt topic
+      description: MQTT topic used for communication with the device
       default: awtrix_XXXXXX
     light_entity:
       selector:
@@ -33,7 +33,7 @@ blueprint:
           domain: light
           integration: mqtt
       name: Display entity
-      description: The device display entity
+      description: The light entity representing the display
       default: light.awtrix_matrix
     button_entity:
       selector:
@@ -41,44 +41,47 @@ blueprint:
           domain: binary_sensor
           integration: mqtt
       name: Middle button
-      description: The device middle button, to toggle the screen
+      description: Button to manually toggle the display
       default: binary_sensor.awtrix_button_select
     temp_entity:
       selector:
         entity:
           domain: sensor
           device_class: temperature
-      name: Temperature entity
-      description: Used for inside temperature
+      name: Temperature sensor
+      description: Sensor for indoor temperature
       default: sensor.room_temperature
     weather_entity:
       selector:
         entity:
           domain: weather
-      name: Weather entity
-      description: Used for outisde temperature
+      name: Weather sensor
+      description: Sensor for outdoor temperature and weather conditions
       default: weather.home
     dishwasher_entity:
       selector:
         entity:
           domain: sensor
-      name: Dishwasher remaining time entity
-      description: Used for dishwasher remaining time
+      name: Dishwasher remaining time sensor
+      description: Sensor showing the remaining time for the dishwasher
       default: sensor.dishwasher_remaining_time
     washing_machine_entity:
       selector:
         entity:
           domain: sensor
-      name: Washing machine remaining time entity
-      description: Used for washing machine remaining time
+      name: Washing machine remaining time sensor
+      description: Sensor showing the remaining time for the washing machine
       default: sensor.washing_machine_remaining_time
     occupancy_entity:
       selector:
         entity:
-          domain: binary_sensor
-          device_class: occupancy
-      name: Room occupancy sensor
-      description: Turn display automatically on or off depending on occupancy
+          filter:
+            - domain: binary_sensor
+              device_class: occupancy
+            - domain: binary_sensor
+              device_class: motion
+      name: Occupancy sensor
+      description: Sensor detecting room occupancy to manage display
       default: binary_sensor.room_occupancy
 
 mode: parallel

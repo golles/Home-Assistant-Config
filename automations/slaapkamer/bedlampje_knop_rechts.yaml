@@ -5,7 +5,7 @@
     input:
       day_end_time: 00:00:00
       day_start_time: 08:00:00
-      smart_button: sensor.bedlampje_knop_rechts_action
+      smart_button: aedfcbec177d4991812d760d3f308b95
       light_entity_bed: light.bedlampje_rechts
       light_entity_ceiling: light.slaapkamer_plafond_groep
       night_profile: nachtlampje

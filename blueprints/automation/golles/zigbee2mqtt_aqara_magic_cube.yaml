@@ -1,196 +1,227 @@
 blueprint:
   name: Zigbee2MQTT - Aqara Magic Cube (MFKZQ01LM)
   description: |
-    This blueprint allows you to make automations for the Aqara Magic Cube, connected to Zigbee2MQTT.
+    Create automations for the Aqara Magic Cube (MFKZQ01LM) using Zigbee2MQTT.
+    Supports actions like flips, rotations, slides, taps, drops, and shakes with side-specific triggers.
 
-    Limitations (these are by design):
-    - There is just one trigger for flip to a side, separate actions for flip90 and flip180 aren't possible.
-    - For fall there are no separate actions for the side, due to the nature of falling it becomes random what will happen.
-    - For shake there are no separate actions for the side, due to the nature of shaking it isn't always clear which side is up.
+    **Limitations:**
+    - Flip actions (90° or 180°) cannot be distinguished; only the final side is tracked.
+    - Falling actions do not track the side due to randomness.
+    - Shake actions do not track the side due to unclear orientation.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/zigbee2mqtt_aqara_magic_cube.yaml
   input:
-    remote:
-      name: Action entity
-      description: Aqara Magic Cube to use, entity should end with _action
+    cube:
+      name: Magic Cube Device
       selector:
-        entity:
+        device:
           integration: mqtt
-          domain: sensor
-          multiple: false
+          manufacturer: Aqara
+          model: Cube (MFKZQ01LM)
     side:
-      name: Side entity
-      description: Aqara Magic Cube to use, entity should end with _side
+      name: Cube Side Entity
+      description: Entity representing the current side of the cube (_side suffix).
       selector:
         entity:
           integration: mqtt
           domain: sensor
-          multiple: false
 
     fall:
-      name: Drop the cube
+      name: Action for Cube Drop
+      description: Actions to execute when the cube is dropped.
       default: []
       selector:
         action: {}
 
     flip_side_0:
-      name: Flip the cube to side 0
+      name: Action for Flip to Side 0
+      description: Actions to execute when the cube is flipped to side 0.
       default: []
       selector:
         action: {}
     flip_side_1:
-      name: Flip the cube to side 1
+      name: Action for Flip to Side 1
+      description: Actions to execute when the cube is flipped to side 1.
       default: []
       selector:
         action: {}
     flip_side_2:
-      name: Flip the cube to side 2
+      name: Action for Flip to Side 2
+      description: Actions to execute when the cube is flipped to side 2.
       default: []
       selector:
         action: {}
     flip_side_3:
-      name: Flip the cube to side 3
+      name: Action for Flip to Side 3
+      description: Actions to execute when the cube is flipped to side 3.
       default: []
       selector:
         action: {}
     flip_side_4:
-      name: Flip the cube to side 4
+      name: Action for Flip to Side 4
+      description: Actions to execute when the cube is flipped to side 4.
       default: []
       selector:
         action: {}
     flip_side_5:
-      name: Flip the cube to side 5
+      name: Action for Flip to Side 5
+      description: Actions to execute when the cube is flipped to side 5.
       default: []
       selector:
         action: {}
 
     rotate_left_side_0:
-      name: Rotate cube left with side 0 up
+      name: Rotate Left with Side 0 Up
+      description: Actions to execute when the cube rotates left with side 0 facing up.
       default: []
       selector:
         action: {}
     rotate_left_side_1:
-      name: Rotate cube left with side 1 up
+      name: Rotate Left with Side 1 Up
+      description: Actions to execute when the cube rotates left with side 1 facing up.
       default: []
       selector:
         action: {}
     rotate_left_side_2:
-      name: Rotate cube left with side 2 up
+      name: Rotate Left with Side 2 Up
+      description: Actions to execute when the cube rotates left with side 2 facing up.
       default: []
       selector:
         action: {}
     rotate_left_side_3:
-      name: Rotate cube left with side 3 up
+      name: Rotate Left with Side 3 Up
+      description: Actions to execute when the cube rotates left with side 3 facing up.
       default: []
       selector:
         action: {}
     rotate_left_side_4:
-      name: Rotate cube left with side 4 up
+      name: Rotate Left with Side 4 Up
+      description: Actions to execute when the cube rotates left with side 4 facing up.
       default: []
       selector:
         action: {}
     rotate_left_side_5:
-      name: Rotate cube left with side 5 up
+      name: Rotate Left with Side 5 Up
+      description: Actions to execute when the cube rotates left with side 5 facing up.
       default: []
       selector:
         action: {}
 
     rotate_right_side_0:
-      name: Rotate cube right with side 0 up
+      name: Rotate Right with Side 0 Up
+      description: Actions to execute when the cube rotates right with side 0 facing up.
       default: []
       selector:
         action: {}
     rotate_right_side_1:
-      name: Rotate cube right with side 1 up
+      name: Rotate Right with Side 1 Up
+      description: Actions to execute when the cube rotates right with side 1 facing up.
       default: []
       selector:
         action: {}
     rotate_right_side_2:
-      name: Rotate cube right with side 2 up
+      name: Rotate Right with Side 2 Up
+      description: Actions to execute when the cube rotates right with side 2 facing up.
       default: []
       selector:
         action: {}
     rotate_right_side_3:
-      name: Rotate cube right with side 3 up
+      name: Rotate Right with Side 3 Up
+      description: Actions to execute when the cube rotates right with side 3 facing up.
       default: []
       selector:
         action: {}
     rotate_right_side_4:
-      name: Rotate cube right with side 4 up
+      name: Rotate Right with Side 4 Up
+      description: Actions to execute when the cube rotates right with side 4 facing up.
       default: []
       selector:
         action: {}
     rotate_right_side_5:
-      name: Rotate cube right with side 5 up
+      name: Rotate Right with Side 5 Up
+      description: Actions to execute when the cube rotates right with side 5 facing up.
       default: []
       selector:
         action: {}
 
     shake:
-      name: Shake the cube
+      name: Shake Action
+      description: Actions to execute when the cube is shaken.
       default: []
       selector:
         action: {}
 
     slide_side_0:
-      name: Slide the cube with side 0 up
+      name: Slide with Side 0 Up
+      description: Actions to execute when the cube slides with side 0 facing up.
       default: []
       selector:
         action: {}
     slide_side_1:
-      name: Slide the cube with side 1 up
+      name: Slide with Side 1 Up
+      description: Actions to execute when the cube slides with side 1 facing up.
       default: []
       selector:
         action: {}
     slide_side_2:
-      name: Slide the cube with side 2 up
+      name: Slide with Side 2 Up
+      description: Actions to execute when the cube slides with side 2 facing up.
       default: []
       selector:
         action: {}
     slide_side_3:
-      name: Slide the cube with side 3 up
+      name: Slide with Side 3 Up
+      description: Actions to execute when the cube slides with side 3 facing up.
       default: []
       selector:
         action: {}
     slide_side_4:
-      name: Slide the cube with side 4 up
+      name: Slide with Side 4 Up
+      description: Actions to execute when the cube slides with side 4 facing up.
       default: []
       selector:
         action: {}
     slide_side_5:
-      name: Slide the cube with side 5 up
+      name: Slide with Side 5 Up
+      description: Actions to execute when the cube slides with side 5 facing up.
       default: []
       selector:
         action: {}
 
     tap_side_0:
-      name: Tap the cube with side 0 up
+      name: Tap with Side 0 Up
+      description: Actions to execute when the cube is tapped with side 0 facing up.
       default: []
       selector:
         action: {}
     tap_side_1:
-      name: Tap the cube with side 1 up
+      name: Tap with Side 1 Up
+      description: Actions to execute when the cube is tapped with side 1 facing up.
       default: []
       selector:
         action: {}
     tap_side_2:
-      name: Tap the cube with side 2 up
+      name: Tap with Side 2 Up
+      description: Actions to execute when the cube is tapped with side 2 facing up.
       default: []
       selector:
         action: {}
     tap_side_3:
-      name: Tap the cube with side 3 up
+      name: Tap with Side 3 Up
+      description: Actions to execute when the cube is tapped with side 3 facing up.
       default: []
       selector:
         action: {}
     tap_side_4:
-      name: Tap the cube with side 4 up
+      name: Tap with Side 4 Up
+      description: Actions to execute when the cube is tapped with side 4 facing up.
       default: []
       selector:
         action: {}
     tap_side_5:
-      name: Tap the cube with side 5 up
+      name: Tap with Side 5 Up
+      description: Actions to execute when the cube is tapped with side 5 facing up.
       default: []
       selector:
         action: {}
@@ -200,31 +231,60 @@ max: 5
 max_exceeded: silent
 
 triggers:
-  - trigger: state
-    entity_id: !input remote
-    to:
-      - "fall"
-      - "flip180"
-      - "flip90"
-      - "rotate_left"
-      - "rotate_right"
-      - "shake"
-      - "slide"
-      - "tap"
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: fall
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: flip180
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: flip90
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: rotate_left
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: rotate_right
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: shake
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: slide
+  - trigger: device
+    domain: mqtt
+    device_id: !input cube
+    type: action
+    subtype: tap
 
 actions:
   - variables:
-      event: "{{ trigger.to_state.state }}"
+      payload: "{{ trigger.payload }}"
       side_entity: !input side
       side: "{{ states(side_entity) }}"
 
   - choose:
       - conditions: >-
-          {{ event == "fall" }}
+          {{ payload == "fall" }}
         sequence: !input fall
 
       - conditions: >-
-          {{ event == "flip180" or event == "flip90" }}
+          {{ payload == "flip180" or payload == "flip90" }}
         sequence:
           - choose:
               - conditions: "{{ side == 0 }}"
@@ -241,7 +301,7 @@ actions:
                 sequence: !input flip_side_5
 
       - conditions: >-
-          {{ event == "rotate_left" }}
+          {{ payload == "rotate_left" }}
         sequence:
           - choose:
               - conditions: "{{ side == 0 }}"
@@ -258,7 +318,7 @@ actions:
                 sequence: !input rotate_left_side_5
 
       - conditions: >-
-          {{ event == "rotate_right" }}
+          {{ payload == "rotate_right" }}
         sequence:
           - choose:
               - conditions: "{{ side == 0 }}"
@@ -275,11 +335,11 @@ actions:
                 sequence: !input rotate_right_side_5
 
       - conditions: >-
-          {{ event == "shake" }}
+          {{ payload == "shake" }}
         sequence: !input shake
 
       - conditions: >-
-          {{ event == "slide" }}
+          {{ payload == "slide" }}
         sequence:
           - choose:
               - conditions: "{{ side == 0 }}"
@@ -296,7 +356,7 @@ actions:
                 sequence: !input slide_side_5
 
       - conditions: >-
-          {{ event == "tap" }}
+          {{ payload == "tap" }}
         sequence:
           - choose:
               - conditions: "{{ side == 0 }}"

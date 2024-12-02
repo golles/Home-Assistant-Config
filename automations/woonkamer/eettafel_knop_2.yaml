@@ -5,8 +5,8 @@
   use_blueprint:
     path: golles/zigbee2mqtt_hue_smart_button_press_and_hold_actions.yaml
     input:
-      hold_cooldown: "1"
-      smart_button: sensor.eettafelknop_2_action
+      hold_delay: "1"
+      smart_button: ae4c6384c61e4d718d3f45449269ffc0
       press_action:
         - action: switch.toggle
           entity_id: switch.eettafellamp

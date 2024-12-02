@@ -3,7 +3,7 @@
   use_blueprint:
     path: golles/zigbee2mqtt_xiaomi_switch.yaml
     input:
-      switch: sensor.logeerkamer_knop_action
+      switch: b2ae20f92c30fce9190d686b0a8bf92b
       single:
         - if:
             - condition: state
@@ -35,10 +35,7 @@
                 entity_id: light.logeerkamer
       hold:
         - repeat:
-            until:
-              - condition: state
-                entity_id: sensor.logeerkamer_knop_action
-                state: release
+            while: "{{ True }}"
             sequence:
               - alias: Step brightness
                 action: light.turn_on

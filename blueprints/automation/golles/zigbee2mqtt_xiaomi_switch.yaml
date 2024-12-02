@@ -1,51 +1,65 @@
 blueprint:
   name: Zigbee2MQTT - Xiaomi switch (WXKG01LM and WXKG11LM))
   description: |
-    This blueprint allows you to make automations for the Xiaomi Aqara switch and Xiaomi MiJia wireless switch, connected to Zigbee2MQTT.
+    Automate actions for Xiaomi Mi Wireless Switch (WXKG01LM) and Aqara Wireless Mini Switch (WXKG11LM) connected via Zigbee2MQTT.
+    This blueprint supports multiple press patterns:
+    - **Single Press**: Trigger an action on a single press.
+    - **Double Press**: Trigger an action on a double press.
+    - **Triple Press**: Trigger an action on a triple press.
+    - **Quadruple Press**: Trigger an action on a quadruple press.
+    - **Hold**: Trigger an action when the button is held.
+    - **Release**: Trigger an action when the button is released.
+
+    Configure distinct actions for each press type and create versatile automations for your switch.
   domain: automation
   author: golles
   source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/zigbee2mqtt_xiaomi_switch.yaml
   input:
     switch:
-      name: Switch
-      description: Switch to use (pick the sensor that ends with _action).
+      name: Xiaomi/Aqara Wireless Switch
+      description: Select the switch connected via Zigbee2MQTT.
       selector:
-        entity:
-          integration: mqtt
-          domain: sensor
+        device:
+          filter:
+            - integration: mqtt
+              manufacturer: Xiaomi
+              model: Mi wireless switch (WXKG01LM)
+            - integration: mqtt
+              manufacturer: Aqara
+              model: Wireless mini switch (WXKG11LM)
     single:
-      name: Single press action(s)
-      description: Action to run on single press
+      name: Action for Single Press
+      description: The action to execute on a single press.
       default: []
       selector:
         action: {}
     double:
-      name: Double press action(s)
-      description: Action to run on double press
+      name: Action for Double Press
+      description: The action to execute on a double press.
       default: []
       selector:
         action: {}
     triple:
-      name: Triple press action(s)
-      description: Action to run on triple press
+      name: Action for Triple Press
+      description: The action to execute on a triple press.
       default: []
       selector:
         action: {}
     quadruple:
-      name: Quadruple press action(s)
-      description: Action to run on quadruple press
+      name: Action for Quadruple Press
+      description: The action to execute on a quadruple press.
       default: []
       selector:
         action: {}
     hold:
-      name: Hold action(s)
-      description: Action to run on hold
+      name: Action for Hold
+      description: The action to execute when the button is held.
       default: []
       selector:
         action: {}
     release:
-      name: Release action(s)
-      description: Action to run on release
+      name: Action for Release
+      description: The action to execute when the button is released.
       default: []
       selector:
         action: {}
@@ -54,35 +68,53 @@ mode: restart
 max_exceeded: silent
 
 triggers:
-  - trigger: state
-    entity_id: !input switch
-    to:
-      - "single"
-      - "double"
-      - "triple"
-      - "quadruple"
-      - "hold"
-      - "release"
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: single
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: double
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: triple
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: quadruple
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: hold
+  - trigger: device
+    domain: mqtt
+    device_id: !input switch
+    type: action
+    subtype: release
 
 actions:
-  - variables:
-      to_state: "{{ trigger.to_state.state }}"
-
   - choose:
-      - conditions: "{{ to_state == 'single' }}"
+      - conditions: "{{ trigger.payload == 'single' }}"
         sequence: !input single
 
-      - conditions: "{{ to_state == 'double' }}"
+      - conditions: "{{ trigger.payload == 'double' }}"
         sequence: !input double
 
-      - conditions: "{{ to_state == 'triple' }}"
+      - conditions: "{{ trigger.payload == 'triple' }}"
         sequence: !input triple
 
-      - conditions: "{{ to_state == 'quadruple' }}"
+      - conditions: "{{ trigger.payload == 'quadruple' }}"
         sequence: !input quadruple
 
-      - conditions: "{{ to_state == 'hold' }}"
+      - conditions: "{{ trigger.payload == 'hold' }}"
         sequence: !input hold
 
-      - conditions: "{{ to_state == 'release' }}"
+      - conditions: "{{ trigger.payload == 'release' }}"
         sequence: !input release
