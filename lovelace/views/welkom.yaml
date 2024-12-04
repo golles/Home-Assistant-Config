@@ -487,6 +487,9 @@ sections:
             color: state
       - type: tile
         entity: light.voortuin
+      - type: tile
+        entity: camera.deurbel
+        show_entity_picture: true
 
   # Achtertuin
   - type: grid
