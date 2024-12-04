@@ -1,4 +1,4 @@
-- id: trapkast_light_bsaed_on_door
+- id: trapkast_light_based_on_door
   alias: trapkast verlichting automatisch aan en uit
   mode: restart
   max_exceeded: silent
@@ -27,3 +27,15 @@
       default:
         - action: light.turn_off
           entity_id: light.trapkastlamp
+
+- id: trapkast_knop
+  alias: Trapkast knop
+  use_blueprint:
+    path: golles/zigbee2mqtt_xiaomi_switch.yaml
+    input:
+      switch: d6a97e023579c72e49cbdd8f5391df8b
+      single:
+        - alias: Toggle light
+          action: light.toggle
+          target:
+            entity_id: light.trapkastlamp
