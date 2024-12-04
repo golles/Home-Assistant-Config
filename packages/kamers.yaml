@@ -51,14 +51,6 @@ template:
             is_state("binary_sensor.badkamer_sensor_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
           }}
 
-      - name: Badkamer beweging
-        device_class: motion
-        icon: mdi:motion-sensor
-        state: >
-          {{
-            is_state("binary_sensor.badkamer_sensor_beweging", "on") or is_state("binary_sensor.douche_beweging_occupancy", "on")
-          }}
-
       - name: Zolder beweging
         device_class: motion
         icon: mdi:motion-sensor
