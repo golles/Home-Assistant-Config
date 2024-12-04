@@ -31,7 +31,8 @@ sections:
         entity: light.achtertuin_groep
         name: Achtertuin
       - type: tile
-        entity: switch.gekleurde_licht
+        entity: switch.gekleurde_licht_plug
+        name: Gekleurde licht
         icon: mdi:led-strip-variant
 
   - type: grid

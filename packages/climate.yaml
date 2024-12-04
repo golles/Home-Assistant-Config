@@ -40,7 +40,7 @@ homeassistant:
 climate:
   - platform: generic_thermostat
     name: Elektrische kachel
-    heater: switch.elektrische_kachel
+    heater: switch.elektrische_kachel_plug
     target_sensor: sensor.logeerkamer_temperatuur
     min_temp: 5
     max_temp: 25

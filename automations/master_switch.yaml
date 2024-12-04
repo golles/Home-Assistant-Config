@@ -11,4 +11,4 @@
               - light.hal_lamp
               - light.voortuin
               - light.voortuin_lamp
-              - switch.gekleurde_licht
+              - switch.gekleurde_licht_plug
