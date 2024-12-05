@@ -16,24 +16,11 @@
       from: "off"
       to: "on"
   actions:
-    - alias: Repeat setting the fan to high, to make sure it happens
-      repeat:
-        sequence:
-          - alias: Set fan to high for 30 minutes
-            action: button.press
-            target:
-              entity_id: button.mechanische_ventilatie_30_minuten_extra_hoog
-          - delay:
-              seconds: 10
-        until:
-          - alias: While fan is low
-            condition: numeric_state
-            entity_id: fan.mechanische_ventilatie_ventilatie
-            attribute: percentage
-            above: 74
-          - alias: Don't do it too many times
-            condition: template
-            value_template: "{{ repeat.index <= 5 }}"
+    - alias: Set fan to extra high for 30 minutes
+      action: script.mechanical_ventilation_speed_timer
+      data:
+        speed: 4
+        timer: 30
 
     - alias: Wait for occupancy to be off for 5 minutes
       wait_for_trigger:
@@ -48,6 +35,7 @@
       continue_on_timeout: false
 
     - alias: Set fan to high for 15 minutes
-      action: button.press
-      target:
-        entity_id: button.mechanische_ventilatie_15_minuten_hoog
+      action: script.mechanical_ventilation_speed_timer
+      data:
+        speed: 3
+        timer: 15

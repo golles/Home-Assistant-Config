@@ -14,6 +14,7 @@
       below: 26
   actions:
     - alias: Set fan to medium for 15 minutes
-      action: button.press
-      target:
-        entity_id: button.mechanische_ventilatie_15_minuten_medium
+      action: script.mechanical_ventilation_speed_timer
+      data:
+        speed: 2
+        timer: 15

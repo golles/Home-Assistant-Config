@@ -1,0 +1,77 @@
+script:
+  mechanical_ventilation_speed_timer:
+    alias: Mechanische ventilatie snelheid en timer
+    icon: mdi:fan-clock
+    mode: restart
+    fields:
+      speed:
+        name: Speed
+        description: Set the fan speed (1=idle, 2=medium, 3=high, 4=extra high)
+        default: "2"
+        example: "2"
+        required: true
+        selector:
+          number:
+            min: 1
+            max: 4
+            mode: box
+      timer:
+        name: Timer
+        description: Set the fan speed timer
+        default: "30"
+        example: "30"
+        required: true
+        selector:
+          number:
+            min: 0
+            max: 120
+            mode: box
+            unit_of_measurement: minutes
+    sequence:
+      - alias: set variables
+        variables:
+          percentage: >
+            {{ speed * 25 }}
+
+      - alias: Repeat setting the fan, to make sure it happens
+        repeat:
+          sequence:
+            - alias: Set the fan speed and timer
+              action: esphome.mechanische_ventilatie_set_speed_timer
+              data:
+                speed: "{{ speed }}"
+                timer: "{{ timer }}"
+            - delay:
+                seconds: 10
+          until: |-
+            {{
+              is_state_attr("fan.mechanische_ventilatie_ventilatie", "percentage", percentage) or
+              repeat.index > 5
+            }}
+
+      - alias: Check if the speed is stll not set
+        if:
+          - condition: template
+            value_template: >
+              {{ not is_state_attr("fan.mechanische_ventilatie_ventilatie", "percentage", percentage) }}
+        then:
+          - alias: Restart the device
+            action: button.press
+            target:
+              entity_id: button.mechanische_ventilatie_restart
+
+          - alias: Wait for the device to become online
+            wait_for_trigger:
+              - trigger: state
+                entity_id: binary_sensor.mechanische_ventilatie_status
+                from: "off"
+                to: "on"
+            timeout:
+              minutes: 5
+            continue_on_timeout: false
+
+          - alias: Try to set the fan speed and timer one more time
+            action: esphome.mechanische_ventilatie_set_speed_timer
+            data:
+              speed: "{{ speed }}"
+              timer: "{{ timer }}"

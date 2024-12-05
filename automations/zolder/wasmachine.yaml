@@ -26,9 +26,10 @@
               below: 51
           sequence:
             - alias: Turn on fan to reduce humidity
-              action: button.press
-              target:
-                entity_id: button.mechanische_ventilatie_30_minuten_hoog
+              action: script.mechanical_ventilation_speed_timer
+              data:
+                speed: 3
+                timer: 30
     - choose:
         - conditions:
             # When the heater is in auto mode, switch the heating on.
