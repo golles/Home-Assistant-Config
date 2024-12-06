@@ -76,7 +76,7 @@ template:
             {{
               iif(
                 states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress")~"%",
+                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress") ~ "%",
                 "unavailable"
               )
             }}
@@ -123,7 +123,7 @@ template:
             {{
               iif(
                 states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress")~"%",
+                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress") ~ "%",
                 "unavailable"
               )
             }}
@@ -136,8 +136,8 @@ template:
           {% elif is_state("binary_sensor.384090532720002735_001_bsh_common_status_doorstate", "on") -%}
             Deur open
           {% elif is_state("sensor.384090532720002735_001_bsh_common_status_operationstate", "Loopt") -%}
-            {% if is_state("sensor.oven_resterende_minuten", "unavailable") -%}
-              {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
+            {% if is_state("sensor.oven_resterende_minuten", "-1") -%}
+              {{ states("sensor.384090532720002735_001_bsh_common_option_programprogress") ~ "%" }}
             {%- else -%}
               {% set minuten = states("sensor.oven_resterende_minuten") %}
               {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
@@ -172,7 +172,7 @@ template:
             {{
               iif(
                 states("sensor.384090532720002735_001_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.384090532720002735_001_bsh_common_option_programprogress")~"%",
+                states("sensor.384090532720002735_001_bsh_common_option_programprogress") ~ "%",
                 "unavailable"
               )
             }}
