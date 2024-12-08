@@ -65,6 +65,18 @@ badges:
     show_name: true
     show_state: true
     show_icon: true
+    entity: sensor.count_zigbee_unavailable
+    color: red
+    state_content: state
+    name: Zigbee
+    visibility:
+      - condition: numeric_state
+        entity: sensor.count_zigbee_unavailable
+        above: 0
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
     entity: alarm_control_panel.alarmo
     color: blue
     name: Alarm

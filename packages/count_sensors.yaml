@@ -16,6 +16,8 @@ homeassistant:
       friendly_name: Speakers aan
     sensor.count_batteries_low:
       friendly_name: Batterijen laag
+    sensor.count_zigbee_unavailable:
+      friendly_name: Zigbee niet beschikbaar
 
 template:
   - sensor:
@@ -198,7 +200,7 @@ template:
               | list
             }}
 
-      - name: Count batteries_low
+      - name: Count batteries low
         icon: mdi:battery-alert-variant-outline
         state: >-
           {{ this.attributes.low | default([], true) | count }}
@@ -235,3 +237,31 @@ template:
               | map(attribute="entity_id")
               | list
             }}
+
+      - name: Count zigbee unavailable
+        icon: mdi:zigbee
+        state: >-
+          {{ this.attributes.unavailable | default([], true) | count }}
+        unit_of_measurement: niet beschikbaar
+        attributes:
+          "unavailable": >-
+            {% set unavailable_devices =
+              states
+              | selectattr("state", "eq", "unavailable")
+              | selectattr("entity_id", "in", integration_entities("mqtt"))
+              | map(attribute="entity_id")
+              | map("device_id")
+              | reject("eq", none)
+              | reject("in", [
+                  device_id("light.kerstboom")
+              ])
+              | unique
+              | list
+            %}
+
+            {%- set devices = namespace(list=[]) -%}
+            {% for device_id in unavailable_devices %}
+              {%- set devices.list = devices.list + [device_attr(device_id, "name") ~ " (" ~ area_name(device_id) ~ ")"] -%}
+            {% endfor %}
+
+            {{ devices.list }}
