@@ -28,7 +28,7 @@
               action: mqtt.publish
               data:
                 topic: zigbee2mqtt/Kerstboom/set
-                payload_template: |-
+                payload: >-
                   {
                       "effect": {
                           "effect": "carnaval",
