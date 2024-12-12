@@ -529,7 +529,7 @@ sections:
         entity: light.achtertuin_groep
         name: Achtertuin
       - type: tile
-        entity: switch.gekleurde_licht_plug
+        entity: light.gekleurde_licht_plug
         name: Gekleurde licht
         icon: mdi:led-strip-variant
 
