@@ -64,6 +64,7 @@ template:
                 "light.voortuin_lamp",
                 "light.achtertuin_lamp_1",
                 "light.achtertuin_lamp_2",
+                "light.gekleurde_licht_plug",
               ])
               | map(attribute="entity_id")
               | list
@@ -78,6 +79,7 @@ template:
                 "light.voortuin_lamp",
                 "light.achtertuin_lamp_1",
                 "light.achtertuin_lamp_2",
+                "light.gekleurde_licht_plug",
               ])
               | map(attribute="entity_id")
               | list
