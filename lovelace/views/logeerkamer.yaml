@@ -74,6 +74,100 @@ sections:
   - type: grid
     cards:
       - type: heading
+        heading: 3D printer
+        heading_style: subtitle
+      - type: tile
+        entity: switch.3d_printer_plug
+        name: Stroom
+        vertical: true
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: tile
+        entity: light.p1s_01p00c480300533_chamber_light
+        name: Licht
+        vertical: true
+        visibility:
+          - condition: state
+            entity: sensor.p1s_01p00c480300533_print_status
+            state_not: offline
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: tile
+        entity: button.p1s_01p00c480300533_pause_printing
+        name: Pauze
+        vertical: true
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: button.p1s_01p00c480300533_pause_printing
+            state_not: unavailable
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: tile
+        entity: button.p1s_01p00c480300533_resume_printing
+        name: Hervat
+        vertical: true
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: button.p1s_01p00c480300533_resume_printing
+            state_not: unavailable
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: tile
+        entity: button.p1s_01p00c480300533_stop_printing
+        name: Stop
+        vertical: true
+        hide_state: true
+        visibility:
+          - condition: state
+            entity: button.p1s_01p00c480300533_stop_printing
+            state_not: unavailable
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: tile
+        entity: sensor.p1s_01p00c480300533_print_status
+        name: Status
+        icon: mdi:printer-3d
+      - type: tile
+        entity: select.p1s_01p00c480300533_printing_speed
+        name: Snelheid
+        visibility:
+          - condition: state
+            entity: select.p1s_01p00c480300533_printing_speed
+            state_not: unavailable
+      - type: tile
+        entity: sensor.p1s_01p00c480300533_print_progress
+        name: Voortgang
+        visibility:
+          - condition: state
+            entity: sensor.p1s_01p00c480300533_print_status
+            state: running
+      - type: tile
+        entity: sensor.p1s_01p00c480300533_remaining_time
+        name: Tijd
+        visibility:
+          - condition: state
+            entity: sensor.p1s_01p00c480300533_print_status
+            state: running
+      - type: tile
+        entity: image.p1s_01p00c480300533_cover_image
+        name: Print
+        hide_state: true
+        show_entity_picture: true
+        visibility:
+          - condition: state
+            entity: sensor.p1s_01p00c480300533_print_status
+            state: running
+
+  - type: grid
+    cards:
+      - type: heading
         heading: Deuren en ramen
         heading_style: subtitle
       - type: tile

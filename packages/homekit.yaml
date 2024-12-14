@@ -30,6 +30,7 @@ homekit:
       - sensor.particulate_matter_pm_2_5
       - sensor.toilet_klimaat_humidity
       - sensor.toilet_klimaat_temperature
+      - switch.3d_printer_plug
       - switch.adguard_home_primary_bescherming
   entity_config:
     alarm_control_panel.alarmo:
@@ -44,5 +45,7 @@ homekit:
       name: Trapkast
     light.skull:
       name: Skull
+    switch.3d_printer_plug:
+      name: 3D printer
     switch.adguard_home_primary_bescherming:
       name: Internet bescherming

@@ -103,6 +103,15 @@ cards:
         state: "on"
 
   - type: tile
+    entity: sensor.p1s_01p00c480300533_remaining_time
+    name: 3D printer
+    icon: mdi:printer-3d
+    visibility:
+      - condition: state
+        entity: binary_sensor.ui_helper_let_op_3d_printer
+        state: "on"
+
+  - type: tile
     entity: input_boolean.vacation_mode
     visibility:
       - condition: state
