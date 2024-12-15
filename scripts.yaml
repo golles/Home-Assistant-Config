@@ -7,6 +7,10 @@ everything_off:
       description: entities to exclude
       selector:
         entity:
+          filter:
+            - domain: fan
+            - domain: light
+            - domain: media_player
           multiple: true
   variables:
     exclude_ids: >

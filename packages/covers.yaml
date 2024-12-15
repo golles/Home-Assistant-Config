@@ -148,14 +148,19 @@ script:
         required: true
         selector:
           entity:
-            domain: cover
+            filter:
+              domain: cover
       window_entity:
         name: Door/window entity
         description: This should be closed (off) to make the cover close.
         required: true
         selector:
           entity:
-            domain: binary_sensor
+            filter:
+              - domain: binary_sensor
+                device_class: door
+              - domain: binary_sensor
+                device_class: window
       wait_minutes:
         name: Wait period
         description: In case the window entity is open (true) at the moment of trigger, the cover will still be closed when the window is closed within this wait period.
