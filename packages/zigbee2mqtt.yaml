@@ -1,0 +1,48 @@
+sensor:
+  - platform: rest
+    name: Zigbee2MQTT coordinator latest version
+    resource: https://api.github.com/repos/Koenkk/Z-Stack-firmware/contents/coordinator/Z-Stack_3.x.0/bin
+    headers:
+      Accept: application/vnd.github.v3+json
+    value_template: >
+      {% for item in value_json %}
+        {% if item.name.startswith("CC2652R_coordinator_") %}
+          {{ item.name.split("CC2652R_coordinator_")[1].split(".zip")[0] }}
+        {% endif %}
+      {% endfor %}
+    scan_interval: 86400
+
+template:
+  - binary_sensor:
+      - name: Zigbee2MQTT coordinator update
+        state: >
+          {{
+            not is_state("sensor.zigbee2mqtt_bridge_coordinator_version", states("sensor.zigbee2mqtt_coordinator_latest_version"))
+          }}
+        device_class: update
+        availability: >
+          {{
+            states("sensor.zigbee2mqtt_bridge_coordinator_version") not in ["unknown", "unavailable"] and
+            states("sensor.zigbee2mqtt_coordinator_latest_version") not in ["unknown", "unavailable"]
+          }}
+
+automation:
+  - id: zigbee2mqtt_coordinator_update_notification
+    alias: "Notificatie: Zigbee2MQTT coordinator versie update"
+    mode: restart
+    max_exceeded: silent
+    triggers:
+      - alias: When there is an update
+        trigger: state
+        entity_id: binary_sensor.zigbee2mqtt_coordinator_update
+        from: "off"
+        to: "on"
+    actions:
+      - alias: Send the notification
+        action: notify.telegram_sander
+        data:
+          message: |
+            *Zigbee2MQTT coordinator update*
+            Versie *{{ states("sensor.zigbee2mqtt_coordinator_latest_version") }}* is beschikbaar!
+            De huidige versie is {{ states("sensor.zigbee2mqtt_bridge_coordinator_version") }}.
+            https://github.com/Koenkk/Z-Stack-firmware/releases/latest

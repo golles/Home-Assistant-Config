@@ -1,16 +1,19 @@
 - id: notification_new_version
-  alias: "Notificatie: Nieuwe versie beschikbaar"
+  alias: "Notificatie: Home Assistant versie update"
   mode: single
   triggers:
     - trigger: state
       entity_id: binary_sensor.docker_hub_update_available
+      from: "off"
       to: "on"
       for:
         minutes: 90
   actions:
-    - action: notify.telegram_sander
+    - alias: Send the notification
+      action: notify.telegram_sander
       data:
         message: |
+          *Home Assistant update*
           Versie *{{ states("sensor.docker_hub") }}* is beschikbaar!
           De huidige versie is {{ states("sensor.current_version") }}.
           {{ state_attr("sensor.home_assistant_website", "release_notes") }}
