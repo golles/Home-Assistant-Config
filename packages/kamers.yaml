@@ -40,7 +40,7 @@ template:
           {{
             is_state("binary_sensor.epl_woonkamer_occupancy", "on") or
             is_state("binary_sensor.epl_eettafel_occupancy", "on") or
-            is_state("binary_sensor.epl_keuken_zone_2_occupancy", "on")
+            is_state("binary_sensor.epl_keuken_occupancy", "on")
           }}
 
       - name: Badkamer beweging
