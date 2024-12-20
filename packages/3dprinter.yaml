@@ -1,0 +1,76 @@
+automation:
+  - id: 3d_printer_lamp
+    alias: 3D printer lamp
+    mode: restart
+    max_exceeded: silent
+    triggers:
+      - alias: Room occupancy changes
+        trigger: state
+        entity_id: binary_sensor.logeerkamer_bezetting
+      - alias: The printer comes online
+        trigger: state
+        entity_id: binary_sensor.p1s_01p00c480300533_online
+        to: "on"
+      - alias: The printer is making a timelapse
+        trigger: state
+        entity_id: binary_sensor.p1s_01p00c480300533_recording_timelapse
+        to: "on"
+    condition:
+      - alias: The printer should be online
+        condition: state
+        entity_id: binary_sensor.p1s_01p00c480300533_online
+        state: "on"
+    actions:
+      - if:
+          - condition: or
+            conditions:
+              - alias: When the room is occupied
+                condition: state
+                entity_id: binary_sensor.logeerkamer_bezetting
+                state: "on"
+              - alias: When making a timelapse
+                condition: state
+                entity_id: binary_sensor.p1s_01p00c480300533_recording_timelapse
+                state: "on"
+        then:
+          - alias: Turn the printer chamber light on
+            action: light.turn_on
+            entity_id: light.p1s_01p00c480300533_chamber_light
+        else:
+          - alias: Wait a bit
+            delay:
+              minutes: 2
+
+          - alias: Turn the printer chamber light off
+            action: light.turn_off
+            entity_id: light.p1s_01p00c480300533_chamber_light
+
+  # The Bambulab Handy iOS app has a bug with notifications, they don't have sound or vibration so they remain unnoticed, do the notifications here as well.
+  - id: 3d_printer_notifications
+    alias: "Notificatie: 3D printer"
+    mode: restart
+    max_exceeded: silent
+    triggers:
+      - alias: When there is an error
+        trigger: state
+        entity_id: binary_sensor.p1s_01p00c480300533_print_error
+        from: "off"
+        to: "on"
+        variables:
+          message: Storing, check de printer
+      - alias: When the print finished
+        trigger: state
+        entity_id: sensor.p1s_01p00c480300533_print_status
+        from: "running"
+        to: "finish"
+        variables:
+          message: Klaar
+    actions:
+      - alias: Send the notification
+        action: notify.sander
+        data:
+          title: 3D printer
+          message: "{{ message }}"
+          data:
+            group: 3dprinter
+            url: /dashboard-kamers/logeerkamer
