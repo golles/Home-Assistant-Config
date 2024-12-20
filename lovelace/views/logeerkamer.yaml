@@ -78,62 +78,18 @@ sections:
         heading_style: subtitle
       - type: tile
         entity: switch.3d_printer_plug
-        name: Stroom
-        vertical: true
-        grid_options:
-          columns: 3
-          rows: 2
-      - type: tile
-        entity: light.p1s_01p00c480300533_chamber_light
-        name: Licht
-        vertical: true
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-        grid_options:
-          columns: 3
-          rows: 2
-      - type: tile
-        entity: button.p1s_01p00c480300533_pause_printing
-        name: Pauze
-        vertical: true
-        hide_state: true
-        visibility:
-          - condition: state
-            entity: button.p1s_01p00c480300533_pause_printing
-            state_not: unavailable
-        grid_options:
-          columns: 3
-          rows: 2
-      - type: tile
-        entity: button.p1s_01p00c480300533_resume_printing
-        name: Hervat
-        vertical: true
-        hide_state: true
-        visibility:
-          - condition: state
-            entity: button.p1s_01p00c480300533_resume_printing
-            state_not: unavailable
-        grid_options:
-          columns: 3
-          rows: 2
-      - type: tile
-        entity: button.p1s_01p00c480300533_stop_printing
-        name: Stop
-        vertical: true
-        hide_state: true
-        visibility:
-          - condition: state
-            entity: button.p1s_01p00c480300533_stop_printing
-            state_not: unavailable
-        grid_options:
-          columns: 3
-          rows: 2
+        name: 3D Printer
       - type: tile
         entity: sensor.p1s_01p00c480300533_print_status
         name: Status
         icon: mdi:printer-3d
+      - type: tile
+        entity: light.p1s_01p00c480300533_chamber_light
+        name: Licht
+        visibility:
+          - condition: state
+            entity: sensor.p1s_01p00c480300533_print_status
+            state_not: offline
       - type: tile
         entity: select.p1s_01p00c480300533_printing_speed
         name: Snelheid
@@ -155,11 +111,12 @@ sections:
           - condition: state
             entity: sensor.p1s_01p00c480300533_print_status
             state: running
-      - type: tile
-        entity: image.p1s_01p00c480300533_cover_image
-        name: Print
-        hide_state: true
-        show_entity_picture: true
+      - type: picture-glance
+        image_entity: image.p1s_01p00c480300533_cover_image
+        entities:
+          - entity: button.p1s_01p00c480300533_resume_printing
+          - entity: button.p1s_01p00c480300533_pause_printing
+          - entity: button.p1s_01p00c480300533_stop_printing
         visibility:
           - condition: state
             entity: sensor.p1s_01p00c480300533_print_status

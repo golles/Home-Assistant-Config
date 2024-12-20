@@ -402,6 +402,11 @@ sections:
 
       - !include cards/media_player_logeerkamer.yaml
 
+      - type: tile
+        entity: sensor.p1s_01p00c480300533_print_status
+        name: 3D printer
+        icon: mdi:printer-3d
+
   # Badkamer
   - type: grid
     cards:
