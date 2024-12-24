@@ -3,14 +3,12 @@
   mode: single
   max_exceeded: silent
   triggers:
-    - trigger: numeric_state
-      entity_id: sensor.achtertuin_sensor_1_licht
-      below: 60
-      for:
-        minutes: 5
+    - trigger: time
+      at: "15:30:00"
   conditions:
-    - condition: template
-      value_template: > # All days in December after Sinterklaas.
+    - alias: All days in December after Sinterklaas.
+      condition: template
+      value_template: >
         {{ now().month == 12 and now().day >= 6 }}
   actions:
     - alias: Turn on the light
