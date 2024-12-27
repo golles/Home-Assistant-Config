@@ -136,7 +136,9 @@ template:
           {% elif is_state("binary_sensor.384090532720002735_001_bsh_common_status_doorstate", "on") -%}
             Deur open
           {% elif is_state("sensor.384090532720002735_001_bsh_common_status_operationstate", "Loopt") -%}
-            {% if is_state("sensor.oven_resterende_minuten", "-1") -%}
+            {% if is_state("sensor.384090532720002735_001_bsh_common_option_programprogress", "unavailable") -%}
+              {{ states("sensor.384090532720002735_001_bsh_common_status_operationstate") }}
+            {% elif is_state("sensor.oven_resterende_minuten", "-1") -%}
               {{ states("sensor.384090532720002735_001_bsh_common_option_programprogress") ~ "%" }}
             {%- else -%}
               {% set minuten = states("sensor.oven_resterende_minuten") %}
