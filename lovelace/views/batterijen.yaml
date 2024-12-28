@@ -21,6 +21,12 @@ sections:
         heading: Batterijen
         heading_style: title
         icon: mdi:battery-charging-wireless
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Bijna leeg
+        heading_style: subtitle
       - type: custom:auto-entities
         show_empty: true
         card:
@@ -30,13 +36,48 @@ sections:
         card_param: cards
         filter:
           include:
+            - domain: binary_sensor
+              attributes:
+                device_class: battery
+              state: "on"
+              options:
+                type: tile
             - domain: sensor
               attributes:
                 device_class: battery
+              state: "<= 30"
               options:
                 type: tile
         sort:
           method: state
           numeric: true
-        layout_options:
-          grid_columns: full
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Ok
+        heading_style: subtitle
+      - type: custom:auto-entities
+        show_empty: true
+        card:
+          type: grid
+          columns: 2
+          square: false
+        card_param: cards
+        filter:
+          include:
+            - domain: binary_sensor
+              attributes:
+                device_class: battery
+              state: "off"
+              options:
+                type: tile
+            - domain: sensor
+              attributes:
+                device_class: battery
+              state: "> 30"
+              options:
+                type: tile
+        sort:
+          method: state
+          numeric: true
