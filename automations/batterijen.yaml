@@ -7,7 +7,7 @@
       trigger: numeric_state
       entity_id:
         - sensor.iphone_van_golles_battery_level
-        - sensor.iphone_van_golles_watch_battery
+        - sensor.iphone_van_golles_watch_battery_level
         - sensor.ipad_mini_van_golles_battery_level
       below: 30
 
