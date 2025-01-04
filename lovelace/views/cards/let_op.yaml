@@ -28,14 +28,6 @@ cards:
         state: "on"
 
   - type: tile
-    entity: binary_sensor.stookalert_noord_holland
-    name: Stookalert
-    visibility:
-      - condition: state
-        entity: binary_sensor.stookalert_noord_holland
-        state: "on"
-
-  - type: tile
     entity: binary_sensor.knmi_waarschuwing
     name: KNMI
     state_content:

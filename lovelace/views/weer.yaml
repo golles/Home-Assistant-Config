@@ -59,11 +59,11 @@ sections:
           - state
           - code
       - type: tile
-        entity: binary_sensor.stookalert_noord_holland
-        name: Stookalert
-      - type: tile
         entity: binary_sensor.meteoalarm
         name: MeteoAlarm
+      - type: tile
+        entity: sensor.stookwijzer_advies_code
+        name: Stookwijzer
 
   - type: grid
     cards:

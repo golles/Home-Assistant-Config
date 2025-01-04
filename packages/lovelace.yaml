@@ -93,7 +93,6 @@ template:
           {{
             is_state("binary_sensor.ui_helper_let_op_p2000_dichtbij", "on") or
             is_state("binary_sensor.ui_helper_let_op_meteoalarm", "on") or
-            is_state("binary_sensor.stookalert_noord_holland", "on") or
             is_state("binary_sensor.knmi_waarschuwing", "on") or
             is_state("binary_sensor.aurora_visibility_visibility_alert", "on") or
             is_state("binary_sensor.ui_helper_let_op_afval_bio", "on") or
