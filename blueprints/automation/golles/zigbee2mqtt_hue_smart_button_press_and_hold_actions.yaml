@@ -17,7 +17,7 @@ blueprint:
         device:
           integration: mqtt
           manufacturer: Philips
-          model: Hue smart button (8718699693985)
+          model: Hue smart button
     press_action:
       name: Action on Press
       description: The action to execute when the button is pressed.

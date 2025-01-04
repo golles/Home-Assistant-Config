@@ -23,10 +23,10 @@ blueprint:
           filter:
             - integration: mqtt
               manufacturer: Xiaomi
-              model: Mi wireless switch (WXKG01LM)
+              model: Mi wireless switch
             - integration: mqtt
               manufacturer: Aqara
-              model: Wireless mini switch (WXKG11LM)
+              model: Wireless mini switch
     single:
       name: Action for Single Press
       description: The action to execute on a single press.

@@ -18,7 +18,7 @@ blueprint:
         device:
           integration: mqtt
           manufacturer: Aqara
-          model: Cube (MFKZQ01LM)
+          model: Cube
     side:
       name: Cube Side Entity
       description: Entity representing the current side of the cube (_side suffix).
