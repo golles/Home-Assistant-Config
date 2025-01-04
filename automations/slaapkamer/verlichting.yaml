@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.slaapkamer_beweging_occupancy
       cool_down: 60
       light_entity: light.slaapkamer_plafond_groep
-      illuminance_entity: sensor.slaapkamer_beweging_illuminance_lux
+      illuminance_entity: sensor.slaapkamer_lichtsterkte_illuminance
       illuminance_below: 10
       day_start_time: 08:00:00
       day_scene: scene.slaapkamer_plafond_groep_helder

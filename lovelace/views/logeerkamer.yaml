@@ -149,7 +149,7 @@ sections:
         entity: sensor.logeerkamer_luchtvochtigheid
         name: Luchtvochtigheid
       - type: tile
-        entity: sensor.logeerkamer_beweging_illuminance_lux
+        entity: sensor.logeerkamer_beweging_illuminance
         name: Lichtsterkte
       - type: tile
         entity: sensor.logeerkamer_battery

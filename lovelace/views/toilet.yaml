@@ -54,7 +54,7 @@ sections:
         entity: sensor.toilet_klimaat_humidity
         name: Luchtvochtigheid
       - type: tile
-        entity: sensor.toilet_beweging_illuminance_lux
+        entity: sensor.toilet_beweging_illuminance
         name: Lichtsterkte
 
   - type: grid

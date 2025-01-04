@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.logeerkamer_bezetting
       cool_down: 60
       light_entity: light.logeerkamer
-      illuminance_entity: sensor.logeerkamer_beweging_illuminance_lux
+      illuminance_entity: sensor.logeerkamer_beweging_illuminance
       illuminance_below: 10
       day_start_time: 08:00:00
       day_scene: scene.logeerkamer_helder

@@ -67,7 +67,7 @@ sections:
         entity: sensor.kledingkamer_luchtvochtigheid
         name: Luchtvochtigheid
       - type: tile
-        entity: sensor.kledingkamer_lichtsterkte_illuminance_lux
+        entity: sensor.kledingkamer_lichtsterkte_illuminance
         name: Lichtsterkte
 
   - type: grid

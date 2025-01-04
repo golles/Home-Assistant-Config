@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.toilet_beweging_occupancy
       cool_down: 90
       light_entity: light.toilet
-      illuminance_entity: sensor.toilet_beweging_illuminance_lux
+      illuminance_entity: sensor.toilet_beweging_illuminance
       illuminance_below: 100
       day_start_time: 08:00:00
       day_scene: scene.toilet_helder

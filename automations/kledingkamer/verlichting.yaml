@@ -7,7 +7,7 @@
       motion_entity: binary_sensor.kledingkamer_beweging_occupancy
       cool_down: 45
       light_entity: light.kledingkamer
-      illuminance_entity: sensor.kledingkamer_lichtsterkte_illuminance_lux
+      illuminance_entity: sensor.kledingkamer_lichtsterkte_illuminance
       illuminance_below: 12
       illuminance_above: 60
       day_start_time: 08:00:00
