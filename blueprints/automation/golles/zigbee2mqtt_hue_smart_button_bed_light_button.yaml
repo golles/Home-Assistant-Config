@@ -19,7 +19,7 @@ blueprint:
         device:
           integration: mqtt
           manufacturer: Philips
-          model: Hue smart button (8718699693985)
+          model: Hue smart button
     light_entity_bed:
       name: Bedside Light
       description: The light entity for the bedside lamp.
