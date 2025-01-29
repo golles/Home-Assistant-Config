@@ -79,7 +79,7 @@ automation:
 
             {{ as_local((state_attr("sun.sun", "next_setting")) | as_datetime + timedelta(minutes = ofsetMinutes)).strftime("%H:%M:%S") }}
 
-  # The next automation is make sure we reload the ingration once it's unavailble.
+  # The next automation is to make sure we reload the ingration once it's unavailble.
   # Copied from: https://github.com/iMicknl/ha-tahoma/issues/599#issuecomment-994596289
   - id: covers_overkiz_reload_integration
     alias: Rolluiken - Overkiz integratie herladen bij probleem
@@ -94,7 +94,7 @@ automation:
         entity_id: cover.slaapkamer
         to: unavailable
         for:
-          minutes: 60 # Habdle longer outages.
+          minutes: 60 # Handle longer outages.
     actions:
       - alias: Reload Overkiz integration
         action: homeassistant.reload_config_entry
@@ -174,7 +174,7 @@ script:
       - choose:
           - conditions:
               - "{{ is_state(window_entity, 'off') }}"
-              - "{{ is_state(cover_entity, 'open') }}"
+              - "{{ not is_state(cover_entity, 'closed') }}"
             sequence:
               - alias: Close the cover
                 action: cover.close_cover
@@ -183,7 +183,7 @@ script:
 
           - conditions:
               - "{{ is_state(window_entity, 'on') }}"
-              - "{{ is_state(cover_entity, 'open') }}"
+              - "{{ not is_state(cover_entity, 'closed') }}"
             sequence:
               - alias: Wait if the window is closed within a given time.
                 wait_template: "{{ is_state(window_entity, 'off') }}"
