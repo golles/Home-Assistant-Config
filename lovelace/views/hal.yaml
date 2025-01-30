@@ -132,18 +132,18 @@ sections:
         heading_style: subtitle
         tap_action:
           action: navigate
-          navigation_path: /config/devices/device/6ddd1bfc38e356168076c2e876b86b18
+          navigation_path: /config/devices/device/b19f3ccae50bad3167a884a6fdff5e4b
       - type: tile
-        entity: sensor.back_ups_bx950mi_status
+        entity: sensor.ups_status
         name: Status
       - type: tile
-        entity: sensor.back_ups_bx950mi_batterijlading
+        entity: sensor.ups_batterijlading
         name: Batterij
       - type: tile
-        entity: sensor.back_ups_bx950mi_batterijduur
+        entity: sensor.ups_batterijduur
         name: Batterij tijd
       - type: tile
-        entity: sensor.back_ups_bx950mi_resultaat_zelftest
+        entity: sensor.ups_resultaat_zelftest
         name: Test
 
   - type: grid
@@ -156,4 +156,4 @@ sections:
         name: Automatisch licht
         icon: mdi:lightbulb-auto
       - type: tile
-        entity: switch.back_ups_bx950mi_beeper
+        entity: switch.ups_beeper
