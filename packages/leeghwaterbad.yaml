@@ -50,7 +50,7 @@ automation:
       - condition: template
         value_template: >-
           {{
-            0 <= as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling")) - as_timestamp(now()) <= 60 * 60
+            0 <= as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling"), 0) - as_timestamp(now()) <= 60 * 60
           }}
     actions:
       - action: notify.sander
