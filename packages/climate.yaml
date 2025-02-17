@@ -143,6 +143,7 @@ template:
         state: >-
           {%
             set temps = states.climate
+            | rejectattr("state", "in", ["unavailable", "unknown"])
             | rejectattr("attributes.current_temperature", "none")
             | map(attribute="attributes.current_temperature")
             | sort
@@ -155,6 +156,7 @@ template:
         availability: >-
           {%
             set temps = states.climate
+            | rejectattr("state", "in", ["unavailable", "unknown"])
             | rejectattr("attributes.current_temperature", "none")
             | map(attribute="attributes.current_temperature")
             | sort
