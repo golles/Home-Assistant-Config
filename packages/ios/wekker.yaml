@@ -39,10 +39,14 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
-          # It should come from Sander and he should be home.
           - conditions:
-              - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
-              - "{{ is_state('person.sander', 'home') }}"
+              - alias: Should be triggered by Sander
+                condition: template
+                value_template: "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+              - alias: Sander should be home
+                condition: state
+                entity_id: person.sander
+                state: home
             sequence: []
 
   - id: ios_action_alarm_clock_snooze
@@ -59,19 +63,38 @@ automation:
           user_id: "{{ trigger.event.context.user_id }}"
 
       - choose:
-          # Temperature should be higher than a certain amount.
           - conditions:
-              - "{{ state_attr('weather.knmi_purmerend', 'temperature') > -2 }}"
+              - alias: Temperature should be higher than a certain value.
+                condition: numeric_state
+                entity_id: sensor.knmi_temperatuur
+                above: -2
+              - alias: Should be triggered by Sander
+                condition: template
+                value_template: "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+              - alias: Sander should be home
+                condition: state
+                entity_id: person.sander
+                state: home
             sequence:
               - choose:
-                  # It should come from Sander and he should be home.
                   - conditions:
-                      - "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
-                      - "{{ is_state('person.sander', 'home') }}"
+                      - alias: Slaapkamer should be closed.
+                        condition: state
+                        entity_id: cover.slaapkamer
+                        state: closed
                     sequence:
-                      - alias: Set covers to their preference position
+                      - alias: Set slaapkamer to the preference position
                         action: button.press
                         target:
-                          entity_id:
-                            - button.kledingkamer_my_position
-                            - button.slaapkamer_my_position
+                          entity_id: button.slaapkamer_my_position
+              - choose:
+                  - conditions:
+                      - alias: Kledingkamer should be closed.
+                        condition: state
+                        entity_id: cover.kledingkamer
+                        state: closed
+                    sequence:
+                      - alias: Set kledingkamer to the preference position
+                        action: button.press
+                        target:
+                          entity_id: button.kledingkamer_my_position
