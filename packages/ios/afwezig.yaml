@@ -28,7 +28,8 @@ automation:
 
   - id: check_devices_left_on
     alias: iOS action - Apparaten aangelaten
-    mode: single
+    mode: restart
+    max_exceeded: silent
     triggers:
       - trigger: state
         entity_id: group.residents
