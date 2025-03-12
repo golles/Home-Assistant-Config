@@ -33,7 +33,10 @@ template:
               | selectattr("state", "eq", "on")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "search", "light.epl_*")
+              | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | map(attribute="entity_id")
               | list
             }}
@@ -43,6 +46,10 @@ template:
               | selectattr("state", "eq", "off")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "search", "light.epl_*")
+              | rejectattr("entity_id", "search", "light.epo_*")
+              | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | map(attribute="entity_id")
               | list
             }}
@@ -59,7 +66,10 @@ template:
               | selectattr("state", "eq", "on")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "search", "light.epl_*")
+              | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | rejectattr("entity_id", "in", [
                 "light.voortuin_lamp",
                 "light.achtertuin_lamp_1",
@@ -75,6 +85,10 @@ template:
               | selectattr("state", "eq", "off")
               | rejectattr("attributes.is_hue_group", "defined")
               | rejectattr("attributes.entity_id", "defined")
+              | rejectattr("entity_id", "search", "light.epl_*")
+              | rejectattr("entity_id", "search", "light.epo_*")
+              | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | rejectattr("entity_id", "in", [
                 "light.voortuin_lamp",
                 "light.achtertuin_lamp_1",
