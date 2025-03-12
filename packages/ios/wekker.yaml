@@ -42,7 +42,8 @@ automation:
           - conditions:
               - alias: Should be triggered by Sander
                 condition: template
-                value_template: "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+                value_template: >-
+                  {{ is_state_attr("person.sander", "user_id", user_id) }}
               - alias: Sander should be home
                 condition: state
                 entity_id: person.sander
@@ -70,7 +71,8 @@ automation:
                 above: -2
               - alias: Should be triggered by Sander
                 condition: template
-                value_template: "{{ is_state_attr('person.sander', 'user_id', user_id) }}"
+                value_template: >-
+                  {{ is_state_attr("person.sander", "user_id", user_id) }}
               - alias: Sander should be home
                 condition: state
                 entity_id: person.sander
