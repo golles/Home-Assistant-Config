@@ -109,29 +109,15 @@ sections:
         heading: Pollen
         heading_style: subtitle
       - type: tile
-        entity: sensor.huis_boompollen_vandaag
+        entity: sensor.kleenex_pollen_radar_huis_bomen
         name: Bomen
-        state_content:
-          - level
-          - state
       - type: tile
-        entity: sensor.huis_graspollen_vandaag
+        entity: sensor.kleenex_pollen_radar_huis_gras
         name: Grassen
-        state_content:
-          - level
-          - state
       - type: tile
-        entity: sensor.huis_ambrosiapollen_vandaag
+        entity: sensor.kleenex_pollen_radar_huis_kruiden
         name: Onkruiden
-        state_content:
-          - level
-          - state
-      - type: tile
-        entity: sensor.huis_schimmel_vandaag
-        name: Schimmels
-        state_content:
-          - level
-          - state
+        icon: mdi:sprout
 
   - type: grid
     cards:
