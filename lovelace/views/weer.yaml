@@ -111,13 +111,22 @@ sections:
       - type: tile
         entity: sensor.kleenex_pollen_radar_huis_bomen
         name: Bomen
+        state_content:
+          - level
+          - state
       - type: tile
         entity: sensor.kleenex_pollen_radar_huis_gras
         name: Grassen
+        state_content:
+          - level
+          - state
       - type: tile
         entity: sensor.kleenex_pollen_radar_huis_kruiden
         name: Onkruiden
         icon: mdi:sprout
+        state_content:
+          - level
+          - state
 
   - type: grid
     cards:
