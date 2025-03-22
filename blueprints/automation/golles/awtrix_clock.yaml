@@ -149,7 +149,7 @@ actions:
             data:
               topic: "{{ topic }}/custom/temp-inside"
               payload: >-
-                {% if states(temp_entity) not in [None, "unknown"] %}
+                {% if states(temp_entity) not in [None, "unknown", "unavailable"] %}
                   {{
                     dict(
                       text = states(temp_entity) | round ~ state_attr(temp_entity, "unit_of_measurement"),
@@ -162,7 +162,7 @@ actions:
             data:
               topic: "{{ topic }}/custom/weather"
               payload: >-
-                {% if state_attr(weather_entity, "temperature") not in [None, "unknown"] %}
+                {% if state_attr(weather_entity, "temperature") not in [None, "unknown", "unavailable"] %}
                   {{
                     dict(
                       text = state_attr(weather_entity, "temperature") | round ~ state_attr(weather_entity, "temperature_unit"),
