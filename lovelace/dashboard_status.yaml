@@ -10,3 +10,4 @@ views:
   - !include views/hass.yaml
   - !include views/borg.yaml
   - !include views/internet.yaml
+  - !include views/3dprinter.yaml

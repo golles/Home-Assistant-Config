@@ -70,57 +70,14 @@ sections:
         name: Klok
         state_content: state
         color: primary
-
-  - type: grid
-    cards:
-      - type: heading
-        heading: 3D printer
-        heading_style: subtitle
       - type: tile
         entity: switch.3d_printer_plug
         name: 3D Printer
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_print_status
-        name: Status
         icon: mdi:printer-3d
-      - type: tile
-        entity: light.p1s_01p00c480300533_chamber_light
-        name: Licht
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-      - type: tile
-        entity: select.p1s_01p00c480300533_printing_speed
-        name: Snelheid
-        visibility:
-          - condition: state
-            entity: select.p1s_01p00c480300533_printing_speed
-            state_not: unavailable
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_print_progress
-        name: Voortgang
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state: running
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_remaining_time
-        name: Tijd
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state: running
-      - type: picture-glance
-        image_entity: image.p1s_01p00c480300533_cover_image
-        entities:
-          - entity: button.p1s_01p00c480300533_resume_printing
-          - entity: button.p1s_01p00c480300533_pause_printing
-          - entity: button.p1s_01p00c480300533_stop_printing
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state: running
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/3dprinter
+
 
   - type: grid
     cards:
