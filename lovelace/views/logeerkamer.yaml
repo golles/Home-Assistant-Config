@@ -78,7 +78,6 @@ sections:
           action: navigate
           navigation_path: /dashboard-status/3dprinter
 
-
   - type: grid
     cards:
       - type: heading
