@@ -34,7 +34,6 @@ custom_components/eufy_security             https://github.com/fuatakgun/eufy_se
 custom_components/flightradar24             https://github.com/AlexandrErohin/home-assistant-flightradar24
 custom_components/bambu_lab                 https://github.com/greghesp/ha-bambulab
 custom_components/home_connect_alt          https://github.com/ekutner/home-connect-hass
-custom_components/ical                      https://github.com/tybritten/ical-sensor-homeassistant
 custom_components/kamstrup_403              https://github.com/golles/ha-kamstrup_403
 custom_components/kleenex_pollenradar       https://github.com/MarcoGos/kleenex_pollenradar
 custom_components/knmi                      https://github.com/golles/ha-knmi
