@@ -47,7 +47,7 @@
 
           Goede{{ daypart() }}!
           Vandaag is het {{ day() }} {{ now().day }} {{ month() }}.
-          {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") in ["", "----", None] %}
+          {% if state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription").replace("-", "") in ["", None] %}
             {{ states("sensor.knmi_weersverwachting") }}
           {% else %}
             {{ state_attr("sensor.lokaal_weer_en_verkeer", "weatherDescription") | replace("km/uur", "kilometer per uur") }}
