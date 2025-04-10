@@ -402,14 +402,6 @@ sections:
 
       - !include cards/media_player_logeerkamer.yaml
 
-      - type: tile
-        entity: switch.3d_printer_plug
-        name: 3D Printer
-        icon: mdi:printer-3d
-        tap_action:
-          action: navigate
-          navigation_path: /dashboard-status/3dprinter
-
   # Badkamer
   - type: grid
     cards:
@@ -485,6 +477,13 @@ sections:
       - type: tile
         entity: light.zolder
         name: Plafond
+      - type: tile
+        entity: switch.3d_printer_plug
+        name: 3D Printer
+        icon: mdi:printer-3d
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/3dprinter
       - type: tile
         entity: sensor.wasmachine_status
         name: Wasmachine

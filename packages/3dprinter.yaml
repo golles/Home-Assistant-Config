@@ -6,7 +6,7 @@ automation:
     triggers:
       - alias: Room occupancy changes
         trigger: state
-        entity_id: binary_sensor.logeerkamer_bezetting
+        entity_id: binary_sensor.zolder_bezetting
       - alias: The printer comes online
         trigger: state
         entity_id: binary_sensor.p1s_01p00c480300533_online
@@ -26,7 +26,7 @@ automation:
             conditions:
               - alias: When the room is occupied
                 condition: state
-                entity_id: binary_sensor.logeerkamer_bezetting
+                entity_id: binary_sensor.zolder_bezetting
                 state: "on"
               - alias: When making a timelapse
                 condition: state
