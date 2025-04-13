@@ -120,7 +120,6 @@ sections:
         hours_to_show: 24
         entities:
           - entity: device_tracker.golf_7_5
-        theme_mode: auto
         layout_options:
           grid_columns: full
           grid_rows: 8
