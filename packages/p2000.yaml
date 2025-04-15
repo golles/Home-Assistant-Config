@@ -45,7 +45,7 @@ sensor:
 
 automation:
   - id: notification_p2000
-    alias: "Notificatie: P200 bericht in de buurt"
+    alias: "Notificatie: P2000 bericht in de buurt"
     mode: single
     triggers:
       - trigger: state
@@ -55,7 +55,12 @@ automation:
         value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
     actions:
       - alias: Sent a notification with url
-        action: notify.all_phones_and_tv
+        action: >-
+          {% if is_state("media_player.lg_c9", "on") %}
+            notify.all_phones_and_tv
+          {% else %}
+            notify.all_phones
+          {% endif %}
         data:
           title: >-
             {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}

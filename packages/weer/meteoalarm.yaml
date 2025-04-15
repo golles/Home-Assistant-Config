@@ -17,7 +17,13 @@ automation:
       - "{{ state_attr('binary_sensor.meteoalarm', 'description') != None }}"
       - "{{ state_attr('binary_sensor.meteoalarm', 'instruction') != None }}"
     actions:
-      - action: notify.all_phones_and_tv
+      - alias: Send a notification
+        action: >-
+          {% if is_state("media_player.lg_c9", "on") %}
+            notify.all_phones_and_tv
+          {% else %}
+            notify.all_phones
+          {% endif %}
         data:
           title: >-
             ⚠️ {{state_attr("binary_sensor.meteoalarm", "headline")}}
