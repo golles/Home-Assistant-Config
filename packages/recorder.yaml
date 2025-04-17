@@ -4,3 +4,4 @@ recorder:
   exclude:
     entity_globs:
       - sensor.flightradar24*
+      - sensor.epl_*_target_*

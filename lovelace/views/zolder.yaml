@@ -88,7 +88,7 @@ sections:
         entity: sensor.zolder_luchtvochtigheid
         name: Luchtvochtigheid
       - type: tile
-        entity: sensor.zolder_beweging_2_illuminance
+        entity: sensor.epl_zolder_illuminance
         name: Lichtsterkte
 
   - type: grid

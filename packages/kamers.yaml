@@ -56,7 +56,7 @@ template:
         icon: mdi:motion-sensor
         state: >
           {{
-            is_state("binary_sensor.zolder_beweging_1_occupancy", "on") or is_state("binary_sensor.zolder_beweging_2_occupancy", "on")
+            is_state("binary_sensor.epl_zolder_occupancy", "on")
           }}
 
       - name: Trap beweging
@@ -178,7 +178,9 @@ template:
         device_class: occupancy
         icon: mdi:motion-sensor
         state: >
-          {% set motion_entities = ["binary_sensor.zolder_beweging_1_occupancy", "binary_sensor.zolder_beweging_2_occupancy"] %}
+          {% set motion_entities = [
+            "binary_sensor.epl_zolder_occupancy"
+          ] %}
           {% set media_entities = ["media_player.zolder"] %}
 
           {%

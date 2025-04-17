@@ -75,8 +75,7 @@ sections:
           - binary_sensor.slaapkamer_beweging_occupancy
           # Tweede verdieping.
           - binary_sensor.zoldertrap_sensor_beweging
-          - binary_sensor.zolder_beweging_1_occupancy
-          - binary_sensor.zolder_beweging_2_occupancy
+          - binary_sensor.epl_zolder_occupancy
         hours_to_show: 3
         layout_options:
           grid_columns: full
@@ -197,11 +196,7 @@ sections:
               state: "on"
               options:
                 type: tile
-            - entity_id: binary_sensor.zolder_beweging_1_occupancy
-              state: "on"
-              options:
-                type: tile
-            - entity_id: binary_sensor.zolder_beweging_2_occupancy
+            - entity_id: binary_sensor.epl_zolder_occupancy
               state: "on"
               options:
                 type: tile

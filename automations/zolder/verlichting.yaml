@@ -7,8 +7,8 @@
       motion_entity: binary_sensor.zolder_bezetting
       cool_down: 60
       light_entity: light.zolder
-      illuminance_entity: sensor.zolder_beweging_2_illuminance
-      illuminance_below: 15
+      illuminance_entity: sensor.epl_zolder_illuminance
+      illuminance_below: 0.7
       day_start_time: 08:00:00
       day_scene: scene.zolder_helder
       day_scene_before_off: scene.zolder_gedimd
