@@ -2,7 +2,6 @@ title: Borg backup
 path: borg
 icon: mdi:cloud-upload
 type: sections
-max_columns: 4
 sections:
   - type: custom:mushroom-chips-card
     chips:
