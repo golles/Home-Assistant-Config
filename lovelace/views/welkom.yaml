@@ -399,8 +399,20 @@ sections:
       - type: tile
         entity: cover.logeerkamer
         name: Rolgordijn
+      - type: tile
+        entity: media_player.logeerkamer
+        tap_action:
+          action: toggle
+        visibility:
+          - condition: state
+            entity: media_player.logeerkamer
+            state: "off"
 
-      - !include cards/media_player_logeerkamer.yaml
+      - type: conditional
+        conditions:
+          - entity: media_player.logeerkamer
+            state_not: "off"
+        card: !include cards/media_player_logeerkamer.yaml
 
   # Badkamer
   - type: grid
