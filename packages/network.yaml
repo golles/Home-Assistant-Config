@@ -10,11 +10,15 @@ automation:
         value_template: >-
           {{ trigger.to_state.state not in [trigger.from_state.state, "unknown", "unavailable"] }}
     actions:
-      - action: notify.sander
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: 🌍 Externe IP gewijzigd
-          message: >-
-            Nieuwe ip: {{ states('sensor.myip') }}, check of de DDNS update gelukt is.
+          message: ""
+          target: !secret discord_monitoring
           data:
-            group: ddns
-            url: /dashboard-status/internet
+            embed:
+              color: 16753920 # Orange
+              title: 🌍 Externe IP gewijzigd
+              description: |
+                Nieuwe ip: {{ states('sensor.myip') }}
+                Check of de DDNS update gelukt is

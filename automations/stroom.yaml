@@ -31,11 +31,12 @@
         {% from "automations.jinja" import was_within %}
         {{ was_within("automation.notificatie_elektriciteit_laag_tarief_vandaag", 24 * 60 * 60) }}
   actions:
-    - alias: Notify users about low tarif today
-      action: notify.all_phones
+    - alias: Send the notification
+      action: notify.discord
       data:
-        title: 🔌 Elektriciteit
-        message: >-
-          Vandaag is de Elektriciteit de hele dag laag tarief
+        message: ""
+        target: !secret discord_meterstanden
         data:
-          group: elektriciteit
+          embed:
+            title: 🔌 Elektriciteit
+            description: Vandaag is de Elektriciteit de hele dag laag tarief

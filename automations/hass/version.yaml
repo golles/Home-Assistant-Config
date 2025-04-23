@@ -10,10 +10,14 @@
         minutes: 90
   actions:
     - alias: Send the notification
-      action: notify.telegram_sander
+      action: notify.discord
       data:
-        message: |
-          *Home Assistant update*
-          Versie *{{ states("sensor.docker_hub") }}* is beschikbaar!
-          De huidige versie is {{ states("sensor.current_version") }}.
-          {{ state_attr("sensor.home_assistant_website", "release_notes") }}
+        message: ""
+        target: !secret discord_updates
+        data:
+          embed:
+            title: Home Assistant update
+            description: |
+              Versie **{{ states("sensor.docker_hub") }}** is beschikbaar!
+              De huidige versie is {{ states("sensor.current_version") }}.
+              {{ state_attr("sensor.home_assistant_website", "release_notes") }}

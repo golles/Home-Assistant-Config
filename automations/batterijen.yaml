@@ -43,14 +43,14 @@
         area: >-
           {{ area_name(trigger.entity_id) }}
 
-    - alias: Send message
-      action: notify.sander
+    - alias: Send the notification
+      action: notify.discord
       data:
-        title: 🔋 Batterij leeg
-        message: >-
-          {{ device_model ~ " batterij" ~ iif(area != None, " in de " ~ area, "") ~ " is leeg" }}
+        message: ""
+        target: !secret discord_batterijen
         data:
-          group: battery
-          url: /dashboard-status/batterijen
-          tag: >-
-            {{ "battery-" ~ device_id }}
+          embed:
+            color: 16753920 # Orange
+            title: 🔋 Batterij leeg
+            description: |
+              {{ device_model ~ " batterij" ~ iif(area != None, " in de " ~ area, "") ~ " is leeg" }}

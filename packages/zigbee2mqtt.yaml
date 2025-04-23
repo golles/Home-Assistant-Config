@@ -39,10 +39,14 @@ automation:
         to: "on"
     actions:
       - alias: Send the notification
-        action: notify.telegram_sander
+        action: notify.discord
         data:
-          message: |
-            *Zigbee2MQTT coordinator update*
-            Versie *{{ states("sensor.zigbee2mqtt_coordinator_latest_version") }}* is beschikbaar!
-            De huidige versie is {{ states("sensor.zigbee2mqtt_bridge_coordinator_version") }}.
-            https://github.com/Koenkk/Z-Stack-firmware/releases/latest
+          message: ""
+          target: !secret discord_updates
+          data:
+            embed:
+              title: Zigbee2MQTT coordinator update
+              description: |
+                Versie **{{ states("sensor.zigbee2mqtt_coordinator_latest_version") }}** is beschikbaar!
+                De huidige versie is {{ states("sensor.zigbee2mqtt_bridge_coordinator_version") }}.
+                https://github.com/Koenkk/Z-Stack-firmware/releases/latest

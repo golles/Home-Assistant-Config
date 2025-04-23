@@ -1,6 +1,6 @@
 rest_command:
   post_daily_meter_values:
-    url: !secret meter_readings_url
+    url: !secret post_daily_meter_url
     method: POST
     payload: >-
       {
@@ -11,6 +11,10 @@ rest_command:
         "heat_volume": {{ states("sensor.kamstrup_403_volume") }}
       }
     content_type: "application/json; charset=utf-8"
+    verify_ssl: true
+  get_monthly_meter_values:
+    url: !secret get_monthly_meter_url
+    method: GET
     verify_ssl: true
 
 automation:
@@ -23,3 +27,48 @@ automation:
     actions:
       - alias: Post values
         action: rest_command.post_daily_meter_values
+
+  - id: notification_monthly_meter_values
+    alias: "Notificatie: Maandelijkse meterstanden"
+    triggers:
+      - trigger: time
+        at: "09:00:00"
+    condition:
+      condition: template
+      value_template: "{{ now().day == 1 }}"
+    actions:
+      - action: rest_command.get_monthly_meter_values
+        response_variable: meter_response
+      - if: "{{ meter_response['status'] == 200 }}"
+        then:
+          - alias: Set variables
+            variables:
+              current_month: "{{ meter_response['content'][0] }}"
+              previous_month: "{{ meter_response['content'][1] }}"
+
+          - alias: Send message
+            action: notify.discord
+            data:
+              message: ""
+              target: !secret discord_meterstanden
+              data:
+                embed:
+                  title: 🔌 Maandelijkse meterstanden
+                  fields:
+                    - name: >-
+                        {% from 'nl.jinja' import month %}
+                        {{ now().day }} {{ month() }}:
+                      value: |
+                        - Elektriciteit laag: {{ current_month['electricity_low'] }} kWh
+                        - Elektriciteit hoog: {{ current_month['electricity_high'] }} kWh
+                        - Warmte energie: {{ current_month['heat_energy'] }} GJ
+                        - Warmte volume: {{ current_month['heat_volume'] }} m³
+                      inline: false
+                    - name: >-
+                        Verbruik:
+                      value: |
+                        - Elektriciteit laag: {{ (current_month['electricity_low'] | int) - (previous_month['electricity_low'] | int) }} kWh
+                        - Elektriciteit hoog: {{ (current_month['electricity_high'] | int) - (previous_month['electricity_high'] | int) }} kWh
+                        - Warmte energie: {{ (current_month['heat_energy'] | int) - (previous_month['heat_energy'] | int) }} GJ
+                        - Warmte volume: {{ (current_month['heat_volume'] | int) - (previous_month['heat_volume'] | int) }} m³
+                      inline: false

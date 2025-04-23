@@ -31,11 +31,15 @@ automation:
     conditions:
       - "{{ states('input_text.borg') == 'Backup and/or Prune finished with errors' }}"
     actions:
-      - action: notify.sander
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: Borg backup
-          message: >-
-            Backup is niet goed gegaan, laatste status: {{ states('input_text.borg') }}.
+          message: ""
+          target: !secret discord_monitoring
           data:
-            group: borg_backup
-            url: /dashboard-status/borg
+            embed:
+              color: 15158332 # Red
+              title: Borg backup
+              description: |
+                Backup is niet goed gegaan.
+                Laatste status: `{{ states('input_text.borg') }}`
