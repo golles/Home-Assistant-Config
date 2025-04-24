@@ -48,7 +48,7 @@ automation:
           data:
             embed:
               color: >-
-                {{ iif(is_state("sensor.ups_status", "Online"), "3066993", "3066993") }}
+                {{ iif(is_state("sensor.ups_status", "Online"), "3066993", "15158332") }}
               title: 🔋 UPS status
               description: |
                 {{ states("sensor.ups_status") }}

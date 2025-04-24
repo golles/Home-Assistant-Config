@@ -54,32 +54,39 @@ automation:
       - condition: template
         value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
     actions:
-      - alias: Sent a notification with url
-        action: >-
-          {% if is_state("media_player.lg_c9", "on") %}
-            notify.all_phones_and_tv
-          {% else %}
-            notify.all_phones
-          {% endif %}
+      - if:
+          - condition: state
+            entity_id: media_player.lg_c9
+            state: "on"
+        then:
+          - alias: Sent a notification to the tv
+            action: notify.lg_c9
+            data:
+              message: >-
+                {{ states("sensor.p2000_dichtbij") }}
+
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: >-
-            {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}
-            {% if "ambulance" in state %} 🚑
-            {% elif "brandweer" in state %} 🚒
-            {% elif "politie" in state %} 🚓
-            {% else %}🚨 {% endif %}
-            P2000 melding
-          message: >-
-            {{ states("sensor.p2000_dichtbij") }}
+          message: ""
+          target: !secret discord_p2000
           data:
-            group: p2000
-            push:
-              interruption-level: time-sensitive
-            action_data:
-              latitude: "{{ state_attr('sensor.p2000_dichtbij', 'latitude') }}"
-              longitude: "{{ state_attr('sensor.p2000_dichtbij', 'longitude') }}"
-              latitude_delta: 0.0005
-              longitude_delta: 0.0005
-              shows_user_location: true
-            url: >-
-              https://www.google.com/maps/search/?api=1&query={{ state_attr("sensor.p2000_dichtbij", "latitude") }},{{ state_attr("sensor.p2000_dichtbij", "longitude") }}
+            embed:
+              color: >-
+                {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}
+                {% if "ambulance" in state %} 16776960
+                {% elif "brandweer" in state %} 15158332
+                {% elif "politie" in state %} 3447003
+                {% else %} 16777215
+                {% endif %}
+              title: >-
+                {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}
+                {% if "ambulance" in state %} 🚑
+                {% elif "brandweer" in state %} 🚒
+                {% elif "politie" in state %} 🚓
+                {% else %}🚨
+                {% endif %}
+                P2000 melding
+              description: |
+                {{ states("sensor.p2000_dichtbij") }}
+                https://www.google.com/maps/search/?api=1&query={{ state_attr("sensor.p2000_dichtbij", "latitude") }},{{ state_attr("sensor.p2000_dichtbij", "longitude") }}

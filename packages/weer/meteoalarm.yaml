@@ -17,18 +17,36 @@ automation:
       - "{{ state_attr('binary_sensor.meteoalarm', 'description') != None }}"
       - "{{ state_attr('binary_sensor.meteoalarm', 'instruction') != None }}"
     actions:
-      - alias: Send a notification
-        action: >-
-          {% if is_state("media_player.lg_c9", "on") %}
-            notify.all_phones_and_tv
-          {% else %}
-            notify.all_phones
-          {% endif %}
+      - if:
+          - condition: state
+            entity_id: media_player.lg_c9
+            state: "on"
+        then:
+          - alias: Sent a notification to the tv
+            action: notify.lg_c9
+            data:
+              message: >-
+                {{state_attr("binary_sensor.meteoalarm", "description")}}
+                {{state_attr("binary_sensor.meteoalarm", "instruction")}}
+
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: >-
-            ⚠️ {{state_attr("binary_sensor.meteoalarm", "headline")}}
-          message: >-
-            {{state_attr("binary_sensor.meteoalarm", "description")}}
-            {{state_attr("binary_sensor.meteoalarm", "instruction")}}
+          message: ""
+          target: !secret discord_weer
           data:
-            group: weather
+            embed:
+              color: >-
+                {% set state = state_attr("binary_sensor.meteoalarm", "code") %}
+                {% if state == "2; yellow; Moderate" %} 16776960
+                {% elif state == "3; orange; Severe" %} 16753920
+                {% elif state == "4; red; High" %} 15158332
+                {% else %} 3066993
+                {% endif %}
+              title: >-
+                ⚠️ {{state_attr("binary_sensor.meteoalarm", "headline")}}
+              description: |
+                {{state_attr("binary_sensor.meteoalarm", "description")}}
+                {{state_attr("binary_sensor.meteoalarm", "instruction")}}
+
+                https://meteoalarm.org/nl/live/region/NL

@@ -6,18 +6,27 @@
       from: "off"
       to: "on"
   actions:
-    - alias: Send a notification
-      action: >-
-        {% if is_state("media_player.lg_c9", "on") %}
-          notify.all_phones_and_tv
-        {% else %}
-          notify.all_phones
-        {% endif %}
+    - if:
+        - condition: state
+          entity_id: media_player.lg_c9
+          state: "on"
+      then:
+        - alias: Sent a notification to the tv
+          action: notify.lg_c9
+          data:
+            message: >-
+              {{ states("sensor.aurora_visibility_visibility") }}% kans op het noorderlicht
+
+    - alias: Send the notification
+      action: notify.discord
       data:
-        title: 🌌✨💫 Noorderlicht
-        message: >-
-          {{ states("sensor.aurora_visibility_visibility") }}% kans op het noorderlicht
+        message: ""
+        target: !secret discord_weer
         data:
-          group: weather
-          push:
-            interruption-level: critical
+          embed:
+            color: 11877887 # Purple
+            title: 🌌✨💫 Noorderlicht
+            description: |
+              {{ states("sensor.aurora_visibility_visibility") }}% kans op het noorderlicht
+
+              https://www.swpc.noaa.gov/products/aurora-30-minute-forecast

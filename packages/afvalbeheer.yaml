@@ -47,9 +47,6 @@ automation:
         entity_id: input_boolean.vacation_mode
         state: "off"
     actions:
-      - variables:
-          external_url: !secret external_url
-
       - alias: Send the notification
         action: notify.discord
         data:
@@ -62,4 +59,4 @@ automation:
                 Morgen wordt de **{{ state_attr(entity, "friendly_name") | upper }}** container geleegd.
               thumbnail:
                 url: >-
-                  {{ external_url }}{{ state_attr(entity, "entity_picture") }}
+                  {{ state_attr(entity, "entity_picture") | replace("/local/", "https://raw.githubusercontent.com/golles/Home-Assistant-Config/refs/heads/main/www/") }}
