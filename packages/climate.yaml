@@ -217,12 +217,17 @@ automation:
         attribute: current_temperature
         below: 18
     actions:
-      - action: notify.telegram_huisgroep
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: Tado
-          message: |
-            Ik zie dat {{ states("sensor.huis_nearest_device") }} bijna thuis is.
-            Het is hier nu nog koud, dus ik verwarm de woonkamer alvast.
+          message: ""
+          target: !secret discord_algemeen
+          data:
+            embed:
+              title: Verwarming
+              description: |
+                Ik zie dat {{ states("sensor.huis_nearest_device") }} bijna thuis is
+                Het is hier nu nog koud, dus ik verwarm de woonkamer alvast
 
       - alias: Heat up the living room for a short time
         action: tado.set_climate_timer

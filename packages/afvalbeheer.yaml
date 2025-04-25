@@ -47,16 +47,16 @@ automation:
         entity_id: input_boolean.vacation_mode
         state: "off"
     actions:
-      - variables:
-          external_url: !secret external_url
-
-      - action: notify.sander
+      - alias: Send the notification
+        action: notify.discord
         data:
-          title: Afval
-          message: >-
-            Morgen wordt de {{ state_attr(entity, "friendly_name") | upper }} container geleegd.
+          message: ""
+          target: !secret discord_afval
           data:
-            group: afval
-            image: >-
-              {{ external_url }}{{ state_attr(entity, "entity_picture") }}
-            url: /dashboard-buiten/achtertuin
+            embed:
+              title: 🗑️ Afval
+              description: |
+                Morgen wordt de **{{ state_attr(entity, "friendly_name") | upper }}** container geleegd.
+              thumbnail:
+                url: >-
+                  {{ state_attr(entity, "entity_picture") | replace("/local/", "https://raw.githubusercontent.com/golles/Home-Assistant-Config/refs/heads/main/www/") }}

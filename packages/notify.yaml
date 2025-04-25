@@ -17,16 +17,7 @@ notify:
       - action: sander
       - action: mobile_app_ipad_mini_van_golles
 
-  - name: all_phones_and_tv
+  - name: discord
     platform: group
     services:
-      - action: all_phones
-      - action: lg_c9
-
-  - platform: telegram
-    name: telegram_huisgroep
-    chat_id: !secret telegram_house_group
-
-  - platform: telegram
-    name: telegram_sander
-    chat_id: !secret telegram_sander
+      - action: home_assistant
