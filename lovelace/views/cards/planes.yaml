@@ -2,7 +2,7 @@ type: custom:auto-entities
 show_empty: false
 card:
   type: grid
-  columns: 2
+  columns: 1
   square: false
 card_param: cards
 filter:
@@ -31,10 +31,5 @@ filter:
     {% if data.entities | length > 0 %}
       {{ data.entities }}
     {% endif %}
-  include:
-    - entity_id: sensor.flightradar24_current_in_area
-      options:
-        type: tile
-        name: Aantal
 sort:
   method: name

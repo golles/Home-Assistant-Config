@@ -67,5 +67,8 @@ sections:
       - type: heading
         heading: Vliegtuigen
         heading_style: subtitle
+        badges:
+          - type: entity
+            entity: sensor.flightradar24_current_in_area
 
       - !include cards/planes.yaml
