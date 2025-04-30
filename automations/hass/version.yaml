@@ -16,7 +16,10 @@
         target: !secret discord_updates
         data:
           embed:
-            title: Home Assistant update
+            author:
+              name: Home Assistant
+              icon_url: https://www.home-assistant.io/images/favicon-192x192-full.png
+            title: Update
             description: |
               Versie **{{ states("sensor.docker_hub") }}** is beschikbaar!
               De huidige versie is {{ states("sensor.current_version") }}.

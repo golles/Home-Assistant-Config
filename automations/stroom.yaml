@@ -1,5 +1,5 @@
 - id: electricity_low_today
-  alias: "Notificatie: elektriciteit laag tarief vandaag"
+  alias: "Notificatie: Elektriciteit laag tarief vandaag"
   mode: single
   triggers:
     - trigger: time

@@ -24,6 +24,9 @@
         target: !secret discord_weer
         data:
           embed:
+            author:
+              name: National Oceanic and Atmospheric Administration
+              icon_url: https://brands.home-assistant.io/aurora/icon.png
             color: 11877887 # Purple
             title: 🌌✨💫 Noorderlicht
             description: |

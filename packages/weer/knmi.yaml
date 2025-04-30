@@ -26,6 +26,9 @@ automation:
           target: !secret discord_weer
           data:
             embed:
+              author:
+                name: KNMI
+                icon_url: https://brands.home-assistant.io/knmi/icon.png
               color: >-
                 {% set state = state_attr("binary_sensor.knmi_waarschuwing", "code") %}
                 {% if state == "groen" %} 3066993

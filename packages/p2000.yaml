@@ -77,7 +77,7 @@ automation:
                 {% if "ambulance" in state %} 16776960
                 {% elif "brandweer" in state %} 15158332
                 {% elif "politie" in state %} 3447003
-                {% else %} 16777215
+                {% else %} None
                 {% endif %}
               title: >-
                 {% set state = state_attr("sensor.p2000_dichtbij", "discipline") | lower %}

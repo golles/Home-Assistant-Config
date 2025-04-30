@@ -36,6 +36,9 @@ automation:
           target: !secret discord_weer
           data:
             embed:
+              author:
+                name: MeteoAlarm
+                icon_url: https://brands.home-assistant.io/meteoalarm/icon.png
               color: >-
                 {% set state = state_attr("binary_sensor.meteoalarm", "code") %}
                 {% if state == "2; yellow; Moderate" %} 16776960

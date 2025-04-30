@@ -45,7 +45,10 @@ automation:
           target: !secret discord_updates
           data:
             embed:
-              title: Zigbee2MQTT coordinator update
+              author:
+                name: Zigbee2MQTT
+                icon_url: https://www.zigbee2mqtt.io/logo.png
+              title: Coordinator update
               description: |
                 Versie **{{ states("sensor.zigbee2mqtt_coordinator_latest_version") }}** is beschikbaar!
                 De huidige versie is {{ states("sensor.zigbee2mqtt_bridge_coordinator_version") }}.
