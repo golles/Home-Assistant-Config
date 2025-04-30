@@ -39,12 +39,19 @@ automation:
     actions:
       - action: rest_command.get_monthly_meter_values
         response_variable: meter_response
-      - if: "{{ meter_response['status'] == 200 }}"
+      - if: >-
+          {{ meter_response["status"] == 200 }}
         then:
           - alias: Set variables
             variables:
-              current_month: "{{ meter_response['content'][0] }}"
-              previous_month: "{{ meter_response['content'][1] }}"
+              current_month: >-
+                {{ meter_response["content"][0] }}
+              previous_month: >-
+                {{ meter_response["content"][1] }}
+              jan1st_year: >-
+                {{ now().year - 1 if now().month == 1 else now().year }}
+              previous_jan1st: >-
+                {{ meter_response["content"] | selectattr("date", "search", jan1st_year ~ "-01-01 00:00:00") | list | first }}
 
           - alias: Send message
             action: notify.discord
@@ -54,21 +61,22 @@ automation:
               data:
                 embed:
                   title: 🔌 Maandelijkse meterstanden
-                  fields:
-                    - name: >-
-                        {% from 'nl.jinja' import month %}
-                        {{ now().day }} {{ month() }}:
-                      value: |
-                        - Elektriciteit laag: {{ current_month['electricity_low'] }} kWh
-                        - Elektriciteit hoog: {{ current_month['electricity_high'] }} kWh
-                        - Warmte energie: {{ current_month['heat_energy'] }} GJ
-                        - Warmte volume: {{ current_month['heat_volume'] }} m³
-                      inline: false
-                    - name: >-
-                        Verbruik:
-                      value: |
-                        - Elektriciteit laag: {{ (current_month['electricity_low'] | int) - (previous_month['electricity_low'] | int) }} kWh
-                        - Elektriciteit hoog: {{ (current_month['electricity_high'] | int) - (previous_month['electricity_high'] | int) }} kWh
-                        - Warmte energie: {{ (current_month['heat_energy'] | int) - (previous_month['heat_energy'] | int) }} GJ
-                        - Warmte volume: {{ (current_month['heat_volume'] | int) - (previous_month['heat_volume'] | int) }} m³
-                      inline: false
+                  description: |
+                    {% from "nl.jinja" import month %}
+                    **{{ now().day }} {{ month() }}:**
+                    - Elektriciteit laag: {{ current_month["electricity_low"] }} kWh
+                    - Elektriciteit hoog: {{ current_month["electricity_high"] }} kWh
+                    - Warmte energie: {{ current_month["heat_energy"] }} GJ
+                    - Warmte volume: {{ current_month["heat_volume"] }} m³
+
+                    **Verbruik vorige maand:**
+                    - Elektriciteit laag: {{ (current_month["electricity_low"] | int) - (previous_month["electricity_low"] | int) }} kWh
+                    - Elektriciteit hoog: {{ (current_month["electricity_high"] | int) - (previous_month["electricity_high"] | int) }} kWh
+                    - Warmte energie: {{ (current_month["heat_energy"] | int) - (previous_month["heat_energy"] | int) }} GJ
+                    - Warmte volume: {{ (current_month["heat_volume"] | int) - (previous_month["heat_volume"] | int) }} m³
+
+                    **Verbruik sinds 1 januari {{ jan1st_year }}:**
+                    - Elektriciteit laag: {{ (current_month["electricity_low"] | int) - (previous_jan1st["electricity_low"] | int) }} kWh
+                    - Elektriciteit hoog: {{ (current_month["electricity_high"] | int) - (previous_jan1st["electricity_high"] | int) }} kWh
+                    - Warmte energie: {{ (current_month["heat_energy"] | int) - (previous_jan1st["heat_energy"] | int) }} GJ
+                    - Warmte volume: {{ (current_month["heat_volume"] | int) - (previous_jan1st["heat_volume"] | int) }} m³
