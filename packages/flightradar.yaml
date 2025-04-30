@@ -1,0 +1,63 @@
+automation:
+  - id: flightradar24_notification
+    alias: "Notificatie: Flightradar24"
+    mode: restart
+    max_exceeded: silent
+    triggers:
+      - alias: Plane entering the area
+        trigger: event
+        event_type: flightradar24_entry
+    actions:
+      - alias: Set variables
+        variables:
+          registration: >-
+            {{ iif(trigger.event.data.aircraft_registration, trigger.event.data.aircraft_registration, "N/A") }}
+          callsign: >-
+            {{ iif(trigger.event.data.callsign, trigger.event.data.callsign, "N/A") }}
+          model: >-
+            {{ iif(trigger.event.data.aircraft_model, trigger.event.data.aircraft_model, "N/A") }}
+          airline: >-
+            {{ iif(trigger.event.data.airline_short, trigger.event.data.airline_short, "N/A") }}
+          from: >-
+            {{ iif(trigger.event.data.airport_origin_city, trigger.event.data.airport_origin_city ~ ", " ~ trigger.event.data.airport_origin_country_name, "N/A") }}
+          to: >-
+            {{ iif(trigger.event.data.airport_destination_city, trigger.event.data.airport_destination_city ~ ", " ~ trigger.event.data.airport_destination_country_name, "N/A") }}
+          altitude: >-
+            {{ (trigger.event.data.altitude | float * 0.3048) | round(0) }}
+          speed: >-
+            {{ (trigger.event.data.ground_speed | float * 1.852) | round(0) }}
+          url: >-
+            {% if callsign not in ["N/A", "Blocked"] %}
+              {{ "https://www.flightradar24.com/" ~ callsign }}
+            {% else %}
+              {{ "https://www.flightradar24.com/" ~ trigger.event.data.flight_number }}
+            {% endif %}
+
+      - alias: Send the notification
+        action: notify.discord
+        data:
+          message: ""
+          target: !secret discord_flightradar
+          data:
+            embed:
+              author:
+                name: Flightradar24
+                icon_url: https://brands.home-assistant.io/flightradar24/icon.png
+              color: >-
+                {% if "LIFELN" in callsign %} 16776960
+                {% else %} None
+                {% endif %}
+              title: >-
+                ✈️  {{ model }} - {{ airline }}
+              description: |
+                Callsign: {{ callsign }}
+                Registration: {{ registration }}
+                From: {{ from }}
+                To: {{ iif(callsign == "LIFELN1", states('sensor.p2000_lifeliner_1'), to) }}
+                Altitude: {{ altitude }} meter
+                Speed: {{ speed }} km/h
+
+                {{ url }}
+              thumbnail:
+                url: >-
+                  {{ trigger.event.data.aircraft_photo_large }}
