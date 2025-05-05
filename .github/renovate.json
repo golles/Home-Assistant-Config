@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "schedule": ["before 9am on Saturday"],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchManagers": ["devcontainer"],
+      "groupName": "devcontainer updates",
+      "addLabels": ["devcontainer"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+      "addLabels": ["github-actions"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
+}
