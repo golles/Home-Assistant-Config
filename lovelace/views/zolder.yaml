@@ -60,6 +60,8 @@ sections:
       - type: tile
         entity: sensor.wasmachine_status
         name: Wasmachine
+      - type: tile
+        entity: binary_sensor.hometrainer
 
   - type: grid
     cards:

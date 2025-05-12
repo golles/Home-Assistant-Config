@@ -1,0 +1,12 @@
+device_tracker:
+  - platform: bluetooth_le_tracker
+    track_new_devices: false
+
+template:
+  - binary_sensor:
+      - name: Hometrainer
+        icon: mdi:bike
+        state: >
+          {{ is_state("device_tracker.vifhtr2_1_0131", "home") }}
+        availability: >
+          {{ states("device_tracker.vifhtr2_1_0131") in ["home", "not_home"] }}
