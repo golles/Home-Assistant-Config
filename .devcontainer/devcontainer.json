@@ -1,14 +1,17 @@
 {
-  "name": "My HA development",
-  "image": "mcr.microsoft.com/vscode/devcontainers/python:1-3.11-bullseye",
+  "name": "My HA config development",
+  "image": "mcr.microsoft.com/vscode/devcontainers/python:1-3.13",
   "postCreateCommand": ".devcontainer/scripts/setup",
   "forwardPorts": [8123],
   "customizations": {
     "vscode": {
       "extensions": [
         "esbenp.prettier-vscode",
+        "GitHub.vscode-github-actions",
         "github.vscode-pull-request-github",
         "keesschollaart.vscode-home-assistant",
+        "lukas-tr.materialdesignicons-intellisense",
+        "ms-python.python",
         "redhat.vscode-yaml"
       ],
       "settings": {
@@ -39,7 +42,8 @@
   },
   "remoteUser": "vscode",
   "features": {
-    "node": "latest",
-    "rust": "latest"
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": 22
+    }
   }
 }
