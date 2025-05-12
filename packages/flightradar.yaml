@@ -28,9 +28,9 @@ automation:
             {{ (trigger.event.data.ground_speed | float * 1.852) | round(0) }}
           url: >-
             {% if callsign not in ["N/A", "Blocked"] %}
-              {{ "https://www.flightradar24.com/" ~ callsign }}
+              {{ "https://www.fr24.com/" ~ callsign }}
             {% else %}
-              {{ "https://www.flightradar24.com/" ~ trigger.event.data.flight_number }}
+              {{ "https://www.fr24.com/" ~ trigger.event.data.flight_number }}
             {% endif %}
 
       - alias: Send the notification
@@ -50,6 +50,7 @@ automation:
               title: >-
                 ✈️  {{ model }} - {{ airline }}
               description: |
+                {{ now().strftime('%d-%m-%Y %H:%M:%S') }}
                 Callsign: {{ callsign }}
                 Registration: {{ registration }}
                 From: {{ from }}
