@@ -46,7 +46,7 @@ template:
         state: >-
           {{
             state_attr("sensor.purmerend_bio_afval", "Days_until") == 1 and now() > today_at("18:00") or
-            state_attr("sensor.purmerend_bio_afval", "Days_until") == 0 and now() < today_at("12:00")
+            state_attr("sensor.purmerend_bio_afval", "Days_until") == 0 and now() < today_at("18:00")
           }}
         availability: >-
           {{ not is_state("sensor.purmerend_bio_afval", "unknown") and state_attr("sensor.purmerend_bio_afval", "Days_until") is not none }}
@@ -54,7 +54,7 @@ template:
         state: >-
           {{
             state_attr("sensor.purmerend_papier", "Days_until") == 1 and now() > today_at("18:00") or
-            state_attr("sensor.purmerend_papier", "Days_until") == 0 and now() < today_at("12:00")
+            state_attr("sensor.purmerend_papier", "Days_until") == 0 and now() < today_at("18:00")
           }}
         availability: >-
           {{ not is_state("sensor.purmerend_papier", "unknown") and state_attr("sensor.purmerend_papier", "Days_until") is not none }}
@@ -62,7 +62,7 @@ template:
         state: >-
           {{
             state_attr("sensor.purmerend_restafval", "Days_until") == 1 and now() > today_at("18:00") or
-            state_attr("sensor.purmerend_restafval", "Days_until") == 0 and now() < today_at("12:00")
+            state_attr("sensor.purmerend_restafval", "Days_until") == 0 and now() < today_at("18:00")
           }}
         availability: >-
           {{ not is_state("sensor.purmerend_restafval", "unknown") and state_attr("sensor.purmerend_restafval", "Days_until") is not none }}
