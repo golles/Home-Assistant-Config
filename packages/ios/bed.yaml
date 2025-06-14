@@ -57,6 +57,7 @@ automation:
             - light.overloop_spot_2
             - light.overloop_spot_3
             - light.gekleurde_licht_plug
+            - fan.ventilator
 
       - alias: Now turn some lights off with a transition
         action: light.turn_off
