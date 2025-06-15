@@ -1,0 +1,87 @@
+- id: system_monitoring_alert
+  alias: "Notificatie: Systeem monitoring"
+  mode: parallel
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_schijfgebruik
+      above: 80
+      variables:
+        alert_message: "SSD1 is bijna vol, -STATE-%"
+        resolved_message: "SSD1 is weer OK, -STATE-%"
+        resolved_threshold: 80
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_schijfgebruik_media
+      above: 80
+      variables:
+        alert_message: "SSD2 is bijna vol, -STATE-%"
+        resolved_message: "SSD2 is weer OK, -STATE-%"
+        resolved_threshold: 80
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_geheugengebruik
+      above: 80
+      for:
+        minutes: 5
+      variables:
+        alert_message: "Geheugen gebruik is hoog, -STATE-%"
+        resolved_message: "Geheugen gebruik is weer OK, -STATE-%"
+        resolved_threshold: 80
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_swap_usage
+      above: 20
+      for:
+        minutes: 5
+      variables:
+        alert_message: "Swap gebruik is hoog, -STATE-%"
+        resolved_message: "Swap gebruik is weer OK, -STATE-%"
+        resolved_threshold: 80
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_processor_use
+      above: 80
+      for:
+        minutes: 5
+      variables:
+        alert_message: "Processor gebruik is hoog, -STATE-%"
+        resolved_message: "Processor gebruik is weer OK, -STATE-%"
+        resolved_threshold: 80
+    - trigger: numeric_state
+      entity_id: sensor.system_monitor_processortemperatuur
+      above: 85
+      for:
+        minutes: 5
+      variables:
+        alert_message: "Processor temperatuur is hoog, -STATE-°C"
+        resolved_message: "Processor temperatuur is weer OK, -STATE-°C"
+        resolved_threshold: 85
+  actions:
+    - alias: Send the notification
+      action: notify.discord
+      data:
+        message: ""
+        target: !secret discord_monitoring
+        data:
+          embed:
+            color: 15158332 # Red
+            title: Systeem monitoring
+            description: |
+              :x: - `{{ alert_message | replace('-STATE-', states(trigger.entity_id)) }}`
+
+    - alias: Wait a bit to see if the alert resolves
+      wait_template: >-
+        {{
+          states(trigger.entity_id) | int < resolved_threshold | int
+        }}
+      timeout:
+        hours: 1
+      continue_on_timeout: false
+
+    - alias: Send the notification
+      action: notify.discord
+      data:
+        message: ""
+        target: !secret discord_monitoring
+        data:
+          embed:
+            color: 3066993 # Green
+            title: Systeem monitoring
+            description: |
+              :white_check_mark: - `{{ resolved_message | replace('-STATE-', states(trigger.entity_id)) }}`
