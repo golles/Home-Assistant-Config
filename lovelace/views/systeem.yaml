@@ -1,0 +1,152 @@
+title: test
+path: test
+icon: mdi:chip
+type: sections
+sections:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Systeem
+        heading_style: title
+        icon: mdi:chip
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Processor
+        heading_style: subtitle
+      - type: statistics-graph
+        chart_type: line
+        period: 5minute
+        stat_types:
+          - mean
+        entities:
+          - entity: sensor.system_monitor_processor_use
+            name: Gebruik
+          - entity: sensor.system_monitor_processortemperatuur
+            name: Temperatuur
+      - type: tile
+        entity: sensor.system_monitor_processor_use
+        name: Gebruik
+      - type: tile
+        entity: sensor.system_monitor_processortemperatuur
+        name: Temperatuur
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Belasting
+        heading_style: subtitle
+      - type: statistics-graph
+        chart_type: line
+        period: hour
+        stat_types:
+          - mean
+        entities:
+          - entity: sensor.system_monitor_load_1m
+            name: 1 min
+          - entity: sensor.system_monitor_load_5m
+            name: 5 min
+          - entity: sensor.system_monitor_load_15m
+            name: 15 min
+      - type: tile
+        entity: sensor.system_monitor_load_1m
+        name: 1 min
+      - type: tile
+        entity: sensor.system_monitor_load_5m
+        name: 5 min
+      - type: tile
+        entity: sensor.system_monitor_load_15m
+        name: 15 min
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Geheugen
+        heading_style: subtitle
+      - type: gauge
+        entity: sensor.system_monitor_geheugengebruik
+        name: Geheugen
+        needle: true
+        severity:
+          green: 0
+          yellow: 70
+          red: 90
+      - type: tile
+        entity: sensor.system_monitor_memory_use
+        name: Gebruikt
+      - type: tile
+        entity: sensor.system_monitor_memory_free
+        name: Vrij
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Swap
+        heading_style: subtitle
+      - type: gauge
+        entity: sensor.system_monitor_swap_usage
+        name: Swap
+        needle: true
+        severity:
+          green: 0
+          yellow: 10
+          red: 20
+      - type: tile
+        entity: sensor.system_monitor_swap_use
+        name: Gebruikt
+      - type: tile
+        entity: sensor.system_monitor_swap_free
+        name: Vrij
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: SSD1
+        heading_style: subtitle
+      - type: gauge
+        entity: sensor.system_monitor_schijfgebruik
+        name: SSD1
+        needle: true
+        severity:
+          green: 0
+          yellow: 70
+          red: 90
+      - type: tile
+        entity: sensor.system_monitor_disk_use
+        name: Gebruikt
+      - type: tile
+        entity: sensor.system_monitor_disk_free
+        name: Vrij
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: SSD2
+        heading_style: subtitle
+      - type: gauge
+        entity: sensor.system_monitor_schijfgebruik_media
+        name: SSD2
+        needle: true
+        severity:
+          green: 0
+          yellow: 70
+          red: 90
+      - type: tile
+        entity: sensor.system_monitor_disk_use_media
+        name: Gebruikt
+      - type: tile
+        entity: sensor.system_monitor_disk_free_media
+        name: Vrij
