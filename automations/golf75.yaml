@@ -1,3 +1,30 @@
+- id: notification_apk_golf_75
+  alias: "Notificatie: APK Golf 7.5"
+  mode: single
+  triggers:
+    - platform: time
+      at: "14:00:00"
+  condition:
+    - condition: template
+      value_template: >-
+        {{
+          now().date() == (states('sensor.golf_7_5_apk_expiration') | as_datetime | as_local - timedelta(days=60)).date()
+        }}
+  action:
+    - alias: Send the notification
+      action: notify.discord
+      data:
+        message: ""
+        target: !secret discord_algemeen
+        data:
+          embed:
+            author:
+              name: RDW
+              icon_url: https://brands.home-assistant.io/rdw/icon.png
+            title: 🚗 APK Golf 7.5
+            description: |
+              Tijd voor het inplannen van de APK, deze verloopt op {{ states('sensor.golf_7_5_apk_expiration') }}
+
 - id: track_golf_75
   alias: Golf 7.5 - Update locatie
   description: |
