@@ -2,7 +2,11 @@ template:
   - binary_sensor:
       - name: MacBook in thuis kantoor
         state: >-
-          {{ is_state("device_tracker.macbook_pro_van_sander", "home") and "DELL P2419H" in state_attr("sensor.macbook_pro_van_sander_displays", "Display Names") }}
+          {{
+            is_state("device_tracker.macbook_pro_van_sander", "home") and
+            states("sensor.macbook_pro_van_sander_displays") not in ["unavailable"] and
+            "DELL P2419H" in state_attr("sensor.macbook_pro_van_sander_displays", "Display Names")
+          }}
       - name: MacBook in thuis kantoor en aan
         delay_off:
           seconds: 10
@@ -10,7 +14,11 @@ template:
           {{ is_state("binary_sensor.macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.macbook_pro_van_sander_active", "on") }}
       - name: TT MacBook in thuis kantoor
         state: >-
-          {{ is_state("device_tracker.tt_macbook", "home") and "DELL P2419H" in state_attr("sensor.tt_macbook_displays", "Display Names") }}
+          {{
+            is_state("device_tracker.tt_macbook", "home") and
+            states("sensor.tt_macbook_displays") not in ["unavailable"] and
+            "DELL P2419H" in state_attr("sensor.tt_macbook_displays", "Display Names")
+          }}
       - name: TT MacBook in thuis kantoor en aan
         delay_off:
           seconds: 10
