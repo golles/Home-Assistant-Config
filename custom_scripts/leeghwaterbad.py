@@ -72,6 +72,15 @@ def parse_datetime(date_string: str, timezone: str, string_date_format: str) -> 
 
 def get_subscription_details(soup: BeautifulSoup) -> Abonnement:
     """Extracts subscription details from the subscriptions page."""
+    active = len(soup.select("#subscriptions_active > div > div")) - 1 # Exclude the header row
+    if active == 0:
+        return Abonnement(
+            beschikbaar=0,
+            totaal=0,
+            procent=0,
+            verloopdatum="1970-01-01T00:00:00+00:00",
+        )
+
     details = soup.select_one("#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)").get_text(strip=True)
     match = re.match(r"(\d+)/(\d+)-\s+(\d+)%", details)
     if match:

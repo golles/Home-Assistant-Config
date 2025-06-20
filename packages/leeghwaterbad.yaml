@@ -20,6 +20,8 @@ command_line:
       command_timeout: 120
       value_template: "{{ value_json.abonnement.verloopdatum }}"
       device_class: timestamp
+      availability: >-
+        {{ not is_state("sensor.leeghwaterbad_verloopdatum", "1970-01-01T00:00:00+00:00") }}
   - sensor:
       name: Leeghwaterbad Volgende bestelling
       unique_id: leeghwaterbad_volgende_bestelling
@@ -36,7 +38,7 @@ command_line:
         - ticket
       device_class: timestamp
       availability: >-
-        {{ states("sensor.leeghwaterbad_volgende_bestelling") != "1970-01-01T00:00:00+00:00" }}
+        {{ not is_state("sensor.leeghwaterbad_volgende_bestelling", "1970-01-01T00:00:00+00:00") }}
 
 automation:
   - id: notification_leeghwaterbad_ticket
