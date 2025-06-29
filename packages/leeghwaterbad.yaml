@@ -55,7 +55,7 @@ automation:
             0 <= as_timestamp(states("sensor.leeghwaterbad_volgende_bestelling"), 0) - as_timestamp(now()) <= 60 * 60
           }}
     actions:
-      - action: notify.sander
+      - action: notify.mobile_app_iphone_van_golles
         data:
           title: 🏊 Veel plezier met zwemmen!
           message: >-
