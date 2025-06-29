@@ -184,4 +184,3 @@ sections:
         entities:
           - entity: sensor.speedtest_ping
             name: Ping
-
