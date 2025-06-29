@@ -23,6 +23,7 @@ sections:
         icon: mdi:chip
 
   - type: grid
+    column_span: 2
     cards:
       - type: heading
         heading: Processor
@@ -32,6 +33,8 @@ sections:
         period: 5minute
         stat_types:
           - mean
+        layout_options:
+          grid_columns: full
         entities:
           - entity: sensor.system_monitor_processor_use
             name: Gebruik
@@ -45,6 +48,7 @@ sections:
         name: Temperatuur
 
   - type: grid
+    column_span: 2
     cards:
       - type: heading
         heading: Belasting
@@ -54,6 +58,8 @@ sections:
         period: hour
         stat_types:
           - mean
+        layout_options:
+          grid_columns: full
         entities:
           - entity: sensor.system_monitor_load_1m
             name: 1 min

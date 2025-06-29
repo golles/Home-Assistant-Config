@@ -154,41 +154,34 @@ sections:
       - type: heading
         heading: Snelheden
         heading_style: subtitle
-      - type: custom:mini-graph-card
-        name: Download
-        icon: mdi:speedometer
+
+      - type: statistics-graph
+        chart_type: line
+        period: 5minute
+        days_to_show: 7
+        stat_types:
+          - mean
         entities:
-          - sensor.speedtest_download
-        line_color: blue
-        points_per_hour: 2
-        hours_to_show: 24
-        hour24: true
-        more_info: false
-        show:
-          legend: false
-          extrema: true
-      - type: custom:mini-graph-card
-        name: Upload
-        icon: mdi:speedometer
+          - entity: sensor.speedtest_download
+            name: Download
+
+      - type: statistics-graph
+        chart_type: line
+        period: 5minute
+        days_to_show: 7
+        stat_types:
+          - mean
         entities:
-          - sensor.speedtest_upload
-        line_color: red
-        points_per_hour: 2
-        hours_to_show: 24
-        hour24: true
-        more_info: false
-        show:
-          legend: false
-          extrema: true
-      - type: custom:mini-graph-card
-        name: Ping
-        icon: mdi:speedometer
+          - entity: sensor.speedtest_upload
+            name: Upload
+
+      - type: statistics-graph
+        chart_type: line
+        period: 5minute
+        days_to_show: 7
+        stat_types:
+          - mean
         entities:
-          - sensor.speedtest_ping
-        points_per_hour: 2
-        hours_to_show: 24
-        hour24: true
-        more_info: false
-        show:
-          legend: false
-          extrema: true
+          - entity: sensor.speedtest_ping
+            name: Ping
+
