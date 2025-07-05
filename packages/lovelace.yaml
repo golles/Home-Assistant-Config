@@ -79,10 +79,9 @@ template:
       - name: UI helper let op 3d printer
         state: >-
           {{
-            states("sensor.p1s_01p00c480300533_remaining_time") | int > 0
+            is_state("switch.3d_printer_plug", "on") and
+            not is_state("switch.p1s_01p00c480300533_print_status", "offline")
           }}
-        availability: >-
-          {{ is_number(states("sensor.p1s_01p00c480300533_remaining_time")) }}
       - name: UI helper let op oven
         state: >-
           {{
