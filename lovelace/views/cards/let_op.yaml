@@ -70,34 +70,80 @@ cards:
         entity: binary_sensor.ui_helper_let_op_afval_papier
         state: "on"
 
-  - type: tile
+  - type: custom:entity-progress-card-template
     entity: sensor.vaatwasser_status
+    icon: >-
+      {{ state_attr(entity, "icon") }}
     name: Vaatwasser
+    secondary: >-
+      {{ states(entity) }}
+    percent: >-
+      {{
+        iif(
+          state_attr(entity, "voortgang") != "unavailable",
+          state_attr(entity, "voortgang"),
+          0
+        )
+      }}
     visibility:
       - condition: state
         entity: binary_sensor.ui_helper_let_op_vaatwasser
         state: "on"
 
-  - type: tile
+  - type: custom:entity-progress-card-template
     entity: sensor.wasmachine_status
+    icon: >-
+      {{ state_attr(entity, "icon") }}
     name: Wasmachine
+    secondary: >-
+      {{ states(entity) }}
+    percent: >-
+      {{
+        iif(
+          state_attr(entity, "voortgang") != "unavailable",
+          state_attr(entity, "voortgang"),
+          0
+        )
+      }}
     visibility:
       - condition: state
         entity: binary_sensor.ui_helper_let_op_wasmachine
         state: "on"
 
-  - type: tile
+  - type: custom:entity-progress-card-template
     entity: sensor.oven_status
+    icon: >-
+      {{ state_attr(entity, "icon") }}
     name: Oven
+    secondary: >-
+      {{ states(entity) }}
+    percent: >-
+      {{
+        iif(
+          state_attr(entity, "voortgang") != "unavailable",
+          state_attr(entity, "voortgang"),
+          0
+        )
+      }}
     visibility:
       - condition: state
         entity: binary_sensor.ui_helper_let_op_oven
         state: "on"
 
-  - type: tile
-    entity: sensor.p1s_01p00c480300533_remaining_time
-    name: 3D printer
+  - type: custom:entity-progress-card-template
+    entity: sensor.p1s_01p00c480300533_print_progress
     icon: mdi:printer-3d
+    name: 3D Printer
+    secondary: >-
+      {{
+        iif(
+          states("sensor.p1s_01p00c480300533_remaining_time") == "0",
+          states("sensor.p1s_01p00c480300533_print_status"),
+          states("sensor.p1s_01p00c480300533_remaining_time") ~ " minuten"
+        )
+      }}
+    percent: >-
+      {{ states("sensor.p1s_01p00c480300533_print_progress") }}
     tap_action:
       action: navigate
       navigation_path: /dashboard-status/3dprinter

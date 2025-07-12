@@ -46,8 +46,6 @@ template:
           {% elif is_state("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate", "Loopt") -%}
             {% set minuten = states("sensor.wasmachine_resterende_minuten") %}
             {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
-          {% elif is_state("binary_sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_remotecontrolstartallowed", "on") -%}
-            Uitgestelde start
           {%- else -%}
             {{ states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_status_operationstate") }}
           {%- endif %}
@@ -76,7 +74,7 @@ template:
             {{
               iif(
                 states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress") ~ "%",
+                states("sensor.bosch_wawh2643nl_68a40e31630b_bsh_common_option_programprogress"),
                 "unavailable"
               )
             }}
@@ -91,8 +89,6 @@ template:
           {% elif is_state("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_operationstate", "Loopt") -%}
             {% set minuten = states("sensor.vaatwasser_resterende_minuten") %}
             {{ minuten ~ " " ~ iif(minuten == "1", "minuut", "minuten") }}
-          {% elif is_state("binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_remotecontrolstartallowed", "on") -%}
-            Uitgestelde start
           {% elif is_state("switch.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate", "off") -%}
             off
           {%- else -%}
@@ -123,7 +119,7 @@ template:
             {{
               iif(
                 states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress") ~ "%",
+                states("sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_option_programprogress"),
                 "unavailable"
               )
             }}
@@ -174,7 +170,7 @@ template:
             {{
               iif(
                 states("sensor.384090532720002735_001_bsh_common_option_programprogress") != "unavailable",
-                states("sensor.384090532720002735_001_bsh_common_option_programprogress") ~ "%",
+                states("sensor.384090532720002735_001_bsh_common_option_programprogress"),
                 "unavailable"
               )
             }}
