@@ -58,14 +58,6 @@ sections:
             entity: binary_sensor.macbook_in_thuis_kantoor
             state: "on"
       - type: tile
-        entity: binary_sensor.tt_macbook_active
-        name: Werk laptop
-        icon: mdi:laptop
-        visibility:
-          - condition: state
-            entity: binary_sensor.tt_macbook_in_thuis_kantoor
-            state: "on"
-      - type: tile
         entity: light.logeerkamer_klok_matrix
         name: Klok
         state_content: state

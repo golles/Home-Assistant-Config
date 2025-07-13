@@ -11,17 +11,19 @@
   alias: Logeerkamer - Elektrische verwarming
   mode: single
   triggers:
-    - trigger: state
+    - alias: Immediately trigger when laptops are being used
+      trigger: state
       entity_id:
         - binary_sensor.macbook_in_thuis_kantoor_en_aan
-        - binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
       to: "on"
-    - trigger: state
+    - alias: Trigger when logeerkamer is occupied
+      trigger: state
       entity_id: binary_sensor.logeerkamer_bezetting
       to: "on"
       for:
         minutes: 5
-    - trigger: state
+    - alias: Trigger when logeerkamer is not occupied
+      trigger: state
       entity_id: binary_sensor.logeerkamer_bezetting
       to: "off"
   actions:

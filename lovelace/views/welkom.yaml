@@ -383,16 +383,6 @@ sections:
               - condition: state
                 entity: binary_sensor.macbook_in_thuis_kantoor
                 state: "on"
-          - type: entity
-            show_state: false
-            show_icon: true
-            entity: binary_sensor.tt_macbook_active
-            icon: mdi:laptop
-            color: state
-            visibility:
-              - condition: state
-                entity: binary_sensor.tt_macbook_in_thuis_kantoor
-                state: "on"
       - type: tile
         entity: light.logeerkamer
         name: Plafond

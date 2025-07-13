@@ -4,12 +4,6 @@ notify:
     services:
       - action: mobile_app_iphone_van_golles
       - action: mobile_app_macbook_pro_van_sander
-      - action: mobile_app_tt_macbook
-
-  - name: sander_work
-    platform: group
-    services:
-      - action: mobile_app_tt_macbook
 
   - name: all_phones
     platform: group

@@ -26,7 +26,8 @@
     - choose:
         - conditions:
             - condition: state
-              entity_id: binary_sensor.tt_macbook_in_thuis_kantoor_en_aan
+              entity_id:
+                - binary_sensor.macbook_in_thuis_kantoor_en_aan
               state: "on"
           sequence:
             - alias: Notify Sander when he's working from home, he might not hear the doorbell as he's really busy

@@ -1,0 +1,158 @@
+blueprint:
+  name: Mute media player during MacBook meeting or inactivity
+  description: Mute or turn off a media player when a MacBook, using the official mobile app, is in a meeting or becomes inactive, and restore after.
+  domain: automation
+  author: golles
+  source_url: https://raw.githubusercontent.com/golles/Home-Assistant-Config/main/blueprints/automation/golles/mac_home_office.yaml
+  input:
+    macbook_audio_input_binary_sensor:
+      name: MacBook audio input binary sensor
+      description: Audio Input In Use
+      selector:
+        entity:
+          domain: binary_sensor
+          integration: mobile_app
+    macbook_active_binary_sensor:
+      name: MacBook active binary sensor
+      description: Active
+      selector:
+        entity:
+          domain: binary_sensor
+          integration: mobile_app
+    macbook_display_sensor:
+      name: MacBook display sensor
+      description: Displays
+      selector:
+        entity:
+          domain: sensor
+          integration: mobile_app
+    macbook_frontmost_app_sensor:
+      name: MacBook frontmost app sensor
+      description: Frontmost App
+      selector:
+        entity:
+          domain: sensor
+          integration: mobile_app
+    macbook_device_tracker:
+      name: MacBook device tracker
+      selector:
+        entity:
+          domain: device_tracker
+          integration: mobile_app
+    macbook_device_state:
+      name: MacBook device tracker state
+      description: The state indicating the MacBook is at your workspace
+      default: home
+      selector:
+        text:
+    media_player:
+      name: Media player to mute/turn off
+      selector:
+        entity:
+          domain: media_player
+    monitor_name:
+      name: Monitor name
+      description: Exact name of the monitor to look for in the display attribute
+      selector:
+        text:
+    apps:
+      name: Apps that trigger muting
+      description: List of frontmost app names that trigger the automation, each app on a new line starting with a dash
+      selector:
+        object:
+    timeout_minutes:
+      name: Timeout before unmute
+      description: How long to wait before restoring audio (in minutes)
+      default: 45
+      selector:
+        number:
+          min: 1
+          max: 120
+          mode: slider
+          unit_of_measurement: minutes
+
+trigger:
+  - id: meeting
+    platform: state
+    entity_id: !input macbook_audio_input_binary_sensor
+    from: "off"
+    to: "on"
+  - platform: state
+    entity_id: !input macbook_active_binary_sensor
+    from: "on"
+    to: "off"
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: !input macbook_frontmost_app_sensor
+    to: loginwindow
+    for:
+      seconds: 1 # Use a small delay to not stop the media player on glitches
+
+variables:
+  macbook_display_sensor: !input macbook_display_sensor
+  monitor_name: !input monitor_name
+  macbook_frontmost_app_sensor: !input macbook_frontmost_app_sensor
+  apps: !input apps
+
+condition:
+  - condition: template
+    value_template: >-
+      {{
+        states(macbook_display_sensor) not in ["unavailable"] and
+        monitor_name in state_attr(macbook_display_sensor, "Display Names")
+      }}
+  - condition: state
+    entity_id: !input macbook_device_tracker
+    state: !input macbook_device_state
+  - condition: state
+    entity_id: !input media_player
+    state: playing
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: meeting
+        sequence:
+          - alias: Is a given app the frontmost app
+            condition: template
+            value_template: "{{ states(macbook_frontmost_app_sensor) in apps }}"
+
+          - alias: Mute media player
+            service: media_player.volume_mute
+            data:
+              entity_id: !input media_player
+              is_volume_muted: true
+
+          - alias: Wait for MacBook audio input to stop
+            wait_for_trigger:
+              - platform: state
+                entity_id: !input macbook_audio_input_binary_sensor
+                from: "on"
+                to: "off"
+            timeout:
+              minutes: !input timeout_minutes
+            continue_on_timeout: true
+
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: !input macbook_audio_input_binary_sensor
+                    state: "off"
+                sequence:
+                  - alias: Restore media player volume
+                    service: media_player.volume_mute
+                    data:
+                      entity_id: !input media_player
+                      is_volume_muted: false
+            default:
+              - alias: Turn off media player after timeout
+                service: media_player.turn_off
+                data:
+                  entity_id: !input media_player
+
+    default:
+      - service: media_player.turn_off
+        data:
+          entity_id: !input media_player

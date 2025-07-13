@@ -8,96 +8,23 @@ template:
             "DELL P2419H" in state_attr("sensor.macbook_pro_van_sander_displays", "Display Names")
           }}
       - name: MacBook in thuis kantoor en aan
-        delay_off:
-          seconds: 10
-        state: >-
-          {{ is_state("binary_sensor.macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.macbook_pro_van_sander_active", "on") }}
-      - name: TT MacBook in thuis kantoor
         state: >-
           {{
-            is_state("device_tracker.tt_macbook", "home") and
-            states("sensor.tt_macbook_displays") not in ["unavailable"] and
-            "DELL P2419H" in state_attr("sensor.tt_macbook_displays", "Display Names")
+            is_state("binary_sensor.macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.macbook_pro_van_sander_active", "on")
           }}
-      - name: TT MacBook in thuis kantoor en aan
-        delay_off:
-          seconds: 10
-        state: >-
-          {{ is_state("binary_sensor.tt_macbook_in_thuis_kantoor", "on") and is_state("binary_sensor.tt_macbook_active", "on") }}
 
 automation:
-  - id: home_office_laptop_inactive
-    alias: Thuiswerken, stop muziek laptop inactive
-    mode: restart
-    triggers:
-      - trigger: state
-        entity_id: binary_sensor.tt_macbook_active
-        from: "on"
-        to: "off"
-        for:
-          minutes: 15
-      - trigger: state
-        entity_id: sensor.tt_macbook_frontmost_app
-        to: loginwindow
-        for: 1
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
-        state: "on"
-      - condition: state
-        entity_id: media_player.logeerkamer
-        state: playing
-    actions:
-      - action: media_player.turn_off
-        data:
-          entity_id: media_player.logeerkamer
-
-  - id: home_office_meeting
-    alias: Thuiswerken, stop muziek bij vergadering
-    mode: restart
-    triggers:
-      - trigger: state
-        entity_id: binary_sensor.tt_macbook_audio_input_in_use
-        from: "off"
-        to: "on"
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.tt_macbook_in_thuis_kantoor
-        state: "on"
-      - condition: state
-        entity_id: media_player.logeerkamer
-        state: playing
-      - condition: state
-        entity_id: sensor.tt_macbook_frontmost_app
-        state:
-          - Slack
-          - Microsoft Teams
-    actions:
-      - action: media_player.volume_mute
-        data:
-          entity_id: media_player.logeerkamer
-          is_volume_muted: true
-
-      - wait_for_trigger:
-          - trigger: state
-            entity_id: binary_sensor.tt_macbook_audio_input_in_use
-            from: "on"
-            to: "off"
-        timeout:
-          minutes: 45
-        continue_on_timeout: true
-
-      - choose:
-          - conditions:
-              - condition: state
-                entity_id: binary_sensor.tt_macbook_audio_input_in_use
-                state: "off"
-            sequence:
-              - action: media_player.volume_mute
-                data:
-                  entity_id: media_player.logeerkamer
-                  is_volume_muted: false
-        default:
-          - action: media_player.turn_off
-            data:
-              entity_id: media_player.logeerkamer
+  - id: mac_home_office_private
+    alias: Thuiswerken, stop muziek bij vergadering of inactiviteit (prive)
+    use_blueprint:
+      path: golles/mac_home_office.yaml
+      input:
+        macbook_active_binary_sensor: binary_sensor.macbook_pro_van_sander_active
+        macbook_audio_input_binary_sensor: binary_sensor.macbook_pro_van_sander_audio_input_in_use
+        macbook_display_sensor: sensor.macbook_pro_van_sander_displays
+        macbook_frontmost_app_sensor: sensor.macbook_pro_van_sander_frontmost_app
+        macbook_device_tracker: device_tracker.macbook_pro_van_sander
+        media_player: media_player.logeerkamer
+        monitor_name: DELL P2419H
+        apps:
+          - Google Chrome
