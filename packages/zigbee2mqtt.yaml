@@ -1,13 +1,13 @@
 sensor:
   - platform: rest
     name: Zigbee2MQTT coordinator latest version
-    resource: https://api.github.com/repos/Koenkk/Z-Stack-firmware/contents/coordinator/Z-Stack_3.x.0/bin
+    resource: https://api.github.com/repos/Koenkk/Z-Stack-firmware/releases/latest
     headers:
       Accept: application/vnd.github.v3+json
     value_template: >
-      {% for item in value_json %}
-        {% if item.name.startswith("CC2652R_coordinator_") %}
-          {{ item.name.split("CC2652R_coordinator_")[1].split(".zip")[0] }}
+      {% for asset in value_json.assets %}
+        {% if asset.name.startswith("CC2652R_coordinator_") %}
+          {{ asset.name.split("CC2652R_coordinator_")[1].split(".zip")[0] }}
         {% endif %}
       {% endfor %}
     scan_interval: 86400
