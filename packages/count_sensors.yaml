@@ -111,7 +111,7 @@ template:
               states.binary_sensor
               | selectattr("state", "eq", "on")
               | selectattr("attributes.device_class", "==", "door")
-              | rejectattr("entity_id", "in", integration_entities('home_connect') + integration_entities('home_connect_alt'))
+              | rejectattr("entity_id", "in", integration_entities("home_connect") + integration_entities("home_connect_alt"))
               | map(attribute="entity_id")
               | list
             }}
@@ -120,7 +120,7 @@ template:
               states.binary_sensor
               | selectattr("state", "eq", "off")
               | selectattr("attributes.device_class", "==", "door")
-              | rejectattr("entity_id", "in", integration_entities('home_connect') + integration_entities('home_connect_alt'))
+              | rejectattr("entity_id", "in", integration_entities("home_connect") + integration_entities("home_connect_alt"))
               | map(attribute="entity_id")
               | list
             }}
@@ -281,3 +281,18 @@ template:
             {% endfor %}
 
             {{ devices.list }}
+
+      - name: Stale entities
+        icon: mdi:crosshairs-question
+        state: >-
+          {{ this.attributes.stale | default([], true) | count }}
+        unit_of_measurement: stale
+        attributes:
+          "stale": >-
+            {{
+              states
+              | selectattr("state", "eq", "unavailable")
+              | selectattr("attributes.restored", "eq", True)
+              | map(attribute="entity_id")
+              | list
+            }}
