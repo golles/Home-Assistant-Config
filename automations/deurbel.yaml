@@ -60,7 +60,7 @@
                       entity_id: media_player.lg_c9
 
                 - conditions:
-                    - "{{ not is_state('media_player.mediabox', ['idle', 'off', 'unavailable', 'unknown']) }}"
+                    - "{{ not is_state('media_player.mediabox', ['idle', 'paused', 'off', 'unavailable', 'unknown']) }}"
                     - "{{ is_state_attr('media_player.lg_c9', 'source', 'Ziggo') }}"
                     - "{{ not is_state_attr('media_player.mediabox', 'play_mode', 'linear') }}"
                   sequence:
