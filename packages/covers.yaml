@@ -123,6 +123,11 @@ script:
               entity_id:
                 - button.kledingkamer_my_position
                 - button.slaapkamer_my_position
+          - alias: Notify user as this might be unexpected
+            action: notify.sander
+            data:
+              title: Rolluiken
+              message: Het wordt vandaag warm, de rolluiken gaan niet helemaal open
         else:
           - alias: Open south facing covers
             action: cover.open_cover
