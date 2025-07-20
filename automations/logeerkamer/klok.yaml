@@ -11,3 +11,16 @@
       occupancy_entity: binary_sensor.logeerkamer_bezetting
       dishwasher_entity: sensor.vaatwasser_resterende_minuten
       washing_machine_entity: sensor.wasmachine_resterende_minuten
+
+- id: turn_off_klok_when_light_switch_pressed
+  alias: Turn off klok when light turn off switch is pressed
+  mode: single
+  max_exceeded: silent
+  triggers:
+    - trigger: state
+      entity_id: event.logeerkamer_schakelaar_button_4
+  actions:
+    - alias: Send the notification
+      action: light.turn_off
+      target:
+        entity_id: light.logeerkamer_klok_matrix
