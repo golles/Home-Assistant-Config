@@ -148,6 +148,15 @@ sections:
             entity: light.kerstboom
             state_not: unavailable
       - type: tile
+        entity: binary_sensor.aquarium_status
+        state_content:
+          - state
+          - temperatuur
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/aquarium
+
+      - type: tile
         entity: cover.zonnescherm_template
         state_content: state
         visibility:

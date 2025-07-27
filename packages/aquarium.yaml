@@ -1,0 +1,11 @@
+template:
+  - binary_sensor:
+      - name: Aquarium status
+        icon: mdi:fishbowl-outline
+        state: >
+          {{ is_state("light.aquarium_licht", "on") }}
+        attributes:
+          "temperatuur": >-
+            {{ states("sensor.aquarium_watertemperatuur") }} °C
+        availability: >
+          {{ states("light.aquarium_licht") not in ("unknown", "unavailable") }}

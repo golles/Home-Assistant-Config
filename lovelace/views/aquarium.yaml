@@ -1,0 +1,112 @@
+title: Aquarium
+path: aquarium
+icon: mdi:fishbowl-outline
+type: sections
+sections:
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: template
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/welkom
+        icon: mdi:arrow-left-bold
+        content: Overzicht
+    layout_options:
+      grid_columns: full
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Aquarium
+        heading_style: title
+        icon: mdi:fishbowl-outline
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Status
+        heading_style: subtitle
+      - type: tile
+        entity: light.aquarium_licht
+        name: Lamp
+      - type: tile
+        entity: sensor.aquarium_watertemperatuur
+        name: Temperatuur
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Verlichting
+        heading_style: subtitle
+      - type: tile
+        entity: select.aquarium_lichtmodus
+        name: Lichtmodus
+      - type: tile
+        entity: select.aquarium_dynamische_modus
+        name: Dynamische modus
+      - type: tile
+        entity: button.aquarium_preset_1
+        name: Preset 1
+      - type: tile
+        entity: button.aquarium_preset_2
+        name: Preset 2
+      - type: tile
+        entity: button.aquarium_preset_3
+        name: Preset 3
+      - type: tile
+        entity: button.aquarium_preset_4
+        name: Preset 4
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Sensoren
+        heading_style: subtitle
+      - type: tile
+        entity: binary_sensor.aquarium_connectiviteit
+        name: Status
+      - type: tile
+        entity: binary_sensor.aquarium_watertemperatuur
+        name: Temperatuur
+      - type: tile
+        entity: binary_sensor.aquarium_pomp_lekkage_water_leak
+        name: Pomp lekkage
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Stroom schakelaars
+        heading_style: subtitle
+      - type: tile
+        entity: switch.aquarium_verlichting_plug
+        name: Verlichting
+      - type: tile
+        entity: switch.aquarium_pomp_plug
+        name: Pomp
+      - type: tile
+        entity: switch.aquarium_verwarming_plug
+        name: Verwarming
+
+  - type: grid
+    column_span: 4
+    cards:
+      - type: heading
+        heading: Verbuik
+        heading_style: subtitle
+
+      - type: statistics-graph
+        chart_type: bar
+        period: day
+        stat_types:
+          - change
+        layout_options:
+          grid_columns: full
+        days_to_show: 7
+        entities:
+          - entity: sensor.aquarium_pomp_plug_energy
+            name: Pomp
+          - entity: sensor.aquarium_verlichting_plug_energy
+            name: Verlichting
+          - entity: sensor.aquarium_verwarming_plug_energy
+            name: Verwarming

@@ -36,6 +36,7 @@ template:
               | rejectattr("entity_id", "search", "light.epl_*")
               | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.aquarium_licht")
               | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | map(attribute="entity_id")
               | list
@@ -49,6 +50,7 @@ template:
               | rejectattr("entity_id", "search", "light.epl_*")
               | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.aquarium_licht")
               | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | map(attribute="entity_id")
               | list
@@ -69,6 +71,7 @@ template:
               | rejectattr("entity_id", "search", "light.epl_*")
               | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.aquarium_licht")
               | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | rejectattr("entity_id", "in", [
                 "light.voortuin_lamp",
@@ -88,6 +91,7 @@ template:
               | rejectattr("entity_id", "search", "light.epl_*")
               | rejectattr("entity_id", "search", "light.epo_*")
               | rejectattr("entity_id", "search", "light.*_klok_*")
+              | rejectattr("entity_id", "eq", "light.aquarium_licht")
               | rejectattr("entity_id", "eq", "light.p1s_01p00c480300533_chamber_light")
               | rejectattr("entity_id", "in", [
                 "light.voortuin_lamp",
