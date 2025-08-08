@@ -40,7 +40,7 @@ sections:
             {{ event.announcement }}
 
             Begint: {{ event.create_date | as_datetime }}
-            Verwachte opgelost: {{ event.expec_solv_time | as_datetime }}
+            Verwachte opgelost: {{ event.expected_solv_time | as_datetime }}
             Werkelijk opgelost: {{ event.solv_time | as_datetime }}
 
             {% endfor %}
