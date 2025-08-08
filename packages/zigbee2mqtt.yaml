@@ -53,3 +53,43 @@ automation:
                 Versie **{{ states("sensor.zigbee2mqtt_coordinator_latest_version") }}** is beschikbaar!
                 De huidige versie is {{ states("sensor.zigbee2mqtt_bridge_coordinator_version") }}.
                 https://github.com/Koenkk/Z-Stack-firmware/releases/latest
+
+  - id: notification_zigbee_devices_unavailable
+    alias: "Notificatie: Zigbee apparaten niet bereikbaar"
+    mode: single
+    triggers:
+      - trigger: numeric_state
+        entity_id: sensor.count_zigbee_unavailable
+        below: 1
+        variables:
+          color: 3066993 # Green
+          message: Alle Zigbee apparaten zijn weer bereikbaar
+      - trigger: numeric_state
+        entity_id: sensor.count_zigbee_unavailable
+        above: 0
+        for:
+          hours: 3 # Prevent spamming if a device is offline for a little while
+        variables:
+          color: 15158332 # Red
+          message: |
+            De volgende Zigbee apparaten zijn niet bereikbaar:
+            {{
+              state_attr("sensor.count_zigbee_unavailable", "unavailable")
+              | map("regex_replace", "^(.*)$", "- \\1")
+              | join("\n")
+            }}
+    actions:
+      - alias: Send the notification
+        action: notify.discord
+        data:
+          message: ""
+          target: !secret discord_monitoring
+          data:
+            embed:
+              author:
+                name: Zigbee2MQTT
+                icon_url: https://github.com/Koenkk/zigbee2mqtt/raw/master/images/logo.png
+              color: |
+                {{ color | int }}
+              description: |
+                {{ message }}
