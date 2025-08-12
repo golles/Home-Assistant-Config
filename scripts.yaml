@@ -14,39 +14,46 @@ everything_off:
           multiple: true
   variables:
     exclude_ids: >
-      {{ exclude_entity_ids | default([]) }}
+      {{
+        exclude_entity_ids | default([])
+        +
+        [
+          "fan.air_purifier",
+          "fan.mechanische_ventilatie_ventilatie",
+          "light.aquarium_licht",
+          "media_player.mediabox_homekit"
+        ]
+      }}
     fans: >
       {{
         states.fan
-        | selectattr('state', 'eq', 'on')
-        | rejectattr('entity_id', 'in', ['fan.air_purifier', 'fan.mechanische_ventilatie_ventilatie'])
-        | rejectattr('entity_id', 'in', exclude_ids)
-        | map(attribute='entity_id')
-        | join(', ')
+        | selectattr("state", "eq", "on")
+        | rejectattr("entity_id", "in", exclude_ids)
+        | map(attribute="entity_id")
+        | join(", ")
       }}
     media_players: >
       {{
         states.media_player
-        | rejectattr('state', 'in', ['off', 'unavailable'])
-        | rejectattr('entity_id', 'in', ['media_player.mediabox_homekit'])
-        | rejectattr('entity_id', 'in',
+        | rejectattr("state", "in", ["off", "unavailable"])
+        | rejectattr("entity_id", "in",
             integration_entities("jellyfin")
             | select("match", "media_player.")
             | list
           )
-        | rejectattr('entity_id', 'in', exclude_ids)
-        | map(attribute='entity_id')
-        | join(', ')
+        | rejectattr("entity_id", "in", exclude_ids)
+        | map(attribute="entity_id")
+        | join(", ")
       }}
     lights: >
       {{
         states.light
-        | selectattr('state', 'eq', 'on')
-        | rejectattr('attributes.is_hue_group', 'defined')
-        | rejectattr('attributes.entity_id', 'defined')
-        | rejectattr('entity_id', 'in', exclude_ids)
-        | map(attribute='entity_id')
-        | join(', ')
+        | selectattr("state", "eq", "on")
+        | rejectattr("attributes.is_hue_group", "defined")
+        | rejectattr("attributes.entity_id", "defined")
+        | rejectattr("entity_id", "in", exclude_ids)
+        | map(attribute="entity_id")
+        | join(", ")
       }}
   sequence:
     - if:
