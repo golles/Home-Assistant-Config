@@ -176,6 +176,35 @@ template:
             }}
 
 automation:
+  - id: home_connect_dishwaser_delayed_start
+    alias: Vaatwasser - Uitgestelde start
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_doorstate
+        from: "on"
+        to: "off"
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_status_remotecontrolstartallowed
+        state: "on"
+    actions:
+      - alias: Start the dishwasher program delayed at 03:00
+        action: home_connect_alt.start_program
+        data:
+          device_id: "{{ device_id('switch.bosch_sbv88tx36e_68a40e0cd8f6_bsh_common_setting_powerstate') }}"
+          options:
+            - key: BSH.Common.Option.StartInRelative
+              value: >-
+                {% set now = now() %}
+                {% set target = now.replace(hour=3, minute=0, second=0, microsecond=0) %}
+                {% if now >= target %}
+                  {% set target = target + timedelta(days=1) %}
+                {% endif %}
+                {{ (target - now).total_seconds() | int }}
+          program_key: Dishcare.Dishwasher.Program.Auto2
+          validate: true
+
   - id: home_connect_conversation_remaining_time
     alias: "Spraakassistent: Wanneer is de machine klaar"
     mode: single

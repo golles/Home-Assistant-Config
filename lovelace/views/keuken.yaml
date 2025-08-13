@@ -99,6 +99,10 @@ sections:
         name: Automatisch licht
         icon: mdi:lightbulb-auto
       - type: tile
+        entity: automation.vaatwasser_uitgestelde_start
+        name: Auto start
+        icon: mdi:dishwasher
+      - type: tile
         entity: button.keuken_rolgordijn_voorkeurspositie
         name: Voorkeurspositie
         icon: mdi:window-shutter
