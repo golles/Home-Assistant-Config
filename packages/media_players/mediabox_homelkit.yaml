@@ -10,7 +10,8 @@ media_player:
         device_class: tv
         value_template: >-
           {{ states("media_player.mediabox") }}
-        media_content_type_template: tv_show
+        media_content_type_template: >-
+          {{ state_attr("media_player.mediabox", "media_content_type") }}
         media_image_url_template: >-
           {{ state_attr("media_player.mediabox", "entity_picture") }}
         title_template: >-
