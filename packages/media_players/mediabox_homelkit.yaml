@@ -32,8 +32,6 @@ media_player:
           service: media_player.media_pause
           target:
             entity_id: media_player.mediabox
-        current_volume_template: >-
-          {{ state_attr("media_player.lg_c9", "volume_level") }}
         volume_up:
           service: media_player.volume_up
           target:
