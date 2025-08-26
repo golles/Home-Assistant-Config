@@ -78,6 +78,11 @@ automation:
               | map("regex_replace", "^(.*)$", "- \\1")
               | join("\n")
             }}
+    conditions:
+      - alias: Prevent all triggers after reboot
+        condition: template
+        value_template: >
+          {{ (now() - as_datetime(states("sensor.uptime"))).total_seconds() > 300 }}
     actions:
       - alias: Send the notification
         action: notify.discord
