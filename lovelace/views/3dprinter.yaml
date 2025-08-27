@@ -18,68 +18,25 @@ sections:
     column_span: 4
     cards:
       - type: heading
-        heading: P1S
+        heading: 3D printer
         heading_style: title
         icon: mdi:printer-3d
 
   - type: grid
     cards:
       - type: heading
-        heading: 3D printer
+        heading: P1S
         heading_style: subtitle
-      - type: tile
-        entity: switch.3d_printer_plug
-        name: Stroom
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_print_status
-        name: Status
-        icon: mdi:printer-3d
-      - type: tile
-        entity: light.p1s_01p00c480300533_chamber_light
-        name: Licht
-        visibility:
-          - condition: state
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
             entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_remaining_time
-        name: Tijd
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-
-      - type: tile
-        entity: sensor.p1s_01p00c480300533_task_name
-        name: Taak
-        grid_options:
-          columns: 12
-          rows: 1
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-      - type: custom:entity-progress-card
-        entity: sensor.p1s_01p00c480300533_print_progress
-        name: Voortgang
-        unit: "%"
-        icon: mdi:percent-outline
-        grid_options:
-          columns: 12
-          rows: 1
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
-      - type: picture
-        image_entity: image.p1s_01p00c480300533_cover_image
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
+      - type: custom:ha-bambulab-ams-card
+        ams: 7b5fe0c32a98004bd4b4c13962b8ec3a
+        show_info_bar: true
+      - type: custom:ha-bambulab-print_status-card
+        printer: fe906d66cefa564d81b807f00cf7935a
+        custom_power: switch.3d_printer_plug
       - type: custom:ha-bambulab-print_control-card
         printer: fe906d66cefa564d81b807f00cf7935a
-        visibility:
-          - condition: state
-            entity: sensor.p1s_01p00c480300533_print_status
-            state_not: offline
