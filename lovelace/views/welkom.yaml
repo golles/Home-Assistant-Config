@@ -150,7 +150,7 @@ sections:
       - type: tile
         entity: binary_sensor.aquarium_status
         state_content:
-          - state
+          - effect
           - temperatuur
         tap_action:
           action: navigate

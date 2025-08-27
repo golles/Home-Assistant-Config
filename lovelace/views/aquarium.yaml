@@ -40,12 +40,6 @@ sections:
         heading: Verlichting
         heading_style: subtitle
       - type: tile
-        entity: select.aquarium_lichtmodus
-        name: Lichtmodus
-      - type: tile
-        entity: select.aquarium_dynamische_modus
-        name: Dynamische modus
-      - type: tile
         entity: button.aquarium_preset_1
         name: Preset 1
       - type: tile
