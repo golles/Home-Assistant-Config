@@ -115,16 +115,16 @@ automation:
     max_exceeded: silent
     triggers:
       - trigger: numeric_state
-        entity_id: sensor.0x04cf8cdf3c7cb18a_illuminance_lux
-        above: 30000
+        entity_id: sensor.achtertuin_sensor_1_licht
+        above: 3800
       - trigger: state
         entity_id: sensor.zon_positie
         from: Voor
         to: Achter
     conditions:
       - condition: numeric_state
-        entity_id: sensor.0x04cf8cdf3c7cb18a_illuminance_lux
-        above: 30000
+        entity_id: sensor.achtertuin_sensor_1_licht
+        above: 3800
       - condition: state
         entity_id: sensor.zon_positie
         state: Achter
