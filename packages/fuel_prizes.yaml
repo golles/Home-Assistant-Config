@@ -14,7 +14,7 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Purmerend
-        select: "#euro95 > div.pump_price > span.price"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
         unit_of_measurement: €
         device_class: monetary
         state_class: total
@@ -23,7 +23,7 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Winschoten
-        select: "#euro95 > div.pump_price > span.price"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
         unit_of_measurement: €
         device_class: monetary
         state_class: total
@@ -32,7 +32,7 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Hoogezand
-        select: "#euro95 > div.pump_price > span.price"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
         unit_of_measurement: €
         device_class: monetary
         state_class: total
