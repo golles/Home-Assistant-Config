@@ -183,33 +183,3 @@ media_player:
               source: NPO Politiek en Nieuws
             target:
               entity_id: media_player.mediabox
-          Ziggo Sport Select:
-            service: media_player.select_source
-            data:
-              source: Ziggo Sport Select
-            target:
-              entity_id: media_player.mediabox
-          Ziggo Sport Voetbal:
-            service: media_player.select_source
-            data:
-              source: Ziggo Sport Voetbal
-            target:
-              entity_id: media_player.mediabox
-          Ziggo Sport Racing:
-            service: media_player.select_source
-            data:
-              source: Ziggo Sport Racing
-            target:
-              entity_id: media_player.mediabox
-          Ziggo Sport Docu:
-            service: media_player.select_source
-            data:
-              source: Ziggo Sport Docu
-            target:
-              entity_id: media_player.mediabox
-          Ziggo Live Events:
-            service: media_player.select_source
-            data:
-              source: Ziggo Live Events
-            target:
-              entity_id: media_player.mediabox
