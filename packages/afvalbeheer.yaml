@@ -1,15 +1,3 @@
-sensor:
-  - platform: afvalbeheer
-    wastecollector: !secret wastecollector
-    resources:
-      - restafval
-      - bio-afval
-      - papier
-    postcode: !secret postcode
-    streetnumber: !secret streetnumber
-    dutch: 1
-    disableicons: 1
-
 homeassistant:
   customize:
     sensor.purmerend_restafval:
