@@ -5,7 +5,14 @@ template:
         state: >
           {{ is_state("light.aquarium_licht", "on") }}
         attributes:
-          "temperatuur": >-
+          "modus": >
+            {% set translations = {
+              "manual": "Handmatig",
+              "automatic": "Automatisch",
+              "dynamic": "Dynamisch"
+            } %}
+            {{ translations.get(state_attr("light.aquarium_licht", "light_mode"), state_attr("light.aquarium_licht", "light_mode")) }}
+          "temperatuur": >
             {{ states("sensor.aquarium_watertemperatuur") }} °C
         availability: >
           {{ states("light.aquarium_licht") not in ("unknown", "unavailable") }}

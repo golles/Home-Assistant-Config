@@ -150,8 +150,8 @@ sections:
       - type: tile
         entity: binary_sensor.aquarium_status
         state_content:
-          - effect
           - temperatuur
+          - light_mode
         tap_action:
           action: navigate
           navigation_path: /dashboard-status/aquarium
