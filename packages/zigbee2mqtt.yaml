@@ -13,18 +13,18 @@ sensor:
     scan_interval: 86400
 
 template:
-  - binary_sensor:
-      - name: Zigbee2MQTT coordinator update
-        state: >
-          {{
-            not is_state("sensor.zigbee2mqtt_bridge_coordinator_version", states("sensor.zigbee2mqtt_coordinator_latest_version"))
-          }}
-        device_class: update
+  - update:
+      - name: Zigbee2MQTT coordinator
+        installed_version: >
+          {{ states('sensor.zigbee2mqtt_bridge_coordinator_version') }}
+        latest_version: >
+          {{ states('sensor.zigbee2mqtt_coordinator_latest_version') }}
         availability: >
           {{
             states("sensor.zigbee2mqtt_bridge_coordinator_version") not in ["unknown", "unavailable"] and
             states("sensor.zigbee2mqtt_coordinator_latest_version") not in ["unknown", "unavailable"]
           }}
+        release_url: https://github.com/Koenkk/Z-Stack-firmware/releases
 
 automation:
   - id: zigbee2mqtt_coordinator_update_notification
@@ -34,7 +34,7 @@ automation:
     triggers:
       - alias: When there is an update
         trigger: state
-        entity_id: binary_sensor.zigbee2mqtt_coordinator_update
+        entity_id: update.zigbee2mqtt_coordinator
         from: "off"
         to: "on"
     actions:
