@@ -151,7 +151,7 @@ sections:
         entity: binary_sensor.aquarium_status
         state_content:
           - temperatuur
-          - light_mode
+          - modus
         tap_action:
           action: navigate
           navigation_path: /dashboard-status/aquarium

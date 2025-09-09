@@ -4,8 +4,8 @@ set -e
 
 # Resouce list for javascript dependencies.
 JAVASCRIPT=$(cat <<'EOF'
+apexcharts-card.js              https://github.com/RomRider/apexcharts-card/releases/latest/download/apexcharts-card.js
 auto-entities.js                https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js
-bubble-card.js                  https://raw.githubusercontent.com/Clooos/Bubble-Card/refs/heads/main/dist/bubble-card.js
 entity-progress-card.js         https://github.com/francois-le-ko4la/lovelace-entity-progress-card/releases/latest/download/entity-progress-card.js
 mini-graph-card-bundle.js       https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js
 mini-media-player-bundle.js     https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js

@@ -28,18 +28,40 @@ sections:
       - type: heading
         heading: Processor
         heading_style: subtitle
-      - type: statistics-graph
-        chart_type: line
-        period: 5minute
-        stat_types:
-          - mean
-        layout_options:
-          grid_columns: full
-        entities:
+      - type: custom:apexcharts-card
+        graph_span: 1d
+        all_series_config:
+          stroke_width: 1
+        section_mode: true
+        grid_options:
+          columns: full
+        yaxis:
+          - id: usage
+            decimals: 0
+            min: 0
+            max: 100
+            apex_config:
+              title:
+                text: Gebruik (%)
+          - id: temperature
+            opposite: true
+            decimals: 0
+            min: ~0
+            max: ~100
+            apex_config:
+              title:
+                text: Temperatuur (°C)
+        series:
           - entity: sensor.system_monitor_processor_use
             name: Gebruik
+            yaxis_id: usage
+            group_by:
+              duration: 30min
           - entity: sensor.system_monitor_processortemperatuur
             name: Temperatuur
+            yaxis_id: temperature
+            group_by:
+              duration: 30min
       - type: tile
         entity: sensor.system_monitor_processor_use
         name: Gebruik
@@ -53,14 +75,20 @@ sections:
       - type: heading
         heading: Belasting
         heading_style: subtitle
-      - type: statistics-graph
-        chart_type: line
-        period: hour
-        stat_types:
-          - mean
-        layout_options:
-          grid_columns: full
-        entities:
+      - type: custom:apexcharts-card
+        graph_span: 1d
+        all_series_config:
+          stroke_width: 1
+        section_mode: true
+        grid_options:
+          columns: full
+        yaxis:
+          - min: 0
+            max: ~4
+            apex_config:
+              title:
+                text: Belasting (%)
+        series:
           - entity: sensor.system_monitor_load_1m
             name: 1 min
           - entity: sensor.system_monitor_load_5m

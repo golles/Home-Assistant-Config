@@ -1,6 +1,9 @@
 - url: /bambu_lab/ha-bambulab-cards.js
   type: module
 
+- url: /local/apexcharts-card.js
+  type: module
+
 - url: /local/auto-entities.js
   type: module
 

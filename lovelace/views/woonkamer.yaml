@@ -101,6 +101,14 @@ sections:
         name: Klok
         state_content: state
         color: primary
+      - type: tile
+        entity: binary_sensor.aquarium_status
+        state_content:
+          - temperatuur
+          - modus
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-status/aquarium
 
   - type: grid
     cards:

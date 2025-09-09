@@ -81,26 +81,91 @@ sections:
       - type: tile
         entity: switch.aquarium_verwarming_plug
         name: Verwarming
+      - type: tile
+        entity: switch.aquarium_skimmer_plug
+        name: Skimmer
 
   - type: grid
     column_span: 4
     cards:
       - type: heading
-        heading: Verbuik
+        heading: Statistiek
         heading_style: subtitle
 
-      - type: statistics-graph
-        chart_type: bar
-        period: day
-        stat_types:
-          - change
-        layout_options:
-          grid_columns: full
-        days_to_show: 7
-        entities:
+      - type: custom:apexcharts-card
+        graph_span: 7d
+        span:
+          start: day
+          offset: "-6d"
+        all_series_config:
+          stroke_width: 2
+        section_mode: true
+        grid_options:
+          columns: full
+        yaxis:
+          - decimals: 1
+            apex_config:
+              title:
+                text: Verbruik (kWh)
+        series:
           - entity: sensor.aquarium_pomp_plug_energy
             name: Pomp
+            color: "#4269d0"
+            opacity: 0.5
+            type: column
+            group_by:
+              duration: 1d
+              func: diff
           - entity: sensor.aquarium_verlichting_plug_energy
             name: Verlichting
+            color: "#f4bd4a"
+            opacity: 0.5
+            type: column
+            group_by:
+              duration: 1d
+              func: diff
           - entity: sensor.aquarium_verwarming_plug_energy
             name: Verwarming
+            color: "#ff725c"
+            opacity: 0.5
+            type: column
+            group_by:
+              duration: 1d
+              func: diff
+          - entity: sensor.aquarium_skimmer_plug_energy
+            name: Skimmer
+            color: "#4ac98b"
+            opacity: 0.5
+            type: column
+            group_by:
+              duration: 1d
+              func: diff
+
+      - type: custom:apexcharts-card
+        graph_span: 7d
+        span:
+          start: day
+          offset: "-6d"
+        all_series_config:
+          stroke_width: 2
+        section_mode: true
+        grid_options:
+          columns: full
+        yaxis:
+          - decimals: 1
+            min: "|-1|"
+            max: "|+1|"
+            apex_config:
+              title:
+                text: Temperatuur (°C)
+        series:
+          - entity: sensor.aquarium_watertemperatuur
+            name: Aquarium temperatuur
+            color: "#4269d0"
+            opacity: 0.5
+            fill_raw: last
+          - entity: sensor.woonkamer_temperatuur
+            name: Kamer temperatuur
+            color: "#ff725c"
+            opacity: 0.5
+            fill_raw: last
