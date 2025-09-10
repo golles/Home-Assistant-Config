@@ -1,8 +1,7 @@
 import argparse
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from datetime import datetime
-from typing import Optional
 
 import orjson
 import pytz
@@ -10,7 +9,6 @@ import requests
 from bs4 import BeautifulSoup
 
 # Constants
-TOKEN_FIELD = "__RequestVerificationToken"
 LOGIN_URL = "https://spurd.booqi.me/client/login"
 ORDERS_URL = "https://spurd.booqi.me/client/orders"
 SUBSCRIPTIONS_URL = "https://spurd.booqi.me/client/subscriptions"
@@ -22,14 +20,14 @@ class Abonnement:
     beschikbaar: int | None = None
     totaal: int | None = None
     procent: int | None = None
-    verloopdatum: str | None = None
+    verloopdatum: datetime | None = None
 
 
 @dataclass
 class Bestelling:
-    volgende: str | None = None
+    volgende: datetime | None = None
     product: str | None = None
-    aantal: int | None = None
+    aantal: list[str] | None = None
     ordernummer: str | None = None
     status: str | None = None
     ticket: str | None = None
@@ -38,13 +36,10 @@ class Bestelling:
 def login(session: requests.Session, email: str, password: str) -> None:
     """Handles login to the portal."""
     response = session.get(LOGIN_URL)
-    soup = BeautifulSoup(response.text, "html.parser")
+    if response.status_code != 200:
+        raise Exception(f"Login page not reachable (status {response.status_code})")
 
-    payload = {
-        "email": email,
-        "password": password,
-    }
-
+    payload = {"email": email, "password": password}
     response = session.post(LOGIN_URL, data=payload)
     soup = BeautifulSoup(response.text, "html.parser")
 
@@ -54,78 +49,107 @@ def login(session: requests.Session, email: str, password: str) -> None:
 
 
 def get_page(session: requests.Session, url: str) -> BeautifulSoup:
-    """Fetches the transactions page."""
+    """Fetches a portal page and returns a BeautifulSoup tree."""
     response = session.get(url)
     if response.status_code != 200:
-        raise Exception("Failed to retrieve page")
+        raise Exception(f"Failed to retrieve {url} (status {response.status_code})")
     return BeautifulSoup(response.text, "html.parser")
 
 
-def parse_datetime(date_string: str, timezone: str, string_date_format: str) -> str:
-    """Parses date time string into ISO format (UTC)."""
+def parse_datetime(date_string: str, timezone: str, string_date_format: str) -> datetime:
+    """Parses a datetime string into a timezone-aware UTC datetime."""
     parsed = datetime.strptime(date_string, string_date_format)
     local_tz = pytz.timezone(timezone)
     parsed_local = local_tz.localize(parsed)
-    parsed_utc = parsed_local.astimezone(pytz.utc)
-    return parsed_utc.isoformat()
+    return parsed_local.astimezone(pytz.utc)
+
+
+def safe_text(node, default: str | None = None) -> str | None:
+    """Extracts and cleans text from a BeautifulSoup node, or returns a default."""
+    return node.get_text(strip=True) if node else default
 
 
 def get_subscription_details(soup: BeautifulSoup) -> Abonnement:
     """Extracts subscription details from the subscriptions page."""
-    active = len(soup.select("#subscriptions_active > div > div")) - 1 # Exclude the header row
+    active = max(len(soup.select("#subscriptions_active > div > div")) - 1, 0)
     if active == 0:
         return Abonnement(
             beschikbaar=0,
             totaal=0,
             procent=0,
-            verloopdatum="1970-01-01T00:00:00+00:00",
+            verloopdatum=datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc),
         )
 
-    details = soup.select_one("#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)").get_text(strip=True)
-    match = re.match(r"(\d+)/(\d+)-\s+(\d+)%", details)
-    if match:
-        beschikbaar = int(match.group(1))
-        totaal = int(match.group(2))
-        percent = int(match.group(3))
+    details = safe_text(
+        soup.select_one("#subscriptions_active > div > div:nth-child(2) > div:nth-child(3)")
+    )
+    beschikbaar = totaal = percent = None
+    if details:
+        match = re.match(r"(\d+)/(\d+)-\s+(\d+)%", details)
+        if match:
+            beschikbaar = int(match.group(1))
+            totaal = int(match.group(2))
+            percent = int(match.group(3))
 
-    verloopdatum = soup.select_one("#subscriptions_active > div > div:nth-child(2) > div:nth-child(4)").get_text(strip=True)
+    verloopdatum_text = safe_text(
+        soup.select_one("#subscriptions_active > div > div:nth-child(2) > div:nth-child(4)")
+    )
+    verloopdatum = (
+        parse_datetime(verloopdatum_text, TIMEZONE, "%d-%m-%Y") if verloopdatum_text else None
+    )
 
     return Abonnement(
         beschikbaar=beschikbaar,
         totaal=totaal,
         procent=percent,
-        verloopdatum=parse_datetime(verloopdatum, TIMEZONE, "%d-%m-%Y"),
+        verloopdatum=verloopdatum,
     )
 
 
 def get_order_details(soup: BeautifulSoup) -> Bestelling:
-    """Extracts order details from the subscriptions page."""
+    """Extracts the next order (closest future date) from the orders page."""
     rows = soup.select("#orders_usable > table tbody > tr")
-    if len(rows) == 0:
+    if not rows:
         return Bestelling(
-            volgende="1970-01-01T00:00:00+00:00",
-            product=None,
-            aantal=None,
-            ordernummer=None,
-            status=None,
-            ticket=None,
+            volgende=datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc),
         )
 
-    volgende = soup.select_one("#orders_usable > table > tbody > tr > td:nth-child(4)").get_text(strip=True)
-    product = soup.select_one("#orders_usable > table > tbody > tr > td:nth-child(1) > span > span > strong").get_text(strip=True)
-    aantal = soup.select_one("#orders_usable > table > tbody > tr > td:nth-child(3) > span:nth-child(1)").get_text(strip=True)
-    ordernummer = soup.select_one("#orders_usable > table > tbody > tr > td:nth-child(1) > span > span > small").get_text(strip=True)
-    status = soup.select_one("#orders_usable > table > tbody > tr > td:nth-child(2) > span").get_text(strip=True)
-    ticket = soup.select_one("#orders_usable > table > tbody > tr > td.nk-tb-col.nk-tb-col-tools.align-middle > ul > li:nth-child(2) > a").get("href")
+    orders: list[Bestelling] = []
+    for row in rows:
+        volgende_text = safe_text(row.select_one("td:nth-child(4)"))
+        if not volgende_text:
+            continue
 
-    return Bestelling(
-        volgende=parse_datetime(volgende, TIMEZONE, "%d-%m-%Y %H:%M"),
-        product=product,
-        aantal=aantal,
-        ordernummer=ordernummer,
-        status=status,
-        ticket=f"https://spurd.booqi.me/{ticket}",
-    )
+        volgende = parse_datetime(volgende_text, TIMEZONE, "%d-%m-%Y %H:%M")
+
+        product = safe_text(row.select_one("td:nth-child(1) strong"))
+        aantal = safe_text(row.select_one("td:nth-child(3) span"))
+        ordernummer = safe_text(row.select_one("td:nth-child(1) small"))
+        status = safe_text(row.select_one("td:nth-child(2) span"))
+        ticket_node = row.select_one("td.nk-tb-col-tools ul li:nth-child(2) a")
+        ticket_href = ticket_node.get("href") if ticket_node else None
+
+        orders.append(
+            Bestelling(
+                volgende=volgende,
+                product=product,
+                aantal=aantal,
+                ordernummer=ordernummer,
+                status=status,
+                ticket=f"https://spurd.booqi.me/{ticket_href}" if ticket_href else None,
+            )
+        )
+
+    return min(orders, key=lambda o: o.volgende)
+
+
+def to_serializable(obj):
+    """Helper for orjson to handle datetime and dataclasses."""
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    if hasattr(obj, "__dataclass_fields__"):
+        return asdict(obj)
+    raise TypeError
 
 
 def main(email: str, password: str):
@@ -133,17 +157,14 @@ def main(email: str, password: str):
 
     login(session, email, password)
 
-    response = get_page(session, ORDERS_URL)
-    bestelling = get_order_details(response)
+    bestelling = get_order_details(get_page(session, ORDERS_URL))
+    abonnement = get_subscription_details(get_page(session, SUBSCRIPTIONS_URL))
 
-    response = get_page(session, SUBSCRIPTIONS_URL)
-    abonnement = get_subscription_details(response)
-
-    print(orjson.dumps({"abonnement": abonnement, "bestelling": bestelling}).decode("utf-8"))
+    data = {"abonnement": abonnement, "bestelling": bestelling}
+    print(orjson.dumps(data, default=to_serializable, option=orjson.OPT_INDENT_2).decode())
 
 
 if __name__ == "__main__":
-    # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Leeghwaterbad Data Scraper")
     parser.add_argument("email", type=str, help="Your email for the Leeghwaterbad portal")
     parser.add_argument("password", type=str, help="Your password for the Leeghwaterbad portal")
