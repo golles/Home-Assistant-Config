@@ -136,8 +136,8 @@ sections:
         needle: true
         severity:
           green: 0
-          yellow: 10
-          red: 20
+          yellow: 70
+          red: 90
       - type: tile
         entity: sensor.system_monitor_swap_use
         name: Gebruikt

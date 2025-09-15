@@ -27,7 +27,7 @@
         resolved_threshold: 80
     - trigger: numeric_state
       entity_id: sensor.system_monitor_swap_usage
-      above: 20
+      above: 80
       for:
         minutes: 5
       variables:
