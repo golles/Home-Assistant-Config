@@ -93,20 +93,32 @@ sections:
         heading_style: subtitle
 
       - type: custom:apexcharts-card
-        graph_span: 7d
+        graph_span: 14d
         span:
           start: day
-          offset: "-6d"
+          offset: "-13d"
         all_series_config:
           stroke_width: 2
         section_mode: true
         grid_options:
           columns: full
         yaxis:
-          - decimals: 1
+          - decimals: 2
             apex_config:
               title:
                 text: Verbruik (kWh)
+        apex_config:
+          tooltip:
+            x:
+              format: d MMMM yyyy
+            y:
+              formatter: |
+                EVAL:function(value, { series, seriesIndex, dataPointIndex, w }) {
+                  if (value === null) {
+                    return "0 kWh";
+                  }
+                  return value.toFixed(2) + " kWh";
+                }
         series:
           - entity: sensor.aquarium_pomp_plug_energy
             name: Pomp
@@ -142,10 +154,10 @@ sections:
               func: diff
 
       - type: custom:apexcharts-card
-        graph_span: 7d
+        graph_span: 14d
         span:
           start: day
-          offset: "-6d"
+          offset: "-13d"
         all_series_config:
           stroke_width: 2
         section_mode: true
@@ -164,8 +176,14 @@ sections:
             color: "#4269d0"
             opacity: 0.5
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.woonkamer_temperatuur
             name: Kamer temperatuur
             color: "#ff725c"
             opacity: 0.5
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min

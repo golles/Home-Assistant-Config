@@ -29,7 +29,7 @@ sections:
         heading: Processor
         heading_style: subtitle
       - type: custom:apexcharts-card
-        graph_span: 1d
+        graph_span: 1w
         all_series_config:
           stroke_width: 1
         section_mode: true
@@ -56,18 +56,26 @@ sections:
             name: Gebruik
             yaxis_id: usage
             group_by:
-              duration: 30min
+              func: avg
+              duration: 15min
           - entity: sensor.system_monitor_processortemperatuur
             name: Temperatuur
             yaxis_id: temperature
             group_by:
-              duration: 30min
+              func: avg
+              duration: 15min
       - type: tile
         entity: sensor.system_monitor_processor_use
         name: Gebruik
+        group_by:
+          func: avg
+          duration: 5min
       - type: tile
         entity: sensor.system_monitor_processortemperatuur
         name: Temperatuur
+        group_by:
+          func: avg
+          duration: 5min
 
   - type: grid
     column_span: 2
@@ -76,7 +84,7 @@ sections:
         heading: Belasting
         heading_style: subtitle
       - type: custom:apexcharts-card
-        graph_span: 1d
+        graph_span: 1w
         all_series_config:
           stroke_width: 1
         section_mode: true
@@ -91,10 +99,19 @@ sections:
         series:
           - entity: sensor.system_monitor_load_1m
             name: 1 min
+            group_by:
+              func: avg
+              duration: 15min
           - entity: sensor.system_monitor_load_5m
             name: 5 min
+            group_by:
+              func: avg
+              duration: 15min
           - entity: sensor.system_monitor_load_15m
             name: 15 min
+            group_by:
+              func: avg
+              duration: 15min
       - type: tile
         entity: sensor.system_monitor_load_1m
         name: 1 min

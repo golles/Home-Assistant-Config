@@ -161,7 +161,7 @@ sections:
           start: day
           offset: "-6d"
         all_series_config:
-          stroke_width: 2
+          stroke_width: 1
         section_mode: true
         grid_options:
           columns: full
@@ -185,7 +185,8 @@ sections:
             fill_raw: last
             yaxis_id: speed
             group_by:
-              duration: 1d
+              func: avg
+              duration: 15min
           - entity: sensor.speedtest_upload
             name: Upload
             color: "#e74c3c"
@@ -193,7 +194,8 @@ sections:
             fill_raw: last
             yaxis_id: speed
             group_by:
-              duration: 1d
+              func: avg
+              duration: 15min
           - entity: sensor.speedtest_ping
             name: Ping
             color: "#f1c40f"
@@ -201,4 +203,5 @@ sections:
             fill_raw: last
             yaxis_id: ping
             group_by:
-              duration: 1d
+              func: avg
+              duration: 15min

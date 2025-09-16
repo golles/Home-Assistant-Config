@@ -51,7 +51,7 @@ sections:
       - type: custom:apexcharts-card
         graph_span: 14d
         all_series_config:
-          stroke_width: 2
+          stroke_width: 1
         section_mode: true
         grid_options:
           columns: full
@@ -59,24 +59,45 @@ sections:
           - entity: sensor.woonkamer_temperatuur
             name: Woonkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.toilet_klimaat_temperature
             name: Toilet
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.slaapkamer_temperatuur
             name: Slaapkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.kledingkamer_temperatuur
             name: Kledingkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.logeerkamer_temperatuur
             name: Logeerkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.badkamer_temperatuur
             name: Badkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.zolder_temperatuur
             name: Zolder
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
 
   - type: grid
     column_span: 4
@@ -87,7 +108,7 @@ sections:
       - type: custom:apexcharts-card
         graph_span: 14d
         all_series_config:
-          stroke_width: 2
+          stroke_width: 1
         section_mode: true
         grid_options:
           columns: full
@@ -95,21 +116,42 @@ sections:
           - entity: sensor.woonkamer_luchtvochtigheid
             name: Woonkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.toilet_klimaat_temperature
             name: Toilet
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.toilet_klimaat_humidity
             name: Slaapkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.slaapkamer_luchtvochtigheid
             name: Kledingkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.logeerkamer_luchtvochtigheid
             name: Logeerkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.badkamer_luchtvochtigheid
             name: Badkamer
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
           - entity: sensor.zolder_luchtvochtigheid
             name: Zolder
             fill_raw: last
+            group_by:
+              func: avg
+              duration: 30min
