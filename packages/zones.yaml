@@ -21,8 +21,8 @@ automation:
       - condition: template
         value_template:
           > # Can't be triggered when it was already triggered in the last 24 hours.
-          {% from "automations.jinja" import was_within %}
-          {{ was_within("automation.notificatie_komt_thuis_na_bezoeken_ouders", 24 * 60 * 60) }}
+          {% from "automations.jinja" import last_triggered_longer_than %}
+          {{ last_triggered_longer_than("automation.notificatie_komt_thuis_na_bezoeken_ouders", 24 * 60 * 60) }}
     actions:
       - action: notify.sander
         data:

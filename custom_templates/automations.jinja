@@ -1,8 +1,9 @@
 {#
-A macro, useful for automation conditions, to check if a certain automation was triggered before within a given time.
-automation_entity_id: the automation entity, eg "automation.my_automation".
-seconds: the number of seconds to perform the check against.
+Checks whether an automation’s last trigger happened longer than a given number of seconds ago.
+This is useful for implementing cooldowns or preventing an automation from running too frequently.
+automation_entity_id: The entity ID of the automation, e.g. "automation.my_automation".
+seconds: The minimum number of seconds that must have passed since the automation last triggered.
 #}
-{%- macro was_within(automation_entity_id, seconds) -%}
+{%- macro last_triggered_longer_than(automation_entity_id, seconds) -%}
 {{ as_timestamp(now()) - as_timestamp(state_attr(automation_entity_id, "last_triggered")) | int >= seconds }}
 {%- endmacro -%}

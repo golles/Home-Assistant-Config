@@ -20,8 +20,8 @@
     - condition: template
       value_template:
         > # Don't trigger if it has been triggered in the last 6 hours.
-        {% from "automations.jinja" import was_within %}
-        {{ was_within("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", 6 * 60 * 60) }}
+        {% from "automations.jinja" import last_triggered_longer_than %}
+        {{ last_triggered_longer_than("automation.goedemorgen_bericht_bij_1e_beweging_in_de_woonkamer", 6 * 60 * 60) }}
   actions:
     - alias: Force update weather description
       action: homeassistant.update_entity
