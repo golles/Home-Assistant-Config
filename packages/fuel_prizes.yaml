@@ -14,8 +14,10 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Purmerend
-        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) dd"
         unit_of_measurement: €
+        value_template: >-
+          {{ value.split(" ")[0] }}
         device_class: monetary
         state_class: total
 
@@ -23,8 +25,10 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Winschoten
-        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) dd"
         unit_of_measurement: €
+        value_template: >-
+          {{ value.split(" ")[0] }}
         device_class: monetary
         state_class: total
 
@@ -32,8 +36,10 @@ scrape:
     scan_interval: 3600
     sensor:
       - name: Tango Hoogezand
-        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) .text-body-footnote--callout"
+        select: "div[data-testid='elStationDetailsProducts'] > div:nth-child(2) dd"
         unit_of_measurement: €
+        value_template: >-
+          {{ value.split(" ")[0] }}
         device_class: monetary
         state_class: total
 
