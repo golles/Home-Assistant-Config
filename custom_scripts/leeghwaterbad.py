@@ -126,8 +126,14 @@ def get_order_details(soup: BeautifulSoup) -> Bestelling:
         aantal = safe_text(row.select_one("td:nth-child(3) span"))
         ordernummer = safe_text(row.select_one("td:nth-child(1) small"))
         status = safe_text(row.select_one("td:nth-child(2) span"))
-        ticket_node = row.select_one("td.nk-tb-col-tools ul li:nth-child(2) a")
-        ticket_href = ticket_node.get("href") if ticket_node else None
+        # Find ticket link by looping over all li elements and checking href
+        ticket_href = None
+        li_nodes = row.select("td.nk-tb-col-tools ul li")
+        for li in li_nodes:
+            a = li.find("a", href=True)
+            if a and a["href"].startswith("/assets/order/tickets/"):
+                ticket_href = a["href"]
+                break
 
         orders.append(
             Bestelling(
