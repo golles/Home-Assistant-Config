@@ -27,6 +27,7 @@ www/media/ha-bambulab
 *.key
 .cloud
 .google.token
+.ha_run.lock
 .HA_VERSION
 .storage
 .uuid
