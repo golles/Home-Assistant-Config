@@ -16,15 +16,15 @@ jobs:
 
       - name: Setup custom components
         run: |
-          ./scripts/update_resources init_custom_components
+          ./scripts/update_resources.sh custom_components
 
       - name: Mock secrets
         uses: golles/mock-yaml-secrets-action@v1
         with:
-          configFile: ".github/workflows/mock-secrets-config.json"
+          configFile: .github/workflows/mock-secrets-config.json
 
       - name: Home Assistant configuration check
         uses: frenck/action-home-assistant@v1.4
         with:
-          path: "."
+          path: .
           version: beta

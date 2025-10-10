@@ -1,0 +1,34 @@
+[
+  {
+    "file": "apexcharts-card.js",
+    "url": "https://github.com/RomRider/apexcharts-card/releases/latest/download/apexcharts-card.js"
+  },
+  {
+    "file": "auto-entities.js",
+    "url": "https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js"
+  },
+  {
+    "file": "entity-progress-card.js",
+    "url": "https://github.com/francois-le-ko4la/lovelace-entity-progress-card/releases/latest/download/entity-progress-card.js"
+  },
+  {
+    "file": "mini-graph-card-bundle.js",
+    "url": "https://github.com/kalkih/mini-graph-card/releases/latest/download/mini-graph-card-bundle.js"
+  },
+  {
+    "file": "mini-media-player-bundle.js",
+    "url": "https://github.com/kalkih/mini-media-player/releases/latest/download/mini-media-player-bundle.js"
+  },
+  {
+    "file": "mushroom.js",
+    "url": "https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js"
+  },
+  {
+    "file": "swipe-navigation.js",
+    "url": "https://github.com/zanna-37/hass-swipe-navigation/releases/latest/download/swipe-navigation.js"
+  },
+  {
+    "file": "vertical-stack-in-card.js",
+    "url": "https://raw.githubusercontent.com/ofekashery/vertical-stack-in-card/master/vertical-stack-in-card.js"
+  }
+]
