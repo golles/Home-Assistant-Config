@@ -51,7 +51,7 @@ If you like any of these blueprints, then you can import these into your own Hom
 
 ### Custom components
 
-Custom components that I've installed are set in the `CUSTOM_COMPONENTS` variable in the [update_resources](scripts/update_resources) script.
+Custom components that I've installed are set [custom_components.json](scripts/resources/custom_components.json).
 There are also a few components that I've developed:
 
 | Component                                                               | Installations                                                                                                  | Stars                                                                                                 |

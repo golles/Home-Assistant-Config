@@ -1,0 +1,102 @@
+[
+  {
+    "name": "afvalbeheer",
+    "repository": "https://github.com/pippyn/Home-Assistant-Sensor-Afvalbeheer",
+    "ref": "master"
+  },
+  {
+    "name": "alarmo",
+    "repository": "https://github.com/nielsfaber/alarmo",
+    "ref": "main"
+  },
+  {
+    "name": "ori",
+    "repository": "https://github.com/golles/ha-aquatlantis-ori",
+    "ref": "main"
+  },
+  {
+    "name": "auth_oidc",
+    "repository": "https://github.com/christiaangoossens/hass-oidc-auth",
+    "ref": "main"
+  },
+  {
+    "name": "blitzortung",
+    "repository": "https://github.com/mrk-its/homeassistant-blitzortung",
+    "ref": "master"
+  },
+  {
+    "name": "car_wash",
+    "repository": "https://github.com/Limych/ha-car_wash",
+    "ref": "dev"
+  },
+  {
+    "name": "eufy_security",
+    "repository": "https://github.com/fuatakgun/eufy_security",
+    "ref": "master"
+  },
+  {
+    "name": "flightradar24",
+    "repository": "https://github.com/AlexandrErohin/home-assistant-flightradar24",
+    "ref": "main"
+  },
+  {
+    "name": "bambu_lab",
+    "repository": "https://github.com/greghesp/ha-bambulab",
+    "ref": "main"
+  },
+  {
+    "name": "home_connect_alt",
+    "repository": "https://github.com/ekutner/home-connect-hass",
+    "ref": "master"
+  },
+  {
+    "name": "kamstrup_403",
+    "repository": "https://github.com/golles/ha-kamstrup_403",
+    "ref": "main"
+  },
+  {
+    "name": "kleenex_pollenradar",
+    "repository": "https://github.com/MarcoGos/kleenex_pollenradar",
+    "ref": "main"
+  },
+  {
+    "name": "knmi",
+    "repository": "https://github.com/golles/ha-knmi",
+    "ref": "main"
+  },
+  {
+    "name": "lghorizon",
+    "repository": "https://github.com/Sholofly/lghorizon",
+    "ref": "dev"
+  },
+  {
+    "name": "media_player_template",
+    "repository": "https://github.com/Sennevds/media_player.template",
+    "ref": "master"
+  },
+  {
+    "name": "p2000",
+    "repository": "https://github.com/cyberjunky/home-assistant-p2000",
+    "ref": "master"
+  },
+  {
+    "name": "spook",
+    "repository": "https://github.com/frenck/spook",
+    "ref": "main"
+  },
+  {
+    "name": "tomtom_travel_time",
+    "repository": "https://github.com/golles/ha-tomtom-travel-time",
+    "ref": "main"
+  },
+  {
+    "name": "webrtc",
+    "repository": "https://github.com/AlexxIT/WebRTC",
+    "ref": "master"
+  },
+  {
+    "name": "xiaomi_miio_fan",
+    "repository": "https://github.com/syssi/xiaomi_fan",
+    "ref": "develop"
+  }
+]
