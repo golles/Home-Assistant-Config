@@ -202,8 +202,6 @@ automation:
                   {% set target = target + timedelta(days=1) %}
                 {% endif %}
                 {{ (target - now).total_seconds() | int }}
-          program_key: Dishcare.Dishwasher.Program.Auto2
-          validate: true
 
   - id: home_connect_conversation_remaining_time
     alias: "Spraakassistent: Wanneer is de machine klaar"
