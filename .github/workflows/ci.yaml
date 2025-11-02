@@ -56,4 +56,5 @@ jobs:
       - name: Home Assistant configuration check
         uses: frenck/action-home-assistant@v1.4
         with:
+          path: ${{ github.workspace }}
           version: stable
