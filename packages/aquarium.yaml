@@ -68,7 +68,7 @@ automation:
         data:
           title: 🐠 Aquarium
           message: |
-              {{ alert_message | replace('-STATE-', states(trigger.entity_id)) }}
+            {{ alert_message | replace('-STATE-', states(trigger.entity_id)) }}
           data:
             group: aquarium
             url: /dashboard-status/aquarium
