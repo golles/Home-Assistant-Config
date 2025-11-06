@@ -16,3 +16,157 @@ template:
             {{ states("sensor.aquarium_watertemperatuur") }} °C
         availability: >
           {{ states("light.aquarium_licht") not in ("unknown", "unavailable") }}
+
+automation:
+  - id: aquarium_monitoring_alert
+    alias: "Notificatie: Aquarium monitoring"
+    mode: parallel
+    triggers:
+      - trigger: numeric_state
+        entity_id: sensor.aquarium_watertemperatuur
+        above: 30
+        for:
+          minutes: 5
+        variables:
+          alert_message: Watertemperatuur is te hoog, -STATE-°C
+      - trigger: numeric_state
+        entity_id: sensor.aquarium_watertemperatuur
+        below: 22
+        for:
+          minutes: 5
+        variables:
+          alert_message: Watertemperatuur is te laag, -STATE-°C
+      - trigger: state
+        entity_id: switch.aquarium_verlichting_plug
+        to: "off"
+        for:
+          minutes: 60
+        variables:
+          alert_message: Verlichting is al een tijd uit
+      - trigger: state
+        entity_id: switch.aquarium_pomp_plug
+        to: "off"
+        for:
+          minutes: 60
+        variables:
+          alert_message: Filter is al een tijd uit
+      - trigger: state
+        entity_id: switch.aquarium_verwarming_plug
+        to: "off"
+        for:
+          minutes: 60
+        variables:
+          alert_message: Verwarming is al een tijd uit
+      - trigger: state
+        entity_id: binary_sensor.aquarium_pomp_lekkage_water_leak
+        to: "on"
+        variables:
+          alert_message: Lekkage bij het filter gedetecteerd
+    actions:
+      - alias: Send the notification
+        action: notify.sander
+        data:
+          title: 🐠 Aquarium
+          message: |
+              {{ alert_message | replace('-STATE-', states(trigger.entity_id)) }}
+          data:
+            group: aquarium
+            url: /dashboard-status/aquarium
+            push:
+              interruption-level: critical
+
+  - id: aquarium_buttons
+    alias: Aquarium - Knoppen
+    mode: single
+    triggers:
+      - trigger: device
+        domain: mqtt
+        device_id: bec06935fe26cb7ae7140f1ed8ac9eb2
+        type: action
+        subtype: on_press
+      - trigger: device
+        domain: mqtt
+        device_id: bec06935fe26cb7ae7140f1ed8ac9eb2
+        type: action
+        subtype: off_press
+      - trigger: device
+        domain: mqtt
+        device_id: bec06935fe26cb7ae7140f1ed8ac9eb2
+        type: action
+        subtype: down_press
+      - trigger: device
+        domain: mqtt
+        device_id: bec06935fe26cb7ae7140f1ed8ac9eb2
+        type: action
+        subtype: up_press
+    action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.payload == 'on_press' }}"
+            sequence:
+              - if:
+                  - condition: state
+                    entity_id: light.aquarium_licht
+                    attribute: effect
+                    state: automatic
+                then:
+                  - alias: Set the light to maintenance mode
+                    service: light.turn_on
+                    target:
+                      entity_id: light.aquarium_licht
+                    data:
+                      brightness: 255
+                      effect: manual
+                      rgbw_color: [255, 255, 255, 255]
+                else:
+                  - alias: Set the light to automatic mode
+                    service: light.turn_on
+                    target:
+                      entity_id: light.aquarium_licht
+                    data:
+                      effect: automatic
+
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.payload == 'off_press' }}"
+            sequence:
+              - if:
+                  - condition: state
+                    entity_id: switch.aquarium_pomp_plug
+                    state: "on"
+                then:
+                  - alias: Turn off the heater and pump
+                    service: switch.turn_off
+                    target:
+                      entity_id:
+                        - switch.aquarium_verwarming_plug
+                        - switch.aquarium_pomp_plug
+                else:
+                  - alias: Turn on the heater and pump
+                    service: switch.turn_on
+                    target:
+                      entity_id:
+                        - switch.aquarium_pomp_plug
+                        - switch.aquarium_verwarming_plug
+
+          - conditions:
+              - condition: template
+                value_template: "{{ trigger.payload == 'down_press' }}"
+            sequence:
+              - if:
+                  - condition: state
+                    entity_id: switch.aquarium_plug_4
+                    state: "on"
+                then:
+                  - alias: Turn off plug 4
+                    service: switch.turn_off
+                    target:
+                      entity_id:
+                        - switch.aquarium_plug_4
+                else:
+                  - alias: Turn on plug 4
+                    service: switch.turn_on
+                    target:
+                      entity_id:
+                        - switch.aquarium_plug_4

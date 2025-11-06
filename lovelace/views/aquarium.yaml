@@ -82,8 +82,152 @@ sections:
         entity: switch.aquarium_verwarming_plug
         name: Verwarming
       - type: tile
-        entity: switch.aquarium_skimmer_plug
-        name: Skimmer
+        entity: switch.aquarium_plug_4
+        name: Plug 4
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Tijdschema
+        heading_style: subtitle
+      - type: custom:apexcharts-card
+        graph_span: 1d
+        span:
+          start: day
+        all_series_config:
+          stroke_width: 2
+          show:
+            legend_value: false
+            in_header: false
+          extend_to: now
+          type: line
+          curve: straight
+          unit: "%"
+        apex_config:
+          yaxis:
+            max: 100
+            min: 0
+          stroke:
+            curve: straight
+        now:
+          show: true
+          label: Nu
+          color: red
+
+        section_mode: true
+        series:
+          - entity: light.aquarium_licht
+            name: Red
+            color: red
+            data_generator: >
+              const key = 'red';
+
+              const sch = entity.attributes.schedule || {};
+
+              const dayStart = new Date(start.getFullYear(), start.getMonth(),
+              start.getDate(), 0, 0).getTime();
+
+              const toTs = t => { const [h,m] = t.split(':').map(Number); return new
+              Date(start.getFullYear(), start.getMonth(), start.getDate(), h,
+              m).getTime(); };
+
+              const points = Object.entries(sch).map(([time, vals]) => {
+                const ts = toTs(time);
+                const base = parseFloat(vals[key] ?? 0);
+                const intensity = parseFloat(vals.intensity ?? 0);
+                return [ts, base * intensity / 100];
+              }).sort((a,b)=>a[0]-b[0]);
+
+              if (points.length === 0) return [[dayStart,0]];
+
+              if (points[0][0] > dayStart) { points.unshift([Math.max(points[0][0]-1000,
+              dayStart),0]); points.unshift([dayStart,0]); }
+
+              return points;
+          - entity: light.aquarium_licht
+            name: Green
+            color: green
+            data_generator: >
+              const key = 'green';
+
+              const sch = entity.attributes.schedule || {};
+
+              const dayStart = new Date(start.getFullYear(), start.getMonth(),
+              start.getDate(), 0, 0).getTime();
+
+              const toTs = t => { const [h,m] = t.split(':').map(Number); return new
+              Date(start.getFullYear(), start.getMonth(), start.getDate(), h,
+              m).getTime(); };
+
+              const points = Object.entries(sch).map(([time, vals]) => {
+                const ts = toTs(time);
+                const base = parseFloat(vals[key] ?? 0);
+                const intensity = parseFloat(vals.intensity ?? 0);
+                return [ts, base * intensity / 100];
+              }).sort((a,b)=>a[0]-b[0]);
+
+              if (points.length === 0) return [[dayStart,0]];
+
+              if (points[0][0] > dayStart) { points.unshift([Math.max(points[0][0]-1000,
+              dayStart),0]); points.unshift([dayStart,0]); }
+
+              return points;
+          - entity: light.aquarium_licht
+            name: Blue
+            color: blue
+            data_generator: >
+              const key = 'blue';
+
+              const sch = entity.attributes.schedule || {};
+
+              const dayStart = new Date(start.getFullYear(), start.getMonth(),
+              start.getDate(), 0, 0).getTime();
+
+              const toTs = t => { const [h,m] = t.split(':').map(Number); return new
+              Date(start.getFullYear(), start.getMonth(), start.getDate(), h,
+              m).getTime(); };
+
+              const points = Object.entries(sch).map(([time, vals]) => {
+                const ts = toTs(time);
+                const base = parseFloat(vals[key] ?? 0);
+                const intensity = parseFloat(vals.intensity ?? 0);
+                return [ts, base * intensity / 100];
+              }).sort((a,b)=>a[0]-b[0]);
+
+              if (points.length === 0) return [[dayStart,0]];
+
+              if (points[0][0] > dayStart) { points.unshift([Math.max(points[0][0]-1000,
+              dayStart),0]); points.unshift([dayStart,0]); }
+
+              return points;
+          - entity: light.aquarium_licht
+            name: White
+            color: lightgrey
+            data_generator: >
+              const key = 'white';
+
+              const sch = entity.attributes.schedule || {};
+
+              const dayStart = new Date(start.getFullYear(), start.getMonth(),
+              start.getDate(), 0, 0).getTime();
+
+              const toTs = t => { const [h,m] = t.split(':').map(Number); return new
+              Date(start.getFullYear(), start.getMonth(), start.getDate(), h,
+              m).getTime(); };
+
+              const points = Object.entries(sch).map(([time, vals]) => {
+                const ts = toTs(time);
+                const base = parseFloat(vals[key] ?? 0);
+                const intensity = parseFloat(vals.intensity ?? 0);
+                return [ts, base * intensity / 100];
+              }).sort((a,b)=>a[0]-b[0]);
+
+              if (points.length === 0) return [[dayStart,0]];
+
+              if (points[0][0] > dayStart) { points.unshift([Math.max(points[0][0]-1000,
+              dayStart),0]); points.unshift([dayStart,0]); }
+
+              return points;
 
   - type: grid
     column_span: 4
@@ -144,8 +288,8 @@ sections:
             group_by:
               duration: 1d
               func: diff
-          - entity: sensor.aquarium_skimmer_plug_energy
-            name: Skimmer
+          - entity: sensor.aquarium_plug_4_energy
+            name: Plug 4
             color: "#4ac98b"
             opacity: 0.5
             type: column
