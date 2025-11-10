@@ -5,17 +5,52 @@ template:
         state: >
           {{ is_state("light.aquarium_licht", "on") }}
         attributes:
-          "modus": >
+          modus: >
             {% set translations = {
               "manual": "Handmatig",
               "automatic": "Automatisch",
               "dynamic": "Dynamisch"
             } %}
             {{ translations.get(state_attr("light.aquarium_licht", "light_mode"), state_attr("light.aquarium_licht", "light_mode")) }}
-          "temperatuur": >
+          temperatuur: >
             {{ states("sensor.aquarium_watertemperatuur") }} °C
         availability: >
           {{ states("light.aquarium_licht") not in ("unknown", "unavailable") }}
+
+  - button:
+      - name: Aquarium schema
+        press:
+          action: ori.set_schedule
+          data:
+            device_id: 753a24aab6441d1d21381fa051beb10e
+            schedule:
+              - 8,59,0,0,0,0,0      # Nacht: alles uit
+              - 9,0,15,15,15,20,20  # Zachte zonsopkomst
+              - 10,0,40,30,30,35,50 # Rustige opbouw
+              - 12,0,70,40,40,45,70 # Piek
+              - 15,0,70,40,40,45,70 # Kortere piekperiode
+              - 16,0,60,35,35,40,60 # Begin van afbouw
+              - 17,0,45,25,25,30,45 # Gouden uur / avondlicht
+              - 18,0,25,15,15,20,25 # Schemer
+              - 19,0,0,0,0,0,0      # Nacht
+
+      - name: Aquarium schema met maanlicht
+        press:
+          action: ori.set_schedule
+          data:
+            device_id: 753a24aab6441d1d21381fa051beb10e
+            schedule:
+              - 8,59,0,0,0,0,0      # Nacht: alles uit
+              - 9,0,15,15,15,20,20  # Zachte zonsopkomst
+              - 10,0,40,30,30,35,50 # Rustige opbouw
+              - 12,0,70,40,40,45,70 # Piek
+              - 15,0,70,40,40,45,70 # Kortere piekperiode
+              - 16,0,60,35,35,40,60 # Begin van afbouw
+              - 17,0,45,25,25,30,45 # Gouden uur / avondlicht
+              - 18,0,25,15,15,20,25 # Schemer
+              - 19,0,0,0,0,0,0      # Nacht
+              - 20,0,10,0,0,10,0    # Maanlicht
+              - 22,0,0,0,0,0,0      # Nacht
 
 automation:
   - id: aquarium_monitoring_alert
