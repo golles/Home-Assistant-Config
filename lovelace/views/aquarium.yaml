@@ -82,8 +82,8 @@ sections:
         entity: switch.aquarium_verwarming_plug
         name: Verwarming
       - type: tile
-        entity: switch.aquarium_plug_4
-        name: Plug 4
+        entity: switch.aquarium_luchtpomp_plug
+        name: Luchtpomp
 
   - type: grid
     cards:
@@ -288,8 +288,8 @@ sections:
             group_by:
               duration: 1d
               func: diff
-          - entity: sensor.aquarium_plug_4_energy
-            name: Plug 4
+          - entity: sensor.aquarium_luchtpomp_plug_energy
+            name: Luchtpomp
             color: "#4ac98b"
             opacity: 0.5
             type: column
