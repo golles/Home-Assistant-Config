@@ -120,7 +120,7 @@ action:
             value_template: "{{ states(macbook_frontmost_app_sensor) in apps }}"
 
           - alias: Mute media player
-            service: media_player.volume_mute
+            action: media_player.volume_mute
             data:
               entity_id: !input media_player
               is_volume_muted: true
@@ -142,17 +142,17 @@ action:
                     state: "off"
                 sequence:
                   - alias: Restore media player volume
-                    service: media_player.volume_mute
+                    action: media_player.volume_mute
                     data:
                       entity_id: !input media_player
                       is_volume_muted: false
             default:
               - alias: Turn off media player after timeout
-                service: media_player.turn_off
+                action: media_player.turn_off
                 data:
                   entity_id: !input media_player
 
     default:
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: !input media_player

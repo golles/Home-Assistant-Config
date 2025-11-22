@@ -147,7 +147,7 @@ automation:
                     state: automatic
                 then:
                   - alias: Set the light to maintenance mode
-                    service: light.turn_on
+                    action: light.turn_on
                     target:
                       entity_id: light.aquarium_licht
                     data:
@@ -156,7 +156,7 @@ automation:
                       rgbw_color: [255, 255, 255, 255]
                 else:
                   - alias: Set the light to automatic mode
-                    service: light.turn_on
+                    action: light.turn_on
                     target:
                       entity_id: light.aquarium_licht
                     data:
@@ -172,14 +172,14 @@ automation:
                     state: "on"
                 then:
                   - alias: Turn off the heater and pump
-                    service: switch.turn_off
+                    action: switch.turn_off
                     target:
                       entity_id:
                         - switch.aquarium_verwarming_plug
                         - switch.aquarium_pomp_plug
                 else:
                   - alias: Turn on the heater and pump
-                    service: switch.turn_on
+                    action: switch.turn_on
                     target:
                       entity_id:
                         - switch.aquarium_pomp_plug
@@ -195,13 +195,13 @@ automation:
                     state: "on"
                 then:
                   - alias: Turn off plug 4
-                    service: switch.turn_off
+                    action: switch.turn_off
                     target:
                       entity_id:
                         - switch.aquarium_luchtpomp_plug
                 else:
                   - alias: Turn on plug 4
-                    service: switch.turn_on
+                    action: switch.turn_on
                     target:
                       entity_id:
                         - switch.aquarium_luchtpomp_plug
