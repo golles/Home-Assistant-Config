@@ -97,6 +97,14 @@ automation:
         to: "on"
         variables:
           alert_message: Lekkage bij het filter gedetecteerd
+      - trigger: state
+        entity_id: light.aquarium_licht
+        attribute: effect
+        not_to: automatic
+        for:
+          minutes: 120
+        variables:
+          alert_message: Verlichting staat niet op automatisch
     actions:
       - alias: Send the notification
         action: notify.sander
