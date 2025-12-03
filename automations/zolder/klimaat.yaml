@@ -6,3 +6,31 @@
       door_entity: binary_sensor.zolderraam_contact
       climate_entity: climate.zolder
       turn_off_delay: 300
+
+- id: zolder_lekkage
+  alias: Zolder lekkage detectie
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.zolder_lekkage_water_leak
+      to: "on"
+  actions:
+    - alias: Repeat the sequence until the leak is resolved
+      repeat:
+        sequence:
+          - alias: Send the notification
+            action: notify.sander
+            data:
+              title: 💧 Lekkage op zolder
+              message: Er is een lekkage gedetecteerd op zolder. Controleer dit zo snel mogelijk!
+              data:
+                push:
+                  interruption-level: critical
+
+          - alias: Wait before resending
+            delay:
+              minutes: 5
+        until:
+          - condition: state
+            entity_id: binary_sensor.zolder_lekkage_water_leak
+            state: "off"

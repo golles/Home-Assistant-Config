@@ -92,6 +92,9 @@ sections:
       - type: tile
         entity: sensor.epl_zolder_illuminance
         name: Lichtsterkte
+      - type: tile
+        entity: binary_sensor.zolder_lekkage_water_leak
+        name: Lekkage
 
   - type: grid
     cards:
