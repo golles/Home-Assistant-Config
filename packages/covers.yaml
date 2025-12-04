@@ -11,18 +11,16 @@ input_datetime:
     has_date: false
     has_time: true
 
-cover:
-  - platform: template
-    covers:
-      zonnescherm_template:
+template:
+  - cover:
+      - name: Zonnescherm template
         device_class: awning
-        friendly_name: Zonnescherm
-        icon_template: mdi:storefront-outline
-        value_template: >-
+        icon: mdi:storefront-outline
+        state: >-
           {{ iif(states("binary_sensor.zonnescherm_contact_contact") == "on", "open", "closed") }}
-        availability_template: >-
+        availability: >-
           {{ states("cover.zonnescherm") != "unavailable" }}
-        position_template: >-
+        position: >-
           {{ iif(states("binary_sensor.zonnescherm_contact_contact") == "on", 50, 0) }}
         open_cover:
           action: cover.open_cover
@@ -37,7 +35,6 @@ cover:
           target:
             entity_id: cover.zonnescherm
 
-template:
   - button:
       - name: Logeerkamer rolgordijn voorkeurspositie
         icon: mdi:star

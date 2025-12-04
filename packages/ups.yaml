@@ -1,15 +1,13 @@
-switch:
-  - platform: template
-    switches:
-      ups_beeper:
-        friendly_name: UPS Beeper
-        icon_template: >
+template:
+  - switch:
+      - name: UPS Beeper
+        icon: >
           {% if is_state("sensor.ups_pieperstatus", "enabled") %}
             mdi:volume-high
           {% else %}
             mdi:volume-off
           {% endif %}
-        value_template: >
+        state: >
           {{ is_state("sensor.ups_pieperstatus", "enabled") }}
         turn_on:
           type: beeper_enable
