@@ -30,6 +30,9 @@ sections:
       - type: tile
         entity: light.aquarium_licht
         name: Lamp
+        state_content:
+          - state
+          - effect
       - type: tile
         entity: sensor.aquarium_watertemperatuur
         name: Temperatuur
