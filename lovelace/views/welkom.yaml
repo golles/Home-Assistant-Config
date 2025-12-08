@@ -563,4 +563,4 @@ sections:
       - type: tile
         entity: input_boolean.guest_mode
       - type: tile
-        entity: switch.tado_home_mode
+        entity: switch.tado_thuismodus
