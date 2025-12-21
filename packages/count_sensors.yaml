@@ -293,10 +293,14 @@ template:
         unit_of_measurement: stale
         attributes:
           "stale": >-
-            {{
-              states
-              | selectattr("state", "eq", "unavailable")
-              | selectattr("attributes.restored", "eq", True)
-              | map(attribute="entity_id")
-              | list
-            }}
+            {% if as_timestamp(now()) - as_timestamp(states("sensor.uptime"), 0) > 120 %}
+              {{
+                states
+                | selectattr("state", "eq", "unavailable")
+                | selectattr("attributes.restored", "eq", True)
+                | map(attribute="entity_id")
+                | list
+              }}
+            {% else %}
+              []
+            {% endif %}
