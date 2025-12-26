@@ -85,6 +85,9 @@ sections:
         entity: switch.aquarium_verwarming_plug
         name: Verwarming
       - type: tile
+        entity: switch.aquarium_skimmer_plug
+        name: Skimmer
+      - type: tile
         entity: switch.aquarium_luchtpomp_plug
         name: Luchtpomp
 
@@ -294,6 +297,14 @@ sections:
           - entity: sensor.aquarium_luchtpomp_plug_energy
             name: Luchtpomp
             color: "#4ac98b"
+            opacity: 0.5
+            type: column
+            group_by:
+              duration: 1d
+              func: diff
+          - entity: sensor.aquarium_skimmer_plug_energy
+            name: Skimmer
+            color: "#aa47bc"
             opacity: 0.5
             type: column
             group_by:
