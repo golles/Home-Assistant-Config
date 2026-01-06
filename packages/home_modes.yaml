@@ -55,6 +55,9 @@ automation:
           minutes: 30
         id: woonkamer_avond
       - trigger: time
+        at: "23:00:00"
+        id: woonkamer_uit
+      - trigger: time
         at: "23:30:00"
         id: tanden_poetsen
       - trigger: time
@@ -86,10 +89,11 @@ automation:
                   brightness: 1
                 target:
                   entity_id: light.woonkamer_groot_2
-              - alias: Wait till a certain time
-                wait_for_trigger:
-                  - trigger: time
-                    at: "22:00:00"
+
+          - conditions:
+              - condition: trigger
+                id: woonkamer_uit
+            sequence:
               - alias: Wait a little to randomize the behavior
                 delay:
                   minutes: "{{ range(0, 30) | random }}"
