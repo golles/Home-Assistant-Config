@@ -2,21 +2,5 @@
   {
     "file": "google_theme.yaml",
     "url": "https://raw.githubusercontent.com/JuanMTech/google-theme/main/themes/google_theme.yaml"
-  },
-  {
-    "file": "mushroom-shadow.yaml",
-    "url": "https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-shadow.yaml"
-  },
-  {
-    "file": "mushroom-square-shadow.yaml",
-    "url": "https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-square-shadow.yaml"
-  },
-  {
-    "file": "mushroom-square.yaml",
-    "url": "https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom-square.yaml"
-  },
-  {
-    "file": "mushroom.yaml",
-    "url": "https://raw.githubusercontent.com/piitaya/lovelace-mushroom-themes/main/themes/mushroom.yaml"
   }
 ]
