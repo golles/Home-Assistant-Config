@@ -37,7 +37,7 @@ sections:
         heading: Klimaat
         heading_style: subtitle
       - type: tile
-        entity: fan.mechanische_ventilatie_ventilatie
+        entity: fan.mechanische_ventilatie_ventilation
 
   - type: grid
     cards:
@@ -67,6 +67,6 @@ sections:
         name: Automatisch licht
         icon: mdi:lightbulb-auto
       - type: tile
-        entity: button.mechanische_ventilatie_15_minuten_medium
+        entity: button.mechanische_ventilatie_medium_15
         name: 15 Minuten medium
         icon: mdi:fan

@@ -40,7 +40,7 @@ sections:
         entity: climate.zolder
         name: Verwarming
       - type: tile
-        entity: fan.mechanische_ventilatie_ventilatie
+        entity: fan.mechanische_ventilatie_ventilation
 
   - type: grid
     cards:

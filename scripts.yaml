@@ -21,7 +21,7 @@ everything_off:
         +
         [
           "fan.air_purifier",
-          "fan.mechanische_ventilatie_ventilatie",
+          "fan.mechanische_ventilatie_ventilation",
           "media_player.mediabox_homekit",
         ]
       }}

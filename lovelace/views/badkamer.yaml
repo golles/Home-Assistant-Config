@@ -40,7 +40,7 @@ sections:
         entity: climate.badkamer
         name: Verwarming
       - type: tile
-        entity: fan.mechanische_ventilatie_ventilatie
+        entity: fan.mechanische_ventilatie_ventilation
 
   - type: grid
     cards:
@@ -99,6 +99,6 @@ sections:
         name: Automatisch licht
         icon: mdi:lightbulb-auto
       - type: tile
-        entity: button.mechanische_ventilatie_15_minuten_extra_hoog
+        entity: button.mechanische_ventilatie_max_15
         name: 15 Minuten extra hoog
         icon: mdi:fan

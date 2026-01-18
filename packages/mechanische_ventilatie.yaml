@@ -62,8 +62,10 @@ script:
                 timer: "{{ timer }}"
             - delay:
                 seconds: 10
-          until: |-
-            {{
-              is_state_attr("fan.mechanische_ventilatie_ventilatie", "percentage", percentage) or
-              repeat.index > 10
-            }}
+          until:
+            - condition: template
+              value_template: |-
+                {{
+                  is_state_attr("fan.mechanische_ventilatie_ventilation", "percentage", percentage) or
+                  repeat.index > 10
+                }}
