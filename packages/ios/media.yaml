@@ -12,14 +12,14 @@ ios:
       show_in_watch: true
       use_custom_colors: true
 
-    - name: Ziggo
+    - name: Odido
       background_color: "#ffffff"
       label:
-        text: Ziggo
-        color: "#f48c00"
+        text: Odido
+        color: "#1b5ee4"
       icon:
         icon: television-classic
-        color: "#f48c00"
+        color: "#1b5ee4"
       show_in_carplay: false
       show_in_watch: true
       use_custom_colors: true
@@ -39,25 +39,26 @@ automation:
         data:
           stream: https://stream.qmusic.nl/qmusic/mp3
 
-  - id: ios_action_tv_ziggo
-    alias: iOS action - Ziggo
+  - id: ios_action_tv_odido
+    alias: iOS action - Odido
     mode: single
     max_exceeded: silent
     triggers:
       - trigger: event
         event_type: ios.action_fired
         event_data:
-          actionName: Ziggo
+          actionName: Odido
     actions:
       - choose:
           # Turn on.
           - conditions:
               - condition: state
-                entity_id: media_player.mediabox
+                entity_id: media_player.4k_tv_box_2
                 state: "off"
             sequence:
-              - action: script.lg_c9_source_ziggo
+              - action: media_player.turn_on
+                entity_id: media_player.4k_tv_box_2
         # Turn off.
         default:
           - action: media_player.turn_off
-            entity_id: media_player.mediabox
+            entity_id: media_player.4k_tv_box_2

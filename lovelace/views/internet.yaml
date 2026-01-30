@@ -21,30 +21,6 @@ sections:
         heading: Internet
         heading_style: title
         icon: mdi:web
-      - type: markdown
-        title: Ziggo meldingen
-        entities: sensor.ziggo_incidents
-        layout_options:
-          grid_columns: full
-        content: >-
-          {% set announcements = state_attr("sensor.ziggo_incidents", "announcements") | default([], true) %}
-          {% set outages = state_attr("sensor.ziggo_incidents", "outages") | default([], true) %}
-          {% set combined = announcements + outages %}
-
-          {% if combined | count == 0 %}
-            Geen
-          {% else %}
-            {% for event in combined %}
-            **[{{ event.status }}]: {{ iif("title" in event, event.title, event.id) }}**
-
-            {{ event.announcement }}
-
-            Begint: {{ event.create_date | as_datetime }}
-            Verwachte opgelost: {{ event.expected_solv_time | as_datetime }}
-            Werkelijk opgelost: {{ event.solv_time | as_datetime }}
-
-            {% endfor %}
-          {% endif %}
 
   - type: grid
     cards:

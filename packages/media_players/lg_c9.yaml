@@ -2,12 +2,18 @@ media_player:
   - platform: universal
     name: Woonkamer
     children:
-      - media_player.mediabox
-      - media_player.lg_c9
+      - media_player.4k_tv_box_2 # The Android TV
+      - media_player.4k_tv_box # The Chromecast from the Android TV
+      - media_player.lg_c9 # The TV
     active_child_template: >-
       {% set source = state_attr("media_player.lg_c9", "source") %}
-      {% if source == "Ziggo" %}
-        media_player.mediabox
+      {% set tv_box_2_app_id = state_attr("media_player.4k_tv_box_2", "app_id") %}
+      {% if source == "Odido" %}
+        {% if tv_box_2_app_id in ["com.google.android.youtube.tv", "org.jellyfin.androidtv"] %}
+          media_player.4k_tv_box
+        {% else %}
+          media_player.4k_tv_box_2
+        {% endif %}
       {% else %}
         media_player.lg_c9
       {% endif %}
@@ -16,14 +22,12 @@ media_player:
         action: media_player.turn_on
         target:
           entity_id:
-            - media_player.lg_c9
-            - media_player.mediabox
+            - media_player.4k_tv_box_2
       turn_off:
         action: media_player.turn_off
         target:
           entity_id:
-            - media_player.lg_c9
-            - media_player.mediabox
+            - media_player.4k_tv_box_2
       volume_up:
         action: media_player.volume_up
         target:
@@ -56,8 +60,8 @@ automation:
           broadcast_address: !secret webostv_ip
 
 script:
-  lg_c9_source_ziggo:
-    alias: Speel Ziggo op LG C9
+  lg_c9_source_odido:
+    alias: Speel Odido op LG C9
     icon: mdi:television
     mode: restart
     sequence:
@@ -68,16 +72,16 @@ script:
                 entity_id: media_player.lg_c9
                 state: "off"
               - condition: state
-                entity_id: media_player.mediabox
+                entity_id: media_player.4k_tv_box_2
                 state: "off"
         then:
-          - alias: Turn on the mediabox
+          - alias: Turn on the tv box
             action: media_player.turn_on
             data:
-              entity_id: media_player.mediabox
+              entity_id: media_player.4k_tv_box_2
 
-      - alias: Set the source of the tv to ziggo
+      - alias: Set the source of the tv to odido
         action: script.play_tv_with_source
         data:
           media_player: media_player.lg_c9
-          source: Ziggo
+          source: Odido

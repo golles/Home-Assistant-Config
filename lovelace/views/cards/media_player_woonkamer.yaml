@@ -14,36 +14,30 @@ shortcuts:
   columns: 6
   column_height: 48
   buttons:
-    - cover: /local/tv/ziggo.png
-      type: service
-      id: script.lg_c9_source_ziggo
-    - cover: /local/tv/netflix.png
+    - cover: /local/tv/odido.png
       type: script
-      id: script.play_tv_with_source
-      data:
-        media_player: media_player.lg_c9
-        source: Netflix
-    - cover: /local/tv/youtube.png
-      type: script
-      id: script.play_tv_with_source
-      data:
-        media_player: media_player.lg_c9
-        source: YouTube
-    - cover: /local/tv/switch.png
-      type: script
-      id: script.play_tv_with_source
-      data:
-        media_player: media_player.lg_c9
-        source: Nintendo Switch
+      id: script.lg_c9_source_odido
     - cover: /local/tv/jellyfin.png
       type: script
       id: script.play_tv_with_source
       data:
         media_player: media_player.lg_c9
         source: Jellyfin
+    - cover: /local/tv/youtube.png
+      type: script
+      id: script.play_tv_with_source
+      data:
+        media_player: media_player.lg_c9
+        source: YouTube
     - cover: /local/tv/iptv_smarters_pro.png
       type: script
       id: script.play_tv_with_source
       data:
         media_player: media_player.lg_c9
         source: IPTVSmartersPro
+    - cover: /local/tv/switch.png
+      type: script
+      id: script.play_tv_with_source
+      data:
+        media_player: media_player.lg_c9
+        source: Nintendo Switch

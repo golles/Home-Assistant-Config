@@ -65,11 +65,6 @@
     "ref": "main"
   },
   {
-    "name": "lghorizon",
-    "repository": "https://github.com/Sholofly/lghorizon",
-    "ref": "dev"
-  },
-  {
     "name": "media_player_template",
     "repository": "https://github.com/Sennevds/media_player.template",
     "ref": "master"

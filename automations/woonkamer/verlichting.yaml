@@ -81,13 +81,11 @@
       attribute: source
       from:
         - Jellyfin
-        - Netflix
     - trigger: state
       entity_id: media_player.lg_c9
       attribute: source
       to:
         - Jellyfin
-        - Netflix
     - trigger: numeric_state
       id: illuminance
       entity_id: sensor.epl_eettafel_illuminance
@@ -103,7 +101,7 @@
       value_template: >-
         {{
           trigger.id != "illuminance" or
-          trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Jellyfin", "Netflix"]
+          trigger.id == "illuminance" and state_attr("media_player.lg_c9", "source") in ["Jellyfin"]
         }}
   actions:
     - if:
@@ -112,7 +110,6 @@
           attribute: source
           state:
             - Jellyfin
-            - Netflix
       then:
         - alias: Turn on movie scenes
           action: scene.turn_on
