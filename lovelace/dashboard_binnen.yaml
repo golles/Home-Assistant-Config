@@ -1,5 +1,3 @@
-swipe_nav: !include config/swipe_nav.yaml
-
 views:
   - !include views/woonkamer.yaml
   - !include views/keuken.yaml

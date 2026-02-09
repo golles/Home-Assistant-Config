@@ -1,5 +1,3 @@
-swipe_nav: !include config/swipe_nav.yaml
-
 views:
   - !include views/klimaat.yaml
   - !include views/lampen.yaml

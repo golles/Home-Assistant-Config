@@ -1,4 +1,2 @@
-swipe_nav: !include lovelace/config/swipe_nav.yaml
-
 views:
   - !include lovelace/views/welkom.yaml

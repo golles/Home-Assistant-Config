@@ -19,8 +19,5 @@
 - url: /local/mushroom.js
   type: module
 
-- url: /local/swipe-navigation.js
-  type: js
-
 - url: /local/vertical-stack-in-card.js
   type: module

@@ -8,6 +8,10 @@
     "url": "https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js"
   },
   {
+    "file": "bubble-card.js",
+    "url": "https://raw.githubusercontent.com/Clooos/Bubble-Card/refs/heads/main/dist/bubble-card.js"
+  },
+  {
     "file": "entity-progress-card.js",
     "url": "https://github.com/francois-le-ko4la/lovelace-entity-progress-card/releases/latest/download/entity-progress-card.js"
   },
@@ -22,10 +26,6 @@
   {
     "file": "mushroom.js",
     "url": "https://github.com/piitaya/lovelace-mushroom/releases/latest/download/mushroom.js"
-  },
-  {
-    "file": "swipe-navigation.js",
-    "url": "https://github.com/zanna-37/hass-swipe-navigation/releases/latest/download/swipe-navigation.js"
   },
   {
     "file": "vertical-stack-in-card.js",
