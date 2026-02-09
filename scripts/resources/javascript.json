@@ -8,10 +8,6 @@
     "url": "https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.js"
   },
   {
-    "file": "bubble-card.js",
-    "url": "https://raw.githubusercontent.com/Clooos/Bubble-Card/refs/heads/main/dist/bubble-card.js"
-  },
-  {
     "file": "entity-progress-card.js",
     "url": "https://github.com/francois-le-ko4la/lovelace-entity-progress-card/releases/latest/download/entity-progress-card.js"
   },
