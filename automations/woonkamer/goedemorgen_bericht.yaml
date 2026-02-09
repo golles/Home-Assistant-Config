@@ -17,6 +17,9 @@
     - condition: state
       entity_id: binary_sensor.morning
       state: "on"
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: "off"
     - condition: template
       value_template:
         > # Don't trigger if it has been triggered in the last 6 hours.
