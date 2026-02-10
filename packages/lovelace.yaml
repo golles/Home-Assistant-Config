@@ -1,8 +1,14 @@
 lovelace:
-  mode: yaml
+  resource_mode: yaml
   resources: !include ../lovelace/resources.yaml
 
   dashboards:
+    dashboard-welkom:
+      mode: yaml
+      filename: lovelace/dashboard_welkom.yaml
+      title: Welkom
+      icon: mdi:view-dashboard
+
     dashboard-kamers:
       mode: yaml
       filename: lovelace/dashboard_binnen.yaml

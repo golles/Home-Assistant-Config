@@ -1,2 +1,0 @@
-views:
-  - !include lovelace/views/welkom.yaml

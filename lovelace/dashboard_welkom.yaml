@@ -1,0 +1,2 @@
+views:
+  - !include views/welkom.yaml
