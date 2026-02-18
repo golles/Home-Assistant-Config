@@ -68,7 +68,7 @@ automation:
             {% if states("sensor.count_speakers_on") not in ["unknown", "0"] %}{{ states("sensor.count_speakers_on") }}🔊 {% endif %}
           data:
             tag: devices_left_on
-            url: /lovelace/welkom
+            url: dashboard-status/3dprinter
             actions:
               - action: "{{ action_all_off }}"
                 title: Zet alles uit

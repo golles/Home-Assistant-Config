@@ -8,7 +8,7 @@ sections:
       - type: template
         tap_action:
           action: navigate
-          navigation_path: /lovelace/welkom
+          navigation_path: /dashboard-welkom/welkom
         icon: mdi:arrow-left-bold
         content: Overzicht
     layout_options:
