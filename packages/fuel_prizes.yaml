@@ -8,6 +8,8 @@ homeassistant:
       icon: mdi:gas-station
     sensor.freie_tankstelle_husers:
       icon: mdi:gas-station
+    sensor.avia_rutenbrock:
+      icon: mdi:gas-station
 
 scrape:
   - resource: https://www.tango.nl/stations/tango-purmerend
@@ -56,6 +58,27 @@ sensor:
       Content-Type: application/json; charset=utf-8
     payload: >-
       { "serviceStationId": "6ca71ccf2", "updateDB": false, "includeServiceImages": false }
+    value_template: >-
+      {% set price = namespace(value = "unavailable") %}
+      {% for product in value_json.station.prices %}
+        {% if product["name"] == "Super (E10)" %}
+          {% set price.value = product["price"] %}
+        {% endif %}
+      {% endfor %}
+      {{ price.value }}
+
+  - platform: rest
+    name: AVIA Rutenbrock
+    scan_interval: 3600
+    unit_of_measurement: €
+    device_class: monetary
+    state_class: total
+    resource: https://page-api.auto-motor-und-sport.de/mt/poi-detail/
+    method: POST
+    headers:
+      Content-Type: application/json; charset=utf-8
+    payload: >-
+      { "serviceStationId": "dcef7d45", "updateDB": false, "includeServiceImages": false }
     value_template: >-
       {% set price = namespace(value = "unavailable") %}
       {% for product in value_json.station.prices %}

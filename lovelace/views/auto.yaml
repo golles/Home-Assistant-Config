@@ -100,11 +100,21 @@ sections:
         icon_color: "#44739e"
 
       - type: custom:mushroom-template-card
-        primary: Freie Tankstelle Hüsers
+        primary: Hüsers Rütenbrock
         secondary: € {{ states(entity) | replace(".", ",") }}
         icon: >-
           {{ state_attr(entity, "icon") }}
         entity: sensor.freie_tankstelle_husers
+        tap_action:
+          action: more-info
+        icon_color: "#44739e"
+
+      - type: custom:mushroom-template-card
+        primary: AVIA Rütenbrock
+        secondary: € {{ states(entity) | replace(".", ",") }}
+        icon: >-
+          {{ state_attr(entity, "icon") }}
+        entity: sensor.avia_rutenbrock
         tap_action:
           action: more-info
         icon_color: "#44739e"
