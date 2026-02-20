@@ -1,2 +1,2 @@
 go2rtc:
-  url: http://go2rtc:1984
+  url: !secret go2rtc_url
