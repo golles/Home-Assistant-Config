@@ -337,7 +337,7 @@ sections:
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.woonkamer_temperatuur
+          - entity: sensor.woonkamer_temperature
             name: Kamer temperatuur
             color: "#ff725c"
             opacity: 0.5

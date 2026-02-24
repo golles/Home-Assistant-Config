@@ -80,6 +80,11 @@
     "ref": "main"
   },
   {
+    "name": "tado_ce",
+    "repository": "https://github.com/hiall-fyi/tado_ce",
+    "ref": "main"
+  },
+  {
     "name": "tomtom_travel_time",
     "repository": "https://github.com/golles/ha-tomtom-travel-time",
     "ref": "main"

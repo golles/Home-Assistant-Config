@@ -84,10 +84,10 @@ sections:
         entity: binary_sensor.zolder_beweging
         name: Beweging
       - type: tile
-        entity: sensor.zolder_temperatuur
+        entity: sensor.zolder_temperature
         name: Temperatuur
       - type: tile
-        entity: sensor.zolder_luchtvochtigheid
+        entity: sensor.zolder_humidity
         name: Luchtvochtigheid
       - type: tile
         entity: sensor.epl_zolder_illuminance

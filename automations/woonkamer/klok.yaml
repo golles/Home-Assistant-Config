@@ -6,7 +6,7 @@
       light_entity: light.woonkamer_klok_matrix
       topic: awtrix_b861cc
       button_entity: binary_sensor.woonkamer_klok_button_select
-      temp_entity: sensor.woonkamer_temperatuur
+      temp_entity: sensor.woonkamer_temperature
       weather_entity: weather.knmi_purmerend
       dishwasher_entity: sensor.vaatwasser_resterende_minuten
       washing_machine_entity: sensor.wasmachine_resterende_minuten

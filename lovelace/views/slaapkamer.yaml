@@ -88,10 +88,10 @@ sections:
         entity: binary_sensor.slaapkamer_beweging_occupancy
         name: Beweging
       - type: tile
-        entity: sensor.slaapkamer_temperatuur
+        entity: sensor.slaapkamer_temperature
         name: Temperatuur
       - type: tile
-        entity: sensor.slaapkamer_luchtvochtigheid
+        entity: sensor.slaapkamer_humidity
         name: Luchtvochtigheid
       - type: tile
         entity: sensor.slaapkamer_lichtsterkte_illuminance

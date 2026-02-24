@@ -61,10 +61,10 @@ sections:
         name: Beweging
         icon: mdi:motion-sensor
       - type: tile
-        entity: sensor.badkamer_temperatuur
+        entity: sensor.badkamer_temperature
         name: Temperatuur
       - type: tile
-        entity: sensor.badkamer_luchtvochtigheid
+        entity: sensor.badkamer_humidity
         name: Luchtvochtigheid
       - type: tile
         entity: sensor.badkamer_sensor_licht

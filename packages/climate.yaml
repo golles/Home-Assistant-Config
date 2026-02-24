@@ -1,47 +1,8 @@
-homeassistant:
-  customize:
-    "binary_sensor.ru1141249024_batterij":
-      friendly_name: Thermostaat batterij
-    "binary_sensor.ru1141249024_connectiestatus":
-      friendly_name: Thermostaat verbinding
-    "binary_sensor.va1805654016_batterij":
-      friendly_name: Woonkamer batterij
-    "binary_sensor.va1805654016_connectiestatus":
-      friendly_name: Woonkamer verbinding
-    "binary_sensor.va1923094528_batterij":
-      friendly_name: Woonkamer batterij
-    "binary_sensor.va1923094528_connectiestatus":
-      friendly_name: Woonkamer verbinding
-    "binary_sensor.va3030325248_batterij":
-      friendly_name: Woonkamer batterij
-    "binary_sensor.va3030325248_connectiestatus":
-      friendly_name: Woonkamer verbinding
-    "binary_sensor.va2677479424_batterij":
-      friendly_name: Slaapkamer batterij
-    "binary_sensor.va2677479424_connectiestatus":
-      friendly_name: Slaapkamer verbinding
-    "binary_sensor.va3382122496_batterij":
-      friendly_name: Kledingkamer batterij
-    "binary_sensor.va3382122496_connectiestatus":
-      friendly_name: Kledingkamer verbinding
-    "binary_sensor.va4103542784_batterij":
-      friendly_name: Logeerkamer batterij
-    "binary_sensor.va4103542784_connectiestatus":
-      friendly_name: Logeerkamer verbinding
-    "binary_sensor.va1788876800_batterij":
-      friendly_name: Badkamer batterij
-    "binary_sensor.va1788876800_connectiestatus":
-      friendly_name: Badkamer verbinding
-    "binary_sensor.va2979272704_batterij":
-      friendly_name: Zolder batterij
-    "binary_sensor.va2979272704_connectiestatus":
-      friendly_name: Zolder verbinding
-
 climate:
   - platform: generic_thermostat
     name: Elektrische kachel
     heater: switch.elektrische_kachel_plug
-    target_sensor: sensor.logeerkamer_temperatuur
+    target_sensor: sensor.logeerkamer_temperature
     min_temp: 5
     max_temp: 25
     initial_hvac_mode: "off"
@@ -54,7 +15,7 @@ template:
       - name: Woonkamer opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -64,7 +25,7 @@ template:
       - name: Slaapkamer opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -74,7 +35,7 @@ template:
       - name: Kledingkamer opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -84,7 +45,7 @@ template:
       - name: Logeerkamer opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -94,7 +55,7 @@ template:
       - name: Badkamer opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -104,7 +65,7 @@ template:
       - name: Zolder opwarmen
         icon: mdi:radiator
         press:
-          - action: tado.set_climate_timer
+          - action: tado_ce.set_climate_timer
             data:
               time_period: "00:15:00"
               temperature: 25
@@ -140,25 +101,25 @@ template:
   - switch:
       - name: Tado thuismodus
         icon: >
-          {% if is_state_attr("climate.woonkamer", "preset_mode", "home") %}
+          {% if is_state("select.tado_ce_presence_mode", "Home") %}
             mdi:radiator
           {% else %}
             mdi:radiator-off
           {% endif %}
         state: >
-          {{ is_state_attr("climate.woonkamer", "preset_mode", "home") }}
+          {{ is_state("select.tado_ce_presence_mode", "Home") }}
         turn_on:
-          action: climate.set_preset_mode
+          action: select.select_option
           data:
-            preset_mode: home
+            option: Home
           target:
-            entity_id: climate.woonkamer
+            entity_id: select.tado_ce_presence_mode
         turn_off:
-          action: climate.set_preset_mode
+          action: select.select_option
           data:
-            preset_mode: away
+            option: Away
           target:
-            entity_id: climate.woonkamer
+            entity_id: select.tado_ce_presence_mode
 
 automation:
   - id: tado_auto_home_and_away_mode
@@ -175,12 +136,12 @@ automation:
                 entity_id: group.residents
                 state: not_home
             sequence:
-              - alias: Set climate preset mode to home
-                action: climate.set_preset_mode
+              - alias: Set climate preset mode to away
+                action: select.select_option
                 data:
-                  preset_mode: away
+                  option: Away
                 target:
-                  entity_id: climate.woonkamer
+                  entity_id: select.tado_ce_presence_mode
 
               - alias: Turn electric heater off
                 action: climate.turn_off
@@ -188,11 +149,11 @@ automation:
                   entity_id: climate.elektrische_kachel
         default:
           - alias: Set climate preset mode to home
-            action: climate.set_preset_mode
+            action: select.select_option
             data:
-              preset_mode: home
+              option: Home
             target:
-              entity_id: climate.woonkamer
+              entity_id: select.tado_ce_presence_mode
 
   - id: tado_preheat_going_home_cold_day
     alias: Tado - Huis opwarmen op een koude dag naar huis gaan
@@ -227,7 +188,7 @@ automation:
                 Het is hier nu nog koud, dus ik verwarm de woonkamer alvast
 
       - alias: Heat up the living room for a short time
-        action: tado.set_climate_timer
+        action: tado_ce.set_climate_timer
         data:
           time_period: "00:15:00"
           temperature: 25

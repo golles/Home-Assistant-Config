@@ -56,7 +56,7 @@ sections:
         grid_options:
           columns: full
         series:
-          - entity: sensor.woonkamer_temperatuur
+          - entity: sensor.woonkamer_temperature
             name: Woonkamer
             fill_raw: last
             group_by:
@@ -68,31 +68,31 @@ sections:
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.slaapkamer_temperatuur
+          - entity: sensor.slaapkamer_temperature
             name: Slaapkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.kledingkamer_temperatuur
+          - entity: sensor.kledingkamer_temperature
             name: Kledingkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.logeerkamer_temperatuur
+          - entity: sensor.logeerkamer_temperature
             name: Logeerkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.badkamer_temperatuur
+          - entity: sensor.badkamer_temperature
             name: Badkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.zolder_temperatuur
+          - entity: sensor.zolder_temperature
             name: Zolder
             fill_raw: last
             group_by:
@@ -113,7 +113,7 @@ sections:
         grid_options:
           columns: full
         series:
-          - entity: sensor.woonkamer_luchtvochtigheid
+          - entity: sensor.woonkamer_humidity
             name: Woonkamer
             fill_raw: last
             group_by:
@@ -131,25 +131,25 @@ sections:
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.slaapkamer_luchtvochtigheid
+          - entity: sensor.slaapkamer_humidity
             name: Kledingkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.logeerkamer_luchtvochtigheid
+          - entity: sensor.logeerkamer_humidity
             name: Logeerkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.badkamer_luchtvochtigheid
+          - entity: sensor.badkamer_humidity
             name: Badkamer
             fill_raw: last
             group_by:
               func: avg
               duration: 30min
-          - entity: sensor.zolder_luchtvochtigheid
+          - entity: sensor.zolder_humidity
             name: Zolder
             fill_raw: last
             group_by:

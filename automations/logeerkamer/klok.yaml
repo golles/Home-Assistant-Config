@@ -6,7 +6,7 @@
       light_entity: light.logeerkamer_klok_matrix
       topic: awtrix_b92250
       button_entity: binary_sensor.logeerkamer_klok_button_select
-      temp_entity: sensor.logeerkamer_temperatuur
+      temp_entity: sensor.logeerkamer_temperature
       weather_entity: weather.knmi_purmerend
       occupancy_entity: binary_sensor.logeerkamer_bezetting
       dishwasher_entity: sensor.vaatwasser_resterende_minuten
