@@ -246,3 +246,26 @@ automation:
                     target:
                       entity_id:
                         - switch.aquarium_skimmer_plug
+
+  - id: garnalen_bak_verlichting
+    alias: Aquarium - Garnalen bak verlichting
+    mode: single
+    triggers:
+      - trigger: time
+        at: "09:00:00"
+        id: aan
+      - trigger: time
+        at: "19:00:00"
+    actions:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: aan
+            sequence:
+              - alias: Turn on garnalen bak verlichting
+                action: switch.turn_on
+                entity_id: switch.garnalenbak_verlichting
+        default:
+          - alias: Turn off garnalen bak verlichting
+            action: switch.turn_off
+            entity_id: switch.garnalenbak_verlichting
