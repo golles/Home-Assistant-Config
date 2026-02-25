@@ -5,12 +5,6 @@ homeassistant:
     cover.zonnescherm:
       icon: mdi:storefront-outline
 
-input_datetime:
-  covers_down:
-    name: Rolluiken dicht
-    has_date: false
-    has_time: true
-
 template:
   - cover:
       - name: Zonnescherm template
@@ -55,27 +49,6 @@ template:
               entity_id: cover.keuken
 
 automation:
-  - id: covers_down_set_daily_time
-    alias: Rolluiken - Tijd voor sluiten dagelijks aanpassen
-    mode: single
-    triggers:
-      - trigger: homeassistant
-        event: start
-      - trigger: time
-        at: "12:00:00"
-    actions:
-      - action: input_datetime.set_datetime
-        data:
-          entity_id: input_datetime.covers_down
-          time: >
-            {% set currentDay = now().strftime("%j") | int %}
-            {% set middleDay = 183 %}
-            {% set longestDayOffsetMinutes = 45 %}
-            {% set magicFactor = 2.5 %}
-            {% set ofsetMinutes = (-((currentDay-middleDay) | abs) / magicFactor--longestDayOffsetMinutes) | round(0) %}
-
-            {{ as_local((state_attr("sun.sun", "next_setting")) | as_datetime + timedelta(minutes = ofsetMinutes)).strftime("%H:%M:%S") }}
-
   # The next automation is to make sure we reload the ingration once it's unavailble.
   # Copied from: https://github.com/iMicknl/ha-tahoma/issues/599#issuecomment-994596289
   - id: covers_overkiz_reload_integration

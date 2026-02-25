@@ -3,8 +3,19 @@
   mode: single
   max_exceeded: silent
   triggers:
-    - trigger: time
-      at: input_datetime.covers_down
+    - alias: Close at sunset
+      trigger: time
+      at: sensor.sun_next_setting
+    - alias: Earliest close time
+      trigger: time
+      at: "16:30:00"
+    - alias: Latest close time
+      trigger: time
+      at: "22:00:00"
+  condition:
+    - condition: time
+      after: "16:30:00"
+      before: "22:00:01"
   actions:
     - action: script.close_cover_window_state
       data:

@@ -3,16 +3,13 @@
   mode: single
   max_exceeded: silent
   triggers:
-    - alias: Close on calculated time
+    - alias: Close at sunset
       trigger: time
-      at: input_datetime.covers_down
-    - alias: For days when it turns dark early
-      trigger: numeric_state
-      entity_id: sensor.achtertuin_sensor_1_licht
-      below: 25
-      for:
-        minutes: 15
-    - alias: For days when it turns dark late
+      at: sensor.sun_next_setting
+    - alias: Earliest close time
+      trigger: time
+      at: "17:00:00"
+    - alias: Latest close time
       trigger: time
       at: "19:30:00"
     - alias: Time to open the cover
@@ -20,22 +17,30 @@
       at: "08:30:00"
       id: open
   actions:
-    - if:
-        - condition: trigger
-          id: open
-      then:
-        - alias: Open the cover
-          action: button.press
-          target:
-            entity_id: button.keuken_rolgordijn_voorkeurspositie
-      else:
-        - alias: Delay closing, so it doesn't close at the same time every day
-          delay:
-            minutes: "{{ range(0, 30) | random }}"
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: open
+          sequence:
+            - alias: Randomize time to open
+              delay:
+                minutes: "{{ range(0, 30) | random }}"
+            - alias: Open the cover
+              action: button.press
+              target:
+                entity_id: button.keuken_rolgordijn_voorkeurspositie
 
-        - alias: Close the cover, depending on the window state
-          action: script.close_cover_window_state
-          data:
-            wait_minutes: 240
-            cover_entity: cover.keuken
-            window_entity: binary_sensor.keukenraam_contact
+        - conditions:
+            - condition: time
+              after: "17:00:00"
+              before: "19:30:01"
+          sequence:
+            - alias: Randomize time to close
+              delay:
+                minutes: "{{ range(0, 30) | random }}"
+            - alias: Close the cover, depending on the window state
+              action: script.close_cover_window_state
+              data:
+                wait_minutes: 240
+                cover_entity: cover.keuken
+                window_entity: binary_sensor.keukenraam_contact
