@@ -67,24 +67,6 @@ automation:
 
       - choose:
           - conditions:
-              - alias: If any of the covers is still open
-                condition: template
-                value_template: >-
-                  {{
-                    is_state("cover.slaapkamer", "open") or
-                    is_state("cover.kledingkamer", "open") or
-                    is_state("cover.logeerkamer", "open")
-                  }}
-            sequence:
-              - alias: Set the covers down time to be in a few seconds, so they all close
-                action: input_datetime.set_datetime
-                data:
-                  entity_id: input_datetime.covers_down
-                  time: >-
-                    {{ (now() | as_timestamp + 5) | timestamp_custom("%H:%M:%S") }}
-
-      - choose:
-          - conditions:
               - condition: state
                 entity_id: binary_sensor.slaapkamerraam_contact
                 state: "on"
