@@ -1,7 +1,15 @@
 recorder:
-  db_url: !secret mariadb_connection
   purge_keep_days: 31
   exclude:
     entity_globs:
       - sensor.flightradar24*
       - sensor.epl_*_target_*
+
+command_line:
+  - sensor:
+      unique_id: database_file_size
+      name: Database file size
+      command: stat -c %s /config/home-assistant_v2.db
+      device_class: data_size
+      state_class: measurement
+      unit_of_measurement: B

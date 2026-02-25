@@ -127,6 +127,32 @@
 
 # sensor.golf_7_5_last_known_location is a SQL sensor with the following query:
 #
+######################################## SQLite ########################################
+#
+# SELECT
+#     json_extract(state_attributes.shared_attrs, '$.latitude')
+#     || ', ' ||
+#     json_extract(state_attributes.shared_attrs, '$.longitude')
+#     || ', ' ||
+#     json_extract(state_attributes.shared_attrs, '$.gps_accuracy')
+#     AS location
+# FROM states
+# LEFT JOIN state_attributes
+#     ON states.attributes_id = state_attributes.attributes_id
+# WHERE metadata_id = (
+#     SELECT metadata_id
+#     FROM states_meta
+#     WHERE entity_id = 'device_tracker.golf_7_5'
+# )
+# AND json_extract(state_attributes.shared_attrs, '$.latitude') IS NOT NULL
+# AND json_extract(state_attributes.shared_attrs, '$.longitude') IS NOT NULL
+# AND json_extract(state_attributes.shared_attrs, '$.gps_accuracy') IS NOT NULL
+# ORDER BY state_id DESC
+# LIMIT 1;
+#
+#
+######################################## MySQL #########################################
+#
 # SELECT
 #    CONCAT(
 #       JSON_VALUE(state_attributes.shared_attrs, '$.latitude'),

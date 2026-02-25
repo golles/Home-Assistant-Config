@@ -40,9 +40,8 @@ sections:
         heading: Database
         heading_style: subtitle
       - type: tile
-        entity: sensor.mariadb_size
-        name: MariaDB size
-        icon: mdi:database
+        entity: sensor.database_file_size
+        name: Database size
 
   - type: grid
     cards:
