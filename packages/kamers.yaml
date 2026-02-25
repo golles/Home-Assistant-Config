@@ -178,7 +178,8 @@ template:
         icon: mdi:motion-sensor
         state: >
           {% set motion_entities = [
-            "binary_sensor.epl_zolder_occupancy"
+            "binary_sensor.epl_zolder_occupancy",
+            "binary_sensor.hometrainer"
           ] %}
           {% set media_entities = ["media_player.zolder"] %}
 
