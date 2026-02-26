@@ -11,6 +11,9 @@
       state: "off"
     - condition: state
       entity_id: media_player.lg_soundbar
+      state: "off"
+    - condition: state
+      entity_id: media_player.woonkamer_homepod_mini
       state:
         - "off"
         - idle
@@ -31,11 +34,12 @@
       target:
         entity_id: sensor.lokaal_weer_en_verkeer
 
-    - alias: Set soundbar volume
+    - alias: Set volume
       action: media_player.volume_set
+      target:
+        entity_id: media_player.woonkamer_homepod_mini
       data:
-        entity_id: media_player.lg_soundbar
-        volume_level: 0.25 # 10 * 0.025
+        volume_level: 0.7
 
     - alias: Wait a little
       delay:
@@ -43,7 +47,7 @@
 
     - alias: Speak message
       action: tts.microsoft_say
-      entity_id: media_player.lg_soundbar
+      entity_id: media_player.woonkamer_homepod_mini
       data:
         message: >-
           {% from 'nl.jinja' import month, day, daypart %}
@@ -65,16 +69,16 @@
     - alias: Wait till the message has finished
       wait_for_trigger:
         - trigger: state
-          entity_id: media_player.lg_soundbar
+          entity_id: media_player.woonkamer_homepod_mini
           from: playing
           to: idle
       timeout:
         minutes: 2
       continue_on_timeout: true
 
-    - alias: Restore soundbar volume and source
-      action: shell_command.set_soundbar_source_and_volume
+    - alias: Set volume
+      action: media_player.volume_set
+      target:
+        entity_id: media_player.woonkamer_homepod_mini
       data:
-        ip: !secret lg_soundbar_ip
-        source: 15 # HMDI ARC.
-        volume: 12
+        volume_level: 0.5
