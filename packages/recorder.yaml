@@ -4,6 +4,8 @@ recorder:
     entity_globs:
       - sensor.flightradar24*
       - sensor.epl_*_target_*
+      - sensor.logeerkamer_klok_*
+      - sensor.woonkamer_klok_*
 
 command_line:
   - sensor:
