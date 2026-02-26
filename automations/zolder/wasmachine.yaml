@@ -43,7 +43,7 @@
               below: 20
           sequence:
             - alias: Heat the room for a period of time to reduce humidity
-              action: tado.set_climate_timer
+              action: tado_ce.set_climate_timer
               data:
                 entity_id: climate.zolder
                 time_period: "02:00:00"
