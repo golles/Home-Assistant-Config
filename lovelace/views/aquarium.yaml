@@ -138,7 +138,6 @@ sections:
           label: Nu
           color: red
 
-        section_mode: true
         series:
           - entity: light.aquarium_licht
             name: Red
