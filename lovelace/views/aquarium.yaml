@@ -37,6 +37,20 @@ sections:
         entity: sensor.aquarium_watertemperatuur
         name: Temperatuur
 
+      - type: picture-entity
+        entity: camera.c100_live_view
+        show_state: false
+        show_name: false
+        camera_view: auto
+        fit_mode: cover
+        grid_options:
+          columns: 12
+          rows: 4
+        visibility:
+          - condition: state
+            entity: switch.c100
+            state: "on"
+
   - type: grid
     cards:
       - type: heading
@@ -92,6 +106,7 @@ sections:
         name: Luchtpomp
 
   - type: grid
+    column_span: 4
     cards:
       - type: heading
         heading: Tijdschema
@@ -109,6 +124,9 @@ sections:
           type: line
           curve: straight
           unit: "%"
+        section_mode: true
+        grid_options:
+          columns: full
         apex_config:
           yaxis:
             max: 100
