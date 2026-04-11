@@ -39,7 +39,7 @@
       target:
         entity_id: media_player.woonkamer_homepod_mini
       data:
-        volume_level: 0.7
+        volume_level: 0.5
 
     - alias: Wait a little
       delay:
