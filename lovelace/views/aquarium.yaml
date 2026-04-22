@@ -38,7 +38,7 @@ sections:
         name: Temperatuur
 
       - type: picture-entity
-        entity: camera.c100_live_view
+        entity: camera.tapo_c110_live_view
         show_state: false
         show_name: false
         camera_view: auto
@@ -48,7 +48,7 @@ sections:
           rows: 4
         visibility:
           - condition: state
-            entity: switch.c100
+            entity: switch.tapo_c110
             state: "on"
 
   - type: grid
@@ -104,6 +104,32 @@ sections:
       - type: tile
         entity: switch.aquarium_luchtpomp_plug
         name: Luchtpomp
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Garnalen aquarium
+        heading_style: subtitle
+      - type: tile
+        entity: switch.garnalenbak_verlichting
+        name: Verlichting
+      - type: tile
+        entity: switch.garnalenbak_filter
+        name: Pomp
+
+      - type: picture-entity
+        entity: camera.c100_live_view
+        show_state: false
+        show_name: false
+        camera_view: auto
+        fit_mode: cover
+        grid_options:
+          columns: 12
+          rows: 4
+        visibility:
+          - condition: state
+            entity: switch.c100
+            state: "on"
 
   - type: grid
     column_span: 4
