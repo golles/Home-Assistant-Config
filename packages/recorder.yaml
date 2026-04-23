@@ -1,5 +1,5 @@
 recorder:
-  purge_keep_days: 31
+  purge_keep_days: 14
   exclude:
     entity_globs:
       - sensor.flightradar24*
