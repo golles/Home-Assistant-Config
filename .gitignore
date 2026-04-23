@@ -52,8 +52,10 @@ webostv.conf
 *.db-journal
 *.pid
 tts
+tmp_backups
 
 # automatically downloaded dependencies
+.cache
 deps
 lib
 
