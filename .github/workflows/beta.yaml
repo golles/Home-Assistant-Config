@@ -12,18 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.3
 
       - name: Setup custom components
         run: |
           ./scripts/update_resources.sh custom_components
 
       - name: Mock secrets
-        uses: golles/mock-yaml-secrets-action@v1
+        uses: golles/mock-yaml-secrets-action@v1.1.2
         with:
           configFile: .github/workflows/mock-secrets-config.json
 
       - name: Home Assistant configuration check
-        uses: frenck/action-home-assistant@v1.4
+        uses: frenck/action-home-assistant@v1.4.1
         with:
           version: beta
