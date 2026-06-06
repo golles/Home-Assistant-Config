@@ -125,6 +125,29 @@ automation:
             push:
               interruption-level: critical
 
+  - id: aquarium_airpump_temperature
+    alias: Aquarium luchtpomp bij warmte
+    mode: single
+    triggers:
+      - trigger: time_pattern
+        minutes: "/30"
+    actions:
+      - if:
+          - condition: numeric_state
+            entity_id: sensor.aquarium_watertemperatuur
+            above: 27
+          - condition: time
+            after: "08:59:00"
+            before: "23:00:00"
+        then:
+          - action: switch.turn_on
+            target:
+              entity_id: switch.aquarium_luchtpomp_plug
+        else:
+          - action: switch.turn_off
+            target:
+              entity_id: switch.aquarium_luchtpomp_plug
+
   - id: aquarium_buttons
     alias: Aquarium - Knoppen
     mode: single
