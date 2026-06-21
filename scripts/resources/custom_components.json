@@ -75,6 +75,11 @@
     "ref": "master"
   },
   {
+    "name": "proton_drive",
+    "repository": "https://github.com/LouisBrunner/ha-proton-drive",
+    "ref": "main"
+  },
+  {
     "name": "spook",
     "repository": "https://github.com/frenck/spook",
     "ref": "main"
