@@ -49,6 +49,101 @@ template:
               entity_id: cover.keuken
 
 automation:
+  - id: auto_close_awning
+    alias: Zonnescherm automatisch sluiten
+    mode: single
+    max_exceeded: silent
+    triggers:
+      - trigger: state
+        entity_id: sensor.zon_positie
+        from: Achter
+        to: Voor
+      - trigger: state
+        entity_id: sun.sun
+        to: below_horizon
+      - trigger: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: 7
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.zonnescherm_contact_contact
+        state: "on"
+    actions:
+      - alias: Close the awning
+        action: cover.close_cover
+        target:
+          entity_id: cover.zonnescherm
+
+  - id: awning_can_be_opened
+    alias: Zonnescherm kan open
+    mode: single
+    max_exceeded: silent
+    triggers:
+      - trigger: numeric_state
+        entity_id: sensor.achtertuin_sensor_1_licht
+        above: 3800
+      - trigger: state
+        entity_id: sensor.zon_positie
+        from: Voor
+        to: Achter
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.achtertuin_sensor_1_licht
+        above: 3800
+      - condition: state
+        entity_id: sensor.zon_positie
+        state: Achter
+      - condition: numeric_state
+        entity_id: sensor.knmi_max_temperatuur_vandaag
+        above: 19
+      - condition: numeric_state
+        entity_id: sensor.knmi_neerslag_vandaag
+        below: 10
+      - condition: state
+        entity_id: binary_sensor.zonnescherm_contact_contact
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "off"
+    actions:
+      - alias: Set up variables for the actions
+        variables:
+          # Including an id in the action allows us to identify this script run and not accidentally trigger for other notification actions.
+          action_open: "{{ 'OPEN_' ~ context.id }}"
+
+      - alias: Ask to close the awning
+        action: notify.all_phones
+        data:
+          message: De zon is achter, wil je het zonnescherm openen?
+          data:
+            tag: sun
+            actions:
+              - action: "{{ action_open }}"
+                title: Ja, open
+
+      - alias: Wait for a response
+        wait_for_trigger:
+          - trigger: event
+            event_type: mobile_app_notification_action
+            event_data:
+              action: "{{ action_open }}"
+
+      - alias: Perform the action
+        choose:
+          - conditions: "{{ wait.trigger.event.data.action == action_open }}"
+            sequence:
+              - action: button.press
+                target:
+                  entity_id: button.zonnescherm_my_position
+
+              - alias: Clear this notification on all devices
+                action: notify.all_phones
+                data:
+                  message: clear_notification
+                  data:
+                    tag: sun
+
   # The next automation is to make sure we reload the ingration once it's unavailble.
   # Copied from: https://github.com/iMicknl/ha-tahoma/issues/599#issuecomment-994596289
   - id: covers_overkiz_reload_integration
@@ -77,6 +172,36 @@ automation:
           notification_id: config_entry_reconfigure
 
 script:
+  zonnescherm_dicht:
+    alias: Zonnescherm dicht
+    icon: mdi:arrow-up-box
+    mode: single
+    sequence:
+      - alias: Close awning
+        action: cover.close_cover
+        target:
+          entity_id: cover.zonnescherm
+
+  zonnescherm_open:
+    alias: Zonnescherm open
+    icon: mdi:arrow-down-box
+    mode: single
+    sequence:
+      - alias: Open awning to preference position
+        action: button.press
+        target:
+          entity_id: button.zonnescherm_my_position
+
+  zonnescherm_helemaal_open:
+    alias: Zonnescherm helemaal open
+    icon: mdi:arrow-down-box
+    mode: single
+    sequence:
+      - alias: Fully open awning
+        action: cover.open_cover
+        target:
+          entity_id: cover.zonnescherm
+
   open_south_facing_covers_based_on_weather:
     alias: Open south facing covers based on weather
     mode: parallel

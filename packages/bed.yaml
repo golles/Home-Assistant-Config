@@ -1,52 +1,9 @@
-ios:
-  actions:
-    - name: Naar bed
-      background_color: "#4c00ff"
-      label:
-        text: Naar bed
-        color: "#ffffff"
-      icon:
-        icon: bed
-        color: "#ffffff"
-      show_in_carplay: false
-      show_in_watch: true
-      use_custom_colors: true
-
-    - name: Gaan slapen
-      background_color: "#4c00ff"
-      label:
-        text: Gaan slapen
-        color: "#ffffff"
-      icon:
-        icon: sleep
-        color: "#ffffff"
-      show_in_carplay: false
-      show_in_watch: true
-      use_custom_colors: true
-
-    - name: Uit bed
-      background_color: "#4c00ff"
-      label:
-        text: Uit bed
-        color: "#ffffff"
-      icon:
-        icon: sleep-off
-        color: "#ffffff"
-      show_in_carplay: false
-      show_in_watch: true
-      use_custom_colors: true
-
-automation:
-  - id: ios_action_going_to_bed
-    alias: iOS action - Naar bed
+script:
+  naar_bed:
+    alias: Naar bed
+    icon: mdi:bed
     mode: single
-    max_exceeded: silent
-    triggers:
-      - trigger: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: Naar bed
-    actions:
+    sequence:
       - alias: Turn most of the devices off
         action: script.everything_off
         data:
@@ -85,29 +42,29 @@ automation:
         target:
           entity_id: scene.slaapkamer_naar_bed
 
-  - id: ios_action_going_to_sleep
-    alias: iOS action - Gaan slapen
+      - alias: Disable motion-activated bedroom light while going to bed
+        action: automation.turn_off
+        target:
+          entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
+
+  gaan_slapen:
+    alias: Gaan slapen
+    icon: mdi:sleep
     mode: single
-    max_exceeded: silent
-    triggers:
-      - trigger: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: Gaan slapen
-    actions:
+    sequence:
       - alias: Now turn everything off
         action: script.everything_off
 
-  - id: ios_action_going_out_of_bed
-    alias: iOS action - Uit bed
+      - alias: Disable motion-activated bedroom light while sleeping
+        action: automation.turn_off
+        target:
+          entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
+
+  uit_bed:
+    alias: Uit bed
+    icon: mdi:sleep-off
     mode: single
-    max_exceeded: silent
-    triggers:
-      - trigger: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: Uit bed
-    actions:
+    sequence:
       - alias: Open south facing covers based on temperature
         action: script.open_south_facing_covers_based_on_weather
 
@@ -117,3 +74,8 @@ automation:
           entity_id:
             - button.logeerkamer_rolgordijn_voorkeurspositie
             - button.keuken_rolgordijn_voorkeurspositie
+
+      - alias: Re-enable motion-activated bedroom light
+        action: automation.turn_on
+        target:
+          entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid

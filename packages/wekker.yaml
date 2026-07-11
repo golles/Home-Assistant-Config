@@ -1,0 +1,47 @@
+script:
+  wekker_uit_sander:
+    alias: Wekker uit (Sander)
+    icon: mdi:alarm-off
+    mode: single
+    sequence:
+      - condition: state
+        entity_id: person.sander
+        state: home
+
+  wekker_gesnoozed_sander:
+    alias: Wekker gesnoozed (Sander)
+    icon: mdi:alarm-snooze
+    mode: single
+    sequence:
+      - alias: Temperature should be higher than a certain value
+        condition: numeric_state
+        entity_id: sensor.knmi_temperatuur
+        above: -2
+
+      - alias: Sander should be home
+        condition: state
+        entity_id: person.sander
+        state: home
+
+      - choose:
+          - conditions:
+              - alias: Slaapkamer cover should be closed.
+                condition: state
+                entity_id: cover.slaapkamer
+                state: closed
+            sequence:
+              - alias: Set slaapkamer to the preference position
+                action: button.press
+                target:
+                  entity_id: button.slaapkamer_my_position
+      - choose:
+          - conditions:
+              - alias: Kledingkamer cover should be closed.
+                condition: state
+                entity_id: cover.kledingkamer
+                state: closed
+            sequence:
+              - alias: Set kledingkamer to the preference position
+                action: button.press
+                target:
+                  entity_id: button.kledingkamer_my_position

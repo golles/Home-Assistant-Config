@@ -16,37 +16,15 @@
       night_scene_before_off: scene.slaapkamer_plafond_groep_nachtlampje
       no_motion_wait: 15
 
-- id: disable_slaapkamer_light_auto
-  alias: Slaapkamerlamp niet automatisch tijdens slaap
+- id: enable_slaapkamer_light_auto
+  alias: Slaapkamerlamp weer automatisch na rolluik open
   mode: single
   max_exceeded: silent
   triggers:
-    - trigger: event
-      event_type: ios.action_fired
-      event_data:
-        actionName: Naar bed
-    - trigger: event
-      event_type: ios.action_fired
-      event_data:
-        actionName: Gaan slapen
-    - trigger: event
-      event_type: ios.action_fired
-      event_data:
-        actionName: Uit bed
-      id: aan
     - trigger: state
       entity_id: cover.slaapkamer
       attribute: current_position
       to: 100
-      id: aan
   actions:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: aan
-          sequence:
-            - action: automation.turn_on
-              entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
-      default:
-        - action: automation.turn_off
-          entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid
+    - action: automation.turn_on
+      entity_id: automation.slaapkamerlamp_automatisch_aan_uit_door_aanwezigheid

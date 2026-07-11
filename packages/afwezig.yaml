@@ -1,33 +1,6 @@
-ios:
-  actions:
-    - name: Alles uit
-      background_color: "#ff0000"
-      label:
-        text: Alles uit
-        color: "#ffffff"
-      icon:
-        icon: power
-        color: "#ffffff"
-      show_in_carplay: true
-      show_in_watch: true
-      use_custom_colors: true
-
 automation:
-  - id: ios_action_everything_off
-    alias: iOS action - Alles uit
-    mode: single
-    max_exceeded: silent
-    triggers:
-      - trigger: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: Alles uit
-    actions:
-      - alias: Now turn everything off
-        action: script.everything_off
-
   - id: check_devices_left_on
-    alias: iOS action - Apparaten aangelaten
+    alias: "Notificatie: Apparaten aangelaten"
     mode: restart
     max_exceeded: silent
     triggers:
