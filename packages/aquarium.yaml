@@ -24,14 +24,14 @@ template:
           data:
             device_id: 753a24aab6441d1d21381fa051beb10e
             schedule:
-              - 10,59,0,0,0,0,0    # Nacht
-              - 11,0,15,20,20,25,25   # Zonsopkomst
-              - 12,0,40,35,35,40,55   # Opbouw
-              - 13,0,65,50,45,55,85   # Piek
-              - 16,0,65,50,45,55,85   # Piek vasthouden
-              - 17,0,45,30,30,35,50   # Avondlicht
-              - 18,0,25,20,20,25,30   # Schemer
-              - 19,0,0,0,0,0,0     # Nacht
+              - 10,59,0,0,0,0,0 # Nacht
+              - 11,0,15,20,20,25,25 # Zonsopkomst
+              - 12,0,40,35,35,40,55 # Opbouw
+              - 13,0,65,50,45,55,85 # Piek
+              - 16,0,65,50,45,55,85 # Piek vasthouden
+              - 17,0,45,30,30,35,50 # Avondlicht
+              - 18,0,25,20,20,25,30 # Schemer
+              - 19,0,0,0,0,0,0 # Nacht
 
       - name: Aquarium schema thuis
         press:
@@ -307,3 +307,25 @@ automation:
           - alias: Turn off garnalen bak verlichting
             action: switch.turn_off
             entity_id: switch.garnalenbak_verlichting
+
+  - id: aquarium_vakantiemodus_schema
+    alias: Aquarium - Schema bij vakantiemodus
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id: input_boolean.vacation_mode
+    actions:
+      - if:
+          - condition: state
+            entity_id: input_boolean.vacation_mode
+            state: "on"
+        then:
+          - alias: Aquarium schema thuis indrukken
+            action: button.press
+            target:
+              entity_id: button.aquarium_schema_thuis
+        else:
+          - alias: Aquarium schema indrukken
+            action: button.press
+            target:
+              entity_id: button.aquarium_schema
