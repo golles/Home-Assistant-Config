@@ -24,6 +24,21 @@ template:
           data:
             device_id: 753a24aab6441d1d21381fa051beb10e
             schedule:
+              - 10,59,0,0,0,0,0    # Nacht
+              - 11,0,15,20,20,25,25   # Zonsopkomst
+              - 12,0,40,35,35,40,55   # Opbouw
+              - 13,0,65,50,45,55,85   # Piek
+              - 16,0,65,50,45,55,85   # Piek vasthouden
+              - 17,0,45,30,30,35,50   # Avondlicht
+              - 18,0,25,20,20,25,30   # Schemer
+              - 19,0,0,0,0,0,0     # Nacht
+
+      - name: Aquarium schema thuis
+        press:
+          action: ori.set_schedule
+          data:
+            device_id: 753a24aab6441d1d21381fa051beb10e
+            schedule:
               - 8,59,0,0,0,0,0 # Nacht
               - 9,0,20,20,20,25,25 # Zachte zonsopkomst
               - 10,0,50,35,35,40,55 # Snellere opbouw
