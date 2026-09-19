@@ -7,7 +7,6 @@ views:
   - !include views/batterijen.yaml
   - !include views/systeem.yaml
   - !include views/hass.yaml
-  - !include views/borg.yaml
   - !include views/internet.yaml
   - !include views/3dprinter.yaml
   - !include views/aquarium.yaml
