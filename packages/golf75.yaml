@@ -1,0 +1,32 @@
+input_text:
+  golf_75_active_tracker:
+    name: Golf 7.5 - Actieve tracker
+    initial: ""
+
+template:
+  - device_tracker:
+      - name: Golf 7.5
+        unique_id: golf_7_5
+        icon: mdi:car
+        picture: /local/auto/golf75.jpg
+        latitude: >-
+          {% set tracker = states('input_text.golf_75_active_tracker') %}
+          {% if tracker not in ['unknown', 'unavailable', 'none', ''] %}
+            {{ state_attr(tracker, 'latitude') }}
+          {% else %}
+            {{ states('sensor.golf_7_5_last_known_location').split(', ')[0] }}
+          {% endif %}
+        longitude: >-
+          {% set tracker = states('input_text.golf_75_active_tracker') %}
+          {% if tracker not in ['unknown', 'unavailable', 'none', ''] %}
+            {{ state_attr(tracker, 'longitude') }}
+          {% else %}
+            {{ states('sensor.golf_7_5_last_known_location').split(', ')[1] }}
+          {% endif %}
+        location_accuracy: >-
+          {% set tracker = states('input_text.golf_75_active_tracker') %}
+          {% if tracker not in ['unknown', 'unavailable', 'none', ''] %}
+            {{ state_attr(tracker, 'gps_accuracy') | int(0) }}
+          {% else %}
+            {{ states('sensor.golf_7_5_last_known_location').split(', ')[2] | int(0) }}
+          {% endif %}

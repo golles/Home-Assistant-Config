@@ -28,14 +28,16 @@
 - id: track_golf_75
   alias: Golf 7.5 - Update locatie
   description: |
-    This automation does update a car location.
+    This automation controls which person's location device_tracker.golf_7_5 (see packages/golf75.yaml) mirrors.
     Requirements:
       - An iPhone
       - Focus while driving should be set, either automatically or via Bluetooth.
       - Shortcuts app should be installed and 2 automations should be created:
         1. When focus Driving is turned on -> select Home Assistant event: GOLF_75_START
         2. When focus Driving is turned off -> select Home Assistant event: GOLF_75_STOP
-    Every {throttle_seconds} the location of the person who sent the start event is used as the car location. This is done until the stop event is sent.
+    While tracking is active, device_tracker.golf_7_5 live-mirrors the location of the person who sent the start
+    event. On stop (and on restart, before a new start event arrives) it falls back to the last known location
+    from sensor.golf_7_5_last_known_location.
     This does only work if a defined Home Assistant person is driving the car, so no theft protection.
   mode: restart
   triggers:
@@ -45,12 +47,6 @@
     - trigger: event
       event_type: GOLF_75_STOP
       id: stop
-    - trigger: homeassistant
-      event: start
-      id: restore
-  variables:
-    device_tracker_id: golf_7_5
-    throttle_seconds: 30
   actions:
     - alias: Collect some variables
       variables:
@@ -76,54 +72,24 @@
             - condition: trigger
               id: start
           sequence:
-            - alias: Repeat location updates until the automation is triggered with a stop event
-              repeat:
-                while: "{{ True }}"
-                sequence:
-                  - alias: Set car location based on the location of the person
-                    action: device_tracker.see
-                    data:
-                      dev_id: "{{ device_tracker_id }}"
-                      gps:
-                        - '{{ state_attr(person, "latitude")}}'
-                        - '{{ state_attr(person, "longitude")}}'
-                      gps_accuracy: >-
-                        {{ state_attr(person, "gps_accuracy") }}
+            - alias: Start mirroring this person's location
+              action: input_text.set_value
+              target:
+                entity_id: input_text.golf_75_active_tracker
+              data:
+                value: "{{ person }}"
 
-                  - alias: Throttle updates
-                    delay:
-                      seconds: "{{ throttle_seconds }}"
-
-        - alias: Stop event, person should be set as well
+        - alias: Stop event
           conditions:
-            - '{{ person != "none" }}'
             - condition: trigger
               id: stop
           sequence:
-            - alias: Set final car location based on the location of the person
-              action: device_tracker.see
+            - alias: Stop mirroring, fall back to the last known location
+              action: input_text.set_value
+              target:
+                entity_id: input_text.golf_75_active_tracker
               data:
-                dev_id: "{{ device_tracker_id }}"
-                gps:
-                  - '{{ state_attr(person, "latitude")}}'
-                  - '{{ state_attr(person, "longitude")}}'
-                gps_accuracy: >-
-                  {{ state_attr(person, "gps_accuracy") }}
-
-        - alias: Restore event
-          conditions:
-            - condition: trigger
-              id: restore
-          sequence:
-            - alias: Set car location based on last known location from SQL sensor
-              action: device_tracker.see
-              data:
-                dev_id: "{{ device_tracker_id }}"
-                gps:
-                  - '{{ states("sensor.golf_7_5_last_known_location").split(", ")[0] }}'
-                  - '{{ states("sensor.golf_7_5_last_known_location").split(", ")[1] }}'
-                gps_accuracy: >-
-                  {{ states("sensor.golf_7_5_last_known_location").split(", ")[2] }}
+                value: ""
 
 # sensor.golf_7_5_last_known_location is a SQL sensor with the following query:
 #
