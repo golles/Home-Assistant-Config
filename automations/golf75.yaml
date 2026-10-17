@@ -90,7 +90,6 @@
                 entity_id: input_text.golf_75_active_tracker
               data:
                 value: ""
-
 # sensor.golf_7_5_last_known_location is a SQL sensor with the following query:
 #
 ######################################## SQLite ########################################
